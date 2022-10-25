@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'Views/Screens/sign_up_page.dart';
+
 void main() {
   runApp(const MyApp());
 }
@@ -10,23 +12,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Reddit',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.white,
+        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.orange)
+            .copyWith(secondary: Colors.lightBlue),
       ),
-      home: _HomePage(),
+      home: const SignUpPage(),
     );
   }
 }
 
-class _HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: const Center(child: Text('Welcome to Reddit')),
-    );
-  }
-}
+// class _HomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Home'),
+//       ),
+//       body: const Center(child: Text('Welcome to Reddit')),
+//     );
+//   }
+// }
