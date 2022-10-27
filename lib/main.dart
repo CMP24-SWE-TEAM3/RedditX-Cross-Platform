@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'controllers/search_controller.dart';
+import 'views/screens/search_screen_one.dart';
 
 void main() {
   runApp(const MyApp());
@@ -6,7 +9,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -14,19 +16,15 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: _HomePage(),
-    );
-  }
-}
-
-class _HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
+      home: Scaffold(
+        appBar: AppBar(),
+        body: Center(
+          child: ChangeNotifierProvider(
+            create: (_) => SearchController(),
+            child: const SearchScreenOne(),
+          ),
+        ),
       ),
-      body: const Center(child: Text('Welcome to Reddit')),
     );
   }
 }
