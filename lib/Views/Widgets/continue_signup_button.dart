@@ -7,6 +7,7 @@ class ContinueSignUpButton extends StatelessWidget {
     required TextEditingController passwordController,
     required TextEditingController emailController,
     required this.function,
+    required this.ctx,
   })  : _userNameController = userNameController,
         _passwordController = passwordController,
         _emailController = emailController,
@@ -16,6 +17,7 @@ class ContinueSignUpButton extends StatelessWidget {
   final TextEditingController _passwordController;
   final TextEditingController _emailController;
   final Function function;
+  final BuildContext ctx;
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +35,12 @@ class ContinueSignUpButton extends StatelessWidget {
                               value2.text.isNotEmpty &&
                               value3.text.isNotEmpty)
                           ? () => function(_emailController,
-                              _userNameController, _passwordController)
+                              _userNameController, _passwordController, ctx)
                           : null,
                       // onPressed: () => function(_emailController,
                       // _userNameController, _passwordController),
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.orange,
+                        backgroundColor: Theme.of(context).colorScheme.primary,
                         minimumSize: const Size(double.infinity, 50),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20),

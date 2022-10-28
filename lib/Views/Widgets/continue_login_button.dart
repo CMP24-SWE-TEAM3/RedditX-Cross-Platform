@@ -6,6 +6,7 @@ class ContinueLoginButton extends StatelessWidget {
     required TextEditingController userNameController,
     required TextEditingController passwordController,
     required this.function,
+    required this.ctx,
   })  : _userNameController = userNameController,
         _passwordController = passwordController,
         super(key: key);
@@ -13,6 +14,7 @@ class ContinueLoginButton extends StatelessWidget {
   final TextEditingController _userNameController;
   final TextEditingController _passwordController;
   final Function function;
+  final BuildContext ctx;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +26,10 @@ class ContinueLoginButton extends StatelessWidget {
             builder: (context, value2, child) {
               return ElevatedButton(
                 onPressed: (value1.text.isNotEmpty && value2.text.isNotEmpty)
-                    ? () => function
+                    ? () => function(_userNameController, _passwordController, ctx)
                     : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.orange,
+                  backgroundColor: Theme.of(context).colorScheme.primary,
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),

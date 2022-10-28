@@ -5,6 +5,7 @@ import '../Widgets/sign_up_bar.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
 import 'email_signup.dart';
+import 'forget_password.dart';
 
 class EmailLogin extends StatefulWidget {
   const EmailLogin({super.key});
@@ -15,6 +16,18 @@ class EmailLogin extends StatefulWidget {
 }
 
 class _EmailLoginState extends State<EmailLogin> {
+  TextEditingController userNameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  void submit(userNameController, passwordController, ctx) {
+    print('sending data to back end');
+  }
+
+  void forgetPass(BuildContext ctx) {
+    Navigator.of(ctx)
+        .pushReplacementNamed(ForgetPassword.routeName, arguments: {});
+  }
+
   void emailsignup(BuildContext ctx) {
     Navigator.of(ctx)
         .pushReplacementNamed(EmailSignup.routeName, arguments: {});
@@ -22,8 +35,6 @@ class _EmailLoginState extends State<EmailLogin> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController userNameController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
     final userAgrementUrl =
         Uri.parse('https://www.redditinc.com/policies/user-agreement');
     final privacyUrl =
@@ -48,76 +59,90 @@ class _EmailLoginState extends State<EmailLogin> {
       },
       child: Scaffold(
         appBar: appBar,
-        body: SizedBox(
-          width: double.infinity,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: padding,
-                  child: const Text(
-                    'Log in to Reddit',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.5,
+        body: Stack(
+          children: [
+            SizedBox(
+              width: double.infinity,
+              child: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: padding,
+                      child: const Text(
+                        'Log in to Reddit',
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          letterSpacing: 0.5,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
-                SizedBox(
-                  height: heightScreen * 0.1,
-                ),
-                Padding(
-                  padding: EdgeInsets.all(
-                    heightScreen * 0.025,
-                  ),
-                  child: UserNameText(userNameController: userNameController),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(
-                    heightScreen * 0.025,
-                  ),
-                  child: PasswordText(passwordController: passwordController),
-                ),
-                SizedBox(
-                  height: heightScreen * 0.01,
-                ),
-                TextButton(
-                  style: ButtonStyle(
-                    foregroundColor: MaterialStatePropertyAll(
-                        Theme.of(context).colorScheme.primary),
-                  ),
-                  onPressed: () {},
-                  child: const Text(
-                    'Forget Password',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
+                    SizedBox(
+                      height: heightScreen * 0.1,
                     ),
-                  ),
+                    Padding(
+                      padding: EdgeInsets.all(
+                        heightScreen * 0.025,
+                      ),
+                      child:
+                          UserNameText(userNameController: userNameController),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.all(
+                        heightScreen * 0.025,
+                      ),
+                      child:
+                          PasswordText(passwordController: passwordController),
+                    ),
+                    SizedBox(
+                      height: heightScreen * 0.01,
+                    ),
+                    TextButton(
+                      style: ButtonStyle(
+                        foregroundColor: MaterialStatePropertyAll(
+                            Theme.of(context).colorScheme.primary),
+                      ),
+                      onPressed: () => forgetPass(context),
+                      child: const Text(
+                        'Forget Password',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: heightScreen * 0.3,
+                    ),
+                    UserLoginAggreement(
+                        userAgrementUrl: userAgrementUrl,
+                        privacyUrl: privacyUrl),
+                    SizedBox(
+                      height: heightScreen * 0.03,
+                    ),
+                  ],
                 ),
-                SizedBox(
-                  height: heightScreen * 0.3,
-                ),
-                UserLoginAggreement(
-                    userAgrementUrl: userAgrementUrl, privacyUrl: privacyUrl),
-                SizedBox(
-                  height: heightScreen * 0.03,
-                ),
-                ContinueLoginButton(
+              ),
+            ),
+            SizedBox(
+              width: double.infinity,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
+                  padding: EdgeInsets.only(bottom: heightScreen * 0.02),
+                  child: ContinueLoginButton(
                     userNameController: userNameController,
                     passwordController: passwordController,
-                    function: () {}),
-                SizedBox(
-                  height: heightScreen * 0.01,
+                    function: submit,
+                    ctx: context,
+                  ),
                 ),
-              ],
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
   }
 }
-

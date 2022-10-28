@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
+import 'Views/Screens/about_you.dart';
 import 'Views/Screens/email_login.dart';
 import 'Views/Screens/email_signup.dart';
+import 'Views/Screens/forget_password.dart';
 import 'Views/Screens/sign_up_page.dart';
 
 void main() {
@@ -32,6 +34,8 @@ class MyApp extends StatelessWidget {
         SignUpPage.routeName: (ctx) => const SignUpPage(),
         EmailLogin.routeName: (ctx) => const EmailLogin(),
         EmailSignup.routeName: (ctx) => const EmailSignup(),
+        ForgetPassword.routeName: (ctx) => const ForgetPassword(),
+        AboutYou.routeName: (ctx) => const AboutYou(),
       },
     );
   }
