@@ -5,6 +5,7 @@ import '../Widgets/continue_signup_button.dart';
 import '../Widgets/sign_up_bar.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
+import 'about_you.dart';
 import 'email_login.dart';
 
 class EmailSignup extends StatefulWidget {
@@ -30,10 +31,20 @@ class _EmailSignupState extends State<EmailSignup> {
 
   void submit(emailController, userNameController, passwordController, ctx) {
     print('sending data to back end');
+    Navigator.of(ctx).pushReplacementNamed(AboutYou.routeName, arguments: {});
   }
 
   void validate(emailController, userNameController, passwordController, ctx) {
     setState(() => _submit = true);
+
+    bool isValidEmail = EmailValidator.validate(emailController.text);
+    bool isValidPassword = (passwordController.text.length >= 8);
+    bool isValidUserName1 = ((userNameController.text.length >= 3) &&
+        (userNameController.text.length <= 20));
+    bool isValidUserName2 =
+        (RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(userNameController.text));
+    bool isValidUserName3 = true;
+
     errorEmailText = (!_submit)
         ? null
         : (EmailValidator.validate(emailController.text))
@@ -47,24 +58,21 @@ class _EmailSignupState extends State<EmailSignup> {
             ? 'Username must be between 3 and 20 characters'
             : (!(RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(userNameController.text)))
                 ? 'Letters, numbers, dashes, and underscores only. please try again without symbols.'
-                : null;
+                : !(isValidUserName3)
+                    ? 'That username is already taken'
+                    : null;
 
     errorPasswordText = (!_submit)
         ? null
         : (passwordController.text.length >= 8)
             ? null
             : 'the password must be at least 8 characters';
-    bool isValidEmail = EmailValidator.validate(emailController.text);
-    bool isValidPassword = (passwordController.text.length >= 8);
-    bool isValidUserName1 = ((userNameController.text.length >= 3) &&
-        (userNameController.text.length <= 20));
-    bool isValidUserName2 =
-        (RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(userNameController.text));
 
     if (isValidEmail &&
         isValidPassword &&
         isValidUserName1 &&
-        isValidUserName2) {
+        isValidUserName2 &&
+        isValidUserName3) {
       submit(emailController, userNameController, passwordController, ctx);
     } else {
       print(emailController.text +
@@ -109,15 +117,18 @@ class _EmailSignupState extends State<EmailSignup> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: padding,
-                      child: const Text(
-                        'Hi new friend, welcome to Reddit',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5,
+                    SizedBox(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: padding,
+                        child: const Text(
+                          'Hi new friend, welcome to Reddit',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5,
+                          ),
                         ),
                       ),
                     ),

@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'Views/Screens/about_you.dart';
+import 'Views/Screens/choose_username.dart';
 import 'Views/Screens/email_login.dart';
 import 'Views/Screens/email_signup.dart';
 import 'Views/Screens/forget_password.dart';
+import 'Views/Screens/forget_username.dart';
 import 'Views/Screens/sign_up_page.dart';
+import 'Views/Screens/temphome.dart';
 
 void main() {
   runApp(const MyApp());
@@ -31,10 +34,13 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       home: const SignUpPage(),
       routes: {
+        Home.routeName: (ctx) => const Home(),
         SignUpPage.routeName: (ctx) => const SignUpPage(),
         EmailLogin.routeName: (ctx) => const EmailLogin(),
         EmailSignup.routeName: (ctx) => const EmailSignup(),
         ForgetPassword.routeName: (ctx) => const ForgetPassword(),
+        ForgetUserName.routeName: (ctx) => const ForgetUserName(),
+        ChooseUserName.routeName: (ctx) => const ChooseUserName(),
         AboutYou.routeName: (ctx) => const AboutYou(),
       },
     );

@@ -5,28 +5,21 @@ import '../Widgets/email_me_button.dart';
 import '../Widgets/sign_up_bar.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import 'email_login.dart';
-import 'forget_username.dart';
 
-class ForgetPassword extends StatefulWidget {
-  const ForgetPassword({super.key});
-  static const routeName = '/ForgetPassword';
+class ForgetUserName extends StatefulWidget {
+  const ForgetUserName({super.key});
+  static const routeName = '/ForgetUserName';
 
   @override
-  State<ForgetPassword> createState() => _ForgetPasswordState();
+  State<ForgetUserName> createState() => _ForgetUserNameState();
 }
 
-class _ForgetPasswordState extends State<ForgetPassword> {
-  TextEditingController userNameController = TextEditingController();
+class _ForgetUserNameState extends State<ForgetUserName> {
   TextEditingController emailController = TextEditingController();
 
-  void submit(userNameController, emailController, ctx) {
+  void submit(emailController, ctx) {
     print('sending data to back end');
     Navigator.of(ctx).pop();
-  }
-
-  void forgetusername(BuildContext ctx) {
-    Navigator.of(ctx)
-        .pushReplacementNamed(ForgetUserName.routeName, arguments: {});
   }
 
   void havingTrouble(havingTroubleurl) {
@@ -66,7 +59,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     child: Padding(
                       padding: padding,
                       child: const Text(
-                        'Forget your password?',
+                        'Recover username',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 24,
@@ -78,12 +71,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   ),
                   SizedBox(
                     height: heightScreen * 0.05,
-                  ),
-                  Padding(
-                    padding: EdgeInsets.all(
-                      heightScreen * 0.02,
-                    ),
-                    child: UserNameText(userNameController: userNameController),
                   ),
                   Padding(
                     padding: EdgeInsets.all(
@@ -110,16 +97,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     padding: EdgeInsets.all(
                       heightScreen * 0.02,
                     ),
-                    child: textbutton(
-                        'Forget username?', () => forgetusername(context)),
-                  ),
-                  // SizedBox(
-                  //   height: heightScreen * 0.05,
-                  // ),
-                  Padding(
-                    padding: EdgeInsets.all(
-                      heightScreen * 0.02,
-                    ),
                     child: textbutton('Having trouble?',
                         () => havingTrouble(havingTroubleurl)),
                   ),
@@ -133,8 +110,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               alignment: Alignment.bottomCenter,
               child: Padding(
                 padding: EdgeInsets.only(bottom: heightScreen * 0.02),
-                child: MailMeButton1(
-                  userNameController: userNameController,
+                child: MailMeButton2(
                   emailController: emailController,
                   function: submit,
                   ctx: context,

@@ -6,6 +6,7 @@ import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
 import 'email_signup.dart';
 import 'forget_password.dart';
+import 'temphome.dart';
 
 class EmailLogin extends StatefulWidget {
   const EmailLogin({super.key});
@@ -21,11 +22,12 @@ class _EmailLoginState extends State<EmailLogin> {
 
   void submit(userNameController, passwordController, ctx) {
     print('sending data to back end');
+    Navigator.of(ctx).pop();
+    Navigator.of(ctx).pushReplacementNamed(Home.routeName, arguments: {});
   }
 
   void forgetPass(BuildContext ctx) {
-    Navigator.of(ctx)
-        .pushReplacementNamed(ForgetPassword.routeName, arguments: {});
+    Navigator.of(ctx).pushNamed(ForgetPassword.routeName, arguments: {});
   }
 
   void emailsignup(BuildContext ctx) {
@@ -67,14 +69,18 @@ class _EmailLoginState extends State<EmailLogin> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Padding(
-                      padding: padding,
-                      child: const Text(
-                        'Log in to Reddit',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5,
+                    SizedBox(
+                      width: double.infinity,
+                      child: Padding(
+                        padding: padding,
+                        child: const Text(
+                          'Log in to Reddit',
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                            letterSpacing: 0.5,
+                          ),
                         ),
                       ),
                     ),
@@ -98,29 +104,31 @@ class _EmailLoginState extends State<EmailLogin> {
                     SizedBox(
                       height: heightScreen * 0.01,
                     ),
-                    TextButton(
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStatePropertyAll(
-                            Theme.of(context).colorScheme.primary),
+                    Padding(
+                      padding: EdgeInsets.all(
+                        heightScreen * 0.02,
                       ),
-                      onPressed: () => forgetPass(context),
-                      child: const Text(
-                        'Forget Password',
-                        style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
+                      child: TextButton(
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStatePropertyAll(
+                              Theme.of(context).colorScheme.primary),
+                        ),
+                        onPressed: () => forgetPass(context),
+                        child: const Text(
+                          'Forget Password',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
                         ),
                       ),
                     ),
                     SizedBox(
-                      height: heightScreen * 0.3,
+                      height: heightScreen * 0.26,
                     ),
                     UserLoginAggreement(
                         userAgrementUrl: userAgrementUrl,
                         privacyUrl: privacyUrl),
-                    SizedBox(
-                      height: heightScreen * 0.03,
-                    ),
                   ],
                 ),
               ),

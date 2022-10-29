@@ -40,6 +40,7 @@ class SignUpPage extends StatelessWidget {
               ),
               const Text(
                 'Dive into anything',
+                textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
