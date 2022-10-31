@@ -4,6 +4,7 @@ import 'package:reddit/methods/default_bottom_sheet.dart';
 import 'package:reddit/methods/show_leave_community_dialog.dart';
 import 'package:reddit/styles/custom_icons.dart';
 import 'package:reddit/views/widgets/post_card_widget.dart';
+import 'package:reddit/views/widgets/post_classic_widget.dart';
 import '../../controllers/community_controller.dart';
 
 class CommunityScreen extends StatelessWidget {
@@ -282,8 +283,6 @@ class CommunityScreen extends StatelessWidget {
                 child: SizedBox(
               height: 40,
               child: Row(
-
-
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -324,20 +323,26 @@ class CommunityScreen extends StatelessWidget {
                             ["Card", "Classic"],
                             "postView");
                       },
-                      icon:  Icon(value.postViewIcon))
+                      icon: Icon(value.postViewIcon))
                 ],
               ),
             )),
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate(
-              (context, index) => ListTile(
-                  tileColor: Colors.white,
-                  title: PostCardWidget(
-                      postType: "link", context: context, postPlace: "home")),
-              childCount: 10,
+          Consumer<CommunityProvider>(
+            builder: (context, value, child) => SliverList(
+              delegate: SliverChildBuilderDelegate(
+                (context, index) => ListTile(
+                    tileColor: Colors.white,
+                    title: (value.postView == "card")
+                        ? PostCardWidget(
+                            postType: "link",
+                            context: context,
+                            postPlace: "home")
+                        : const PostClassic(postType: "image")),
+                childCount: 10,
+              ),
             ),
-          ),
+          )
         ],
       ),
     )));

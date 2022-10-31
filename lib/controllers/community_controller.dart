@@ -7,6 +7,7 @@ class CommunityProvider with ChangeNotifier {
   double expandedHeight = 320;
   bool joined = false;
   IconData notificationIcon = Icons.notifications_outlined;
+  String postView="card";
 
   List<IconData> bottomSheetNotificationsIconsFilled = [
     Icons.notifications_off,
@@ -103,6 +104,14 @@ class CommunityProvider with ChangeNotifier {
         postViewIcon = bottomSheetPostViewIcons[i];
       } else {
         checkIconPostView[i] = false;
+      }
+      if(index==0)
+      {
+        postView="card";
+      }
+      else
+      {
+        postView="classic";
       }
     }
     notifyListeners();
