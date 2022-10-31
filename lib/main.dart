@@ -1,32 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'controllers/community_controller.dart';
+import 'views/screens/community_home_screen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(
+    create: (context) => CommunityProvider(),
+    child: const MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return ChangeNotifierProvider<CommunityProvider>(
+      create: (context) => CommunityProvider(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        debugShowCheckedModeBanner: false,
+        home: const CommunityScreen(),
       ),
-      home: _HomePage(),
-    );
-  }
-}
-
-class _HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: const Center(child: Text('Welcome to Reddit')),
     );
   }
 }
