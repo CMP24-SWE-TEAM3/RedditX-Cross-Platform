@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
+import 'package:reddit/styles/custom_icons.dart';
 import 'post_top_widget.dart';
 
 class PostCardWidget extends StatelessWidget {
@@ -138,17 +139,18 @@ class PostCardWidget extends StatelessWidget {
                   Expanded(
                     child: IconButton(
                         onPressed: () {},
-                        icon: const Icon(Icons.arrow_upward_outlined)),
+                        icon: const Icon(CustomIcons.up_outline)),
                   ),
                   const Text("1500"),
                   Expanded(
                     child: IconButton(
                         onPressed: () {},
-                        icon: const Icon(Icons.arrow_upward_outlined)),
+                        icon: const Icon(CustomIcons.down_outline)),
                   ),
                   Expanded(
                     child: IconButton(
-                        onPressed: () {}, icon: const Icon(Icons.comment)),
+                        onPressed: () {},
+                        icon: const Icon(CustomIcons.comment)),
                   ),
                   const Text("60"),
                   Expanded(
@@ -158,8 +160,7 @@ class PostCardWidget extends StatelessWidget {
                   const Text("Share"),
                   Expanded(
                     child: IconButton(
-                        onPressed: () {},
-                        icon: const Icon(Icons.present_to_all)),
+                        onPressed: () {}, icon: const Icon(CustomIcons.gift)),
                   )
                 ],
               ),

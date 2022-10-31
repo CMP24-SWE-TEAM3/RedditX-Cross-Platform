@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/methods/default_bottom_sheet.dart';
+import 'package:reddit/methods/show_leave_community_dialog.dart';
+import 'package:reddit/styles/custom_icons.dart';
 import 'package:reddit/views/widgets/post_card_widget.dart';
 import '../../controllers/community_controller.dart';
 
@@ -19,7 +22,7 @@ class CommunityScreen extends StatelessWidget {
                 elevation: 0,
                 primary: false,
                 backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-                foregroundColor: Color.fromARGB(255, 194, 193, 193),
+                foregroundColor: const Color.fromARGB(255, 194, 193, 193),
                 collapsedHeight: 60,
                 centerTitle: true,
                 floating: true,
@@ -27,7 +30,10 @@ class CommunityScreen extends StatelessWidget {
                 pinned: true,
                 expandedHeight: value.expandedHeight,
                 leading: IconButton(
-                    onPressed: () {}, icon: const Icon(Icons.arrow_back)),
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: const Icon(Icons.arrow_back)),
                 title: InkWell(
                   borderRadius: const BorderRadius.all(
                     Radius.circular(5),
@@ -126,10 +132,23 @@ class CommunityScreen extends StatelessWidget {
                                                           Colors.white,
                                                       radius: 15,
                                                       child: InkWell(
-                                                        onTap: () {},
-                                                        child: const Icon(
-                                                          Icons
-                                                              .notifications_outlined,
+                                                        onTap: () {
+                                                          showDefaultBottomSheet(
+                                                              context,
+                                                              "COMMUNITY NOTIFICATIONS",
+                                                              3,
+                                                              value
+                                                                  .bottomSheetNotificationsIcons,
+                                                              [
+                                                                "Off",
+                                                                "Low",
+                                                                "Frequent"
+                                                              ],
+                                                              "notifications");
+                                                        },
+                                                        child: Icon(
+                                                          value
+                                                              .notificationIcon,
                                                           size: 18,
                                                         ),
                                                       )),
@@ -150,7 +169,11 @@ class CommunityScreen extends StatelessWidget {
                                                       borderRadius:
                                                           BorderRadius.circular(
                                                               15),
-                                                      onTap: () {},
+                                                      onTap: () {
+                                                        showLeaveCommunityDialog(
+                                                            context,
+                                                            "Are you sure you want to leave the r/Art community?");
+                                                      },
                                                       child: const Padding(
                                                         padding:
                                                             EdgeInsets.all(5),
@@ -254,38 +277,58 @@ class CommunityScreen extends StatelessWidget {
               ]),
             ),
           ),
-          SliverToBoxAdapter(
-              child: SizedBox(
-            height: 40,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const SizedBox(
-                  width: 10,
-                ),
-                InkWell(
-                    onTap: () {},
-                    child: SizedBox(
-                      height: 30,
-                      child: Row(
-                        children: const [
-                          Icon(Icons.new_releases_outlined),
-                          SizedBox(
-                            width: 5,
-                          ),
-                          Text("NEW POSTS"),
-                          Icon(Icons.arrow_drop_down_rounded),
-                        ],
-                      ),
-                    )),
-                const Spacer(),
-                IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.view_stream_outlined))
-              ],
-            ),
-          )),
+          Consumer<CommunityProvider>(
+            builder: (context, value, child) => SliverToBoxAdapter(
+                child: SizedBox(
+              height: 40,
+              child: Row(
+
+
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  const SizedBox(
+                    width: 10,
+                  ),
+                  InkWell(
+                      onTap: () {
+                        showDefaultBottomSheet(
+                            context,
+                            "SORT POSTS BY",
+                            5,
+                            value.bottomSheetPostSortIcons,
+                            ["Hot", "New", "Top", "Controversial", "Rising"],
+                            "postSortBy");
+                      },
+                      child: SizedBox(
+                        height: 30,
+                        child: Row(
+                          children: [
+                            Icon(value.postSortByIcon),
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Text("${value.postSortByType} POSTS"),
+                            const Icon(Icons.arrow_drop_down_rounded),
+                          ],
+                        ),
+                      )),
+                  const Spacer(),
+                  IconButton(
+                      onPressed: () {
+                        showDefaultBottomSheet(
+                            context,
+                            "POST VIEW",
+                            2,
+                            value.bottomSheetPostViewIcons,
+                            ["Card", "Classic"],
+                            "postView");
+                      },
+                      icon:  Icon(value.postViewIcon))
+                ],
+              ),
+            )),
+          ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) => ListTile(

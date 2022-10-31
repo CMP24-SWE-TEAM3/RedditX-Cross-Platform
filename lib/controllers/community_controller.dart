@@ -1,9 +1,58 @@
 import 'package:flutter/material.dart';
 
+import '../styles/custom_icons.dart';
+
 class CommunityProvider with ChangeNotifier {
   bool isExpanded = false;
   double expandedHeight = 320;
   bool joined = false;
+  IconData notificationIcon = Icons.notifications_outlined;
+
+  List<IconData> bottomSheetNotificationsIconsFilled = [
+    Icons.notifications_off,
+    Icons.notifications,
+    Icons.notifications_active
+  ];
+  List<IconData> bottomSheetNotificationsIconsOutlined = [
+    Icons.notifications_off_outlined,
+    Icons.notifications_outlined,
+    Icons.notifications_active_outlined
+  ];
+
+  List<IconData> bottomSheetNotificationsIcons = [
+    Icons.notifications_off_outlined,
+    Icons.notifications,
+    Icons.notifications_active_outlined
+  ];
+
+  IconData postSortByIcon = CustomIcons.hotjar;
+
+  List<IconData> bottomSheetPostSortIcons = [
+    CustomIcons.hotjar,
+    CustomIcons.certificate_outline,
+    CustomIcons.award,
+    CustomIcons.broadsword,
+    CustomIcons.chart_outline
+  ];
+
+  String postSortByType = "HOT";
+
+  List<String> postSortByTypes = [
+    "HOT",
+    "NEW",
+    "TOP",
+    "CONTROVERSIAL",
+    "RISING"
+  ];
+  IconData postViewIcon = Icons.view_stream_outlined;
+  List<IconData> bottomSheetPostViewIcons = [
+    Icons.view_stream_outlined,
+    CustomIcons.menu
+  ];
+
+  List<bool> checkIconNotification = [false, true, false];
+  List<bool> checkIconPostView = [true, false];
+  List<bool> checkIconPostSortBy = [true, false, false, false, false];
 
   void changeExpandedHight(bool isExpandedd) {
     isExpanded = !isExpandedd;
@@ -22,6 +71,54 @@ class CommunityProvider with ChangeNotifier {
 
   void unJoinCommunity() {
     joined = false;
+    notifyListeners();
+  }
+
+  void changeNotificationsType(String type, int index) {
+    if (type == "Off") {
+      notificationIcon = Icons.notifications_off_outlined;
+    } else if (type == "Low") {
+      notificationIcon = Icons.notifications_outlined;
+    } else {
+      notificationIcon = Icons.notifications_active_outlined;
+    }
+    for (int i = 0; i < 3; i++) {
+      if (i == index) {
+        bottomSheetNotificationsIcons[i] =
+            bottomSheetNotificationsIconsFilled[i];
+        checkIconNotification[i] = true;
+      } else {
+        bottomSheetNotificationsIcons[i] =
+            bottomSheetNotificationsIconsOutlined[i];
+        checkIconNotification[i] = false;
+      }
+    }
+    notifyListeners();
+  }
+
+  void changePostView(String type, int index) {
+    for (int i = 0; i < 2; i++) {
+      if (i == index) {
+        checkIconPostView[i] = true;
+        postViewIcon = bottomSheetPostViewIcons[i];
+      } else {
+        checkIconPostView[i] = false;
+      }
+    }
+    notifyListeners();
+  }
+
+  void changePostSortBy(String type, int index) {
+    for (int i = 0; i < 5; i++) {
+      if (i == index) {
+        checkIconPostSortBy[i] = true;
+        postSortByIcon = bottomSheetPostSortIcons[i];
+        postSortByType = postSortByTypes[i];
+      } else {
+        checkIconPostSortBy[i] = false;
+      }
+    }
+
     notifyListeners();
   }
 }
