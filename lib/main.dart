@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'setting_Menu.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(const SettingsMenu());
 }
 
 class MyApp extends StatelessWidget {
