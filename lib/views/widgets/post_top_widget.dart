@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/methods/show_profile_dialog.dart';
+import 'package:reddit/styles/custom_icons.dart';
+import 'package:reddit/views/widgets/default_drop_down_button_widget.dart';
 
 class PostTopWidget extends StatelessWidget {
   final String postPlace;
@@ -66,7 +68,24 @@ class PostTopWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert)),
+          const DefaultDropDownButtonWidget(
+            optionsCount: 5,
+            listValues: [
+              "Save",
+              "Hide post",
+              "Report",
+              "Block account",
+              "Award details"
+            ],
+            map: {
+              "Save": CustomIcons.saved,
+              "Hide post": Icons.visibility_off_outlined,
+              "Report": Icons.flag_outlined,
+              "Block account": Icons.block_outlined,
+              "Award details": CustomIcons.award
+            },
+            width: 140,
+          )
         ],
       );
     }

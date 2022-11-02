@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:reddit/methods/default_bottom_sheet.dart';
 import 'package:reddit/methods/show_leave_community_dialog.dart';
 import 'package:reddit/styles/custom_icons.dart';
+import 'package:reddit/views/widgets/default_drop_down_button_widget.dart';
 import 'package:reddit/views/widgets/post_card_widget.dart';
 import 'package:reddit/views/widgets/post_classic_widget.dart';
 import '../../controllers/community_controller.dart';
@@ -64,15 +65,33 @@ class CommunityScreen extends StatelessWidget {
                         ),
                       )),
                 ),
-                actions: [
-                  IconButton(
-                      onPressed: () {}, icon: const Icon(Icons.more_vert)),
-                  const CircleAvatar(
+                actions: const [
+                  DefaultDropDownButtonWidget(
+                    optionsCount: 5,
+                    listValues: [
+                      "Share community",
+                      "Add to custom feed",
+                      "Community info",
+                      "Change user flair",
+                      "Contact mods",
+                      "Add to Home screen"
+                    ],
+                    map: {
+                      "Share community": Icons.share_outlined,
+                      "Add to custom feed": Icons.add,
+                      "Community info": Icons.info,
+                      "Change user flair": Icons.change_circle,
+                      "Contact mods": CustomIcons.mail,
+                      "Add to Home screen": Icons.add
+                    },
+                    width: 171,
+                  ),
+                  CircleAvatar(
                     radius: 20,
                     backgroundImage: NetworkImage(
                         "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
                   ),
-                  const SizedBox(
+                  SizedBox(
                     width: 15,
                   )
                 ],
@@ -335,10 +354,10 @@ class CommunityScreen extends StatelessWidget {
                     tileColor: Colors.white,
                     title: (value.postView == "card")
                         ? PostCardWidget(
-                            postType: "link",
+                            postType: "text",
                             context: context,
                             postPlace: "home")
-                        : const PostClassic(postType: "image")),
+                        : const PostClassic(postType: "text")),
                 childCount: 10,
               ),
             ),

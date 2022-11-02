@@ -59,7 +59,7 @@ class PostClassic extends StatelessWidget {
                     Row(
                       children: [
                         const Expanded(
-                            flex: 3,
+                            flex: 5,
                             child: Text(
                               "post titleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
                               maxLines: 3,
@@ -69,7 +69,7 @@ class PostClassic extends StatelessWidget {
                           width: 20,
                         ),
                         Expanded(
-                            flex: 1,
+                            flex: 3,
                             child: (postType == 'link')
                                 ? const Padding(
                                     padding:
