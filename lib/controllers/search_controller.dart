@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as international;
 import 'package:shared_preferences/shared_preferences.dart';
 import '../views/widgets/search_history_widget.dart';
+import '../../models/search_model.dart';
+import '../views/widgets/people_in_search_results.dart';
 
 class SearchController with ChangeNotifier {
   //controller that stores the input text
   var searchTextFieldcontroller = TextEditingController();
   //detect the platform
   //web==> true , App==> false
-  bool isWeb = true;
+  bool isWeb = false;
   //text appears from RTL ==> true, from LTR ==< false
   bool isRTLText = false;
   //the icon that appears in the end of the text field to delete the input text
@@ -16,7 +18,7 @@ class SearchController with ChangeNotifier {
   //is the textField focused
   bool isFocused = false;
   //is the text field hovered with the mouse
-  bool isHovered = false;
+  bool isHoveredTextField = false;
   //to detect when the textField is tapped
   bool isTapped = false;
   //to detect whether the border is circular or rectangular depending on the platform
@@ -29,8 +31,12 @@ class SearchController with ChangeNotifier {
   bool isSearchHistoryClicked = false;
   //to detect which item was clicked
   int clickedItemIndex = 0;
-  //
   double bottomborderRadius = 0;
+  //to store in it shich useres from the search result of people are followed and which are not
+  //I will fill it during reading data in the model class
+  List<bool> isFollowing = [];
+  //to detect if the Follow button in the search result in hovered
+  List<bool> isHoveredFollowButton = [];
 
   SearchController() {
     //web==> circular
@@ -43,13 +49,13 @@ class SearchController with ChangeNotifier {
 
   onHoverTextField() {
     //when hover the field with the mouse
-    isHovered = true;
+    isHoveredTextField = true;
     notifyListeners();
   }
 
   onExitTextField() {
     //when move the mouse away from the text field the region
-    isHovered = false;
+    isHoveredTextField = false;
     notifyListeners();
   }
 
@@ -103,7 +109,7 @@ class SearchController with ChangeNotifier {
     //if web==>
     //===if the text field is hovered ==> the color is white
     //===else ==> the color is grey
-    Color fillColor = (isWeb && (isHovered || isTapped))
+    Color fillColor = (isWeb && (isHoveredTextField || isTapped))
         ? Colors.white
         : const Color.fromRGBO(230, 230, 230, 1);
 
@@ -124,7 +130,7 @@ class SearchController with ChangeNotifier {
 
   Color enabledBorderColor() {
     Color enableBorderColor = isWeb
-        ? (isHovered)
+        ? (isHoveredTextField)
             ? Colors.blue
             : Colors.white
         : const Color.fromRGBO(230, 230, 230, 1); //grey
@@ -187,6 +193,14 @@ class SearchController with ChangeNotifier {
     notifyListeners();
   }
 
+  fillFollowingList() {
+    //fill List of following / unfollowing Uccounts
+    for (var i = 0; i < peoplesList.length; i++) {
+      isFollowing.add(peoplesList[i].followed);
+      isHoveredFollowButton.add(false);
+    }
+  }
+
   //when  asearch history is deleted using close button
   deleteSearchHistory(int index) async {
     //indicate that a search history item is deleted
@@ -227,5 +241,33 @@ class SearchController with ChangeNotifier {
       );
     }
     return searchHistoryWidget;
+  }
+
+  List<PeopleSearchResult> buildPeopleInSearchListWidget() {
+    fillFollowingList();
+    List<PeopleSearchResult> peopleSearchResultsWidgetList = [];
+    for (int i = 0; i < peoplesList.length; i++) {
+      peopleSearchResultsWidgetList.add(
+        PeopleSearchResult(
+          personData: peoplesList[i],
+          index: i,
+        ),
+      );
+    }
+    return peopleSearchResultsWidgetList;
+  }
+
+  //index of the account in the retrieved accounts list
+  onPressingFollowButton(int index) {
+    //1-send follow/ UnFollow request to the API
+    //2-
+    isFollowing[index] = !isFollowing[index];
+    notifyListeners();
+  }
+
+  onHoverFollowButton(int i) {
+    isHoveredFollowButton[i] = !isHoveredFollowButton[i];
+
+    notifyListeners();
   }
 }

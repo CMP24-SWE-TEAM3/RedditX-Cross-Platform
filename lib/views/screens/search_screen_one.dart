@@ -67,7 +67,7 @@ class SearchScreenOneState extends State {
                     //shrinkWrap makes the scroll size same as content size
                     shrinkWrap: true,
                     children: [
-                      //call a function the buils the search history column
+                      //call a function the builds the search history column
                       ...Provider.of<SearchController>(context)
                           .buildSearchHistoryColumn(),
                     ],
