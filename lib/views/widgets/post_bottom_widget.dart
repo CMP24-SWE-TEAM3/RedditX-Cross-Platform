@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-
 import '../../styles/custom_icons.dart';
 
 class PostBottomWidget extends StatelessWidget {

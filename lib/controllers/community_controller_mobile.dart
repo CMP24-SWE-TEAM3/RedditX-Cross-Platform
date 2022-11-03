@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/methods/controversial_specific_bottom_sheet.dart';
-
-import '../methods/default_bottom_sheet.dart';
 import '../styles/custom_icons.dart';
 
 class MobileCommunityProvider with ChangeNotifier {
