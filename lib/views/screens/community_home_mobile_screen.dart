@@ -6,10 +6,11 @@ import 'package:reddit/styles/custom_icons.dart';
 import 'package:reddit/views/widgets/default_drop_down_button_widget.dart';
 import 'package:reddit/views/widgets/post_card_widget.dart';
 import 'package:reddit/views/widgets/post_classic_widget.dart';
-import '../../controllers/community_controller.dart';
+import '../../controllers/community_controller_mobile.dart';
 
-class CommunityScreen extends StatelessWidget {
-  const CommunityScreen({super.key});
+class CommunityMobileScreen extends StatelessWidget {
+  const CommunityMobileScreen({super.key});
+  // final tabBarController = TabController(length: 3, vsync: this);
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +20,7 @@ class CommunityScreen extends StatelessWidget {
       length: 2,
       child: CustomScrollView(
         slivers: [
-          Consumer<CommunityProvider>(
+          Consumer<MobileCommunityProvider>(
             builder: (context, value, child) => SliverAppBar(
                 elevation: 0,
                 primary: false,
@@ -67,6 +68,7 @@ class CommunityScreen extends StatelessWidget {
                 ),
                 actions: const [
                   DefaultDropDownButtonWidget(
+                    icon: Icons.more_vert,
                     optionsCount: 5,
                     listValues: [
                       "Share community",
@@ -286,18 +288,21 @@ class CommunityScreen extends StatelessWidget {
             backgroundColor: Colors.white,
             title: Align(
               alignment: Alignment.center,
-              child:
-                  TabBar(labelColor: Colors.black, isScrollable: true, tabs: [
-                Tab(
-                  text: 'Posts',
-                ),
-                Tab(
-                  text: 'About',
-                )
-              ]),
+              child: TabBar(
+                  //controller: tabBarController,
+                  labelColor: Colors.black,
+                  isScrollable: true,
+                  tabs: [
+                    Tab(
+                      text: 'Posts',
+                    ),
+                    Tab(
+                      text: 'About',
+                    )
+                  ]),
             ),
           ),
-          Consumer<CommunityProvider>(
+          Consumer<MobileCommunityProvider>(
             builder: (context, value, child) => SliverToBoxAdapter(
                 child: SizedBox(
               height: 40,
@@ -317,6 +322,12 @@ class CommunityScreen extends StatelessWidget {
                             value.bottomSheetPostSortIcons,
                             ["Hot", "New", "Top", "Controversial", "Rising"],
                             "postSortBy");
+                        // showControversialBottomSheet(
+                        //     context,
+                        //     "CONTROVERSIAL POSTS FROM",
+                        //     6,
+                        //     value.controversialPostsIcons,
+                        //     value.controversialPostsTypes);
                       },
                       child: SizedBox(
                         height: 30,
@@ -326,7 +337,11 @@ class CommunityScreen extends StatelessWidget {
                             const SizedBox(
                               width: 5,
                             ),
-                            Text("${value.postSortByType} POSTS"),
+                            Text(
+                              value.postSortByType,
+                              maxLines: 1,
+                              overflow: TextOverflow.clip,
+                            ),
                             const Icon(Icons.arrow_drop_down_rounded),
                           ],
                         ),
@@ -347,7 +362,7 @@ class CommunityScreen extends StatelessWidget {
               ),
             )),
           ),
-          Consumer<CommunityProvider>(
+          Consumer<MobileCommunityProvider>(
             builder: (context, value, child) => SliverList(
               delegate: SliverChildBuilderDelegate(
                 (context, index) => ListTile(

@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller_mobile.dart';
 
-
-void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
-    List<IconData> icons, List<String> options, String source) {
+void showControversialBottomSheet(BuildContext context, String title,
+    int itemCount, List<IconData> icons, List<String> options) {
   showModalBottomSheet(
       isDismissible: true,
       isScrollControlled: true,
@@ -12,7 +11,7 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
       backgroundColor: Colors.white,
       constraints: const BoxConstraints(maxWidth: 395),
       context: context,
-      builder: (context) => Padding(
+      builder: (BuildContext context) => Padding(
           padding: const EdgeInsets.all(15),
           child: Wrap(
             children: [
@@ -33,23 +32,8 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                         tileColor: Colors.white,
                         title: InkWell(
                           onTap: () {
-                            if (source == "notifications") {
-                              value.changeNotificationsType(
-                                  options[index], index);
-                            } else if (source == "postView") {
-                              value.changePostView(options[index], index);
-                            } else if (source == "postSortBy") {
-                              if (index == 3) {
-                                //Navigator.pop(context);
-                                Scaffold.of(context)
-                                    .showBottomSheet((context) => Container(
-                                          color: Colors.red,
-                                          height: 100,
-                                        ));
-                              }
-                              value.changePostSortBy(
-                                  options[index], index, context);
-                            }
+                            value.changeControversialPostsFrom(
+                                options[index], index, context);
 
                             Navigator.pop(context);
                           },
@@ -65,16 +49,6 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                                     fontWeight: FontWeight.bold),
                               ),
                               const Spacer(),
-                              if (source == "notifications" &&
-                                      value.checkIconNotification[index] ||
-                                  source == "postSortBy" &&
-                                      value.checkIconPostSortBy[index] ||
-                                  source == "postView" &&
-                                      value.checkIconPostView[index])
-                                const Icon(
-                                  Icons.check_outlined,
-                                  color: Colors.blue,
-                                )
                             ],
                           ),
                         ))),

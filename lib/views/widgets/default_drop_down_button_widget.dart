@@ -6,9 +6,11 @@ class DefaultDropDownButtonWidget extends StatelessWidget {
 
   final Map<String, IconData> map;
   final double width;
+  final IconData icon;
 
   const DefaultDropDownButtonWidget(
       {super.key,
+      required this.icon,
       required this.optionsCount,
       required this.listValues,
       required this.map,
@@ -17,7 +19,8 @@ class DefaultDropDownButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButton<String>(
-      icon: const Icon(Icons.more_vert),
+      icon: Icon(icon),
+
       //value: dropdownValue,
       items: listValues.map((name) {
         return DropdownMenuItem<String>(

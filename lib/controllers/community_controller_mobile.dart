@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/methods/controversial_specific_bottom_sheet.dart';
 
+import '../methods/default_bottom_sheet.dart';
 import '../styles/custom_icons.dart';
 
-class CommunityProvider with ChangeNotifier {
+class MobileCommunityProvider with ChangeNotifier {
   bool isExpanded = false;
   double expandedHeight = 320;
   bool joined = false;
   IconData notificationIcon = Icons.notifications_outlined;
-  String postView="card";
+  String postView = "card";
+  bool isControversial = false;
 
   List<IconData> bottomSheetNotificationsIconsFilled = [
     Icons.notifications_off,
@@ -36,14 +39,14 @@ class CommunityProvider with ChangeNotifier {
     CustomIcons.chart_outline
   ];
 
-  String postSortByType = "HOT";
+  String postSortByType = "HOT POSTS";
 
   List<String> postSortByTypes = [
-    "HOT",
-    "NEW",
-    "TOP",
-    "CONTROVERSIAL",
-    "RISING"
+    "HOT POSTS",
+    "NEW POSTS",
+    "TOP POSTS",
+    "CONTROVERSIAL POSTS",
+    "RISING POSTS"
   ];
   IconData postViewIcon = Icons.view_stream_outlined;
   List<IconData> bottomSheetPostViewIcons = [
@@ -51,9 +54,34 @@ class CommunityProvider with ChangeNotifier {
     CustomIcons.menu
   ];
 
+  List<IconData> controversialPostsIcons = [
+    Icons.circle_outlined,
+    Icons.circle_outlined,
+    Icons.circle_outlined,
+    Icons.circle_outlined,
+    Icons.circle_outlined,
+    Icons.circle_outlined
+  ];
+  List<String> controversialPostsTypes = [
+    "Past hour",
+    "Past 24 hours",
+    "Past week",
+    "Past month",
+    "Past year",
+    "All time"
+  ];
+
   List<bool> checkIconNotification = [false, true, false];
   List<bool> checkIconPostView = [true, false];
   List<bool> checkIconPostSortBy = [true, false, false, false, false];
+  List<bool> checkIconControversialPostsFrom = [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ];
 
   void changeExpandedHight(bool isExpandedd) {
     isExpanded = !isExpandedd;
@@ -105,19 +133,16 @@ class CommunityProvider with ChangeNotifier {
       } else {
         checkIconPostView[i] = false;
       }
-      if(index==0)
-      {
-        postView="card";
-      }
-      else
-      {
-        postView="classic";
+      if (index == 0) {
+        postView = "card";
+      } else {
+        postView = "classic";
       }
     }
     notifyListeners();
   }
 
-  void changePostSortBy(String type, int index) {
+  void changePostSortBy(String type, int index, BuildContext context) {
     for (int i = 0; i < 5; i++) {
       if (i == index) {
         checkIconPostSortBy[i] = true;
@@ -128,6 +153,22 @@ class CommunityProvider with ChangeNotifier {
       }
     }
 
+    notifyListeners();
+  }
+
+  void changeControversialPostsFrom(
+      String type, int index, BuildContext context) {
+    for (int i = 0; i < 6; i++) {
+      if (i == index) {
+        checkIconControversialPostsFrom[i] = true;
+        controversialPostsIcons[i] = Icons.check_circle;
+        postSortByType =
+            "CONTROVERSIAL POSTS FROM ${controversialPostsTypes[i]}";
+      } else {
+        checkIconControversialPostsFrom[i] = false;
+        controversialPostsIcons[i] = Icons.circle_outlined;
+      }
+    }
     notifyListeners();
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../controllers/community_controller.dart';
+
+import '../controllers/community_controller_mobile.dart';
 
 Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
   return showDialog<void>(
@@ -40,7 +41,7 @@ Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
                 const SizedBox(
                   width: 10,
                 ),
-                Consumer<CommunityProvider>(
+                Consumer<MobileCommunityProvider>(
                   builder: (context, value, child) {
                     return Expanded(
                         child: Container(
