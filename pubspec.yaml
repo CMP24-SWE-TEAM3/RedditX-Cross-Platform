@@ -39,6 +39,8 @@ dependencies:
   linter: ^1.28.0
   provider: ^6.0.4
   link_preview_generator: ^1.2.0
+  fluttertoast: ^8.1.1
+  custom_pop_up_menu: ^1.2.4
 
 dev_dependencies:
   flutter_test:

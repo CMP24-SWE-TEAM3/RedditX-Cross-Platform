@@ -1,10 +1,16 @@
+import 'package:custom_pop_up_menu/custom_pop_up_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/controllers/community_controller_mobile.dart';
 import 'package:reddit/controllers/community_controller_web.dart';
+import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/styles/custom_icons.dart';
 import 'dart:math' as math;
 
 import 'package:reddit/views/widgets/default_drop_down_button_widget.dart';
+import 'package:reddit/views/widgets/web_app_bar.dart';
+
+import '../../methods/default_bottom_sheet.dart';
 
 class CommunityWebScreen extends StatelessWidget {
   final BoxConstraints constraints;
@@ -13,164 +19,187 @@ class CommunityWebScreen extends StatelessWidget {
       {super.key, required this.context, required this.constraints});
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
-      appBar: AppBar(
-          titleSpacing: 0,
-          // centerTitle: false,
-          automaticallyImplyLeading: false,
-          backgroundColor: Colors.white,
-          title: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 20),
-            child: Center(child: Consumer<WebCommunityProvider>(
-              builder: (context, value, child) {
-                return Consumer<WebCommunityProvider>(
-                  builder: (context, value, child) => Row(
-                    children: [
-                      IconButton(
-                        padding: const EdgeInsets.all(0),
-                        icon: const Icon(
-                          CustomIcons.reddit,
-                          color: Colors.red,
-                          size: 30,
-                        ),
-                        onPressed: () {},
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      if (constraints.minWidth >= 1098)
-                        const Text(
-                          'Reddit',
+        appBar: AppBar(
+            titleSpacing: 0,
+            // centerTitle: false,
+            automaticallyImplyLeading: false,
+            backgroundColor: Colors.white,
+            title: WebAppBarTitle(constraints: constraints, context: context)),
+        body: Consumer<MobileCommunityProvider>(
+          builder: (context, value, child) {
+            return Column(
+              children: [
+                const SizedBox(
+                  width: double.infinity,
+                  height: 150,
+                  child: Image(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                          "https://img.freepik.com/free-vector/hand-drawn-floral-wallpaper_52683-67169.jpg?w=1060&t=st=1666378342~exp=1666378942~hmac=17e16de142749acc0d7770d08abefff1c63cad6e6c3ce4320085d7c0ec1a17ad")),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const CircleAvatar(
+                      radius: 35,
+                      backgroundImage: NetworkImage(
+                          "https://img.freepik.com/premium-photo/background-texture-red-blossom-roses-red-rose-is-meaning-love-romantic_10585-89.jpg?w=1060"),
+                    ),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    Flexible(
+                        child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: const [
+                        Text(
+                          "A subreddit for cute and cuddly pictures",
                           style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 20,
+                              fontWeight: FontWeight.bold, fontSize: 30),
+                        ),
+                        SizedBox(height: 6),
+                        Text(
+                          "r/aww",
+                          style: TextStyle(color: Colors.grey),
+                        )
+                      ],
+                    )),
+                    const SizedBox(
+                      width: 30,
+                    ),
+                    value.joined
+                        ? Consumer<WebCommunityProvider>(
+                            builder: (context, value, child) => Container(
+                                height: 40,
+                                decoration: BoxDecoration(
+                                    border: Border.all(color: Colors.blue),
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: MouseRegion(
+                                  onHover: (val) {
+                                    value.joinLeaveButtonOnHover();
+                                  },
+                                  onExit: (event) {
+                                    value.joinLeaveButtonOnExit();
+                                  },
+                                  child: InkWell(
+                                      borderRadius: BorderRadius.circular(20),
+                                      onTap: () {
+                                        showToast("Successfully left r/aww");
+                                        Provider.of<MobileCommunityProvider>(
+                                                context,
+                                                listen: false)
+                                            .unJoinCommunity();
+                                        print(Provider.of<
+                                                    MobileCommunityProvider>(
+                                                context,
+                                                listen: false)
+                                            .joined);
+                                      },
+                                      child: Padding(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Center(
+                                            child: Text(
+                                              "   ${value.joinLeaveButtonText}  ",
+                                              style: const TextStyle(
+                                                  color: Colors.blue),
+                                            ),
+                                          ))),
+                                )),
+                          )
+                        : Container(
+                            height: 40,
+                            decoration: BoxDecoration(
+                                color: Colors.blue,
+                                borderRadius: BorderRadius.circular(20)),
+                            child: InkWell(
+                                borderRadius: BorderRadius.circular(20),
+                                onTap: () {
+                                  value.joinCommunity();
+                                  showToast("Successfully joined r/aww");
+                                },
+                                child: const Padding(
+                                    padding: EdgeInsets.all(5),
+                                    child: Center(
+                                      child: Text(
+                                        "     Join     ",
+                                        style: TextStyle(
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ))),
                           ),
-                        ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Expanded(
-                          child: Container(
-                        width: 500,
-                        decoration: BoxDecoration(
-                          border: Border.all(
-                            color: Theme.of(context).scaffoldBackgroundColor,
-                          ),
-                          borderRadius:
-                              const BorderRadius.all(Radius.circular(20)),
-                        ),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                              label: Text("Search reddit"),
-                              prefixIcon: Icon(Icons.search)),
-                        ),
-                      )),
-                      Transform.rotate(
-                        angle: 45 * math.pi / 180,
-                        child: IconButton(
-                            onPressed: () {},
-                            icon: const Icon(
-                              CustomIcons.arrow_up_circle,
-                              color: Colors.black,
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    PopupMenuButton(
+                      child: CircleAvatar(
+                        backgroundColor: Colors.blue,
+                        radius: 20,
+                        child: CircleAvatar(
+                            backgroundColor: Colors.white,
+                            radius: 19,
+                            // child: InkWell(
+                            //   onTap: () {
+                            //     showDefaultBottomSheet(
+                            //         context,
+                            //         "COMMUNITY NOTIFICATIONS",
+                            //         3,
+                            //         value.bottomSheetNotificationsIcons,
+                            //         ["Off", "Low", "Frequent"],
+                            //         "notifications");
+                            //   },
+                            child: Icon(
+                              value.notificationIcon,
+                              size: 20,
+                              //),
                             )),
                       ),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            CustomIcons.coins,
-                            color: Colors.black,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            CustomIcons.shield_1,
-                            color: Colors.black,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            CustomIcons.comment,
-                            color: Colors.black,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.notifications_outlined,
-                            color: Colors.black,
-                          )),
-                      IconButton(
-                          onPressed: () {},
-                          icon: const Icon(
-                            Icons.add,
-                            color: Colors.black,
-                          )),
-                      Container(
-                          height: 35,
-                          decoration: BoxDecoration(
-                            color: Color.fromARGB(255, 236, 238, 238),
-                            borderRadius: BorderRadius.circular(15.0),
-                          ),
-                          child: TextButton(
-                              onPressed: () {},
-                              child: Row(
-                                children: const [
-                                  Icon(
-                                    Icons.speaker,
-                                    color: Colors.black,
-                                  ),
-                                  Text(
-                                    "Advertise",
-                                    style: TextStyle(color: Colors.black),
-                                  )
-                                ],
-                              ))),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                      if (constraints.minWidth >= 600)
-                        InkWell(
-                            focusColor: Colors.white,
-                            hoverColor: Colors.white,
-                            onTap: () {},
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  border: Border.all(
-                                      color:
-                                          Color.fromARGB(255, 195, 195, 195)),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Row(
-                                children: [
-                                  const SizedBox(
-                                    width: 8,
-                                  ),
-                                  const CircleAvatar(
-                                    radius: 15,
-                                    backgroundImage: NetworkImage(
-                                        "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
-                                  ),
-                                  DefaultDropDownButtonWidget(
-                                      icon: Icons.arrow_drop_down,
-                                      optionsCount: 2,
-                                      listValues: const ["1", "2"],
-                                      map: const {
-                                        "1": Icons.add,
-                                        "2": Icons.add
-                                      },
-                                      width: (constraints.minWidth >= 1200)
-                                          ? 180
-                                          : (constraints.minWidth >= 800)
-                                              ? 60
-                                              : 10)
-                                ],
-                              ),
-                            ))
-                    ],
-                  ),
-                );
-              },
-            )),
-          )),
-    );
+                      itemBuilder: (_) => <PopupMenuItem<String>>[
+                        PopupMenuItem<String>(
+                            value: 'Off',
+                            child: Row(
+                              children: [
+                                Icon(value.bottomSheetNotificationsIcons[0]),
+                                const Text("Off")
+                              ],
+                            )),
+                        PopupMenuItem<String>(
+                            value: 'Low',
+                            child: Row(
+                              children: [
+                                Icon(value.bottomSheetNotificationsIcons[1]),
+                                const Text("Low")
+                              ],
+                            )),
+                        PopupMenuItem<String>(
+                            value: 'Frequent',
+                            child: Row(
+                              children: [
+                                Icon(value.bottomSheetNotificationsIcons[2]),
+                                const Text("Frequent")
+                              ],
+                            )),
+                      ],
+                      onSelected: (String val) {
+                        (val == "Off")
+                            ? value.changeNotificationsType(val, 0)
+                            : (val == "Low")
+                                ? value.changeNotificationsType(val, 1)
+                                : (val == "Frequent")
+                                    ? value.changeNotificationsType(val, 2)
+                                    : value.changeNotificationsType(val, 0);
+                      },
+                    )
+                  ],
+                ),
+              ],
+            );
+          },
+        ));
   }
 }
