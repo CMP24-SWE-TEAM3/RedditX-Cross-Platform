@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../views/widgets/search_history_widget.dart';
 import '../../models/search_model.dart';
 import '../views/widgets/people_in_search_results.dart';
+import '../views/widgets/communities_in_search_results.dart';
 
 class SearchController with ChangeNotifier {
   //controller that stores the input text
@@ -32,11 +33,16 @@ class SearchController with ChangeNotifier {
   //to detect which item was clicked
   int clickedItemIndex = 0;
   double bottomborderRadius = 0;
-  //to store in it shich useres from the search result of people are followed and which are not
+  //to store in it useres from the search result of people are followed and which are not
   //I will fill it during reading data in the model class
   List<bool> isFollowing = [];
-  //to detect if the Follow button in the search result in hovered
+  //to store in it subreddits from the search result of communities are joined and which are not
+  //I will fill it during reading data in the model class
+  List<bool> isJoining = [];
+  //to detect if the Follow button in the search result is hovered with mouse
   List<bool> isHoveredFollowButton = [];
+  //to detect if the join button in the search result is hovered with mouse
+  List<bool> isHoveredJoinButton = [];
 
   SearchController() {
     //web==> circular
@@ -194,10 +200,20 @@ class SearchController with ChangeNotifier {
   }
 
   fillFollowingList() {
-    //fill List of following / unfollowing Uccounts
+    //fill List of following / unfollowing Accounts
     for (var i = 0; i < peoplesList.length; i++) {
       isFollowing.add(peoplesList[i].followed);
+      //make all follow button unhovered initially
       isHoveredFollowButton.add(false);
+    }
+  }
+
+  fillJoiningList() {
+    //fill List of joining / unjoining Uccounts
+    for (var i = 0; i < communitiesList.length; i++) {
+      isJoining.add(communitiesList[i].joined);
+      //make all join button unhovered initially
+      isHoveredJoinButton.add(false);
     }
   }
 
@@ -244,8 +260,11 @@ class SearchController with ChangeNotifier {
   }
 
   List<PeopleSearchResult> buildPeopleInSearchListWidget() {
+    //initially fill the list of followed/unfollowed accounts
     fillFollowingList();
+    //List of people widgets
     List<PeopleSearchResult> peopleSearchResultsWidgetList = [];
+    //fill its data from the peopleList in the model class
     for (int i = 0; i < peoplesList.length; i++) {
       peopleSearchResultsWidgetList.add(
         PeopleSearchResult(
@@ -257,17 +276,57 @@ class SearchController with ChangeNotifier {
     return peopleSearchResultsWidgetList;
   }
 
+  List<CommunitiesSearchResult> buildCommunityInSearchListWidget() {
+    //initially fill the list of followed/unfollowed accounts
+    fillJoiningList();
+    //List of community widgets
+    List<CommunitiesSearchResult> communitySearchResultsWidgetList = [];
+    //fill its data from the communitiesList in the model class
+    for (int i = 0; i < communitiesList.length; i++) {
+      communitySearchResultsWidgetList.add(
+        CommunitiesSearchResult(
+          communityData: communitiesList[i],
+          index: i,
+        ),
+      );
+    }
+    return communitySearchResultsWidgetList;
+  }
+
   //index of the account in the retrieved accounts list
   onPressingFollowButton(int index) {
     //1-send follow/ UnFollow request to the API
-    //2-
+    //2-change the text of the follow button
     isFollowing[index] = !isFollowing[index];
     notifyListeners();
   }
 
-  onHoverFollowButton(int i) {
-    isHoveredFollowButton[i] = !isHoveredFollowButton[i];
+  onPressingJoinButton(int index) {
+    //1-send follow/ UnFollow request to the API
+    //2-change the text of the join button
+    isJoining[index] = !isJoining[index];
+    notifyListeners();
+  }
 
+  onHoverFollowButton(int i) {
+    isHoveredFollowButton[i] = true;
+    notifyListeners();
+  }
+
+  onHoverJoinButton(int i) {
+    isHoveredJoinButton[i] = true;
+    notifyListeners();
+  }
+
+  //when exit hovering
+  onExitFollowButton(int i) {
+    isHoveredFollowButton[i] = false;
+    notifyListeners();
+  }
+
+  //when exit hovering
+  onExitJoinButton(int i) {
+    isHoveredJoinButton[i] = false;
     notifyListeners();
   }
 }
