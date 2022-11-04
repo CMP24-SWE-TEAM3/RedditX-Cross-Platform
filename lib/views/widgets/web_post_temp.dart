@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
-import 'package:reddit/views/widgets/post_bottom_widget.dart';
 import 'package:reddit/views/widgets/web_post_bottom.dart';
 import 'post_top_widget.dart';
 

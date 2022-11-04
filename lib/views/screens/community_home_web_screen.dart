@@ -4,9 +4,6 @@ import 'package:reddit/controllers/community_controller_mobile.dart';
 import 'package:reddit/controllers/community_controller_web.dart';
 import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/views/widgets/web_app_bar.dart';
-import 'package:reddit/views/widgets/web_post_card.dart';
-
-import '../widgets/post_card_widget.dart';
 import '../widgets/web_post_temp.dart';
 
 class CommunityWebScreen extends StatelessWidget {
@@ -198,7 +195,7 @@ class CommunityWebScreen extends StatelessWidget {
                     TabBar(
                         padding:
                             EdgeInsets.only(left: width / 4, right: width / 2),
-                        labelPadding: EdgeInsets.only(right: 0),
+                        labelPadding: const EdgeInsets.only(right: 0),
                         labelColor: Colors.grey,
                         indicatorColor: Colors.deepOrange,
                         tabs: const [

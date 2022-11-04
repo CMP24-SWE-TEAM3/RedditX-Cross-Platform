@@ -1,150 +1,117 @@
+import 'package:float_column/float_column.dart';
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
+import 'package:reddit/methods/show_profile_dialog.dart';
+import 'package:reddit/views/widgets/pop_up_menu_button.dart';
 import 'package:reddit/views/widgets/post_bottom_widget.dart';
-import 'post_top_widget.dart';
 
 class PostCardWidget extends StatelessWidget {
   final String postType;
-  final BuildContext context;
-  final String postPlace;
+  const PostCardWidget({required this.postType, super.key});
 
-  const PostCardWidget(
-      {super.key,
-      required this.postType,
-      required this.context,
-      required this.postPlace});
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: () {},
-        child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10),
-            child: SizedBox(
-              width: double.infinity,
+      onTap: () {},
+      child: SizedBox(
+        width: double.infinity,
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
               child: Column(
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 5),
-                    child: Column(
-                      children: [
-                        PostTopWidget(
-                            postPlace: postPlace,
-                            postType: postType,
-                            context: context),
-                        const SizedBox(
-                          height: 10,
+                  Row(
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          showeProfileDialog(context);
+                        },
+                        child: Text(
+                          "u/coolkid",
+                          style:
+                              TextStyle(color: Colors.grey[800], fontSize: 15),
                         ),
-                        if (postType == 'image' || postType == 'text')
-                          const Text(
-                            "Inspired by camping and being outdoors with friends kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
-                            maxLines: 4,
-                            overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 17),
-                          ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 8),
-                  if (postType == "image")
-                    Container(
-                      height: 250,
-                      width: double.infinity,
-                      decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"))),
-                    ),
-                  if (postType == "text")
-                    Column(
-                      children: [
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8),
+                      ),
+                      Text(
+                        "  15h",
+                        style: TextStyle(color: Colors.grey[800], fontSize: 15),
+                      ),
+                      if (postType == 'image')
+                        InkWell(
+                          onTap: () {},
                           child: Text(
-                            "Inspired by camping and being outdoors with friends kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
-                            maxLines: 3,
-                            overflow: TextOverflow.ellipsis,
+                            " · i.redd.it",
+                            style: TextStyle(
+                                color: Colors.grey[800], fontSize: 15),
                           ),
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Wrap(
-                              runSpacing: 5,
-                              crossAxisAlignment: WrapCrossAlignment.start,
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsetsDirectional.only(end: 8),
-                                  child: Container(
-                                    height: 20,
-                                    decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: Colors.blue,
-                                    ),
-                                    child: MaterialButton(
-                                      onPressed: () {},
-                                      height: 25,
-                                      minWidth: 1,
-                                      padding: EdgeInsets.zero,
-                                      child: Text("art",
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .bodyMedium!
-                                              .copyWith(color: Colors.white)),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        )
-                      ],
-                    ),
-                  if (postType == 'link')
-                    Row(
+                      if (postType == "text") const Spacer(),
+                      const PopUpMenu(),
+                    ],
+                  ),
+                  if (postType == "text")
+                    const Text(
+                      "post titleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+                      maxLines: 3,
+                      overflow: TextOverflow.ellipsis,
+                    )
+                  else
+                    FloatColumn(
                       children: [
-                        Expanded(
-                          child: Column(
-                            children: const [
-                              Text(
-                                "Inspired by camping and being outdoors with friends kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk",
-                                maxLines: 5,
-                                overflow: TextOverflow.ellipsis,
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                            child: Column(
-                          children: const [
-                            Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 18),
-                              child: LinkPreviewGenerator(
-                                link: "https://github.com/hebaashraf21",
-                                linkPreviewStyle: LinkPreviewStyle.small,
-                                bodyMaxLines: 1,
-                                bodyTextOverflow: TextOverflow.ellipsis,
-                                showBody: false,
-                              ),
-                            ),
-                          ],
-                        ))
+                        Floatable(
+                            float: FCFloat.end,
+                            padding: (postType == 'image')
+                                ? const EdgeInsets.only(left: 8, right: 8)
+                                : const EdgeInsets.only(left: 0),
+                            child: (postType == 'link')
+                                ? const SizedBox(
+                                    height: 90,
+                                    width: 150,
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.symmetric(horizontal: 18),
+                                      child: LinkPreviewGenerator(
+                                        link: "https://github.com/hebaashraf21",
+                                        linkPreviewStyle:
+                                            LinkPreviewStyle.small,
+                                        bodyMaxLines: 1,
+                                        bodyTextOverflow: TextOverflow.ellipsis,
+                                        showBody: false,
+                                      ),
+                                    ),
+                                  )
+                                : (postType == 'image')
+                                    ? Container(
+                                        height: 90,
+                                        width: 120,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20.0),
+                                            image: const DecorationImage(
+                                                fit: BoxFit.cover,
+                                                image: NetworkImage(
+                                                    "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"))),
+                                      )
+                                    : const SizedBox(height: 20)),
+                        const WrappableText(
+                            text: TextSpan(
+                                text:
+                                    "post titleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuueeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee"))
                       ],
                     ),
-                  const PostBottomWidget(),
-                  Container(
-                    height: 10,
-                    width: double.infinity,
-                    color: Theme.of(context).scaffoldBackgroundColor,
-                  )
                 ],
               ),
-            )));
+            ),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5),
+              child: PostBottomWidget(),
+            ),
+            const Divider(),
+          ],
+        ),
+      ),
+    );
   }
 }

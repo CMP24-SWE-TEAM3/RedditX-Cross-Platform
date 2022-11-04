@@ -2,19 +2,19 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller_mobile.dart';
-import 'package:reddit/views/screens/community_home_mobile_screen.dart';
-import 'package:reddit/views/widgets/post_card_widget.dart';
 
 import '../../styles/custom_icons.dart';
 
 //still working on over flow problems
 
 class WebPostDartWidget extends StatelessWidget {
+  const WebPostDartWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Consumer<MobileCommunityProvider>(
       builder: (context, value, child) => Padding(
-          padding: EdgeInsets.all(15),
+          padding: const EdgeInsets.all(15),
           child: Column(
             children: [
               SizedBox(
@@ -63,7 +63,7 @@ class WebPostDartWidget extends StatelessWidget {
                             const SizedBox(
                               width: 5,
                             ),
-                            Container(
+                            SizedBox(
                               height: 20,
                               child: TextButton(
                                   onPressed: () {},
@@ -75,44 +75,40 @@ class WebPostDartWidget extends StatelessWidget {
                                         color: Colors.black),
                                   )),
                             ),
-                            Container(
+                            SizedBox(
                               height: 20,
                               child: TextButton(
                                 onPressed: () {},
-                                child: Container(
-                                  child: ConstrainedBox(
-                                    constraints: BoxConstraints(
-                                      minWidth: 200.0,
-                                      maxWidth: 300.0,
-                                      minHeight: 30.0,
-                                      maxHeight: 100.0,
-                                    ),
-                                    child: AutoSizeText(
-                                      "Posted by cake girl 19 hours ago",
-                                      style: TextStyle(
-                                          fontSize: 10.0, color: Colors.grey),
-                                    ),
+                                child: ConstrainedBox(
+                                  constraints: const BoxConstraints(
+                                    minWidth: 200.0,
+                                    maxWidth: 300.0,
+                                    minHeight: 30.0,
+                                    maxHeight: 100.0,
+                                  ),
+                                  child: const AutoSizeText(
+                                    "Posted by cake girl 19 hours ago",
+                                    style: TextStyle(
+                                        fontSize: 10.0, color: Colors.grey),
                                   ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 10,
                         ),
-                        Container(
-                          child: ConstrainedBox(
-                            constraints: BoxConstraints(
-                              minWidth: 200.0,
-                              maxWidth: 300.0,
-                              minHeight: 30.0,
-                              maxHeight: 100.0,
-                            ),
-                            child: AutoSizeText(
-                              "yourTexttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
-                              style: TextStyle(fontSize: 20.0),
-                            ),
+                        ConstrainedBox(
+                          constraints: const BoxConstraints(
+                            minWidth: 200.0,
+                            maxWidth: 300.0,
+                            minHeight: 30.0,
+                            maxHeight: 100.0,
+                          ),
+                          child: const AutoSizeText(
+                            "yourTexttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt",
+                            style: TextStyle(fontSize: 20.0),
                           ),
                         ),
                       ],

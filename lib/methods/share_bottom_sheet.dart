@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller_mobile.dart';
 import 'package:reddit/methods/show_toast.dart';

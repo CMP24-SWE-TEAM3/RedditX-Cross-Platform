@@ -93,7 +93,10 @@ class MobileCommunityProvider with ChangeNotifier {
       reactsCount++;
     }
     isPostLiked = !isPostLiked;
-    isPostDisliked = !isPostLiked;
+    if (isPostDisliked) {
+      isPostDisliked = !isPostDisliked;
+    }
+
     notifyListeners();
   }
 
@@ -104,7 +107,9 @@ class MobileCommunityProvider with ChangeNotifier {
       reactsCount--;
     }
     isPostDisliked = !isPostDisliked;
-    isPostLiked = !isPostDisliked;
+    if (isPostLiked) {
+      isPostLiked = !isPostLiked;
+    }
     notifyListeners();
   }
 

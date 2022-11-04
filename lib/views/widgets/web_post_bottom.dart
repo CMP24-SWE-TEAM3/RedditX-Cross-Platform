@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller_mobile.dart';
-import '../../methods/share_bottom_sheet.dart';
 import '../../methods/show_toast.dart';
 import '../../styles/custom_icons.dart';
 
@@ -60,11 +59,25 @@ class WebPostBottomWidget extends StatelessWidget {
           Expanded(
               child: Row(
             children: [
-              IconButton(
-                  onPressed: () {
-                    shareBottomSheet(context);
-                  },
-                  icon: const Icon(Icons.share_outlined)),
+              PopupMenuButton(
+                child: const Icon(Icons.share_outlined),
+                itemBuilder: (_) => <PopupMenuItem<String>>[
+                  PopupMenuItem<String>(
+                      value: "Copy link",
+                      child: Row(
+                        children: const [
+                          Icon(CustomIcons.content_copy),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text("Copy link")
+                        ],
+                      )),
+                ],
+                onSelected: (String val) {
+                  showToast("Link copied");
+                },
+              ),
               const Text("Share"),
             ],
           )),

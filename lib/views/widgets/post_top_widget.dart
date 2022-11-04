@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/methods/show_profile_dialog.dart';
-import 'package:reddit/styles/custom_icons.dart';
 import 'package:reddit/views/widgets/pop_up_menu_button.dart';
 
 class PostTopWidget extends StatelessWidget {
@@ -68,7 +67,7 @@ class PostTopWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          const PopUpMenuItem(),
+          const PopUpMenu(),
         ],
       );
     }
@@ -101,7 +100,7 @@ class PostTopWidget extends StatelessWidget {
             ),
           ),
           const Spacer(),
-          const PopUpMenuItem(),
+          const  PopUpMenu(),
         ],
       );
     } else {
@@ -124,7 +123,7 @@ class PostTopWidget extends StatelessWidget {
               const Text("  12m"),
               const Text("  i.redd.it"),
               const Spacer(),
-              const PopUpMenuItem(),
+              const PopUpMenu(),
             ],
           )
         ],

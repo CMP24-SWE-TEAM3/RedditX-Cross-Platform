@@ -5,8 +5,8 @@ import 'package:reddit/methods/show_toast.dart';
 
 import '../../styles/custom_icons.dart';
 
-class PopUpMenuItem extends StatelessWidget {
-  const PopUpMenuItem({super.key});
+class PopUpMenu extends StatelessWidget {
+  const PopUpMenu({super.key});
 
   @override
   Widget build(BuildContext context) {

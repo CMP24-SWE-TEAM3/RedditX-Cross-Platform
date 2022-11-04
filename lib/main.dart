@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/methods/check_internet_connection.dart';
 import 'package:reddit/views/screens/community_home_web_screen.dart';
 import 'controllers/community_controller_mobile.dart';
 import 'controllers/community_controller_web.dart';
@@ -31,8 +30,9 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
-        print(constraints.minWidth.round());
-        return CommunityWebScreen(context: context, constraints: constraints);
+        return (constraints.minWidth.round() < 500)
+            ? CommunityMobileScreen(context: context, constraints: constraints)
+            : CommunityWebScreen(context: context, constraints: constraints);
       }),
     );
   }

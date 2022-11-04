@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller_mobile.dart';
-import 'package:reddit/controllers/community_controller_web.dart';
-import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/styles/custom_icons.dart';
-import 'package:reddit/views/widgets/about_tab_bar_view.dart';
-import 'package:reddit/views/widgets/default_drop_down_button_widget.dart';
+import 'package:reddit/views/widgets/post_classic_widget.dart';
 import 'package:reddit/views/widgets/post_card_widget.dart';
-import 'package:reddit/views/widgets/web_app_bar.dart';
-
 import '../../methods/default_bottom_sheet.dart';
 import '../../methods/show_leave_community_dialog.dart';
 
@@ -23,8 +18,6 @@ class CommunityMobileScreen extends StatelessWidget {
   });
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
     return Scaffold(
         body: Consumer<MobileCommunityProvider>(
       builder: (context, value, child) => NestedScrollView(
@@ -110,10 +103,12 @@ class CommunityMobileScreen extends StatelessWidget {
                       separatorBuilder: (context, index) => const Divider(),
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
-                        return PostCardWidget(
-                            postType: "text",
-                            context: context,
-                            postPlace: "community");
+                        return (value.postView == "classic")
+                            ? PostClassicWidget(
+                                postType: "link",
+                                context: context,
+                                postPlace: "community")
+                            : const PostCardWidget(postType: "text");
                       },
                     ),
                   ),
@@ -124,12 +119,12 @@ class CommunityMobileScreen extends StatelessWidget {
                       Container(
                         width: double.infinity,
                         color: Colors.red,
-                        child: Text("kjhgf"),
+                        child: const Text("kjhgf"),
                       ),
                       Container(
                           width: double.infinity,
                           color: Colors.green,
-                          child: Text("kjhgf"))
+                          child: const Text("kjhgf"))
                     ],
                   ))
               ],
