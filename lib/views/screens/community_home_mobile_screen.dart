@@ -1,25 +1,52 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/methods/default_bottom_sheet.dart';
-import 'package:reddit/methods/show_leave_community_dialog.dart';
+import 'package:reddit/controllers/community_controller_mobile.dart';
+import 'package:reddit/controllers/community_controller_web.dart';
+import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/styles/custom_icons.dart';
 import 'package:reddit/views/widgets/default_drop_down_button_widget.dart';
 import 'package:reddit/views/widgets/post_card_widget.dart';
-import 'package:reddit/views/widgets/post_classic_widget.dart';
-import '../../controllers/community_controller_mobile.dart';
+import 'package:reddit/views/widgets/web_app_bar.dart';
+
+import '../../methods/default_bottom_sheet.dart';
+import '../../methods/show_leave_community_dialog.dart';
 
 class CommunityMobileScreen extends StatelessWidget {
-  const CommunityMobileScreen({super.key});
-  // final tabBarController = TabController(length: 3, vsync: this);
-
+  final BoxConstraints constraints;
+  final BuildContext context;
+  const CommunityMobileScreen(
+      {super.key, required this.context, required this.constraints});
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
     return Scaffold(
-        body: SafeArea(
-            child: DefaultTabController(
-      length: 2,
-      child: CustomScrollView(
-        slivers: [
+        body: NestedScrollView(
+      body: DefaultTabController(
+          length: 2,
+          child: Column(
+            children: [
+              Container(
+                child: TabBar(labelColor: Colors.black, tabs: [
+                  Tab(
+                    text: "Posts",
+                  ),
+                  Tab(text: "About")
+                ]),
+              ),
+              Expanded(
+                child: ListView.builder(
+                  itemCount: 10,
+                  itemBuilder: (BuildContext context, int index) {
+                    return PostCardWidget(
+                        postType: "text", context: context, postPlace: "home");
+                  },
+                ),
+              )
+            ],
+          )),
+      headerSliverBuilder: (context, innerBoxIsScrolled) {
+        return [
           Consumer<MobileCommunityProvider>(
             builder: (context, value, child) => SliverAppBar(
                 elevation: 0,
@@ -281,104 +308,16 @@ class CommunityMobileScreen extends StatelessWidget {
                   ),
                 )),
           ),
-          const SliverAppBar(
-            pinned: true,
-            primary: false,
-            elevation: 0,
-            backgroundColor: Colors.white,
-            title: Align(
-              alignment: Alignment.center,
-              child: TabBar(
-                  //controller: tabBarController,
-                  labelColor: Colors.black,
-                  isScrollable: true,
-                  tabs: [
-                    Tab(
-                      text: 'Posts',
-                    ),
-                    Tab(
-                      text: 'About',
-                    )
-                  ]),
-            ),
-          ),
-          Consumer<MobileCommunityProvider>(
-            builder: (context, value, child) => SliverToBoxAdapter(
-                child: SizedBox(
-              height: 40,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(
-                    width: 10,
-                  ),
-                  InkWell(
-                      onTap: () {
-                        showDefaultBottomSheet(
-                            context,
-                            "SORT POSTS BY",
-                            5,
-                            value.bottomSheetPostSortIcons,
-                            ["Hot", "New", "Top", "Controversial", "Rising"],
-                            "postSortBy");
-                        // showControversialBottomSheet(
-                        //     context,
-                        //     "CONTROVERSIAL POSTS FROM",
-                        //     6,
-                        //     value.controversialPostsIcons,
-                        //     value.controversialPostsTypes);
-                      },
-                      child: SizedBox(
-                        height: 30,
-                        child: Row(
-                          children: [
-                            Icon(value.postSortByIcon),
-                            const SizedBox(
-                              width: 5,
-                            ),
-                            Text(
-                              value.postSortByType,
-                              maxLines: 1,
-                              overflow: TextOverflow.clip,
-                            ),
-                            const Icon(Icons.arrow_drop_down_rounded),
-                          ],
-                        ),
-                      )),
-                  const Spacer(),
-                  IconButton(
-                      onPressed: () {
-                        showDefaultBottomSheet(
-                            context,
-                            "POST VIEW",
-                            2,
-                            value.bottomSheetPostViewIcons,
-                            ["Card", "Classic"],
-                            "postView");
-                      },
-                      icon: Icon(value.postViewIcon))
-                ],
-              ),
-            )),
-          ),
-          Consumer<MobileCommunityProvider>(
-            builder: (context, value, child) => SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => ListTile(
-                    tileColor: Colors.white,
-                    title: (value.postView == "card")
-                        ? PostCardWidget(
-                            postType: "text",
-                            context: context,
-                            postPlace: "home")
-                        : const PostClassic(postType: "text")),
-                childCount: 10,
+          SliverPadding(
+            padding: const EdgeInsets.all(16),
+            sliver: SliverList(
+              delegate: SliverChildListDelegate(
+                [],
               ),
             ),
-          )
-        ],
-      ),
-    )));
+          ),
+        ];
+      },
+    ));
   }
 }

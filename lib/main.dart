@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/views/screens/community_home_web_screen.dart';
-
 import 'controllers/community_controller_mobile.dart';
 import 'controllers/community_controller_web.dart';
 import 'views/screens/community_home_mobile_screen.dart';
@@ -31,10 +30,8 @@ class MyApp extends StatelessWidget {
       home: LayoutBuilder(
           builder: (BuildContext context, BoxConstraints constraints) {
         //print(constraints.minWidth.round());
-        return CommunityWebScreen(
-          constraints: constraints,
-          context: context,
-        );
+        return CommunityMobileScreen(
+            context: context, constraints: constraints);
       }),
     );
   }
