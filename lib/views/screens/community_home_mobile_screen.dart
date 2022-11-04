@@ -4,6 +4,7 @@ import 'package:reddit/controllers/community_controller_mobile.dart';
 import 'package:reddit/controllers/community_controller_web.dart';
 import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/styles/custom_icons.dart';
+import 'package:reddit/views/widgets/about_tab_bar_view.dart';
 import 'package:reddit/views/widgets/default_drop_down_button_widget.dart';
 import 'package:reddit/views/widgets/post_card_widget.dart';
 import 'package:reddit/views/widgets/web_app_bar.dart';
@@ -38,19 +39,80 @@ class CommunityMobileScreen extends StatelessWidget {
                       ),
                       Tab(text: "About")
                     ]),
-                (value.tabIndex == 0)
-                    ? Expanded(
-                        child: ListView.builder(
-                          itemCount: 10,
-                          itemBuilder: (BuildContext context, int index) {
-                            return PostCardWidget(
-                                postType: "text",
-                                context: context,
-                                postPlace: "home");
+                if (value.tabIndex == 0)
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      InkWell(
+                          onTap: () {
+                            showDefaultBottomSheet(
+                                context,
+                                "SORT POSTS BY",
+                                5,
+                                value.bottomSheetPostSortIcons,
+                                [
+                                  "Hot",
+                                  "New",
+                                  "Top",
+                                  "Controversial",
+                                  "Rising"
+                                ],
+                                "postSortBy");
+                            // showControversialBottomSheet(
+                            //     context,
+                            //     "CONTROVERSIAL POSTS FROM",
+                            //     6,
+                            //     value.controversialPostsIcons,
+                            //     value.controversialPostsTypes);
                           },
-                        ),
-                      )
-                    : const Text("data")
+                          child: SizedBox(
+                            height: 30,
+                            child: Row(
+                              children: [
+                                Icon(value.postSortByIcon),
+                                const SizedBox(
+                                  width: 5,
+                                ),
+                                Text(
+                                  value.postSortByType,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.clip,
+                                ),
+                                const Icon(Icons.arrow_drop_down_rounded),
+                              ],
+                            ),
+                          )),
+                      const Spacer(),
+                      IconButton(
+                          onPressed: () {
+                            showDefaultBottomSheet(
+                                context,
+                                "POST VIEW",
+                                2,
+                                value.bottomSheetPostViewIcons,
+                                ["Card", "Classic"],
+                                "postView");
+                          },
+                          icon: Icon(value.postViewIcon))
+                    ],
+                  ),
+                if (value.tabIndex == 0)
+                  Expanded(
+                    child: ListView.builder(
+                      itemCount: 10,
+                      itemBuilder: (BuildContext context, int index) {
+                        return PostCardWidget(
+                            postType: "text",
+                            context: context,
+                            postPlace: "home");
+                      },
+                    ),
+                  ),
+                if (value.tabIndex == 1) AboutTabBarView()
               ],
             )),
         headerSliverBuilder: (context, innerBoxIsScrolled) {
@@ -399,14 +461,15 @@ class CommunityMobileScreen extends StatelessWidget {
                     ),
                   )),
             ),
-            SliverPadding(
-              padding: const EdgeInsets.all(16),
-              sliver: SliverList(
-                delegate: SliverChildListDelegate(
-                  [],
-                ),
-              ),
-            ),
+
+            // SliverPadding(
+            //   padding: const EdgeInsets.all(16),
+            //   sliver: SliverList(
+            //     delegate: SliverChildListDelegate(
+            //       [],
+            //     ),
+            //   ),
+            // ),
           ];
         },
       ),

@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../styles/custom_icons.dart';
 
 class MobileCommunityProvider with ChangeNotifier {
-  int tabIndex=0;
+  int tabIndex = 0;
   bool isExpanded = false;
   double expandedHeight = 320;
   bool joined = false;
@@ -81,9 +81,8 @@ class MobileCommunityProvider with ChangeNotifier {
     false
   ];
 
-  void changeTab(int val)
-  {
-    tabIndex=val;
+  void changeTab(int val) {
+    tabIndex = val;
     notifyListeners();
   }
 

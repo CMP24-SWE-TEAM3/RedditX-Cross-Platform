@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../methods/share_bottom_sheet.dart';
 import '../../styles/custom_icons.dart';
 
 class PostBottomWidget extends StatelessWidget {
@@ -24,7 +25,10 @@ class PostBottomWidget extends StatelessWidget {
         const Text("60"),
         Expanded(
           child: IconButton(
-              onPressed: () {}, icon: const Icon(Icons.share_outlined)),
+              onPressed: () {
+                shareBottomSheet(context);
+              },
+              icon: const Icon(Icons.share_outlined)),
         ),
         const Text("Share"),
         Expanded(
