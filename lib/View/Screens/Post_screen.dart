@@ -125,6 +125,7 @@ class _post_screenState extends State<post_screen> {
 
   @override
   Widget build(BuildContext context) {
+    var screen_width = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
         elevation: 1.5,
@@ -142,6 +143,25 @@ class _post_screenState extends State<post_screen> {
             icon: Icon(Icons.more_vert_rounded),
             color: Colors.white,
           ),
+          // PopupMenuButton(
+          //     itemBuilder: ((context) => [
+          //           PopupMenuItem(
+          //               child: Text(
+          //             'kareem',
+          //           )),
+          //           PopupMenuItem(
+          //               child: Text(
+          //             'ashraf',
+          //           )),
+          //           PopupMenuItem(
+          //               child: Text(
+          //             'abdo',
+          //           )),
+          //           PopupMenuItem(
+          //               child: Text(
+          //             'ali',
+          //           )),
+          //         ])),
           CircleAvatar(
             radius: 16.0,
             child: ClipRRect(
@@ -154,128 +174,203 @@ class _post_screenState extends State<post_screen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          child: Column(children: [
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                SizedBox(
-                  width: 15,
-                ),
-                CircleAvatar(
-                  radius: 16.0,
-                  child: ClipRRect(
-                    child: Image.asset('assets/kareem.jpg'),
-                    borderRadius: BorderRadius.circular(50.0),
-                  ),
-                ),
-                SizedBox(
-                  width: 10,
-                ),
-                Column(
-                  children: [
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text("r/kareem_community"),
+      body: (screen_width < 600)
+          ? Stack(alignment: AlignmentDirectional.bottomCenter, children: [
+              SingleChildScrollView(
+                child: Container(
+                  child: Column(children: [
+                    SizedBox(
+                      height: 15,
                     ),
-                    GestureDetector(
-                      onTap: () {},
-                      child: Text(
-                        "u/kareem_ashraf1",
-                        style: TextStyle(color: Colors.black45),
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: 15,
+                        ),
+                        CircleAvatar(
+                          radius: 16.0,
+                          child: ClipRRect(
+                            child: Image.asset('assets/kareem.jpg'),
+                            borderRadius: BorderRadius.circular(50.0),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Column(
+                          children: [
+                            GestureDetector(
+                              onTap: () {},
+                              child: Text("r/kareem_community"),
+                            ),
+                            GestureDetector(
+                              onTap: () {},
+                              child: Text(
+                                "u/kareem_ashraf1",
+                                style: TextStyle(color: Colors.black45),
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: Container(
+                        child: Text(
+                            'kareem aaaaaaaaaaaaaaaaaaaasssssssssssadvsfojbndflbkjndfoj dlfkjn od lojsnl  xof n,cvm oisd  mdvoi  dfk m  wpondfkm odifn lmdg goin'),
                       ),
                     ),
-                  ],
-                )
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Container(
-                child: Text(
-                    'kareem aaaaaaaaaaaaaaaaaaaasssssssssssadvsfojbndflbkjndfoj dlfkjn od lojsnl  xof n,cvm oisd  mdvoi  dfk m  wpondfkm odifn lmdg goin'),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.arrow_upward_rounded)),
-                    Text("145"),
-                    IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_downward)),
-                  ],
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.arrow_upward_rounded)),
+                            Text("145"),
+                            IconButton(
+                                onPressed: () {},
+                                icon: Icon(Icons.arrow_downward)),
+                          ],
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.mode_comment_outlined)),
+                              Text("145"),
+                            ],
+                          ),
+                        ),
+                        InkWell(
+                          onTap: () {},
+                          child: Row(
+                            children: [
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.share_outlined)),
+                              Text("Share   "),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                        width: double.infinity,
+                        height: 35,
+                        color: Color.fromRGBO(242, 243, 244, 1),
+                        child: InkWell(
+                          onTap: () => sort_comments(context),
+                          child: Row(children: [
+                            Text('   Sort Comment'),
+                          ]),
+                        )),
+                    comments(),
+                    comments(),
+                    comments(),
+                    comments(),
+                  ]),
                 ),
-                InkWell(
-                  onTap: () {},
+              ),
+              Container(
+                height: 50,
+                width: double.infinity,
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
+                      Expanded(
+                        child: InkWell(
+                          onTap: () {},
+                          child: TextFormField(
+                            decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                                borderSide: BorderSide(
+                                    width: 100,
+                                    color: Color.fromARGB(255, 238, 240, 242)),
+                              ),
+                              fillColor: Color.fromRGBO(242, 243, 244, 1),
+                              filled: true,
+                              hintText: '   Add a comment',
+                              hintStyle:
+                                  TextStyle(fontSize: 20, color: Colors.black),
+                            ),
+                          ),
+                        ),
+                      ),
                       IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.mode_comment_outlined)),
-                      Text("145"),
+                          icon: Icon(Icons.arrow_downward_rounded)),
                     ],
                   ),
                 ),
-                InkWell(
-                  onTap: () {},
+              ),
+            ])
+          : Container(
+              width: screen_width,
+              height: double.infinity,
+              color: Color.fromRGBO(50, 50, 50, 1),
+              child: Container(
+                width: screen_width * 0.85,
+                height: double.infinity,
+                margin: const EdgeInsets.only(right: 65, left: 65),
+                color: Color.fromRGBO(218, 224, 230, 1),
+                child: SingleChildScrollView(
                   child: Row(
                     children: [
-                      IconButton(
-                          onPressed: () {}, icon: Icon(Icons.share_outlined)),
-                      Text("Share   "),
+                      // the wider Row
+                      Container(
+                        width: screen_width * 0.57,
+                        height: 5000,
+                        color: Colors.white,
+                        margin:
+                            const EdgeInsets.only(right: 12, left: 36, top: 70),
+                        child: Column(children: [
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 16.0,
+                                child: ClipRRect(
+                                  child: Image.asset('assets/kareem.jpg'),
+                                  borderRadius: BorderRadius.circular(50.0),
+                                ),
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              GestureDetector(
+                                onTap: () {},
+                                child: Text("r/kareem_community"),
+                              ),
+                              GestureDetector(
+                                onTap: () {},
+                                child: Text(
+                                  "u/kareem_ashraf1",
+                                  style: TextStyle(color: Colors.black45),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ]),
+                      ),
+                      Container(
+                        width: screen_width * 0.24,
+                        height: 5000,
+                        color: Colors.white,
+                        margin:
+                            const EdgeInsets.only(right: 20, left: 5, top: 70),
+                      )
                     ],
                   ),
                 ),
-              ],
+              ),
             ),
-            Container(
-                width: double.infinity,
-                height: 35,
-                color: Color.fromRGBO(218, 224, 230, 1),
-                child: InkWell(
-                  onTap: () => sort_comments(context),
-                  child: Row(children: [
-                    Text('   Sort Comment'),
-                  ]),
-                )),
-            comments(),
-            Container(
-              height: 7,
-              width: double.infinity,
-              child: Text(''),
-              color: Color.fromRGBO(218, 224, 230, 1),
-            ),
-            comments(),
-            Container(
-              height: 7,
-              width: double.infinity,
-              child: Text(''),
-              color: Color.fromRGBO(218, 224, 230, 1),
-            ),
-            comments(),
-            Container(
-              height: 7,
-              width: double.infinity,
-              child: Text(''),
-              color: Color.fromRGBO(218, 224, 230, 1),
-            ),
-            comments(),
-            Container(
-              height: 7,
-              width: double.infinity,
-              child: Text(''),
-              color: Color.fromRGBO(218, 224, 230, 1),
-            ),
-          ]),
-        ),
-      ),
     );
   }
 }

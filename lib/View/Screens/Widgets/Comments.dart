@@ -10,9 +10,11 @@ class comments extends StatefulWidget {
 class _commentsState extends State<comments> {
   double container_height = 200;
   TextOverflow comments_text = TextOverflow.clip;
-  bool is_visible = false;
+  bool is_visible = true;
   @override
   Widget build(BuildContext context) {
+    var screen_size = MediaQuery.of(context).size;
+
     return InkWell(
       onTap: () => setState(() {
         container_height = container_height == 50 ? 200 : 50;
@@ -67,7 +69,7 @@ class _commentsState extends State<comments> {
                 child: Row(
                   children: [
                     SizedBox(
-                      width: 90,
+                      width: screen_size.width * 0.26,
                     ),
                     IconButton(
                       onPressed: () {},
@@ -95,7 +97,13 @@ class _commentsState extends State<comments> {
                         onPressed: () {}, icon: Icon(Icons.arrow_downward)),
                   ],
                 ),
-              )
+              ),
+              Container(
+                height: 7,
+                width: double.infinity,
+                child: Text(''),
+                color: Color.fromRGBO(242, 243, 244, 1),
+              ),
             ],
           ),
         ),
