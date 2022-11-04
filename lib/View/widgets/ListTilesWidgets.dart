@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ListTileCustom extends StatefulWidget {
-  ListTileCustom({
-    Key? key,
-    required this.ico,
-    required this.text,
-    required this.selector,
-  }) : super(key: key);
+  ListTileCustom(
+      {Key? key,
+      required this.ico,
+      required this.text,
+      required this.selector,
+      this.subtitle})
+      : super(key: key);
   Icon ico;
   String? text;
+  String? subtitle = " ";
   bool? selector;
 
   @override
-  _ListTileCustomState createState() =>
-      _ListTileCustomState(ico: ico, text: text, selector: selector);
+  _ListTileCustomState createState() => _ListTileCustomState(
+      ico: ico, text: text, selector: selector, subtitle: subtitle);
 }
 
 class _ListTileCustomState extends State<ListTileCustom> {
@@ -22,7 +24,10 @@ class _ListTileCustomState extends State<ListTileCustom> {
   String? text;
   bool? selector;
   bool? enble = true;
+
+  String? subtitle = " ";
   _ListTileCustomState({
+    this.subtitle = " ",
     required this.ico,
     required this.text,
     required this.selector,
@@ -32,6 +37,7 @@ class _ListTileCustomState extends State<ListTileCustom> {
     return ListTile(
       leading: ico,
       title: Text(text!),
+      subtitle: Text(subtitle!),
       enabled: enble!,
       trailing: Switch(
           value: selector!,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/View/screens/account_setting_screen.dart';
+import 'package:reddit/View/screens/manage-emails.dart';
 import '../../const/const.dart';
 import '../../icons/my_flutter_app_icons.dart';
 
@@ -13,7 +14,7 @@ bool sw3BlurNSFW = false;
 bool sw3enble = false;
 
 void main() {
-  runApp(const accountSettingsScreen());
+  runApp(const SettingsMenu());
 }
 
 class SettingsMenu extends StatelessWidget {
@@ -27,7 +28,7 @@ class SettingsMenu extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: white,
       ),
-      home: const MyHomePage(title: 'Settings Home'),
+      home: const manageEmailsScreen(),
     );
   }
 }
@@ -67,71 +68,6 @@ class _MyHomePageState extends State<MyHomePage> {
             title: "Style Avatar",
             ico: const Icon(Icons.checkroom_rounded),
           ),
-          SettingsLabel(title: "FEED OPTIONS"),
-          SettingsTileButtomSheet(
-            leadingIcon: const Icon(Icons.house_rounded),
-            titleText: const Text("Sort Home posts by"),
-            //variableVal: ,   to be implemented in logic
-            sheetText: const Text('SORT POSTS BY'),
-            sheetChildrenIconList: const [
-              Icon(Icons.rocket),
-              Icon(Icons.hot_tub),
-              Icon(Icons.psychology_outlined),
-              Icon(Icons.arrow_upward_rounded),
-              Icon(MyFlutterApp.broadsword),
-              Icon(Icons.keyboard_arrow_up),
-            ],
-            sheetChildrenTextList: const [
-              Text('Best'),
-              Text('Hot'),
-              Text('New'),
-              Text('Top'),
-              Text('Controversial'),
-              Text('Rising')
-            ],
-          ),
-          SettingsLabel(title: "VIEW OPTIONS"),
-          SettingsTileButtomSheet(
-            leadingIcon: const Icon(Icons.rectangle),
-            titleText: const Text("Default view"),
-            //variableVal: ,   to be implemented in logic
-            sheetText: const Text('DEFAULT VIEW'),
-            sheetChildrenIconList: const [
-              Icon(Icons.rectangle),
-              Icon(Icons.rectangle),
-            ],
-            sheetChildrenTextList: const [
-              Text('Card'),
-              Text('Classic'),
-            ],
-          ),
-          SettingsTileButtomSheet(
-            leadingIcon: const Icon(Icons.rectangle),
-            titleText: const Text("Autoplay"),
-            //variableVal: ,   to be implemented in logic
-            sheetText: const Text('AUTOPLAY'),
-            sheetChildrenIconList: const [
-              Icon(Icons.rectangle),
-              Icon(Icons.rectangle),
-            ],
-            sheetChildrenTextList: const [
-              Text('Card'),
-              Text('Classic'),
-            ],
-          ),
-          ListTileCustom(
-              ico: const Icon(Icons.remove_red_eye),
-              text: "Reduce animations",
-              selector: sw1ReduceAnimation),
-          ListTileCustom(
-              ico: const Icon(Icons.person),
-              text: "Show NSFW content (Im over 18)",
-              selector: sw2ShowNSFW),
-          ListTileCustom(
-              ico: const Icon(Icons.eighteen_mp),
-              text: "Blur NSFW Images",
-              selector: sw3BlurNSFW),
-          SettingsLabel(title: "ADVANCED"),
           SettingsLabel(title: "ABOUT"),
           ListTileURL(
             url: "https://www.redditinc.com/policies/content-policy",
@@ -155,11 +91,11 @@ class _MyHomePageState extends State<MyHomePage> {
             ico: const Icon(Icons.help),
           ),
           ListTileURL(
-            url: "https://www.reddithelp.com/hc/en-us",
+            url:
+                "https://reddit.zendesk.com/hc/en-us/requests/new?ticket_form_id=65076",
             title: "Report an issue",
             ico: const Icon(Icons.email_outlined),
           ),
-          SettingsLabel(title: "BUILD INFORMATION"),
         ],
         //),
       ),
