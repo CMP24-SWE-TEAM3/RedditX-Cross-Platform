@@ -15,8 +15,12 @@ import '../../methods/show_leave_community_dialog.dart';
 class CommunityMobileScreen extends StatelessWidget {
   final BoxConstraints constraints;
   final BuildContext context;
-  const CommunityMobileScreen(
-      {super.key, required this.context, required this.constraints});
+
+  const CommunityMobileScreen({
+    super.key,
+    required this.context,
+    required this.constraints,
+  });
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -113,7 +117,21 @@ class CommunityMobileScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                if (value.tabIndex == 1) Text("oiujgyhtgf")
+                if (value.tabIndex == 1)
+                  Expanded(
+                      child: Column(
+                    children: [
+                      Container(
+                        width: double.infinity,
+                        color: Colors.red,
+                        child: Text("kjhgf"),
+                      ),
+                      Container(
+                          width: double.infinity,
+                          color: Colors.green,
+                          child: Text("kjhgf"))
+                    ],
+                  ))
               ],
             )),
         headerSliverBuilder: (context, innerBoxIsScrolled) {

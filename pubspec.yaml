@@ -41,6 +41,7 @@ dependencies:
   link_preview_generator: ^1.2.0
   fluttertoast: ^8.1.1
   custom_pop_up_menu: ^1.2.4
+  auto_size_text: ^3.0.0
 
 dev_dependencies:
   flutter_test:

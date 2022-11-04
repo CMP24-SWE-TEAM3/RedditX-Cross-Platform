@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:reddit/views/widgets/post_bottom_widget.dart';
+import 'package:reddit/views/widgets/web_post_bottom.dart';
 import 'post_top_widget.dart';
 
-class PostCardWidget extends StatelessWidget {
+class WebPostTemp extends StatelessWidget {
   final String postType;
   final BuildContext context;
   final String postPlace;
 
-  const PostCardWidget(
+  const WebPostTemp(
       {super.key,
       required this.postType,
       required this.context,
@@ -137,7 +138,7 @@ class PostCardWidget extends StatelessWidget {
                         ))
                       ],
                     ),
-                  const PostBottomWidget(),
+                  const WebPostBottomWidget(),
                   Container(
                     height: 10,
                     width: double.infinity,

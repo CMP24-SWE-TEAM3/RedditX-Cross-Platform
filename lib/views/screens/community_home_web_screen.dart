@@ -4,6 +4,10 @@ import 'package:reddit/controllers/community_controller_mobile.dart';
 import 'package:reddit/controllers/community_controller_web.dart';
 import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/views/widgets/web_app_bar.dart';
+import 'package:reddit/views/widgets/web_post_card.dart';
+
+import '../widgets/post_card_widget.dart';
+import '../widgets/web_post_temp.dart';
 
 class CommunityWebScreen extends StatelessWidget {
   final BoxConstraints constraints;
@@ -204,20 +208,45 @@ class CommunityWebScreen extends StatelessWidget {
                           )
                         ]),
                     Expanded(
-                        child: TabBarView(children: [
-                      Container(
-                        width: double.infinity,
-                        color: const Color.fromARGB(255, 222, 229, 232),
-                        child: Container(
-                          width: width / 3,
-                          color: Color.fromARGB(255, 180, 40, 30),
-                          child: Text("lkjhg"),
-                        ),
+                        child: SingleChildScrollView(
+                            child: Container(
+                      color: const Color.fromARGB(255, 227, 234, 237),
+                      child: Row(
+                        children: [
+                          if (constraints.minWidth >= 600)
+                            Container(
+                              color: Colors.red,
+                              width: width / 8,
+                            ),
+                          Column(
+                            children: [
+                              SizedBox(height: height / 10),
+                              SizedBox(
+                                width: (constraints.minWidth >= 1250)
+                                    ? width / 2.5
+                                    : 500,
+                                child: ListView.separated(
+                                  shrinkWrap: true,
+                                  separatorBuilder: (context, index) =>
+                                      const Divider(),
+                                  itemCount: 10,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Container(
+                                        color: Colors.white,
+                                        child: WebPostTemp(
+                                          context: context,
+                                          postPlace: "home",
+                                          postType: "image",
+                                        ));
+                                  },
+                                ),
+                              )
+                            ],
+                          )
+                        ],
                       ),
-                      const Center(
-                        child: Text("2"),
-                      ),
-                    ])),
+                    )))
                   ],
                 );
               },
