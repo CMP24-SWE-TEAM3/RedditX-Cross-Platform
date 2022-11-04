@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as international;
 import 'package:shared_preferences/shared_preferences.dart';
-import '../views/widgets/search_history_widget.dart';
+
 import '../../models/search_model.dart';
+import '../views/widgets/search_history_widget.dart';
 import '../views/widgets/people_in_search_results.dart';
 import '../views/widgets/communities_in_search_results.dart';
+import '../views/widgets/posts_in_search_results.dart';
 
 class SearchController with ChangeNotifier {
   //controller that stores the input text
@@ -274,6 +276,21 @@ class SearchController with ChangeNotifier {
       );
     }
     return peopleSearchResultsWidgetList;
+  }
+
+  List<PostsSearchResult> buildPostsInSearchListWidget() {
+    //List of posts widgets
+    List<PostsSearchResult> postsSearchResultsWidgetList = [];
+    //fill its data from the peopleList in the model class
+    for (int i = 0; i < postsList.length; i++) {
+      postsSearchResultsWidgetList.add(
+        PostsSearchResult(
+          postData: postsList[i],
+          index: i,
+        ),
+      );
+    }
+    return postsSearchResultsWidgetList;
   }
 
   List<CommunitiesSearchResult> buildCommunityInSearchListWidget() {

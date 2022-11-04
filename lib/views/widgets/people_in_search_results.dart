@@ -22,16 +22,14 @@ class PeopleSearchResult extends StatelessWidget {
     int years = DateTime.now().year - personData.date.year;
     int months = DateTime.now().month - personData.date.month;
     int days = DateTime.now().day - personData.date.day;
-    if (years == 1 && months < 0) {
-      years = 0;
-    }
+    //negative value means the current day/month is less than the DateTime of the post
+    //so it means we are in a month/year after that one but not a full minute/day/month/year have passed
+    //so we subtract it
+    //Ex:3/11/2022-5/12/2022
     if (months < 0) {
       months = (12 - personData.date.month) + DateTime.now().month;
-    } else if (months == 1 && days < 0) {
-      months = 0;
-    }
-
-    if (days < 0) {
+      years -= 1;
+    } else if (days < 0) {
       int daysCount = personData.date.month == 2
           ? 28
           : (personData.date.month == 1 ||
@@ -44,6 +42,7 @@ class PeopleSearchResult extends StatelessWidget {
               ? 31
               : 30;
       days = (daysCount - personData.date.day) + DateTime.now().day;
+      months -= 1;
     }
     //format the shown period according to the values of days,months and years
     String shownDate = '';
@@ -72,7 +71,10 @@ class PeopleSearchResult extends StatelessWidget {
                   width: 10,
                 ),
                 //circular image
-                CircularImageWidget(img: personData.img),
+                CircularImageWidget(
+                  img: personData.img,
+                  radius: 40,
+                ),
                 //space in the right of the image
                 const SizedBox(
                   width: 10,

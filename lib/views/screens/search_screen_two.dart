@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import '../widgets/posts_in_search_results.dart';
-import '../widgets/comments_in_search_results.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/search_controller.dart';
+import '../widgets/comments_in_search_results.dart';
 
 class SearchScreenTwo extends StatelessWidget {
   const SearchScreenTwo({super.key});
@@ -65,7 +64,29 @@ class SearchScreenTwo extends StatelessWidget {
                   height: constraint.maxHeight * 0.93,
                   child: TabBarView(
                     children: [
-                      const PostsSearchResult(),
+                      Container(
+                        color: const Color.fromRGBO(135, 138, 140, 0.2),
+                        alignment:
+                            (Provider.of<SearchController>(context).isWeb)
+                                ? Alignment.center
+                                : Alignment.topCenter,
+                        child: SizedBox(
+                          width: (Provider.of<SearchController>(context).isWeb)
+                              ? constraint.maxWidth * 0.7
+                              : constraint.maxWidth * 1,
+                          child: ListView(
+                            //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
+                            //because the column gives unBounded constraints
+                            //shrinkWrap makes the scroll size same as content size
+                            shrinkWrap: true,
+                            children: [
+                              //call a function the builds the search history column
+                              ...Provider.of<SearchController>(context)
+                                  .buildPostsInSearchListWidget(),
+                            ],
+                          ),
+                        ),
+                      ),
                       Container(
                         color: const Color.fromRGBO(135, 138, 140, 0.2),
                         alignment:

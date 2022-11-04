@@ -1,19 +1,20 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
 class CircularImageWidget extends StatelessWidget {
   const CircularImageWidget({
     Key? key,
     required this.img,
+    required this.radius,
   }) : super(key: key);
   //image path or url
   final String img;
+  final double radius;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 40,
-      height: 40,
+      width: radius,
+      height: radius,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
         image: DecorationImage(

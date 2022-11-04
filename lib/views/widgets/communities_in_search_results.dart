@@ -35,6 +35,7 @@ class CommunitiesSearchResult extends StatelessWidget {
                 //circular image
                 CircularImageWidget(
                   img: communityData.img,
+                  radius: 40,
                 ),
                 //space in the right of the image
                 const SizedBox(
