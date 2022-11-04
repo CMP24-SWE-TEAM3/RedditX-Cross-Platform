@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/View/screens/account_setting_screen.dart';
+import 'package:reddit/View/screens/change_password_screen.dart';
 import 'package:reddit/View/screens/manage-emails.dart';
+import 'package:reddit/View/screens/update_email_screen.dart';
 import '../../const/const.dart';
 import '../../icons/my_flutter_app_icons.dart';
 
@@ -14,12 +16,11 @@ bool sw3BlurNSFW = false;
 bool sw3enble = false;
 
 void main() {
-  runApp(const SettingsMenu());
+  runApp(const ChangePasswordScreen());
 }
 
 class SettingsMenu extends StatelessWidget {
   const SettingsMenu({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -28,26 +29,42 @@ class SettingsMenu extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: white,
       ),
-      home: const manageEmailsScreen(),
+      home: const SettingsHomePage(
+        title: "Settings",
+      ),
+      routes: {
+        SettingsHomePage.routeName: (context) =>
+            const SettingsHomePage(title: "Settings"),
+        accountSettingsScreen.routeName: (context) =>
+            const accountSettingsScreen(),
+        manageEmailsScreen.routeName: (context) => const manageEmailsScreen(),
+        UpdateEmailAddress.routeName: (context) => const UpdateEmailAddress(),
+        ChangePasswordScreen.routeName: (context) =>
+            const ChangePasswordScreen(),
+      },
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
+class SettingsHomePage extends StatefulWidget {
+  const SettingsHomePage({super.key, required this.title});
 
+  static const routeName = '/Settings';
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<SettingsHomePage> createState() => _SettingsHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _SettingsHomePageState extends State<SettingsHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
+        leading: InkWell(
+          child: const Icon(Icons.arrow_back),
+          onTap: () => Navigator.pop(context),
+        ),
         title: const Text("Settings"),
       ),
       body: ListView(
@@ -58,6 +75,10 @@ class _MyHomePageState extends State<MyHomePage> {
           SettingsListTile(
             title: "Account settings for u/USER_NAME",
             ico: const Icon(Icons.person),
+            onTab: () {
+              Navigator.of(context)
+                  .pushNamed(accountSettingsScreen.routeName, arguments: {});
+            },
           ),
           SettingsLabel(title: "PREMIUM"),
           SettingsListTile(

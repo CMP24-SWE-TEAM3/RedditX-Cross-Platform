@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/Controller/Mobile_settings_controller.dart';
+import 'package:reddit/View/screens/manage-emails.dart';
+import 'package:reddit/View/screens/update_email_screen.dart';
 import 'package:reddit/View/widgets/ListTilesWidgets.dart';
 import 'package:reddit/View/widgets/default_buttom_sheet.dart';
 import 'package:reddit/View/widgets/settingLabelWidget.dart';
 import '../../model/settings_model.dart';
+import './change_password_screen.dart';
 
 class accountSettingsScreen extends StatefulWidget {
   const accountSettingsScreen({super.key});
-
+  static const routeName = '/Settings/Account_Settings';
   @override
   State<accountSettingsScreen> createState() => accountStateSettingsScreen();
 }
@@ -22,7 +25,10 @@ class accountStateSettingsScreen extends State<accountSettingsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
+        leading: InkWell(
+          child: const Icon(Icons.arrow_back),
+          onTap: () => Navigator.pop(context),
+        ),
         title: const Text("Acount Settings"),
       ),
       body: ChangeNotifierProvider(
@@ -45,40 +51,51 @@ class accountStateSettingsScreen extends State<accountSettingsScreen> {
                 Icon(Icons.add),
               ], //to be replaced
             ),
-            const ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Update email address"),
-              trailing: Icon(Icons.arrow_forward_rounded),
-              subtitle: Text("email@gmail.com"),
+            InkWell(
+              child: const ListTile(
+                leading: Icon(Icons.settings),
+                title: Text("Update email address"),
+                trailing: Icon(Icons.arrow_forward_rounded),
+                subtitle: Text("email@gmail.com"),
 
-              // onTap: () async => (!hasPassword!)
-              //     ? await showDialog<String>(
-              //         context: context,
-              //         builder: (BuildContext context) => AlertDialog(
-              //           title: const Text('Update email address'),
-              //           content: const Text(
-              //               'To change your email address, you need to create a Reddit password first'),
-              //           actions: <Widget>[
-              //             ElevatedButton(
-              //               onPressed: () => Navigator.pop(context, 'Cancel'),
-              //               child: const Text('Cancel'),
-              //               style: const ButtonStyle(alignment: Alignment.center),
-              //             ),
-              //             ElevatedButton(
-              //               onPressed: () => Navigator.pop(context, 'OK'),
-              //               child: const Text('OK'),
-              //               style: const ButtonStyle(alignment: Alignment.center),
-              //             ),
-              //           ],
-              //         ),
-              //       )
-              //     : () {},
+                // onTap: () async => (!hasPassword!)
+                //     ? await showDialog<String>(
+                //         context: context,
+                //         builder: (BuildContext context) => AlertDialog(
+                //           title: const Text('Update email address'),
+                //           content: const Text(
+                //               'To change your email address, you need to create a Reddit password first'),
+                //           actions: <Widget>[
+                //             ElevatedButton(
+                //               onPressed: () => Navigator.pop(context, 'Cancel'),
+                //               child: const Text('Cancel'),
+                //               style: const ButtonStyle(alignment: Alignment.center),
+                //             ),
+                //             ElevatedButton(
+                //               onPressed: () => Navigator.pop(context, 'OK'),
+                //               child: const Text('OK'),
+                //               style: const ButtonStyle(alignment: Alignment.center),
+                //             ),
+                //           ],
+                //         ),
+                //       )
+                //     : () {},
+              ),
+              onTap: () {
+                Navigator.of(context)
+                    .pushNamed(UpdateEmailAddress.routeName, arguments: {});
+              },
             ),
-            const ListTile(
-              leading: Icon(Icons.settings),
-              title: Text("Change password"),
-              trailing: Icon(Icons.arrow_forward_rounded),
-              // onTap: () => () {},
+            InkWell(
+              child: const ListTile(
+                leading: Icon(Icons.settings),
+                title: Text("Change password"),
+                trailing: Icon(Icons.arrow_forward_rounded),
+              ),
+              onTap: () {
+                Navigator.of(context)
+                    .pushNamed(ChangePasswordScreen.routeName, arguments: {});
+              },
             ),
             // ListTile(
             //   leading: Icon(Icons.person_outline_sharp),
@@ -108,11 +125,18 @@ class accountStateSettingsScreen extends State<accountSettingsScreen> {
                     ),
             ),
             SettingsLabel(title: "CONTACT SETTINGS"),
-            const ListTile(
-              leading: Icon(Icons.email),
-              title: Text("Manage emails"),
-              trailing: Icon(Icons.arrow_forward_rounded),
+            InkWell(
+              child: const ListTile(
+                leading: Icon(Icons.email),
+                title: Text("Manage emails"),
+                trailing: Icon(Icons.arrow_forward_rounded),
+              ),
+              onTap: () {
+                Navigator.of(context)
+                    .pushNamed(manageEmailsScreen.routeName, arguments: {});
+              },
             ),
+
             SettingsLabel(title: "BLOCKING AND PERMISSIONS"),
             const ListTile(
               leading: Icon(Icons.block_flipped),

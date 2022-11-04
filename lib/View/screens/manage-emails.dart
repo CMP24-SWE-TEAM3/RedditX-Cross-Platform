@@ -8,7 +8,7 @@ import '../../model/settings_model.dart';
 
 class manageEmailsScreen extends StatefulWidget {
   const manageEmailsScreen({super.key});
-
+  static const routeName = '/Settings/Account_Settings/Manage_Emails';
   @override
   State<manageEmailsScreen> createState() => accountStateSettingsScreen();
 }
@@ -32,7 +32,10 @@ class accountStateSettingsScreen extends State<manageEmailsScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: const Icon(Icons.arrow_back),
+        leading: InkWell(
+          child: const Icon(Icons.arrow_back),
+          onTap: () => Navigator.pop(context),
+        ),
         title: const Text("Emails"),
       ),
       body: ListView(
@@ -49,12 +52,6 @@ class accountStateSettingsScreen extends State<manageEmailsScreen> {
             subtitle: "",
             selector: chatRequestsEmails,
           ),
-          ListTileCustom(
-            ico: const Icon(Icons.email_outlined),
-            text: "New user welcome",
-            subtitle: "",
-            selector: newUserWelcomeEmails,
-          ),
           SettingsLabel(title: "ACTIVITY"),
           ListTileCustom(
             ico: const Icon(Icons.email_outlined),
@@ -69,7 +66,7 @@ class accountStateSettingsScreen extends State<manageEmailsScreen> {
             selector: commentsOnYourPostsEmails,
           ),
           ListTileCustom(
-            ico: const Icon(Icons.notifications),
+            ico: const Icon(Icons.reply_outlined),
             text: "Replies To Your Comments",
             subtitle: "",
             selector: repliesToYourCommentsEmails,
@@ -87,7 +84,7 @@ class accountStateSettingsScreen extends State<manageEmailsScreen> {
             selector: upvotesOnYourCommentsEmails,
           ),
           ListTileCustom(
-            ico: const Icon(Icons.notifications),
+            ico: const Icon(Icons.person),
             text: "Username mentions",
             subtitle: "",
             selector: userNameMentionsEmails,
@@ -119,7 +116,7 @@ class accountStateSettingsScreen extends State<manageEmailsScreen> {
           ),
           SettingsLabel(title: ""),
           ListTileCustom(
-            ico: const Icon(Icons.notifications),
+            ico: const Icon(Icons.email_outlined),
             text: "Unsubscribe from all emails",
             subtitle: "",
             selector: unsubscribeFromAllEmails,

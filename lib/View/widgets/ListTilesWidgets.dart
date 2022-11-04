@@ -110,15 +110,17 @@ class SettingsTileButtomSheet extends StatelessWidget {
 }
 
 class SettingsListTile extends StatelessWidget {
-  SettingsListTile({super.key, this.title, this.ico});
+  SettingsListTile({super.key, this.title, this.ico, this.onTab});
   String? title;
   Icon? ico;
+  var onTab;
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: ico,
       trailing: const Icon(Icons.arrow_forward),
       title: Text(title!),
+      onTap: onTab ?? onTab,
     );
   }
 }

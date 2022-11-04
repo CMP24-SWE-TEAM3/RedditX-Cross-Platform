@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
 
 class SettingsMobileController with ChangeNotifier {
+  bool text_bool = false;
+  changer() {
+    text_bool = !text_bool;
+    notifyListeners();
+  }
+
   static List<String> genderTypes = [
     "Male",
     "Female",
