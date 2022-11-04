@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/View/Screens/Widgets/Comments.dart';
 
 class post_screen extends StatefulWidget {
   const post_screen({Key? key}) : super(key: key);
@@ -243,7 +244,35 @@ class _post_screenState extends State<post_screen> {
                   child: Row(children: [
                     Text('   Sort Comment'),
                   ]),
-                ))
+                )),
+            comments(),
+            Container(
+              height: 7,
+              width: double.infinity,
+              child: Text(''),
+              color: Color.fromRGBO(218, 224, 230, 1),
+            ),
+            comments(),
+            Container(
+              height: 7,
+              width: double.infinity,
+              child: Text(''),
+              color: Color.fromRGBO(218, 224, 230, 1),
+            ),
+            comments(),
+            Container(
+              height: 7,
+              width: double.infinity,
+              child: Text(''),
+              color: Color.fromRGBO(218, 224, 230, 1),
+            ),
+            comments(),
+            Container(
+              height: 7,
+              width: double.infinity,
+              child: Text(''),
+              color: Color.fromRGBO(218, 224, 230, 1),
+            ),
           ]),
         ),
       ),
