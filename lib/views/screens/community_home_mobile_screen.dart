@@ -113,7 +113,7 @@ class CommunityMobileScreen extends StatelessWidget {
                       },
                     ),
                   ),
-                if (value.tabIndex == 1) AboutTabBarView()
+                if (value.tabIndex == 1) Text("oiujgyhtgf")
               ],
             )),
         headerSliverBuilder: (context, innerBoxIsScrolled) {

@@ -11,6 +11,10 @@ class MobileCommunityProvider with ChangeNotifier {
   String postView = "card";
   bool isControversial = false;
 
+  bool isPostLiked = false;
+  bool isPostDisliked = false;
+  int reactsCount = 0;
+
   List<IconData> bottomSheetNotificationsIconsFilled = [
     Icons.notifications_off,
     Icons.notifications,
@@ -81,6 +85,28 @@ class MobileCommunityProvider with ChangeNotifier {
     false,
     false
   ];
+
+  void likePost() {
+    if (isPostLiked) {
+      reactsCount--;
+    } else {
+      reactsCount++;
+    }
+    isPostLiked = !isPostLiked;
+    isPostDisliked = !isPostLiked;
+    notifyListeners();
+  }
+
+  void disLikePost() {
+    if (isPostDisliked) {
+      reactsCount++;
+    } else {
+      reactsCount--;
+    }
+    isPostDisliked = !isPostDisliked;
+    isPostLiked = !isPostDisliked;
+    notifyListeners();
+  }
 
   void saveUnsavePost() {
     isPostSaved = !isPostSaved;
