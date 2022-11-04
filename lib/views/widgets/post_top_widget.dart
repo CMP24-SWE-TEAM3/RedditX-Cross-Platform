@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/methods/show_profile_dialog.dart';
 import 'package:reddit/styles/custom_icons.dart';
-import 'package:reddit/views/widgets/default_drop_down_button_widget.dart';
 
 class PostTopWidget extends StatelessWidget {
   final String postPlace;
@@ -68,25 +67,67 @@ class PostTopWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          const DefaultDropDownButtonWidget(
-            icon:Icons.more_vert,
-            optionsCount: 5,
-            listValues: [
-              "Save",
-              "Hide post",
-              "Report",
-              "Block account",
-              "Award details"
+          PopupMenuButton(
+            child: const Icon(Icons.more_vert),
+            itemBuilder: (_) => <PopupMenuItem<String>>[
+              PopupMenuItem<String>(
+                  value: "Save",
+                  child: Row(
+                    children: const [
+                      Icon(CustomIcons.saved),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Save")
+                    ],
+                  )),
+              PopupMenuItem<String>(
+                  value: "Hide post",
+                  child: Row(
+                    children: const [
+                      Icon(Icons.visibility_off_outlined),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Hide post")
+                    ],
+                  )),
+              PopupMenuItem<String>(
+                  value: "Report",
+                  child: Row(
+                    children: const [
+                      Icon(Icons.flag_outlined),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Report")
+                    ],
+                  )),
+              PopupMenuItem<String>(
+                  value: "Block account",
+                  child: Row(
+                    children: const [
+                      Icon(Icons.block_outlined),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Block account")
+                    ],
+                  )),
+              PopupMenuItem<String>(
+                  value: "Award details",
+                  child: Row(
+                    children: const [
+                      Icon(CustomIcons.award),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text("Award details")
+                    ],
+                  )),
             ],
-            map: {
-              "Save": CustomIcons.saved,
-              "Hide post": Icons.visibility_off_outlined,
-              "Report": Icons.flag_outlined,
-              "Block account": Icons.block_outlined,
-              "Award details": CustomIcons.award
-            },
-            width: 140,
-          )
+            onSelected: (String val) {},
+          ),
         ],
       );
     }
