@@ -102,13 +102,14 @@ class CommunityMobileScreen extends StatelessWidget {
                   ),
                 if (value.tabIndex == 0)
                   Expanded(
-                    child: ListView.builder(
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) => const Divider(),
                       itemCount: 10,
                       itemBuilder: (BuildContext context, int index) {
                         return PostCardWidget(
                             postType: "text",
                             context: context,
-                            postPlace: "home");
+                            postPlace: "community");
                       },
                     ),
                   ),

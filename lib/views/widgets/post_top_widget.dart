@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/methods/show_profile_dialog.dart';
 import 'package:reddit/styles/custom_icons.dart';
+import 'package:reddit/views/widgets/pop_up_menu_button.dart';
 
 class PostTopWidget extends StatelessWidget {
   final String postPlace;
@@ -67,67 +68,7 @@ class PostTopWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          PopupMenuButton(
-            child: const Icon(Icons.more_vert),
-            itemBuilder: (_) => <PopupMenuItem<String>>[
-              PopupMenuItem<String>(
-                  value: "Save",
-                  child: Row(
-                    children: const [
-                      Icon(CustomIcons.saved),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Save")
-                    ],
-                  )),
-              PopupMenuItem<String>(
-                  value: "Hide post",
-                  child: Row(
-                    children: const [
-                      Icon(Icons.visibility_off_outlined),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Hide post")
-                    ],
-                  )),
-              PopupMenuItem<String>(
-                  value: "Report",
-                  child: Row(
-                    children: const [
-                      Icon(Icons.flag_outlined),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Report")
-                    ],
-                  )),
-              PopupMenuItem<String>(
-                  value: "Block account",
-                  child: Row(
-                    children: const [
-                      Icon(Icons.block_outlined),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Block account")
-                    ],
-                  )),
-              PopupMenuItem<String>(
-                  value: "Award details",
-                  child: Row(
-                    children: const [
-                      Icon(CustomIcons.award),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      Text("Award details")
-                    ],
-                  )),
-            ],
-            onSelected: (String val) {},
-          ),
+          const PopUpMenuItem(),
         ],
       );
     }
@@ -158,7 +99,9 @@ class PostTopWidget extends StatelessWidget {
               "i.redd.it",
               style: TextStyle(color: Colors.grey[600]),
             ),
-          )
+          ),
+          const Spacer(),
+          const PopUpMenuItem(),
         ],
       );
     } else {
@@ -179,7 +122,9 @@ class PostTopWidget extends StatelessWidget {
                 child: const Text("r/AskAnySoftware"),
               ),
               const Text("  12m"),
-              const Text("  i.redd.it")
+              const Text("  i.redd.it"),
+              const Spacer(),
+              const PopUpMenuItem(),
             ],
           )
         ],

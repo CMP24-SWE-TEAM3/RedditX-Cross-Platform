@@ -7,7 +7,7 @@ Future<void> showToast(final String msg) async {
       msg: msg,
       toastLength: Toast.LENGTH_LONG,
       gravity: ToastGravity.BOTTOM,
-      backgroundColor: Colors.white,
+      backgroundColor: Color.fromARGB(255, 195, 118, 85),
       textColor: Colors.black,
       fontSize: 16,
       webPosition: "center");

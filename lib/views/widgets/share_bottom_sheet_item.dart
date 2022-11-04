@@ -5,18 +5,17 @@ class ShareBottomSheetItem extends StatelessWidget {
   final IconData icon;
   final String text;
 
-
-  const ShareBottomSheetItem(
-      {super.key,
-      required this.circleAvatarColor,
-      required this.icon,
-      required this.text,
-});
+  const ShareBottomSheetItem({
+    super.key,
+    required this.circleAvatarColor,
+    required this.icon,
+    required this.text,
+  });
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-        child: Column(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
+      child: Column(
         children: [
           CircleAvatar(
             radius: 30,
@@ -27,6 +26,7 @@ class ShareBottomSheetItem extends StatelessWidget {
                       text == "Messenger" ||
                       text == "Share Via..." ||
                       text == "Save" ||
+                      text == "Community" ||
                       text == "Copy link")
                   ? Colors.black
                   : Colors.white,
