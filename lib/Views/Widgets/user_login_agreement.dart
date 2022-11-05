@@ -1,6 +1,7 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class UserLoginAggreement extends StatelessWidget {
   const UserLoginAggreement({
@@ -18,8 +19,8 @@ class UserLoginAggreement extends StatelessWidget {
       textAlign: TextAlign.center,
       text: TextSpan(
         style: const TextStyle(
-          color: Colors.black,
-          fontSize: 15,
+          color: (kIsWeb) ? Colors.black : Colors.grey,
+          fontSize: (kIsWeb) ? 12 : 15,
         ),
         children: <TextSpan>[
           const TextSpan(

@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/Views/Screens/temphome.dart';
+import 'package:username_gen/username_gen.dart';
 
+import '../Widgets/choice_button.dart';
 import '../Widgets/continue_username.dart';
 import '../Widgets/sign_up_bar.dart';
+import 'choose_profilepicture.dart';
+import 'interests.dart';
 
 class ChooseUserName extends StatefulWidget {
   const ChooseUserName({super.key});
@@ -12,29 +16,58 @@ class ChooseUserName extends StatefulWidget {
   State<ChooseUserName> createState() => _ChooseUserNameState();
 }
 
-bool _submit = false;
-TextEditingController userNameController = TextEditingController();
-String? errorUserNameText;
-
-void submit(userNameController, ctx) {
-  print('sending data to back end');
-  Navigator.of(ctx).pop();
-  Navigator.of(ctx).pushReplacementNamed(Home.routeName, arguments: {});
-}
-
 class _ChooseUserNameState extends State<ChooseUserName> {
+  bool _submit = false;
+  TextEditingController userNameController = TextEditingController();
+  String? errorUserNameText;
+
+  var _userNameSuggest = ['', '', ''];
+
+  void submit1(userNameController, ctx) {
+    print('sending data to back end');
+    
+    Navigator.of(ctx)
+        .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
+  }
+
+  void submit2(String username, ctx) {
+    print('sending data to back end');
+    
+    Navigator.of(ctx)
+        .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
+  }
+
+  void refresh() {
+    setState(() => _userNameSuggest = [
+          UsernameGen().generate(),
+          UsernameGen().generate(),
+          UsernameGen().generate()
+        ]);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _userNameSuggest = [
+      UsernameGen().generate(),
+      UsernameGen().generate(),
+      UsernameGen().generate()
+    ];
+  }
+
   void validate(userNameController, ctx) {
     setState(() => _submit = true);
+    if (_submit) {
+      bool isValidUserName3 = true;
 
-    bool isValidUserName3 = true;
+      errorUserNameText =
+          !(isValidUserName3) ? 'That username is already taken' : null;
 
-    errorUserNameText =
-        !(isValidUserName3) ? 'That username is already taken' : null;
-
-    if (isValidUserName3) {
-      submit(userNameController, ctx);
-    } else {
-      print("---" + userNameController.text + "---");
+      if (isValidUserName3) {
+        submit1(userNameController, ctx);
+      } else {
+        print("---" + userNameController.text + "---");
+      }
     }
   }
 
@@ -45,10 +78,12 @@ class _ChooseUserNameState extends State<ChooseUserName> {
     final heightScreen = (mediaQuery.size.height -
         appBar.preferredSize.height -
         mediaQuery.padding.top);
+    final widthScreen = (mediaQuery.size.width);
     final padding = EdgeInsets.symmetric(
       vertical: heightScreen * 0.01,
-      horizontal: mediaQuery.size.width * 0.05,
+      horizontal: widthScreen * 0.05,
     );
+    final paddingleft = heightScreen * 0.03;
     return Scaffold(
       appBar: appBar,
       body: Stack(
@@ -60,8 +95,9 @@ class _ChooseUserNameState extends State<ChooseUserName> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Padding(
-                    padding: EdgeInsets.all(
-                      heightScreen * 0.03,
+                    padding: EdgeInsets.only(
+                      left: paddingleft,
+                      bottom: heightScreen * 0.01,
                     ),
                     child: const Text(
                       'Create your profile',
@@ -80,14 +116,15 @@ class _ChooseUserNameState extends State<ChooseUserName> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          letterSpacing: 0.5,
+                          letterSpacing: 0.1,
                         ),
                       ),
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(
-                      heightScreen * 0.03,
+                    padding: EdgeInsets.only(
+                      left: paddingleft,
+                      bottom: heightScreen * 0.01,
                     ),
                     child: const Text(
                       'Reddit is anonymous, so your username is what you\'ll go by here. Choose wisely-because once you get a name, you can\'t changeit.',
@@ -98,8 +135,9 @@ class _ChooseUserNameState extends State<ChooseUserName> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(
-                      heightScreen * 0.02,
+                    padding: EdgeInsets.only(
+                      left: paddingleft,
+                      bottom: heightScreen * 0.01,
                     ),
                     child: TextField(
                       cursorColor: Colors.black,
@@ -114,8 +152,9 @@ class _ChooseUserNameState extends State<ChooseUserName> {
                     ),
                   ),
                   Padding(
-                    padding: EdgeInsets.all(
-                      heightScreen * 0.03,
+                    padding: EdgeInsets.only(
+                      left: paddingleft,
+                      bottom: heightScreen * 0.01,
                     ),
                     child: const Text(
                       'This will be your name forever, so make sure it feels like you.',
@@ -125,6 +164,34 @@ class _ChooseUserNameState extends State<ChooseUserName> {
                       ),
                     ),
                   ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                      left: paddingleft,
+                      bottom: heightScreen * 0.01,
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Can\'t think of one? use one of these:',
+                          style: TextStyle(
+                            fontSize: 14,
+                            color: Colors.grey,
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: refresh,
+                          icon: const Icon(Icons.refresh_rounded),
+                        ),
+                      ],
+                    ),
+                  ),
+                  chooseUserName(
+                      paddingleft, heightScreen, context, _userNameSuggest[0]),
+                  chooseUserName(
+                      paddingleft, heightScreen, context, _userNameSuggest[1]),
+                  chooseUserName(
+                      paddingleft, heightScreen, context, _userNameSuggest[2]),
                 ],
               ),
             ),
@@ -145,6 +212,21 @@ class _ChooseUserNameState extends State<ChooseUserName> {
           ),
         ],
       ),
+    );
+  }
+
+  Padding chooseUserName(
+    double paddingleft,
+    double heightScreen,
+    BuildContext context,
+    String username,
+  ) {
+    return Padding(
+      padding: EdgeInsets.only(
+        left: paddingleft,
+        bottom: heightScreen * 0.01,
+      ),
+      child: ChoiceButton(username, submit2, context),
     );
   }
 }

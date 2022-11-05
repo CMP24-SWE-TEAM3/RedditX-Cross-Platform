@@ -94,7 +94,7 @@ class SignUpPage extends StatelessWidget {
                         foregroundColor: MaterialStatePropertyAll(
                             Theme.of(context).colorScheme.primary),
                       ),
-                      onPressed: () {},
+                      onPressed: () => emailLogin(context),
                       child: const Text(
                         'Log in',
                         style: TextStyle(

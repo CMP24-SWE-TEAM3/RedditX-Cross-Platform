@@ -153,9 +153,9 @@ class _EmailSignupState extends State<EmailSignup> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.all(
-                        heightScreen * 0.02,
-                      ),
+                      padding: EdgeInsets.symmetric(
+                          vertical: heightScreen * 0.02,
+                          horizontal: heightScreen * 0.01),
                       child: PasswordText(
                         passwordController: passwordController,
                         errorPasswordText: errorPasswordText,

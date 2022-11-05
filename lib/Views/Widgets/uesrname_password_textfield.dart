@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class UserNameText extends StatefulWidget {
   const UserNameText({
@@ -20,6 +21,10 @@ class _UserNameTextState extends State<UserNameText> {
     return TextField(
       cursorColor: Colors.black,
       decoration: InputDecoration(
+        suffixIcon: IconButton(
+          onPressed: widget.userNameController.clear,
+          icon: const Icon(Icons.clear),
+        ),
         errorText: widget.errorUserNameText,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
@@ -60,6 +65,10 @@ class _EmailTextState extends State<EmailText> {
     return TextField(
       cursorColor: Colors.black,
       decoration: InputDecoration(
+        suffixIcon: IconButton(
+          onPressed: widget.emailController.clear,
+          icon: const Icon(Icons.clear),
+        ),
         errorText: widget.errorEmailText,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
@@ -96,11 +105,25 @@ class PasswordText extends StatefulWidget {
 }
 
 class _PasswordTextState extends State<PasswordText> {
+  bool _obscureText = true;
+
+  void _toggle() {
+    setState(() {
+      _obscureText = !_obscureText;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
       cursorColor: Colors.black,
       decoration: InputDecoration(
+        suffixIcon: IconButton(
+          onPressed: _toggle,
+          icon: (_obscureText)
+              ? const Icon(Icons.visibility)
+              : const Icon(Icons.visibility_off),
+        ),
         errorText: widget.errorPasswordText,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
@@ -116,7 +139,7 @@ class _PasswordTextState extends State<PasswordText> {
         fillColor: const Color.fromARGB(31, 126, 114, 114),
       ),
       keyboardType: TextInputType.visiblePassword,
-      obscureText: true,
+      obscureText: _obscureText,
       enableSuggestions: false,
       autocorrect: false,
       controller: widget.passwordController,

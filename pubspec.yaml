@@ -39,6 +39,8 @@ dependencies:
   provider: ^6.0.4
   url_launcher: ^6.1.6
   email_validator: ^2.1.17
+  username_gen: ^1.0.4
+  image_picker: ^0.8.6
 
 dev_dependencies:
   flutter_test:
@@ -68,6 +70,8 @@ flutter:
     - assets/images/google.png
     - assets/images/facebook.png
     - assets/images/email.png
+    - assets/images/defaultuser.png
+    - assets/images/web_signup_edge.jpg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

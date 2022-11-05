@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 
 import 'Views/Screens/about_you.dart';
+import 'Views/Screens/choose_profilepicture.dart';
 import 'Views/Screens/choose_username.dart';
 import 'Views/Screens/email_login.dart';
 import 'Views/Screens/email_signup.dart';
 import 'Views/Screens/forget_password.dart';
 import 'Views/Screens/forget_username.dart';
+import 'Views/Screens/interests.dart';
 import 'Views/Screens/sign_up_page.dart';
 import 'Views/Screens/temphome.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() {
   runApp(const MyApp());
@@ -22,11 +25,14 @@ class MyApp extends StatelessWidget {
       title: 'Reddit',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
-            .copyWith(secondary: Colors.lightBlue),
+        colorScheme: (kIsWeb)
+            ? ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+                .copyWith(secondary: Colors.deepOrange)
+            : ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
+                .copyWith(secondary: Colors.lightBlue),
         textTheme: ThemeData.light().textTheme.copyWith(
               bodyText1: const TextStyle(
-                color: Colors.black,
+                color: Colors.grey,
                 fontSize: 12,
               ),
             ),
@@ -41,6 +47,8 @@ class MyApp extends StatelessWidget {
         ForgetPassword.routeName: (ctx) => const ForgetPassword(),
         ForgetUserName.routeName: (ctx) => const ForgetUserName(),
         ChooseUserName.routeName: (ctx) => const ChooseUserName(),
+        Interests.routeName: (ctx) => const Interests(),
+        ChooseProfilePicture.routeName: (ctx) => const ChooseProfilePicture(),
         AboutYou.routeName: (ctx) => const AboutYou(),
       },
     );

@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
+import '../Widgets/choice_button.dart';
 import '../Widgets/sign_up_bar.dart';
-import 'choose_username.dart';
+import 'interests.dart';
 
 class AboutYou extends StatelessWidget {
   const AboutYou({super.key});
@@ -75,36 +76,22 @@ class AboutYou extends StatelessWidget {
                 padding: EdgeInsets.all(
                   heightScreen * 0.02,
                 ),
-                child: choiceButton('Man', submit, context),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ChoiceButton('Man', submit, context),
+                ),
               ),
               Padding(
                 padding: EdgeInsets.all(
                   heightScreen * 0.02,
                 ),
-                child: choiceButton('Woman', submit, context),
+                child: SizedBox(
+                  width: double.infinity,
+                  child: ChoiceButton('Woman', submit, context),
+                ),
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  ElevatedButton choiceButton(txt, function, ctx) {
-    return ElevatedButton(
-      onPressed: () => function(txt, ctx),
-      style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 230, 230, 230),
-        minimumSize: const Size(double.infinity, 50),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(20),
-        ),
-      ),
-      child: Text(
-        txt,
-        style: const TextStyle(
-          fontSize: 18,
-          color: Colors.black,
         ),
       ),
     );
@@ -119,5 +106,5 @@ void submit(String kind, ctx) {
   print('sending data to back end');
   print('---------------------' + kind + '-------------------');
   Navigator.of(ctx)
-      .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
+      .pushReplacementNamed(Interests.routeName, arguments: {});
 }
