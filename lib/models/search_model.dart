@@ -31,6 +31,42 @@ List<PersonInSearch> peoplesList = [
     date: DateTime(2021, 10, 2),
   ),
   PersonInSearch(
+    userName: 'Donia',
+    karma: 2500,
+    about: '',
+    followed: true,
+    img:
+        'https://hips.hearstapps.com/hbu.h-cdn.co/assets/16/11/gettyimages-157418577.jpg',
+    date: DateTime(2021, 10, 2),
+  ),
+  PersonInSearch(
+    userName: 'Donia',
+    karma: 2500,
+    about: '',
+    followed: true,
+    img:
+        'https://hips.hearstapps.com/hbu.h-cdn.co/assets/16/11/gettyimages-157418577.jpg',
+    date: DateTime(2021, 10, 2),
+  ),
+  PersonInSearch(
+    userName: 'Donia',
+    karma: 2500,
+    about: '',
+    followed: true,
+    img:
+        'https://hips.hearstapps.com/hbu.h-cdn.co/assets/16/11/gettyimages-157418577.jpg',
+    date: DateTime(2021, 10, 2),
+  ),
+  PersonInSearch(
+    userName: 'Donia',
+    karma: 2500,
+    about: '',
+    followed: true,
+    img:
+        'https://hips.hearstapps.com/hbu.h-cdn.co/assets/16/11/gettyimages-157418577.jpg',
+    date: DateTime(2021, 10, 2),
+  ),
+  PersonInSearch(
     userName: 'Sara',
     karma: 2521,
     about:
@@ -91,6 +127,33 @@ List<CommunityInSearch> communitiesList = [
     joined: false,
   ),
   CommunityInSearch(
+    name: 'DDDOOONNN',
+    img:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
+    about:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
+    membersCount: 1220,
+    joined: false,
+  ),
+  CommunityInSearch(
+    name: 'DDDOOONNN',
+    img:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
+    about:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
+    membersCount: 1220,
+    joined: false,
+  ),
+  CommunityInSearch(
+    name: 'DDDOOONNN',
+    img:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
+    about:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&shttps://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
+    membersCount: 1220,
+    joined: false,
+  ),
+  CommunityInSearch(
     name: 'HHHEEHHEE',
     img:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
@@ -139,7 +202,7 @@ class PostInSearch {
 List<PostInSearch> postsList = [
   PostInSearch(
     postText:
-        'World War II or the Second World War, often abbreviated as WWII or WW2, was a global war that lasted from 1937 to 1945. It involved the vast majority of the worlds countries—including all of the great powers—forming two opposing military alliances: the Allies and the Axis powers. World War II was a total war that directly involved more than 100 million personnel from more than 30 countries. The major participants in the war threw their entire economic, industrial, and scientific capabilities behind the war effort, blurring the distinction between civilian and military resources. Aircraft played a major role in the conflict, enabling the strategic bombing of population centres and deploying the only two nuclear weapons ever used in war. World War II was by far the deadliest conflict in human history; it resulted in 70 to 85 million fatalities, mostly among civilians. Tens of millions died due to genocides (including the Holocaust), starvation, massacres, and disease. In the wake of the Axis defeat, Germany and Japan were occupied, and war crimes tribunals were conducted against German and Japanese leaders.',
+        'World War II or the Second Worl all of the great powers—forming two opposing military alliances: the Allies and the Axis powers. World War II was a total war that directly involved more than 100 million personnel from more than 30 countries. The major participants in the war threw their entire economic, industrial, and scientific capabilities behind the war effort, blurring the distinction between civilian and military resources. Aircraft played a major role in the conflict, enabling the strategic bombing of population centres and deploying the only two nuclear weapons ever used in war. World War II was by far the deadliest conflict in human history; it resulted in 70 to 85 million fatalities, mostly among civilians. Tens of millions died due to genocides (including the Holocaust), starvation, massacres, and disease. In the wake of the Axis defeat, Germany and Japan were occupied, and war crimes tribunals were conducted against German and Japanese leaders.',
     communityName: 'u/communityName',
     userName: 'u/userName',
     communityIcon:
@@ -198,5 +261,85 @@ List<PostInSearch> postsList = [
     attachedMedia: [],
     nsfw: true,
     spoiler: true,
+  ),
+];
+
+class CommentInSearch {
+  PostInSearch postData;
+  String userName;
+  String userAvatar;
+  int commentVotesCount;
+  DateTime createdAt;
+  String commentText;
+  CommentInSearch({
+    required this.postData,
+    required this.userName,
+    required this.userAvatar,
+    required this.commentVotesCount,
+    required this.createdAt,
+    required this.commentText,
+  });
+}
+
+List<CommentInSearch> commentssList = [
+  CommentInSearch(
+    postData: postsList[0],
+    userName: 'doniaaa',
+    userAvatar:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+    commentVotesCount: 1002,
+    createdAt: DateTime(2021, 10, 30),
+    commentText:
+        'It is the comment text It is the comment text It is the comment text It is the comment text',
+  ),
+  CommentInSearch(
+    postData: postsList[1],
+    userName: 'doniaaa Gameeeel',
+    userAvatar:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+    commentVotesCount: 1002255,
+    createdAt: DateTime(2021, 11, 7),
+    commentText:
+        'It is the comment text It is the comment text It is the comment text It is the comment text',
+  ),
+  CommentInSearch(
+    postData: postsList[1],
+    userName: 'doniaaa Gameeeel',
+    userAvatar:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+    commentVotesCount: 1002255,
+    createdAt: DateTime(2022, 11, 5, 6),
+    commentText:
+        'It is the comment text It is the comment text It is the comment text It is the comment text',
+  ),
+  CommentInSearch(
+    postData: postsList[1],
+    userName: 'doniaaa Gameeeel',
+    userAvatar:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+    commentVotesCount: 1002255,
+    createdAt: DateTime(2022, 11, 4, 15),
+    commentText:
+        'It is the comment text It is the comment text It is the comment text It is the comment text',
+  ),
+  CommentInSearch(
+    postData: postsList[2],
+    userName: 'doniaaa',
+    userAvatar:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+    commentVotesCount: 211,
+    createdAt: DateTime(2021, 12, 5),
+    commentText:
+        'It is the comment text It is the comment text It is the comment text It is the comment text',
+  ),
+  CommentInSearch(
+    postData: postsList[0],
+    userName: 'doniaaa',
+    userAvatar:
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+    commentVotesCount: 1002,
+    createdAt: DateTime(2022, 11, 2),
+    commentText:
+        'It is the comment text It is the comment text It is the com ItIs the comment text It is the comment text It is the com ItIs the comment text It is the comment text It is the com ItIs the comment text It is the comment text It is the com ItIt is the comment text It is the comment text It is the com It It is the comment text It is the comment text It is the com It is the comment text It is the comment text It is the comment text It is the comment text It is the comment text It is the comment text It is the comment text It is the comment text It is the comment text It is the comment text It is the comment text It is the comment textIt is the comment text It is the comment text It is the comment text It is the comment text',
   ),
 ];

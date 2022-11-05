@@ -1,10 +1,15 @@
+import 'dart:math' as math;
+
+import 'package:float_column/float_column.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'dart:math' as math;
-import '../../models/search_model.dart';
+
 import '../../controllers/search_controller.dart';
-import 'circular_image_widget.dart';
-import 'package:float_column/float_column.dart';
+import '../../models/search_model.dart';
+
+import 'community_icon_and_2lines_app.dart';
+import 'community_icon_and_2lines_web.dart';
+import 'upvotes_and_comments.dart';
 
 class PostsSearchResult extends StatelessWidget {
   final PostInSearch postData;
@@ -22,77 +27,8 @@ class PostsSearchResult extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String dateToShow() {
-      //calculate the number of days,months and years the person has been in Reddit
-      int years = DateTime.now().year - postData.createdAt.year;
-      int months = DateTime.now().month - postData.createdAt.month;
-      int days = DateTime.now().day - postData.createdAt.day;
-      int hours = DateTime.now().hour - postData.createdAt.hour;
-      int minutes = DateTime.now().minute - postData.createdAt.minute;
-      int seconds = DateTime.now().second - postData.createdAt.second;
-      //negative value means the current second/minute/day/month is less than the DateTime of the post
-      //so it means we are in a minute/day/month/year after that one but not a full minute/day/month/year have passed
-      //so we subtract it
-      //Ex:3/11/2022-5/12/2022
-      if (months < 0) {
-        months = (12 - postData.createdAt.month) + DateTime.now().month;
-        years -= 1;
-      }
-      if (days < 0) {
-        int daysCount = postData.createdAt.month == 2
-            ? 28
-            : (postData.createdAt.month == 1 ||
-                    postData.createdAt.month == 3 ||
-                    postData.createdAt.month == 5 ||
-                    postData.createdAt.month == 7 ||
-                    postData.createdAt.month == 8 ||
-                    postData.createdAt.month == 10 ||
-                    postData.createdAt.month == 12)
-                ? 31
-                : 30;
-        days = (daysCount - postData.createdAt.day) + DateTime.now().day;
-        months -= 1;
-      }
-      if (hours < 0) {
-        hours = (24 - postData.createdAt.hour) + DateTime.now().hour;
-        days -= 1;
-      }
-      if (minutes < 0) {
-        minutes = (60 - postData.createdAt.minute) + DateTime.now().minute;
-        hours -= 1;
-      }
-      if (seconds < 0) {
-        hours = (60 - postData.createdAt.second) + DateTime.now().second;
-        minutes -= 1;
-      }
-      //format the shown period according to the values of days,months and years
-      String shownDate = '';
-      if (years != 0) {
-        shownDate = Provider.of<SearchController>(context).isWeb
-            ? '$years years'
-            : '${years}y';
-      } else if (months != 0) {
-        shownDate = shownDate = Provider.of<SearchController>(context).isWeb
-            ? '$months months'
-            : '${months}mo';
-      } else if (days != 0) {
-        shownDate = shownDate = Provider.of<SearchController>(context).isWeb
-            ? '$days days'
-            : '${days}d';
-      } else if (minutes != 0) {
-        shownDate = shownDate = Provider.of<SearchController>(context).isWeb
-            ? '$minutes minutes'
-            : '${minutes}m';
-      } else if (seconds != 0) {
-        shownDate = shownDate = Provider.of<SearchController>(context).isWeb
-            ? '$seconds seconds'
-            : '${seconds}s';
-      } else {
-        shownDate = 'now';
-      }
-      return shownDate;
-    }
-
+    String shownDate =
+        Provider.of<SearchController>(context).calculateAge(postData.createdAt);
     return !Provider.of<SearchController>(context).isWeb
         /////////////////////////////APP////////////////////////////
         ? Container(
@@ -116,49 +52,9 @@ class PostsSearchResult extends StatelessWidget {
                             0.7 //to free space for the picture
                         : MediaQuery.of(context).size.width * 1,
                     //community icon + the 2 lines next to it
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        CircularImageWidget(
-                          img: postData.communityIcon,
-                          radius: 30,
-                        ),
-                        const SizedBox(
-                          width: 5,
-                        ),
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              textAlign: TextAlign.right,
-                              postData.communityName,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Colors.black,
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 2,
-                            ),
-                            Text(
-                              textAlign: TextAlign.right,
-                              '${postData.userName} . ${dateToShow()}',
-                              style: const TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Color.fromRGBO(124, 124, 124, 1),
-                              ),
-                            ),
-                            const SizedBox(
-                              height: 5,
-                            ),
-                          ],
-                        ),
-                      ],
+                    child: CommIconAndTwoLinesApp(
+                      postData: postData,
+                      shownDate: shownDate,
                     ),
                   ),
                 ),
@@ -204,7 +100,10 @@ class PostsSearchResult extends StatelessWidget {
                   height: 10,
                 ),
                 //upvotes and comments
-                UpVotesAndComments(postData: postData),
+                UpVotesAndComments(
+                  postData: postData,
+                  isPost: true,
+                ),
                 //horizontal line
                 const Divider(
                   color: Color.fromRGBO(135, 138, 140, 0.2),
@@ -212,6 +111,7 @@ class PostsSearchResult extends StatelessWidget {
               ],
             ),
           )
+        /////////////////////////////WEB////////////////////////////
         : Container(
             color: Colors.white,
             child: Column(
@@ -219,39 +119,11 @@ class PostsSearchResult extends StatelessWidget {
                 const SizedBox(
                   height: 10,
                 ),
-                Row(
-                  children: [
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    CircularImageWidget(
-                      img: postData.communityIcon,
-                      radius: 20,
-                    ),
-                    const SizedBox(
-                      width: 5,
-                    ),
-                    Text(
-                      '${postData.communityName} . ',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: Colors.black,
-                      ),
-                    ),
-                    Text(
-                      'Posted by ${postData.userName} ${dateToShow()} ago',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 12,
-                        color: Color.fromRGBO(124, 124, 124, 1),
-                      ),
-                    ),
-                  ],
-                ),
+                CommIconAndNextLinesWeb(
+                    postData: postData, shownDate: shownDate),
                 Row(
                   children: postData.attachedMedia.isEmpty
-                      //if there is not picture to show
+                      //if there is no picture to show
                       ? [
                           const SizedBox(
                             width: 5,
@@ -266,6 +138,7 @@ class PostsSearchResult extends StatelessWidget {
                             width: 15,
                           ),
                         ]
+                      //if there are pictures ==> Show the first one
                       : [
                           const SizedBox(
                             width: 5,
@@ -284,7 +157,7 @@ class PostsSearchResult extends StatelessWidget {
                             flex: 1,
                             child: Container(
                               height: 100,
-                              width: 100,
+                              width: 150,
                               decoration: BoxDecoration(
                                 shape: BoxShape.rectangle,
                                 image: DecorationImage(
@@ -307,7 +180,10 @@ class PostsSearchResult extends StatelessWidget {
                   height: 10,
                 ),
                 //upvotes and comments
-                UpVotesAndComments(postData: postData),
+                UpVotesAndComments(
+                  postData: postData,
+                  isPost: true,
+                ),
                 //horizontal line
                 const Divider(
                   color: Color.fromRGBO(135, 138, 140, 0.2),
@@ -315,72 +191,6 @@ class PostsSearchResult extends StatelessWidget {
               ],
             ),
           );
-  }
-}
-
-//the row that view the number of comments and upvotes
-class UpVotesAndComments extends StatelessWidget {
-  const UpVotesAndComments({
-    super.key,
-    required this.postData,
-  });
-
-  final PostInSearch postData;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Text(
-          textAlign: TextAlign.start,
-          Provider.of<SearchController>(context).isWeb
-              ////////////WEB/////////
-              //formatting votesCount appearance
-              ? postData.votesCount > 0
-                  ? //positive voteCount
-                  postData.votesCount > 1000000
-                      ? '  ${double.parse((postData.votesCount / 1000000.0).toStringAsFixed(3))}m upvotes'
-                      : postData.votesCount > 1000
-                          ? '  ${postData.votesCount / 1000.0}k upvotes'
-                          : '  ${postData.votesCount} upvotes'
-                  : //negative voteCount
-                  postData.votesCount < -1000000
-                      ? '  ${double.parse((postData.votesCount / -1000000.0).toStringAsFixed(3))}m downvotes'
-                      : postData.votesCount < -1000
-                          ? '  ${postData.votesCount / -1000.0}k downvotes'
-                          : '  ${postData.votesCount} downvotes'
-              : //////////App////////
-              //formatting comments appearance
-              postData.votesCount > 0
-                  ? '  ${postData.votesCount} upvotes'
-                  : '${postData.votesCount * -1} downvotes',
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-            color: Color.fromRGBO(124, 124, 124, 1),
-          ),
-        ),
-        Text(
-          textAlign: TextAlign.start,
-          Provider.of<SearchController>(context).isWeb
-              ////////////WEB/////////
-              /////formatting votesCount appearance
-              ? postData.commentsCount > 1000000
-                  ? '  ${double.parse((postData.commentsCount / 1000000.0).toStringAsFixed(3))}m comments'
-                  : postData.commentsCount > 1000
-                      ? '  ${postData.commentsCount / 1000.0}k comments'
-                      : '  ${postData.commentsCount} comments'
-              : //////////App////////
-              //formatting comments appearance
-              '  ${postData.commentsCount} comments',
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-            color: Color.fromRGBO(124, 124, 124, 1),
-          ),
-        ),
-      ],
-    );
   }
 }
 
@@ -416,7 +226,7 @@ class PostTextWidget extends StatelessWidget {
                     fontSize: 16,
                   ),
                 ),
-                //container of the flait text
+                //container of the flair text
                 WidgetSpan(
                   child: Container(
                     margin: const EdgeInsets.only(

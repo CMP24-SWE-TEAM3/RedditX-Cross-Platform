@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/search_controller.dart';
-import '../widgets/comments_in_search_results.dart';
 
 class SearchScreenTwo extends StatelessWidget {
   const SearchScreenTwo({super.key});
@@ -13,7 +12,7 @@ class SearchScreenTwo extends StatelessWidget {
       child: Scaffold(
         appBar: null,
         body: Container(
-          color: const Color.fromRGBO(135, 138, 140, 0.2),
+          color: const Color.fromRGBO(135, 138, 140, 0.3),
           child: LayoutBuilder(
             //to be responsive with the size of the screen
             builder: (ctx, constraint) => Column(
@@ -65,22 +64,25 @@ class SearchScreenTwo extends StatelessWidget {
                   child: TabBarView(
                     children: [
                       Container(
-                        color: const Color.fromRGBO(135, 138, 140, 0.2),
+                        color: const Color.fromRGBO(135, 138, 140, 0.1),
                         alignment:
                             (Provider.of<SearchController>(context).isWeb)
-                                ? Alignment.center
+                                ? Alignment.bottomCenter
                                 : Alignment.topCenter,
                         child: SizedBox(
                           width: (Provider.of<SearchController>(context).isWeb)
                               ? constraint.maxWidth * 0.7
                               : constraint.maxWidth * 1,
+                          height: (Provider.of<SearchController>(context).isWeb)
+                              ? constraint.maxHeight * 0.85
+                              : constraint.maxHeight * 1,
                           child: ListView(
                             //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
                             //because the column gives unBounded constraints
                             //shrinkWrap makes the scroll size same as content size
                             shrinkWrap: true,
                             children: [
-                              //call a function the builds the search history column
+                              //call a function the builds the posts list
                               ...Provider.of<SearchController>(context)
                                   .buildPostsInSearchListWidget(),
                             ],
@@ -88,35 +90,51 @@ class SearchScreenTwo extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        color: const Color.fromRGBO(135, 138, 140, 0.2),
+                        color: const Color.fromRGBO(135, 138, 140, 0.1),
                         alignment:
                             (Provider.of<SearchController>(context).isWeb)
-                                ? Alignment.center
+                                ? Alignment.bottomCenter
                                 : Alignment.topCenter,
                         child: SizedBox(
                           width: (Provider.of<SearchController>(context).isWeb)
                               ? constraint.maxWidth * 0.7
                               : constraint.maxWidth * 1,
-                          child: const CommentsSearchResult(),
-                        ),
-                      ),
-                      Container(
-                        color: const Color.fromRGBO(135, 138, 140, 0.2),
-                        alignment:
-                            (Provider.of<SearchController>(context).isWeb)
-                                ? Alignment.center
-                                : Alignment.topCenter,
-                        child: SizedBox(
-                          width: (Provider.of<SearchController>(context).isWeb)
-                              ? constraint.maxWidth * 0.7
-                              : constraint.maxWidth * 1,
+                          height: (Provider.of<SearchController>(context).isWeb)
+                              ? constraint.maxHeight * 0.85
+                              : constraint.maxHeight * 1,
                           child: ListView(
                             //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
                             //because the column gives unBounded constraints
                             //shrinkWrap makes the scroll size same as content size
                             shrinkWrap: true,
                             children: [
-                              //call a function the builds the search history column
+                              //call a function the builds the comments list
+                              ...Provider.of<SearchController>(context)
+                                  .buildCommentsInSearchListWidget(),
+                            ],
+                          ),
+                        ),
+                      ),
+                      Container(
+                        color: const Color.fromRGBO(135, 138, 140, 0.1),
+                        alignment:
+                            (Provider.of<SearchController>(context).isWeb)
+                                ? Alignment.bottomCenter
+                                : Alignment.topCenter,
+                        child: SizedBox(
+                          width: (Provider.of<SearchController>(context).isWeb)
+                              ? constraint.maxWidth * 0.7
+                              : constraint.maxWidth * 1,
+                          height: (Provider.of<SearchController>(context).isWeb)
+                              ? constraint.maxHeight * 0.85
+                              : constraint.maxHeight * 1,
+                          child: ListView(
+                            //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
+                            //because the column gives unBounded constraints
+                            //shrinkWrap makes the scroll size same as content size
+                            shrinkWrap: true,
+                            children: [
+                              //call a function the builds the communities list
                               ...Provider.of<SearchController>(context)
                                   .buildCommunityInSearchListWidget(),
                             ],
@@ -124,22 +142,25 @@ class SearchScreenTwo extends StatelessWidget {
                         ),
                       ),
                       Container(
-                        color: const Color.fromRGBO(135, 138, 140, 0.2),
+                        color: const Color.fromRGBO(135, 138, 140, 0.1),
                         alignment:
                             (Provider.of<SearchController>(context).isWeb)
-                                ? Alignment.center
+                                ? Alignment.bottomCenter
                                 : Alignment.topCenter,
                         child: SizedBox(
                           width: (Provider.of<SearchController>(context).isWeb)
                               ? constraint.maxWidth * 0.7
                               : constraint.maxWidth * 1,
+                          height: (Provider.of<SearchController>(context).isWeb)
+                              ? constraint.maxHeight * 0.85
+                              : constraint.maxHeight * 1,
                           child: ListView(
                             //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
                             //because the column gives unBounded constraints
                             //shrinkWrap makes the scroll size same as content size
                             shrinkWrap: true,
                             children: [
-                              //call a function the builds the search history column
+                              //call a function the builds the people list
                               ...Provider.of<SearchController>(context)
                                   .buildPeopleInSearchListWidget(),
                             ],
