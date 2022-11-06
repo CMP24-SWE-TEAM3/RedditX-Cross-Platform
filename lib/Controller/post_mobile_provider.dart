@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-
-import '../View/Styles/custom_icons.dart';
+import 'package:reddit/View/Styles/custom_icons.dart';
 
 class MobilePostProvider with ChangeNotifier {
-
   bool isPostLiked = false;
   bool isPostDisliked = false;
   int reactsCount = 0;
 
+  bool isPostSaved = false;
 
-  List<IconData> bottomSheetPostSortIcons = [
+  List<IconData> bottomSheetPostSortIcons_1 = [
     CustomIcons.hotjar,
     CustomIcons.certificate_outline,
     CustomIcons.award,
@@ -44,5 +43,8 @@ class MobilePostProvider with ChangeNotifier {
     notifyListeners();
   }
 
-
+  void saveUnsavePost() {
+    isPostSaved = !isPostSaved;
+    notifyListeners();
+  }
 }

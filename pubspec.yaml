@@ -39,6 +39,7 @@ dependencies:
   provider: ^6.0.4
   link_preview_generator: ^1.2.0
   any_link_preview: ^2.0.9
+  fluttertoast: ^8.1.1
 
 dev_dependencies:
   flutter_test:
