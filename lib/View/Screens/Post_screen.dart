@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/View/Screens/Widgets/Comments.dart';
+import 'package:reddit/View/Screens/post_page_web.dart';
+import 'package:reddit/View/Widgets/Comments.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit/Controller/post_mobile_provider.dart';
+import 'package:reddit/View/Styles/custom_icons.dart';
+import 'package:reddit/View/Widgets/Comments.dart';
 
 class post_screen extends StatefulWidget {
   const post_screen({Key? key}) : super(key: key);
@@ -265,6 +270,15 @@ class _post_screenState extends State<post_screen> {
                         color: Color.fromRGBO(242, 243, 244, 1),
                         child: InkWell(
                           onTap: () => sort_comments(context),
+                          // {
+                          //   showDefaultBottomSheet(
+                          //     context,
+                          //     "SORT POSTS BY",
+                          //     5,
+                          //     bottomSheetPostSortIcons_1,
+                          //     ["Hot", "New", "Top", "Controversial", "Rising"],
+                          //   );
+                          // },
                           child: Row(children: [
                             Text('   Sort Comment'),
                           ]),
@@ -312,65 +326,7 @@ class _post_screenState extends State<post_screen> {
                 ),
               ),
             ])
-          : Container(
-              width: screen_width,
-              height: double.infinity,
-              color: Color.fromRGBO(50, 50, 50, 1),
-              child: Container(
-                width: screen_width * 0.85,
-                height: double.infinity,
-                margin: const EdgeInsets.only(right: 65, left: 65),
-                color: Color.fromRGBO(218, 224, 230, 1),
-                child: SingleChildScrollView(
-                  child: Row(
-                    children: [
-                      // the wider Row
-                      Container(
-                        width: screen_width * 0.57,
-                        height: 5000,
-                        color: Colors.white,
-                        margin:
-                            const EdgeInsets.only(right: 12, left: 36, top: 70),
-                        child: Column(children: [
-                          Row(
-                            children: [
-                              CircleAvatar(
-                                radius: 16.0,
-                                child: ClipRRect(
-                                  child: Image.asset('assets/kareem.jpg'),
-                                  borderRadius: BorderRadius.circular(50.0),
-                                ),
-                              ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Text("r/kareem_community"),
-                              ),
-                              GestureDetector(
-                                onTap: () {},
-                                child: Text(
-                                  "u/kareem_ashraf1",
-                                  style: TextStyle(color: Colors.black45),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ]),
-                      ),
-                      Container(
-                        width: screen_width * 0.24,
-                        height: 5000,
-                        color: Colors.white,
-                        margin:
-                            const EdgeInsets.only(right: 20, left: 5, top: 70),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
+          : WebPostPage(),
     );
   }
 }
