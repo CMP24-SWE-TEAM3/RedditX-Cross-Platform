@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller_mobile.dart';
+import 'package:reddit/controllers/community_controller.dart';
+import 'package:reddit/models/post_model.dart';
 import 'package:reddit/styles/custom_icons.dart';
 import 'package:reddit/views/widgets/post_classic_widget.dart';
 import 'package:reddit/views/widgets/post_card_widget.dart';
 import '../../methods/default_bottom_sheet.dart';
 import '../../methods/show_leave_community_dialog.dart';
+import '../../models/community_model.dart';
 
 class CommunityMobileScreen extends StatelessWidget {
   final BoxConstraints constraints;
@@ -93,14 +95,16 @@ class CommunityMobileScreen extends StatelessWidget {
                   Expanded(
                     child: ListView.separated(
                       separatorBuilder: (context, index) => const Divider(),
-                      itemCount: 10,
+                      itemCount: postsList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return (value.postView == "classic")
                             ? PostClassicWidget(
-                                postType: "link",
+                                postType: postsList[index].type,
                                 context: context,
-                                postPlace: "community")
-                            : const PostCardWidget(postType: "text");
+                                postPlace: "community",
+                                index: index,
+                              )
+                            : PostCardWidget(postType: postsList[index].type,index: index,);
                       },
                     ),
                   ),
@@ -159,17 +163,17 @@ class CommunityMobileScreen extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 5),
                           child: Row(
-                            children: const [
-                              Icon(
+                            children: [
+                              const Icon(
                                 Icons.search,
                                 color: Colors.white,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
                               Text(
-                                "r/Art",
-                                style: TextStyle(
+                                "r/${communityModel1.name}",
+                                style: const TextStyle(
                                     fontSize: 15, color: Colors.white),
                               )
                             ],
@@ -273,7 +277,7 @@ class CommunityMobileScreen extends StatelessWidget {
                     const CircleAvatar(
                       radius: 20,
                       backgroundImage: NetworkImage(
-                          "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
+                          "https://i.pinimg.com/564x/cd/c8/11/cdc8110b6e2f746ab4c615b69d07dbfe.jpg"),
                     ),
                     const SizedBox(
                       width: 15,
@@ -288,13 +292,14 @@ class CommunityMobileScreen extends StatelessWidget {
                           child: Stack(
                             clipBehavior: Clip.none,
                             alignment: Alignment.bottomLeft,
-                            children: const [
+                            children: [
                               SizedBox(
                                 width: double.infinity,
                                 child: Image(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(
-                                        "https://img.freepik.com/free-vector/hand-drawn-floral-wallpaper_52683-67169.jpg?w=1060&t=st=1666378342~exp=1666378942~hmac=17e16de142749acc0d7770d08abefff1c63cad6e6c3ce4320085d7c0ec1a17ad")),
+                                    image: NetworkImage(communityModel1.banner
+                                        //"https://img.freepik.com/free-vector/hand-drawn-floral-wallpaper_52683-67169.jpg?w=1060&t=st=1666378342~exp=1666378942~hmac=17e16de142749acc0d7770d08abefff1c63cad6e6c3ce4320085d7c0ec1a17ad"
+                                        )),
                               ),
                               Positioned(
                                 left: 20,
@@ -302,7 +307,9 @@ class CommunityMobileScreen extends StatelessWidget {
                                 child: CircleAvatar(
                                   radius: 35,
                                   backgroundImage: NetworkImage(
-                                      "https://img.freepik.com/premium-photo/background-texture-red-blossom-roses-red-rose-is-meaning-love-romantic_10585-89.jpg?w=1060"),
+                                      communityModel1.icon
+                                      //"https://img.freepik.com/premium-photo/background-texture-red-blossom-roses-red-rose-is-meaning-love-romantic_10585-89.jpg?w=1060"
+                                      ),
                                 ),
                               ),
                             ],
@@ -318,9 +325,9 @@ class CommunityMobileScreen extends StatelessWidget {
                                   children: [
                                     Row(
                                       children: [
-                                        const Text(
-                                          "r/Art",
-                                          style: TextStyle(
+                                        Text(
+                                          "r/${communityModel1.name}",
+                                          style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         ),
@@ -423,17 +430,17 @@ class CommunityMobileScreen extends StatelessWidget {
                                     ),
                                     const SizedBox(height: 10),
                                     Row(
-                                      children: const [
+                                      children: [
                                         Text(
-                                          "21,493,483 members",
-                                          style: TextStyle(
+                                          "${communityModel1.membersCount} members",
+                                          style: const TextStyle(
                                               color: Color.fromARGB(
                                                   255, 75, 75, 75)),
                                         ),
-                                        SizedBox(
+                                        const SizedBox(
                                           width: 5,
                                         ),
-                                        Text(
+                                        const Text(
                                           "1,374 online",
                                           style: TextStyle(
                                               color: Color.fromARGB(
@@ -451,11 +458,11 @@ class CommunityMobileScreen extends StatelessWidget {
                                               value.isExpanded);
                                         },
                                         child: value.isExpanded
-                                            ? const Text(
-                                                "This is a subreddit about art, where we are serious about art and artists, and discussing art in mature, substantive way. READ THE RULES AND LOOK AT THE OTHER POSTS BEFORE POSTING. Be on your best behaviour and do not comment unless you have something meaningful and mature to say. We are STRICTLE MODERATED and DO NOT give out warnings.",
+                                            ? Text(
+                                                communityModel1.description,
                                               )
-                                            : const Text(
-                                                "This is a subreddit about art, where we are serious about art and artists, and discussing art in mature, substantive way. READ THE RULES AND LOOK AT THE OTHER POSTS BEFORE POSTING. Be on your best behaviour and do not comment unless you have something meaningful and mature to say. We are STRICTLE MODERATED and DO NOT give out warnings.",
+                                            : Text(
+                                                communityModel1.description,
                                                 maxLines: 3,
                                                 overflow: TextOverflow.ellipsis,
                                               ),

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/community_controller_mobile.dart';
+import '../../controllers/community_controller.dart';
 import '../../styles/custom_icons.dart';
 import 'dart:math' as math;
 

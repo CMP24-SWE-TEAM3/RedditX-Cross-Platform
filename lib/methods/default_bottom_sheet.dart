@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller_mobile.dart';
+import 'package:reddit/controllers/community_controller.dart';
 
 
 void showDefaultBottomSheet(BuildContext context, String title, int itemCount,

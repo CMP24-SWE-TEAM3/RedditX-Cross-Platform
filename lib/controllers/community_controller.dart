@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/models/post_model.dart';
 import '../styles/custom_icons.dart';
 
 class CommunityProvider with ChangeNotifier {
 
   //used in Join/Leave button on hover
   String joinLeaveButtonText = "Joined";
-
   bool isPostSaved = false;
   int tabIndex = 0;
   bool isExpanded = false;
@@ -15,9 +15,9 @@ class CommunityProvider with ChangeNotifier {
   String postView = "card";
   bool isControversial = false;
 
-  bool isPostLiked = false;
-  bool isPostDisliked = false;
-  int reactsCount = 0;
+  List<bool> isPostLiked = List.filled(postsList.length, false, growable: true);
+  List<bool> isPostDisliked = List.filled(postsList.length, false, growable: true);
+ 
 
   List<IconData> bottomSheetNotificationsIconsFilled = [
     Icons.notifications_off,
@@ -71,29 +71,29 @@ class CommunityProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void likePost() {
-    if (isPostLiked) {
-      reactsCount--;
+  void likePost(int index) {
+    if (isPostLiked[index]) {
+      postsList[index].votesCount--;
     } else {
-      reactsCount++;
+      postsList[index].votesCount++;
     }
-    isPostLiked = !isPostLiked;
-    if (isPostDisliked) {
-      isPostDisliked = !isPostDisliked;
+    isPostLiked[index] = !isPostLiked[index];
+    if (isPostDisliked[index]) {
+      isPostDisliked[index] = !isPostDisliked[index];
     }
 
     notifyListeners();
   }
 
-  void disLikePost() {
-    if (isPostDisliked) {
-      reactsCount++;
+  void disLikePost(int index) {
+    if (isPostDisliked[index]) {
+      postsList[index].votesCount++;
     } else {
-      reactsCount--;
+      postsList[index].votesCount--;
     }
-    isPostDisliked = !isPostDisliked;
-    if (isPostLiked) {
-      isPostLiked = !isPostLiked;
+    isPostDisliked[index] = !isPostDisliked[index];
+    if (isPostLiked[index]) {
+      isPostLiked[index] = !isPostLiked[index];
     }
     notifyListeners();
   }

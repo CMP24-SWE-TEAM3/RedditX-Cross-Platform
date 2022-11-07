@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller_mobile.dart';
+import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/styles/custom_icons.dart';
 import 'package:reddit/views/widgets/share_bottom_sheet_item.dart';

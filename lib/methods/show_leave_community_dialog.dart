@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../controllers/community_controller_mobile.dart';
+import '../controllers/community_controller.dart';
 
 Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
   return showDialog<void>(

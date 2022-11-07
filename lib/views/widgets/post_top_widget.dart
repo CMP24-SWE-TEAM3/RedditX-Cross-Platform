@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:reddit/methods/show_profile_dialog.dart';
 import 'package:reddit/views/widgets/pop_up_menu_button.dart';
 
+import '../../models/post_model.dart';
+
 class PostTopWidget extends StatelessWidget {
   final String postPlace;
   final String postType;
   final BuildContext context;
+  final DateTime dateTime;
+  final String userName;
+  final int index;
 
   const PostTopWidget(
       {required this.postPlace,
       required this.postType,
       required this.context,
+      required this.dateTime,
+      required this.userName,
+      required this.index,
       super.key});
   @override
   Widget build(BuildContext context) {
@@ -80,7 +88,7 @@ class PostTopWidget extends StatelessWidget {
               showeProfileDialog(context);
             },
             child: Text(
-              "u/svftsof",
+              "u/${postsList[index].username}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -92,6 +100,7 @@ class PostTopWidget extends StatelessWidget {
             "  16d   ",
             style: TextStyle(color: Colors.grey[600]),
           ),
+          if(postType=="image")
           InkWell(
             onTap: () {},
             child: Text(

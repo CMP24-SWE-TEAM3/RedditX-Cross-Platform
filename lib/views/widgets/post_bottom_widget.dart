@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller_mobile.dart';
+import 'package:reddit/controllers/community_controller.dart';
+import 'package:reddit/models/post_model.dart';
 import '../../methods/share_bottom_sheet.dart';
 import '../../styles/custom_icons.dart';
 
 class PostBottomWidget extends StatelessWidget {
-  const PostBottomWidget({super.key});
+  final int index;
+  const PostBottomWidget({required this.index,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,22 +17,22 @@ class PostBottomWidget extends StatelessWidget {
           Expanded(
             child: IconButton(
                 onPressed: () {
-                  value.likePost();
+                  value.likePost(index);
                 },
-                icon: (value.isPostLiked)
+                icon: (value.isPostLiked[index])
                     ? const Icon(
                         CustomIcons.up_bold,
                         color: Colors.deepOrange,
                       )
                     : const Icon(CustomIcons.up_outline)),
           ),
-          Text("${value.reactsCount}"),
+          Text("${postsList[index].votesCount}"),
           Expanded(
             child: IconButton(
                 onPressed: () {
-                  value.disLikePost();
+                  value.disLikePost(index);
                 },
-                icon: (value.isPostDisliked)
+                icon: (value.isPostDisliked[index])
                     ? const Icon(
                         CustomIcons.down_bold,
                         color: Colors.blue,
@@ -41,7 +43,7 @@ class PostBottomWidget extends StatelessWidget {
             child: IconButton(
                 onPressed: () {}, icon: const Icon(CustomIcons.comment)),
           ),
-          const Text("60"),
+          Text("${postsList[index].commentsNumber}"),
           Expanded(
             child: IconButton(
                 onPressed: () {

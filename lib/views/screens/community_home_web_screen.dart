@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller_mobile.dart';
+import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/methods/show_toast.dart';
+import 'package:reddit/models/community_model.dart';
+import 'package:reddit/models/post_model.dart';
 import 'package:reddit/views/widgets/web_app_bar.dart';
 import '../widgets/web_post_temp.dart';
 
@@ -28,21 +30,26 @@ class CommunityWebScreen extends StatelessWidget {
               builder: (context, value, child) {
                 return Column(
                   children: [
-                    const SizedBox(
+                     SizedBox(
                       width: double.infinity,
                       height: 150,
                       child: Image(
                           fit: BoxFit.cover,
                           image: NetworkImage(
-                              "https://img.freepik.com/free-vector/hand-drawn-floral-wallpaper_52683-67169.jpg?w=1060&t=st=1666378342~exp=1666378942~hmac=17e16de142749acc0d7770d08abefff1c63cad6e6c3ce4320085d7c0ec1a17ad")),
+                              communityModel1.banner)),
                     ),
+                    
                     Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
+                      
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        const CircleAvatar(
+                        SizedBox(
+                          width: 400,
+                        ),
+                         CircleAvatar(
                           radius: 35,
                           backgroundImage: NetworkImage(
-                              "https://img.freepik.com/premium-photo/background-texture-red-blossom-roses-red-rose-is-meaning-love-romantic_10585-89.jpg?w=1060"),
+                              communityModel1.icon),
                         ),
                         const SizedBox(
                           width: 30,
@@ -51,16 +58,18 @@ class CommunityWebScreen extends StatelessWidget {
                             child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: const [
+                          children:  [
                             Text(
-                              "A subreddit for cute and cuddly pictures",
-                              style: TextStyle(
+                              (communityModel1.description.length>50)?communityModel1.name:communityModel1.description,
+                              maxLines: 1,
+                              softWrap: true,
+                              style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 30),
                             ),
-                            SizedBox(height: 6),
+                           const  SizedBox(height: 6),
                             Text(
-                              "r/aww",
-                              style: TextStyle(color: Colors.grey),
+                              communityModel1.name,
+                              style: const TextStyle(color: Colors.grey),
                             )
                           ],
                         )),
@@ -93,11 +102,7 @@ class CommunityWebScreen extends StatelessWidget {
                                                     context,
                                                     listen: false)
                                                 .unJoinCommunity();
-                                            print(Provider.of<
-                                                        CommunityProvider>(
-                                                    context,
-                                                    listen: false)
-                                                .joined);
+                                          
                                           },
                                           child: Padding(
                                               padding: const EdgeInsets.all(5),
@@ -225,15 +230,18 @@ class CommunityWebScreen extends StatelessWidget {
                                   shrinkWrap: true,
                                   separatorBuilder: (context, index) =>
                                       const Divider(),
-                                  itemCount: 10,
+                                  itemCount: postsList.length,
                                   itemBuilder:
                                       (BuildContext context, int index) {
                                     return Container(
                                         color: Colors.white,
                                         child: WebPostTemp(
+                                          userName: postsList[index].username,
+                                          index: index,
+                                          dateTime: postsList[index].createdAt,
                                           context: context,
-                                          postPlace: "home",
-                                          postType: "image",
+                                          postPlace: "community",
+                                          postType: postsList[index].type,
                                         ));
                                   },
                                 ),
