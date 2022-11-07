@@ -73,7 +73,7 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
         children: [
           SettingsLabel(title: "GENERAL"),
           SettingsListTile(
-            title: "Account settings for u/USER_NAME",
+            title: "Account settings for u/USERNAME",
             ico: const Icon(Icons.person),
             onTab: () {
               Navigator.of(context)
