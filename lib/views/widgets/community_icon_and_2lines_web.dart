@@ -35,12 +35,14 @@ class CommIconAndNextLinesWeb extends StatelessWidget {
             color: Colors.black,
           ),
         ),
-        Text(
-          'Posted by ${postData.userName} $shownDate',
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-            color: Color.fromRGBO(124, 124, 124, 1),
+        Expanded(
+          child: Text(
+            'Posted by ${postData.userName} $shownDate',
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+              color: Color.fromRGBO(124, 124, 124, 1),
+            ),
           ),
         ),
       ],

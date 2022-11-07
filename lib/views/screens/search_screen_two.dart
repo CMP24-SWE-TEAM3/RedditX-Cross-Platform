@@ -15,7 +15,7 @@ class SearchScreenTwo extends StatelessWidget {
           color: const Color.fromRGBO(135, 138, 140, 0.3),
           child: LayoutBuilder(
             //to be responsive with the size of the screen
-            builder: (ctx, constraint) => Column(
+            builder: (context, constraint) => Column(
               children: [
                 SizedBox(
                   height: constraint.maxHeight * 0.07,
@@ -71,7 +71,7 @@ class SearchScreenTwo extends StatelessWidget {
                                 : Alignment.topCenter,
                         child: SizedBox(
                           width: (Provider.of<SearchController>(context).isWeb)
-                              ? constraint.maxWidth * 0.7
+                              ? constraint.maxWidth * 0.82
                               : constraint.maxWidth * 1,
                           height: (Provider.of<SearchController>(context).isWeb)
                               ? constraint.maxHeight * 0.85
@@ -97,7 +97,7 @@ class SearchScreenTwo extends StatelessWidget {
                                 : Alignment.topCenter,
                         child: SizedBox(
                           width: (Provider.of<SearchController>(context).isWeb)
-                              ? constraint.maxWidth * 0.7
+                              ? constraint.maxWidth * 0.82
                               : constraint.maxWidth * 1,
                           height: (Provider.of<SearchController>(context).isWeb)
                               ? constraint.maxHeight * 0.85
@@ -123,7 +123,7 @@ class SearchScreenTwo extends StatelessWidget {
                                 : Alignment.topCenter,
                         child: SizedBox(
                           width: (Provider.of<SearchController>(context).isWeb)
-                              ? constraint.maxWidth * 0.7
+                              ? constraint.maxWidth * 0.82
                               : constraint.maxWidth * 1,
                           height: (Provider.of<SearchController>(context).isWeb)
                               ? constraint.maxHeight * 0.85
@@ -149,7 +149,7 @@ class SearchScreenTwo extends StatelessWidget {
                                 : Alignment.topCenter,
                         child: SizedBox(
                           width: (Provider.of<SearchController>(context).isWeb)
-                              ? constraint.maxWidth * 0.7
+                              ? constraint.maxWidth * 0.82
                               : constraint.maxWidth * 1,
                           height: (Provider.of<SearchController>(context).isWeb)
                               ? constraint.maxHeight * 0.85

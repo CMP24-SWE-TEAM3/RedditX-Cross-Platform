@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/search_controller.dart';
+import '../screens/search_screen_two.dart';
 
 class SearchTextFieldWidget extends StatelessWidget {
   const SearchTextFieldWidget({super.key});
@@ -25,6 +26,12 @@ class SearchTextFieldWidget extends StatelessWidget {
             context,
             listen: false,
           ).onTapTextField();
+          if (!Provider.of<SearchController>(
+            context,
+            listen: false,
+          ).isWeb) {
+            //Go to the search history screen
+          }
         },
         onTapOutside: (_) {
           //when the user tap outside the search field
@@ -108,6 +115,15 @@ class SearchTextFieldWidget extends StatelessWidget {
               .isNotEmpty) {
             Provider.of<SearchController>(context, listen: false)
                 .onSubmittingTextField();
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => ChangeNotifierProvider(
+                  create: (_) => SearchController(),
+                  child: const SearchScreenTwo(),
+                ),
+              ),
+            );
           }
         },
         //the function that will be called when the text is changing

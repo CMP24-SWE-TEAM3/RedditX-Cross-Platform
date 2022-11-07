@@ -14,7 +14,7 @@ class SearchController with ChangeNotifier {
   var searchTextFieldcontroller = TextEditingController();
   //detect the platform
   //web==> true , App==> false
-  bool isWeb = false;
+  bool isWeb = true;
   //text appears from RTL ==> true, from LTR ==< false
   bool isRTLText = false;
   //the icon that appears in the end of the text field to delete the input text
@@ -109,6 +109,9 @@ class SearchController with ChangeNotifier {
     );
     //5-every change in text this function is called
     onChangeTextField();
+    notifyListeners();
+    //2-flag to make the clicked item color: white
+    isSearchHistoryClicked = false;
     notifyListeners();
   }
   ////////////////////////////////////////////

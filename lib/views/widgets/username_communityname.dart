@@ -15,7 +15,7 @@ class UserOrCommunityNameText extends StatelessWidget {
       textAlign: TextAlign.start,
       usernameOrCommunityName,
       style: const TextStyle(
-        fontWeight: FontWeight.w700,
+        fontWeight: FontWeight.w600,
         fontSize: 12,
         color: Color.fromRGBO(28, 28, 28, 1),
       ),

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/search_text_field.dart';
-import '../widgets/trending_today_in_search.dart';
 import '../../controllers/search_controller.dart';
+import '../widgets/search_history_and_trending.dart';
 
 class SearchScreenOne extends StatefulWidget {
   const SearchScreenOne({super.key});
@@ -29,53 +29,72 @@ class SearchScreenOneState extends State {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        //in web ==> text field only
-        //in App ==> arrow_back button + text field
-        Provider.of<SearchController>(context).isWeb
-            ? const SearchTextFieldWidget()
-            : Row(
-                children: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(Icons.arrow_back),
-                  ),
-                  const Expanded(
-                    //Expanded to make the Widget fill the avaialable space along the row
-                    //WARNING ==> removing Expanded will cause a runTime error because the textFieldWidget will not fit in the row
-                    child: SearchTextFieldWidget(),
-                  ),
-                ],
-              ),
-        //check if the search history is empty==> display trending only
-        //if there is search history ==> display it then trending
-        (Provider.of<SearchController>(context).restoreSearchHistory == null ||
-                Provider.of<SearchController>(context)
-                    .restoreSearchHistory!
-                    .isEmpty ||
-                Provider.of<SearchController>(context).restoreSearchHistory ==
-                    null)
-            //if the stored list history is empty ==> show wtrending only
-            ? const TrendingTodayInSearch()
-            //if there is search history==> show it then show trending
-            : Column(
-                children: [
-                  ListView(
-                    //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
-                    //because the column gives unBounded constraints
-                    //shrinkWrap makes the scroll size same as content size
-                    shrinkWrap: true,
+    return Scaffold(
+      appBar: null,
+      body: Column(
+        children: [
+          //in web ==> text field only
+          //in App ==> arrow_back button + text field
+          !Provider.of<SearchController>(context).isWeb &&
+                  Provider.of<SearchController>(context).isTapped
+              ? SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.2,
+                  width: MediaQuery.of(context).size.width,
+                  child: Row(
                     children: [
-                      //call a function the builds the search history column
-                      ...Provider.of<SearchController>(context)
-                          .buildSearchHistoryColumn(),
+                      IconButton(
+                        onPressed: () {
+                          //when the user tap outside the search field
+                          Provider.of<SearchController>(
+                            context,
+                            listen: false,
+                          ).onExitTapTextField();
+                        },
+                        icon: const Icon(Icons.arrow_back),
+                      ),
+                      const Expanded(
+                        //Expanded to make the Widget fill the avaialable space along the row
+                        //WARNING ==> removing Expanded will cause a runTime error because the textFieldWidget will not fit in the row
+                        child: SearchTextFieldWidget(),
+                      ),
                     ],
                   ),
-                  const TrendingTodayInSearch(),
-                ],
-              ),
-      ],
+                )
+              : SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  child: const SearchTextFieldWidget(),
+                ),
+          Provider.of<SearchController>(context).isTapped &&
+                  Provider.of<SearchController>(context).isWeb
+              ? Stack(
+                  alignment: Alignment.topCenter,
+                  children: [
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.9,
+                      width: MediaQuery.of(context).size.width,
+                      color: const Color.fromARGB(255, 230, 124, 159),
+                    ),
+                    SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.4,
+                      child: const SearchHostoryAndTrending(),
+                    ),
+                  ],
+                )
+              : Provider.of<SearchController>(context).isTapped &&
+                      !Provider.of<SearchController>(context).isWeb
+                  ? SizedBox(
+                      width: MediaQuery.of(context).size.width,
+                      child: const SearchHostoryAndTrending(),
+                    )
+                  //Will be replaced by home screen
+                  : Container(
+                      height: MediaQuery.of(context).size.height * 0.9,
+                      width: MediaQuery.of(context).size.width,
+                      color: const Color.fromARGB(255, 230, 124, 159),
+                    ),
+        ],
+      ),
     );
   }
 }

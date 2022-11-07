@@ -67,8 +67,8 @@ List<PersonInSearch> peoplesList = [
     date: DateTime(2021, 10, 2),
   ),
   PersonInSearch(
-    userName: 'Sara',
-    karma: 2521,
+    userName: 'SaraSaraSaraSaraSaraSaraSaraaa',
+    karma: 252112,
     about:
         'BBBBBBBAABBBBBBBBBBBBBBBBBBBBBBBAABBBBBBBBBBBBBBBBBBBBBBBAABBBBBBBBBBBBBBBBBBBBBBBAABBBBBBBBBBBBBBBBAAAAAAAAA',
     followed: false,
@@ -118,7 +118,7 @@ class CommunityInSearch {
 //will be replaced with real data from the APIs
 List<CommunityInSearch> communitiesList = [
   CommunityInSearch(
-    name: 'DDDOOONNN',
+    name: 'Donnnnnnnn',
     img:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     about:
@@ -127,7 +127,7 @@ List<CommunityInSearch> communitiesList = [
     joined: false,
   ),
   CommunityInSearch(
-    name: 'DDDOOONNN',
+    name: 'Donnnnnnnn',
     img:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     about:
@@ -136,7 +136,7 @@ List<CommunityInSearch> communitiesList = [
     joined: false,
   ),
   CommunityInSearch(
-    name: 'DDDOOONNN',
+    name: 'Donnnnnnnn',
     img:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     about:
@@ -145,7 +145,7 @@ List<CommunityInSearch> communitiesList = [
     joined: false,
   ),
   CommunityInSearch(
-    name: 'DDDOOONNN',
+    name: 'DonnnnnnnnDonnnnnnnnA',
     img:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     about:
@@ -154,7 +154,7 @@ List<CommunityInSearch> communitiesList = [
     joined: false,
   ),
   CommunityInSearch(
-    name: 'HHHEEHHEE',
+    name: 'DonnnnnnnnDonnnnnnnnA',
     img:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     about:
@@ -218,8 +218,8 @@ List<PostInSearch> postsList = [
   PostInSearch(
     postText:
         'World War II or the Second World War, often abbreviated as WWII or WW2, was a global war that lasted from 1937 to 1945. It involved the vast majority of the worlds countries—including all of the great powers—forming two opposing military alliances: the Allies and the Axis powers. World War II was a total war that directly involved more than 100 million personnel from more than 30 countries. The major participants in the war threw their entire economic, industrial, and scientific capabilities behind the war effort, blurring the distinction between civilian and military resources. Aircraft played a major role in the conflict, enabling the strategic bombing of population centres and deploying the only two nuclear weapons ever used in war. World War II was by far the deadliest conflict in human history; it resulted in 70 to 85 million fatalities, mostly among civilians. Tens of millions died due to genocides (including the Holocaust), starvation, massacres, and disease. In the wake of the Axis defeat, Germany and Japan were occupied, and war crimes tribunals were conducted against German and Japanese leaders.',
-    communityName: 'u/communityName',
-    userName: 'u/userName',
+    communityName: 'u/communityNamecommunit',
+    userName: 'u/communityNcommunityNcommunityN',
     communityIcon:
         'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     flairText: 'Politics',
@@ -286,7 +286,7 @@ List<CommentInSearch> commentssList = [
     postData: postsList[0],
     userName: 'doniaaa',
     userAvatar:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     commentVotesCount: 1002,
     createdAt: DateTime(2021, 10, 30),
     commentText:
@@ -296,7 +296,7 @@ List<CommentInSearch> commentssList = [
     postData: postsList[1],
     userName: 'doniaaa Gameeeel',
     userAvatar:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     commentVotesCount: 1002255,
     createdAt: DateTime(2021, 11, 7),
     commentText:
@@ -306,7 +306,7 @@ List<CommentInSearch> commentssList = [
     postData: postsList[1],
     userName: 'doniaaa Gameeeel',
     userAvatar:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     commentVotesCount: 1002255,
     createdAt: DateTime(2022, 11, 5, 6),
     commentText:
@@ -314,9 +314,9 @@ List<CommentInSearch> commentssList = [
   ),
   CommentInSearch(
     postData: postsList[1],
-    userName: 'doniaaa Gameeeel',
+    userName: 'SaraSaraSaraSaraSaraSaraSaraaa',
     userAvatar:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     commentVotesCount: 1002255,
     createdAt: DateTime(2022, 11, 4, 15),
     commentText:
@@ -326,7 +326,7 @@ List<CommentInSearch> commentssList = [
     postData: postsList[2],
     userName: 'doniaaa',
     userAvatar:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     commentVotesCount: 211,
     createdAt: DateTime(2021, 12, 5),
     commentText:
@@ -336,7 +336,7 @@ List<CommentInSearch> commentssList = [
     postData: postsList[0],
     userName: 'doniaaa',
     userAvatar:
-        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1YtO1HTt8FmVCCmsDxcW-XQ8224fpCiUYb3jkJlY6&s',
+        'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
     commentVotesCount: 1002,
     createdAt: DateTime(2022, 11, 2),
     commentText:

@@ -49,7 +49,7 @@ class PostsSearchResult extends StatelessWidget {
                     width: postData.attachedMedia
                             .isNotEmpty //is there a picture to show or not
                         ? MediaQuery.of(context).size.width *
-                            0.7 //to free space for the picture
+                            0.69 //to free space for the picture
                         : MediaQuery.of(context).size.width * 1,
                     //community icon + the 2 lines next to it
                     child: CommIconAndTwoLinesApp(
@@ -121,6 +121,9 @@ class PostsSearchResult extends StatelessWidget {
                 ),
                 CommIconAndNextLinesWeb(
                     postData: postData, shownDate: shownDate),
+                const SizedBox(
+                  height: 5,
+                ),
                 Row(
                   children: postData.attachedMedia.isEmpty
                       //if there is no picture to show

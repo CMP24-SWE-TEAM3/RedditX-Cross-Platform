@@ -44,9 +44,11 @@ class CommentsSearchResult extends StatelessWidget {
                       width: 5,
                     ),
                     //community icon and the line next to it in web
-                    CommIconAndNextLinesWeb(
-                      postData: commentData.postData,
-                      shownDate: postShownDate,
+                    Expanded(
+                      child: CommIconAndNextLinesWeb(
+                        postData: commentData.postData,
+                        shownDate: postShownDate,
+                      ),
                     ),
                   ],
                 )

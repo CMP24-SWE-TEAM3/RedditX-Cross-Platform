@@ -21,82 +21,81 @@ class CommunitiesSearchResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
       color: Colors.white,
       child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                //space in the left of the image
-                const SizedBox(
-                  width: 10,
-                ),
-                //circular image
-                CircularImageWidget(
-                  img: communityData.img,
-                  radius: 40,
-                ),
-                //space in the right of the image
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Column(
-                    children: Provider.of<SearchController>(context).isWeb
-                        ///////////////////////////////////WEB///////////////////////////////////
-                        ? communityData.about.isEmpty
-                            //if about text is empty ==> make the name in the middle of the widget vertically
-                            ? [
-                                Expanded(
-                                  child: CommunityNameRow(
-                                    communityData: communityData,
-                                  ),
-                                ),
-                              ]
-                            //if about text is not empty
-                            : [
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: CommunityNameRow(
-                                    communityData: communityData,
-                                  ),
-                                ),
-                                Expanded(
-                                  flex: 5,
-                                  child: AboutCommunityText(
-                                    communityData: communityData,
-                                    maxNumberOfCharacters: 100,
-                                  ),
-                                ),
-                              ]
-                        : ///////////////////////////////////APP///////////////////////////////////
-                        [
-                            //space in the top
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            //community name
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                UserOrCommunityNameText(
-                                  usernameOrCommunityName: communityData.name,
-                                ),
-                              ],
-                            ),
-                            //just space
-                            const SizedBox(
-                              height: 1,
-                            ),
-                            //numbr of memebers
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
+          const SizedBox(
+            height: 10,
+          ),
+          Row(
+            children: [
+              //space in the left of the image
+              const SizedBox(
+                width: 8,
+              ),
+              //circular image
+              CircularImageWidget(
+                img: communityData.img,
+                radius: 35,
+              ),
+              //space in the right of the image
+              const SizedBox(
+                width: 8,
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: Provider.of<SearchController>(context).isWeb
+                      ///////////////////////////////////WEB///////////////////////////////////
+                      ? communityData.about.isEmpty
+                          //if about text is empty ==> make the name in the middle of the widget vertically
+                          ? [
+                              CommunityNameRow(
+                                communityData: communityData,
+                              ),
+                            ]
+                          //if about text is not empty
+                          : [
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              CommunityNameRow(
+                                communityData: communityData,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              AboutCommunityText(
+                                communityData: communityData,
+                                maxNumberOfCharacters: 100,
+                              ),
+                            ]
+                      : ///////////////////////////////////APP///////////////////////////////////
+                      [
+                          //community name
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              UserOrCommunityNameText(
+                                usernameOrCommunityName: communityData.name,
+                              ),
+                            ],
+                          ),
+                          //just space
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          //numbr of memebers
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Text(
                                   communityData.membersCount > 1000000
                                       ? '${double.parse((communityData.membersCount / 1000000.0).toStringAsFixed(3))}m members'
                                       : communityData.membersCount > 1000
@@ -108,38 +107,33 @@ class CommunitiesSearchResult extends StatelessWidget {
                                     color: Color.fromRGBO(124, 124, 124, 1),
                                   ),
                                 ),
-                              ],
-                            ),
-                            //just space
-                            const SizedBox(
-                              height: 5,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                AboutCommunityText(
-                                  communityData: communityData,
-                                  maxNumberOfCharacters: 30,
-                                ),
-                              ],
-                            ),
-                          ],
-                  ),
+                              ),
+                            ],
+                          ),
+                          //just space
+                          const SizedBox(
+                            height: 5,
+                          ),
+                          AboutCommunityText(
+                            communityData: communityData,
+                            maxNumberOfCharacters: 30,
+                          ),
+                        ],
                 ),
-                //space between text and the button
-                const SizedBox(
-                  width: 10,
-                ),
-                FollowJoinButtonWidget(
-                  index: index,
-                  isPeopleWidget: false,
-                ),
-                //space in the right of the button
-                const SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
+              ),
+              //space between text and the button
+              const SizedBox(
+                width: 8,
+              ),
+              FollowJoinButtonWidget(
+                index: index,
+                isPeopleWidget: false,
+              ),
+              //space in the right of the button
+              const SizedBox(
+                width: 8,
+              ),
+            ],
           ),
           //horizontal line
           const Divider(
@@ -165,16 +159,24 @@ class AboutCommunityText extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      textAlign: TextAlign.start,
-      communityData.about.length > maxNumberOfCharacters
-          ? '${communityData.about.substring(0, maxNumberOfCharacters)}...'
-          : communityData.about,
-      style: const TextStyle(
-        fontWeight: FontWeight.w400,
-        fontSize: 12,
-        color: Color.fromRGBO(124, 124, 124, 1),
-      ),
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: Text(
+            textAlign: TextAlign.start,
+            communityData.about.length > maxNumberOfCharacters
+                ? '${communityData.about.substring(0, maxNumberOfCharacters)}...'
+                : communityData.about,
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+              color: Color.fromRGBO(124, 124, 124, 1),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -195,16 +197,19 @@ class CommunityNameRow extends StatelessWidget {
         UserOrCommunityNameText(
           usernameOrCommunityName: communityData.name,
         ),
-        Text(
-          communityData.membersCount > 1000000
-              ? '${double.parse((communityData.membersCount / 1000000.0).toStringAsFixed(3))}m Members'
-              : communityData.membersCount > 1000
-                  ? '${communityData.membersCount / 1000.0}k Members'
-                  : '${communityData.membersCount} Members',
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-            color: Color.fromRGBO(124, 124, 124, 1),
+        Expanded(
+          child: Text(
+            overflow: TextOverflow.clip,
+            communityData.membersCount > 1000000
+                ? ' . ${double.parse((communityData.membersCount / 1000000.0).toStringAsFixed(3))}m Members'
+                : communityData.membersCount > 1000
+                    ? ' . ${communityData.membersCount / 1000.0}k Members'
+                    : ' . ${communityData.membersCount} Members',
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+              color: Color.fromRGBO(124, 124, 124, 1),
+            ),
           ),
         ),
       ],

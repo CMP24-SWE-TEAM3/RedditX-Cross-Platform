@@ -59,100 +59,91 @@ class PeopleSearchResult extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 100,
       color: Colors.white,
       child: Column(
         children: [
-          Expanded(
-            child: Row(
-              children: [
-                //for free space in the beginning
-                const SizedBox(
-                  width: 10,
-                ),
-                //circular image
-                CircularImageWidget(
-                  img: personData.img,
-                  radius: 40,
-                ),
-                //space in the right of the image
-                const SizedBox(
-                  width: 10,
-                ),
-                Expanded(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: Provider.of<SearchController>(context).isWeb
-                        ///////////////////////////////////WEB///////////////////////////////////
-                        ? personData.about.isNotEmpty
-                            //if about text is not empty
-                            ? [
-                                const SizedBox(
-                                  height: 15,
-                                ),
-                                Expanded(
-                                  flex: 2,
-                                  child: FirstRowInWebPeopleInSearch(
-                                      personData: personData),
-                                ),
-                                Expanded(
-                                  flex: 5,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      Expanded(
-                                        child: Text(
-                                          textAlign: TextAlign.start,
-                                          //show only 100 characters
-                                          personData.about.length > 100
-                                              ? '${personData.about.substring(0, 100)}...'
-                                              : personData.about,
-                                          style: const TextStyle(
-                                            fontWeight: FontWeight.w400,
-                                            fontSize: 12,
-                                            color: Color.fromRGBO(
-                                                124, 124, 124, 1),
-                                          ),
-                                        ),
+          SizedBox(
+            height: Provider.of<SearchController>(context).isWeb ? 0 : 5,
+          ),
+          Row(
+            children: [
+              //for free space in the beginning
+              const SizedBox(
+                width: 8,
+              ),
+              //circular image
+              CircularImageWidget(
+                img: personData.img,
+                radius: 35,
+              ),
+              //space in the right of the image
+              const SizedBox(
+                width: 8,
+              ),
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: Provider.of<SearchController>(context).isWeb
+                      ///////////////////////////////////WEB///////////////////////////////////
+                      ? personData.about.isNotEmpty
+                          //if about text is not empty
+                          ? [
+                              const SizedBox(
+                                height: 15,
+                              ),
+                              FirstRowInWebPeopleInSearch(
+                                personData: personData,
+                              ),
+                              const SizedBox(
+                                height: 10,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Expanded(
+                                    child: Text(
+                                      textAlign: TextAlign.start,
+                                      //show only 100 characters
+                                      personData.about.length > 100
+                                          ? '${personData.about.substring(0, 100)}...'
+                                          : personData.about,
+                                      style: const TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        fontSize: 12,
+                                        color: Color.fromRGBO(124, 124, 124, 1),
                                       ),
-                                    ],
+                                    ),
                                   ),
-                                ),
-                              ]
-                            //if about text is empty ==> make the name in the middle of the widget vertically
-                            : [
-                                Expanded(
-                                  child: Center(
-                                    child: FirstRowInWebPeopleInSearch(
-                                        personData: personData),
-                                  ),
-                                ),
-                              ]
-                        : ///////////////////////////////////APP///////////////////////////////////
-                        [
-                            const SizedBox(
-                              height: 15,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                UserOrCommunityNameText(
-                                  usernameOrCommunityName: personData.userName,
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 7,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
+                                ],
+                              ),
+                            ]
+                          //if about text is empty ==> make the name in the middle of the widget vertically
+                          : [
+                              FirstRowInWebPeopleInSearch(
+                                  personData: personData),
+                            ]
+                      : ///////////////////////////////////APP///////////////////////////////////
+                      [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              UserOrCommunityNameText(
+                                usernameOrCommunityName: personData.userName,
+                              ),
+                            ],
+                          ),
+                          const SizedBox(
+                            height: 7,
+                          ),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Expanded(
+                                child: Text(
                                   textAlign: TextAlign.start,
                                   personData.karma < 1000
                                       ? '${personData.karma} Karma . ${dateToShow()}'
@@ -165,23 +156,23 @@ class PeopleSearchResult extends StatelessWidget {
                                     color: Color.fromRGBO(124, 124, 124, 1),
                                   ),
                                 ),
-                              ],
-                            ),
-                          ],
-                  ),
+                              ),
+                            ],
+                          ),
+                        ],
                 ),
-                const SizedBox(
-                  width: 10,
-                ),
-                FollowJoinButtonWidget(
-                  index: index,
-                  isPeopleWidget: true,
-                ),
-                const SizedBox(
-                  width: 10,
-                ),
-              ],
-            ),
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+              FollowJoinButtonWidget(
+                index: index,
+                isPeopleWidget: true,
+              ),
+              const SizedBox(
+                width: 10,
+              ),
+            ],
           ),
           //horizontal line
           const Divider(
@@ -205,21 +196,23 @@ class FirstRowInWebPeopleInSearch extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         UserOrCommunityNameText(
           usernameOrCommunityName: personData.userName,
         ),
-        Text(
-          personData.karma > 1000000
-              ? ' . ${double.parse((personData.karma / 1000000.0).toStringAsFixed(3))}m Karma'
-              : personData.karma > 1000
-                  ? ' . ${personData.karma / 1000.0}k Karma'
-                  : ' . ${personData.karma} Karma',
-          style: const TextStyle(
-            fontWeight: FontWeight.w400,
-            fontSize: 12,
-            color: Color.fromRGBO(124, 124, 124, 1),
+        Expanded(
+          child: Text(
+            personData.karma > 1000000
+                ? ' . ${double.parse((personData.karma / 1000000.0).toStringAsFixed(3))}m Karma'
+                : personData.karma > 1000
+                    ? ' . ${personData.karma / 1000.0}k Karma'
+                    : ' . ${personData.karma} Karma',
+            style: const TextStyle(
+              fontWeight: FontWeight.w400,
+              fontSize: 12,
+              color: Color.fromRGBO(124, 124, 124, 1),
+            ),
           ),
         ),
       ],
