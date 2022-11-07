@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import '../styles/custom_icons.dart';
 
-class MobileCommunityProvider with ChangeNotifier {
+class CommunityProvider with ChangeNotifier {
+
+  //used in Join/Leave button on hover
+  String joinLeaveButtonText = "Joined";
+
   bool isPostSaved = false;
   int tabIndex = 0;
   bool isExpanded = false;
@@ -56,6 +60,16 @@ class MobileCommunityProvider with ChangeNotifier {
   List<bool> checkIconNotification = [false, true, false];
   List<bool> checkIconPostView = [true, false];
   List<bool> checkIconPostSortBy = [true, false, false, false, false];
+
+    void joinLeaveButtonOnHover() {
+    joinLeaveButtonText = "Leave";
+    notifyListeners();
+  }
+
+  void joinLeaveButtonOnExit() {
+    joinLeaveButtonText = "Joined";
+    notifyListeners();
+  }
 
   void likePost() {
     if (isPostLiked) {

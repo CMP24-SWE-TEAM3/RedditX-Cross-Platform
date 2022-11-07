@@ -12,7 +12,7 @@ class WebPostDartWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MobileCommunityProvider>(
+    return Consumer<CommunityProvider>(
       builder: (context, value, child) => Padding(
           padding: const EdgeInsets.all(15),
           child: Column(

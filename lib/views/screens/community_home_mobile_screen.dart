@@ -19,7 +19,7 @@ class CommunityMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Consumer<MobileCommunityProvider>(
+        body: Consumer<CommunityProvider>(
       builder: (context, value, child) => NestedScrollView(
         body: DefaultTabController(
             length: 2,
@@ -57,12 +57,6 @@ class CommunityMobileScreen extends StatelessWidget {
                                   "Top",
                                 ],
                                 "postSortBy");
-                            // showControversialBottomSheet(
-                            //     context,
-                            //     "CONTROVERSIAL POSTS FROM",
-                            //     6,
-                            //     value.controversialPostsIcons,
-                            //     value.controversialPostsTypes);
                           },
                           child: SizedBox(
                             height: 30,
@@ -129,7 +123,7 @@ class CommunityMobileScreen extends StatelessWidget {
             )),
         headerSliverBuilder: (context, innerBoxIsScrolled) {
           return [
-            Consumer<MobileCommunityProvider>(
+            Consumer<CommunityProvider>(
               builder: (context, value, child) => SliverAppBar(
                   elevation: 0,
                   primary: false,

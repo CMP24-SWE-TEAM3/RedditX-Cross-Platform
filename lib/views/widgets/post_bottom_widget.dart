@@ -9,7 +9,7 @@ class PostBottomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MobileCommunityProvider>(
+    return Consumer<CommunityProvider>(
       builder: (context, value, child) => Row(
         children: [
           Expanded(

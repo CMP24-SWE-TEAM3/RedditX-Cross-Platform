@@ -13,7 +13,7 @@ void shareBottomSheet(BuildContext context) {
     backgroundColor: Colors.white,
     constraints: const BoxConstraints(maxWidth: 395),
     context: context,
-    builder: (context) => Consumer<MobileCommunityProvider>(
+    builder: (context) => Consumer<CommunityProvider>(
         builder: (context, value, child) => Column(
               mainAxisSize: MainAxisSize.min,
               children: [

@@ -41,7 +41,7 @@ Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
                 const SizedBox(
                   width: 10,
                 ),
-                Consumer<MobileCommunityProvider>(
+                Consumer<CommunityProvider>(
                   builder: (context, value, child) {
                     return Expanded(
                         child: Container(

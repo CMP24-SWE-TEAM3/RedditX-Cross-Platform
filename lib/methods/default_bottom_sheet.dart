@@ -25,7 +25,7 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                 ),
               ),
               const Divider(),
-              Consumer<MobileCommunityProvider>(
+              Consumer<CommunityProvider>(
                 builder: (context, value, child) => ListView.builder(
                     shrinkWrap: true,
                     itemCount: itemCount,

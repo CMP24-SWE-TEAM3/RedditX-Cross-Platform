@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller_mobile.dart';
-import 'package:reddit/controllers/community_controller_web.dart';
 import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/views/widgets/web_app_bar.dart';
 import '../widgets/web_post_temp.dart';
@@ -25,7 +24,7 @@ class CommunityWebScreen extends StatelessWidget {
                 backgroundColor: Colors.white,
                 title:
                     WebAppBarTitle(constraints: constraints, context: context)),
-            body: Consumer<MobileCommunityProvider>(
+            body: Consumer<CommunityProvider>(
               builder: (context, value, child) {
                 return Column(
                   children: [
@@ -69,7 +68,7 @@ class CommunityWebScreen extends StatelessWidget {
                           width: 30,
                         ),
                         value.joined
-                            ? Consumer<WebCommunityProvider>(
+                            ? Consumer<CommunityProvider>(
                                 builder: (context, value, child) => Container(
                                     height: 40,
                                     decoration: BoxDecoration(
@@ -90,12 +89,12 @@ class CommunityWebScreen extends StatelessWidget {
                                           onTap: () {
                                             showToast(
                                                 "Successfully left r/aww");
-                                            Provider.of<MobileCommunityProvider>(
+                                            Provider.of<CommunityProvider>(
                                                     context,
                                                     listen: false)
                                                 .unJoinCommunity();
                                             print(Provider.of<
-                                                        MobileCommunityProvider>(
+                                                        CommunityProvider>(
                                                     context,
                                                     listen: false)
                                                 .joined);

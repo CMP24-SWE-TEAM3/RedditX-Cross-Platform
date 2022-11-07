@@ -9,7 +9,7 @@ class WebPostBottomWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MobileCommunityProvider>(
+    return Consumer<CommunityProvider>(
       builder: (context, value, child) => Row(
         children: [
           Expanded(
@@ -81,7 +81,7 @@ class WebPostBottomWidget extends StatelessWidget {
               const Text("Share"),
             ],
           )),
-          Consumer<MobileCommunityProvider>(
+          Consumer<CommunityProvider>(
             builder: (context, value, child) => Expanded(
                 child: Row(
               children: [

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller_web.dart';
 
+import '../../controllers/community_controller_mobile.dart';
 import '../../styles/custom_icons.dart';
 import 'dart:math' as math;
 
@@ -17,9 +17,9 @@ class WebAppBarTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: Center(child: Consumer<WebCommunityProvider>(
+      child: Center(child: Consumer<CommunityProvider>(
         builder: (context, value, child) {
-          return Consumer<WebCommunityProvider>(
+          return Consumer<CommunityProvider>(
             builder: (context, value, child) => Row(
               children: [
                 IconButton(

@@ -10,7 +10,7 @@ class PopUpMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MobileCommunityProvider>(
+    return Consumer<CommunityProvider>(
       builder: (context, value, child) => PopupMenuButton(
         child: const Icon(Icons.more_vert),
         itemBuilder: (_) => <PopupMenuItem<String>>[
