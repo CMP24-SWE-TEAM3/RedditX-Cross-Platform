@@ -49,14 +49,12 @@ class CommunityMobileScreen extends StatelessWidget {
                             showDefaultBottomSheet(
                                 context,
                                 "SORT POSTS BY",
-                                5,
+                                3,
                                 value.bottomSheetPostSortIcons,
                                 [
                                   "Hot",
                                   "New",
                                   "Top",
-                                  "Controversial",
-                                  "Rising"
                                 ],
                                 "postSortBy");
                             // showControversialBottomSheet(

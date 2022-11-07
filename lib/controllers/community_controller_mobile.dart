@@ -38,8 +38,6 @@ class MobileCommunityProvider with ChangeNotifier {
     CustomIcons.hotjar,
     CustomIcons.certificate_outline,
     CustomIcons.award,
-    CustomIcons.broadsword,
-    CustomIcons.chart_outline
   ];
 
   String postSortByType = "HOT POSTS";
@@ -48,8 +46,6 @@ class MobileCommunityProvider with ChangeNotifier {
     "HOT POSTS",
     "NEW POSTS",
     "TOP POSTS",
-    "CONTROVERSIAL POSTS",
-    "RISING POSTS"
   ];
   IconData postViewIcon = Icons.view_stream_outlined;
   List<IconData> bottomSheetPostViewIcons = [
@@ -57,34 +53,9 @@ class MobileCommunityProvider with ChangeNotifier {
     CustomIcons.menu
   ];
 
-  List<IconData> controversialPostsIcons = [
-    Icons.circle_outlined,
-    Icons.circle_outlined,
-    Icons.circle_outlined,
-    Icons.circle_outlined,
-    Icons.circle_outlined,
-    Icons.circle_outlined
-  ];
-  List<String> controversialPostsTypes = [
-    "Past hour",
-    "Past 24 hours",
-    "Past week",
-    "Past month",
-    "Past year",
-    "All time"
-  ];
-
   List<bool> checkIconNotification = [false, true, false];
   List<bool> checkIconPostView = [true, false];
   List<bool> checkIconPostSortBy = [true, false, false, false, false];
-  List<bool> checkIconControversialPostsFrom = [
-    false,
-    false,
-    false,
-    false,
-    false,
-    false
-  ];
 
   void likePost() {
     if (isPostLiked) {
@@ -193,22 +164,6 @@ class MobileCommunityProvider with ChangeNotifier {
       }
     }
 
-    notifyListeners();
-  }
-
-  void changeControversialPostsFrom(
-      String type, int index, BuildContext context) {
-    for (int i = 0; i < 6; i++) {
-      if (i == index) {
-        checkIconControversialPostsFrom[i] = true;
-        controversialPostsIcons[i] = Icons.check_circle;
-        postSortByType =
-            "CONTROVERSIAL POSTS FROM ${controversialPostsTypes[i]}";
-      } else {
-        checkIconControversialPostsFrom[i] = false;
-        controversialPostsIcons[i] = Icons.circle_outlined;
-      }
-    }
     notifyListeners();
   }
 }
