@@ -5,7 +5,7 @@ import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/styles/custom_icons.dart';
 import 'package:reddit/views/widgets/share_bottom_sheet_item.dart';
 
-void shareBottomSheet(BuildContext context) {
+void shareBottomSheet(BuildContext context,int index) {
   showModalBottomSheet(
     isDismissible: true,
     isScrollControlled: true,
@@ -45,15 +45,15 @@ void shareBottomSheet(BuildContext context) {
                       children: [
                         InkWell(
                           onTap: () {
-                            value.saveUnsavePost();
-                            (value.isPostSaved)
+                            value.saveUnsavePost(index);
+                            (value.isPostSaved[index])
                                 ? showToast("Post saved!")
                                 : showToast("Post unsaved!");
                           },
                           child: ShareBottomSheetItem(
                               circleAvatarColor:
                                   const Color.fromARGB(255, 222, 229, 232),
-                              icon: (value.isPostSaved)
+                              icon: (value.isPostSaved[index])
                                   ? CustomIcons.unsaved
                                   : CustomIcons.saved,
                               text: "Save"),

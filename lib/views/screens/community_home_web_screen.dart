@@ -5,6 +5,7 @@ import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/models/community_model.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/views/widgets/web_app_bar.dart';
+import 'package:reddit/views/widgets/web_post_card.dart';
 import '../widgets/web_post_temp.dart';
 
 class CommunityWebScreen extends StatelessWidget {
@@ -30,26 +31,22 @@ class CommunityWebScreen extends StatelessWidget {
               builder: (context, value, child) {
                 return Column(
                   children: [
-                     SizedBox(
+                    SizedBox(
                       width: double.infinity,
                       height: 150,
                       child: Image(
                           fit: BoxFit.cover,
-                          image: NetworkImage(
-                              communityModel1.banner)),
+                          image: NetworkImage(communityModel1.banner)),
                     ),
-                    
                     Row(
-                      
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SizedBox(
-                          width: 400,
+                          width: width / 5,
                         ),
-                         CircleAvatar(
+                        CircleAvatar(
                           radius: 35,
-                          backgroundImage: NetworkImage(
-                              communityModel1.icon),
+                          backgroundImage: NetworkImage(communityModel1.icon),
                         ),
                         const SizedBox(
                           width: 30,
@@ -58,15 +55,17 @@ class CommunityWebScreen extends StatelessWidget {
                             child: Column(
                           mainAxisAlignment: MainAxisAlignment.start,
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children:  [
+                          children: [
                             Text(
-                              (communityModel1.description.length>50)?communityModel1.name:communityModel1.description,
+                              (communityModel1.description.length > 50)
+                                  ? communityModel1.name
+                                  : communityModel1.description,
                               maxLines: 1,
                               softWrap: true,
                               style: const TextStyle(
                                   fontWeight: FontWeight.bold, fontSize: 30),
                             ),
-                           const  SizedBox(height: 6),
+                            const SizedBox(height: 6),
                             Text(
                               communityModel1.name,
                               style: const TextStyle(color: Colors.grey),
@@ -102,7 +101,6 @@ class CommunityWebScreen extends StatelessWidget {
                                                     context,
                                                     listen: false)
                                                 .unJoinCommunity();
-                                          
                                           },
                                           child: Padding(
                                               padding: const EdgeInsets.all(5),
@@ -235,7 +233,7 @@ class CommunityWebScreen extends StatelessWidget {
                                       (BuildContext context, int index) {
                                     return Container(
                                         color: Colors.white,
-                                        child: WebPostTemp(
+                                        child: WebPostWidget(
                                           userName: postsList[index].username,
                                           index: index,
                                           dateTime: postsList[index].createdAt,

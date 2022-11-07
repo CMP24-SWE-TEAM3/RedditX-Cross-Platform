@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:reddit/methods/show_profile_dialog.dart';
 import 'package:reddit/views/widgets/pop_up_menu_button.dart';
 
+import '../../controllers/community_controller.dart';
 import '../../models/post_model.dart';
 
 class PostTopWidget extends StatelessWidget {
@@ -59,9 +61,11 @@ class PostTopWidget extends StatelessWidget {
                       style: TextStyle(color: Colors.grey[800]),
                     ),
                   ),
-                  Text(
-                    "  15h",
-                    style: TextStyle(color: Colors.grey[800]),
+                  Consumer<CommunityProvider>(
+                    builder: (context, value, ind) => Text(
+                      "${value.calculateAge(postsList[index].createdAt)}",
+                      style: TextStyle(color: Colors.grey[600]),
+                    ),
                   ),
                   if (postType == "image")
                     InkWell(
@@ -75,7 +79,7 @@ class PostTopWidget extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          const PopUpMenu(),
+           PopUpMenu(index:index),
         ],
       );
     }
@@ -96,20 +100,22 @@ class PostTopWidget extends StatelessWidget {
             Icons.person,
             color: Colors.blue,
           ),
-          Text(
-            "  16d   ",
-            style: TextStyle(color: Colors.grey[600]),
-          ),
-          if(postType=="image")
-          InkWell(
-            onTap: () {},
-            child: Text(
-              "i.redd.it",
+          Consumer<CommunityProvider>(
+            builder: (context, value, ind) => Text(
+              "    ${value.calculateAge(postsList[index].createdAt)}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
+          if (postType == "image")
+            InkWell(
+              onTap: () {},
+              child: Text(
+                "   i.redd.it",
+                style: TextStyle(color: Colors.grey[600]),
+              ),
+            ),
           const Spacer(),
-          const  PopUpMenu(),
+          PopUpMenu(index: index,),
         ],
       );
     } else {
@@ -129,10 +135,15 @@ class PostTopWidget extends StatelessWidget {
                 onTap: () {},
                 child: const Text("r/AskAnySoftware"),
               ),
-              const Text("  12m"),
+              Consumer<CommunityProvider>(
+                builder: (context, value, ind) => Text(
+                  "${value.calculateAge(postsList[index].createdAt)}",
+                  style: TextStyle(color: Colors.grey[600]),
+                ),
+              ),
               const Text("  i.redd.it"),
               const Spacer(),
-              const PopUpMenu(),
+               PopUpMenu(index: index,),
             ],
           )
         ],

@@ -7,62 +7,39 @@ import '../../styles/custom_icons.dart';
 
 class WebPostBottomWidget extends StatelessWidget {
   final int index;
-  const WebPostBottomWidget({required this.index,super.key});
+  const WebPostBottomWidget({required this.index, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Consumer<CommunityProvider>(
       builder: (context, value, child) => Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.max,
         children: [
           Expanded(
+            child: InkWell(
               child: Row(
-            children: [
-              IconButton(
-                  onPressed: () {
-                    value.likePost(index);
-                  },
-                  icon: (value.isPostLiked[index])
-                      ? const Icon(
-                          CustomIcons.up_bold,
-                          color: Colors.deepOrange,
-                        )
-                      : const Icon(CustomIcons.up_outline)),
-              Text("${postsList[index].votesCount}"),
-              IconButton(
-                  onPressed: () {
-                    value.disLikePost(index);
-                  },
-                  icon: (value.isPostDisliked[index])
-                      ? const Icon(
-                          CustomIcons.down_bold,
-                          color: Colors.blue,
-                        )
-                      : const Icon(CustomIcons.down_outline)),
-            ],
-          )),
-          Expanded(
-            child: Row(
-              children: [
-                IconButton(
-                    onPressed: () {}, icon: const Icon(CustomIcons.comment)),
-                const Text("60"),
-              ],
+                children: [
+                  const Icon(
+                    CustomIcons.comment,
+                    size: 15,
+                  ),
+                  SizedBox(
+                    width: 5,
+                  ),
+                  Text("${postsList[index].commentsNumber}"),
+                ],
+              ),
             ),
           ),
-          // Expanded(
-          //   child: Row(
-          //     children: [
-          //       IconButton(
-          //           onPressed: () {}, icon: const Icon(CustomIcons.gift)),
-          //       Text("Awards")
-          //     ],
-          //   ),
-          // ),
           Expanded(
               child: Row(
             children: [
               PopupMenuButton(
-                child: const Icon(Icons.share_outlined),
+                child: const Icon(
+                  Icons.share_outlined,
+                  size: 15,
+                ),
                 itemBuilder: (_) => <PopupMenuItem<String>>[
                   PopupMenuItem<String>(
                       value: "Copy link",
@@ -87,26 +64,46 @@ class WebPostBottomWidget extends StatelessWidget {
             builder: (context, value, child) => Expanded(
                 child: Row(
               children: [
-                IconButton(
-                  onPressed: () {
-                    value.saveUnsavePost();
-                    (value.isPostSaved)
-                        ? showToast("Post saved!")
-                        : showToast("Post unsaved");
-                  },
-                  icon: (value.isPostSaved)
-                      ? const Icon(CustomIcons.unsaved)
-                      : const Icon(CustomIcons.saved),
-                ),
-                (value.isPostSaved) ? const Text("Unsave") : const Text("Save")
+                InkWell(
+                    onTap: () {
+                      value.saveUnsavePost(index);
+                      (value.isPostSaved[index])
+                          ? showToast("Post saved!")
+                          : showToast("Post unsaved");
+                    },
+                    child: Row(
+                      children: [
+                        (value.isPostSaved[index])
+                            ? const Icon(
+                                CustomIcons.unsaved,
+                                size: 15,
+                              )
+                            : const Icon(
+                                CustomIcons.saved,
+                                size: 15,
+                              ),
+                        (value.isPostSaved[index])
+                            ? const Text(
+                                "Unsave",
+                                style: TextStyle(fontSize: 12),
+                              )
+                            : const Text("Save")
+                      ],
+                    )),
               ],
             )),
+          ),
+          SizedBox(
+            width: 10,
           ),
           Expanded(
               child: Row(
             children: [
               PopupMenuButton(
-                child: const Icon(Icons.more_vert),
+                child: const Icon(
+                  Icons.more_vert,
+                  size: 15,
+                ),
                 itemBuilder: (_) => <PopupMenuItem<String>>[
                   PopupMenuItem<String>(
                       value: "Hide",

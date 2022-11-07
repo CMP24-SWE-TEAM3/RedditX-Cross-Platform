@@ -47,7 +47,7 @@ class PostBottomWidget extends StatelessWidget {
           Expanded(
             child: IconButton(
                 onPressed: () {
-                  shareBottomSheet(context);
+                  shareBottomSheet(context,index);
                 },
                 icon: const Icon(Icons.share_outlined)),
           ),

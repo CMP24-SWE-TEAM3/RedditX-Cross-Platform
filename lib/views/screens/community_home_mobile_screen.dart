@@ -104,7 +104,10 @@ class CommunityMobileScreen extends StatelessWidget {
                                 postPlace: "community",
                                 index: index,
                               )
-                            : PostCardWidget(postType: postsList[index].type,index: index,);
+                            : PostCardWidget(
+                                postType: postsList[index].type,
+                                index: index,
+                              );
                       },
                     ),
                   ),

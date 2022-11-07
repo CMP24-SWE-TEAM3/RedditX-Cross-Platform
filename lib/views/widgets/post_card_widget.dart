@@ -1,6 +1,8 @@
 import 'package:float_column/float_column.dart';
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/methods/show_profile_dialog.dart';
 import 'package:reddit/views/widgets/pop_up_menu_button.dart';
 import 'package:reddit/views/widgets/post_bottom_widget.dart';
@@ -38,26 +40,29 @@ class PostCardWidget extends StatelessWidget {
                               TextStyle(color: Colors.grey[800], fontSize: 15),
                         ),
                       ),
-                      Text(
-                        "  ${postsList[index].createdAt}",
-                        style: TextStyle(color: Colors.grey[800], fontSize: 15),
+                      Consumer<CommunityProvider>(
+                        builder: (context, value, child) => Text(
+                          "  ${value.calculateAge(postsList[index].createdAt)}",
+                          style:
+                              TextStyle(color: Colors.grey[800], fontSize: 15),
+                        ),
                       ),
                       if (postType == 'image')
                         InkWell(
                           onTap: () {},
                           child: Text(
-                            " · i.redd.it",
+                            "  · i.redd.it",
                             style: TextStyle(
                                 color: Colors.grey[800], fontSize: 15),
                           ),
                         ),
                       if (postType == "text") const Spacer(),
-                      const PopUpMenu(),
+                      PopUpMenu(index:index),
                     ],
                   ),
                   if (postType == "text")
                     Text(
-                      postsList[index].title,
+                      postsList[index].text,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     )
@@ -68,7 +73,7 @@ class PostCardWidget extends StatelessWidget {
                             float: FCFloat.end,
                             padding: (postType == 'image')
                                 ? const EdgeInsets.only(left: 8, right: 8)
-                                :const EdgeInsets.only(left: 0),
+                                : const EdgeInsets.only(left: 0),
                             child: (postType == 'link')
                                 ? SizedBox(
                                     height: 90,
@@ -93,22 +98,21 @@ class PostCardWidget extends StatelessWidget {
                                         decoration: BoxDecoration(
                                             borderRadius:
                                                 BorderRadius.circular(20.0),
-                                            image:  DecorationImage(
+                                            image: DecorationImage(
                                                 fit: BoxFit.cover,
                                                 image: NetworkImage(
-                                                    postsList[index].attachments[0]))),
+                                                    postsList[index]
+                                                        .attachments[0]))),
                                       )
                                     : const SizedBox(height: 20)),
-                         WrappableText(
-                            text: TextSpan(
-                                text:
-                                    postsList[index].title))
+                        WrappableText(
+                            text: TextSpan(text: postsList[index].title))
                       ],
                     ),
                 ],
               ),
             ),
-             Padding(
+            Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: PostBottomWidget(
                 index: index,

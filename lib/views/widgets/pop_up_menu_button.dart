@@ -6,7 +6,8 @@ import 'package:reddit/methods/show_toast.dart';
 import '../../styles/custom_icons.dart';
 
 class PopUpMenu extends StatelessWidget {
-  const PopUpMenu({super.key});
+  final int index;
+  const PopUpMenu({required this.index,super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +17,21 @@ class PopUpMenu extends StatelessWidget {
         itemBuilder: (_) => <PopupMenuItem<String>>[
           PopupMenuItem<String>(
               onTap: () {
-                value.saveUnsavePost();
-                (value.isPostSaved)
+                value.saveUnsavePost(index);
+                (value.isPostSaved[index])
                     ? showToast("Post saved!")
                     : showToast("Post unsaved");
               },
-              value: (value.isPostSaved) ? "Unsave" : "Save",
+              value: (value.isPostSaved[index]) ? "Unsave" : "Save",
               child: Row(
                 children: [
-                  (value.isPostSaved)
+                  (value.isPostSaved[index])
                       ? const Icon(CustomIcons.unsaved)
                       : const Icon(CustomIcons.saved),
                   const SizedBox(
                     width: 5,
                   ),
-                  (value.isPostSaved)
+                  (value.isPostSaved[index])
                       ? const Text("Unsave")
                       : const Text("Save")
                 ],
