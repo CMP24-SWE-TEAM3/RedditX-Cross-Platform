@@ -1,3 +1,4 @@
+import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
 import '../../Controllers/validations.dart';
@@ -6,62 +7,42 @@ import '../Widgets/sign_up_bar.dart';
 import '../Widgets/sign_up_button.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
-import 'email_signup.dart';
-import 'forget_password.dart';
-import 'forget_username.dart';
-import 'temphome.dart';
+import '../Widgets/user_signup_web_agreement.dart';
+import 'about_you.dart';
+import 'email_login.dart';
 
-class EmailLoginW extends StatefulWidget {
-  const EmailLoginW({super.key});
+class EmailSignupW extends StatefulWidget {
+  const EmailSignupW({super.key});
 
   @override
-  State<EmailLoginW> createState() => _EmailLoginWState();
+  State<EmailSignupW> createState() => _EmailSignupWState();
 }
 
-class _EmailLoginWState extends State<EmailLoginW> {
-  bool _submited = false;
-  TextEditingController userNameController = TextEditingController();
-  String? errorUserNameText;
-  TextEditingController passwordController = TextEditingController();
-  String? errorPasswordText;
+void emailLogin(BuildContext ctx) {
+  Navigator.of(ctx).pushReplacementNamed(EmailLogin.routeName, arguments: {});
+}
 
-  void submit(userNameController, passwordController, ctx) {
-    print('sending data to back end');
-    Navigator.of(ctx).pop();
-    Navigator.of(ctx).pushReplacementNamed(Home.routeName, arguments: {});
-  }
+void submit(emailController, ctx) {
+  print('sending data to back end');
+  Navigator.of(ctx).pushReplacementNamed(AboutYou.routeName, arguments: {});
+}
 
-  void validate(userNameController, passwordController, ctx) {
-    setState(() {
-      _submited = true;
-      errorUserNameText = usernameValidation(userNameController.text);
-      errorPasswordText = passwordValidation(passwordController.text);
-    });
+class _EmailSignupWState extends State<EmailSignupW> {
+  TextEditingController emailController = TextEditingController();
+  String? errorEmailText;
 
-    if ((errorUserNameText == null) && (errorPasswordText == null)) {
-      submit(userNameController, passwordController, ctx);
+  void validate(emailController, ctx) {
+    setState(() => errorEmailText = emailValidation(emailController.text));
+
+    if (errorEmailText == null) {
+      submit(emailController, ctx);
     } else {
-      print(userNameController.text + "---" + passwordController.text);
+      print(emailController.text + "---");
     }
-  }
-
-  void forgetPass(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(ForgetPassword.routeName, arguments: {});
-  }
-
-  void forgetusername(BuildContext ctx) {
-    Navigator.of(ctx)
-        .pushReplacementNamed(ForgetUserName.routeName, arguments: {});
-  }
-
-  void emailsignup(BuildContext ctx) {
-    Navigator.of(ctx)
-        .pushReplacementNamed(EmailSignup.routeName, arguments: {});
   }
 
   @override
   Widget build(BuildContext context) {
-    const fixedWidth = 1536;
     final userAgrementUrl =
         Uri.parse('https://www.redditinc.com/policies/user-agreement');
     final privacyUrl =
@@ -71,6 +52,7 @@ class _EmailLoginWState extends State<EmailLoginW> {
 
     final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
     final widthScreen = (mediaQuery.size.width);
+    const fixedWidth = 1536;
     final padding = EdgeInsets.symmetric(
       vertical: heightScreen * 0.09,
       horizontal: widthScreen * 0.03,
@@ -102,7 +84,7 @@ class _EmailLoginWState extends State<EmailLoginW> {
                     Padding(
                       padding: padding * 0.3,
                       child: const Text(
-                        'Log in',
+                        'Sign up',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
@@ -111,9 +93,12 @@ class _EmailLoginWState extends State<EmailLoginW> {
                         ),
                       ),
                     ),
-                    UserLoginAggreement(
-                        userAgrementUrl: userAgrementUrl,
-                        privacyUrl: privacyUrl),
+                    SizedBox(
+                      width: fixedWidth * 0.2,
+                      child: UserSignupWebAgreement(
+                          userAgrementUrl: userAgrementUrl,
+                          privacyUrl: privacyUrl),
+                    ),
                     SizedBox(
                       height: heightScreen * 0.1,
                     ),
@@ -141,20 +126,9 @@ class _EmailLoginWState extends State<EmailLoginW> {
                       width: fixedWidth * 0.2,
                       child: Padding(
                         padding: const EdgeInsets.all(4),
-                        child: UserNameText(
-                          userNameController: userNameController,
-                          errorUserNameText: errorUserNameText,
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      width: fixedWidth * 0.2,
-                      child: Padding(
-                        padding: const EdgeInsets.all(4),
-                        child: PasswordText(
-                          passwordController: passwordController,
-                          errorPasswordText: errorPasswordText,
-                        ),
+                        child: EmailText(
+                            emailController: emailController,
+                            errorEmailText: errorEmailText),
                       ),
                     ),
                     Padding(
@@ -162,11 +136,8 @@ class _EmailLoginWState extends State<EmailLoginW> {
                       child: SizedBox(
                         width: fixedWidth * 0.2,
                         child: ElevatedButton(
-                          onPressed: () => validate(
-                              userNameController, passwordController, context),
-                          child: (_submited)
-                              ? const Icon(Icons.check)
-                              : const Text('LOG IN'),
+                          onPressed: () => validate(emailController, context),
+                          child: const Text('CONTINUE'),
                         ),
                       ),
                     ),
@@ -176,31 +147,20 @@ class _EmailLoginWState extends State<EmailLoginW> {
                         width: fixedWidth * 0.2,
                         child: Row(
                           children: [
-                            const Text('Forget your'),
-                            TextButton(
-                              onPressed: () => forgetusername(context),
-                              child: const Text('username'),
+                            const Text(
+                              style: TextStyle(
+                                fontSize: 12,
+                              ),
+                              'Already a redditor?',
                             ),
-                            const Text('or'),
                             TextButton(
-                              onPressed: () => forgetPass(context),
-                              child: const Text('password'),
-                            ),
-                            const Text('?'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: SizedBox(
-                        width: fixedWidth * 0.2,
-                        child: Row(
-                          children: [
-                            const Text('New to Reddit?'),
-                            TextButton(
-                              onPressed: () => emailsignup(context),
-                              child: const Text('SIGN UP'),
+                              onPressed: () => emailLogin(context),
+                              child: const Text(
+                                'LOG IN',
+                                style: TextStyle(
+                                  fontSize: 12,
+                                ),
+                              ),
                             ),
                           ],
                         ),

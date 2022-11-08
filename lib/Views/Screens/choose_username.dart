@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reddit/Views/Screens/temphome.dart';
 import 'package:username_gen/username_gen.dart';
 
+import '../../Controllers/validations.dart';
 import '../Widgets/choice_button.dart';
 import '../Widgets/continue_username.dart';
 import '../Widgets/sign_up_bar.dart';
@@ -25,14 +26,14 @@ class _ChooseUserNameState extends State<ChooseUserName> {
 
   void submit1(userNameController, ctx) {
     print('sending data to back end');
-    
+
     Navigator.of(ctx)
         .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
   }
 
   void submit2(String username, ctx) {
     print('sending data to back end');
-    
+
     Navigator.of(ctx)
         .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
   }
@@ -58,12 +59,9 @@ class _ChooseUserNameState extends State<ChooseUserName> {
   void validate(userNameController, ctx) {
     setState(() => _submit = true);
     if (_submit) {
-      bool isValidUserName3 = true;
+      errorUserNameText = usernameValidation(userNameController.text);
 
-      errorUserNameText =
-          !(isValidUserName3) ? 'That username is already taken' : null;
-
-      if (isValidUserName3) {
+      if (errorUserNameText == null) {
         submit1(userNameController, ctx);
       } else {
         print("---" + userNameController.text + "---");

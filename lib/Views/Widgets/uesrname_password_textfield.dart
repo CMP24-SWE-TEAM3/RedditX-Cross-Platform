@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+import 'x_button.dart';
+
 class UserNameText extends StatefulWidget {
   const UserNameText({
     Key? key,
@@ -19,13 +21,30 @@ class _UserNameTextState extends State<UserNameText> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: (_) => setState(() {}),
       cursorColor: Colors.black,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          onPressed: widget.userNameController.clear,
-          icon: const Icon(Icons.clear),
-        ),
+        suffixIcon: (kIsWeb)
+            ? null
+            : Visibility(
+                visible: widget.userNameController.text.isNotEmpty,
+                child: IconButton(
+                  onPressed: () => setState(() {
+                    widget.userNameController.clear();
+                  }),
+                  icon: const Icon(
+                    XButtonIcon.cancelcircled2,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
         errorText: widget.errorUserNameText,
+        enabledBorder: (kIsWeb)
+            ? const OutlineInputBorder(
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey), //<-- SEE HERE
+              )
+            : null,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             width: 3,
@@ -34,10 +53,12 @@ class _UserNameTextState extends State<UserNameText> {
         ),
         labelText: 'Username',
         labelStyle: const TextStyle(
-          color: Colors.black,
+          color: (kIsWeb) ? Colors.grey : Colors.black,
         ),
         filled: true,
-        fillColor: const Color.fromARGB(31, 126, 114, 114),
+        fillColor: (kIsWeb)
+            ? const Color.fromARGB(255, 252, 252, 255)
+            : const Color.fromARGB(31, 126, 114, 114),
       ),
       controller: widget.userNameController,
       onSubmitted: (_) {},
@@ -63,13 +84,30 @@ class _EmailTextState extends State<EmailText> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      onChanged: (_) => setState(() {}),
       cursorColor: Colors.black,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          onPressed: widget.emailController.clear,
-          icon: const Icon(Icons.clear),
-        ),
+        suffixIcon: (kIsWeb)
+            ? null
+            : Visibility(
+                visible: widget.emailController.text.isNotEmpty,
+                child: IconButton(
+                  onPressed: () => setState(() {
+                    widget.emailController.clear();
+                  }),
+                  icon: const Icon(
+                    XButtonIcon.cancelcircled2,
+                    color: Colors.black54,
+                  ),
+                ),
+              ),
         errorText: widget.errorEmailText,
+        enabledBorder: (kIsWeb)
+            ? const OutlineInputBorder(
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey), //<-- SEE HERE
+              )
+            : null,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             width: 3,
@@ -78,10 +116,12 @@ class _EmailTextState extends State<EmailText> {
         ),
         labelText: 'Email',
         labelStyle: const TextStyle(
-          color: Colors.black,
+          color: (kIsWeb) ? Colors.grey : Colors.black,
         ),
         filled: true,
-        fillColor: const Color.fromARGB(31, 126, 114, 114),
+        fillColor: (kIsWeb)
+            ? const Color.fromARGB(255, 252, 252, 255)
+            : const Color.fromARGB(31, 126, 114, 114),
       ),
       controller: widget.emailController,
       keyboardType: TextInputType.emailAddress,
@@ -118,13 +158,27 @@ class _PasswordTextState extends State<PasswordText> {
     return TextField(
       cursorColor: Colors.black,
       decoration: InputDecoration(
-        suffixIcon: IconButton(
-          onPressed: _toggle,
-          icon: (_obscureText)
-              ? const Icon(Icons.visibility)
-              : const Icon(Icons.visibility_off),
-        ),
+        suffixIcon: (kIsWeb)
+            ? null
+            : IconButton(
+                onPressed: _toggle,
+                icon: (_obscureText)
+                    ? const Icon(
+                        Icons.visibility,
+                        color: Colors.black54,
+                      )
+                    : const Icon(
+                        Icons.visibility_off,
+                        color: Colors.black54,
+                      ),
+              ),
         errorText: widget.errorPasswordText,
+        enabledBorder: (kIsWeb)
+            ? const OutlineInputBorder(
+                borderSide:
+                    BorderSide(width: 1, color: Colors.grey), //<-- SEE HERE
+              )
+            : null,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             width: 3,
@@ -133,10 +187,12 @@ class _PasswordTextState extends State<PasswordText> {
         ),
         labelText: 'Password',
         labelStyle: const TextStyle(
-          color: Colors.black,
+          color: (kIsWeb) ? Colors.grey : Colors.black,
         ),
         filled: true,
-        fillColor: const Color.fromARGB(31, 126, 114, 114),
+        fillColor: (kIsWeb)
+            ? const Color.fromARGB(255, 252, 252, 255)
+            : const Color.fromARGB(31, 126, 114, 114),
       ),
       keyboardType: TextInputType.visiblePassword,
       obscureText: _obscureText,
