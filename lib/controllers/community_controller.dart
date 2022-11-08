@@ -3,7 +3,6 @@ import 'package:reddit/models/post_model.dart';
 import '../styles/custom_icons.dart';
 
 class CommunityProvider with ChangeNotifier {
-
   //used in Join/Leave button on hover
   String joinLeaveButtonText = "Joined";
 
@@ -16,11 +15,9 @@ class CommunityProvider with ChangeNotifier {
   bool isControversial = false;
 
   List<bool> isPostLiked = List.filled(postsList.length, false, growable: true);
-  List<bool> isPostDisliked = List.filled(postsList.length, false, growable: true);
-    List<bool> isPostSaved =
+  List<bool> isPostDisliked =
       List.filled(postsList.length, false, growable: true);
-
- 
+  List<bool> isPostSaved = List.filled(postsList.length, false, growable: true);
 
   List<IconData> bottomSheetNotificationsIconsFilled = [
     Icons.notifications_off,
@@ -39,10 +36,10 @@ class CommunityProvider with ChangeNotifier {
     Icons.notifications_active_outlined
   ];
 
-  IconData postSortByIcon = CustomIcons.hotjar;
+  IconData postSortByIcon = Icons.local_fire_department_rounded;
 
   List<IconData> bottomSheetPostSortIcons = [
-    CustomIcons.hotjar,
+    Icons.local_fire_department_rounded,
     CustomIcons.certificate_outline,
     CustomIcons.award,
   ];
@@ -62,9 +59,17 @@ class CommunityProvider with ChangeNotifier {
 
   List<bool> checkIconNotification = [false, true, false];
   List<bool> checkIconPostView = [true, false];
-  List<bool> checkIconPostSortBy = [true, false, false, false, false];
+  List<bool> checkIconPostSortBy = [true, false, false];
+  List<bool> sortPostsButtonsHover = [false, false, false];
 
-    void joinLeaveButtonOnHover() {
+
+
+  void sortPostsButtonsOnHover(bool value,int index) {
+    sortPostsButtonsHover[index] = value;
+    notifyListeners();
+  }
+
+  void joinLeaveButtonOnHover() {
     joinLeaveButtonText = "Leave";
     notifyListeners();
   }
@@ -171,7 +176,7 @@ class CommunityProvider with ChangeNotifier {
   }
 
   void changePostSortBy(String type, int index, BuildContext context) {
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 3; i++) {
       if (i == index) {
         checkIconPostSortBy[i] = true;
         postSortByIcon = bottomSheetPostSortIcons[i];
@@ -183,7 +188,6 @@ class CommunityProvider with ChangeNotifier {
 
     notifyListeners();
   }
-
 
   calculateAge(DateTime createdAt) {
     String shownDate = '';
@@ -231,22 +235,21 @@ class CommunityProvider with ChangeNotifier {
     }
     //format the shown period according to the values of days,months and years
     if (years != 0) {
-      shownDate =  '${years}y';
+      shownDate = '${years}y';
     } else if (months != 0) {
       shownDate = '${months}mo';
     } else if (days != 0) {
-      shownDate =  '${days}d';
+      shownDate = '${days}d';
     } else if (hours != 0) {
-      shownDate =  '${hours}h';
+      shownDate = '${hours}h';
     } else if (minutes != 0) {
-      shownDate =  '${minutes}m';
+      shownDate = '${minutes}m';
     } else if (seconds != 0) {
-      shownDate =  '${seconds}s';
+      shownDate = '${seconds}s';
     } else {
       shownDate = 'now';
     }
 
     return shownDate;
   }
-
 }

@@ -7,6 +7,8 @@ import 'package:reddit/models/post_model.dart';
 import 'package:reddit/views/widgets/web_app_bar.dart';
 import 'package:reddit/views/widgets/web_post_card.dart';
 
+import '../../styles/custom_icons.dart';
+
 class CommunityWebScreen extends StatelessWidget {
   final BoxConstraints constraints;
   final BuildContext context;
@@ -194,6 +196,9 @@ class CommunityWebScreen extends StatelessWidget {
                       height: 20,
                     ),
                     TabBar(
+                        onTap: (val) {
+                          value.changeTab(val);
+                        },
                         padding:
                             EdgeInsets.only(left: width / 4, right: width / 2),
                         labelPadding: const EdgeInsets.only(right: 0),
@@ -205,52 +210,372 @@ class CommunityWebScreen extends StatelessWidget {
                             text: "About",
                           )
                         ]),
-                    Expanded(
-                        child: SingleChildScrollView(
-                            child: Container(
-                      color: const Color.fromARGB(255, 227, 234, 237),
-                      child: Row(
-                        children: [
-                          if (constraints.minWidth >= 600)
-                            Container(
-                              color: Colors.red,
-                              width: width / 8,
-                            ),
-                          Column(
-                            children: [
-                              SizedBox(height: height / 10),
-                              SizedBox(
+                    if (value.tabIndex == 0)
+                      Expanded(
+                          child: SingleChildScrollView(
+                              child: Container(
+                        color: const Color.fromARGB(255, 227, 234, 237),
+                        child: Row(
+                          children: [
+                            if (constraints.minWidth >= 600)
+                              Container(
+                                color: const Color.fromARGB(255, 244, 242, 242),
+                                width: width / 8,
+                              ),
+                            Column(
+                              children: [
+                                SizedBox(height: height / 20),
+                                Container(
+                                  height: 50,
                                   width: (constraints.minWidth >= 1250)
                                       ? width / 2.5
                                       : 500,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.white,
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Colors.grey, spreadRadius: 1),
+                                    ],
+                                  ),
                                   child: Expanded(
-                                    child: ListView.separated(
-                                      shrinkWrap: true,
-                                      separatorBuilder: (context, index) =>
-                                          const Divider(),
-                                      itemCount: postsList.length,
-                                      itemBuilder:
-                                          (BuildContext context, int index) {
-                                        return Container(
-                                            color: Colors.white,
-                                            child: WebPostCard(
-                                              userName:
-                                                  postsList[index].username,
-                                              index: index,
-                                              dateTime:
-                                                  postsList[index].createdAt,
-                                              context: context,
-                                              postPlace: "community",
-                                              postType: postsList[index].type,
-                                            ));
-                                      },
+                                      child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 7, vertical: 5),
+                                    child: Row(
+                                      children: [
+                                        InkWell(
+                                            onHover: (val) {
+                                              value.sortPostsButtonsOnHover(
+                                                  val, 0);
+                                            },
+                                            onTap: () {
+                                              value.changePostSortBy(
+                                                  "hot", 0, context);
+                                            },
+                                            child: Container(
+                                              height: 30,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                color:
+                                                    (value.sortPostsButtonsHover[
+                                                            0])
+                                                        ? const Color.fromARGB(
+                                                            255, 210, 209, 209)
+                                                        : Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color:
+                                                          (value.sortPostsButtonsHover[
+                                                                  0])
+                                                              ? const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  210,
+                                                                  209,
+                                                                  209)
+                                                              : Colors.white,
+                                                      spreadRadius: 1),
+                                                ],
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    Icons
+                                                        .local_fire_department_rounded,
+                                                    color:
+                                                        (value.checkIconPostSortBy[
+                                                                0])
+                                                            ? Colors.blue
+                                                            : const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                108,
+                                                                108,
+                                                                108),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 3,
+                                                  ),
+                                                  Text(
+                                                    "Hot",
+                                                    style: TextStyle(
+                                                      color:
+                                                          (value.checkIconPostSortBy[
+                                                                  0])
+                                                              ? Colors.blue
+                                                              : const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  108,
+                                                                  108,
+                                                                  108),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )),
+                                        const SizedBox(
+                                          width: 7,
+                                        ),
+                                        InkWell(
+                                            onHover: (val) {
+                                              value.sortPostsButtonsOnHover(
+                                                  val, 1);
+                                            },
+                                            onTap: () {
+                                              value.changePostSortBy(
+                                                  "new", 1, context);
+                                            },
+                                            child: Container(
+                                              height: 30,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                color:
+                                                    (value.sortPostsButtonsHover[
+                                                            1])
+                                                        ? const Color.fromARGB(
+                                                            255, 210, 209, 209)
+                                                        : Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color:
+                                                          (value.sortPostsButtonsHover[
+                                                                  1])
+                                                              ? const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  210,
+                                                                  209,
+                                                                  209)
+                                                              : Colors.white,
+                                                      spreadRadius: 1),
+                                                ],
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    CustomIcons
+                                                        .certificate_outline,
+                                                    size: 20,
+                                                    color:
+                                                        (value.checkIconPostSortBy[
+                                                                1])
+                                                            ? Colors.blue
+                                                            : const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                108,
+                                                                108,
+                                                                108),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 3,
+                                                  ),
+                                                  Text(
+                                                    "New",
+                                                    style: TextStyle(
+                                                      color:
+                                                          (value.checkIconPostSortBy[
+                                                                  1])
+                                                              ? Colors.blue
+                                                              : const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  108,
+                                                                  108,
+                                                                  108),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )),
+                                        const SizedBox(
+                                          width: 7,
+                                        ),
+                                        InkWell(
+                                            onHover: (val) {
+                                              value.sortPostsButtonsOnHover(
+                                                  val, 2);
+                                            },
+                                            onTap: () {
+                                              value.changePostSortBy(
+                                                  "top", 2, context);
+                                            },
+                                            child: Container(
+                                              height: 30,
+                                              width: 60,
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                                color:
+                                                    (value.sortPostsButtonsHover[
+                                                            2])
+                                                        ? const Color.fromARGB(
+                                                            255, 210, 209, 209)
+                                                        : Colors.white,
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      color:
+                                                          (value.sortPostsButtonsHover[
+                                                                  2])
+                                                              ? const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  210,
+                                                                  209,
+                                                                  209)
+                                                              : Colors.white,
+                                                      spreadRadius: 1),
+                                                ],
+                                              ),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                children: [
+                                                  Icon(
+                                                    CustomIcons.award,
+                                                    size: 20,
+                                                    color:
+                                                        (value.checkIconPostSortBy[
+                                                                2])
+                                                            ? Colors.blue
+                                                            : const Color
+                                                                    .fromARGB(
+                                                                255,
+                                                                108,
+                                                                108,
+                                                                108),
+                                                  ),
+                                                  const SizedBox(
+                                                    width: 3,
+                                                  ),
+                                                  Text(
+                                                    "Top",
+                                                    style: TextStyle(
+                                                      color:
+                                                          (value.checkIconPostSortBy[
+                                                                  2])
+                                                              ? Colors.blue
+                                                              : const Color
+                                                                      .fromARGB(
+                                                                  255,
+                                                                  108,
+                                                                  108,
+                                                                  108),
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
+                                            )),
+                                        const Spacer(),
+                                        // PopupMenuButton(
+                                        //   child: CircleAvatar(
+                                        //     backgroundColor: Colors.blue,
+                                        //     radius: 20,
+                                        //     child: CircleAvatar(
+                                        //         backgroundColor: Colors.white,
+                                        //         radius: 19,
+                                        //         child: Icon(
+                                        //           value.notificationIcon,
+                                        //           size: 20,
+                                        //         )),
+                                        //   ),
+                                        //   itemBuilder: (_) =>
+                                        //       <PopupMenuItem<String>>[
+                                        //     PopupMenuItem<String>(
+                                        //         value: 'Off',
+                                        //         child: Row(
+                                        //           children: [
+                                        //             Icon(value
+                                        //                 .bottomSheetNotificationsIcons[0]),
+                                        //             const Text("Off")
+                                        //           ],
+                                        //         )),
+                                        //     PopupMenuItem<String>(
+                                        //         value: 'Low',
+                                        //         child: Row(
+                                        //           children: [
+                                        //             Icon(value
+                                        //                 .bottomSheetNotificationsIcons[1]),
+                                        //             const Text("Low")
+                                        //           ],
+                                        //         )),
+                                        //     PopupMenuItem<String>(
+                                        //         value: 'Frequent',
+                                        //         child: Row(
+                                        //           children: [
+                                        //             Icon(value
+                                        //                 .bottomSheetNotificationsIcons[2]),
+                                        //             const Text("Frequent")
+                                        //           ],
+                                        //         )),
+                                        //   ],
+                                        //   onSelected: (String val) {
+                                        //     (val == "Off")
+                                        //         ? value.changeNotificationsType(
+                                        //             val, 0)
+                                        //         : (val == "Low")
+                                        //             ? value
+                                        //                 .changeNotificationsType(
+                                        //                     val, 1)
+                                        //             : (val == "Frequent")
+                                        //                 ? value
+                                        //                     .changeNotificationsType(
+                                        //                         val, 2)
+                                        //                 : value
+                                        //                     .changeNotificationsType(
+                                        //                         val, 0);
+                                        //   },
+                                        // )
+                                      ],
                                     ),
-                                  ))
-                            ],
-                          )
-                        ],
-                      ),
-                    )))
+                                  )),
+                                ),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                SizedBox(
+                                    width: (constraints.minWidth >= 1250)
+                                        ? width / 2.5
+                                        : 500,
+                                    child: Expanded(
+                                      child: ListView.separated(
+                                        shrinkWrap: true,
+                                        separatorBuilder: (context, index) =>
+                                            const Divider(),
+                                        itemCount: postsList.length,
+                                        itemBuilder:
+                                            (BuildContext context, int index) {
+                                          return Container(
+                                              color: Colors.white,
+                                              child: WebPostCard(
+                                                userName:
+                                                    postsList[index].username,
+                                                index: index,
+                                                dateTime:
+                                                    postsList[index].createdAt,
+                                                context: context,
+                                                postPlace: "community",
+                                                postType: postsList[index].type,
+                                              ));
+                                        },
+                                      ),
+                                    ))
+                              ],
+                            )
+                          ],
+                        ),
+                      ))),
+                    if (value.tabIndex == 1) const Text("About"),
                   ],
                 );
               },

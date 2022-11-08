@@ -142,7 +142,7 @@ class WebAppBarTitle extends StatelessWidget {
                             const CircleAvatar(
                               radius: 15,
                               backgroundImage: NetworkImage(
-                                  "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
+                                 "https://i.pinimg.com/564x/cd/c8/11/cdc8110b6e2f746ab4c615b69d07dbfe.jpg"),
                             ),
                             DefaultDropDownButtonWidget(
                                 icon: Icons.arrow_drop_down,
