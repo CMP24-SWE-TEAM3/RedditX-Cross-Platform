@@ -1,10 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/styles/colors.dart';
 
+/// Shows the item of share bottom sheet
 class ShareBottomSheetItem extends StatelessWidget {
+  /// Color of circle avatar of item
   final Color circleAvatarColor;
+
+  /// Icon of item
   final IconData icon;
+
+  /// Text of icon
   final String text;
 
+  /// Share bottom sheet item constructor
   const ShareBottomSheetItem({
     super.key,
     required this.circleAvatarColor,
@@ -26,10 +34,11 @@ class ShareBottomSheetItem extends StatelessWidget {
                       text == "Messenger" ||
                       text == "Share Via..." ||
                       text == "Save" ||
+                      text == "Unsave" ||
                       text == "Community" ||
                       text == "Copy link")
                   ? Colors.black
-                  : Colors.white,
+                  : whiteColor,
               size: 35,
             ),
           ),

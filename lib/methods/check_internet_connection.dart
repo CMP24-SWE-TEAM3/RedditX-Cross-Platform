@@ -1,5 +1,7 @@
 import 'dart:io';
 
+/// Checking whether the device connected to wifi or not
+
 checkInternet(bool internetConnection) async {
   try {
     var result = await InternetAddress.lookup("google.com");

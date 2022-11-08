@@ -4,18 +4,33 @@ import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/models/post_model.dart';
+import 'package:reddit/styles/colors.dart';
 import 'package:reddit/views/widgets/web_post_bottom.dart';
 import '../../styles/custom_icons.dart';
-import 'post_top_widget.dart';
 
+/// Shows the  card post view
 class WebPostCard extends StatelessWidget {
-  final String postType;
-  final BuildContext context;
+  /// To determine the view of the top part of the post
+  /// As it has different views in home, community and profile
   final String postPlace;
-  final int index;
-  final String userName;
+
+  /// To indicate post type: text, image or link
+  final String postType;
+
+  /// To show bottom sheets & pop up menus
+  final BuildContext context;
+
+  /// Shows when the post was posted
   final DateTime dateTime;
 
+  /// Shows the user name who posted
+  final String userName;
+
+  /// Index of the post
+  final int index;
+
+
+  /// Web post card constructor
   const WebPostCard(
       {super.key,
       required this.postType,
@@ -56,7 +71,7 @@ class WebPostCard extends StatelessWidget {
                               icon: (value.isPostDisliked[index])
                                   ? const Icon(
                                       CustomIcons.down_bold,
-                                      color: Colors.blue,
+                                      color: blueColor,
                                     )
                                   : const Icon(CustomIcons.down_outline)),
                         ],
@@ -135,7 +150,7 @@ class WebPostCard extends StatelessWidget {
                   const SizedBox(
                     height: 7,
                   ),
-                  WebPostBottomWidget(index: index),
+                  BottomPostWeb(index: index),
                   const SizedBox(
                     height: 7,
                   ),

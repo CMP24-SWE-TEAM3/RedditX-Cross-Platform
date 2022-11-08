@@ -3,12 +3,18 @@ import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/models/post_model.dart';
+import 'package:reddit/styles/colors.dart';
 import '../../methods/share_bottom_sheet.dart';
 import '../../styles/custom_icons.dart';
 
-class PostBottomWidget extends StatelessWidget {
+///  Shows the bottom part of mobile post
+class BottomPostMobile extends StatelessWidget {
+
+  /// Index of post
   final int index;
-  const PostBottomWidget({required this.index, super.key});
+
+  /// Constructor of mobile bottom post widget
+  const BottomPostMobile({required this.index, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +42,7 @@ class PostBottomWidget extends StatelessWidget {
                 icon: (value.isPostDisliked[index])
                     ? const Icon(
                         CustomIcons.down_bold,
-                        color: Colors.blue,
+                        color: blueColor,
                       )
                     : const Icon(CustomIcons.down_outline)),
           ),

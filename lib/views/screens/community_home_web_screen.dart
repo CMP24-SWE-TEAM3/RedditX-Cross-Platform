@@ -6,12 +6,18 @@ import 'package:reddit/models/community_model.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/views/widgets/web_app_bar.dart';
 import 'package:reddit/views/widgets/web_post_card.dart';
-
+import '../../styles/colors.dart';
 import '../../styles/custom_icons.dart';
 
+/// Community web screen
 class CommunityWebScreen extends StatelessWidget {
+  /// Constrains to handle respositivity
   final BoxConstraints constraints;
+
+  /// Context used in [defaultBottomSheet] and others
   final BuildContext context;
+
+  /// Community web screen constructor
   const CommunityWebScreen(
       {super.key, required this.context, required this.constraints});
   @override
@@ -25,7 +31,7 @@ class CommunityWebScreen extends StatelessWidget {
                 titleSpacing: 0,
                 // centerTitle: false,
                 automaticallyImplyLeading: false,
-                backgroundColor: Colors.white,
+                backgroundColor: whiteColor,
                 title:
                     WebAppBarTitle(constraints: constraints, context: context)),
             body: Consumer<CommunityProvider>(
@@ -81,7 +87,7 @@ class CommunityWebScreen extends StatelessWidget {
                                 builder: (context, value, child) => Container(
                                     height: 40,
                                     decoration: BoxDecoration(
-                                        border: Border.all(color: Colors.blue),
+                                        border: Border.all(color: blueColor),
                                         color: Colors.white,
                                         borderRadius:
                                             BorderRadius.circular(20)),
@@ -109,7 +115,7 @@ class CommunityWebScreen extends StatelessWidget {
                                                 child: Text(
                                                   "   ${value.joinLeaveButtonText}  ",
                                                   style: const TextStyle(
-                                                      color: Colors.blue),
+                                                      color: blueColor),
                                                 ),
                                               ))),
                                     )),
@@ -117,7 +123,7 @@ class CommunityWebScreen extends StatelessWidget {
                             : Container(
                                 height: 40,
                                 decoration: BoxDecoration(
-                                    color: Colors.blue,
+                                    color: blueColor,
                                     borderRadius: BorderRadius.circular(20)),
                                 child: InkWell(
                                     borderRadius: BorderRadius.circular(20),
@@ -131,7 +137,7 @@ class CommunityWebScreen extends StatelessWidget {
                                           child: Text(
                                             "     Join     ",
                                             style: TextStyle(
-                                                color: Colors.white,
+                                                color: whiteColor,
                                                 fontWeight: FontWeight.bold),
                                           ),
                                         ))),
@@ -141,10 +147,10 @@ class CommunityWebScreen extends StatelessWidget {
                         ),
                         PopupMenuButton(
                           child: CircleAvatar(
-                            backgroundColor: Colors.blue,
+                            backgroundColor: blueColor,
                             radius: 20,
                             child: CircleAvatar(
-                                backgroundColor: Colors.white,
+                                backgroundColor: whiteColor,
                                 radius: 19,
                                 child: Icon(
                                   value.notificationIcon,
@@ -214,12 +220,12 @@ class CommunityWebScreen extends StatelessWidget {
                       Expanded(
                           child: SingleChildScrollView(
                               child: Container(
-                        color: const Color.fromARGB(255, 227, 234, 237),
+                        color: webBackGroundColor,
                         child: Row(
                           children: [
                             if (constraints.minWidth >= 600)
                               Container(
-                                color: const Color.fromARGB(255, 244, 242, 242),
+                                color: webBackGroundColor,
                                 width: width / 8,
                               ),
                             Column(
@@ -232,7 +238,7 @@ class CommunityWebScreen extends StatelessWidget {
                                       : 500,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
-                                    color: Colors.white,
+                                    color: whiteColor,
                                     boxShadow: const [
                                       BoxShadow(
                                           color: Colors.grey, spreadRadius: 1),
@@ -259,24 +265,16 @@ class CommunityWebScreen extends StatelessWidget {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(15),
-                                                color:
-                                                    (value.sortPostsButtonsHover[
-                                                            0])
-                                                        ? const Color.fromARGB(
-                                                            255, 210, 209, 209)
-                                                        : Colors.white,
+                                                color: (value
+                                                        .sortPostsButtonsHover[0])
+                                                    ? webPostsSortTextColorOnHover
+                                                    : whiteColor,
                                                 boxShadow: [
                                                   BoxShadow(
-                                                      color:
-                                                          (value.sortPostsButtonsHover[
-                                                                  0])
-                                                              ? const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  210,
-                                                                  209,
-                                                                  209)
-                                                              : Colors.white,
+                                                      color: (value
+                                                              .sortPostsButtonsHover[0])
+                                                          ? webPostsSortTextColorOnHover
+                                                          : whiteColor,
                                                       spreadRadius: 1),
                                                 ],
                                               ),
@@ -285,36 +283,22 @@ class CommunityWebScreen extends StatelessWidget {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Icon(
-                                                    Icons
-                                                        .local_fire_department_rounded,
-                                                    color:
-                                                        (value.checkIconPostSortBy[
-                                                                0])
-                                                            ? Colors.blue
-                                                            : const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                108,
-                                                                108,
-                                                                108),
-                                                  ),
+                                                      Icons
+                                                          .local_fire_department_rounded,
+                                                      color: (value
+                                                              .checkIconPostSortBy[0])
+                                                          ? webPostsSortTextColorBlue
+                                                          : webPostsSortTextColorGrey),
                                                   const SizedBox(
                                                     width: 3,
                                                   ),
                                                   Text(
                                                     "Hot",
                                                     style: TextStyle(
-                                                      color:
-                                                          (value.checkIconPostSortBy[
-                                                                  0])
-                                                              ? Colors.blue
-                                                              : const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  108,
-                                                                  108,
-                                                                  108),
-                                                    ),
+                                                        color: (value
+                                                                .checkIconPostSortBy[0])
+                                                            ? webPostsSortTextColorBlue
+                                                            : webPostsSortTextColorGrey),
                                                   )
                                                 ],
                                               ),
@@ -337,24 +321,16 @@ class CommunityWebScreen extends StatelessWidget {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(15),
-                                                color:
-                                                    (value.sortPostsButtonsHover[
-                                                            1])
-                                                        ? const Color.fromARGB(
-                                                            255, 210, 209, 209)
-                                                        : Colors.white,
+                                                color: (value
+                                                        .sortPostsButtonsHover[1])
+                                                    ? webPostsSortTextColorOnHover
+                                                    : whiteColor,
                                                 boxShadow: [
                                                   BoxShadow(
-                                                      color:
-                                                          (value.sortPostsButtonsHover[
-                                                                  1])
-                                                              ? const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  210,
-                                                                  209,
-                                                                  209)
-                                                              : Colors.white,
+                                                      color: (value
+                                                              .sortPostsButtonsHover[1])
+                                                          ? webPostsSortTextColorOnHover
+                                                          : whiteColor,
                                                       spreadRadius: 1),
                                                 ],
                                               ),
@@ -363,37 +339,23 @@ class CommunityWebScreen extends StatelessWidget {
                                                     MainAxisAlignment.center,
                                                 children: [
                                                   Icon(
-                                                    CustomIcons
-                                                        .certificate_outline,
-                                                    size: 20,
-                                                    color:
-                                                        (value.checkIconPostSortBy[
-                                                                1])
-                                                            ? Colors.blue
-                                                            : const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                108,
-                                                                108,
-                                                                108),
-                                                  ),
+                                                      CustomIcons
+                                                          .certificate_outline,
+                                                      size: 20,
+                                                      color: (value
+                                                              .checkIconPostSortBy[1])
+                                                          ? webPostsSortTextColorBlue
+                                                          : webPostsSortTextColorGrey),
                                                   const SizedBox(
                                                     width: 3,
                                                   ),
                                                   Text(
                                                     "New",
                                                     style: TextStyle(
-                                                      color:
-                                                          (value.checkIconPostSortBy[
-                                                                  1])
-                                                              ? Colors.blue
-                                                              : const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  108,
-                                                                  108,
-                                                                  108),
-                                                    ),
+                                                        color: (value
+                                                                .checkIconPostSortBy[1])
+                                                            ? webPostsSortTextColorBlue
+                                                            : webPostsSortTextColorGrey),
                                                   )
                                                 ],
                                               ),
@@ -416,24 +378,16 @@ class CommunityWebScreen extends StatelessWidget {
                                               decoration: BoxDecoration(
                                                 borderRadius:
                                                     BorderRadius.circular(15),
-                                                color:
-                                                    (value.sortPostsButtonsHover[
-                                                            2])
-                                                        ? const Color.fromARGB(
-                                                            255, 210, 209, 209)
-                                                        : Colors.white,
+                                                color: (value
+                                                        .sortPostsButtonsHover[2])
+                                                    ? webPostsSortTextColorOnHover
+                                                    : whiteColor,
                                                 boxShadow: [
                                                   BoxShadow(
-                                                      color:
-                                                          (value.sortPostsButtonsHover[
-                                                                  2])
-                                                              ? const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  210,
-                                                                  209,
-                                                                  209)
-                                                              : Colors.white,
+                                                      color: (value
+                                                              .sortPostsButtonsHover[2])
+                                                          ? webPostsSortTextColorOnHover
+                                                          : whiteColor,
                                                       spreadRadius: 1),
                                                 ],
                                               ),
@@ -441,101 +395,28 @@ class CommunityWebScreen extends StatelessWidget {
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
                                                 children: [
-                                                  Icon(
-                                                    CustomIcons.award,
-                                                    size: 20,
-                                                    color:
-                                                        (value.checkIconPostSortBy[
-                                                                2])
-                                                            ? Colors.blue
-                                                            : const Color
-                                                                    .fromARGB(
-                                                                255,
-                                                                108,
-                                                                108,
-                                                                108),
-                                                  ),
+                                                  Icon(CustomIcons.award,
+                                                      size: 20,
+                                                      color: (value
+                                                              .checkIconPostSortBy[2])
+                                                          ? webPostsSortTextColorBlue
+                                                          : webPostsSortTextColorGrey),
                                                   const SizedBox(
                                                     width: 3,
                                                   ),
                                                   Text(
                                                     "Top",
                                                     style: TextStyle(
-                                                      color:
-                                                          (value.checkIconPostSortBy[
-                                                                  2])
-                                                              ? Colors.blue
-                                                              : const Color
-                                                                      .fromARGB(
-                                                                  255,
-                                                                  108,
-                                                                  108,
-                                                                  108),
+                                                      color: (value
+                                                              .checkIconPostSortBy[2])
+                                                          ? webPostsSortTextColorBlue
+                                                          : webPostsSortTextColorGrey,
                                                     ),
                                                   )
                                                 ],
                                               ),
                                             )),
                                         const Spacer(),
-                                        // PopupMenuButton(
-                                        //   child: CircleAvatar(
-                                        //     backgroundColor: Colors.blue,
-                                        //     radius: 20,
-                                        //     child: CircleAvatar(
-                                        //         backgroundColor: Colors.white,
-                                        //         radius: 19,
-                                        //         child: Icon(
-                                        //           value.notificationIcon,
-                                        //           size: 20,
-                                        //         )),
-                                        //   ),
-                                        //   itemBuilder: (_) =>
-                                        //       <PopupMenuItem<String>>[
-                                        //     PopupMenuItem<String>(
-                                        //         value: 'Off',
-                                        //         child: Row(
-                                        //           children: [
-                                        //             Icon(value
-                                        //                 .bottomSheetNotificationsIcons[0]),
-                                        //             const Text("Off")
-                                        //           ],
-                                        //         )),
-                                        //     PopupMenuItem<String>(
-                                        //         value: 'Low',
-                                        //         child: Row(
-                                        //           children: [
-                                        //             Icon(value
-                                        //                 .bottomSheetNotificationsIcons[1]),
-                                        //             const Text("Low")
-                                        //           ],
-                                        //         )),
-                                        //     PopupMenuItem<String>(
-                                        //         value: 'Frequent',
-                                        //         child: Row(
-                                        //           children: [
-                                        //             Icon(value
-                                        //                 .bottomSheetNotificationsIcons[2]),
-                                        //             const Text("Frequent")
-                                        //           ],
-                                        //         )),
-                                        //   ],
-                                        //   onSelected: (String val) {
-                                        //     (val == "Off")
-                                        //         ? value.changeNotificationsType(
-                                        //             val, 0)
-                                        //         : (val == "Low")
-                                        //             ? value
-                                        //                 .changeNotificationsType(
-                                        //                     val, 1)
-                                        //             : (val == "Frequent")
-                                        //                 ? value
-                                        //                     .changeNotificationsType(
-                                        //                         val, 2)
-                                        //                 : value
-                                        //                     .changeNotificationsType(
-                                        //                         val, 0);
-                                        //   },
-                                        // )
                                       ],
                                     ),
                                   )),
@@ -556,7 +437,7 @@ class CommunityWebScreen extends StatelessWidget {
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Container(
-                                              color: Colors.white,
+                                              color: whiteColor,
                                               child: WebPostCard(
                                                 userName:
                                                     postsList[index].username,

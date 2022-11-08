@@ -5,8 +5,13 @@ import 'package:reddit/methods/show_toast.dart';
 
 import '../../styles/custom_icons.dart';
 
+/// Pop up menu 
 class PopUpMenu extends StatelessWidget {
+
+  /// Index of post
   final int index;
+
+  /// Pop up menu constructor
   const PopUpMenu({required this.index,super.key});
 
   @override

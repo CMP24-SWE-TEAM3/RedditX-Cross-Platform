@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/methods/show_toast.dart';
+import 'package:reddit/models/community_model.dart';
 
 import '../controllers/community_controller.dart';
+
+/// Show dialog when Asking to leave a community
 
 Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
   return showDialog<void>(
     context: context,
-    //barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
         content: Column(
@@ -53,6 +56,8 @@ Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
                           borderRadius: BorderRadius.circular(15),
                           onTap: () {
                             value.unJoinCommunity();
+                            showToast(
+                                "You have left the r/${communityModel1.name} community");
                             Navigator.pop(context);
                           },
                           child: const Padding(

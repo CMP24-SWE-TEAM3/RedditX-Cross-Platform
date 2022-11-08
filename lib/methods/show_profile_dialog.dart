@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/models/user_model.dart';
 
+/// Show Profile Dialog when a user name text button pressed
+
 Future<void> showeProfileDialog(BuildContext context, int index) async {
   showDialog<void>(
     context: context,
-    //barrierDismissible: false, // user must tap button!
     builder: (BuildContext context) {
       return AlertDialog(
         content: Column(
@@ -150,7 +151,7 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
                         width: 10,
                       ),
                       Text(
-                        "View profile",
+                        "Invite to community",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                     ],

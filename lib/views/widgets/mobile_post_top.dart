@@ -6,15 +6,31 @@ import 'package:reddit/views/widgets/pop_up_menu_button.dart';
 import '../../controllers/community_controller.dart';
 import '../../models/post_model.dart';
 
-class PostTopWidget extends StatelessWidget {
+/// Shows the top part of the communnity post
+class TopMobilePost extends StatelessWidget {
+
+   /// To determine the view of the top part of the post
+  /// As it has different views in home, community and profile
   final String postPlace;
+
+  /// To indicate post type: text, image or link
   final String postType;
+
+  /// To show bottom sheets & pop up menus
   final BuildContext context;
+
+  /// Shows when the post was posted
   final DateTime dateTime;
+
+  /// Shows the user name who posted
   final String userName;
+
+  /// Index of the post
   final int index;
 
-  const PostTopWidget(
+
+  /// Constructor of mobile top post widget
+  const TopMobilePost(
       {required this.postPlace,
       required this.postType,
       required this.context,
@@ -62,7 +78,7 @@ class PostTopWidget extends StatelessWidget {
                     ),
                   ),
                   Consumer<CommunityProvider>(
-                    builder: (context, value, ind) => Text(
+                    builder: (context, value, child) => Text(
                       "${value.calculateAge(postsList[index].createdAt)}",
                       style: TextStyle(color: Colors.grey[600]),
                     ),
@@ -101,7 +117,7 @@ class PostTopWidget extends StatelessWidget {
             color: Colors.blue,
           ),
           Consumer<CommunityProvider>(
-            builder: (context, value, ind) => Text(
+            builder: (context, value, child) => Text(
               "    ${value.calculateAge(postsList[index].createdAt)}",
               style: TextStyle(color: Colors.grey[600]),
             ),
@@ -136,7 +152,7 @@ class PostTopWidget extends StatelessWidget {
                 child: const Text("r/AskAnySoftware"),
               ),
               Consumer<CommunityProvider>(
-                builder: (context, value, ind) => Text(
+                builder: (context, value, child) => Text(
                   "${value.calculateAge(postsList[index].createdAt)}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),

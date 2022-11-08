@@ -1,16 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:reddit/models/post_model.dart';
-import 'package:reddit/views/widgets/post_bottom_widget.dart';
-import 'post_top_widget.dart';
+import 'package:reddit/views/widgets/mobile_post_bottom.dart';
+import 'mobile_post_top.dart';
 
-class PostClassicWidget extends StatelessWidget {
+/// Shows the card post view
+class MobilePostClassic extends StatelessWidget {
+    /// To indicate post type: text, image or link
   final String postType;
-  final BuildContext context;
-  final String postPlace;
-  final int index;
 
-  const PostClassicWidget(
+  /// To show bottom sheets & pop up menus
+  final BuildContext context;
+
+  /// To determine the view of the top part of the post
+  /// As it has different views in home, community and profile
+  final String postPlace;
+
+  /// Index of the post
+  final int index;
+ 
+  /// Mobile classic post constructor
+  const MobilePostClassic(
       {super.key,
       required this.postType,
       required this.context,
@@ -30,7 +40,7 @@ class PostClassicWidget extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(horizontal: 5),
                     child: Column(
                       children: [
-                        PostTopWidget(
+                        TopMobilePost(
                           postPlace: postPlace,
                           postType: postType,
                           context: context,
@@ -66,38 +76,6 @@ class PostClassicWidget extends StatelessWidget {
                               image: NetworkImage(
                                   postsList[index].attachments[0]))),
                     ),
-                  // if (postType == "text")
-                  //   Row(
-                  //     children: [
-                  //       Wrap(
-                  //         runSpacing: 5,
-                  //         crossAxisAlignment: WrapCrossAlignment.start,
-                  //         children: [
-                  //           Padding(
-                  //             padding: const EdgeInsetsDirectional.only(end: 8),
-                  //             child: Container(
-                  //               height: 20,
-                  //               decoration: BoxDecoration(
-                  //                 borderRadius: BorderRadius.circular(10),
-                  //                 color: Colors.blue,
-                  //               ),
-                  //               child: MaterialButton(
-                  //                 onPressed: () {},
-                  //                 height: 25,
-                  //                 minWidth: 1,
-                  //                 padding: EdgeInsets.zero,
-                  //                 child: Text(postsList[index].communityName,
-                  //                     style: Theme.of(context)
-                  //                         .textTheme
-                  //                         .bodyMedium!
-                  //                         .copyWith(color: Colors.white)),
-                  //               ),
-                  //             ),
-                  //           ),
-                  //         ],
-                  //       ),
-                  //     ],
-                  //   ),
                   if (postType == 'link')
                     Row(
                       children: [
@@ -132,7 +110,9 @@ class PostClassicWidget extends StatelessWidget {
                         ))
                       ],
                     ),
-                  PostBottomWidget(index: index,),
+                  BottomPostMobile(
+                    index: index,
+                  ),
                   Container(
                     height: 10,
                     width: double.infinity,

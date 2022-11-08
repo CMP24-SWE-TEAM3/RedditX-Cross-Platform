@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
+/// Divider
 class Divider extends StatelessWidget {
+  /// Divider constructor
   const Divider({super.key});
 
   @override

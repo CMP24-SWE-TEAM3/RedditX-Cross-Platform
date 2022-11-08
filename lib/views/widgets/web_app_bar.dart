@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/styles/colors.dart';
 
 import '../../controllers/community_controller.dart';
 import '../../styles/custom_icons.dart';
@@ -7,10 +8,17 @@ import 'dart:math' as math;
 
 import 'default_drop_down_button_widget.dart';
 
+
+/// Shows the web app bar title
 class WebAppBarTitle extends StatelessWidget {
+  
+  /// Constrains to handle respositivity
   final BoxConstraints constraints;
+
+  /// BuildContext to show pop up menus
   final BuildContext context;
 
+  /// Web app bar title constructor
   const WebAppBarTitle(
       {super.key, required this.constraints, required this.context});
   @override
@@ -124,12 +132,12 @@ class WebAppBarTitle extends StatelessWidget {
                 ),
                 if (constraints.minWidth >= 600)
                   InkWell(
-                      focusColor: Colors.white,
-                      hoverColor: Colors.white,
+                      focusColor: whiteColor,
+                      hoverColor: whiteColor,
                       onTap: () {},
                       child: Container(
                         decoration: BoxDecoration(
-                            color: Colors.white,
+                            color: whiteColor,
                             border: Border.all(
                                 color:
                                     const Color.fromARGB(255, 195, 195, 195)),
@@ -144,7 +152,7 @@ class WebAppBarTitle extends StatelessWidget {
                               backgroundImage: NetworkImage(
                                  "https://i.pinimg.com/564x/cd/c8/11/cdc8110b6e2f746ab4c615b69d07dbfe.jpg"),
                             ),
-                            DefaultDropDownButtonWidget(
+                            DefaultDropDownButton(
                                 icon: Icons.arrow_drop_down,
                                 optionsCount: 2,
                                 listValues: const ["1", "2"],

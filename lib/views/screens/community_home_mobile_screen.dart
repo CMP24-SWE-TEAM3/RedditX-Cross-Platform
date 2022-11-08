@@ -1,18 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
+import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/styles/custom_icons.dart';
-import 'package:reddit/views/widgets/post_classic_widget.dart';
-import 'package:reddit/views/widgets/post_card_widget.dart';
+import 'package:reddit/views/widgets/mobile_post_classic.dart';
+import 'package:reddit/views/widgets/mobile_post_card.dart';
 import '../../methods/default_bottom_sheet.dart';
 import '../../methods/show_leave_community_dialog.dart';
 import '../../models/community_model.dart';
+import '../../styles/colors.dart';
 
+/// Community mobile screen
 class CommunityMobileScreen extends StatelessWidget {
+  /// Constrains to handle respositivity
   final BoxConstraints constraints;
+
+  /// Context used in [defaultBottomSheet] and others
   final BuildContext context;
 
+  /// Community mobile screen constructor
   const CommunityMobileScreen({
     super.key,
     required this.context,
@@ -98,13 +106,13 @@ class CommunityMobileScreen extends StatelessWidget {
                       itemCount: postsList.length,
                       itemBuilder: (BuildContext context, int index) {
                         return (value.postView == "classic")
-                            ? PostClassicWidget(
+                            ? MobilePostClassic(
                                 postType: postsList[index].type,
                                 context: context,
                                 postPlace: "community",
                                 index: index,
                               )
-                            : PostCardWidget(
+                            : MobilePostCard(
                                 postType: postsList[index].type,
                                 index: index,
                               );
@@ -169,7 +177,7 @@ class CommunityMobileScreen extends StatelessWidget {
                             children: [
                               const Icon(
                                 Icons.search,
-                                color: Colors.white,
+                                color: whiteColor,
                               ),
                               const SizedBox(
                                 width: 5,
@@ -177,7 +185,7 @@ class CommunityMobileScreen extends StatelessWidget {
                               Text(
                                 "r/${communityModel1.name}",
                                 style: const TextStyle(
-                                    fontSize: 15, color: Colors.white),
+                                    fontSize: 15, color: whiteColor),
                               )
                             ],
                           ),
@@ -300,19 +308,16 @@ class CommunityMobileScreen extends StatelessWidget {
                                 width: double.infinity,
                                 child: Image(
                                     fit: BoxFit.cover,
-                                    image: NetworkImage(communityModel1.banner
-                                        //"https://img.freepik.com/free-vector/hand-drawn-floral-wallpaper_52683-67169.jpg?w=1060&t=st=1666378342~exp=1666378942~hmac=17e16de142749acc0d7770d08abefff1c63cad6e6c3ce4320085d7c0ec1a17ad"
-                                        )),
+                                    image:
+                                        NetworkImage(communityModel1.banner)),
                               ),
                               Positioned(
                                 left: 20,
                                 bottom: -20,
                                 child: CircleAvatar(
                                   radius: 35,
-                                  backgroundImage: NetworkImage(
-                                      communityModel1.icon
-                                      //"https://img.freepik.com/premium-photo/background-texture-red-blossom-roses-red-rose-is-meaning-love-romantic_10585-89.jpg?w=1060"
-                                      ),
+                                  backgroundImage:
+                                      NetworkImage(communityModel1.icon),
                                 ),
                               ),
                             ],
@@ -339,12 +344,11 @@ class CommunityMobileScreen extends StatelessWidget {
                                             ? Row(
                                                 children: [
                                                   CircleAvatar(
-                                                    backgroundColor:
-                                                        Colors.blue,
+                                                    backgroundColor: blueColor,
                                                     radius: 16,
                                                     child: CircleAvatar(
                                                         backgroundColor:
-                                                            Colors.white,
+                                                            whiteColor,
                                                         radius: 15,
                                                         child: InkWell(
                                                           onTap: () {
@@ -375,8 +379,8 @@ class CommunityMobileScreen extends StatelessWidget {
                                                     height: 30,
                                                     decoration: BoxDecoration(
                                                         border: Border.all(
-                                                            color: Colors.blue),
-                                                        color: Colors.white,
+                                                            color: blueColor),
+                                                        color: whiteColor,
                                                         borderRadius:
                                                             BorderRadius
                                                                 .circular(15)),
@@ -395,8 +399,8 @@ class CommunityMobileScreen extends StatelessWidget {
                                                           child: Text(
                                                             "Joined",
                                                             style: TextStyle(
-                                                                color: Colors
-                                                                    .blue),
+                                                                color:
+                                                                    blueColor),
                                                           ),
                                                         )),
                                                   )
@@ -405,7 +409,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                             : Container(
                                                 height: 25,
                                                 decoration: BoxDecoration(
-                                                    color: Colors.blue,
+                                                    color: blueColor,
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             15)),
@@ -415,6 +419,8 @@ class CommunityMobileScreen extends StatelessWidget {
                                                             15),
                                                     onTap: () {
                                                       value.joinCommunity();
+                                                      showToast(
+                                                          "You have joined the r/${communityModel1.name} community");
                                                     },
                                                     child: const Padding(
                                                       padding:
@@ -422,7 +428,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                                       child: Text(
                                                         "   Join   ",
                                                         style: TextStyle(
-                                                            color: Colors.white,
+                                                            color: whiteColor,
                                                             fontWeight:
                                                                 FontWeight
                                                                     .bold),
@@ -435,10 +441,9 @@ class CommunityMobileScreen extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "${communityModel1.membersCount} members",
+                                          "${Numeral(communityModel1.membersCount).format(fractionDigits: 1)} members",
                                           style: const TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 75, 75, 75)),
+                                              color: communityInfoGrey),
                                         ),
                                         const SizedBox(
                                           width: 5,
@@ -446,8 +451,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                         const Text(
                                           "1,374 online",
                                           style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 75, 75, 75)),
+                                              color: communityInfoGrey),
                                         ),
                                       ],
                                     ),
@@ -477,15 +481,6 @@ class CommunityMobileScreen extends StatelessWidget {
                     ),
                   )),
             ),
-
-            // SliverPadding(
-            //   padding: const EdgeInsets.all(16),
-            //   sliver: SliverList(
-            //     delegate: SliverChildListDelegate(
-            //       [],
-            //     ),
-            //   ),
-            // ),
           ];
         },
       ),

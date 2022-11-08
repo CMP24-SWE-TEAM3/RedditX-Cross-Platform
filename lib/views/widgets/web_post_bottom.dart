@@ -6,9 +6,15 @@ import '../../methods/show_toast.dart';
 import '../../models/post_model.dart';
 import '../../styles/custom_icons.dart';
 
-class WebPostBottomWidget extends StatelessWidget {
+
+/// Shows the bottom part of web post
+class BottomPostWeb extends StatelessWidget {
+
+  /// Index of the post
   final int index;
-  const WebPostBottomWidget({required this.index, super.key});
+
+  ///Constructor of web bottom post 
+  const BottomPostWeb({required this.index, super.key});
 
   @override
   Widget build(BuildContext context) {

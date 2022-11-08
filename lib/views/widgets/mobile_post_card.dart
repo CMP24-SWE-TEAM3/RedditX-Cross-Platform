@@ -4,15 +4,23 @@ import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/methods/show_profile_dialog.dart';
+import 'package:reddit/styles/colors.dart';
 import 'package:reddit/views/widgets/pop_up_menu_button.dart';
-import 'package:reddit/views/widgets/post_bottom_widget.dart';
+import 'package:reddit/views/widgets/mobile_post_bottom.dart';
 
 import '../../models/post_model.dart';
 
-class PostCardWidget extends StatelessWidget {
+/// Shows the card post view
+class MobilePostCard extends StatelessWidget {
+
+  /// To indicate post type: text, image or link
   final String postType;
+
+  /// Index of the post
   final int index;
-  const PostCardWidget(
+
+  /// Post card constructor
+  const MobilePostCard(
       {required this.index, required this.postType, super.key});
 
   @override
@@ -36,15 +44,15 @@ class PostCardWidget extends StatelessWidget {
                         },
                         child: Text(
                           "u/${postsList[index].username}",
-                          style:
-                              TextStyle(color: Colors.grey[700], fontSize: 15),
+                          style: TextStyle(
+                              color: communityPostsGrey, fontSize: 15),
                         ),
                       ),
                       Consumer<CommunityProvider>(
                         builder: (context, value, child) => Text(
                           "  ${value.calculateAge(postsList[index].createdAt)}",
                           style:
-                              TextStyle(color: Colors.grey[700], fontSize: 15),
+                              TextStyle(color: communityPostsGrey, fontSize: 15),
                         ),
                       ),
                       if (postType == 'image')
@@ -53,7 +61,7 @@ class PostCardWidget extends StatelessWidget {
                           child: Text(
                             "  · i.redd.it",
                             style: TextStyle(
-                                color: Colors.grey[700], fontSize: 15),
+                                color: communityPostsGrey, fontSize: 15),
                           ),
                         ),
                       if (postType == "text") const Spacer(),
@@ -120,7 +128,7 @@ class PostCardWidget extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: PostBottomWidget(
+              child: BottomPostMobile(
                 index: index,
               ),
             ),

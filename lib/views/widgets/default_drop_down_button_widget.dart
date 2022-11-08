@@ -1,14 +1,24 @@
 import 'package:flutter/material.dart';
 
-class DefaultDropDownButtonWidget extends StatelessWidget {
+/// A generic (default) drop down button
+class DefaultDropDownButton extends StatelessWidget {
+  /// Count of button options
   final int optionsCount;
+
+  /// List of button options
   final List<String> listValues;
 
+  /// Map of (button value)&(value icon)
   final Map<String, IconData> map;
+
+  /// Width of drop down list
   final double width;
+
+  /// Icon of drop down button
   final IconData icon;
 
-  const DefaultDropDownButtonWidget(
+  /// Default drop down constructor
+  const DefaultDropDownButton(
       {super.key,
       required this.icon,
       required this.optionsCount,
@@ -20,8 +30,6 @@ class DefaultDropDownButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DropdownButton<String>(
       icon: Icon(icon),
-
-      //value: dropdownValue,
       items: listValues.map((name) {
         return DropdownMenuItem<String>(
             value: name,

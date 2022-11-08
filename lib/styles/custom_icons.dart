@@ -59,6 +59,7 @@
 ///
 import 'package:flutter/widgets.dart';
 
+/// Custom Icons class
 class CustomIcons {
   CustomIcons._();
 

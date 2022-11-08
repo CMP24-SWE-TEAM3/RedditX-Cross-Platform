@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
 
+/// Show default bottom sheet
+/// 
+/// it shows a bottom sheet of [title],[itemCount],[icons],[options] and [source] 
 
 void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
     List<IconData> icons, List<String> options, String source) {

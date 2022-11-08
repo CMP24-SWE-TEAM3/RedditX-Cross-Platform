@@ -7,6 +7,8 @@ import 'package:reddit/views/widgets/share_bottom_sheet_item.dart';
 
 import '../models/user_model.dart';
 
+/// Show Bottom Sheet when share button pressed
+
 void shareBottomSheet(BuildContext context, int index) {
   showModalBottomSheet(
     isDismissible: true,
@@ -58,7 +60,9 @@ void shareBottomSheet(BuildContext context, int index) {
                               icon: (value.isPostSaved[index])
                                   ? CustomIcons.unsaved
                                   : CustomIcons.saved,
-                              text: "Save"),
+                              text: (value.isPostSaved[index])
+                                  ? "Unsave"
+                                  : "Save"),
                         ),
                         InkWell(
                           onTap: () {},
