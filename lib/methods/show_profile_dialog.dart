@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:reddit/models/post_model.dart';
+import 'package:reddit/models/user_model.dart';
 
-Future<void> showeProfileDialog(BuildContext context) async {
+Future<void> showeProfileDialog(BuildContext context, int index) async {
   showDialog<void>(
     context: context,
     //barrierDismissible: false, // user must tap button!
@@ -11,16 +13,15 @@ Future<void> showeProfileDialog(BuildContext context) async {
           mainAxisSize: MainAxisSize.min,
           children: [
             const SizedBox(height: 20),
-            const CircleAvatar(
+            CircleAvatar(
               radius: 45,
-              backgroundImage: NetworkImage(
-                  "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
+              backgroundImage: NetworkImage(users[index].avatar),
             ),
             const SizedBox(height: 30),
-            const Text(
-              "u/Jimmy Neotron",
-              style:
-                  TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+            Text(
+              postsList[index].username,
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.black),
             ),
             const SizedBox(height: 30),
             Row(

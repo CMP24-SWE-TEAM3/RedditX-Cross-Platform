@@ -5,7 +5,9 @@ import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/styles/custom_icons.dart';
 import 'package:reddit/views/widgets/share_bottom_sheet_item.dart';
 
-void shareBottomSheet(BuildContext context,int index) {
+import '../models/user_model.dart';
+
+void shareBottomSheet(BuildContext context, int index) {
   showModalBottomSheet(
     isDismissible: true,
     isScrollControlled: true,
@@ -162,14 +164,14 @@ void shareBottomSheet(BuildContext context,int index) {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
                             child: Column(
-                              children: const [
+                              children: [
                                 CircleAvatar(
                                   radius: 30,
-                                  backgroundImage: NetworkImage(
-                                      "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
+                                  backgroundImage:
+                                      NetworkImage(users[index].avatar),
                                 ),
-                                SizedBox(height: 10),
-                                FittedBox(
+                                const SizedBox(height: 10),
+                                const FittedBox(
                                     fit: BoxFit.contain, child: Text("Profile"))
                               ],
                             )),

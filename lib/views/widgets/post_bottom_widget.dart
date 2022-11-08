@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/models/post_model.dart';
@@ -7,7 +8,7 @@ import '../../styles/custom_icons.dart';
 
 class PostBottomWidget extends StatelessWidget {
   final int index;
-  const PostBottomWidget({required this.index,super.key});
+  const PostBottomWidget({required this.index, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +27,7 @@ class PostBottomWidget extends StatelessWidget {
                       )
                     : const Icon(CustomIcons.up_outline)),
           ),
-          Text("${postsList[index].votesCount}"),
+          Text(Numeral(postsList[index].votesCount).format(fractionDigits: 1)),
           Expanded(
             child: IconButton(
                 onPressed: () {
@@ -43,11 +44,12 @@ class PostBottomWidget extends StatelessWidget {
             child: IconButton(
                 onPressed: () {}, icon: const Icon(CustomIcons.comment)),
           ),
-          Text("${postsList[index].commentsNumber}"),
+          Text(Numeral(postsList[index].commentsNumber)
+              .format(fractionDigits: 1)),
           Expanded(
             child: IconButton(
                 onPressed: () {
-                  shareBottomSheet(context,index);
+                  shareBottomSheet(context, index);
                 },
                 icon: const Icon(Icons.share_outlined)),
           ),

@@ -24,7 +24,7 @@ class PostCardWidget extends StatelessWidget {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -32,19 +32,19 @@ class PostCardWidget extends StatelessWidget {
                     children: [
                       InkWell(
                         onTap: () {
-                          showeProfileDialog(context);
+                          showeProfileDialog(context, index);
                         },
                         child: Text(
                           "u/${postsList[index].username}",
                           style:
-                              TextStyle(color: Colors.grey[800], fontSize: 15),
+                              TextStyle(color: Colors.grey[700], fontSize: 15),
                         ),
                       ),
                       Consumer<CommunityProvider>(
                         builder: (context, value, child) => Text(
                           "  ${value.calculateAge(postsList[index].createdAt)}",
                           style:
-                              TextStyle(color: Colors.grey[800], fontSize: 15),
+                              TextStyle(color: Colors.grey[700], fontSize: 15),
                         ),
                       ),
                       if (postType == 'image')
@@ -53,18 +53,21 @@ class PostCardWidget extends StatelessWidget {
                           child: Text(
                             "  · i.redd.it",
                             style: TextStyle(
-                                color: Colors.grey[800], fontSize: 15),
+                                color: Colors.grey[700], fontSize: 15),
                           ),
                         ),
                       if (postType == "text") const Spacer(),
-                      PopUpMenu(index:index),
+                      PopUpMenu(index: index),
                     ],
                   ),
                   if (postType == "text")
-                    Text(
-                      postsList[index].text,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 7),
+                      child: Text(
+                        postsList[index].text,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                      ),
                     )
                   else
                     FloatColumn(
@@ -106,6 +109,9 @@ class PostCardWidget extends StatelessWidget {
                                       )
                                     : const SizedBox(height: 20)),
                         WrappableText(
+                            overflow: TextOverflow.ellipsis,
+                            maxLines: 9,
+                            padding: const EdgeInsets.symmetric(vertical: 7),
                             text: TextSpan(text: postsList[index].title))
                       ],
                     ),
@@ -118,7 +124,6 @@ class PostCardWidget extends StatelessWidget {
                 index: index,
               ),
             ),
-            const Divider(),
           ],
         ),
       ),

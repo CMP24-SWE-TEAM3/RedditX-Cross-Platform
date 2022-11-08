@@ -6,7 +6,6 @@ import 'package:reddit/models/community_model.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/views/widgets/web_app_bar.dart';
 import 'package:reddit/views/widgets/web_post_card.dart';
-import '../widgets/web_post_temp.dart';
 
 class CommunityWebScreen extends StatelessWidget {
   final BoxConstraints constraints;
@@ -221,29 +220,32 @@ class CommunityWebScreen extends StatelessWidget {
                             children: [
                               SizedBox(height: height / 10),
                               SizedBox(
-                                width: (constraints.minWidth >= 1250)
-                                    ? width / 2.5
-                                    : 500,
-                                child: ListView.separated(
-                                  shrinkWrap: true,
-                                  separatorBuilder: (context, index) =>
-                                      const Divider(),
-                                  itemCount: postsList.length,
-                                  itemBuilder:
-                                      (BuildContext context, int index) {
-                                    return Container(
-                                        color: Colors.white,
-                                        child: WebPostWidget(
-                                          userName: postsList[index].username,
-                                          index: index,
-                                          dateTime: postsList[index].createdAt,
-                                          context: context,
-                                          postPlace: "community",
-                                          postType: postsList[index].type,
-                                        ));
-                                  },
-                                ),
-                              )
+                                  width: (constraints.minWidth >= 1250)
+                                      ? width / 2.5
+                                      : 500,
+                                  child: Expanded(
+                                    child: ListView.separated(
+                                      shrinkWrap: true,
+                                      separatorBuilder: (context, index) =>
+                                          const Divider(),
+                                      itemCount: postsList.length,
+                                      itemBuilder:
+                                          (BuildContext context, int index) {
+                                        return Container(
+                                            color: Colors.white,
+                                            child: WebPostCard(
+                                              userName:
+                                                  postsList[index].username,
+                                              index: index,
+                                              dateTime:
+                                                  postsList[index].createdAt,
+                                              context: context,
+                                              postPlace: "community",
+                                              postType: postsList[index].type,
+                                            ));
+                                      },
+                                    ),
+                                  ))
                             ],
                           )
                         ],

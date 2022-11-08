@@ -66,7 +66,7 @@ List<PostModel> postsList = [
         "https://www.creativefounders.com/art-websites-aspiring-artist/"
       ],
       type: "link",
-      commentsNumber: 550,
+      commentsNumber: 5550,
       communityName: communityModel1.name,
       createdAt: DateTime.now(),
       text: "",
@@ -78,7 +78,7 @@ List<PostModel> postsList = [
         "https://i.pinimg.com/564x/c9/92/64/c9926411478ce371609e61fc76fecaf0.jpg"
       ],
       type: "image",
-      commentsNumber: 100,
+      commentsNumber: 1000,
       communityName: communityModel1.name,
       createdAt: DateTime.now(),
       text: "",

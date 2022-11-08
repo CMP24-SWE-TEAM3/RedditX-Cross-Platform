@@ -54,7 +54,7 @@ class PostTopWidget extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      showeProfileDialog(context);
+                      showeProfileDialog(context,index);
                     },
                     child: Text(
                       "u/THEBNTG",
@@ -89,7 +89,7 @@ class PostTopWidget extends StatelessWidget {
         children: [
           InkWell(
             onTap: () {
-              showeProfileDialog(context);
+              showeProfileDialog(context,index);
             },
             child: Text(
               "u/${postsList[index].username}",
