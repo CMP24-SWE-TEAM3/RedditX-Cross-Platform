@@ -25,9 +25,10 @@ class PostModel {
       required this.votesCount});
 }
 
-/// List of post model used as a mock service
+/// List of post model
+/// dummy data to test
+/// will be replaced with real data from the APIs
 List<PostModel> postsList = [
-
   PostModel(
       attachments: [
         "https://i.pinimg.com/originals/0d/22/ae/0d22ae6fe219f106395c2901968e167e.gif"
@@ -35,25 +36,23 @@ List<PostModel> postsList = [
       type: "image",
       commentsNumber: 3400,
       communityName: communityModel1.name,
-      createdAt: DateTime(2022, 11, 8,12,30),
+      createdAt: DateTime(2022, 11, 8, 12, 30),
       text: "",
       title:
           "“I dream my painting and I paint my dream.”― Vincent Willem van Gogh",
       username: "Hager khaled",
       votesCount: 7500),
-
-       PostModel(
+  PostModel(
       attachments: [""],
       type: "text",
       commentsNumber: 30,
       communityName: communityModel1.name,
-      createdAt: DateTime(2022, 11,8,10, 30),
+      createdAt: DateTime(2022, 11, 8, 10, 30),
       text:
           "“...and then, I have nature and art and poetry, and if that is not enough, what is enough?”― Vincent Willem van Gogh",
       title: "",
       username: "Shrouk shawky",
       votesCount: 160),
-
   PostModel(
       attachments: [
         "https://i.pinimg.com/564x/60/9d/04/609d04f9f059aa65a99955bf9a8b348e.jpg"
@@ -112,11 +111,11 @@ List<PostModel> postsList = [
       communityName: communityModel1.name,
       createdAt: DateTime(2021, 10, 2),
       text: "",
-      title: "Butterflies..They can't see how truly beautiful they are, but everyone else can. People are like that as well",
+      title:
+          "Butterflies..They can't see how truly beautiful they are, but everyone else can. People are like that as well",
       username: "Eman Ashraf",
       votesCount: 900),
-
-      PostModel(
+  PostModel(
       attachments: [
         "https://i.pinimg.com/564x/bf/23/a9/bf23a9053df8a9b82b6aee33cb35cafb.jpg"
       ],
@@ -125,9 +124,8 @@ List<PostModel> postsList = [
       communityName: communityModel1.name,
       createdAt: DateTime(2021, 5, 2),
       text: "",
-      title: "Colored Pencil Techniques. Abstracts with purple flowers to give you ideas for coloring. #coloredpenciltechniques",
+      title:
+          "Colored Pencil Techniques. Abstracts with purple flowers to give you ideas for coloring. #coloredpenciltechniques",
       username: "Mariam khaled",
       votesCount: 473),
-
-      
 ];

@@ -6,7 +6,7 @@ class CommunityModel {
   String icon;
   int membersCount;
 
-/// Community model constructor
+  /// Community model constructor
   CommunityModel(
       {required this.description,
       required this.name,
@@ -15,7 +15,9 @@ class CommunityModel {
       required this.membersCount});
 }
 
-/// Instantiation from community model used as a mock service
+/// Instantiation from community model
+/// dummy data to test
+// /will be replaced with real data from the APIs
 CommunityModel communityModel1 = CommunityModel(
     description:
         "This is a subreddit about art, where we are serious about art and artists, and discussing art in a mature, substantive way. READ THE RULES AND LOOK AT THE OTHER POSTS BEFORE POSTING. Be on your best behavior and do not comment unless you have something meaningful and mature to say. We are STRICTLY MODERATED and DO NOT give out warnings.",

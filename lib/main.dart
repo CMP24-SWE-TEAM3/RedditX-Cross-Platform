@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/models/community_service.dart';
 import 'package:reddit/views/screens/community_home_web_screen.dart';
 import 'controllers/community_controller.dart';
 import 'views/screens/community_home_mobile_screen.dart';
@@ -7,7 +8,7 @@ import 'views/screens/community_home_mobile_screen.dart';
 void main() {
   runApp(MultiProvider(
     providers: [
-      ChangeNotifierProvider(create: (context) => CommunityProvider())
+      ChangeNotifierProvider(create: (context) => CommunityProvider(communityService: CommunityService()))
     ],
     child: const MyApp(),
   ));

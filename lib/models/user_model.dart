@@ -6,7 +6,9 @@ class UserModel {
   UserModel({required this.avatar});
 }
 
-/// List of user model used as a mock service
+/// List of user model
+/// dummy data to test
+/// will be replaced with real data from the APIs
 List<UserModel> users = [
   UserModel(
       avatar:

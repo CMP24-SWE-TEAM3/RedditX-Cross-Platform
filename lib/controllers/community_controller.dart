@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:reddit/models/post_model.dart';
+import '../models/community_service.dart';
 import '../styles/custom_icons.dart';
 
 /// Provider used for [CommunityMobileScreen] and [CommunityWebScreen].
 
 class CommunityProvider with ChangeNotifier {
+  final CommunityService communityService;
+
+  CommunityProvider({required this.communityService});
+
   /// used in Join/Leave button in [CommunityWebScreen] on hover.
   String joinLeaveButtonText = "Joined";
 
