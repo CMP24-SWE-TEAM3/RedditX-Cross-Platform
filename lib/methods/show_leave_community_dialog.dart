@@ -12,6 +12,7 @@ Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        key: const ValueKey("join_dialog"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -32,13 +33,14 @@ Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
                         Navigator.pop(context);
                       },
                       child: const Padding(
+                        key: ValueKey("cancel_button"),
                           padding: EdgeInsets.all(5),
                           child: Center(
-                            child: Text(
+                            child: Center(child: Text(
                               "Cancel",
                               style: TextStyle(
                                   color: Color.fromARGB(255, 102, 102, 102)),
-                            ),
+                            ),)
                           ))),
                 )),
                 const SizedBox(
@@ -61,12 +63,13 @@ Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
                             Navigator.pop(context);
                           },
                           child: const Padding(
+                            key: ValueKey("leave_button"),
                               padding: EdgeInsets.all(5),
                               child: Center(
-                                child: Text(
+                                child: Center(child: Text(
                                   "Leave",
                                   style: TextStyle(color: Colors.white),
-                                ),
+                                ),)
                               ))),
                     ));
                   },

@@ -3,8 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
 
 /// Show default bottom sheet
-/// 
-/// it shows a bottom sheet of [title],[itemCount],[icons],[options] and [source] 
+///
+/// it shows a bottom sheet of [title],[itemCount],[icons],[options] and [source]
 
 void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
     List<IconData> icons, List<String> options, String source) {
@@ -22,6 +22,7 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
               Padding(
                 padding: const EdgeInsets.only(bottom: 10),
                 child: Text(
+                  key: ValueKey(source),
                   title,
                   style: const TextStyle(
                       fontWeight: FontWeight.bold, color: Colors.grey),
@@ -33,6 +34,7 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                     shrinkWrap: true,
                     itemCount: itemCount,
                     itemBuilder: (context, index) => ListTile(
+                        key: ValueKey("${source}_${index}"),
                         tileColor: Colors.white,
                         title: InkWell(
                           onTap: () {
@@ -75,6 +77,7 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                                   source == "postView" &&
                                       value.checkIconPostView[index])
                                 const Icon(
+                                  key:ValueKey("check_icon"),
                                   Icons.check_outlined,
                                   color: Colors.blue,
                                 )

@@ -90,6 +90,7 @@ class WebPostCard extends StatelessWidget {
                                     fontSize: 10.0, color: Colors.grey),
                               ),
                               InkWell(
+                                 key: const ValueKey("username_button"),
                                 onTap: () {},
                                 child: Text(
                                   " u/${postsList[index].username}",

@@ -12,7 +12,6 @@ import '../../models/post_model.dart';
 
 /// Shows the card post view
 class MobilePostCard extends StatelessWidget {
-
   /// To indicate post type: text, image or link
   final String postType;
 
@@ -39,6 +38,7 @@ class MobilePostCard extends StatelessWidget {
                   Row(
                     children: [
                       InkWell(
+                        key: const ValueKey("username_button"),
                         onTap: () {
                           showeProfileDialog(context, index);
                         },
@@ -51,8 +51,8 @@ class MobilePostCard extends StatelessWidget {
                       Consumer<CommunityProvider>(
                         builder: (context, value, child) => Text(
                           "  ${value.calculateAge(postsList[index].createdAt)}",
-                          style:
-                              TextStyle(color: communityPostsGrey, fontSize: 15),
+                          style: TextStyle(
+                              color: communityPostsGrey, fontSize: 15),
                         ),
                       ),
                       if (postType == 'image')

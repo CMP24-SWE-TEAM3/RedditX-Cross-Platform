@@ -10,6 +10,7 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        key: const ValueKey("profile_dialog"),
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [

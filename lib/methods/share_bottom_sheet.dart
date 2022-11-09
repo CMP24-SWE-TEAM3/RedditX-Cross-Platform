@@ -48,6 +48,7 @@ void shareBottomSheet(BuildContext context, int index) {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         InkWell(
+                          key: const ValueKey("save_button2"),
                           onTap: () {
                             value.saveUnsavePost(index);
                             (value.isPostSaved[index])

@@ -18,9 +18,11 @@ class PopUpMenu extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CommunityProvider>(
       builder: (context, value, child) => PopupMenuButton(
+        key: const ValueKey("post_options"),
         child: const Icon(Icons.more_vert),
         itemBuilder: (_) => <PopupMenuItem<String>>[
           PopupMenuItem<String>(
+            key: const ValueKey("save_button"),
               onTap: () {
                 value.saveUnsavePost(index);
                 (value.isPostSaved[index])

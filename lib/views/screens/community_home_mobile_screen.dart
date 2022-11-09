@@ -11,6 +11,7 @@ import '../../methods/default_bottom_sheet.dart';
 import '../../methods/show_leave_community_dialog.dart';
 import '../../models/community_model.dart';
 import '../../styles/colors.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 /// Community mobile screen
 class CommunityMobileScreen extends StatelessWidget {
@@ -193,6 +194,7 @@ class CommunityMobileScreen extends StatelessWidget {
                   ),
                   actions: [
                     PopupMenuButton(
+                      key: const ValueKey("community_options_popup_button"),
                       child: const Icon(
                         Icons.more_vert,
                         color: Colors.orange,
@@ -366,6 +368,8 @@ class CommunityMobileScreen extends StatelessWidget {
                                                                 "notifications");
                                                           },
                                                           child: Icon(
+                                                            key: const ValueKey(
+                                                                "notification_icon"),
                                                             value
                                                                 .notificationIcon,
                                                             size: 18,
@@ -394,20 +398,24 @@ class CommunityMobileScreen extends StatelessWidget {
                                                               "Are you sure you want to leave the r/Art community?");
                                                         },
                                                         child: const Padding(
-                                                          padding:
-                                                              EdgeInsets.all(5),
-                                                          child: Text(
-                                                            "Joined",
-                                                            style: TextStyle(
-                                                                color:
-                                                                    blueColor),
-                                                          ),
-                                                        )),
+                                                            padding:
+                                                                EdgeInsets.all(
+                                                                    5),
+                                                            child: Center(
+                                                              child: Text(
+                                                                "Joined",
+                                                                style: TextStyle(
+                                                                    color:
+                                                                        blueColor),
+                                                              ),
+                                                            ))),
                                                   )
                                                 ],
                                               )
                                             : Container(
-                                                height: 25,
+                                                key: const ValueKey(
+                                                    "join_button"),
+                                                height: 30,
                                                 decoration: BoxDecoration(
                                                     color: blueColor,
                                                     borderRadius:
@@ -423,17 +431,19 @@ class CommunityMobileScreen extends StatelessWidget {
                                                           "You have joined the r/${communityModel1.name} community");
                                                     },
                                                     child: const Padding(
-                                                      padding:
-                                                          EdgeInsets.all(5),
-                                                      child: Text(
-                                                        "   Join   ",
-                                                        style: TextStyle(
-                                                            color: whiteColor,
-                                                            fontWeight:
-                                                                FontWeight
-                                                                    .bold),
-                                                      ),
-                                                    )),
+                                                        padding:
+                                                            EdgeInsets.all(5),
+                                                        child: Center(
+                                                          child: Text(
+                                                            "   Join   ",
+                                                            style: TextStyle(
+                                                                color:
+                                                                    whiteColor,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ))),
                                               )
                                       ],
                                     ),
@@ -459,13 +469,15 @@ class CommunityMobileScreen extends StatelessWidget {
                                       height: 10,
                                     ),
                                     Expanded(
+                                      key: const ValueKey(
+                                          "expanded_discription"),
                                       child: InkWell(
                                         onTap: () {
                                           value.changeExpandedHight(
                                               value.isExpanded);
                                         },
                                         child: value.isExpanded
-                                            ? Text(
+                                            ? AutoSizeText(
                                                 communityModel1.description,
                                               )
                                             : Text(

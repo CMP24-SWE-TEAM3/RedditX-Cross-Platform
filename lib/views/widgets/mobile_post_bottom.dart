@@ -23,6 +23,7 @@ class BottomPostMobile extends StatelessWidget {
         children: [
           Expanded(
             child: IconButton(
+              key: const ValueKey("like_button"),
                 onPressed: () {
                   value.likePost(index);
                 },
@@ -33,9 +34,11 @@ class BottomPostMobile extends StatelessWidget {
                       )
                     : const Icon(CustomIcons.up_outline)),
           ),
-          Text(Numeral(postsList[index].votesCount).format(fractionDigits: 1)),
+          Text(key:const ValueKey("votes_count"),
+            Numeral(postsList[index].votesCount).format(fractionDigits: 1)),
           Expanded(
             child: IconButton(
+              key: const ValueKey("dislike_button"),
                 onPressed: () {
                   value.disLikePost(index);
                 },
@@ -54,6 +57,7 @@ class BottomPostMobile extends StatelessWidget {
               .format(fractionDigits: 1)),
           Expanded(
             child: IconButton(
+              key: const ValueKey("share_button"),
                 onPressed: () {
                   shareBottomSheet(context, index);
                 },
@@ -62,6 +66,7 @@ class BottomPostMobile extends StatelessWidget {
           const Text("Share"),
           Expanded(
             child: IconButton(
+              
                 onPressed: () {}, icon: const Icon(CustomIcons.gift)),
           )
         ],
