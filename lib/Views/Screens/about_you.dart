@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import '../Widgets/choice_button.dart';
 import '../Widgets/sign_up_bar.dart';
 import 'interests.dart';
@@ -20,6 +21,8 @@ class AboutYou extends StatelessWidget {
       vertical: heightScreen * 0.01,
       horizontal: mediaQuery.size.width * 0.1,
     );
+
+    final widthScreen = (mediaQuery.size.width);
     return Scaffold(
       appBar: appBar,
       body: SizedBox(
@@ -78,7 +81,12 @@ class AboutYou extends StatelessWidget {
                 ),
                 child: SizedBox(
                   width: double.infinity,
-                  child: ChoiceButton('Man', submit, context),
+                  child: ChoiceButton(
+                    key: const ValueKey('man_gender_Page'),
+                    'Man',
+                    submit,
+                    context,
+                  ),
                 ),
               ),
               Padding(
@@ -87,7 +95,12 @@ class AboutYou extends StatelessWidget {
                 ),
                 child: SizedBox(
                   width: double.infinity,
-                  child: ChoiceButton('Woman', submit, context),
+                  child: ChoiceButton(
+                    key: const ValueKey('woman_gender_Page'),
+                    'Woman',
+                    submit,
+                    context,
+                  ),
                 ),
               ),
             ],
@@ -103,8 +116,29 @@ void skip(context) {
 }
 
 void submit(String kind, ctx) {
+  final mediaQuery = MediaQuery.of(ctx);
+  final widthScreen = (mediaQuery.size.width);
+  final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
+  // set up the AlertDialog
+  AlertDialog interestPage = AlertDialog(
+    content: Container(
+      width: widthScreen * 0.4,
+      height: heightScreen * 0.73,
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(32.0)),
+      ),
+      child: const Interests(),
+    ),
+  );
   print('sending data to back end');
   print('---------------------' + kind + '-------------------');
-  Navigator.of(ctx)
-      .pushReplacementNamed(Interests.routeName, arguments: {});
+  (kIsWeb)
+      ? showDialog(
+          context: ctx,
+          builder: (BuildContext context) {
+            return interestPage;
+          },
+        )
+      : Navigator.of(ctx)
+          .pushReplacementNamed(Interests.routeName, arguments: {});
 }

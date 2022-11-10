@@ -90,15 +90,19 @@ class _EmailLoginMState extends State<EmailLoginM> {
                       padding: EdgeInsets.all(
                         heightScreen * 0.025,
                       ),
-                      child:
-                          UserNameText(userNameController: userNameController),
+                      child: UserNameText(
+                        key: const ValueKey('username_log_in_Page'),
+                        userNameController: userNameController,
+                      ),
                     ),
                     Padding(
                       padding: EdgeInsets.all(
                         heightScreen * 0.025,
                       ),
-                      child:
-                          PasswordText(passwordController: passwordController),
+                      child: PasswordText(
+                        key: const ValueKey('password_log_in_Page'),
+                        passwordController: passwordController,
+                      ),
                     ),
                     SizedBox(
                       height: heightScreen * 0.01,
@@ -108,6 +112,7 @@ class _EmailLoginMState extends State<EmailLoginM> {
                         heightScreen * 0.02,
                       ),
                       child: TextButton(
+                        key: const ValueKey('forgetpassword_log_in_page'),
                         style: ButtonStyle(
                           foregroundColor: MaterialStatePropertyAll(
                               Theme.of(context).colorScheme.primary),
@@ -139,6 +144,7 @@ class _EmailLoginMState extends State<EmailLoginM> {
                 child: Padding(
                   padding: EdgeInsets.only(bottom: heightScreen * 0.02),
                   child: ContinueLoginButton(
+                    key: const ValueKey('continue_log_in_Page'),
                     userNameController: userNameController,
                     passwordController: passwordController,
                     function: submit,

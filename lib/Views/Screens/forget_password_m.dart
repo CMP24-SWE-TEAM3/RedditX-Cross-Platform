@@ -105,6 +105,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
                       heightScreen * 0.02,
                     ),
                     child: UserNameText(
+                      key: const ValueKey('username_forget_password_Page'),
                         userNameController: userNameController,
                         errorUserNameText: errorUserNameText),
                   ),
@@ -113,6 +114,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
                       heightScreen * 0.02,
                     ),
                     child: EmailText(
+                       key: const ValueKey('email_forget_password_Page'),
                         emailController: emailController,
                         errorEmailText: errorEmailText),
                   ),
@@ -156,6 +158,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
               child: Padding(
                 padding: EdgeInsets.only(bottom: heightScreen * 0.02),
                 child: MailMeButton1(
+                  key: const ValueKey('emailme_forget_password_Page'),
                   userNameController: userNameController,
                   emailController: emailController,
                   function: validate,
@@ -171,6 +174,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
 
   TextButton textbutton(txt, fuction) {
     return TextButton(
+       key: const ValueKey('forget_username_forget_password_Page'),
       style: ButtonStyle(
         foregroundColor:
             MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),

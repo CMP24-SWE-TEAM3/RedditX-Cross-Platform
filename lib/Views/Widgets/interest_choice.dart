@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class InterestChoice extends StatefulWidget {
   const InterestChoice(
-    this.txt,
+    this.pair,
     this.function, {
     Key? key,
   }) : super(key: key);
 
-  final String txt;
+  final List pair;
   final Function function;
 
   @override
@@ -18,22 +19,21 @@ class _InterestChoiceState extends State<InterestChoice> {
   bool ispressed = false;
   void preseed() {
     setState(() => ispressed = !ispressed);
-    widget.function(widget.txt);
+    widget.function(widget.pair[0]);
   }
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      icon: const SizedBox(
-        width: 35,
-        height: 35,
-        child: null,
-      ),
+      key: const ValueKey('icon_interest_page'),
+      icon: Text(widget.pair[1]),
       onPressed: preseed,
       style: ElevatedButton.styleFrom(
         elevation: 0,
         backgroundColor: ispressed
-            ? Color.fromARGB(255, 254, 220, 220)
+            ? (kIsWeb)
+                ? Colors.blueGrey
+                : const Color.fromARGB(255, 254, 220, 220)
             : const Color.fromARGB(255, 248, 251, 255),
         // minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(
@@ -41,7 +41,7 @@ class _InterestChoiceState extends State<InterestChoice> {
         ),
       ),
       label: Text(
-        widget.txt,
+        widget.pair[0],
         style: const TextStyle(
           fontSize: 14,
           color: Colors.black,

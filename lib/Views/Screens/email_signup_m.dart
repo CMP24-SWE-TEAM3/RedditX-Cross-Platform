@@ -111,6 +111,7 @@ class _EmailSignupMState extends State<EmailSignupM> {
                         heightScreen * 0.02,
                       ),
                       child: EmailText(
+                          key: const ValueKey('email_sign_up_Page'),
                           emailController: emailController,
                           errorEmailText: errorEmailText),
                     ),
@@ -119,6 +120,7 @@ class _EmailSignupMState extends State<EmailSignupM> {
                         heightScreen * 0.02,
                       ),
                       child: UserNameText(
+                        key: const ValueKey('username_sign_up_Page'),
                         userNameController: userNameController,
                         errorUserNameText: errorUserNameText,
                       ),
@@ -128,6 +130,7 @@ class _EmailSignupMState extends State<EmailSignupM> {
                           vertical: heightScreen * 0.02,
                           horizontal: heightScreen * 0.01),
                       child: PasswordText(
+                        key: const ValueKey('password_sign_up_Page'),
                         passwordController: passwordController,
                         errorPasswordText: errorPasswordText,
                       ),
@@ -149,6 +152,7 @@ class _EmailSignupMState extends State<EmailSignupM> {
                 child: Padding(
                   padding: EdgeInsets.only(bottom: heightScreen * 0.02),
                   child: ContinueSignUpButton(
+                    key: const ValueKey('continue_sign_up_Page'),
                     userNameController: userNameController,
                     passwordController: passwordController,
                     emailController: emailController,

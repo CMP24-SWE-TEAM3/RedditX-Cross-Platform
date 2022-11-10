@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 
+import '../../Controllers/signin_google.dart';
 import '../Widgets/sign_up_button.dart';
 import '../Widgets/sign_up_bar.dart';
 import '../Widgets/user_privacy_agreement.dart';
 import 'email_login.dart';
+import 'temphome.dart';
 
 class SignUpPage extends StatelessWidget {
   const SignUpPage({super.key});
@@ -13,10 +16,22 @@ class SignUpPage extends StatelessWidget {
     Navigator.of(ctx).pushNamed(EmailLogin.routeName, arguments: {});
   }
 
+  void googleSignIn() {
+    // final GoogleSignInAccount user = signInGoogle() as GoogleSignInAccount;
+    // if (user != null) {
+    //   print(user.displayName);
+    // } else {
+    //   print('Null');
+    // }
+  }
+
   @override
   Widget build(BuildContext context) {
     final mediaQuery = MediaQuery.of(context);
-    final dynamic appBar = buildAppBar(text: 'Skip', function: () {});
+    final dynamic appBar = buildAppBar(
+        text: 'Skip',
+        function: () => Navigator.of(context)
+            .pushReplacementNamed(Home.routeName, arguments: {}));
     final heightScreen = (mediaQuery.size.height -
         appBar.preferredSize.height -
         mediaQuery.padding.top);
@@ -60,8 +75,8 @@ class SignUpPage extends StatelessWidget {
               ),
               Padding(
                 padding: padding,
-                child: SignUpButton(
-                    'assets/images/google.png', 'Continue with Google', () {}),
+                child: SignUpButton('assets/images/google.png',
+                    'Continue with Google', googleSignIn),
               ),
               Padding(
                 padding: padding,
@@ -70,8 +85,12 @@ class SignUpPage extends StatelessWidget {
               ),
               Padding(
                 padding: padding,
-                child: SignUpButton('assets/images/email.png',
-                    'Continue with email', (context) => emailLogin(context)),
+                child: SignUpButton(
+                    key: const ValueKey(
+                        'continue_with_email_sign_in_options_Page'),
+                    'assets/images/email.png',
+                    'Continue with email',
+                    (context) => emailLogin(context)),
               ),
               Padding(
                 padding: padding,
@@ -90,6 +109,7 @@ class SignUpPage extends StatelessWidget {
                       ),
                     ),
                     TextButton(
+                      key: const ValueKey('login_sign_in_options_Page'),
                       style: ButtonStyle(
                         foregroundColor: MaterialStatePropertyAll(
                             Theme.of(context).colorScheme.primary),

@@ -15,6 +15,7 @@ AppBar buildAppBar({text, function}) {
           ),
           actions: [
             TextButton(
+              key: const ValueKey('button_appbar'),
               onPressed: function,
               child: Text(
                 text,

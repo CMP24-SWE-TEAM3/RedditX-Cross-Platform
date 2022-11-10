@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
+// import '../../Controllers/signin_google.dart';
 import '../../Controllers/validations.dart';
 import '../Widgets/dividor_or.dart';
 import '../Widgets/sign_up_bar.dart';
@@ -57,6 +59,15 @@ class _EmailLoginWState extends State<EmailLoginW> {
   void emailsignup(BuildContext ctx) {
     Navigator.of(ctx)
         .pushReplacementNamed(EmailSignup.routeName, arguments: {});
+  }
+
+  void googleSignIn() {
+    // final GoogleSignInAccount user = signInGoogle() as GoogleSignInAccount;
+    // if (user != null) {
+    //   print(user.displayName);
+    // } else {
+    //   print('Null');
+    // }
   }
 
   @override
@@ -122,7 +133,7 @@ class _EmailLoginWState extends State<EmailLoginW> {
                       child: Padding(
                         padding: const EdgeInsets.all(4),
                         child: SignUpButton('assets/images/google.png',
-                            'CONTINUE WITH GOOGLE', () {}),
+                            'CONTINUE WITH GOOGLE', googleSignIn),
                       ),
                     ),
                     SizedBox(

@@ -1,6 +1,8 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+// import 'package:google_sign_in/google_sign_in.dart';
 
+// import '../../Controllers/signin_google.dart';
 import '../../Controllers/validations.dart';
 import '../Widgets/dividor_or.dart';
 import '../Widgets/sign_up_bar.dart';
@@ -10,6 +12,7 @@ import '../Widgets/user_login_agreement.dart';
 import '../Widgets/user_signup_web_agreement.dart';
 import 'about_you.dart';
 import 'email_login.dart';
+import 'email_signup_w_2.dart';
 
 class EmailSignupW extends StatefulWidget {
   const EmailSignupW({super.key});
@@ -24,7 +27,8 @@ void emailLogin(BuildContext ctx) {
 
 void submit(emailController, ctx) {
   print('sending data to back end');
-  Navigator.of(ctx).pushReplacementNamed(AboutYou.routeName, arguments: {});
+  Navigator.of(ctx)
+      .pushReplacementNamed(EmailSignupW2.routeName, arguments: {});
 }
 
 class _EmailSignupWState extends State<EmailSignupW> {
@@ -39,6 +43,15 @@ class _EmailSignupWState extends State<EmailSignupW> {
     } else {
       print(emailController.text + "---");
     }
+  }
+
+  void googleSignIn() {
+    // final GoogleSignInAccount user = signInGoogle() as GoogleSignInAccount;
+    // if (user != null) {
+    //   print(user.displayName);
+    // } else {
+    //   print('Null');
+    // }
   }
 
   @override
@@ -107,7 +120,7 @@ class _EmailSignupWState extends State<EmailSignupW> {
                       child: Padding(
                         padding: const EdgeInsets.all(4),
                         child: SignUpButton('assets/images/google.png',
-                            'CONTINUE WITH GOOGLE', () {}),
+                            'CONTINUE WITH GOOGLE', googleSignIn),
                       ),
                     ),
                     SizedBox(

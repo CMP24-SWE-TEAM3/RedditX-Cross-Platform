@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class InterestButton extends StatelessWidget {
   const InterestButton(
@@ -23,7 +24,9 @@ class InterestButton extends StatelessWidget {
         elevation: 0,
         backgroundColor: (enable)
             ? Theme.of(context).colorScheme.primary
-            : const Color.fromARGB(144, 240, 88, 23),
+            : (kIsWeb)
+                ? Colors.blueGrey
+                : const Color.fromARGB(144, 240, 88, 23),
         minimumSize: const Size(double.infinity, 50),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(20),

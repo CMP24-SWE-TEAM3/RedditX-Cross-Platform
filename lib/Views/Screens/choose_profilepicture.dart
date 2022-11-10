@@ -1,12 +1,14 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
 
 import '../Widgets/bottm_sheet.dart';
 import '../Widgets/sign_up_bar.dart';
 import 'choose_username.dart';
 import 'interests.dart';
+import 'temphome.dart';
 
 class ChooseProfilePicture extends StatefulWidget {
   const ChooseProfilePicture({super.key});
@@ -44,11 +46,6 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
       });
     }
 
-    void submit(ctx) {
-      print('sending data to back end');
-      Navigator.of(ctx).pop();
-    }
-
     final mediaQuery = MediaQuery.of(context);
     final dynamic appBar =
         buildAppBar(text: 'Skip', function: () => skip(context));
@@ -57,6 +54,18 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
         mediaQuery.padding.top);
     final widthScreen = (mediaQuery.size.width);
     final padding = heightScreen * 0.03;
+
+    void submit(ctx) {
+      print('sending data to back end' +
+          (heightScreen * widthScreen * 0.0001).toString());
+      if (kIsWeb) {
+        Navigator.of(ctx).pop();
+        Navigator.of(ctx).pop();
+      }
+      Navigator.of(ctx).pop();
+      Navigator.of(ctx).pushReplacementNamed(Home.routeName, arguments: {});
+    }
+
     return Scaffold(
       appBar: appBar,
       body: Stack(
@@ -107,23 +116,35 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
                     ),
                   ),
                   SizedBox(
-                    height: heightScreen * 0.7,
+                    width: (kIsWeb) ? widthScreen * 0.5 : double.infinity,
+                    height: (kIsWeb) ? heightScreen * 0.5 : heightScreen * 0.7,
                     child: Center(
                       child: Stack(
                         children: [
                           Align(
                             alignment: Alignment.center,
                             child: (_imageFile != null)
-                                ? Image.file(
-                                    _imageFile!,
-                                    fit: BoxFit.cover,
-                                    width: widthScreen * 0.7,
-                                  )
-                                : CircleAvatar(
-                                    radius: widthScreen * 0.4,
-                                    backgroundColor: Colors.white,
-                                    backgroundImage: const AssetImage(
-                                      'assets/images/defaultuser.png',
+                                ? (kIsWeb)
+                                    ? Image.network(
+                                        'https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600w-1714666150.jpg')
+                                    : CircleAvatar(
+                                        radius: widthScreen * 0.45,
+                                        child: CircleAvatar(
+                                          radius: (widthScreen * 0.45),
+                                          backgroundImage: Image.file(
+                                            _imageFile!,
+                                            fit: BoxFit.cover,
+                                          ).image,
+                                        ),
+                                      )
+                                : FittedBox(
+                                    fit: BoxFit.contain,
+                                    child: CircleAvatar(
+                                      radius: widthScreen * 0.4,
+                                      backgroundColor: Colors.white,
+                                      backgroundImage: const AssetImage(
+                                        'assets/images/defaultuser.png',
+                                      ),
                                     ),
                                   ),
                           ),
@@ -135,20 +156,24 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
                                 right: heightScreen * 0.1,
                               ),
                               child: InkWell(
-                                onTap: () => showModalBottomSheet<void>(
-                                  context: context,
-                                  builder: (BuildContext context) {
-                                    return SizedBox(
-                                      height: heightScreen * 0.2,
-                                      child: BottomSheetProfilePicture(
-                                          takephoto, chooseImage),
-                                    );
-                                  },
-                                ),
+                                onTap: (kIsWeb)
+                                    ? () => chooseImage()
+                                    : () => showModalBottomSheet<void>(
+                                          context: context,
+                                          builder: (BuildContext context) {
+                                            return SizedBox(
+                                              height: heightScreen * 0.2,
+                                              child: BottomSheetProfilePicture(
+                                                  takephoto, chooseImage),
+                                            );
+                                          },
+                                        ),
                                 child: Icon(
                                   Icons.camera_alt,
                                   color: Colors.teal,
-                                  size: heightScreen * widthScreen * 0.0002,
+                                  size: (kIsWeb)
+                                      ? 60
+                                      : heightScreen * widthScreen * 0.0002,
                                 ),
                               ),
                             ),
@@ -192,10 +217,4 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
 
 void skip(context) {
   Navigator.of(context).pop();
-}
-
-void submit(String kind, ctx) {
-  print('sending data to back end');
-  Navigator.of(ctx).pop();
-  print('---------------------' + kind + '-------------------');
 }

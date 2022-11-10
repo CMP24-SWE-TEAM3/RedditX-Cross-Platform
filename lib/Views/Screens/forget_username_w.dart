@@ -19,6 +19,7 @@ class ForgetUserNameW extends StatefulWidget {
 }
 
 class _ForgetUserNameWState extends State<ForgetUserNameW> {
+  bool _submited = false;
   TextEditingController emailController = TextEditingController();
   String? errorEmailText;
 
@@ -27,8 +28,9 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
     //Navigator.of(ctx).pop();
   }
 
-  void validate(emailController, ctx) {
+  void validate(emailController, ctx) async {
     setState(() {
+      _submited = true;
       errorEmailText = emailValidation(emailController.text);
     });
 
@@ -143,10 +145,31 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
                         width: fixedWidth * 0.1,
                         child: ElevatedButton(
                           onPressed: () => validate(emailController, context),
-                          child: const Text(
-                            'EMAIL ME',
+                          child: (_submited)
+                              ? const Icon(Icons.check)
+                              : const Text(
+                                  'EMAIL ME',
+                                  style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 12,
+                        left: 4,
+                      ),
+                      child: SizedBox(
+                        width: fixedWidth * 0.27,
+                        child: Visibility(
+                          visible: _submited,
+                          child: Text(
+                            'Thanks! If your Reddit username and email address match, you\'ll get an email with a link to reset your password shortly.',
                             style: TextStyle(
-                              fontWeight: FontWeight.bold,
+                              fontSize: 12,
+                              color: Theme.of(context).colorScheme.primary,
                             ),
                           ),
                         ),

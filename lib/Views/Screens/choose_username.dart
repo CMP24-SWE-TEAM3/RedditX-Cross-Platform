@@ -138,6 +138,7 @@ class _ChooseUserNameState extends State<ChooseUserName> {
                       bottom: heightScreen * 0.01,
                     ),
                     child: TextField(
+                      key: const ValueKey('username_text_field_username_page'),
                       cursorColor: Colors.black,
                       decoration: InputDecoration(
                         errorText: errorUserNameText,
@@ -178,6 +179,7 @@ class _ChooseUserNameState extends State<ChooseUserName> {
                           ),
                         ),
                         IconButton(
+                           key: const ValueKey('refresh_option_button'),
                           onPressed: refresh,
                           icon: const Icon(Icons.refresh_rounded),
                         ),
@@ -201,6 +203,7 @@ class _ChooseUserNameState extends State<ChooseUserName> {
               child: Padding(
                 padding: EdgeInsets.only(bottom: heightScreen * 0.02),
                 child: ContinueUserName(
+                  key: const ValueKey('continue_username_page'),
                   userNameController: userNameController,
                   function: validate,
                   ctx: context,
@@ -224,7 +227,9 @@ class _ChooseUserNameState extends State<ChooseUserName> {
         left: paddingleft,
         bottom: heightScreen * 0.01,
       ),
-      child: ChoiceButton(username, submit2, context),
+      child: ChoiceButton(
+        key: const ValueKey('username_option_button'),
+        username, submit2, context),
     );
   }
 }

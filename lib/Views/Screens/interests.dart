@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:flutter/foundation.dart' show kIsWeb;
 import '../Widgets/interest_button.dart';
 import '../Widgets/interest_choice.dart';
 import '../Widgets/sign_up_bar.dart';
@@ -33,26 +34,26 @@ class _InterestsState extends State<Interests> {
 
   List<String> choosenInterest = [];
 
-  List<String> interests = [
-    'Funny',
-    'Jokes',
-    'Interesting',
-    'Memes',
-    'Lifehacks',
-    'Nature',
-    'Space',
-    'History',
-    'Tech',
-    'Science',
-    'News',
-    'Career',
-    'Books',
-    'Programming',
-    'Travel',
-    'Fishing',
-    'Sports',
-    'Fitness',
-    'Cars'
+  List interests = [
+    ['Funny', '🤣'],
+    ['Jokes', '😄'],
+    ['Interesting', '🤔'],
+    ['Memes', '💩'],
+    ['Lifehacks', '💡'],
+    ['Nature', '🌱'],
+    ['Space', '🚀'],
+    ['History', '🏛️'],
+    ['Tech', '📱'],
+    ['Science', '🧬'],
+    ['News', '🗞️'],
+    ['Career', '💼'],
+    ['Books', '📖'],
+    ['Programming', '💻'],
+    ['Travel', '✈️'],
+    ['Fishing', '🎣'],
+    ['Sports', '🎾'],
+    ['Fitness', '💪'],
+    ['Cars', '🚘']
   ];
 
   @override
@@ -110,7 +111,10 @@ class _InterestsState extends State<Interests> {
                     child: Wrap(
                       children: [
                         ...interests
-                            .map((i) => InterestChoice(i, select))
+                            .map((i) => InterestChoice(
+                                  i,
+                                  select,
+                                ))
                             .toList(),
                       ],
                     ),
@@ -126,6 +130,7 @@ class _InterestsState extends State<Interests> {
               child: Padding(
                 padding: EdgeInsets.only(bottom: heightScreen * 0.02),
                 child: InterestButton(
+                  key: const ValueKey('continue_interest_page'),
                   (num > 2) ? true : false,
                   (num > 2) ? 'Continue' : num.toString() + text,
                   () => submit(choosenInterest, context),
@@ -147,11 +152,32 @@ void submit(List<String> list, ctx) {
     Navigator.of(ctx)
         .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
   } else {
+    final mediaQuery = MediaQuery.of(ctx);
+    final widthScreen = (mediaQuery.size.width);
+    final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
+    // set up the AlertDialog
+    AlertDialog profilePicturePage = AlertDialog(
+      content: Container(
+        width: widthScreen * 0.4,
+        height: heightScreen * 0.73,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+        ),
+        child: const ChooseProfilePicture(),
+      ),
+    );
     print('sending data to back end');
     print(list);
     print('----------------------------------------');
-    Navigator.of(ctx)
-        .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
+    (kIsWeb)
+        ? showDialog(
+            context: ctx,
+            builder: (BuildContext context) {
+              return profilePicturePage;
+            },
+          )
+        : Navigator.of(ctx)
+            .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
   }
 }
 

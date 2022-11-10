@@ -5,6 +5,7 @@ import 'Views/Screens/choose_profilepicture.dart';
 import 'Views/Screens/choose_username.dart';
 import 'Views/Screens/email_login.dart';
 import 'Views/Screens/email_signup.dart';
+import 'Views/Screens/email_signup_w_2.dart';
 import 'Views/Screens/forget_password.dart';
 import 'Views/Screens/forget_username.dart';
 import 'Views/Screens/interests.dart';
@@ -39,12 +40,13 @@ class MyApp extends StatelessWidget {
             ),
       ),
       initialRoute: '/',
-      home: const SignUpPage(),
+      home: (kIsWeb) ? const SignUpPage() : const SignUpPage(),
       routes: {
         Home.routeName: (ctx) => const Home(),
         SignUpPage.routeName: (ctx) => const SignUpPage(),
         EmailLogin.routeName: (ctx) => const EmailLogin(),
         EmailSignup.routeName: (ctx) => const EmailSignup(),
+        EmailSignupW2.routeName: (ctx) => const EmailSignupW2(),
         ForgetPassword.routeName: (ctx) => const ForgetPassword(),
         ForgetUserName.routeName: (ctx) => const ForgetUserName(),
         ChooseUserName.routeName: (ctx) => const ChooseUserName(),

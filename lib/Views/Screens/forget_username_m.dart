@@ -94,6 +94,7 @@ class _ForgetUserNameMState extends State<ForgetUserNameM> {
                       heightScreen * 0.02,
                     ),
                     child: EmailText(
+                      key: const ValueKey('email_forget_username_Page'),
                         emailController: emailController,
                         errorEmailText: errorEmailText),
                   ),
@@ -130,6 +131,7 @@ class _ForgetUserNameMState extends State<ForgetUserNameM> {
               child: Padding(
                 padding: EdgeInsets.only(bottom: heightScreen * 0.02),
                 child: MailMeButton2(
+                  key: const ValueKey('emailme_forget_username_Page'),
                   emailController: emailController,
                   function: validate,
                   ctx: context,

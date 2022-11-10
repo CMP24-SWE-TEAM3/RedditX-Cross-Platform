@@ -68,7 +68,7 @@ class _WButtonState extends State<_WButton> {
           child: Text(
             widget.iconText,
             style: TextStyle(
-              fontSize: 14,
+              fontSize: 12,
               color: colorButton
                   ? Colors.white
                   : Theme.of(context).colorScheme.primary,
