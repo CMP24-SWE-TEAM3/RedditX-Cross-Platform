@@ -1,16 +1,11 @@
-import 'dart:ui';
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:search_project/controllers/search_controller.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:search_project/models/search_model.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class MockSearchService extends Mock implements SearchService {}
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
-  DartPluginRegistrant.ensureInitialized();
   //SharedPreferences.setMockInitialValues({});
   late MockSearchService mockSearchService;
   late SearchController sut;
@@ -36,6 +31,7 @@ void main() {
   });
 
   group('Text Field Functions in controller works well', () {
+    //this test was done at 2022/11/11/1:29
     test('on Hover Text Field ==> onHover variable is true', () {
       sut.onHoverTextField();
       expect(sut.isHoveredTextField, true);
@@ -49,7 +45,10 @@ void main() {
 
     test('on Tap Text Field ==> isTapped variable is true', () {
       sut.onTapTextField();
+
+      /// bottomborderRadius = 0;
       expect(sut.isTapped, true);
+      expect(sut.bottomborderRadius, 0);
     });
 
     test('on Tap outside Text Field ==> isTapped variable is false', () {
@@ -97,42 +96,55 @@ void main() {
     });
   });
 
-  group('Shared preferences of search history', () {
-    test('First item in the search history is the last submitted text', () {
-      sut.searchTextFieldcontroller.text = 'Text to test search history';
-      sut.onSubmittingTextField();
-      expect(sut.restoreSearchHistory![0], 'Text to test search history');
+  group('test calculate age function and formatting it', () {
+    test('Time is more than or equal one year', () {
+      sut.isWeb = true;
+      String shownDate = sut.calculateAge(DateTime(2020, 10, 30));
+      expect(shownDate, '2 years ago');
+
+      sut.isWeb = false;
+      shownDate = sut.calculateAge(DateTime(2020, 10, 30));
+      expect(shownDate, '2y');
     });
 
-    test('Last submitted text is saved in the shared preferences', () async {
-      sut.searchTextFieldcontroller.text = 'Text to test search history';
-      sut.onSubmittingTextField();
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      expect(prefs.getStringList("SearchHistory")![0],
-          'Text to test search history');
+    test('Time is more than or equal one month and less than one year', () {
+      sut.isWeb = true;
+      String shownDate = sut.calculateAge(DateTime(2021, 12, 30));
+      expect(shownDate, '10 months ago');
+
+      sut.isWeb = false;
+      shownDate = sut.calculateAge(DateTime(2021, 12, 30));
+      expect(shownDate, '10mo');
     });
 
-    test('Deleting search history item', () async {
-      //it works like a stack for input text
-      sut.searchTextFieldcontroller.text = 'Text2 to test search history';
-      sut.onSubmittingTextField();
-      sut.searchTextFieldcontroller.text = 'Text1 to test search history';
-      sut.onSubmittingTextField();
-      sut.searchTextFieldcontroller.text = 'Text0 to test search history';
-      sut.onSubmittingTextField();
+    test('Time is more than or equal one day and less than one month', () {
+      sut.isWeb = true;
+      String shownDate = sut.calculateAge(DateTime(2022, 11, 3));
+      expect(shownDate, '8 days ago');
 
-      //delete the second item
-      sut.deleteSearchHistory(1);
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      expect(prefs.getStringList("SearchHistory")![1],
-          'Text2 to test search history');
-      expect(sut.restoreSearchHistory![1], 'Text2 to test search history');
+      sut.isWeb = false;
+      shownDate = sut.calculateAge(DateTime(2022, 11, 3));
+      expect(shownDate, '8d');
     });
 
-    test('Restore search history and save it in the restoreSearchHistory List',
-        () async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      expect(sut.restoreSearchHistory, prefs.getStringList("SearchHistory"));
+    test('Time is more than or equal one hour and less than one day', () {
+      sut.isWeb = true;
+      String shownDate = sut.calculateAge(DateTime(2022, 11, 10, 12));
+      expect(shownDate, '13 hours ago');
+
+      sut.isWeb = false;
+      shownDate = sut.calculateAge(DateTime(2022, 11, 10, 12));
+      expect(shownDate, '13h');
+    });
+
+    test('Time is more than or equal one minute and less than one hour', () {
+      sut.isWeb = true;
+      String shownDate = sut.calculateAge(DateTime(2022, 11, 11, 1, 8));
+      expect(shownDate, '${DateTime.now().minute - 8} minutes ago');
+
+      sut.isWeb = false;
+      shownDate = sut.calculateAge(DateTime(2022, 11, 11, 1, 8));
+      expect(shownDate, '${DateTime.now().minute - 8}m');
     });
   });
 }
