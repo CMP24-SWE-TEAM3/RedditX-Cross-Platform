@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../widgets/search_text_field.dart';
-import '../../controllers/search_controller.dart';
 import '../widgets/search_history_and_trending.dart';
+
+import '../../controllers/search_controller.dart';
 
 class SearchScreenOne extends StatefulWidget {
   const SearchScreenOne({super.key});
@@ -65,15 +67,26 @@ class SearchScreenOneState extends State {
                   width: MediaQuery.of(context).size.width * 0.4,
                   child: const SearchTextFieldWidget(),
                 ),
+
+          //when the field is tapped in web the search history list is shown over the home page
           Provider.of<SearchController>(context).isTapped &&
                   Provider.of<SearchController>(context).isWeb
               ? Stack(
                   alignment: Alignment.topCenter,
                   children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.9,
-                      width: MediaQuery.of(context).size.width,
-                      color: const Color.fromARGB(255, 230, 124, 159),
+                    GestureDetector(
+                      onTap: () {
+                        Provider.of<SearchController>(
+                          context,
+                          listen: false,
+                        ).onExitTapTextField();
+                      },
+                      //will be replaced by home screen
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.9,
+                        width: MediaQuery.of(context).size.width,
+                        color: const Color.fromARGB(255, 230, 124, 159),
+                      ),
                     ),
                     SizedBox(
                       width: MediaQuery.of(context).size.width * 0.4,
@@ -81,6 +94,7 @@ class SearchScreenOneState extends State {
                     ),
                   ],
                 )
+              //when we tap the search field in App we go to the screen the contains the search results
               : Provider.of<SearchController>(context).isTapped &&
                       !Provider.of<SearchController>(context).isWeb
                   ? SizedBox(

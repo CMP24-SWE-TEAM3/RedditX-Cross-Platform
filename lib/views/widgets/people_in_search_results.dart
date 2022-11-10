@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/search_controller.dart';
-import '../../models/search_model.dart';
 import 'circular_image_widget.dart';
 import 'follow_join_button_in_search_rsults.dart';
 import 'username_communityname.dart';
+
+import '../../controllers/search_controller.dart';
+import '../../models/search_model.dart';
 
 class PeopleSearchResult extends StatelessWidget {
   final PersonInSearch personData;
@@ -168,6 +169,7 @@ class PeopleSearchResult extends StatelessWidget {
               FollowJoinButtonWidget(
                 index: index,
                 isPeopleWidget: true,
+                communityOrUserName: personData.userName,
               ),
               const SizedBox(
                 width: 10,

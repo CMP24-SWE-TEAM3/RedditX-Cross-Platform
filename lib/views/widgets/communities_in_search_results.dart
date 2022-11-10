@@ -2,11 +2,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/search_controller.dart';
-import '../../models/search_model.dart';
 import 'circular_image_widget.dart';
 import 'follow_join_button_in_search_rsults.dart';
 import 'username_communityname.dart';
+
+import '../../controllers/search_controller.dart';
+import '../../models/search_model.dart';
+
 
 class CommunitiesSearchResult extends StatelessWidget {
   final CommunityInSearch communityData;
@@ -128,6 +130,7 @@ class CommunitiesSearchResult extends StatelessWidget {
               FollowJoinButtonWidget(
                 index: index,
                 isPeopleWidget: false,
+                communityOrUserName: communityData.name,
               ),
               //space in the right of the button
               const SizedBox(

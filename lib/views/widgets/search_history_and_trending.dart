@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../widgets/trending_today_in_search.dart';
+
+import 'trending_today_in_search.dart';
+
 import '../../controllers/search_controller.dart';
 
 class SearchHostoryAndTrending extends StatelessWidget {
@@ -20,6 +22,7 @@ class SearchHostoryAndTrending extends StatelessWidget {
         : Column(
             children: [
               ListView(
+                key: const Key('search_histort_list'),
                 //WARNING ==> removing shrinkWrap will cause unBounded height runTime exception
                 //because the column gives unBounded constraints
                 //shrinkWrap makes the scroll size same as content size

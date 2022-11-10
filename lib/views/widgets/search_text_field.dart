@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../controllers/search_controller.dart';
+
 import '../screens/search_screen_two.dart';
+
+import '../../controllers/search_controller.dart';
+import '../../models/search_model.dart';
 
 class SearchTextFieldWidget extends StatelessWidget {
   const SearchTextFieldWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    ///MouseRegion widget to detect when the user hover with the mouse on the text field
     return MouseRegion(
-      //MouseRegion widget to detect when the user hover with the mouse on the text field
       onHover: (_) {
         // when the user hover with the mouse on that region ==> to change the colors
         Provider.of<SearchController>(context, listen: false)
@@ -20,25 +23,13 @@ class SearchTextFieldWidget extends StatelessWidget {
         Provider.of<SearchController>(context, listen: false).onExitTextField();
       },
       child: TextField(
+        key: const Key('search_input'),
         //when the user tap on the text field
         onTap: () {
           Provider.of<SearchController>(
             context,
             listen: false,
           ).onTapTextField();
-          if (!Provider.of<SearchController>(
-            context,
-            listen: false,
-          ).isWeb) {
-            //Go to the search history screen
-          }
-        },
-        onTapOutside: (_) {
-          //when the user tap outside the search field
-          Provider.of<SearchController>(
-            context,
-            listen: false,
-          ).onExitTapTextField();
         },
         //user input will be stored in this controller
         controller:
@@ -88,6 +79,7 @@ class SearchTextFieldWidget extends StatelessWidget {
           ),
           //the icon at the end of the textField that allow to delete the text
           suffixIcon: IconButton(
+            key: const Key('clear_text_field_icon'),
             icon: Provider.of<SearchController>(context).closeIcon,
             onPressed: () {
               Provider.of<SearchController>(context, listen: false)
@@ -115,11 +107,14 @@ class SearchTextFieldWidget extends StatelessWidget {
               .isNotEmpty) {
             Provider.of<SearchController>(context, listen: false)
                 .onSubmittingTextField();
+            //Go to search results screen
             Navigator.push(
               context,
               MaterialPageRoute(
                 builder: (context) => ChangeNotifierProvider(
-                  create: (_) => SearchController(),
+                  create: (_) => SearchController(
+                    searchService: SearchService(),
+                  ),
                   child: const SearchScreenTwo(),
                 ),
               ),

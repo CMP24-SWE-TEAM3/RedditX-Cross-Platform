@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../models/search_model.dart';
 import '../../controllers/search_controller.dart';
 
-//the row that view the number of comments and upvotes
+///the row that view the number of comments and upvotes
 class UpVotesAndComments extends StatelessWidget {
   const UpVotesAndComments({
     Key? key,
@@ -12,7 +13,8 @@ class UpVotesAndComments extends StatelessWidget {
   }) : super(key: key);
 
   final PostInSearch postData;
-  //to detect whether post or comment
+
+  ///to detect whether post or comment
   final bool isPost;
   @override
   Widget build(BuildContext context) {

@@ -1,19 +1,25 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../controllers/search_controller.dart';
 
+import '../../controllers/search_controller.dart';
+import '../../styles/custom_icons.dart';
+
+///the button of follow/unfollow in people searchr results
+///the button of join/unjoin in people searchr results
 class FollowJoinButtonWidget extends StatelessWidget {
-  //the button of follow/unfollow in people searchr results
-  //the button of join/unjoin in people searchr results
   const FollowJoinButtonWidget({
-    super.key,
+    Key? key,
     required this.index,
-    required this.isPeopleWidget, //true in people //false in communities
-  });
+    required this.isPeopleWidget,
+    required this.communityOrUserName,
+  }) : super(key: key);
   //to know which button in the list of items
   final int index;
   //to determine whether it is follow button or join button
   final bool isPeopleWidget;
+
+  final String communityOrUserName;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +50,9 @@ class FollowJoinButtonWidget extends StatelessWidget {
               ).onExitJoinButton(index);
       },
       child: TextButton(
+        key: isPeopleWidget
+            ? const Key('follow_button')
+            : const Key('Join_Button'),
         //call onPressing function from controller
         onPressed: () {
           isPeopleWidget
@@ -55,7 +64,52 @@ class FollowJoinButtonWidget extends StatelessWidget {
                   context,
                   listen: false,
                 ).onPressingJoinButton(index);
+                ///alert when click the follow or join button
+                ///it will appears for 5 seconds
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              key: isPeopleWidget
+                  ? const Key('follow_alert')
+                  : const Key('Join_alert'),
+              backgroundColor: Colors.white,
+              duration: const Duration(seconds: 5),
+              content: Row(
+                children: [
+                  const Icon(CustomIcons.reddit),
+                  Text(
+                    style: const TextStyle(color: Colors.black),
+                    isPeopleWidget
+                        ? Provider.of<SearchController>(context, listen: false)
+                                .isFollowing[index]
+                            ? Provider.of<SearchController>(context,
+                                        listen: false)
+                                    .isWeb
+                                ? '  Successfully followed $communityOrUserName'
+                                : '  Following $communityOrUserName'
+                            : Provider.of<SearchController>(context,
+                                        listen: false)
+                                    .isWeb
+                                ? '  Successfully unfollowed $communityOrUserName'
+                                : '  You are no longer following $communityOrUserName'
+                        : Provider.of<SearchController>(context, listen: false)
+                                .isJoining[index]
+                            ? Provider.of<SearchController>(context,
+                                        listen: false)
+                                    .isWeb
+                                ? '  Successfully joined $communityOrUserName'
+                                : '  You have joined the $communityOrUserName community!'
+                            : Provider.of<SearchController>(context,
+                                        listen: false)
+                                    .isWeb
+                                ? '  Successfully left $communityOrUserName'
+                                : '  You have left the $communityOrUserName community',
+                  ),
+                ],
+              ),
+            ),
+          );
         },
+
         style: ButtonStyle(
           backgroundColor: MaterialStateProperty.resolveWith<Color?>(
             (Set<MaterialState> states) {

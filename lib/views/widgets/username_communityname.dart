@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 
 class UserOrCommunityNameText extends StatelessWidget {
-  //the text widget that show the username or community name in search
+  ///the text widget that show the username or community name in search
   const UserOrCommunityNameText({
     super.key,
     required this.usernameOrCommunityName,
   });
-  //the text to be shown
+
+  ///the text to be shown
   final String usernameOrCommunityName;
 
   @override

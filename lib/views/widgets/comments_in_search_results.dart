@@ -2,12 +2,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/search_controller.dart';
-import '../../models/search_model.dart';
 import 'circular_image_widget.dart';
 import 'community_icon_and_2lines_app.dart';
 import 'community_icon_and_2lines_web.dart';
 import 'upvotes_and_comments.dart';
+
+import '../../controllers/search_controller.dart';
+import '../../models/search_model.dart';
+
 
 class CommentsSearchResult extends StatelessWidget {
   final CommentInSearch commentData;
@@ -141,10 +143,11 @@ class CommentsSearchResult extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Text(
+                            key: const Key('comment_content'),
                             maxLines:
                                 Provider.of<SearchController>(context).isWeb
                                     ? null
-                                    : 7,
+                                    : 9,
                             overflow:
                                 Provider.of<SearchController>(context).isWeb
                                     ? null

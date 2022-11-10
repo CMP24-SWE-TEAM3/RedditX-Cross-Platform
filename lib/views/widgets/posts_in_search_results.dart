@@ -4,12 +4,13 @@ import 'package:float_column/float_column.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../controllers/search_controller.dart';
-import '../../models/search_model.dart';
-
 import 'community_icon_and_2lines_app.dart';
 import 'community_icon_and_2lines_web.dart';
 import 'upvotes_and_comments.dart';
+
+
+import '../../controllers/search_controller.dart';
+import '../../models/search_model.dart';
 
 class PostsSearchResult extends StatelessWidget {
   final PostInSearch postData;
@@ -89,6 +90,7 @@ class PostsSearchResult extends StatelessWidget {
                     : Container(),
                 //to make the poxt text wrap the image
                 WrappableText(
+                  key: const Key('post_content'),
                   padding: const EdgeInsets.all(10),
                   textAlign: TextAlign.start,
                   text: TextSpan(
@@ -209,6 +211,7 @@ class PostTextWidget extends StatelessWidget {
     //else==> just text
     return postData.flairText == ''
         ? Text(
+            key: const Key('post_content'),
             postData.postText,
             style: const TextStyle(
               color: Colors.black,
@@ -218,6 +221,7 @@ class PostTextWidget extends StatelessWidget {
           )
         //RichText that wrap text with widgets to wrap post text with flait text container
         : RichText(
+            key: const Key('post_content'),
             text: TextSpan(
               children: [
                 //post text

@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../screens/search_screen_two.dart';
+
 import '../../controllers/search_controller.dart';
+import '../../models/search_model.dart';
 
 class SearchHistoryWidget extends StatelessWidget {
-  //the text that will be passed to the widget to show
+  ///the text that will be passed to the widget to show
   final String textToShow;
-  //the index of this item in the list of search history
-  //it is used to delete the item when the user dlick on delete icon
+
+  ///the index of this item in the list of search history
+  ///it is used to detect the item when the user click on it or delete it
   final int myIndex;
 
   //constructor to pass the text and index to the widget
@@ -19,19 +23,26 @@ class SearchHistoryWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //to detect when the item is clicked
+    //GestureDetector to detect when the item is clicked
     return GestureDetector(
       onTap: () {
         Provider.of<SearchController>(context, listen: false)
             .searchHistoryClicked(textToShow, myIndex);
+        //when it is clicked ==> Go to search results screen
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChangeNotifierProvider(
+              create: (_) => SearchController(
+                searchService: SearchService(),
+              ),
+              child: const SearchScreenTwo(),
+            ),
+          ),
+        );
       },
       child: Container(
-        //if an item is clicked && the clicked item is the current item ==> its color will be grey
-        color: (Provider.of<SearchController>(context).isSearchHistoryClicked &&
-                Provider.of<SearchController>(context).clickedItemIndex ==
-                    myIndex)
-            ? const Color.fromRGBO(230, 230, 230, 1)
-            : Colors.white,
+        color: Colors.white,
         child: Row(
           children: [
             Icon(
@@ -45,6 +56,7 @@ class SearchHistoryWidget extends StatelessWidget {
                   : Colors.grey,
             ),
             Text(
+              key: Key('search_history_item_$myIndex'),
               textToShow,
             ),
             IconButton(

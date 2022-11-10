@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
 import '../../controllers/search_controller.dart';
 
 class SearchScreenTwo extends StatelessWidget {
@@ -52,10 +53,10 @@ class SearchScreenTwo extends StatelessWidget {
                             ),
                           ),
                     tabs: const [
-                      Tab(text: 'Posts'),
-                      Tab(text: 'Comments'),
-                      Tab(text: 'Communities'),
-                      Tab(text: 'People'),
+                      Tab(key: Key('posts_tab'), text: 'Posts'),
+                      Tab(key: Key('comments_tab'), text: 'Comments'),
+                      Tab(key: Key('communities_tab'), text: 'Communities'),
+                      Tab(key: Key('people_tab'), text: 'People'),
                     ],
                   ),
                 ),

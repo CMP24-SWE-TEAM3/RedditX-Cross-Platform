@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../models/search_model.dart';
+
 import 'circular_image_widget.dart';
 
-//community icon and the line next to it in web
+import '../../models/search_model.dart';
+
+//community icon and the line next to it in web posts search results
 class CommIconAndNextLinesWeb extends StatelessWidget {
   const CommIconAndNextLinesWeb({
     super.key,

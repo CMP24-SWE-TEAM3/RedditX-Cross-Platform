@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
-import '../../models/search_model.dart';
+
 import 'circular_image_widget.dart';
 
-//community icon annd the two lines next to it in App
+import '../../models/search_model.dart';
+
+///community icon annd the two lines next to it in App posts search results
 class CommIconAndTwoLinesApp extends StatelessWidget {
   const CommIconAndTwoLinesApp({
     super.key,
