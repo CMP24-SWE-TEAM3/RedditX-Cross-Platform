@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:reddit/Controller/post_mobile_provider.dart';
 import 'package:reddit/View/Styles/custom_icons.dart';
 import 'package:reddit/View/Widgets/Comments.dart';
+import 'package:reddit/View/Widgets/popup_menu.dart';
 
 class post_screen extends StatefulWidget {
   const post_screen({Key? key}) : super(key: key);
@@ -14,6 +15,15 @@ class post_screen extends StatefulWidget {
 }
 
 class _post_screenState extends State<post_screen> {
+  List commentsText = [
+    'The result of the code above will be a padding of 10% of the height of the screen from top and 10% of the width of the screen from left. That’s how you can set your padding dynamically. ( Also be aware that you cannot use const keyword if you’re using mediaQuery values as the value is not available at the compile time.',
+    'What you are doing right now is that there will be a padding of 10 pixels from top and 10 pixels from left side of the screen. So that the Container might have bigger or smaller shapes on different screen sizes. You can do it dynamically by using the screenSize values and media query so that you set the padding according to the screen size:',
+    'The result of the code above will be a padding of 10% of the height of the screen from top and 10% of the width of the screen from left. That’s how you can set your padding dynamically. ( Also be aware that you cannot use const keyword if you’re using mediaQuery values as the value is not available at the compile time.',
+    'What you are doing right now is that there will be a padding of 10 pixels from top and 10 pixels from left side of the screen. So that the Container might have bigger or smaller shapes on different screen sizes. You can do it dynamically by using the screenSize values and media query so that you set the padding according to the screen size:',
+    'The result of the code above will be a padding of 10% of the height of the screen from top and 10% of the width of the screen from left. That’s how you can set your padding dynamically. ( Also be aware that you cannot use const keyword if you’re using mediaQuery values as the value is not available at the compile time.',
+    'What you are doing right now is that there will be a padding of 10 pixels from top and 10 pixels from left side of the screen. So that the Container might have bigger or smaller shapes on different screen sizes. You can do it dynamically by using the screenSize values and media query so that you set the padding according to the screen size:',
+  ];
+
   void sort_comments(BuildContext ctx) {
     showModalBottomSheet(
         context: ctx,
@@ -131,23 +141,63 @@ class _post_screenState extends State<post_screen> {
   @override
   Widget build(BuildContext context) {
     var screen_width = MediaQuery.of(context).size.width;
+    Icon postSubscribe = Icon(Icons.notifications_none_rounded);
     return Scaffold(
       appBar: AppBar(
         elevation: 1.5,
         leadingWidth: 100,
         title: Text(''),
-        backgroundColor: Colors.white54,
+        backgroundColor: Colors.white24,
         actions: [
           IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.notifications_none_rounded),
+            onPressed: () {
+              setState(() {
+                postSubscribe =
+                    (postSubscribe == Icon(Icons.notifications_none_rounded))
+                        ? Icon(Icons.notifications)
+                        : Icon(Icons.notifications_none_rounded);
+              });
+            },
+            icon: postSubscribe,
             color: Colors.white,
           ),
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.more_vert_rounded),
-            color: Colors.white,
-          ),
+          const PopupMen(MenuList: [
+            PopupMenuItem(
+                child: ListTile(
+              leading: Icon(Icons.share_outlined),
+              title: Text("Share"),
+            )),
+            PopupMenuItem(
+                child: ListTile(
+              leading: Icon(Icons.bookmark_border_rounded),
+              title: Text("Save"),
+            )),
+            PopupMenuItem(
+                child: ListTile(
+              leading: Icon(Icons.content_copy_rounded),
+              title: Text("Copy text"),
+            )),
+            PopupMenuItem(
+                child: ListTile(
+              leading: Icon(Icons.remove_red_eye),
+              title: Text("Hide"),
+            )),
+            PopupMenuItem(
+                child: ListTile(
+              leading: Icon(Icons.block_outlined),
+              title: Text("Block account"),
+            )),
+            PopupMenuItem(
+                child: ListTile(
+              leading: Icon(Icons.flag),
+              title: Text("Report"),
+            )),
+          ], icon: Icon(Icons.more_vert_rounded)),
+          // IconButton(
+          //   onPressed: () {},
+          //   icon: Icon(Icons.more_vert_rounded),
+          //   color: Colors.white,
+          // ),
           // PopupMenuButton(
           //     itemBuilder: ((context) => [
           //           PopupMenuItem(
@@ -229,16 +279,31 @@ class _post_screenState extends State<post_screen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
+                        Spacer(),
                         Row(
                           children: [
                             IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.arrow_upward_rounded)),
-                            Text("145"),
+                              onPressed: () {
+                                setState(() {
+                                  Provider.of<MobilePostProvider>(context)
+                                      .likePost();
+                                });
+                              },
+                              icon: Icon(CustomIcons.up_outline),
+                            ),
+                            Text('0'),
                             IconButton(
-                                onPressed: () {},
-                                icon: Icon(Icons.arrow_downward)),
+                                onPressed: () {
+                                  setState(() {
+                                    Provider.of<MobilePostProvider>(context)
+                                        .disLikePost();
+                                  });
+                                },
+                                icon: Icon(CustomIcons.down_outline)),
                           ],
+                        ),
+                        Spacer(
+                          flex: 2,
                         ),
                         InkWell(
                           onTap: () {},
@@ -246,11 +311,12 @@ class _post_screenState extends State<post_screen> {
                             children: [
                               IconButton(
                                   onPressed: () {},
-                                  icon: Icon(Icons.mode_comment_outlined)),
+                                  icon: Icon(CustomIcons.comment)),
                               Text("145"),
                             ],
                           ),
                         ),
+                        Spacer(),
                         InkWell(
                           onTap: () {},
                           child: Row(
@@ -262,6 +328,9 @@ class _post_screenState extends State<post_screen> {
                             ],
                           ),
                         ),
+                        Spacer(),
+                        IconButton(
+                            onPressed: () {}, icon: Icon(CustomIcons.gift)),
                       ],
                     ),
                     Container(
@@ -283,10 +352,22 @@ class _post_screenState extends State<post_screen> {
                             Text('   Sort Comment'),
                           ]),
                         )),
-                    comments(),
-                    comments(),
-                    comments(),
-                    comments(),
+                    // for(int i = 0; i< commentsText.length; i++ ){
+                    //   comments(commentsText[i]),
+                    // },
+                    Column(
+                      children: <Widget>[
+                        for (var item in commentsText)
+                          comments(
+                            commentText: item,
+                          )
+                      ],
+                    ),
+
+                    SizedBox(
+                      height: 40,
+                      width: double.infinity,
+                    )
                   ]),
                 ),
               ),
@@ -298,29 +379,47 @@ class _post_screenState extends State<post_screen> {
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
                     children: [
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {},
-                          child: TextFormField(
-                            decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8),
-                                borderSide: BorderSide(
-                                    width: 100,
-                                    color: Color.fromARGB(255, 238, 240, 242)),
-                              ),
-                              fillColor: Color.fromRGBO(242, 243, 244, 1),
-                              filled: true,
-                              hintText: '   Add a comment',
-                              hintStyle:
-                                  TextStyle(fontSize: 20, color: Colors.black),
+                      InkWell(
+                        onTap: () {},
+                        child: Container(
+                          decoration: BoxDecoration(
+                              color: Color.fromRGBO(242, 243, 244, 1),
+                              borderRadius: BorderRadius.circular(6)),
+                          width: screen_width * 0.82,
+                          height: 40,
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Text(
+                              '  Add a comment',
+                              style: TextStyle(
+                                  color: Colors.black54, fontSize: 15),
                             ),
                           ),
                         ),
                       ),
+                      // Expanded(
+                      //   child: InkWell(
+                      //     onTap: () {},
+                      //     child: TextFormField(
+                      //       decoration: InputDecoration(
+                      //         enabledBorder: OutlineInputBorder(
+                      //           borderRadius: BorderRadius.circular(8),
+                      //           borderSide: BorderSide(
+                      //               width: 100,
+                      //               color: Color.fromARGB(255, 238, 240, 242)),
+                      //         ),
+                      //         fillColor: Color.fromRGBO(242, 243, 244, 1),
+                      //         filled: true,
+                      //         hintText: '   Add a comment',
+                      //         hintStyle:
+                      //             TextStyle(fontSize: 20, color: Colors.black),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                       IconButton(
                           onPressed: () {},
-                          icon: Icon(Icons.arrow_downward_rounded)),
+                          icon: Icon(Icons.arrow_circle_down_sharp)),
                     ],
                   ),
                 ),

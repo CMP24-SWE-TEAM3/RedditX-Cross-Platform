@@ -6,6 +6,7 @@ class MobilePostProvider with ChangeNotifier {
   bool isPostDisliked = false;
   int reactsCount = 0;
 
+
   bool isPostSaved = false;
 
   List<IconData> bottomSheetPostSortIcons_1 = [
@@ -16,7 +17,8 @@ class MobilePostProvider with ChangeNotifier {
     CustomIcons.chart_outline
   ];
 
-  void likePost() {
+
+    void likePost() {
     if (isPostLiked) {
       reactsCount--;
     } else {

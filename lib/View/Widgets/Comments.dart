@@ -1,23 +1,32 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/View/Styles/custom_icons.dart';
+import 'package:reddit/View/Widgets/popup_menu.dart';
 
 class comments extends StatefulWidget {
-  const comments({Key? key}) : super(key: key);
+  String commentText;
+
+  comments({Key? key, required this.commentText}) : super(key: key);
 
   @override
-  State<comments> createState() => _commentsState();
+  State<comments> createState() => _commentsState(commentText);
 }
 
 class _commentsState extends State<comments> {
-  double container_height = 200;
+  String commentText;
+
+  _commentsState(this.commentText);
+
+  double container_height = 230;
   TextOverflow comments_text = TextOverflow.clip;
   bool is_visible = true;
+
   @override
   Widget build(BuildContext context) {
     var screen_size = MediaQuery.of(context).size;
 
     return InkWell(
       onTap: () => setState(() {
-        container_height = container_height == 50 ? 200 : 50;
+        container_height = container_height == 50 ? 230 : 50;
         comments_text =
             container_height == 50 ? TextOverflow.ellipsis : TextOverflow.clip;
         is_visible = container_height == 50 ? false : true;
@@ -58,7 +67,7 @@ class _commentsState extends State<comments> {
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
-                    'dgdbbgfkj okfmog om okjvmok ldofkn lcvx ovjndfk swo lcvm oief  lmd oi mdvlm qo ldmfd foidf . ,dv oj wr. m df9o',
+                    "${commentText}",
                     overflow: comments_text,
                     style: TextStyle(),
                   ),
@@ -68,14 +77,52 @@ class _commentsState extends State<comments> {
                 visible: is_visible,
                 child: Row(
                   children: [
-                    SizedBox(
-                      width: screen_size.width * 0.26,
+                    Spacer(
+                      flex: 10,
                     ),
-                    IconButton(
-                      onPressed: () {},
-                      icon: Icon(Icons.more_vert_rounded),
-                      color: Colors.black,
-                    ),
+
+                    PopupMen(MenuList: [
+                      PopupMenuItem(
+                          child: ListTile(
+                        leading: Icon(Icons.share_outlined),
+                        title: Text("Share"),
+                      )),
+                      PopupMenuItem(
+                          child: ListTile(
+                        leading: Icon(Icons.bookmark_border_rounded),
+                        title: Text("Save"),
+                      )),
+                      PopupMenuItem(
+                          child: ListTile(
+                        leading: Icon(Icons.notifications_none_rounded),
+                        title: Text("Get reply notifications"),
+                      )),
+                      PopupMenuItem(
+                          child: ListTile(
+                        leading: Icon(Icons.content_copy_rounded),
+                        title: Text("Copy text"),
+                      )),
+                      PopupMenuItem(
+                          child: ListTile(
+                        leading: Icon(Icons.close_fullscreen),
+                        title: Text("Collapse thread"),
+                      )),
+                      PopupMenuItem(
+                          child: ListTile(
+                        leading: Icon(Icons.edit),
+                        title: Text("Edit"),
+                      )),
+                      PopupMenuItem(
+                          child: ListTile(
+                        leading: Icon(Icons.delete),
+                        title: Text("Delete"),
+                      )),
+                    ], icon: Icon(Icons.more_vert_rounded)),
+                    // IconButton(
+                    //   onPressed: () {},
+                    //   icon: Icon(Icons.more_vert_rounded),
+                    //   color: Colors.black,
+                    // ),
                     InkWell(
                       onTap: () {},
                       child: Row(
@@ -90,11 +137,10 @@ class _commentsState extends State<comments> {
                       ),
                     ),
                     IconButton(
-                        onPressed: () {},
-                        icon: Icon(Icons.arrow_upward_rounded)),
+                        onPressed: () {}, icon: Icon(CustomIcons.up_outline)),
                     Text("145"),
                     IconButton(
-                        onPressed: () {}, icon: Icon(Icons.arrow_downward)),
+                        onPressed: () {}, icon: Icon(CustomIcons.down_outline)),
                   ],
                 ),
               ),

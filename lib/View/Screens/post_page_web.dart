@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/Controller/post_mobile_provider.dart';
+import 'package:reddit/View/Styles/custom_icons.dart';
 import 'package:reddit/View/Widgets/web_comments.dart';
 
 class WebPostPage extends StatefulWidget {
@@ -13,7 +14,7 @@ class WebPostPage extends StatefulWidget {
 class _WebPostPageState extends State<WebPostPage> {
   @override
   Widget build(BuildContext context) {
-    var screen_width = MediaQuery.of(context).size.width;
+    final screen_width = MediaQuery.of(context).size.width!;
 
     print(screen_width);
     return Container(
@@ -29,16 +30,19 @@ class _WebPostPageState extends State<WebPostPage> {
           child: Row(
             children: [
               // Post & comments Container
+              SizedBox(
+                width: screen_width * 0.03,
+              ),
               Container(
                   width: screen_width * 0.57,
                   height: 5000,
                   color: Colors.white,
-                  margin: const EdgeInsets.only(right: 12, left: 36, top: 70),
+                  margin: const EdgeInsets.only(top: 70),
                   // Post Area
                   child: Column(
                     children: [
                       Container(
-                        height: 950,
+                        height: 720,
                         // this width will change later depending on post size
                         child: Row(children: [
                           // column of like and dislike
@@ -46,12 +50,13 @@ class _WebPostPageState extends State<WebPostPage> {
                             children: [
                               IconButton(
                                   onPressed: () {},
-                                  icon: Icon(Icons.arrow_upward_rounded)),
+                                  icon: Icon(CustomIcons.up_outline)),
                               Text("145"),
                               IconButton(
                                   onPressed: () {},
-                                  icon: Icon(Icons.arrow_downward)),
+                                  icon: Icon(CustomIcons.down_outline)),
                             ],
+                            mainAxisAlignment: MainAxisAlignment.start,
                           ),
                           // column of the real post
                           Column(
@@ -115,7 +120,7 @@ class _WebPostPageState extends State<WebPostPage> {
                                 children: [
                                   IconButton(
                                       onPressed: () {},
-                                      icon: Icon(Icons.mode_comment_outlined)),
+                                      icon: Icon(CustomIcons.comment)),
                                   Text(
                                     '356 Comments',
                                     style: TextStyle(
@@ -132,7 +137,7 @@ class _WebPostPageState extends State<WebPostPage> {
                                       children: [
                                         IconButton(
                                             onPressed: () {},
-                                            icon: Icon(Icons.card_giftcard)),
+                                            icon: Icon(CustomIcons.gift)),
                                         Text(
                                           'Award',
                                           style: TextStyle(
@@ -197,45 +202,61 @@ class _WebPostPageState extends State<WebPostPage> {
                               SizedBox(
                                 height: 35,
                               ),
-                              Row(
-                                children: [
-                                  Text('Comment as kareem-138'),
-                                  SizedBox(
-                                    width: 450,
-                                  ),
-                                ],
-                              ),
-                              SizedBox(
-                                height: 200,
-                              ),
-                              Row(
-                                children: [
-                                  Text('Sort By:',
-                                      style: TextStyle(
-                                          color: Colors.blue,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 18)),
-                                  SizedBox(
-                                    width: 550,
-                                  ),
-                                ],
-                              ),
                             ],
                           ),
                         ]),
                       ),
-                      WebComments(),
-                      WebComments(),
-                      WebComments(),
-                      WebComments(),
+                      Container(
+                        child: Column(
+                          children: [
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 100),
+                                  child: Text('Comment as kareem-138'),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 200,
+                            ),
+                            Row(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 100),
+                                  child: Text('Sort By:',
+                                      style: TextStyle(
+                                          color: Colors.blue,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 18)),
+                                ),
+                                SizedBox(
+                                  height: 50,
+                                ),
+                              ],
+                            ),
+                            WebComments(),
+                            WebComments(),
+                            WebComments(),
+                            WebComments(),
+                          ],
+                        ),
+                      ),
+
                     ],
                   )),
+              SizedBox(
+                width: screen_width * 0.011,
+              ),
               // sidebar container
               Container(
                 width: screen_width * 0.24,
                 height: 5000,
                 color: Colors.white,
-                margin: const EdgeInsets.only(right: 20, left: 5, top: 70),
+                margin: const EdgeInsets.only(top: 70),
+              ),
+              SizedBox(
+                width: screen_width * 0.015,
               )
             ],
           ),
