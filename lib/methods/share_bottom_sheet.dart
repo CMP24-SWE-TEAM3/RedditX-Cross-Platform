@@ -169,14 +169,14 @@ void shareBottomSheet(BuildContext context, int index) {
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 10, vertical: 20),
                             child: Column(
-                              children: [
+                              children: const [
                                 CircleAvatar(
                                   radius: 30,
-                                  backgroundImage:
-                                      NetworkImage(users[index].avatar),
+                                  backgroundImage: NetworkImage(
+                                      "https://i.pinimg.com/564x/cd/c8/11/cdc8110b6e2f746ab4c615b69d07dbfe.jpg"),
                                 ),
-                                const SizedBox(height: 10),
-                                const FittedBox(
+                                SizedBox(height: 10),
+                                FittedBox(
                                     fit: BoxFit.contain, child: Text("Profile"))
                               ],
                             )),

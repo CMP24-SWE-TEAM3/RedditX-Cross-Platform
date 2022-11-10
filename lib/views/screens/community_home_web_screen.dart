@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
+import 'package:reddit/methods/show_snack_bar.dart';
 import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/models/community_model.dart';
 import 'package:reddit/models/post_model.dart';
@@ -102,8 +103,8 @@ class CommunityWebScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           onTap: () {
-                                            showToast(
-                                                "Successfully left r/aww");
+                                            showToast("Successfully left r/${communityModel1.name}");
+  
                                             Provider.of<CommunityProvider>(
                                                     context,
                                                     listen: false)
@@ -129,7 +130,7 @@ class CommunityWebScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20),
                                     onTap: () {
                                       value.joinCommunity();
-                                      showToast("Successfully joined r/aww");
+                                      showToast("Successfully joined r/${communityModel1.name}");
                                     },
                                     child: const Padding(
                                         padding: EdgeInsets.all(5),

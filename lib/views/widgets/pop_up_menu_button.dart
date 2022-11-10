@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/methods/show_toast.dart';
 
+import '../../methods/show_snack_bar.dart';
 import '../../styles/custom_icons.dart';
 
 /// Pop up menu 
@@ -26,8 +27,8 @@ class PopUpMenu extends StatelessWidget {
               onTap: () {
                 value.saveUnsavePost(index);
                 (value.isPostSaved[index])
-                    ? showToast("Post saved!")
-                    : showToast("Post unsaved");
+                    ?showSnackBar(context,"Post saved!")
+                    :showSnackBar(context, "Post unsaved"); 
               },
               value: (value.isPostSaved[index]) ? "Unsave" : "Save",
               child: Row(

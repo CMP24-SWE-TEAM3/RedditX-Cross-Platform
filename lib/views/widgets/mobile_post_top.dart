@@ -8,8 +8,7 @@ import '../../models/post_model.dart';
 
 /// Shows the top part of the communnity post
 class TopMobilePost extends StatelessWidget {
-
-   /// To determine the view of the top part of the post
+  /// To determine the view of the top part of the post
   /// As it has different views in home, community and profile
   final String postPlace;
 
@@ -27,7 +26,6 @@ class TopMobilePost extends StatelessWidget {
 
   /// Index of the post
   final int index;
-
 
   /// Constructor of mobile top post widget
   const TopMobilePost(
@@ -70,7 +68,7 @@ class TopMobilePost extends StatelessWidget {
                 children: [
                   InkWell(
                     onTap: () {
-                      showeProfileDialog(context,index);
+                      showeProfileDialog(context, index);
                     },
                     child: Text(
                       "u/THEBNTG",
@@ -95,7 +93,7 @@ class TopMobilePost extends StatelessWidget {
             ],
           ),
           const Spacer(),
-           PopUpMenu(index:index),
+          PopUpMenu(index: index),
         ],
       );
     }
@@ -104,9 +102,9 @@ class TopMobilePost extends StatelessWidget {
       return Row(
         children: [
           InkWell(
-             key: const ValueKey("username_button"),
+            key: const ValueKey("username_button"),
             onTap: () {
-              showeProfileDialog(context,index);
+              showeProfileDialog(context, index);
             },
             child: Text(
               "u/${postsList[index].username}",
@@ -132,7 +130,9 @@ class TopMobilePost extends StatelessWidget {
               ),
             ),
           const Spacer(),
-          PopUpMenu(index: index,),
+          PopUpMenu(
+            index: index,
+          ),
         ],
       );
     } else {
@@ -160,7 +160,9 @@ class TopMobilePost extends StatelessWidget {
               ),
               const Text("  i.redd.it"),
               const Spacer(),
-               PopUpMenu(index: index,),
+              PopUpMenu(
+                index: index,
+              ),
             ],
           )
         ],

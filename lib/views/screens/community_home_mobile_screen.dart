@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
+import 'package:reddit/methods/show_snack_bar.dart';
 import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/styles/custom_icons.dart';
@@ -427,8 +428,11 @@ class CommunityMobileScreen extends StatelessWidget {
                                                             15),
                                                     onTap: () {
                                                       value.joinCommunity();
-                                                      showToast(
+
+                                                      showSnackBar(context,
                                                           "You have joined the r/${communityModel1.name} community");
+
+                                                     
                                                     },
                                                     child: const Padding(
                                                         padding:
