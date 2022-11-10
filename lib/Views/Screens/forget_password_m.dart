@@ -51,7 +51,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
   }
 
   void havingTrouble(havingTroubleurl) {
-    launchUrl(havingTroubleurl);
+    launchUrl(havingTroubleurl, mode: LaunchMode.externalApplication);
   }
 
   void emailLogin(BuildContext ctx) {

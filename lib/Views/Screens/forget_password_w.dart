@@ -50,7 +50,7 @@ class _ForgetPasswordWState extends State<ForgetPasswordW> {
   }
 
   void havingTrouble(havingTroubleurl) {
-    launchUrl(havingTroubleurl);
+    launchUrl(havingTroubleurl, mode: LaunchMode.externalApplication);
   }
 
   @override

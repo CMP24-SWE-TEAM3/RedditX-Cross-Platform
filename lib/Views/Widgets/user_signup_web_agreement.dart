@@ -30,7 +30,8 @@ class UserSignupWebAgreement extends StatelessWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                launchUrl(userAgrementUrl);
+                launchUrl(userAgrementUrl,
+                    mode: LaunchMode.externalApplication);
               },
           ),
           const TextSpan(
@@ -44,7 +45,7 @@ class UserSignupWebAgreement extends StatelessWidget {
             ),
             recognizer: TapGestureRecognizer()
               ..onTap = () {
-                launchUrl(privacyUrl);
+                launchUrl(privacyUrl, mode: LaunchMode.externalApplication);
               },
           ),
         ],

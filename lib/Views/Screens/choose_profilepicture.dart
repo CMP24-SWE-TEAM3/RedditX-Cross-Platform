@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../Widgets/bottm_sheet.dart';
 import '../Widgets/sign_up_bar.dart';
@@ -25,6 +26,14 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
   @override
   Widget build(BuildContext context) {
     Future<void> takephoto() async {
+      PermissionStatus camera = await Permission.camera.request();
+      if (camera == PermissionStatus.permanentlyDenied) {
+        openAppSettings();
+      }
+      PermissionStatus storage = await Permission.storage.request();
+      if (storage == PermissionStatus.permanentlyDenied) {
+        openAppSettings();
+      }
       final pickedFile = await _picker.pickImage(
         source: ImageSource.camera,
       );
@@ -36,6 +45,10 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
     }
 
     Future<void> chooseImage() async {
+      PermissionStatus storage = await Permission.storage.request();
+      if (storage == PermissionStatus.permanentlyDenied) {
+        openAppSettings();
+      }
       final pickedFile = await _picker.pickImage(
         source: ImageSource.gallery,
       );

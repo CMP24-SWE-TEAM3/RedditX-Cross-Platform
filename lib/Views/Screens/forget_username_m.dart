@@ -40,7 +40,7 @@ class _ForgetUserNameMState extends State<ForgetUserNameM> {
   }
 
   void havingTrouble(havingTroubleurl) {
-    launchUrl(havingTroubleurl);
+    launchUrl(havingTroubleurl, mode: LaunchMode.externalApplication);
   }
 
   void emailLogin(BuildContext ctx) {

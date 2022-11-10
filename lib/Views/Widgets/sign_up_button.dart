@@ -68,7 +68,7 @@ class _WButtonState extends State<_WButton> {
           child: Text(
             widget.iconText,
             style: TextStyle(
-              fontSize: 12,
+              fontSize: 14,
               color: colorButton
                   ? Colors.white
                   : Theme.of(context).colorScheme.primary,
@@ -119,7 +119,7 @@ class _MButton extends StatelessWidget {
         child: Text(
           iconText,
           style: const TextStyle(
-            fontSize: 18,
+            fontSize: 16,
             color: Colors.black,
           ),
         ),

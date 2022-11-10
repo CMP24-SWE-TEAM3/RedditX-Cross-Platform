@@ -42,7 +42,7 @@ dependencies:
   username_gen: ^1.0.4
   image_picker: ^0.8.6
   http: ^0.13.5
-  g_recaptcha_v3: ^0.0.5
+  permission_handler: ^10.2.0
 
 dev_dependencies:
   flutter_test:

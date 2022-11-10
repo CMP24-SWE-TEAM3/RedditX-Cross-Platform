@@ -47,7 +47,7 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
   }
 
   void havingTrouble(havingTroubleurl) {
-    launchUrl(havingTroubleurl);
+    launchUrl(havingTroubleurl, mode: LaunchMode.externalApplication);
   }
 
   @override
