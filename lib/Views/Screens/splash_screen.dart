@@ -15,7 +15,8 @@ class SplashScreen extends StatefulWidget {
   State<SplashScreen> createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin {
+class _SplashScreenState extends State<SplashScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   // init State
   @override
@@ -25,7 +26,8 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
       vsync: this,
     );
     _controller.repeat();
-    final signInController = context.read<SignInController>();
+    final signInController =
+        Provider.of<SignInController>(context, listen: false);
     super.initState();
     //timer for 2 seconds
     Timer(

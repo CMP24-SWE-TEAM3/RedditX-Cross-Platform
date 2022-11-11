@@ -29,53 +29,9 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
 
   @override
   Widget build(BuildContext context) {
-    final signInController = context.read<SignInController>();
-    Future<void> takephoto() async {
-      PermissionStatus camera = await Permission.camera.request();
-      if (camera == PermissionStatus.permanentlyDenied) {
-        openAppSettings();
-      }
-      PermissionStatus storage = await Permission.storage.request();
-      if (storage == PermissionStatus.permanentlyDenied) {
-        openAppSettings();
-      }
-      final pickedFile = await _picker.pickImage(
-        source: ImageSource.camera,
-      );
-      setState(() {
-        if (pickedFile != null) {
-          _imageFile = File(pickedFile.path);
-        }
-      });
-    }
-
-    Future<void> chooseImage() async {
-      PermissionStatus storage = await Permission.storage.request();
-      if (storage == PermissionStatus.permanentlyDenied) {
-        openAppSettings();
-      }
-      final pickedFile = await _picker.pickImage(
-        source: ImageSource.gallery,
-      );
-      setState(() {
-        if (pickedFile != null) {
-          _imageFile = File(pickedFile.path);
-        }
-      });
-    }
-
-    final mediaQuery = MediaQuery.of(context);
-    final dynamic appBar =
-        buildAppBar(text: 'Skip', function: () => skip(context));
-    final heightScreen = (mediaQuery.size.height -
-        appBar.preferredSize.height -
-        mediaQuery.padding.top);
-    final widthScreen = (mediaQuery.size.width);
-    final padding = heightScreen * 0.03;
-
     Future<void> submit(ctx) async {
-      final sp = context.read<SignInController>();
-      final ip = context.read<InternetController>();
+      final sp = Provider.of<SignInController>(context, listen: false);
+      final ip = Provider.of<InternetController>(context, listen: false);
       await ip.checkInternetConnection();
 
       if (ip.hasInternet == false) {
@@ -88,6 +44,45 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
           }
         });
       }
+    }
+
+    Future<void> takephoto() async {
+      final sp = Provider.of<SignInController>(context, listen: false);
+      PermissionStatus camera = await Permission.camera.request();
+      if (camera == PermissionStatus.permanentlyDenied) {
+        openAppSettings();
+      }
+      PermissionStatus storage = await Permission.storage.request();
+      if (storage == PermissionStatus.permanentlyDenied) {
+        openAppSettings();
+      }
+      final pickedFile = await _picker.pickImage(
+        source: ImageSource.camera,
+      );
+      if (pickedFile != null) {
+        _imageFile = File(pickedFile.path);
+      }
+      // ignore: use_build_context_synchronously
+      submit(context);
+    }
+
+    Future<void> chooseImage() async {
+      final sp = Provider.of<SignInController>(context, listen: false);
+      PermissionStatus storage = await Permission.storage.request();
+      if (storage == PermissionStatus.permanentlyDenied) {
+        openAppSettings();
+      }
+      final pickedFile = await _picker.pickImage(
+        source: ImageSource.gallery,
+      );
+      if (pickedFile != null) {
+        _imageFile = File(pickedFile.path);
+      }
+      // ignore: use_build_context_synchronously
+      submit(context);
+    }
+
+    void next(ctx) {
       if (kIsWeb) {
         Navigator.of(ctx).pop();
         Navigator.of(ctx).pop();
@@ -95,6 +90,15 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
       Navigator.of(ctx).pop();
       Navigator.of(ctx).pushReplacementNamed(Home.routeName, arguments: {});
     }
+
+    final mediaQuery = MediaQuery.of(context);
+    final dynamic appBar =
+        buildAppBar(text: 'Skip', function: () => skip(context));
+    final heightScreen = (mediaQuery.size.height -
+        appBar.preferredSize.height -
+        mediaQuery.padding.top);
+    final widthScreen = (mediaQuery.size.width);
+    final padding = heightScreen * 0.03;
 
     return Scaffold(
       appBar: appBar,
@@ -149,65 +153,71 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
                     width: (kIsWeb) ? widthScreen * 0.5 : double.infinity,
                     height: (kIsWeb) ? heightScreen * 0.5 : heightScreen * 0.7,
                     child: Center(
-                      child: Stack(
-                        children: [
-                          Align(
-                            alignment: Alignment.center,
-                            child: (_imageFile != null)
-                                ? (kIsWeb)
-                                    ? Image.network(signInController.imageUrl!)
-                                    : CircleAvatar(
-                                        radius: widthScreen * 0.45,
+                      child: Consumer<SignInController>(
+                        builder: (BuildContext context, value, Widget? child) {
+                          return Stack(
+                            children: [
+                              Align(
+                                alignment: Alignment.center,
+                                child: (_imageFile != null)
+                                    ? (kIsWeb)
+                                        ? Image.network(value.imageUrl!)
+                                        : CircleAvatar(
+                                            radius: widthScreen * 0.45,
+                                            child: CircleAvatar(
+                                              radius: (widthScreen * 0.45),
+                                              backgroundImage: Image.network(
+                                                value.imageUrl!,
+                                                fit: BoxFit.cover,
+                                              ).image,
+                                            ),
+                                          )
+                                    : FittedBox(
+                                        fit: BoxFit.contain,
                                         child: CircleAvatar(
-                                          radius: (widthScreen * 0.45),
-                                          backgroundImage: Image.network(
-                                            signInController.imageUrl!,
-                                            fit: BoxFit.cover,
-                                          ).image,
+                                          radius: widthScreen * 0.4,
+                                          backgroundColor: Colors.white,
+                                          backgroundImage: const AssetImage(
+                                            'assets/images/defaultuser.png',
+                                          ),
                                         ),
-                                      )
-                                : FittedBox(
-                                    fit: BoxFit.contain,
-                                    child: CircleAvatar(
-                                      radius: widthScreen * 0.4,
-                                      backgroundColor: Colors.white,
-                                      backgroundImage: const AssetImage(
-                                        'assets/images/defaultuser.png',
                                       ),
+                              ),
+                              Align(
+                                alignment: Alignment.bottomRight,
+                                child: Padding(
+                                  padding: EdgeInsets.only(
+                                    bottom: heightScreen * 0.1,
+                                    right: heightScreen * 0.1,
+                                  ),
+                                  child: InkWell(
+                                    onTap: (kIsWeb)
+                                        ? () => chooseImage()
+                                        : () => showModalBottomSheet<void>(
+                                              context: context,
+                                              builder: (BuildContext context) {
+                                                return SizedBox(
+                                                  height: heightScreen * 0.2,
+                                                  child:
+                                                      BottomSheetProfilePicture(
+                                                          takephoto,
+                                                          chooseImage),
+                                                );
+                                              },
+                                            ),
+                                    child: Icon(
+                                      Icons.camera_alt,
+                                      color: Colors.teal,
+                                      size: (kIsWeb)
+                                          ? 60
+                                          : heightScreen * widthScreen * 0.0002,
                                     ),
                                   ),
-                          ),
-                          Align(
-                            alignment: Alignment.bottomRight,
-                            child: Padding(
-                              padding: EdgeInsets.only(
-                                bottom: heightScreen * 0.1,
-                                right: heightScreen * 0.1,
-                              ),
-                              child: InkWell(
-                                onTap: (kIsWeb)
-                                    ? () => chooseImage()
-                                    : () => showModalBottomSheet<void>(
-                                          context: context,
-                                          builder: (BuildContext context) {
-                                            return SizedBox(
-                                              height: heightScreen * 0.2,
-                                              child: BottomSheetProfilePicture(
-                                                  takephoto, chooseImage),
-                                            );
-                                          },
-                                        ),
-                                child: Icon(
-                                  Icons.camera_alt,
-                                  color: Colors.teal,
-                                  size: (kIsWeb)
-                                      ? 60
-                                      : heightScreen * widthScreen * 0.0002,
                                 ),
                               ),
-                            ),
-                          ),
-                        ],
+                            ],
+                          );
+                        },
                       ),
                     ),
                   )
@@ -222,7 +232,7 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
               child: Padding(
                 padding: EdgeInsets.only(bottom: heightScreen * 0.02),
                 child: ElevatedButton(
-                  onPressed: () => submit(context),
+                  onPressed: () => next(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).colorScheme.primary,
                     minimumSize: const Size(double.infinity, 50),

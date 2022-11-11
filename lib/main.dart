@@ -53,7 +53,7 @@ class MyApp extends StatelessWidget {
               ),
         ),
         initialRoute: '/',
-        home: (kIsWeb) ? const EmailSignup() : const SplashScreen(),
+        home: (kIsWeb) ? const Home() : const SplashScreen(),
         routes: {
           Home.routeName: (ctx) => const Home(),
           SignUpPage.routeName: (ctx) => const SignUpPage(),

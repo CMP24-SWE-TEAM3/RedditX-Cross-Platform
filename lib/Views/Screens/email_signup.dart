@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:provider/provider.dart';
 
 import '../../Controllers/internet_controller.dart';
 import '../../Controllers/sign_in_controller.dart';
@@ -20,8 +21,8 @@ class EmailSignup extends StatelessWidget {
 
 Future<void> submitSignup(
     emailController, userNameController, passwordController, context) async {
-  final sp = context.read<SignInController>();
-  final ip = context.read<InternetController>();
+  final sp = Provider.of<SignInController>(context, listen: false);
+  final ip = Provider.of<InternetController>(context, listen: false);
   await ip.checkInternetConnection();
 
   if (ip.hasInternet == false) {

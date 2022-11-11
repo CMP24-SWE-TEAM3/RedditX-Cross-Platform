@@ -133,8 +133,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
 // handling google sigin in
   Future handleGoogleSignIn() async {
-    final sp = context.read<SignInController>();
-    final ip = context.read<InternetController>();
+    final sp = Provider.of<SignInController>(context, listen: false);
+    final ip = Provider.of<InternetController>(context, listen: false);
     await ip.checkInternetConnection();
 
     if (ip.hasInternet == false) {
@@ -170,8 +170,8 @@ class _SignUpPageState extends State<SignUpPage> {
   // handling facebookauth
   // handling google sigin in
   Future handleFacebookAuth() async {
-    final sp = context.read<SignInController>();
-    final ip = context.read<InternetController>();
+    final sp = Provider.of<SignInController>(context, listen: false);
+    final ip = Provider.of<InternetController>(context, listen: false);
     await ip.checkInternetConnection();
 
     if (ip.hasInternet == false) {

@@ -139,8 +139,8 @@ class _AboutYouState extends State<AboutYou> {
       ),
     );
 
-    final sp = context.read<SignInController>();
-    final ip = context.read<InternetController>();
+    final sp = Provider.of<SignInController>(context, listen: false);
+    final ip = Provider.of<InternetController>(context, listen: false);
     await ip.checkInternetConnection();
 
     if (ip.hasInternet == false) {

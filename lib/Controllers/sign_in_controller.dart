@@ -373,4 +373,6 @@ class SignInController extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  checkInternetConnection() {}
 }

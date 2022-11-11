@@ -42,8 +42,8 @@ class _ChooseUserNameState extends State<ChooseUserName> {
 
   Future<void> submit(String username, ctx) async {
 
-    final sp = context.read<SignInController>();
-      final ip = context.read<InternetController>();
+    final sp = Provider.of<SignInController>(context, listen: false);
+      final ip = Provider.of<InternetController>(context, listen: false);
       await ip.checkInternetConnection();
 
       if (ip.hasInternet == false) {
