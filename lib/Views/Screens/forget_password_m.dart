@@ -7,6 +7,7 @@ import '../Widgets/email_me_button.dart';
 import '../Widgets/sign_up_bar.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import 'email_login.dart';
+import 'forget_password.dart';
 import 'forget_username.dart';
 
 class ForgetPasswordM extends StatefulWidget {
@@ -22,15 +23,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
   TextEditingController userNameController = TextEditingController();
   String? errorUserNameText;
 
-  void submit(userNameController, emailController, ctx) {
-    print('sending data to back end');
-    const snackBar = SnackBar(
-      content: Text('You will recieve an email soon'),
-      duration: Duration(milliseconds: 300),
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    Navigator.of(ctx).pop();
-  }
+
 
   void validate(userNameController, emailController, ctx) {
     setState(() {
@@ -39,7 +32,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
     });
 
     if ((errorEmailText == null) && (errorUserNameText == null)) {
-      submit(emailController, userNameController, ctx);
+      resetPass(emailController, userNameController, ctx);
     } else {
       print(emailController.text + "---" + userNameController.text);
     }

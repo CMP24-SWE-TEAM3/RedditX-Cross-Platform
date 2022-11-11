@@ -35,7 +35,7 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
     });
 
     if (errorEmailText == null) {
-      submit(emailController, ctx);
+      resetUsername(emailController, ctx);
     } else {
       print(emailController.text + "---");
     }

@@ -8,6 +8,7 @@ import '../Widgets/sign_up_bar.dart';
 import '../Widgets/sign_up_button.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
+import 'email_login.dart';
 import 'email_signup.dart';
 import 'forget_password.dart';
 import 'forget_username.dart';
@@ -27,12 +28,6 @@ class _EmailLoginWState extends State<EmailLoginW> {
   TextEditingController passwordController = TextEditingController();
   String? errorPasswordText;
 
-  void submit(userNameController, passwordController, ctx) {
-    print('sending data to back end');
-    Navigator.of(ctx).pop();
-    Navigator.of(ctx).pushReplacementNamed(Home.routeName, arguments: {});
-  }
-
   void validate(userNameController, passwordController, ctx) {
     setState(() {
       _submited = true;
@@ -41,7 +36,7 @@ class _EmailLoginWState extends State<EmailLoginW> {
     });
 
     if ((errorUserNameText == null) && (errorPasswordText == null)) {
-      submit(userNameController, passwordController, ctx);
+      submitlogin(userNameController, passwordController, ctx);
     } else {
       print(userNameController.text + "---" + passwordController.text);
     }

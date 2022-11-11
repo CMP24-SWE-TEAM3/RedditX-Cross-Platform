@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:reddit/Views/Screens/temphome.dart';
 import 'package:username_gen/username_gen.dart';
 
+import '../../Controllers/internet_controller.dart';
+import '../../Controllers/sign_in_controller.dart';
 import '../../Controllers/validations.dart';
 import '../Widgets/choice_button.dart';
 import '../Widgets/continue_username.dart';
 import '../Widgets/sign_up_bar.dart';
+import '../Widgets/snackBar.dart';
 import 'choose_profilepicture.dart';
 import 'interests.dart';
 
@@ -25,15 +29,34 @@ class _ChooseUserNameState extends State<ChooseUserName> {
   var _userNameSuggest = ['', '', ''];
 
   void submit1(userNameController, ctx) {
-    print('sending data to back end');
+    submit(userNameController.text, ctx);
 
-    Navigator.of(ctx)
-        .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
+    
   }
 
   void submit2(String username, ctx) {
-    print('sending data to back end');
+    submit(username, ctx);
 
+    
+  }
+
+  Future<void> submit(String username, ctx) async {
+
+    final sp = context.read<SignInController>();
+      final ip = context.read<InternetController>();
+      await ip.checkInternetConnection();
+
+      if (ip.hasInternet == false) {
+        // ignore: use_build_context_synchronously
+        showSnackBar("Check your Internet connection", context);
+      } else {
+        await sp.sendUserName(username).then((value) {
+          if (sp.hasError == true) {
+            showSnackBar(sp.errorCode.toString(), context);
+          }
+        });
+      }
+      
     Navigator.of(ctx)
         .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
   }

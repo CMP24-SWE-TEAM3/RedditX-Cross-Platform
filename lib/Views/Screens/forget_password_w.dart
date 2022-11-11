@@ -9,6 +9,7 @@ import '../Widgets/sign_up_bar.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import 'email_login.dart';
 import 'email_signup.dart';
+import 'forget_password.dart';
 import 'forget_username.dart';
 
 class ForgetPasswordW extends StatefulWidget {
@@ -25,10 +26,6 @@ class _ForgetPasswordWState extends State<ForgetPasswordW> {
   TextEditingController userNameController = TextEditingController();
   String? errorUserNameText;
 
-  void submit(userNameController, emailController, ctx) {
-    print('sending data to back end');
-    //Navigator.of(ctx).pop();
-  }
 
   void validate(userNameController, emailController, ctx) {
     setState(() {
@@ -38,7 +35,7 @@ class _ForgetPasswordWState extends State<ForgetPasswordW> {
     });
 
     if ((errorEmailText == null) && (errorUserNameText == null)) {
-      submit(emailController, userNameController, ctx);
+      resetPass(emailController, userNameController, ctx);
     } else {
       print(emailController.text + "---" + userNameController.text);
     }

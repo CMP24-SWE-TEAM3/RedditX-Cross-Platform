@@ -11,6 +11,7 @@ import '../Widgets/user_login_agreement.dart';
 import '../Widgets/user_signup_web_agreement.dart';
 import 'about_you.dart';
 import 'email_login.dart';
+import 'email_signup.dart';
 import 'temphome.dart';
 
 class EmailSignupW2 extends StatefulWidget {
@@ -66,9 +67,10 @@ class _EmailSignupW2State extends State<EmailSignupW2> {
     });
 
     if ((errorUserNameText == null) && (errorPasswordText == null)) {
-      submit(userNameController, passwordController, ctx);
-    } else {
-      print("---" + userNameController.text + "---" + passwordController.text);
+      final routeargs =
+          ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+      submitSignup(
+          routeargs['email'], userNameController, passwordController, ctx);
     }
   }
 

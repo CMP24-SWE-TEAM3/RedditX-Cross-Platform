@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
+import '../../Controllers/internet_controller.dart';
+import '../../Controllers/sign_in_controller.dart';
 import '../Widgets/interest_button.dart';
 import '../Widgets/interest_choice.dart';
+import '../Widgets/show_snackbar.dart';
 import '../Widgets/sign_up_bar.dart';
 import 'choose_profilepicture.dart';
 import 'choose_username.dart';
@@ -144,15 +147,31 @@ class _InterestsState extends State<Interests> {
   }
 }
 
-void submit(List<String> list, ctx) {
-  if (false) {
+Future<void> submit(List<String> list, context) async {
+  final sp = context.read<SignInController>();
+  final ip = context.read<InternetController>();
+  await ip.checkInternetConnection();
+
+  if (ip.hasInternet == false) {
+    // ignore: use_build_context_synchronously
+    showSnackBar("Check your Internet connection", context);
+  } else {
+    await sp
+        .interest(list)
+        .then((value) {
+      if (sp.hasError == true) {
+        showSnackBar(sp.errorCode.toString(), context);
+      }
+    });
+  }
+  if (sp.username != null) {
     print('sending data to back end');
     print(list);
     print('----------------------------------------');
-    Navigator.of(ctx)
+    Navigator.of(context)
         .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
   } else {
-    final mediaQuery = MediaQuery.of(ctx);
+    final mediaQuery = MediaQuery.of(context);
     final widthScreen = (mediaQuery.size.width);
     final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
     // set up the AlertDialog
@@ -166,68 +185,15 @@ void submit(List<String> list, ctx) {
         child: const ChooseProfilePicture(),
       ),
     );
-    print('sending data to back end');
-    print(list);
-    print('----------------------------------------');
     (kIsWeb)
         ? showDialog(
-            context: ctx,
+            context: context,
             builder: (BuildContext context) {
               return profilePicturePage;
             },
           )
-        : Navigator.of(ctx)
+        : Navigator.of(context)
             .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
   }
 }
 
-
-/**
- * 
- * 
- * 
- * 
- * 
-
-SizedBox(
-                height: heightScreen * 0.05,
-              ),
-              Padding(
-                padding: EdgeInsets.all(
-                  heightScreen * 0.02,
-                ),
-                child: const Text(
-                  '|\'m a ...',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: Colors.grey,
-                  ),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(
-                  heightScreen * 0.02,
-                ),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ChoiceButton('Man', submit, context),
-                ),
-              ),
-              Padding(
-                padding: EdgeInsets.all(
-                  heightScreen * 0.02,
-                ),
-                child: SizedBox(
-                  width: double.infinity,
-                  child: ChoiceButton('Woman', submit, context),
-                ),
-              ),
-
-
-
-
-
-
-
- */

@@ -4,9 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:provider/provider.dart';
 
+import '../../Controllers/internet_controller.dart';
+import '../../Controllers/sign_in_controller.dart';
 import '../Widgets/bottm_sheet.dart';
 import '../Widgets/sign_up_bar.dart';
+import '../Widgets/snackBar.dart';
 import 'choose_username.dart';
 import 'interests.dart';
 import 'temphome.dart';
@@ -25,6 +29,7 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
 
   @override
   Widget build(BuildContext context) {
+    final signInController = context.read<SignInController>();
     Future<void> takephoto() async {
       PermissionStatus camera = await Permission.camera.request();
       if (camera == PermissionStatus.permanentlyDenied) {
@@ -68,9 +73,21 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
     final widthScreen = (mediaQuery.size.width);
     final padding = heightScreen * 0.03;
 
-    void submit(ctx) {
-      print('sending data to back end' +
-          (heightScreen * widthScreen * 0.0001).toString());
+    Future<void> submit(ctx) async {
+      final sp = context.read<SignInController>();
+      final ip = context.read<InternetController>();
+      await ip.checkInternetConnection();
+
+      if (ip.hasInternet == false) {
+        // ignore: use_build_context_synchronously
+        showSnackBar("Check your Internet connection", context);
+      } else {
+        await sp.sendPhoto(_imageFile!).then((value) {
+          if (sp.hasError == true) {
+            showSnackBar(sp.errorCode.toString(), context);
+          }
+        });
+      }
       if (kIsWeb) {
         Navigator.of(ctx).pop();
         Navigator.of(ctx).pop();
@@ -138,14 +155,13 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
                             alignment: Alignment.center,
                             child: (_imageFile != null)
                                 ? (kIsWeb)
-                                    ? Image.network(
-                                        'https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600w-1714666150.jpg')
+                                    ? Image.network(signInController.imageUrl!)
                                     : CircleAvatar(
                                         radius: widthScreen * 0.45,
                                         child: CircleAvatar(
                                           radius: (widthScreen * 0.45),
-                                          backgroundImage: Image.file(
-                                            _imageFile!,
+                                          backgroundImage: Image.network(
+                                            signInController.imageUrl!,
                                             fit: BoxFit.cover,
                                           ).image,
                                         ),

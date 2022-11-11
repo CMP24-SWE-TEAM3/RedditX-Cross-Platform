@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
+import '../../Controllers/internet_controller.dart';
+import '../../Controllers/sign_in_controller.dart';
+import '../Widgets/snackBar.dart';
 import 'forget_password_m.dart';
 import 'forget_password_w.dart';
 
@@ -12,4 +15,24 @@ class ForgetPassword extends StatelessWidget {
   Widget build(BuildContext context) {
     return (kIsWeb) ? const ForgetPasswordW() : const ForgetPasswordM();
   }
+}
+
+Future<void> resetPass(userNameController, emailController, context) async {
+  final sp = context.read<SignInController>();
+  final ip = context.read<InternetController>();
+  await ip.checkInternetConnection();
+
+  if (ip.hasInternet == false) {
+    // ignore: use_build_context_synchronously
+    showSnackBar("Check your Internet connection", context);
+  } else {
+    await sp
+        .forgetPass(userNameController.text, emailController.text)
+        .then((value) {
+      if (sp.hasError == true) {
+        showSnackBar(sp.errorCode.toString(), context);
+      }
+    });
+  }
+  (kIsWeb) ? null : showSnackBar('You will recieve an email soon', context);
 }

@@ -51,7 +51,9 @@ class _WButtonState extends State<_WButton> {
       onEnter: (val) => onHover(),
       onExit: (val) => onLeave(),
       child: ElevatedButton.icon(
-        onPressed: () => widget.function(context),
+        onPressed: () {
+          widget.function();
+        },
         icon: SizedBox(
           width: 35,
           height: 35,
@@ -102,7 +104,9 @@ class _MButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton.icon(
-      onPressed: () => function(context),
+      onPressed: () {
+        function();
+      },
       icon: SizedBox(
         width: 35,
         height: 35,

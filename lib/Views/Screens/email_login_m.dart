@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../Controllers/internet_controller.dart';
+import '../../Controllers/sign_in_controller.dart';
 import '../Widgets/continue_login_button.dart';
 import '../Widgets/sign_up_bar.dart';
+import '../Widgets/snackBar.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
+import 'email_login.dart';
 import 'email_signup.dart';
 import 'forget_password.dart';
 import 'temphome.dart';
@@ -19,11 +24,7 @@ class _EmailLoginMState extends State<EmailLoginM> {
   TextEditingController userNameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  void submit(userNameController, passwordController, ctx) {
-    print('sending data to back end');
-    Navigator.of(ctx).pop();
-    Navigator.of(ctx).pushReplacementNamed(Home.routeName, arguments: {});
-  }
+
 
   void forgetPass(BuildContext ctx) {
     Navigator.of(ctx).pushNamed(ForgetPassword.routeName, arguments: {});
@@ -147,7 +148,7 @@ class _EmailLoginMState extends State<EmailLoginM> {
                     key: const ValueKey('continue_log_in_Page'),
                     userNameController: userNameController,
                     passwordController: passwordController,
-                    function: submit,
+                    function: submitlogin,
                     ctx: context,
                   ),
                 ),

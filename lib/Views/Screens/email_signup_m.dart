@@ -1,13 +1,18 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../../Controllers/internet_controller.dart';
+import '../../Controllers/sign_in_controller.dart';
 import '../../Controllers/validations.dart';
 import '../Widgets/continue_signup_button.dart';
 import '../Widgets/sign_up_bar.dart';
+import '../Widgets/snackBar.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
 import 'about_you.dart';
 import 'email_login.dart';
+import 'email_signup.dart';
 
 class EmailSignupM extends StatefulWidget {
   const EmailSignupM({super.key});
@@ -29,11 +34,6 @@ class _EmailSignupMState extends State<EmailSignupM> {
     Navigator.of(ctx).pushReplacementNamed(EmailLogin.routeName, arguments: {});
   }
 
-  void submit(emailController, userNameController, passwordController, ctx) {
-    print('sending data to back end');
-    Navigator.of(ctx).pushReplacementNamed(AboutYou.routeName, arguments: {});
-  }
-
   void validate(emailController, userNameController, passwordController, ctx) {
     setState(() => _submit = true);
 
@@ -44,7 +44,7 @@ class _EmailSignupMState extends State<EmailSignupM> {
     if ((errorEmailText == null) &&
         (errorUserNameText == null) &&
         (errorPasswordText == null)) {
-      submit(emailController, userNameController, passwordController, ctx);
+      submitSignup(emailController, userNameController, passwordController, ctx);
     } else {
       print(emailController.text +
           "---" +

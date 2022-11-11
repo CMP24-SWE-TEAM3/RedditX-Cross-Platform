@@ -26,9 +26,8 @@ void emailLogin(BuildContext ctx) {
 }
 
 void submit(emailController, ctx) {
-  print('sending data to back end');
   Navigator.of(ctx)
-      .pushReplacementNamed(EmailSignupW2.routeName, arguments: {});
+      .pushReplacementNamed(EmailSignupW2.routeName, arguments: {'email':emailController.text});
 }
 
 class _EmailSignupWState extends State<EmailSignupW> {
