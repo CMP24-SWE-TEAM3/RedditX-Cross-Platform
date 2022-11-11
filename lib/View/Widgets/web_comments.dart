@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reddit/View/Screens/Post_screen.dart';
 import 'package:reddit/View/Styles/custom_icons.dart';
 
+/// Web comments widget used in web post page
 class WebComments extends StatefulWidget {
   const WebComments({Key? key}) : super(key: key);
 
@@ -62,14 +63,14 @@ class _WebCommentsState extends State<WebComments> {
                 IconButton(
                     onPressed: () {}, icon: Icon(CustomIcons.up_outline)),
                 Text("145"),
-                IconButton(onPressed: () {}, icon: Icon(CustomIcons.down_outline)),
+                IconButton(
+                    onPressed: () {}, icon: Icon(CustomIcons.down_outline)),
                 InkWell(
                   onTap: () {},
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: () {},
-                          icon: Icon(CustomIcons.comment)),
+                          onPressed: () {}, icon: Icon(CustomIcons.comment)),
                       Text(
                         'Reply',
                         style: TextStyle(

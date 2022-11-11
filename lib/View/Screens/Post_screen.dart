@@ -7,6 +7,7 @@ import 'package:reddit/View/Styles/custom_icons.dart';
 import 'package:reddit/View/Widgets/Comments.dart';
 import 'package:reddit/View/Widgets/popup_menu.dart';
 
+/// Mobile post Screen
 class post_screen extends StatefulWidget {
   const post_screen({Key? key}) : super(key: key);
 
@@ -15,6 +16,7 @@ class post_screen extends StatefulWidget {
 }
 
 class _post_screenState extends State<post_screen> {
+  /// List of strings for comments
   List commentsText = [
     'The result of the code above will be a padding of 10% of the height of the screen from top and 10% of the width of the screen from left. That’s how you can set your padding dynamically. ( Also be aware that you cannot use const keyword if you’re using mediaQuery values as the value is not available at the compile time.',
     'What you are doing right now is that there will be a padding of 10 pixels from top and 10 pixels from left side of the screen. So that the Container might have bigger or smaller shapes on different screen sizes. You can do it dynamically by using the screenSize values and media query so that you set the padding according to the screen size:',
@@ -25,6 +27,7 @@ class _post_screenState extends State<post_screen> {
   ];
 
   void sort_comments(BuildContext ctx) {
+    /// Sorting bottom sheet
     showModalBottomSheet(
         context: ctx,
         builder: (_) {
@@ -193,30 +196,6 @@ class _post_screenState extends State<post_screen> {
               title: Text("Report"),
             )),
           ], icon: Icon(Icons.more_vert_rounded)),
-          // IconButton(
-          //   onPressed: () {},
-          //   icon: Icon(Icons.more_vert_rounded),
-          //   color: Colors.white,
-          // ),
-          // PopupMenuButton(
-          //     itemBuilder: ((context) => [
-          //           PopupMenuItem(
-          //               child: Text(
-          //             'kareem',
-          //           )),
-          //           PopupMenuItem(
-          //               child: Text(
-          //             'ashraf',
-          //           )),
-          //           PopupMenuItem(
-          //               child: Text(
-          //             'abdo',
-          //           )),
-          //           PopupMenuItem(
-          //               child: Text(
-          //             'ali',
-          //           )),
-          //         ])),
           CircleAvatar(
             radius: 16.0,
             child: ClipRRect(
@@ -229,8 +208,11 @@ class _post_screenState extends State<post_screen> {
           ),
         ],
       ),
+
+      /// view mobile or web depending on width of the device
       body: (screen_width < 600)
           ? Stack(alignment: AlignmentDirectional.bottomCenter, children: [
+              /// Main screen for mobile post
               SingleChildScrollView(
                 child: Container(
                   child: Column(children: [
@@ -355,6 +337,7 @@ class _post_screenState extends State<post_screen> {
                     // for(int i = 0; i< commentsText.length; i++ ){
                     //   comments(commentsText[i]),
                     // },
+                    /// Comments area
                     Column(
                       children: <Widget>[
                         for (var item in commentsText)
@@ -371,6 +354,8 @@ class _post_screenState extends State<post_screen> {
                   ]),
                 ),
               ),
+
+              /// Add new comment area
               Container(
                 height: 50,
                 width: double.infinity,
@@ -387,8 +372,8 @@ class _post_screenState extends State<post_screen> {
                               borderRadius: BorderRadius.circular(6)),
                           width: screen_width * 0.82,
                           height: 40,
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                          child: const Padding(
+                            padding: EdgeInsets.all(8.0),
                             child: Text(
                               '  Add a comment',
                               style: TextStyle(
@@ -397,26 +382,6 @@ class _post_screenState extends State<post_screen> {
                           ),
                         ),
                       ),
-                      // Expanded(
-                      //   child: InkWell(
-                      //     onTap: () {},
-                      //     child: TextFormField(
-                      //       decoration: InputDecoration(
-                      //         enabledBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(8),
-                      //           borderSide: BorderSide(
-                      //               width: 100,
-                      //               color: Color.fromARGB(255, 238, 240, 242)),
-                      //         ),
-                      //         fillColor: Color.fromRGBO(242, 243, 244, 1),
-                      //         filled: true,
-                      //         hintText: '   Add a comment',
-                      //         hintStyle:
-                      //             TextStyle(fontSize: 20, color: Colors.black),
-                      //       ),
-                      //     ),
-                      //   ),
-                      // ),
                       IconButton(
                           onPressed: () {},
                           icon: Icon(Icons.arrow_circle_down_sharp)),
@@ -425,6 +390,8 @@ class _post_screenState extends State<post_screen> {
                 ),
               ),
             ])
+
+          /// Web post view
           : WebPostPage(),
     );
   }

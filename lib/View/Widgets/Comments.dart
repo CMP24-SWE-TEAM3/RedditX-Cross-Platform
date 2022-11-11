@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:reddit/View/Styles/custom_icons.dart';
 import 'package:reddit/View/Widgets/popup_menu.dart';
 
+/// Mobile comment widget used in mobile post page
 class comments extends StatefulWidget {
   String commentText;
-
   comments({Key? key, required this.commentText}) : super(key: key);
 
   @override
@@ -24,6 +24,7 @@ class _commentsState extends State<comments> {
   Widget build(BuildContext context) {
     var screen_size = MediaQuery.of(context).size;
 
+    /// controlling the size of the comment when clicked
     return InkWell(
       onTap: () => setState(() {
         container_height = container_height == 50 ? 230 : 50;
@@ -80,7 +81,6 @@ class _commentsState extends State<comments> {
                     Spacer(
                       flex: 10,
                     ),
-
                     PopupMen(MenuList: [
                       PopupMenuItem(
                           child: ListTile(
@@ -118,11 +118,6 @@ class _commentsState extends State<comments> {
                         title: Text("Delete"),
                       )),
                     ], icon: Icon(Icons.more_vert_rounded)),
-                    // IconButton(
-                    //   onPressed: () {},
-                    //   icon: Icon(Icons.more_vert_rounded),
-                    //   color: Colors.black,
-                    // ),
                     InkWell(
                       onTap: () {},
                       child: Row(

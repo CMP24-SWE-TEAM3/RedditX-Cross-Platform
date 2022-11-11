@@ -4,6 +4,7 @@ import 'package:reddit/Controller/post_mobile_provider.dart';
 import 'package:reddit/View/Styles/custom_icons.dart';
 import 'package:reddit/View/Widgets/web_comments.dart';
 
+/// The post design on web
 class WebPostPage extends StatefulWidget {
   const WebPostPage({Key? key}) : super(key: key);
 
@@ -14,13 +15,14 @@ class WebPostPage extends StatefulWidget {
 class _WebPostPageState extends State<WebPostPage> {
   @override
   Widget build(BuildContext context) {
-    final screen_width = MediaQuery.of(context).size.width!;
+    final screen_width = MediaQuery.of(context).size.width;
 
-    print(screen_width);
     return Container(
       width: screen_width,
       height: double.infinity,
       color: Color.fromRGBO(50, 50, 50, 1),
+
+      /// The main container the contains the pgae
       child: Container(
         width: screen_width * 0.85,
         height: double.infinity,
@@ -33,6 +35,8 @@ class _WebPostPageState extends State<WebPostPage> {
               SizedBox(
                 width: screen_width * 0.03,
               ),
+
+              /// Post and comments area
               Container(
                   width: screen_width * 0.57,
                   height: 5000,
@@ -242,13 +246,13 @@ class _WebPostPageState extends State<WebPostPage> {
                           ],
                         ),
                       ),
-
                     ],
                   )),
               SizedBox(
                 width: screen_width * 0.011,
               ),
-              // sidebar container
+
+              /// sidebar container
               Container(
                 width: screen_width * 0.24,
                 height: 5000,
