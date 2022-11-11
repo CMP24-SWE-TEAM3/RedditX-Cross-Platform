@@ -2,16 +2,12 @@ import 'package:flutter/material.dart';
 import '../Widgets/setting_email_password_textfield.dart';
 import '../../const/const.dart';
 
-class ChangePasswordScreen extends StatefulWidget {
-  const ChangePasswordScreen({super.key});
-  static const routeName = '/Settings/Account_Settings/Change_Password';
-  @override
-  State<ChangePasswordScreen> createState() => _ChangePasswordScreenState();
-}
 
-class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
+
+class ChangePasswordScreen extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  static const routeName = '/Settings/Account_Settings/Change_Password';
 
   @override
   Widget build(BuildContext context) {

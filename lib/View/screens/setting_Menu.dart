@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:reddit/Controller/Mobile_settings_controller.dart';
 import 'package:reddit/View/screens/account_setting_screen.dart';
 import 'package:reddit/View/screens/change_password_screen.dart';
 import 'package:reddit/View/screens/manage-emails.dart';
@@ -16,7 +18,7 @@ bool sw3BlurNSFW = false;
 bool sw3enble = false;
 
 void main() {
-  runApp(const ChangePasswordScreen());
+  runApp(SettingsMenu());
 }
 
 class SettingsMenu extends StatelessWidget {
@@ -29,34 +31,24 @@ class SettingsMenu extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: white,
       ),
-      home: const SettingsHomePage(
-        title: "Settings",
+      home: ChangeNotifierProvider(
+        create: (_) => SettingsMobileController(),
+        child: SettingsHomePage(),
       ),
       routes: {
-        SettingsHomePage.routeName: (context) =>
-            const SettingsHomePage(title: "Settings"),
-        accountSettingsScreen.routeName: (context) =>
-            const accountSettingsScreen(),
-        manageEmailsScreen.routeName: (context) => const manageEmailsScreen(),
-        UpdateEmailAddress.routeName: (context) => const UpdateEmailAddress(),
-        ChangePasswordScreen.routeName: (context) =>
-            const ChangePasswordScreen(),
+        SettingsHomePage.routeName: (context) => SettingsHomePage(),
+        accountSettingsScreen.routeName: (context) => accountSettingsScreen(),
+        manageEmailsScreen.routeName: (context) => manageEmailsScreen(),
+        UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
+        ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
       },
     );
   }
 }
 
-class SettingsHomePage extends StatefulWidget {
-  const SettingsHomePage({super.key, required this.title});
-
+class SettingsHomePage extends StatelessWidget {
   static const routeName = '/Settings';
-  final String title;
-
-  @override
-  State<SettingsHomePage> createState() => _SettingsHomePageState();
-}
-
-class _SettingsHomePageState extends State<SettingsHomePage> {
+  final String title = "Settings";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,8 +68,16 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
             title: "Account settings for u/USERNAME",
             ico: const Icon(Icons.person),
             onTab: () {
-              Navigator.of(context)
-                  .pushNamed(accountSettingsScreen.routeName, arguments: {});
+              // Navigator.of(context)
+              //     .pushNamed(accountSettingsScreen.routeName, arguments: {});
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ChangeNotifierProvider(
+                      create: (_) => SettingsMobileController(),
+                      child: accountSettingsScreen(),
+                    ),
+                  ));
             },
           ),
           SettingsLabel(title: "PREMIUM"),
@@ -91,29 +91,29 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
           ),
           SettingsLabel(title: "ABOUT"),
           ListTileURL(
-            url: "https://www.redditinc.com/policies/content-policy",
+            url: "http://redditinc.com/policies/content-policy",
             title: "Content policy",
             ico: const Icon(Icons.message_sharp),
           ),
           ListTileURL(
-            url: "https://www.reddit.com/policies/privacy-policy",
+            url: "http://reddit.com/policies/privacy-policy",
             title: "Privacy policy",
             ico: const Icon(Icons.settings),
           ),
           ListTileURL(
-            url: "https://www.redditinc.com/policies/user-agreement",
+            url: "http://redditinc.com/policies/user-agreement",
             title: "User agreement",
             ico: const Icon(Icons.settings),
           ),
           SettingsLabel(title: "SUPPORT"),
           ListTileURL(
-            url: "https://www.reddithelp.com/hc/en-us",
+            url: "http://reddithelp.com/hc/en-us",
             title: "Help center",
             ico: const Icon(Icons.help),
           ),
           ListTileURL(
             url:
-                "https://reddit.zendesk.com/hc/en-us/requests/new?ticket_form_id=65076",
+                "http://reddit.zendesk.com/hc/en-us/requests/new?ticket_form_id=65076",
             title: "Report an issue",
             ico: const Icon(Icons.email_outlined),
           ),

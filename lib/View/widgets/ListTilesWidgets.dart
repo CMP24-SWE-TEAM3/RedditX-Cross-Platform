@@ -1,51 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
-class ListTileCustom extends StatefulWidget {
+import '../../const/const.dart';
+
+class ListTileCustom extends StatelessWidget {
   ListTileCustom(
       {Key? key,
       required this.ico,
       required this.text,
       required this.selector,
-      this.subtitle})
+      this.subtitle,
+      required this.enble,
+      this.onTap})
       : super(key: key);
   Icon ico;
   String? text;
   String? subtitle = " ";
   bool? selector;
+  Function(bool)? onTap = (_) {};
+  bool enble = true;
 
-  @override
-  _ListTileCustomState createState() => _ListTileCustomState(
-      ico: ico, text: text, selector: selector, subtitle: subtitle);
-}
-
-class _ListTileCustomState extends State<ListTileCustom> {
-  Icon? ico;
-  String? text;
-  bool? selector;
-  bool? enble = true;
-
-  String? subtitle = " ";
-  _ListTileCustomState({
-    this.subtitle = " ",
-    required this.ico,
-    required this.text,
-    required this.selector,
-  });
   @override
   Widget build(BuildContext context) {
     return ListTile(
       leading: ico,
       title: Text(text!),
       subtitle: Text(subtitle!),
-      enabled: enble!,
+      enabled: enble,
       trailing: Switch(
-          value: selector!,
-          onChanged: (value) {
-            setState(() {
-              selector = value;
-            });
-          }),
+        value: selector!,
+        onChanged: (enble) ? onTap : (_) {},
+        activeColor: white,
+        inactiveTrackColor: Colors.grey,
+        activeTrackColor: Colors.blue,
+        splashRadius: 20,
+      ),
     );
   }
 }
@@ -138,13 +128,7 @@ class ListTileURL extends StatelessWidget {
       trailing: const Icon(Icons.arrow_forward),
       title: Text(title!),
       onTap: (() async {
-        if (await canLaunchUrl(Uri.parse(url))) {
-          await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
-        } else {
-          throw 'Could not launch $url';
-        }
-
-        //launchUrl(url);
+        await launchUrl(Uri.parse(url), mode: LaunchMode.inAppWebView);
       }),
     );
   }

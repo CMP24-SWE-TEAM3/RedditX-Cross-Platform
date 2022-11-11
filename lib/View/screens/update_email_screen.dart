@@ -2,16 +2,11 @@ import 'package:flutter/material.dart';
 import '../Widgets/setting_email_password_textfield.dart';
 import '../../const/const.dart';
 
-class UpdateEmailAddress extends StatefulWidget {
-  const UpdateEmailAddress({super.key});
-  static const routeName = '/Settings/Account_Settings/Update_Email';
-  @override
-  State<UpdateEmailAddress> createState() => _UpdateEmailAddressState();
-}
-
-class _UpdateEmailAddressState extends State<UpdateEmailAddress> {
+class UpdateEmailAddress extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  static const routeName = '/Settings/Account_Settings/Update_Email';
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +47,7 @@ class _UpdateEmailAddressState extends State<UpdateEmailAddress> {
               ),
             ],
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
             width: double.infinity,
           ),
@@ -64,26 +59,53 @@ class _UpdateEmailAddressState extends State<UpdateEmailAddress> {
             padding: const EdgeInsets.all(8.0),
             child: PasswordText(passwordController: passwordController),
           ),
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: Row(
-              children: [
-                OutlinedButton(
-                  onPressed: () {},
-                  child: Text(
-                    "Cancel",
-                    style: TextStyle(color: Colors.black),
+          Expanded(
+            child: Align(
+              alignment: FractionalOffset.bottomCenter,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Expanded(
+                      flex: 1,
+                      child: OutlinedButton(
+                        onPressed: () {},
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(white),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: BorderSide(color: Colors.blue)),
+                          ),
+                          //maximumSize: MaterialStateProperty.all(double.infinity),
+                        ),
+                        child: const Text(
+                          "Cancel",
+                          style: TextStyle(color: Colors.black),
+                        ),
+                      ),
+                    ),
                   ),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(white)),
-                ),
-                OutlinedButton(
-                  onPressed: () {},
-                  child: Text("Save"),
-                  style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Colors.blue)),
-                )
-              ],
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: OutlinedButton(
+                      onPressed: () {},
+                      style: ButtonStyle(
+                          backgroundColor:
+                              MaterialStateProperty.all(Colors.blue),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                                  RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(18.0),
+                                      side: BorderSide(color: Colors.blue)))),
+                      child: const Text("Save"),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ],

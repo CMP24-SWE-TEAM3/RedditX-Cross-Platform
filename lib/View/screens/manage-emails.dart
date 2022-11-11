@@ -6,16 +6,8 @@ import 'package:reddit/View/widgets/default_buttom_sheet.dart';
 import 'package:reddit/View/widgets/settingLabelWidget.dart';
 import '../../model/settings_model.dart';
 
-class manageEmailsScreen extends StatefulWidget {
-  const manageEmailsScreen({super.key});
+class manageEmailsScreen extends StatelessWidget {
   static const routeName = '/Settings/Account_Settings/Manage_Emails';
-  @override
-  State<manageEmailsScreen> createState() => accountStateSettingsScreen();
-}
-
-class accountStateSettingsScreen extends State<manageEmailsScreen> {
-  bool inboxMessagesEmails = false;
-  bool chatRequestsEmails = false;
   bool newUserWelcomeEmails = false;
   bool commentsOnYourPostsEmails = false;
   bool repliesToYourCommentsEmails = false;
@@ -30,6 +22,10 @@ class accountStateSettingsScreen extends State<manageEmailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    //bool inboxMessagesEmails =
+    bool unsubscribeEnabling =
+        Provider.of<SettingsMobileController>(context, listen: true)
+            .unsubscribeFromAllEmailsEnabling;
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -42,84 +38,164 @@ class accountStateSettingsScreen extends State<manageEmailsScreen> {
         children: [
           SettingsLabel(title: "MESSAGES"),
           ListTileCustom(
-              ico: const Icon(Icons.email_outlined),
-              text: "Inbox messages",
-              subtitle: "",
-              selector: inboxMessagesEmails),
+            ico: const Icon(Icons.email_outlined),
+            text: "Inbox messages",
+            subtitle: "",
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .inboxMessagesEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleInboxMessagesEmails(),
+          ),
           ListTileCustom(
             ico: const Icon(Icons.chat),
             text: "Allow chat requests",
             subtitle: "",
-            selector: chatRequestsEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .chatRequestsEmails,
+            onTap: (_) {
+              Provider.of<SettingsMobileController>(context, listen: false)
+                  .toggleChatRequestsEmails();
+            },
           ),
           SettingsLabel(title: "ACTIVITY"),
           ListTileCustom(
             ico: const Icon(Icons.email_outlined),
             text: "New user welcome",
             subtitle: "",
-            selector: newUserWelcomeEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .newUserWelcomeEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleNewUserWelcomeEmails(),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Comments On Your Posts",
             subtitle: "",
-            selector: commentsOnYourPostsEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .commentsOnYourPostsEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleCommentsOnYourPostsEmails(),
           ),
           ListTileCustom(
             ico: const Icon(Icons.reply_outlined),
             text: "Replies To Your Comments",
             subtitle: "",
-            selector: repliesToYourCommentsEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .repliesToYourCommentsEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleRepliesToYourCommentsEmails(),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Upvotes On Your Posts",
             subtitle: "",
-            selector: upvotesOnYourPostsEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .upvotesOnYourPostsEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleUpvotesOnYourPostsEmails(),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Upvotes On Your Comments",
             subtitle: "",
-            selector: upvotesOnYourCommentsEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .upvotesOnYourCommentsEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleUpvotesOnYourCommentsEmails(),
           ),
           ListTileCustom(
             ico: const Icon(Icons.person),
             text: "Username mentions",
             subtitle: "",
-            selector: userNameMentionsEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .userNameMentionsEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleUserNameMentionsEmails(),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "New followers",
             subtitle: "",
-            selector: newFollowersEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .newFollowersEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleNewFollowersEmails(),
           ),
           SettingsLabel(title: "NEWSLETTER"),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Daily Digest",
             subtitle: "",
-            selector: dailyDigestEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .dailyDigestEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleDailyDigestEmails(),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Weekly Recap",
             subtitle: "",
-            selector: weeklyRecapEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .weeklyRecapEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleWeeklyRecapEmails(),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Community Discovery",
             subtitle: "",
-            selector: communityDiscoveryEmails,
+            enble: unsubscribeEnabling,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .communityDiscoveryEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleCommunityDiscoveryEmails(),
           ),
           SettingsLabel(title: ""),
           ListTileCustom(
             ico: const Icon(Icons.email_outlined),
             text: "Unsubscribe from all emails",
             subtitle: "",
-            selector: unsubscribeFromAllEmails,
+            enble: true,
+            selector:
+                Provider.of<SettingsMobileController>(context, listen: true)
+                    .unsubscribeFromAllEmails,
+            onTap: (_) =>
+                Provider.of<SettingsMobileController>(context, listen: false)
+                    .toggleUnsubscribeFromAllEmails(),
           ),
         ],
       ),
