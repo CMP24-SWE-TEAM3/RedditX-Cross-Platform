@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/Views/Screens/temphome.dart';
 
-
-
 import '../../../controllers/internet_controller.dart';
 import '../../../controllers/sign_in_controller.dart';
 import '../../widgets/authentication/show_snackbar.dart';
@@ -11,7 +9,6 @@ import '../../widgets/authentication/sign_up_bar.dart';
 import '../../widgets/authentication/sign_up_button.dart';
 import '../../widgets/authentication/user_privacy_agreement.dart';
 import 'email_login.dart';
-
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -46,88 +43,90 @@ class _SignUpPageState extends State<SignUpPage> {
         Uri.parse('https://www.reddit.com/policies/privacy-policy');
     return Scaffold(
         appBar: appBar,
-        body: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              SizedBox(
-                height: heightScreen * 0.05,
-              ),
-              const Text(
-                'Dive into anything',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.5,
+        body: SingleChildScrollView(
+          child: SizedBox(
+            width: double.infinity,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  height: heightScreen * 0.05,
                 ),
-              ),
-              SizedBox(
-                height: heightScreen * 0.05,
-              ),
-              Image.asset(
-                'assets/images/loginEmote.png',
-                height: heightScreen * 0.4,
-                fit: BoxFit.cover,
-              ),
-              SizedBox(
-                height: heightScreen * 0.05,
-              ),
-              Padding(
-                padding: padding,
-                child: SignUpButton('assets/images/google.png',
-                    'Continue with Google', handleGoogleSignIn),
-              ),
-              Padding(
-                padding: padding,
-                child: SignUpButton('assets/images/facebook.png',
-                    'Continue with Facebook', handleFacebookAuth),
-              ),
-              Padding(
-                padding: padding,
-                child: SignUpButton(
-                    key: const ValueKey(
-                        'continue_with_email_sign_in_options_Page'),
-                    'assets/images/email.png',
-                    'Continue with email',
-                    () => emailLogin(context)),
-              ),
-              Padding(
-                padding: padding,
-                child: UserPrivacyAggreement(
-                    userAgrementUrl: userAgrementUrl, privacyUrl: privacyUrl),
-              ),
-              SizedBox(
-                height: heightScreen * 0.05,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Text(
-                      'Already a Redditor?',
-                      style: TextStyle(
-                        fontSize: 15,
-                      ),
-                    ),
-                    TextButton(
-                      key: const ValueKey('login_sign_in_options_Page'),
-                      style: ButtonStyle(
-                        foregroundColor: MaterialStatePropertyAll(
-                            Theme.of(context).colorScheme.primary),
-                      ),
-                      onPressed: () => emailLogin(context),
-                      child: const Text(
-                        'Log in',
+                const Text(
+                  'Dive into anything',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    letterSpacing: 0.5,
+                  ),
+                ),
+                SizedBox(
+                  height: heightScreen * 0.05,
+                ),
+                Image.asset(
+                  'assets/images/loginEmote.png',
+                  height: heightScreen * 0.4,
+                  fit: BoxFit.cover,
+                ),
+                SizedBox(
+                  height: heightScreen * 0.05,
+                ),
+                Padding(
+                  padding: padding,
+                  child: SignUpButton('assets/images/google.png',
+                      'Continue with Google', handleGoogleSignIn),
+                ),
+                Padding(
+                  padding: padding,
+                  child: SignUpButton('assets/images/facebook.png',
+                      'Continue with Facebook', handleFacebookAuth),
+                ),
+                Padding(
+                  padding: padding,
+                  child: SignUpButton(
+                      key: const ValueKey(
+                          'continue_with_email_sign_in_options_Page'),
+                      'assets/images/email.png',
+                      'Continue with email',
+                      () => emailLogin(context)),
+                ),
+                Padding(
+                  padding: padding,
+                  child: UserPrivacyAggreement(
+                      userAgrementUrl: userAgrementUrl, privacyUrl: privacyUrl),
+                ),
+                SizedBox(
+                  height: heightScreen * 0.05,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        'Already a Redditor?',
                         style: TextStyle(
-                          fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              )
-            ],
+                      TextButton(
+                        key: const ValueKey('login_sign_in_options_Page'),
+                        style: ButtonStyle(
+                          foregroundColor: MaterialStatePropertyAll(
+                              Theme.of(context).colorScheme.primary),
+                        ),
+                        onPressed: () => emailLogin(context),
+                        child: const Text(
+                          'Log in',
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
           ),
         ));
   }

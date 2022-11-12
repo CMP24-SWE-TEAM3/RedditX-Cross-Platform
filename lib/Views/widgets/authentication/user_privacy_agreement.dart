@@ -17,6 +17,7 @@ class UserPrivacyAggreement extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
+        // ignore: deprecated_member_use
         style: Theme.of(context).textTheme.bodyText1,
         children: <TextSpan>[
           const TextSpan(

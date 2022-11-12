@@ -1,4 +1,4 @@
-import 'package:reddit/models/community_model.dart';
+
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/models/user_model.dart';
 

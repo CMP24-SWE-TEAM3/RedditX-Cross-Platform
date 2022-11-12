@@ -6,11 +6,11 @@ class PostModel {
   int votesCount;
   String username;
   String communityName;
-  var createdAt;
+  DateTime createdAt;
   String text;
   String title;
   int commentsNumber;
-  var attachments;
+  List<String> attachments;
 
   /// Post model constructor
   PostModel(
