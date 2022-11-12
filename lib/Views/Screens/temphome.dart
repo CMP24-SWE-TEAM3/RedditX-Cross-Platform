@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:reddit/Views/Screens/community/community_scrren.dart';
 
 import 'authentication/about_you.dart';
-
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -24,8 +24,9 @@ class Home extends StatelessWidget {
       ),
     );
     return Scaffold(
-      body: Center(
-        child: ElevatedButton(
+        body: Column(
+      children: [
+        ElevatedButton(
             onPressed: () => showDialog(
                   context: context,
                   builder: (BuildContext context) {
@@ -33,7 +34,10 @@ class Home extends StatelessWidget {
                   },
                 ),
             child: const Text('Clickme for testing web modems')),
-      ),
-    );
+        ElevatedButton(
+            onPressed: () => Navigator.of(context).pushNamed(CommunityScreen.routeName, arguments: {}),
+            child: const Text('Clickme for community')),
+      ],
+    ));
   }
 }
