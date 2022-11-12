@@ -50,3 +50,7 @@ macos/Flutter/GeneratedPluginRegistrant.swift
 windows/flutter/generated_plugin_registrant.cc
 windows/flutter/generated_plugin_registrant.h
 windows/flutter/generated_plugins.cmake
+lib/config/googleKey.jks
+coverage/lcov.info
+coverage/test_coverage.csv
+pubspec.lock
