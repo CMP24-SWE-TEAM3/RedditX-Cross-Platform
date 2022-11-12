@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-import '../../const/const.dart';
+import '../../../config/const.dart';
 
 class ListTileCustom extends StatelessWidget {
   ListTileCustom(
@@ -87,9 +87,12 @@ class SettingsTileButtomSheet extends StatelessWidget {
                 endIndent: 20,
               ),
               for (int i = 0; i < sheetChildrenTextList.length; i++)
-                ListTile(
-                  leading: sheetChildrenIconList[i],
-                  title: sheetChildrenTextList[i],
+                InkWell(
+                  onTap: () {},
+                  child: ListTile(
+                    leading: sheetChildrenIconList[i],
+                    title: sheetChildrenTextList[i],
+                  ),
                 ),
             ],
           ),

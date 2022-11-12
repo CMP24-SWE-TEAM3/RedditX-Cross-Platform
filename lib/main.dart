@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'View/screens/setting_Menu.dart';
+import 'views/Settings/screens/setting_Menu.dart';
 
 void main() {
   runApp(const SettingsMenu());

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/Controller/Mobile_settings_controller.dart';
-import 'package:reddit/View/screens/account_setting_screen.dart';
-import 'package:reddit/View/screens/change_password_screen.dart';
-import 'package:reddit/View/screens/manage-emails.dart';
-import 'package:reddit/View/screens/update_email_screen.dart';
-import '../../const/const.dart';
-import '../../icons/my_flutter_app_icons.dart';
+import 'package:reddit/controllers/Mobile_settings_controller.dart';
+import 'package:reddit/views/Settings/screens/account_setting_screen.dart';
+import 'package:reddit/views/Settings/screens/change_password_screen.dart';
+import 'package:reddit/views/Settings/screens/manage-emails.dart';
+import 'package:reddit/views/Settings/screens/update_email_screen.dart';
+import '../../../config/const.dart';
+import '../../../config/icons/my_flutter_app_icons.dart';
 
 import '../widgets/ListTilesWidgets.dart';
 import '../widgets/settingLabelWidget.dart';
@@ -37,8 +37,8 @@ class SettingsMenu extends StatelessWidget {
       ),
       routes: {
         SettingsHomePage.routeName: (context) => SettingsHomePage(),
-        accountSettingsScreen.routeName: (context) => accountSettingsScreen(),
-        manageEmailsScreen.routeName: (context) => manageEmailsScreen(),
+        AccountSettingsScreen.routeName: (context) => AccountSettingsScreen(),
+        ManageEmailsScreen.routeName: (context) => ManageEmailsScreen(),
         UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
         ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
       },
@@ -75,7 +75,7 @@ class SettingsHomePage extends StatelessWidget {
                   MaterialPageRoute(
                     builder: (context) => ChangeNotifierProvider(
                       create: (_) => SettingsMobileController(),
-                      child: accountSettingsScreen(),
+                      child: AccountSettingsScreen(),
                     ),
                   ));
             },
@@ -85,9 +85,12 @@ class SettingsHomePage extends StatelessWidget {
             title: "Change app icon",
             ico: const Icon(Icons.reddit),
           ),
-          SettingsListTile(
-            title: "Style Avatar",
-            ico: const Icon(Icons.checkroom_rounded),
+          InkWell(
+            onTap: () {},
+            child: SettingsListTile(
+              title: "Change profile picture",
+              ico: const Icon(Icons.photo_camera_front_outlined),
+            ),
           ),
           SettingsLabel(title: "ABOUT"),
           ListTileURL(

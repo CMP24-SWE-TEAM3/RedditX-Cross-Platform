@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../const/const.dart';
+import '../../../config/const.dart';
 
 class UserNameText extends StatelessWidget {
   const UserNameText({
@@ -75,9 +75,11 @@ class PasswordText extends StatelessWidget {
   const PasswordText({
     Key? key,
     required this.passwordController,
+    required this.labeling,
     this.errorPasswordText,
   }) : super(key: key);
 
+  final String? labeling;
   final TextEditingController passwordController;
   final String? errorPasswordText;
 
@@ -96,7 +98,7 @@ class PasswordText extends StatelessWidget {
         //     color: Colors.blue,
         //   ),
         // ),
-        labelText: 'Reddit Password',
+        labelText: labeling,
         labelStyle: const TextStyle(
           color: Colors.grey,
         ),

@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/Controller/Mobile_settings_controller.dart';
-import 'package:reddit/View/screens/manage-emails.dart';
-import 'package:reddit/View/screens/update_email_screen.dart';
-import 'package:reddit/View/widgets/ListTilesWidgets.dart';
-import 'package:reddit/View/widgets/default_buttom_sheet.dart';
-import 'package:reddit/View/widgets/settingLabelWidget.dart';
-import '../../model/settings_model.dart';
+import 'package:reddit/controllers/Mobile_settings_controller.dart';
+import 'package:reddit/views/Settings/screens/manage-emails.dart';
+import 'package:reddit/views/Settings/screens/update_email_screen.dart';
+import 'package:reddit/views/Settings/widgets/ListTilesWidgets.dart';
+import 'package:reddit/views/Settings/widgets/default_buttom_sheet.dart';
+import 'package:reddit/views/Settings/widgets/settingLabelWidget.dart';
+import '../../../models/settings_model.dart';
 import './change_password_screen.dart';
 
-class accountSettingsScreen extends StatelessWidget {
+class AccountSettingsScreen extends StatelessWidget {
   // bool allowToFollow = false;
   // bool allowChatRequests = false;
   // bool allowDirectMessages = false;
@@ -149,17 +149,17 @@ class accountSettingsScreen extends StatelessWidget {
                     MaterialPageRoute(
                       builder: (context) => ChangeNotifierProvider(
                         create: (_) => SettingsMobileController(),
-                        child: manageEmailsScreen(),
+                        child: ManageEmailsScreen(),
                       ),
                     )),
           ),
 
           SettingsLabel(title: "BLOCKING AND PERMISSIONS"),
-          const ListTile(
-            leading: Icon(Icons.block_flipped),
-            title: Text("Manage blocked accounts"),
-            trailing: Icon(Icons.arrow_forward_rounded),
-          ),
+          // const ListTile(
+          //   leading: Icon(Icons.block_flipped),
+          //   title: Text("Manage blocked accounts"),
+          //   trailing: Icon(Icons.arrow_forward_rounded),
+          // ),
           ListTileCustom(
             ico: const Icon(Icons.person_pin),
             text: "Allow people to follow you",

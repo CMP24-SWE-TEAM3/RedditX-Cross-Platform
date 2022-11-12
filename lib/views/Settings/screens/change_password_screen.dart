@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import '../Widgets/setting_email_password_textfield.dart';
-import '../../const/const.dart';
+import '../../Widgets/setting_email_password_textfield.dart';
+import '../../../config/const.dart';
+import '../widgets/forgot_password_dialogue.dart';
 
-class UpdateEmailAddress extends StatelessWidget {
+class ChangePasswordScreen extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
-  static const routeName = '/Settings/Account_Settings/Update_Email';
+  static const routeName = '/Settings/Account_Settings/Change_Password';
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +16,7 @@ class UpdateEmailAddress extends StatelessWidget {
           child: const Icon(Icons.arrow_back),
           onTap: () => Navigator.pop(context),
         ),
-        title: const Text("Update email address"),
+        title: const Text("Change password"),
       ),
       body: Column(
         children: [
@@ -38,10 +39,6 @@ class UpdateEmailAddress extends StatelessWidget {
                       style:
                           TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                     ),
-                    Text(
-                      "email@gmail.com",
-                      style: TextStyle(fontSize: 16),
-                    ),
                   ],
                 ),
               ),
@@ -53,11 +50,28 @@ class UpdateEmailAddress extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: EmailText(emailController: emailController),
+            child: PasswordText(
+                passwordController: passwordController,
+                labeling: "Current password"),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: PasswordText(passwordController: passwordController),
+            child: TextButton(
+                onPressed: () => dialogBuilder(context),
+                child: const Text("Forgot password?",
+                    style: TextStyle(color: Colors.blue))),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: PasswordText(
+                passwordController: passwordController,
+                labeling: "New password"),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: PasswordText(
+                passwordController: passwordController,
+                labeling: "Confirm new password"),
           ),
           Expanded(
             child: Align(
@@ -78,7 +92,7 @@ class UpdateEmailAddress extends StatelessWidget {
                               MaterialStateProperty.all<RoundedRectangleBorder>(
                             RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(18.0),
-                                side: BorderSide(color: Colors.blue)),
+                                side: const BorderSide(color: Colors.blue)),
                           ),
                           //maximumSize: MaterialStateProperty.all(double.infinity),
                         ),
@@ -96,11 +110,11 @@ class UpdateEmailAddress extends StatelessWidget {
                       style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(Colors.blue),
-                          shape:
-                              MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(18.0),
-                                      side: BorderSide(color: Colors.blue)))),
+                          shape: MaterialStateProperty.all<
+                                  RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(18.0),
+                                  side: const BorderSide(color: Colors.blue)))),
                       child: const Text("Save"),
                     ),
                   )
@@ -108,6 +122,32 @@ class UpdateEmailAddress extends StatelessWidget {
               ),
             ),
           ),
+          // Align(
+          //   alignment: Alignment.bottomLeft,
+          //   child: Row(
+          //     children: [
+          //       OutlinedButton(
+          //         onPressed: () {},
+          //         child: const Text("Cancel"),
+          //         style: ButtonStyle(
+          //             backgroundColor: MaterialStateProperty.all(white)),
+          //       )
+          //     ],
+          //   ),
+          // ),
+          // Align(
+          //   alignment: Alignment.bottomRight,
+          //   child: Row(
+          //     children: [
+          //       OutlinedButton(
+          //         onPressed: () {},
+          //         child: const Text("Save"),
+          //         style: ButtonStyle(
+          //             backgroundColor: MaterialStateProperty.all(Colors.blue)),
+          //       )
+          //     ],
+          //   ),
+          // )
         ],
       ),
     );

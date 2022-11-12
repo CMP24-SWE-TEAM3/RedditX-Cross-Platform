@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/Controller/Mobile_settings_controller.dart';
-import 'package:reddit/View/widgets/ListTilesWidgets.dart';
-import 'package:reddit/View/widgets/default_buttom_sheet.dart';
-import 'package:reddit/View/widgets/settingLabelWidget.dart';
-import '../../model/settings_model.dart';
+import 'package:reddit/controllers/Mobile_settings_controller.dart';
+import 'package:reddit/views/Settings/widgets/ListTilesWidgets.dart';
+import 'package:reddit/views/Settings/widgets/default_buttom_sheet.dart';
+import 'package:reddit/views/Settings/widgets/settingLabelWidget.dart';
+import '../../../models/settings_model.dart';
 
-class manageEmailsScreen extends StatelessWidget {
+class ManageEmailsScreen extends StatelessWidget {
   static const routeName = '/Settings/Account_Settings/Manage_Emails';
   bool newUserWelcomeEmails = false;
   bool commentsOnYourPostsEmails = false;
@@ -19,6 +19,8 @@ class manageEmailsScreen extends StatelessWidget {
   bool weeklyRecapEmails = false;
   bool communityDiscoveryEmails = false;
   bool unsubscribeFromAllEmails = false;
+
+  ManageEmailsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
