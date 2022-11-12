@@ -1,0 +1,50 @@
+File,% Branch,% Funcs,% Lines,Uncovered Line #s 
+lib/,,,, 
+main.dart,0.00,0.00,0.00,no unit testing
+lib/Controllers/,,,, 
+internet_controller.dart,0.00,0.00,0.00,no unit testing
+sign_in_controller.dart,100.00,100.00,25.50,"65,67,68,69,70,73,75,80,81,82,83,87,89,91,92,93,94,95,96,97,98,99,100,102,103,106,107,108,109,112,113,114,118,119,123,124,126,127,129,131,134,135,137,138,139,140,141,142,143,144,145,146,147,149,150,153,154,155,156,159,160,161,165,166,171,172,173,174,175,176,177,183,184,189,192,194,195,196,197,198,199,200,203,205,206,207,208,209,210,211,215,216,226,227,228,229,231,232,234,237,239,240,251,252,253,254,255,268,269,270,271,272,284,285,286,287,288,305,306,307,308,309,325,326,327,328,329,333,334,335,340,341,342,343,344,348,349,350,355,356,357,358,359,371,372,373,374,375,379"
+validations.dart,100.00,100.00,100.00,""
+lib/Views/Screens/,,,, 
+about_you.dart,0.00,0.00,0.00,no unit testing
+choose_profilepicture.dart,0.00,0.00,0.00,no unit testing
+choose_username.dart,0.00,0.00,0.00,no unit testing
+email_login.dart,0.00,0.00,0.00,no unit testing
+email_login_m.dart,0.00,0.00,0.00,no unit testing
+email_login_w.dart,0.00,0.00,0.00,no unit testing
+email_signup.dart,0.00,0.00,0.00,no unit testing
+email_signup_m.dart,0.00,0.00,0.00,no unit testing
+email_signup_w.dart,0.00,0.00,0.00,no unit testing
+email_signup_w_2.dart,0.00,0.00,0.00,no unit testing
+forget_password.dart,0.00,0.00,0.00,no unit testing
+forget_password_m.dart,0.00,0.00,0.00,no unit testing
+forget_password_w.dart,0.00,0.00,0.00,no unit testing
+forget_username.dart,0.00,0.00,0.00,no unit testing
+forget_username_m.dart,0.00,0.00,0.00,no unit testing
+forget_username_w.dart,0.00,0.00,0.00,no unit testing
+interests.dart,0.00,0.00,0.00,no unit testing
+sign_up_page.dart,0.00,0.00,0.00,no unit testing
+splash_screen.dart,0.00,0.00,0.00,no unit testing
+temphome.dart,0.00,0.00,0.00,no unit testing
+lib/Views/Widgets/,,,, 
+bottm_sheet.dart,0.00,0.00,0.00,no unit testing
+choice_button.dart,0.00,0.00,0.00,no unit testing
+continue_login_button.dart,0.00,0.00,0.00,no unit testing
+continue_signup_button.dart,0.00,0.00,0.00,no unit testing
+continue_username.dart,0.00,0.00,0.00,no unit testing
+dividor_or.dart,0.00,0.00,0.00,no unit testing
+email_me_button.dart,0.00,0.00,0.00,no unit testing
+interest_button.dart,0.00,0.00,0.00,no unit testing
+interest_choice.dart,0.00,0.00,0.00,no unit testing
+login_signup_textrow.dart,0.00,0.00,0.00,no unit testing
+show_snackbar.dart,0.00,0.00,0.00,no unit testing
+sign_up_bar.dart,0.00,0.00,0.00,no unit testing
+sign_up_button.dart,0.00,0.00,0.00,no unit testing
+uesrname_password_textfield.dart,0.00,0.00,0.00,no unit testing
+user_login_agreement.dart,0.00,0.00,0.00,no unit testing
+user_privacy_agreement.dart,0.00,0.00,0.00,no unit testing
+user_signup_web_agreement.dart,0.00,0.00,0.00,no unit testing
+x_button.dart,0.00,0.00,0.00,no unit testing
+lib/config/,,,, 
+constants.dart,0.00,0.00,0.00,no unit testing
+All files with unit testing,100.00,100.00,28.71,""

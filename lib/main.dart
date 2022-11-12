@@ -1,6 +1,28 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-void main() {
+import 'controllers/internet_controller.dart';
+import 'controllers/sign_in_controller.dart';
+import 'views/screens/about_you.dart';
+import 'views/screens/choose_profilepicture.dart';
+import 'views/screens/choose_username.dart';
+import 'views/screens/email_login.dart';
+import 'views/screens/email_signup.dart';
+import 'views/screens/email_signup_w.dart';
+import 'views/screens/email_signup_w_2.dart';
+import 'views/screens/forget_password.dart';
+import 'views/screens/forget_username.dart';
+import 'views/screens/interests.dart';
+import 'views/screens/sign_up_page.dart';
+import 'views/screens/splash_screen.dart';
+import 'views/screens/temphome.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+
+void main() async {
+  // initial the application
+  WidgetsFlutterBinding.ensureInitialized();
+  (kIsWeb) ? null : await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -9,24 +31,57 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: ((context) => SignInController())),
+        ChangeNotifierProvider(create: ((context) => InternetController())),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Reddit',
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          colorScheme: (kIsWeb)
+              ? ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+                  .copyWith(secondary: Colors.deepOrange)
+              : ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
+                  .copyWith(secondary: Colors.lightBlue),
+          textTheme: ThemeData.light().textTheme.copyWith(
+                bodyText1: const TextStyle(
+                  color: Colors.grey,
+                  fontSize: 12,
+                ),
+              ),
+        ),
+        initialRoute: '/',
+        home: (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+        routes: {
+          Home.routeName: (ctx) => const Home(),
+          SignUpPage.routeName: (ctx) => const SignUpPage(),
+          EmailLogin.routeName: (ctx) => const EmailLogin(),
+          EmailSignup.routeName: (ctx) => const EmailSignup(),
+          EmailSignupW2.routeName: (ctx) => const EmailSignupW2(),
+          ForgetPassword.routeName: (ctx) => const ForgetPassword(),
+          ForgetUserName.routeName: (ctx) => const ForgetUserName(),
+          ChooseUserName.routeName: (ctx) => const ChooseUserName(),
+          Interests.routeName: (ctx) => const Interests(),
+          ChooseProfilePicture.routeName: (ctx) => const ChooseProfilePicture(),
+          AboutYou.routeName: (ctx) => const AboutYou(),
+          SplashScreen.routeName: (ctx) => const SplashScreen(),
+        },
       ),
-      home: _HomePage(),
     );
   }
 }
 
-class _HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
-      ),
-      body: const Center(child: Text('Welcome to Reddit')),
-    );
-  }
-}
+// class _HomePage extends StatelessWidget {
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       appBar: AppBar(
+//         title: const Text('Home'),
+//       ),
+//       body: const Center(child: Text('Welcome to Reddit')),
+//     );
+//   }
+// }
