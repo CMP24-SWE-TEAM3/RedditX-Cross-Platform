@@ -61,28 +61,46 @@ class _WebCommentsState extends State<WebComments> {
             Row(
               children: [
                 IconButton(
-                    onPressed: () {}, icon: Icon(CustomIcons.up_outline)),
-                Text("145"),
+                    onPressed: () {},
+                    icon: Icon(
+                      CustomIcons.up_outline,
+                      size: screen_width * 0.017,
+                    )),
+                Text(
+                  "145",
+                  style: TextStyle(
+                    fontSize: screen_width * 0.013,
+                  ),
+                ),
                 IconButton(
-                    onPressed: () {}, icon: Icon(CustomIcons.down_outline)),
+                  onPressed: () {},
+                  icon: Icon(
+                    CustomIcons.down_outline,
+                    size: screen_width * 0.017,
+                  ),
+                ),
                 InkWell(
                   onTap: () {},
                   child: Row(
                     children: [
                       IconButton(
-                          onPressed: () {}, icon: Icon(CustomIcons.comment)),
+                          onPressed: () {},
+                          icon: Icon(
+                            CustomIcons.comment,
+                            size: screen_width * 0.017,
+                          )),
                       Text(
                         'Reply',
                         style: TextStyle(
                             color: Colors.black45,
-                            fontSize: 14,
+                            fontSize: screen_width * 0.013,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: screen_width * 0.008,
                 ),
                 InkWell(
                   onTap: () {},
@@ -92,14 +110,14 @@ class _WebCommentsState extends State<WebComments> {
                         'Give Award',
                         style: TextStyle(
                             color: Colors.black45,
-                            fontSize: 14,
+                            fontSize: screen_width * 0.013,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: screen_width * 0.008,
                 ),
                 InkWell(
                   onTap: () {},
@@ -109,14 +127,14 @@ class _WebCommentsState extends State<WebComments> {
                         'Share',
                         style: TextStyle(
                             color: Colors.black45,
-                            fontSize: 14,
+                            fontSize: screen_width * 0.013,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: screen_width * 0.008,
                 ),
                 InkWell(
                   onTap: () {},
@@ -126,14 +144,14 @@ class _WebCommentsState extends State<WebComments> {
                         'Report',
                         style: TextStyle(
                             color: Colors.black45,
-                            fontSize: 14,
+                            fontSize: screen_width * 0.013,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: screen_width * 0.008,
                 ),
                 InkWell(
                   onTap: () {},
@@ -143,14 +161,14 @@ class _WebCommentsState extends State<WebComments> {
                         'Save',
                         style: TextStyle(
                             color: Colors.black45,
-                            fontSize: 14,
+                            fontSize: screen_width * 0.013,
                             fontWeight: FontWeight.bold),
                       ),
                     ],
                   ),
                 ),
                 SizedBox(
-                  width: 10,
+                  width: screen_width * 0.008,
                 ),
                 InkWell(
                   onTap: () {},
@@ -160,7 +178,7 @@ class _WebCommentsState extends State<WebComments> {
                         'Follow',
                         style: TextStyle(
                             color: Colors.black45,
-                            fontSize: 14,
+                            fontSize: screen_width * 0.013,
                             fontWeight: FontWeight.bold),
                       ),
                     ],

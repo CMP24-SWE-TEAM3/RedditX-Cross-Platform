@@ -4,18 +4,28 @@ import 'package:reddit/View/Widgets/popup_menu.dart';
 
 /// Mobile comment widget used in mobile post page
 class comments extends StatefulWidget {
-  String commentText;
-  comments({Key? key, required this.commentText}) : super(key: key);
+  // String username;
+  // String createdAt;
+  // String text;
+  // var userPhoto;
+  // int votesCount;
+  String commentsText;
+
+  comments(
+      {Key? key,
+      // required this.userPhoto,
+      // required this.username,
+      // required this.createdAt,
+      // required this.text,
+      // required this.votesCount,
+      required this.commentsText})
+      : super(key: key);
 
   @override
-  State<comments> createState() => _commentsState(commentText);
+  State<comments> createState() => _commentsState();
 }
 
 class _commentsState extends State<comments> {
-  String commentText;
-
-  _commentsState(this.commentText);
-
   double container_height = 230;
   TextOverflow comments_text = TextOverflow.clip;
   bool is_visible = true;
@@ -60,15 +70,16 @@ class _commentsState extends State<comments> {
                   ),
                   GestureDetector(
                     onTap: () {},
-                    child: Text("r/kareem_community"),
+                    child: Text("Kareem Ashraf"),
                   ),
+                  Text(" . 21h")
                 ],
               ),
               Expanded(
                 child: Padding(
                   padding: const EdgeInsets.all(4.0),
                   child: Text(
-                    "${commentText}",
+                    "${widget.commentsText}",
                     overflow: comments_text,
                     style: TextStyle(),
                   ),
@@ -133,7 +144,7 @@ class _commentsState extends State<comments> {
                     ),
                     IconButton(
                         onPressed: () {}, icon: Icon(CustomIcons.up_outline)),
-                    Text("145"),
+                    Text("458"),
                     IconButton(
                         onPressed: () {}, icon: Icon(CustomIcons.down_outline)),
                   ],
