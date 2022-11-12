@@ -6,8 +6,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 
-import '../../Controllers/internet_controller.dart';
-import '../../Controllers/sign_in_controller.dart';
+import '../../controllers/internet_controller.dart';
+import '../../controllers/sign_in_controller.dart';
 import '../Widgets/bottm_sheet.dart';
 import '../Widgets/show_snackbar.dart';
 import '../Widgets/sign_up_bar.dart';

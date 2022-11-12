@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:username_gen/username_gen.dart';
 
-import '../../Controllers/internet_controller.dart';
-import '../../Controllers/sign_in_controller.dart';
-import '../../Controllers/validations.dart';
+import '../../controllers/internet_controller.dart';
+import '../../controllers/sign_in_controller.dart';
+import '../../controllers/validations.dart';
 import '../Widgets/choice_button.dart';
 import '../Widgets/continue_username.dart';
 import '../Widgets/show_snackbar.dart';

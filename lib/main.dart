@@ -2,21 +2,21 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'Controllers/internet_controller.dart';
-import 'Controllers/sign_in_controller.dart';
-import 'Views/Screens/about_you.dart';
-import 'Views/Screens/choose_profilepicture.dart';
-import 'Views/Screens/choose_username.dart';
-import 'Views/Screens/email_login.dart';
-import 'Views/Screens/email_signup.dart';
-import 'Views/Screens/email_signup_w.dart';
-import 'Views/Screens/email_signup_w_2.dart';
-import 'Views/Screens/forget_password.dart';
-import 'Views/Screens/forget_username.dart';
-import 'Views/Screens/interests.dart';
-import 'Views/Screens/sign_up_page.dart';
-import 'Views/Screens/splash_screen.dart';
-import 'Views/Screens/temphome.dart';
+import 'controllers/internet_controller.dart';
+import 'controllers/sign_in_controller.dart';
+import 'views/Screens/about_you.dart';
+import 'views/Screens/choose_profilepicture.dart';
+import 'views/Screens/choose_username.dart';
+import 'views/Screens/email_login.dart';
+import 'views/Screens/email_signup.dart';
+import 'views/Screens/email_signup_w.dart';
+import 'views/Screens/email_signup_w_2.dart';
+import 'views/Screens/forget_password.dart';
+import 'views/Screens/forget_username.dart';
+import 'views/Screens/interests.dart';
+import 'views/Screens/sign_up_page.dart';
+import 'views/Screens/splash_screen.dart';
+import 'views/Screens/temphome.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {

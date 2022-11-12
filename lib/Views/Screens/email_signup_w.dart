@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/Views/Screens/temphome.dart';
+import 'package:reddit/views/Screens/temphome.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
 // import '../../Controllers/signin_google.dart';
-import '../../Controllers/internet_controller.dart';
-import '../../Controllers/sign_in_controller.dart';
-import '../../Controllers/validations.dart';
+import '../../controllers/internet_controller.dart';
+import '../../controllers/sign_in_controller.dart';
+import '../../controllers/validations.dart';
 import '../Widgets/dividor_or.dart';
 import '../Widgets/show_snackbar.dart';
 
