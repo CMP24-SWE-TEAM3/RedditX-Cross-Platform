@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:reddit/models/community_service.dart';
+import 'controllers/community_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
-
 import 'views/screens/authentication/about_you.dart';
 import 'views/screens/authentication/choose_profilepicture.dart';
 import 'views/screens/authentication/choose_username.dart';
@@ -18,7 +19,6 @@ import 'views/screens/authentication/interests.dart';
 import 'views/screens/authentication/sign_up_page.dart';
 import 'views/screens/authentication/splash_screen.dart';
 import 'views/screens/temphome.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   // initial the application
@@ -27,13 +27,18 @@ void main() async {
   runApp(const MyApp());
 }
 
+
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
+  // This widget is the root of your application.
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => CommunityProvider(communityService: CommunityService())),
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
       ],
@@ -48,6 +53,7 @@ class MyApp extends StatelessWidget {
               : ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
                   .copyWith(secondary: Colors.lightBlue),
           textTheme: ThemeData.light().textTheme.copyWith(
+                // ignore: deprecated_member_use
                 bodyText1: const TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
@@ -83,6 +89,16 @@ class MyApp extends StatelessWidget {
 //         title: const Text('Home'),
 //       ),
 //       body: const Center(child: Text('Welcome to Reddit')),
+//     );
+//   }
+// }
+//       debugShowCheckedModeBanner: false,
+//       home: LayoutBuilder(
+//           builder: (BuildContext context, BoxConstraints constraints) {
+//         return (constraints.minWidth.round() < 500)
+//             ? CommunityMobileScreen(context: context, constraints: constraints)
+//             : CommunityWebScreen(context: context, constraints: constraints);
+//       }),
 //     );
 //   }
 // }
