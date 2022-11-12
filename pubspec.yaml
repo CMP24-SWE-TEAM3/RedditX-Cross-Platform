@@ -39,13 +39,19 @@ dependencies:
   firebase_core_platform_interface: ^4.5.2
   flutter:
     sdk: flutter
+
   flutter_facebook_auth: ^5.0.6
   google_sign_in: ^5.4.2
   http: ^0.13.5
   image_picker: ^0.8.6
+
   linter: ^1.28.0
   permission_handler: ^10.2.0
   provider: ^6.0.4
+
+  any_link_preview: ^2.0.9
+  fluttertoast: ^8.1.1
+
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.6
   username_gen: ^1.0.4
@@ -59,6 +65,7 @@ dependencies:
   mocktail: ^0.3.0
   cached_network_image: ^3.2.2
   test_cov_console: ^0.2.2
+
 
 dev_dependencies:
   # The "flutter_lints" package below contains a set of recommended lints to
@@ -81,6 +88,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+
+    - assets/kareem.jpg
     - assets/images/logo.png
     - assets/images/loginEmote.png
     - assets/images/google.png
@@ -88,6 +97,7 @@ flutter:
     - assets/images/email.png
     - assets/images/defaultuser.png
     - assets/images/web_signup_edge.jpg
+
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -99,6 +109,7 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
+
     - family: XButtonIcon
       fonts:
         - asset: assets/icons/xButton.ttf
