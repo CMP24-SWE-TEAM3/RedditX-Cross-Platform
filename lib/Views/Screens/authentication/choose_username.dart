@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:username_gen/username_gen.dart';
 
-import '../../controllers/internet_controller.dart';
-import '../../controllers/sign_in_controller.dart';
-import '../../controllers/validations.dart';
-import '../widgets/choice_button.dart';
-import '../widgets/continue_username.dart';
-import '../widgets/show_snackbar.dart';
-import '../widgets/sign_up_bar.dart';
 
+
+import '../../../controllers/internet_controller.dart';
+import '../../../controllers/sign_in_controller.dart';
+import '../../../controllers/validations.dart';
+import '../../widgets/authentication/choice_button.dart';
+import '../../widgets/authentication/continue_username.dart';
+import '../../widgets/authentication/show_snackbar.dart';
+import '../../widgets/authentication/sign_up_bar.dart';
 import 'choose_profilepicture.dart';
 
 class ChooseUserName extends StatefulWidget {

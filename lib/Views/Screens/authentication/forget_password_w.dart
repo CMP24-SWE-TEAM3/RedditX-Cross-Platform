@@ -1,34 +1,37 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../controllers/validations.dart';
 
-import '../widgets/login_signup_textrow.dart';
 
-import '../widgets/uesrname_password_textfield.dart';
-
+import '../../../controllers/validations.dart';
+import '../../widgets/authentication/login_signup_textrow.dart';
+import '../../widgets/authentication/uesrname_password_textfield.dart';
+import 'forget_password.dart';
 import 'forget_username.dart';
 
-class ForgetUserNameW extends StatefulWidget {
-  const ForgetUserNameW({super.key});
+class ForgetPasswordW extends StatefulWidget {
+  const ForgetPasswordW({super.key});
 
   @override
-  State<ForgetUserNameW> createState() => _ForgetUserNameWState();
+  State<ForgetPasswordW> createState() => _ForgetPasswordWState();
 }
 
-class _ForgetUserNameWState extends State<ForgetUserNameW> {
+class _ForgetPasswordWState extends State<ForgetPasswordW> {
   bool _valid = false;
   TextEditingController emailController = TextEditingController();
   String? errorEmailText;
+  TextEditingController userNameController = TextEditingController();
+  String? errorUserNameText;
 
-  void validate(emailController, ctx) async {
+  void validate(userNameController, emailController, ctx) {
     setState(() {
       errorEmailText = emailValidation(emailController.text);
+      errorUserNameText = usernameValidation(userNameController.text);
     });
 
-    if (errorEmailText == null) {
+    if ((errorEmailText == null) && (errorUserNameText == null)) {
       _valid = true;
-      resetUsername(emailController, ctx);
+      resetPass(emailController, userNameController, ctx);
     }
   }
 
@@ -76,7 +79,6 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
                 padding: padding,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
                       height: heightScreen * 0.05,
@@ -95,7 +97,7 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
                         horizontal: widthScreen * 0.009,
                       ),
                       child: const Text(
-                        'Recover your username',
+                        'Reset your password',
                         textAlign: TextAlign.start,
                         style: TextStyle(
                           fontSize: 16,
@@ -109,13 +111,22 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
                       child: const SizedBox(
                         width: finalWidth,
                         child: Text(
-                          'Tell us the email address associated with your Reddit account, and we’ll send you an email with your username.',
+                          'Tell us the username and email address associated with your Reddit account, and we’ll send you an email with a link to reset your password.',
                           textAlign: TextAlign.start,
                           style: TextStyle(
                             fontSize: 14,
                             letterSpacing: 0.5,
                           ),
                         ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: finalWidth,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: UserNameText(
+                            userNameController: userNameController,
+                            errorUserNameText: errorUserNameText),
                       ),
                     ),
                     SizedBox(
@@ -135,11 +146,12 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
                       child: SizedBox(
                         width: fixedWidth * 0.1,
                         child: ElevatedButton(
-                          onPressed: () => validate(emailController, context),
+                          onPressed: () => validate(
+                              userNameController, emailController, context),
                           child: (_valid)
                               ? const Icon(Icons.check)
                               : const Text(
-                                  'EMAIL ME',
+                                  'REST PASSWORD',
                                   style: TextStyle(
                                     fontWeight: FontWeight.bold,
                                   ),
@@ -162,6 +174,22 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
                               fontSize: 12,
                               color: Theme.of(context).colorScheme.primary,
                             ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        top: 10,
+                        left: 4,
+                      ),
+                      child: TextButton(
+                        onPressed: () => forgetusername(context),
+                        child: const Text(
+                          'FORGET UERNAME?',
+                          style: TextStyle(
+                            fontSize: 12,
+                            fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),

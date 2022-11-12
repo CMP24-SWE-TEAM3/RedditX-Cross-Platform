@@ -1,53 +1,73 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/views/Screens/temphome.dart';
-// import 'package:google_sign_in/google_sign_in.dart';
+import 'package:reddit/Views/Screens/temphome.dart';
 
-// import '../../controllers/signin_google.dart';
-import '../../controllers/internet_controller.dart';
-import '../../controllers/sign_in_controller.dart';
-import '../../controllers/validations.dart';
-import '../widgets/dividor_or.dart';
-import '../widgets/show_snackbar.dart';
-
-import '../widgets/sign_up_button.dart';
-import '../widgets/uesrname_password_textfield.dart';
-
-import '../widgets/user_signup_web_agreement.dart';
-
+import '../../../controllers/internet_controller.dart';
+import '../../../controllers/sign_in_controller.dart';
+import '../../../controllers/validations.dart';
+import '../../widgets/authentication/show_snackbar.dart';
+import '../../widgets/authentication/dividor_or.dart';
+import '../../widgets/authentication/sign_up_button.dart';
+import '../../widgets/authentication/uesrname_password_textfield.dart';
+import '../../widgets/authentication/user_login_agreement.dart';
 import 'email_login.dart';
-import 'email_signup_w_2.dart';
+import 'email_signup.dart';
+import 'forget_password.dart';
+import 'forget_username.dart';
 
-class EmailSignupW extends StatefulWidget {
-  const EmailSignupW({super.key});
+
+class EmailLoginW extends StatefulWidget {
+  const EmailLoginW({super.key});
 
   @override
-  State<EmailSignupW> createState() => _EmailSignupWState();
+  State<EmailLoginW> createState() => _EmailLoginWState();
 }
 
-void emailLogin(BuildContext ctx) {
-  Navigator.of(ctx).pushReplacementNamed(EmailLogin.routeName, arguments: {});
-}
+class _EmailLoginWState extends State<EmailLoginW> {
+  bool _submited = false;
+  TextEditingController userNameController = TextEditingController();
+  String? errorUserNameText;
+  TextEditingController passwordController = TextEditingController();
+  String? errorPasswordText;
 
-void submit(emailController, ctx) {
-  Navigator.of(ctx).pushReplacementNamed(EmailSignupW2.routeName,
-      arguments: {'email': emailController});
-}
+  void validate(userNameController, passwordController, ctx) {
+    setState(() {
+      _submited = true;
+      errorUserNameText = usernameValidation(userNameController.text);
+      errorPasswordText = passwordValidation(passwordController.text);
+    });
 
-class _EmailSignupWState extends State<EmailSignupW> {
-  TextEditingController emailController = TextEditingController();
-  String? errorEmailText;
-
-  void validate(emailController, ctx) {
-    setState(() => errorEmailText = emailValidation(emailController.text));
-
-    if (errorEmailText == null) {
-      submit(emailController, ctx);
+    if ((errorUserNameText == null) && (errorPasswordText == null)) {
+      submitlogin(userNameController, passwordController, ctx);
     }
+  }
+
+  void forgetPass(BuildContext ctx) {
+    Navigator.of(ctx).pushNamed(ForgetPassword.routeName, arguments: {});
+  }
+
+  void forgetusername(BuildContext ctx) {
+    Navigator.of(ctx)
+        .pushReplacementNamed(ForgetUserName.routeName, arguments: {});
+  }
+
+  void emailsignup(BuildContext ctx) {
+    Navigator.of(ctx)
+        .pushReplacementNamed(EmailSignup.routeName, arguments: {});
+  }
+
+  void googleSignIn() {
+    // final GoogleSignInAccount user = signInGoogle() as GoogleSignInAccount;
+    // if (user != null) {
+    //   print(user.displayName);
+    // } else {
+    //   print('Null');
+    // }
   }
 
   @override
   Widget build(BuildContext context) {
+    const fixedWidth = 1536;
     final userAgrementUrl =
         Uri.parse('https://www.redditinc.com/policies/user-agreement');
     final privacyUrl =
@@ -57,7 +77,6 @@ class _EmailSignupWState extends State<EmailSignupW> {
 
     final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
     final widthScreen = (mediaQuery.size.width);
-    const fixedWidth = 1536;
     final padding = EdgeInsets.symmetric(
       vertical: heightScreen * 0.09,
       horizontal: widthScreen * 0.03,
@@ -89,7 +108,7 @@ class _EmailSignupWState extends State<EmailSignupW> {
                     Padding(
                       padding: padding * 0.3,
                       child: const Text(
-                        'Sign up',
+                        'Log in',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           fontSize: 16,
@@ -98,12 +117,9 @@ class _EmailSignupWState extends State<EmailSignupW> {
                         ),
                       ),
                     ),
-                    SizedBox(
-                      width: fixedWidth * 0.2,
-                      child: UserSignupWebAgreement(
-                          userAgrementUrl: userAgrementUrl,
-                          privacyUrl: privacyUrl),
-                    ),
+                    UserLoginAggreement(
+                        userAgrementUrl: userAgrementUrl,
+                        privacyUrl: privacyUrl),
                     SizedBox(
                       height: heightScreen * 0.1,
                     ),
@@ -131,9 +147,20 @@ class _EmailSignupWState extends State<EmailSignupW> {
                       width: fixedWidth * 0.2,
                       child: Padding(
                         padding: const EdgeInsets.all(4),
-                        child: EmailText(
-                            emailController: emailController,
-                            errorEmailText: errorEmailText),
+                        child: UserNameText(
+                          userNameController: userNameController,
+                          errorUserNameText: errorUserNameText,
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      width: fixedWidth * 0.2,
+                      child: Padding(
+                        padding: const EdgeInsets.all(4),
+                        child: PasswordText(
+                          passwordController: passwordController,
+                          errorPasswordText: errorPasswordText,
+                        ),
                       ),
                     ),
                     Padding(
@@ -141,8 +168,11 @@ class _EmailSignupWState extends State<EmailSignupW> {
                       child: SizedBox(
                         width: fixedWidth * 0.2,
                         child: ElevatedButton(
-                          onPressed: () => validate(emailController, context),
-                          child: const Text('CONTINUE'),
+                          onPressed: () => validate(
+                              userNameController, passwordController, context),
+                          child: (_submited)
+                              ? const Icon(Icons.check)
+                              : const Text('LOG IN'),
                         ),
                       ),
                     ),
@@ -152,20 +182,31 @@ class _EmailSignupWState extends State<EmailSignupW> {
                         width: fixedWidth * 0.2,
                         child: Row(
                           children: [
-                            const Text(
-                              style: TextStyle(
-                                fontSize: 12,
-                              ),
-                              'Already a redditor?',
-                            ),
+                            const Text('Forget your'),
                             TextButton(
-                              onPressed: () => emailLogin(context),
-                              child: const Text(
-                                'LOG IN',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                ),
-                              ),
+                              onPressed: () => forgetusername(context),
+                              child: const Text('username'),
+                            ),
+                            const Text('or'),
+                            TextButton(
+                              onPressed: () => forgetPass(context),
+                              child: const Text('password'),
+                            ),
+                            const Text('?'),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: SizedBox(
+                        width: fixedWidth * 0.2,
+                        child: Row(
+                          children: [
+                            const Text('New to Reddit?'),
+                            TextButton(
+                              onPressed: () => emailsignup(context),
+                              child: const Text('SIGN UP'),
                             ),
                           ],
                         ),

@@ -1,9 +1,11 @@
 import 'package:email_validator/email_validator.dart';
 
+/// emial vaildation takes email
 String? emailValidation(var email) {
   return (email.isEmpty) ? 'Please Enter This Field' : (EmailValidator.validate(email)) ? null : 'Not a valid email address';
 }
 
+/// username vaildation takes username
 String? usernameValidation(var username) {
 
   return (username.isEmpty)
@@ -15,6 +17,7 @@ String? usernameValidation(var username) {
           : null;
 }
 
+/// password vaildation takes password
 String? passwordValidation(var password) {
   return (password.isEmpty)
       ? 'Please Enter This Field'

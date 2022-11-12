@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
-import '../screens/email_login.dart';
-import '../screens/email_signup.dart';
+import '../../screens/authentication/email_login.dart';
+import '../../screens/authentication/email_signup.dart';
+
+
 
 Padding loginSignupTextRow(double finalWidth, BuildContext context) {
   return Padding(

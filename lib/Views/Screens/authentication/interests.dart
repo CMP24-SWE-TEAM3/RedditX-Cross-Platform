@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
-import '../../controllers/internet_controller.dart';
-import '../../controllers/sign_in_controller.dart';
-import '../widgets/interest_button.dart';
-import '../widgets/interest_choice.dart';
-import '../widgets/show_snackbar.dart';
-import '../widgets/sign_up_bar.dart';
+
+import '../../../controllers/internet_controller.dart';
+import '../../../controllers/sign_in_controller.dart';
+import '../../widgets/authentication/interest_button.dart';
+import '../../widgets/authentication/interest_choice.dart';
+import '../../widgets/authentication/show_snackbar.dart';
+import '../../widgets/authentication/sign_up_bar.dart';
 import 'choose_profilepicture.dart';
 import 'choose_username.dart';
 

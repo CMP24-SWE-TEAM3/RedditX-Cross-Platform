@@ -3,10 +3,10 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
 import 'package:reddit/views/Screens/temphome.dart';
 
-import '../../controllers/internet_controller.dart';
-import '../../controllers/sign_in_controller.dart';
 
-import '../widgets/show_snackbar.dart';
+import '../../../controllers/internet_controller.dart';
+import '../../../controllers/sign_in_controller.dart';
+import '../../widgets/authentication/show_snackbar.dart';
 import 'email_login_m.dart';
 import 'email_login_w.dart';
 
@@ -22,8 +22,7 @@ class EmailLogin extends StatelessWidget {
 
 Future<void> submitlogin(
     userNameController, passwordController, context) async {
-  // final sp = context.read<SignInController>();
-  // final ip = context.read<InternetController>();
+  
   final sp = Provider.of<SignInController>(context, listen: false);
   final ip = Provider.of<InternetController>(context, listen: false);
   await ip.checkInternetConnection();
