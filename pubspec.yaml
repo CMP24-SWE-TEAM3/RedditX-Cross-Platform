@@ -48,6 +48,7 @@ dependencies:
   dartdoc: ^6.1.2
   mocktail: ^0.3.0
   cached_network_image: ^3.2.2
+  test_cov_console: ^0.2.2
 
 dev_dependencies:
   flutter_test:
