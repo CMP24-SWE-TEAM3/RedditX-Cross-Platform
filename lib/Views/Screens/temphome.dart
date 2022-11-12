@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-
+import '../Settings/screens/setting_Menu.dart';
 import 'authentication/about_you.dart';
 import 'community/community_screen.dart';
 
@@ -36,8 +36,13 @@ class Home extends StatelessWidget {
                 ),
             child: const Text('Clickme for testing web modems')),
         ElevatedButton(
-            onPressed: () => Navigator.of(context).pushNamed(CommunityScreen.routeName, arguments: {}),
+            onPressed: () => Navigator.of(context)
+                .pushNamed(CommunityScreen.routeName, arguments: {}),
             child: const Text('Clickme for community')),
+        ElevatedButton(
+            onPressed: () => Navigator.of(context)
+                .pushNamed(SettingsHomePage.routeName, arguments: {}),
+            child: const Text('Clickme for settings')),
       ],
     ));
   }

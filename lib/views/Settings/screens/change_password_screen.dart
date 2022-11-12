@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../Widgets/setting_email_password_textfield.dart';
 import '../../../config/const.dart';
 import '../widgets/forgot_password_dialogue.dart';
+import '../widgets/setting_email_password_textfield.dart';
 
 class ChangePasswordScreen extends StatelessWidget {
   TextEditingController emailController = TextEditingController();
@@ -122,32 +122,6 @@ class ChangePasswordScreen extends StatelessWidget {
               ),
             ),
           ),
-          // Align(
-          //   alignment: Alignment.bottomLeft,
-          //   child: Row(
-          //     children: [
-          //       OutlinedButton(
-          //         onPressed: () {},
-          //         child: const Text("Cancel"),
-          //         style: ButtonStyle(
-          //             backgroundColor: MaterialStateProperty.all(white)),
-          //       )
-          //     ],
-          //   ),
-          // ),
-          // Align(
-          //   alignment: Alignment.bottomRight,
-          //   child: Row(
-          //     children: [
-          //       OutlinedButton(
-          //         onPressed: () {},
-          //         child: const Text("Save"),
-          //         style: ButtonStyle(
-          //             backgroundColor: MaterialStateProperty.all(Colors.blue)),
-          //       )
-          //     ],
-          //   ),
-          // )
         ],
       ),
     );

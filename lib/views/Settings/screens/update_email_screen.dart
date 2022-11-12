@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../../Widgets/setting_email_password_textfield.dart';
 import '../../../config/const.dart';
 import '../widgets/forgot_password_dialogue.dart';
+import '../widgets/setting_email_password_textfield.dart';
 
 class UpdateEmailAddress extends StatelessWidget {
   final TextEditingController emailController = TextEditingController();

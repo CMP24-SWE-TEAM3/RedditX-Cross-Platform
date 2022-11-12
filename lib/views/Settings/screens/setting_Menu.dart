@@ -11,11 +11,6 @@ import '../../../config/icons/my_flutter_app_icons.dart';
 import '../widgets/ListTilesWidgets.dart';
 import '../widgets/settingLabelWidget.dart';
 
-//to be moved
-bool sw1ReduceAnimation = false;
-bool sw2ShowNSFW = false;
-bool sw3BlurNSFW = false;
-bool sw3enble = false;
 
 void main() {
   runApp(SettingsMenu());

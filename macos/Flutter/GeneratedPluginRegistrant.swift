@@ -5,13 +5,6 @@
 import FlutterMacOS
 import Foundation
 
-
-import shared_preferences_macos
-import url_launcher_macos
-
-func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
-  SharedPreferencesPlugin.register(with: registry.registrar(forPlugin: "SharedPreferencesPlugin"))
-
 import cloud_firestore
 import connectivity_plus
 import facebook_auth_desktop
@@ -33,6 +26,5 @@ func RegisterGeneratedPlugins(registry: FlutterPluginRegistry) {
   PathProviderPlugin.register(with: registry.registrar(forPlugin: "PathProviderPlugin"))
   SharedPreferencesPlugin.register(with: registry.registrar(forPlugin: "SharedPreferencesPlugin"))
   SqflitePlugin.register(with: registry.registrar(forPlugin: "SqflitePlugin"))
-
   UrlLauncherPlugin.register(with: registry.registrar(forPlugin: "UrlLauncherPlugin"))
 }

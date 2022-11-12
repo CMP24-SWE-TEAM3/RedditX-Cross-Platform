@@ -1,6 +1,10 @@
 
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'Controllers/Mobile_settings_controller.dart';
+import 'views/Settings/screens/account_setting_screen.dart';
+import 'views/Settings/screens/change_password_screen.dart';
+import 'views/Settings/screens/manage-emails.dart';
 import 'views/Settings/screens/setting_Menu.dart';
 
 import 'package:reddit/View/Screens/post/Post_screen.dart';
@@ -13,6 +17,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/models/community_service.dart';
+import 'views/Settings/screens/update_email_screen.dart';
 import 'views/screens/community/community_screen.dart';
 import 'controllers/community_controller.dart';
 import 'controllers/internet_controller.dart';
@@ -42,63 +47,10 @@ void main() async {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-
-
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      debugShowCheckedModeBanner: false,
-//      title: 'DonWare',
-//      theme: ThemeData(
-//        primarySwatch: Colors.blue,
-//      ),
-//      home: post_screen(
-//        commentsNumber: postsList[0].commentsNumber,
-//        title: postsList[0].title,
-//        type: postsList[0].type,
-//        text: postsList[0].text,
-//        attachments: postsList[0].attachments,
-//        communityName: postsList[0].communityName,
-//        createdAt: postsList[0].createdAt,
-//        username: postsList[0].username,
-//        votesCount: postsList[0].votesCount),
-//    );
-//  }
-//}
-
-
   @override
   Widget build(BuildContext context) {
 
-//    return Scaffold(
-//      appBar: AppBar(
-//        title: const Text(
-//          'Home',
-//          style: TextStyle(color: Colors.black),
-//        ),
-//        backgroundColor: Colors.white,
-//        leading: IconButton(
-//          color: Colors.black,
-//          icon: const Icon(Icons.menu),
-//          onPressed: () {},
-//        ),
-//        actions: [
-//          IconButton(
-//           onPressed: () {},
-//            icon: Icon(Icons.search),
-//            color: Colors.black,
-//          ),
-//          CircleAvatar(
-//            radius: 16.0,
-//            child: ClipRRect(
-//              child: Image.asset('assets/kareem.jpg'),
-//              borderRadius: BorderRadius.circular(50.0),
-//            ),
-//          ),
-//        ],
-//      ),
-//      body: Center(
-//        child: Text('kareem'),
+
 
     return MultiProvider(
       providers: [
@@ -107,6 +59,8 @@ class MyApp extends StatelessWidget {
                 CommunityProvider(communityService: CommunityService())),
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
+        ChangeNotifierProvider(
+          create: (context) => SettingsMobileController(),),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -142,6 +96,11 @@ class MyApp extends StatelessWidget {
           AboutYou.routeName: (ctx) => const AboutYou(),
           SplashScreen.routeName: (ctx) => const SplashScreen(),
           CommunityScreen.routeName: (ctx) => const CommunityScreen(),
+          SettingsHomePage.routeName: (context) => SettingsHomePage(),
+          AccountSettingsScreen.routeName: (context) => AccountSettingsScreen(),
+          ManageEmailsScreen.routeName: (context) => ManageEmailsScreen(),
+          UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
+          ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
         },
 
       ),
