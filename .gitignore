@@ -53,3 +53,4 @@ windows/flutter/generated_plugins.cmake
 lib/config/googleKey.jks
 coverage/lcov.info
 coverage/test_coverage.csv
+pubspec.lock
