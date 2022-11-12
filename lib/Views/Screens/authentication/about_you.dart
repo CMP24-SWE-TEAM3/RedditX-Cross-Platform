@@ -123,7 +123,7 @@ class _AboutYouState extends State<AboutYou> {
     Navigator.of(context).pop();
   }
 
-   Future<void> submit(String kind, ctx)  async {
+  Future<void> submit(String kind, ctx) async {
     final mediaQuery = MediaQuery.of(ctx);
     final widthScreen = (mediaQuery.size.width);
     final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);

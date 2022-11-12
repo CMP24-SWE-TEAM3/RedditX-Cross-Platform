@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/models/community_service.dart';
-import 'Views/Screens/community/community_scrren.dart';
+import 'views/screens/community/community_scrren.dart';
 import 'controllers/community_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
@@ -28,8 +28,6 @@ void main() async {
   runApp(const MyApp());
 }
 
-
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -39,7 +37,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => CommunityProvider(communityService: CommunityService())),
+        ChangeNotifierProvider(
+            create: (context) =>
+                CommunityProvider(communityService: CommunityService())),
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
       ],

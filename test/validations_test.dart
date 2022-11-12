@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:reddit/Controllers/validations.dart';
+import 'package:reddit/controllers/validations.dart';
 
 void main() {
   group('Validations for Emails', () {
