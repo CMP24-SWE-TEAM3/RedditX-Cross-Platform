@@ -4,7 +4,9 @@ class PersonInSearch {
   String about;
   bool followed;
   String img;
-  DateTime date; // the date of the user bedinning in Reddit
+
+  /// The date this user starts Reddit
+  DateTime date;
 
   PersonInSearch({
     required this.userName,
@@ -32,8 +34,7 @@ List<PersonInSearch> peoplesListData = [
     karma: 36,
     about: '',
     followed: true,
-    img:
-        'https://preview.redd.it/lfs78sg5t7w61.png?width=285&format=png&auto=webp&s=ba719268f3d31b07e04e9904f3adac43ca733902',
+    img: 'https://i.redd.it/amfv7gtqkzr81.png',
     date: DateTime(2021, 10, 2),
   ),
   PersonInSearch(
@@ -84,8 +85,7 @@ List<PersonInSearch> peoplesListData = [
     karma: 7123456,
     about: 'UserName8 information ',
     followed: false,
-    img:
-        'https://preview.redd.it/sgbrrbxevb061.png?auto=webp&s=58a4bc6761d51e964ef1779250c1380c7bc306fb',
+    img: 'https://i.redd.it/ym0nsl4yrgq71.jpg',
     date: DateTime(2021, 12, 20),
   ),
 ];
@@ -97,7 +97,9 @@ class CommunityInSearch {
   int membersCount;
   String img;
   String about;
-  bool joined; //whether you are joined or not
+
+  ///Whether you are joined this community or not
+  bool joined;
 
   CommunityInSearch({
     required this.name,
@@ -283,8 +285,7 @@ List<CommentInSearch> commentssListData = [
   CommentInSearch(
     postData: postsListData[3],
     userName: 'userName2',
-    userAvatar:
-        'https://preview.redd.it/lfs78sg5t7w61.png?width=285&format=png&auto=webp&s=ba719268f3d31b07e04e9904f3adac43ca733902',
+    userAvatar: 'https://i.redd.it/amfv7gtqkzr81.png',
     commentVotesCount: 0,
     createdAt: DateTime(2021, 11, 7),
     commentText:

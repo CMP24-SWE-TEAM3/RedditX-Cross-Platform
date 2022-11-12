@@ -1,53 +1,61 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as international;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/search_model.dart';
 
-import '../views/widgets/comments_in_search_results.dart';
-import '../views/widgets/communities_in_search_results.dart';
-import '../views/widgets/people_in_search_results.dart';
-import '../views/widgets/posts_in_search_results.dart';
-import '../views/widgets/search_history_widget.dart';
+import '../views/widgets/search/comments_in_search_results.dart';
+import '../views/widgets/search/communities_in_search_results.dart';
+import '../views/widgets/search/people_in_search_results.dart';
+import '../views/widgets/search/posts_in_search_results.dart';
+import '../views/widgets/search/search_history_widget.dart';
 
 class SearchController with ChangeNotifier {
   final SearchService searchService;
 
-  ///controller that stores the input text
+  ///Controller that stores the search input text
   var searchTextFieldcontroller = TextEditingController();
-  //detect the platform
-  //web==> true , App==> false
-  bool isWeb = !Platform.isAndroid;
 
-  ///text appears from RTL ==> true, from LTR ==< false
+  ///Whether the platform is web or android
+  //web==> true , App==> false
+  bool isWeb = !(defaultTargetPlatform == TargetPlatform.android);
+
+  ///Whether the text direction is RTL or LTR
   bool isRTLText = false;
   //the icon that appears in the end of the text field to delete the input text
   Widget closeIcon = const Icon(Icons.close, color: Colors.grey);
-  //is the textField focused
+
+  ///Whether the serach text field focused or not
   bool isFocused = false;
-  //is the text field hovered with the mouse
+
+  ///Whether the search text field hovered with the mouse or not
   bool isHoveredTextField = false;
-  //to detect when the textField is tapped
+  //to detect when the search text field is tapped
   bool isTapped = false;
-  //to detect whether the border is circular or rectangular depending on the platform
+  //Whether the border is circular or rectangular depending on the platform
   double borderRadius = 0;
-  //to store  and restore the search history
+
+  ///List to store  and restore the search history
   List<String>? restoreSearchHistory = [];
-  //to detect which item was clicked
+
+  ///Index of search history clicked item if an is clicked
   int clickedItemIndex = 0;
-  //to detect the radius
+  //to detect the radius of the search inpt text field
   double bottomborderRadius = 0;
   //to store in it useres from the search result of people are followed and which are not
   //I will fill it during reading data in the model class
+  ///List of people in search results detects whether each user is followed or not
   List<bool> isFollowing = [];
   //to store in it subreddits from the search result of communities are joined and which are not
   //I will fill it during reading data in the model class
+  ///List of communities in search results detects whether each community is joined or not
   List<bool> isJoining = [];
-  //to detect if the Follow button in the search result is hovered with mouse
+
+  ///Whether this follow button in search result is hovered with mouse or not
   List<bool> isHoveredFollowButton = [];
-  //to detect if the join button in the search result is hovered with mouse
+
+  ///Whether this join button in search result is hovered with mouse or not
   List<bool> isHoveredJoinButton = [];
 
   SearchController({
@@ -61,23 +69,23 @@ class SearchController with ChangeNotifier {
         isWeb ? const Icon(null) : const Icon(Icons.close, color: Colors.grey);
   }
 
-  ///when hover the field with the mouse
+  ///Detects when hover the field with the mouse
   onHoverTextField() {
-    ///a flag to detect it is hovered
+    ///Whether the text field is tapped or not
     isHoveredTextField = true;
     notifyListeners();
   }
 
-  ///when move the mouse away from the text field the region
+  ///Detects when move the mouse away from the text field
   onExitTextField() {
-    ///a flag to detect it is not hovered now
+    ///Whether the text field is hovered or not
     isHoveredTextField = false;
     notifyListeners();
   }
 
-  ///when tap the text field
+  ///Detects when tap the text field
   onTapTextField() {
-    ///a flag to detect it is tapped
+    ///Whether the text field is tapped or not
     isTapped = true;
 
     ///change the shape of the text field when tapped
@@ -85,9 +93,9 @@ class SearchController with ChangeNotifier {
     notifyListeners();
   }
 
-  ///when tap outside the text field
+  ///Detects when tap outside the text field
   onExitTapTextField() {
-    ///a flag to detect it is no longer tapped
+    ///Whether the text field is tapped or not
     isTapped = false;
     //to change make the bottom circular in web
     //rect in App
@@ -95,32 +103,32 @@ class SearchController with ChangeNotifier {
     notifyListeners();
   }
 
-  ///clear button in the end of the text field
+  ///Press clear button in the end of the text field
   textFieldSuffixOnPressed() {
-    ///clear the content of the text field by calling searchTextFieldcontroller.clear();
+    ///Clear the content of the text field
     searchTextFieldcontroller.clear();
 
-    ///in web ==> when clear the text ==> the clear button diappear
+    //in web ==> when clear the text ==> the clear button diappear
     if (isWeb) {
       closeIcon = const Icon(null);
     }
     notifyListeners();
   }
 
-  ///when click on a serach history item
+  ///When click on a serach history item
   searchHistoryClicked(String textClicked, int itemIndex) {
-    ///1-clear the current written text in the text field by calling searchTextFieldcontroller.clear();
+    ///1-Clears the current written text in the text field by calling searchTextFieldcontroller.clear();
     searchTextFieldcontroller.clear();
     clickedItemIndex = itemIndex;
 
-    ///2-make the text in the text field = the text of the clicked item
+    ///2-Makes the text in the text field = the text of the clicked item
     searchTextFieldcontroller.text = textClicked;
 
-    ///3-to make the cursor in the end of the new text
+    ///3-Makes the cursor in the end of the new text
     searchTextFieldcontroller.selection = TextSelection.fromPosition(
       TextPosition(offset: searchTextFieldcontroller.text.length),
     );
-    //5-every change in text this function is called
+    //4-every change in text this function is called
     onChangeTextField();
     notifyListeners();
   }
@@ -158,15 +166,16 @@ class SearchController with ChangeNotifier {
     return enableBorderColor;
   }
 
-  ///to detect whether the text will be written LTR or RTL
+  ///Detects whether the text will be written LTR or RTL
   isRTLTextField() {
-    ///if web ==>the text is always LTR
+    ///In web, the text is always LTR
     isRTLText = isWeb
         ? false
 
-        ///if App ==> detect RTL or LTR using international.Bidi.detectRtlDirectionality function
+        ///In App, detects RTL or LTR using international.Bidi.detectRtlDirectionality function
         : international.Bidi.detectRtlDirectionality(
-                //function from lib intl.dart
+
+                ///[international.Bidi.detectRtlDirectionality] function from [intl.dart]
                 searchTextFieldcontroller.text //input text
                 )
             ? true
@@ -184,23 +193,23 @@ class SearchController with ChangeNotifier {
     notifyListeners();
   }
 
-  ///Get the List of stored search History
+  ///Gets the List of stored search History
   getSearchHistory() async {
-    ///shared preferences for chached data
+    ///shared preferences for cached data
     SharedPreferences prefs = await SharedPreferences.getInstance();
     if (prefs.getStringList("SearchHistory") != null) {
-      ///get the saved data
+      ///Gets the saved data
       restoreSearchHistory = prefs.getStringList("SearchHistory")!;
     } else {
       //to avoid nullable call runtime error
-      /// we get empty list if the saved data is empty
+      ///Gets empty list if the saved data is empty
       restoreSearchHistory = [];
     }
     notifyListeners();
   }
 
   onChangeTextField() {
-    //to detect the text direction according to the written text
+    //Detects the text direction according to the written text
     isRTLTextField();
     //to detect whether to show the icon of delete or no ==>
     //if the text in web is deleted ==> it will not be icon
@@ -208,49 +217,53 @@ class SearchController with ChangeNotifier {
     closeIconAppearOrDisappear();
   }
 
-  ///when search input is submitted
+  ///Submits search input
   onSubmittingTextField() async {
-    ///send the search request to the API
+    ///1-sends the search request to the API
     //will be implemented later
     sendSearchRequestToServer();
 
-    ///Save search history in the front of the list
+    ///2-Saves search history in the front of the list
     restoreSearchHistory!.insert(0, searchTextFieldcontroller.text);
 
-    ///save the new list in the shared preferences
+    ///3-Saves the new list in the shared preferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList("SearchHistory", restoreSearchHistory!);
     notifyListeners();
   }
 
+  ///Fills List of following / unfollowing Accounts
   fillFollowingList() {
-    //fill List of following / unfollowing Accounts
     for (var i = 0; i < searchService.peoplesList.length; i++) {
       isFollowing.add(searchService.peoplesList[i].followed);
-      //make all follow button unhovered initially
+
+      ///Makes all follow button unhovered initially
       isHoveredFollowButton.add(false);
     }
   }
 
+  ///Fills List of joining / unjoining accounts
   fillJoiningList() {
-    //fill List of joining / unjoining Uccounts
     for (var i = 0; i < searchService.communitiesList.length; i++) {
       isJoining.add(searchService.communitiesList[i].joined);
-      //make all join button unhovered initially
+
+      ///Makes all join button unhovered initially
       isHoveredJoinButton.add(false);
     }
   }
 
-  ///when  asearch history is deleted using delete button
+  ///Detects when a search history is deleted using delete button
   deleteSearchHistory(int index) async {
-    ///remove this item from the search history list
+    ///Removes this item from the search history list
     restoreSearchHistory!.removeAt(index);
     notifyListeners();
-    //save the new list in the shared preferences
+
+    ///Saves the updated list in the shared preferences
     SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setStringList("SearchHistory", restoreSearchHistory!);
   }
 
+  ///Returns List of widgets to search results
   List<SearchHistoryWidget> buildSearchHistoryColumn() {
     //to avoid nullable call in the following part of the code
     if (restoreSearchHistory == null) {
@@ -259,8 +272,9 @@ class SearchController with ChangeNotifier {
     //List f widgets that will appear
     List<SearchHistoryWidget> searchHistoryWidget = [];
     int lengthOfShowList = 0;
-    //in web ==> show 5 elements at most
-    //in Appp ==> show 3 elements at most
+
+    ///In web, shows 5 elements at most
+    ///In App, shows 3 elements at most
     if (isWeb && restoreSearchHistory!.length < 5 ||
         !isWeb && restoreSearchHistory!.length < 3) {
       lengthOfShowList = restoreSearchHistory!.length;
@@ -272,7 +286,7 @@ class SearchController with ChangeNotifier {
     for (int i = 0; i < lengthOfShowList; i++) {
       searchHistoryWidget.add(
         SearchHistoryWidget(
-            //the indes of the widget(i) is sent to it (will be used when delete the item)
+            //the index of the widget(i) is sent to it (will be used when delete the item)
             //the text is sent from the front of the list of search hoistory
             myIndex: i,
             textToShow: restoreSearchHistory![i]),
@@ -281,12 +295,15 @@ class SearchController with ChangeNotifier {
     return searchHistoryWidget;
   }
 
+  ///Returns List of widgets to communities search results
   List<PeopleSearchResult> buildPeopleInSearchListWidget() {
-    //initially fill the list of followed/unfollowed accounts
+    ///Fills the list of followed/unfollowed accounts
     fillFollowingList();
-    //List of people widgets
+
+    ///List of people widgets
     List<PeopleSearchResult> peopleSearchResultsWidgetList = [];
-    //fill its data from the peopleList in the model class
+
+    ///Fills its data from the peopleList in the model class
     for (int i = 0; i < searchService.peoplesList.length; i++) {
       peopleSearchResultsWidgetList.add(
         PeopleSearchResult(
@@ -298,10 +315,12 @@ class SearchController with ChangeNotifier {
     return peopleSearchResultsWidgetList;
   }
 
+  ///Returns List of widgets to posts search results
   List<PostsSearchResult> buildPostsInSearchListWidget() {
-    //List of posts widgets
+    ///List of posts widgets
     List<PostsSearchResult> postsSearchResultsWidgetList = [];
-    //fill its data from the postsList in the model class
+
+    ///Fills its data from the postsList in the model class
     for (int i = 0; i < searchService.postsList.length; i++) {
       postsSearchResultsWidgetList.add(
         PostsSearchResult(
@@ -313,10 +332,12 @@ class SearchController with ChangeNotifier {
     return postsSearchResultsWidgetList;
   }
 
+  ///Returns List of widgets to comments search results
   List<CommentsSearchResult> buildCommentsInSearchListWidget() {
-    //List of comments widgets
+    ///List of comments widgets
     List<CommentsSearchResult> commentsSearchResultsWidgetList = [];
-    //fill its data from the commentsList in the model class
+
+    ///Fills its data from the commentsList in the model class
     for (int i = 0; i < searchService.commentssList.length; i++) {
       commentsSearchResultsWidgetList.add(
         CommentsSearchResult(
@@ -328,12 +349,15 @@ class SearchController with ChangeNotifier {
     return commentsSearchResultsWidgetList;
   }
 
+  ///Returns List of widgets to communities search results
   List<CommunitiesSearchResult> buildCommunityInSearchListWidget() {
-    //initially fill the list of joined/unjoined communities
+    ///Fills the list of joined/unjoined communities
     fillJoiningList();
-    //List of community widgets
+
+    ///List of community widgets
     List<CommunitiesSearchResult> communitySearchResultsWidgetList = [];
-    //fill its data from the communitiesList in the model class
+
+    ///Fills its data from the communitiesList in the model class
     for (int i = 0; i < searchService.communitiesList.length; i++) {
       communitySearchResultsWidgetList.add(
         CommunitiesSearchResult(
@@ -345,44 +369,50 @@ class SearchController with ChangeNotifier {
     return communitySearchResultsWidgetList;
   }
 
-  //index of the account in the retrieved accounts list
   onPressingFollowButton(int index) {
-    //1-send follow/ UnFollow request to the API
-    //2-change the text of the follow button
+    ///1-Sends follow/ UnFollow request to the API
+    ///2-Changes the text of the follow button
     isFollowing[index] = !isFollowing[index];
     notifyListeners();
   }
 
   onPressingJoinButton(int index) {
-    //1-send join/ UnJoin request to the API
-    //2-change the text of the join button
+    ///1-Sends join/ UnJoin request to the API
+    ///2-Changes the text of the join button
     isJoining[index] = !isJoining[index];
     notifyListeners();
   }
 
+  ///Detects when hover this follow button
   onHoverFollowButton(int i) {
+    ///Whether this follow button is hovered or not
     isHoveredFollowButton[i] = true;
     notifyListeners();
   }
 
+  ///Detects when hover this join button
   onHoverJoinButton(int i) {
+    ///Whether this join button is hovered or not
     isHoveredJoinButton[i] = true;
     notifyListeners();
   }
 
-  //when exit hovering follow button
+  ///Detects when exit hovering this follow button
   onExitFollowButton(int i) {
+    ///Whether this follow button is hovered or not
     isHoveredFollowButton[i] = false;
     notifyListeners();
   }
 
-  //when exit hovering join button
+  ///Detects when exit hovering this join button
   onExitJoinButton(int i) {
+    ///Whether this join button is hovered or not
     isHoveredJoinButton[i] = false;
     notifyListeners();
   }
 
-  ///calculate the number of days,months and years the person,post has been in Reddit
+  ///Calculates the number of days,months and years the person,post has been in Reddit
+  ///Returns a formatted string
   calculateAge(DateTime createdAt) {
     String shownDate = '';
     int years = DateTime.now().year - createdAt.year;
@@ -392,10 +422,10 @@ class SearchController with ChangeNotifier {
     int minutes = DateTime.now().minute - createdAt.minute;
     int seconds = DateTime.now().second - createdAt.second;
 
-    ///negative value means the current second/minute/day/month is less than the DateTime of the post
-    ///so it means we are in a minute/day/month/year after that one but not a full minute/day/month/year have passed
-    ///so we subtract it
-    ///Ex:3/11/2022-5/12/2022
+    ///Negative value means the current second/minute/day/month is less than the DateTime of the post
+    ///So we are in a minute/day/month/year after that one but not a full minute/day/month/year have passed
+    ///So we subtract it
+    ///   Ex:3/11/2022-5/12/2022
     if (months < 0) {
       months = (12 - createdAt.month) + DateTime.now().month;
       years -= 1;
@@ -428,7 +458,7 @@ class SearchController with ChangeNotifier {
       minutes -= 1;
     }
 
-    ///format the shown period according to the values of days,months and years
+    ///Formats the shown period according to the Date and platform
     if (years != 0) {
       shownDate = isWeb ? '$years years ago' : '${years}y';
     } else if (months != 0) {

@@ -5,18 +5,18 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: "4897882604d919befd350648c7f91926a9d5de99e67b455bf0917cc2362f4bb8"
+      sha256: "3444216bfd127af50bbe4862d8843ed44db946dd933554f0d7285e89f10e28ac"
       url: "https://pub.dev"
     source: hosted
-    version: "47.0.0"
+    version: "50.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
-      sha256: "690e335554a8385bc9d787117d9eb52c0c03ee207a607e593de3c9d71b1cfe80"
+      sha256: "68796c31f510c8455a06fed75fc97d8e5ad04d324a830322ab3efc9feb6201c1"
       url: "https://pub.dev"
     source: hosted
-    version: "4.7.0"
+    version: "5.2.0"
   args:
     dependency: transitive
     description:
@@ -49,6 +49,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
+  cli_util:
+    dependency: transitive
+    description:
+      name: cli_util
+      sha256: "66f86e916d285c1a93d3b79587d94bd71984a66aac4ff74e524cfa7877f1395c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.5"
   clock:
     dependency: transitive
     description:
@@ -89,6 +97,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  csslib:
+    dependency: transitive
+    description:
+      name: csslib
+      sha256: b36c7f7e24c0bdf1bf9a3da461c837d1de64b9f8beb190c9011d8c72a3dfd745
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.17.2"
   cupertino_icons:
     dependency: "direct main"
     description:
@@ -97,6 +113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.0.5"
+  dartdoc:
+    dependency: "direct main"
+    description:
+      name: dartdoc
+      sha256: "31ff67173fff489e5ad73530e179121b3306277498bddc388b68ae86142a0337"
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.1.3"
   drop_cap_text:
     dependency: "direct main"
     description:
@@ -176,6 +200,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  html:
+    dependency: transitive
+    description:
+      name: html
+      sha256: d9793e10dbe0e6c364f4c59bf3e01fb33a9b2a674bc7a1081693dba0614b6269
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.15.1"
   http:
     dependency: transitive
     description:
@@ -228,10 +260,10 @@ packages:
     dependency: "direct main"
     description:
       name: linter
-      sha256: "1d5772a8e0704597d505fc8e3d68a2bf891283fec2539e2621b28cc0aac29151"
+      sha256: "7122698425207454cff723100d9ed4a0209a6fad3c928b304d53a6b674742513"
       url: "https://pub.dev"
     source: hosted
-    version: "1.28.0"
+    version: "1.30.0"
   lints:
     dependency: transitive
     description:
@@ -248,6 +280,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  markdown:
+    dependency: transitive
+    description:
+      name: markdown
+      sha256: c2b81e184067b41d0264d514f7cdaa2c02d38511e39d6521a1ccc238f6d7b3f2
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.0.1"
   matcher:
     dependency: transitive
     description:
@@ -573,6 +613,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "0.4.18"
+  test_cov_console:
+    dependency: "direct main"
+    description:
+      name: test_cov_console
+      sha256: "73519e8be3689d73f5cffb652c12c310acacf48379396d834da937094836e65e"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.2"
   typed_data:
     dependency: transitive
     description:

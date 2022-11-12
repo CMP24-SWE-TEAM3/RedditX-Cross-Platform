@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'views/screens/search_screen_one.dart';
+import 'views/screens/search/search_screen_one.dart';
 import 'controllers/search_controller.dart';
 import 'models/search_model.dart';
 
@@ -19,6 +19,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
+
+      ///Search provider
       home: ChangeNotifierProvider(
         create: (_) => SearchController(
           searchService: SearchService(),
