@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
 
-import 'package:reddit/models/post_model.dart';
-import 'package:reddit/styles/custom_icons.dart';
+import '../../../controllers/community_controller.dart';
 import '../../../methods/community/default_bottom_sheet.dart';
 import '../../../methods/community/show_leave_community_dialog.dart';
 import '../../../methods/community/show_snack_bar.dart';
 import '../../../models/community_model.dart';
+import '../../../models/post_model.dart';
 import '../../../styles/colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
+import '../../../styles/custom_icons.dart';
 import '../../widgets/community/mobile_post_card.dart';
 import '../../widgets/community/mobile_post_classic.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/View/Screens/post/Post_screen.dart';
-import 'package:reddit/View/widgets/post/Styles/custom_icons.dart';
+import '/View/Screens/post/Post_screen.dart';
+import '/View/widgets/post/Styles/custom_icons.dart';
 
 /// Web comments widget used in web post page
 class WebComments extends StatefulWidget {

@@ -1,4 +1,5 @@
-import 'package:reddit/models/post/community_model.dart';
+
+import 'community_model.dart';
 
 /// Post model
 class PostModel {

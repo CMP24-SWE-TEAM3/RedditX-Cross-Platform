@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/Mobile_settings_controller.dart';
-import 'package:reddit/views/Settings/screens/manage-emails.dart';
-import 'package:reddit/views/Settings/screens/update_email_screen.dart';
-import 'package:reddit/views/Settings/widgets/ListTilesWidgets.dart';
-import 'package:reddit/views/Settings/widgets/default_buttom_sheet.dart';
-import 'package:reddit/views/Settings/widgets/settingLabelWidget.dart';
+import '/controllers/Mobile_settings_controller.dart';
+import '/views/Settings/screens/manage-emails.dart';
+import '/views/Settings/screens/update_email_screen.dart';
+import '/views/Settings/widgets/ListTilesWidgets.dart';
+import '/views/Settings/widgets/default_buttom_sheet.dart';
+import '/views/Settings/widgets/settingLabelWidget.dart';
 import '../../../models/settings_model.dart';
 import './change_password_screen.dart';
 

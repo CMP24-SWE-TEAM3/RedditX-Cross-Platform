@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/views/widgets/community/pop_up_menu_button.dart';
+import '/views/widgets/community/pop_up_menu_button.dart';
 
 import '../../../controllers/community_controller.dart';
 import '../../../methods/community/show_profile_dialog.dart';

@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/models/community_model.dart';
-import 'package:reddit/models/post_model.dart';
+
+import '../../../controllers/community_controller.dart';
 import '../../../methods/community/show_toast.dart';
+import '../../../models/community_model.dart';
+import '../../../models/post_model.dart';
 import '../../../styles/colors.dart';
 import '../../../styles/custom_icons.dart';
 import '../../widgets/community/web_app_bar.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/models/post_model.dart';
-import 'package:reddit/styles/colors.dart';
+import '/controllers/community_controller.dart';
+import '/models/post_model.dart';
+import '/styles/colors.dart';
 import '../../../methods/community/share_bottom_sheet.dart';
 import '../../../styles/custom_icons.dart';
 

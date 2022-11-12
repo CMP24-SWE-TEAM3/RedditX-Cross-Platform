@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/views/Screens/temphome.dart';
+
 
 
 import '../../../controllers/internet_controller.dart';
@@ -11,6 +11,7 @@ import '../../widgets/authentication/dividor_or.dart';
 import '../../widgets/authentication/sign_up_button.dart';
 import '../../widgets/authentication/uesrname_password_textfield.dart';
 import '../../widgets/authentication/user_signup_web_agreement.dart';
+import '../temphome.dart';
 import 'email_login.dart';
 import 'email_signup_w_2.dart';
 

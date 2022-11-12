@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:reddit/View/Widgets/post/web_comments.dart';
-import 'package:reddit/View/widgets/post/Styles/custom_icons.dart';
+import '../../../styles/custom_icons.dart';
+import '../../widgets/post/web_comments.dart';
+
+
 
 /// The post design on web
 class WebPostPage extends StatefulWidget {

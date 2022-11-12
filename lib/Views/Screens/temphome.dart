@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../Settings/screens/setting_Menu.dart';
 import 'authentication/about_you.dart';
 import 'community/community_screen.dart';
+import 'search/search_screen_one.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -43,6 +44,9 @@ class Home extends StatelessWidget {
             onPressed: () => Navigator.of(context)
                 .pushNamed(SettingsHomePage.routeName, arguments: {}),
             child: const Text('Clickme for settings')),
+        ElevatedButton(
+            onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchScreenOne(),)),
+            child: const Text('Clickme for search')),
       ],
     ));
   }

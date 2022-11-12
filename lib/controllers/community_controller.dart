@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/models/post_model.dart';
+
 import '../models/community_service.dart';
+import '../models/post_model.dart';
 import '../styles/custom_icons.dart';
 
 /// Provider used for [CommunityMobileScreen] and [CommunityWebScreen].

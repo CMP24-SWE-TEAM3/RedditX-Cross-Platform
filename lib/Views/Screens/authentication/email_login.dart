@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
-import 'package:reddit/views/Screens/temphome.dart';
+
 
 
 import '../../../controllers/internet_controller.dart';
 import '../../../controllers/sign_in_controller.dart';
 import '../../widgets/authentication/show_snackbar.dart';
+import '../temphome.dart';
 import 'email_login_m.dart';
 import 'email_login_w.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/View/widgets/post/Styles/custom_icons.dart';
-import 'package:reddit/View/Widgets/post/popup_menu.dart';
+import '/View/widgets/post/Styles/custom_icons.dart';
+import '/View/Widgets/post/popup_menu.dart';
 
 /// Mobile comment widget used in mobile post page
 class comments extends StatefulWidget {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
+import '/controllers/community_controller.dart';
 
 import '../../../methods/community/show_toast.dart';
 import '../../../models/post_model.dart';

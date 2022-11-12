@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/models/community_service.dart';
+import 'package:search_project/controllers/community_controller.dart';
+import 'package:search_project/models/community_service.dart';
 
 import 'package:mocktail/mocktail.dart';
-import 'package:reddit/models/post_model.dart';
-import 'package:reddit/styles/custom_icons.dart';
+import 'package:search_project/models/post_model.dart';
+import 'package:search_project/styles/custom_icons.dart';
 
 class MockCommunityService extends Mock implements CommunityService {}
 

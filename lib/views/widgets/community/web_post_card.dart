@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/models/post_model.dart';
-import 'package:reddit/styles/colors.dart';
-import 'package:reddit/views/widgets/community/web_post_bottom.dart';
+import '/controllers/community_controller.dart';
+import '/models/post_model.dart';
+import '/styles/colors.dart';
+import '/views/widgets/community/web_post_bottom.dart';
 
 import '../../../View/Screens/post/Post_screen.dart';
 import '../../../View/Screens/post/post_page_web.dart';

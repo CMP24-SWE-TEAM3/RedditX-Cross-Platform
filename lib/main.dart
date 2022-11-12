@@ -1,4 +1,3 @@
-
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'Controllers/Mobile_settings_controller.dart';
@@ -6,8 +5,11 @@ import 'views/Settings/screens/account_setting_screen.dart';
 import 'views/Settings/screens/change_password_screen.dart';
 import 'views/Settings/screens/manage-emails.dart';
 import 'views/Settings/screens/setting_Menu.dart';
+import 'views/screens/search/search_screen_one.dart';
+import 'controllers/search_controller.dart';
+import 'models/search_model.dart';
 
-import 'package:reddit/View/Screens/post/Post_screen.dart';
+import '/View/Screens/post/Post_screen.dart';
 
 import 'models/post/post_model.dart';
 import 'models/post/comment_model.dart';
@@ -16,7 +18,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/models/community_service.dart';
+import '/models/community_service.dart';
 import 'views/Settings/screens/update_email_screen.dart';
 import 'views/screens/community/community_screen.dart';
 import 'controllers/community_controller.dart';
@@ -36,7 +38,6 @@ import 'views/screens/authentication/sign_up_page.dart';
 import 'views/screens/authentication/splash_screen.dart';
 import 'views/screens/temphome.dart';
 
-
 void main() async {
   // initial the application
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,12 +47,8 @@ void main() async {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-
-
-
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
@@ -60,7 +57,12 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(
-          create: (context) => SettingsMobileController(),),
+          create: (context) => SettingsMobileController(),
+        ),
+        ChangeNotifierProvider(
+            create: (context) => SearchController(
+                  searchService: SearchService(),
+                )),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -102,7 +104,6 @@ class MyApp extends StatelessWidget {
           UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
           ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
         },
-
       ),
     );
   }

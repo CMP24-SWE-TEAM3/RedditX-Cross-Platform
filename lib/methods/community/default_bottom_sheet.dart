@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
+
+import '../../controllers/community_controller.dart';
+
 
 /// Show default bottom sheet
 ///

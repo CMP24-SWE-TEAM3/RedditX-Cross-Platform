@@ -2,11 +2,11 @@ import 'package:float_column/float_column.dart';
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/View/Screens/post/Post_screen.dart';
-import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/styles/colors.dart';
-import 'package:reddit/views/widgets/community/mobile_post_bottom.dart';
-import 'package:reddit/views/widgets/community/pop_up_menu_button.dart';
+import '/View/Screens/post/Post_screen.dart';
+import '/controllers/community_controller.dart';
+import '/styles/colors.dart';
+import '/views/widgets/community/mobile_post_bottom.dart';
+import '/views/widgets/community/pop_up_menu_button.dart';
 
 import '../../../methods/community/show_profile_dialog.dart';
 import '../../../models/post_model.dart';

@@ -1,6 +1,8 @@
 
-import 'package:reddit/models/post_model.dart';
-import 'package:reddit/models/user_model.dart';
+
+
+import 'post/post_model.dart';
+import 'user_model.dart';
 
 class CommunityService {
   List<PostModel> testPostsList = postsList;

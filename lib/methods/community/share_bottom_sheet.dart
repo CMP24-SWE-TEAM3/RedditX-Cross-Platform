@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/methods/community/show_toast.dart';
-import 'package:reddit/styles/custom_icons.dart';
 
+
+import '../../controllers/community_controller.dart';
+import '../../styles/custom_icons.dart';
 import '../../views/widgets/community/share_bottom_sheet_item.dart';
+import 'show_toast.dart';
 
 
 
