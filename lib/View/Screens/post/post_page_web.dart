@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/Controller/post/post_mobile_provider.dart';
+
 import 'package:reddit/View/Widgets/post/web_comments.dart';
 import 'package:reddit/View/widgets/post/Styles/custom_icons.dart';
 
@@ -13,8 +13,8 @@ class WebPostPage extends StatefulWidget {
 }
 
 class _WebPostPageState extends State<WebPostPage> {
-bool isVisible = false;
-@override
+  bool isVisible = false;
+  @override
   Widget build(BuildContext context) {
     final screen_width = MediaQuery.of(context).size.width;
     print(screen_width);
@@ -288,7 +288,7 @@ bool isVisible = false;
                     ],
                   )),
               Visibility(
-                visible: isVisible = (screen_width > 1000)? true:false,
+                visible: isVisible = (screen_width > 1000) ? true : false,
                 child: SizedBox(
                   width: screen_width * 0.011,
                 ),
@@ -296,7 +296,7 @@ bool isVisible = false;
 
               /// sidebar container
               Visibility(
-                visible: isVisible = (screen_width > 1000)? true:false,
+                visible: isVisible = (screen_width > 1000) ? true : false,
                 child: Container(
                   width: screen_width * 0.24,
                   height: 5000,
@@ -305,7 +305,7 @@ bool isVisible = false;
                 ),
               ),
               Visibility(
-                visible: isVisible = (screen_width > 1000)? true:false,
+                visible: isVisible = (screen_width > 1000) ? true : false,
                 child: SizedBox(
                   width: screen_width * 0.015,
                 ),

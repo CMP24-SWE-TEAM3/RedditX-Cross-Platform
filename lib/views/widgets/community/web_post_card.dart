@@ -7,6 +7,8 @@ import 'package:reddit/models/post_model.dart';
 import 'package:reddit/styles/colors.dart';
 import 'package:reddit/views/widgets/community/web_post_bottom.dart';
 
+import '../../../View/Screens/post/Post_screen.dart';
+import '../../../View/Screens/post/post_page_web.dart';
 import '../../../styles/custom_icons.dart';
 
 
@@ -45,7 +47,13 @@ class WebPostCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<CommunityProvider>(
       builder: (context, value, child) => InkWell(
-          onTap: () {},
+          onTap: () {
+            Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PostScreen(index: index)));
+
+          },
           child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Column(

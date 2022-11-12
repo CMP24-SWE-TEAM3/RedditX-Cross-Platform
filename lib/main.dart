@@ -11,7 +11,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/models/community_service.dart';
-import 'views/screens/community/community_scrren.dart';
+import 'views/screens/community/community_screen.dart';
 import 'controllers/community_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';

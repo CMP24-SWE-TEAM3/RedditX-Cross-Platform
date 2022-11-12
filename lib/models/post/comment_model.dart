@@ -16,7 +16,7 @@ class CommentModel {
   /// dummy data to test
   /// will be replaced with real data from the APIs
 
-  List<CommentModel> CommentsList = [
+  List<CommentModel> commentsList = [
     CommentModel(
         votesCount: 215,
         text:

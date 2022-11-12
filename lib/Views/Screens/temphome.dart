@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/Views/Screens/community/community_scrren.dart';
+
 
 import 'authentication/about_you.dart';
+import 'community/community_screen.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
