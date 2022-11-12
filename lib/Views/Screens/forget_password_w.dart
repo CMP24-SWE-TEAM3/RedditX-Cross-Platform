@@ -18,7 +18,7 @@ class ForgetPasswordW extends StatefulWidget {
 }
 
 class _ForgetPasswordWState extends State<ForgetPasswordW> {
-  bool _submited = false;
+  bool _valid = false;
   TextEditingController emailController = TextEditingController();
   String? errorEmailText;
   TextEditingController userNameController = TextEditingController();
@@ -26,12 +26,12 @@ class _ForgetPasswordWState extends State<ForgetPasswordW> {
 
   void validate(userNameController, emailController, ctx) {
     setState(() {
-      _submited = true;
       errorEmailText = emailValidation(emailController.text);
       errorUserNameText = usernameValidation(userNameController.text);
     });
 
     if ((errorEmailText == null) && (errorUserNameText == null)) {
+      _valid = true;
       resetPass(emailController, userNameController, ctx);
     }
   }
@@ -149,7 +149,7 @@ class _ForgetPasswordWState extends State<ForgetPasswordW> {
                         child: ElevatedButton(
                           onPressed: () => validate(
                               userNameController, emailController, context),
-                          child: (_submited)
+                          child: (_valid)
                               ? const Icon(Icons.check)
                               : const Text(
                                   'REST PASSWORD',
@@ -168,7 +168,7 @@ class _ForgetPasswordWState extends State<ForgetPasswordW> {
                       child: SizedBox(
                         width: fixedWidth * 0.27,
                         child: Visibility(
-                          visible: _submited,
+                          visible: _valid,
                           child: Text(
                             'Thanks! If your Reddit username and email address match, you\'ll get an email with a link to reset your password shortly.',
                             style: TextStyle(

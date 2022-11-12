@@ -9,7 +9,9 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-bool mockData = true;
+import '../config/constants.dart';
+
+bool mockData = iSMOCK;
 
 class SignInController extends ChangeNotifier {
   final FirebaseAuth? firebaseAuth = (kIsWeb) ? null : FirebaseAuth.instance;

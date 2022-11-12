@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -18,19 +17,17 @@ class ForgetUserNameW extends StatefulWidget {
 }
 
 class _ForgetUserNameWState extends State<ForgetUserNameW> {
-  bool _submited = false;
+  bool _valid = false;
   TextEditingController emailController = TextEditingController();
   String? errorEmailText;
 
-
-
   void validate(emailController, ctx) async {
     setState(() {
-      _submited = true;
       errorEmailText = emailValidation(emailController.text);
     });
 
     if (errorEmailText == null) {
+      _valid = true;
       resetUsername(emailController, ctx);
     }
   }
@@ -139,7 +136,7 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
                         width: fixedWidth * 0.1,
                         child: ElevatedButton(
                           onPressed: () => validate(emailController, context),
-                          child: (_submited)
+                          child: (_valid)
                               ? const Icon(Icons.check)
                               : const Text(
                                   'EMAIL ME',
@@ -158,7 +155,7 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
                       child: SizedBox(
                         width: fixedWidth * 0.27,
                         child: Visibility(
-                          visible: _submited,
+                          visible: _valid,
                           child: Text(
                             'Thanks! If your Reddit username and email address match, you\'ll get an email with a link to reset your password shortly.',
                             style: TextStyle(
