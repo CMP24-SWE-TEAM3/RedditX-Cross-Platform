@@ -1,4 +1,4 @@
-import 'package:email_validator/email_validator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -33,8 +33,6 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
 
     if ((errorEmailText == null) && (errorUserNameText == null)) {
       resetPass(emailController, userNameController, ctx);
-    } else {
-      print(emailController.text + "---" + userNameController.text);
     }
   }
 

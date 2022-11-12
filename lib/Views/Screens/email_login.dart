@@ -5,7 +5,8 @@ import 'package:reddit/Views/Screens/temphome.dart';
 
 import '../../Controllers/internet_controller.dart';
 import '../../Controllers/sign_in_controller.dart';
-import '../Widgets/snackBar.dart';
+
+import '../Widgets/show_snackbar.dart';
 import 'email_login_m.dart';
 import 'email_login_w.dart';
 
@@ -39,7 +40,7 @@ Future<void> submitlogin(userNameController, passwordController, context) async 
     });
   }
   if (sp.hasError == false) {
-    Navigator.of(context).pop();
+    (kIsWeb) ? null : Navigator.of(context).pop();
     Navigator.of(context).pushReplacementNamed(Home.routeName, arguments: {});
   } else {
     // ignore: use_build_context_synchronously

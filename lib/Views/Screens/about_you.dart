@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import '../../Controllers/internet_controller.dart';
 import '../../Controllers/sign_in_controller.dart';
 import '../Widgets/choice_button.dart';
+import '../Widgets/show_snackbar.dart';
 import '../Widgets/sign_up_bar.dart';
-import '../Widgets/snackBar.dart';
 import 'interests.dart';
 
 class AboutYou extends StatefulWidget {
@@ -31,7 +31,6 @@ class _AboutYouState extends State<AboutYou> {
       horizontal: mediaQuery.size.width * 0.1,
     );
 
-    final widthScreen = (mediaQuery.size.width);
     return Scaffold(
       appBar: appBar,
       body: SizedBox(

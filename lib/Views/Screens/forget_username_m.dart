@@ -1,4 +1,4 @@
-import 'package:email_validator/email_validator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -27,8 +27,6 @@ class _ForgetUserNameMState extends State<ForgetUserNameM> {
 
     if (errorEmailText == null) {
       resetUsername(emailController, ctx);
-    } else {
-      print(emailController.text + "---");
     }
   }
 

@@ -1,18 +1,12 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:username_gen/username_gen.dart';
 
 import '../../Controllers/validations.dart';
-import '../Widgets/dividor_or.dart';
-import '../Widgets/sign_up_bar.dart';
-import '../Widgets/sign_up_button.dart';
+
 import '../Widgets/uesrname_password_textfield.dart';
-import '../Widgets/user_login_agreement.dart';
-import '../Widgets/user_signup_web_agreement.dart';
-import 'about_you.dart';
+
 import 'email_login.dart';
 import 'email_signup.dart';
-import 'temphome.dart';
 
 class EmailSignupW2 extends StatefulWidget {
   const EmailSignupW2({super.key});
@@ -24,11 +18,6 @@ class EmailSignupW2 extends StatefulWidget {
 
 void emailLogin(BuildContext ctx) {
   Navigator.of(ctx).pushReplacementNamed(EmailLogin.routeName, arguments: {});
-}
-
-void submit(userNameController, passwordController, ctx) {
-  print('sending data to back end');
-  Navigator.of(ctx).pushReplacementNamed(Home.routeName, arguments: {});
 }
 
 class _EmailSignupW2State extends State<EmailSignupW2> {
@@ -68,7 +57,7 @@ class _EmailSignupW2State extends State<EmailSignupW2> {
 
     if ((errorUserNameText == null) && (errorPasswordText == null)) {
       final routeargs =
-          ModalRoute.of(context)?.settings.arguments as Map<String, String>;
+          ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
       submitSignup(
           routeargs['email'], userNameController, passwordController, ctx);
     }
@@ -76,11 +65,6 @@ class _EmailSignupW2State extends State<EmailSignupW2> {
 
   @override
   Widget build(BuildContext context) {
-    final userAgrementUrl =
-        Uri.parse('https://www.redditinc.com/policies/user-agreement');
-    final privacyUrl =
-        Uri.parse('https://www.reddit.com/policies/privacy-policy');
-
     final mediaQuery = MediaQuery.of(context);
 
     final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
@@ -209,13 +193,14 @@ class _EmailSignupW2State extends State<EmailSignupW2> {
                 ),
                 Column(
                   children: [
-                    Divider(),
+                    const Divider(),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         TextButton(
-                          onPressed: () =>
-                              userNameController.text = _userNameSuggest[4],
+                          onPressed: () => Navigator.of(context)
+                              .pushReplacementNamed(EmailSignup.routeName,
+                                  arguments: {}),
                           child: const Text(
                             'Back',
                             style: TextStyle(color: Colors.black),

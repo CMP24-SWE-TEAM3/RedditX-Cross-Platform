@@ -9,6 +9,7 @@ import 'Views/Screens/choose_profilepicture.dart';
 import 'Views/Screens/choose_username.dart';
 import 'Views/Screens/email_login.dart';
 import 'Views/Screens/email_signup.dart';
+import 'Views/Screens/email_signup_w.dart';
 import 'Views/Screens/email_signup_w_2.dart';
 import 'Views/Screens/forget_password.dart';
 import 'Views/Screens/forget_username.dart';
@@ -21,7 +22,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 void main() async {
   // initial the application
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
+  (kIsWeb) ? null : await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -53,7 +54,7 @@ class MyApp extends StatelessWidget {
               ),
         ),
         initialRoute: '/',
-        home: (kIsWeb) ? const Home() : const SplashScreen(),
+        home: (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
           Home.routeName: (ctx) => const Home(),
           SignUpPage.routeName: (ctx) => const SignUpPage(),

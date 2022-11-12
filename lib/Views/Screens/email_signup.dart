@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
+import 'package:reddit/Views/Screens/temphome.dart';
 
 import '../../Controllers/internet_controller.dart';
 import '../../Controllers/sign_in_controller.dart';
-import '../Widgets/snackBar.dart';
+import '../Widgets/show_snackbar.dart';
 import 'about_you.dart';
 import 'email_signup_m.dart';
 import 'email_signup_w.dart';
@@ -38,5 +39,9 @@ Future<void> submitSignup(
       }
     });
   }
-  Navigator.of(context).pushReplacementNamed(AboutYou.routeName, arguments: {});
+  (kIsWeb)
+      ? Navigator.of(context)
+          .pushReplacementNamed(Home.routeName, arguments: {})
+      : Navigator.of(context)
+          .pushReplacementNamed(AboutYou.routeName, arguments: {});
 }

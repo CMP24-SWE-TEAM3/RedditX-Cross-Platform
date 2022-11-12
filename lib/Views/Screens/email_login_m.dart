@@ -1,17 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../Controllers/internet_controller.dart';
-import '../../Controllers/sign_in_controller.dart';
+
+
 import '../Widgets/continue_login_button.dart';
 import '../Widgets/sign_up_bar.dart';
-import '../Widgets/snackBar.dart';
+
 import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
 import 'email_login.dart';
 import 'email_signup.dart';
 import 'forget_password.dart';
-import 'temphome.dart';
+
 
 class EmailLoginM extends StatefulWidget {
   const EmailLoginM({super.key});

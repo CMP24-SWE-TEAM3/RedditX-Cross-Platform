@@ -5,8 +5,6 @@ String? emailValidation(var email) {
 }
 
 String? usernameValidation(var username) {
-//will be replaced with API
-  bool isTaken = false;
 
   return (username.isEmpty)
       ? 'Please Enter This Field'
@@ -14,9 +12,7 @@ String? usernameValidation(var username) {
       ? 'Username must be between 3 and 20 characters'
       : (!(RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(username)))
           ? 'Letters, numbers, dashes, and underscores only. please try again without symbols.'
-          : (isTaken)
-              ? 'That username is already taken'
-              : null;
+          : null;
 }
 
 String? passwordValidation(var password) {

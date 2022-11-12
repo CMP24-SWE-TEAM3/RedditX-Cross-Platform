@@ -5,9 +5,10 @@ import 'package:provider/provider.dart';
 // import '../../Controllers/signin_google.dart';
 import '../../Controllers/internet_controller.dart';
 import '../../Controllers/sign_in_controller.dart';
+import '../Widgets/show_snackbar.dart';
 import '../Widgets/sign_up_button.dart';
 import '../Widgets/sign_up_bar.dart';
-import '../Widgets/snackbar.dart';
+
 import '../Widgets/user_privacy_agreement.dart';
 import 'email_login.dart';
 import 'temphome.dart';
@@ -138,6 +139,7 @@ class _SignUpPageState extends State<SignUpPage> {
     await ip.checkInternetConnection();
 
     if (ip.hasInternet == false) {
+      // ignore: use_build_context_synchronously
       showSnackBar("Check your Internet connection", context);
     } else {
       await sp.signInWithGoogle().then((value) {
@@ -175,6 +177,7 @@ class _SignUpPageState extends State<SignUpPage> {
     await ip.checkInternetConnection();
 
     if (ip.hasInternet == false) {
+      // ignore: use_build_context_synchronously
       showSnackBar("Check your Internet connection", context);
       // facebookController.reset();
     } else {

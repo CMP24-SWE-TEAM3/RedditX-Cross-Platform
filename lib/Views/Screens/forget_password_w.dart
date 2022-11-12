@@ -1,14 +1,12 @@
-import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Controllers/validations.dart';
-import '../Widgets/email_me_button.dart';
+
 import '../Widgets/login_signup_textrow.dart';
-import '../Widgets/sign_up_bar.dart';
+
 import '../Widgets/uesrname_password_textfield.dart';
-import 'email_login.dart';
-import 'email_signup.dart';
+
 import 'forget_password.dart';
 import 'forget_username.dart';
 
@@ -26,7 +24,6 @@ class _ForgetPasswordWState extends State<ForgetPasswordW> {
   TextEditingController userNameController = TextEditingController();
   String? errorUserNameText;
 
-
   void validate(userNameController, emailController, ctx) {
     setState(() {
       _submited = true;
@@ -36,8 +33,6 @@ class _ForgetPasswordWState extends State<ForgetPasswordW> {
 
     if ((errorEmailText == null) && (errorUserNameText == null)) {
       resetPass(emailController, userNameController, ctx);
-    } else {
-      print(emailController.text + "---" + userNameController.text);
     }
   }
 

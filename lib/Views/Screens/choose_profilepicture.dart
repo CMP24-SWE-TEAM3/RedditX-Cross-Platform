@@ -9,10 +9,9 @@ import 'package:provider/provider.dart';
 import '../../Controllers/internet_controller.dart';
 import '../../Controllers/sign_in_controller.dart';
 import '../Widgets/bottm_sheet.dart';
+import '../Widgets/show_snackbar.dart';
 import '../Widgets/sign_up_bar.dart';
-import '../Widgets/snackBar.dart';
-import 'choose_username.dart';
-import 'interests.dart';
+
 import 'temphome.dart';
 
 class ChooseProfilePicture extends StatefulWidget {
@@ -47,14 +46,15 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
     }
 
     Future<void> takephoto() async {
-      final sp = Provider.of<SignInController>(context, listen: false);
-      PermissionStatus camera = await Permission.camera.request();
-      if (camera == PermissionStatus.permanentlyDenied) {
-        openAppSettings();
-      }
-      PermissionStatus storage = await Permission.storage.request();
-      if (storage == PermissionStatus.permanentlyDenied) {
-        openAppSettings();
+      if (!kIsWeb) {
+        PermissionStatus camera = await Permission.camera.request();
+        if (camera == PermissionStatus.permanentlyDenied) {
+          openAppSettings();
+        }
+        PermissionStatus storage = await Permission.storage.request();
+        if (storage == PermissionStatus.permanentlyDenied) {
+          openAppSettings();
+        }
       }
       final pickedFile = await _picker.pickImage(
         source: ImageSource.camera,
@@ -67,10 +67,11 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
     }
 
     Future<void> chooseImage() async {
-      final sp = Provider.of<SignInController>(context, listen: false);
-      PermissionStatus storage = await Permission.storage.request();
-      if (storage == PermissionStatus.permanentlyDenied) {
-        openAppSettings();
+      if (!kIsWeb) {
+        PermissionStatus storage = await Permission.storage.request();
+        if (storage == PermissionStatus.permanentlyDenied) {
+          openAppSettings();
+        }
       }
       final pickedFile = await _picker.pickImage(
         source: ImageSource.gallery,
@@ -192,7 +193,7 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
                                   ),
                                   child: InkWell(
                                     onTap: (kIsWeb)
-                                        ? () => chooseImage()
+                                        ? chooseImage
                                         : () => showModalBottomSheet<void>(
                                               context: context,
                                               builder: (BuildContext context) {

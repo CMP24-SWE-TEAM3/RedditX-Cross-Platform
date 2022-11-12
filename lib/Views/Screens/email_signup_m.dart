@@ -1,16 +1,15 @@
-import 'package:email_validator/email_validator.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../../Controllers/internet_controller.dart';
-import '../../Controllers/sign_in_controller.dart';
+import 'package:flutter/material.dart';
+
+
+
 import '../../Controllers/validations.dart';
 import '../Widgets/continue_signup_button.dart';
 import '../Widgets/sign_up_bar.dart';
-import '../Widgets/snackBar.dart';
+
 import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
-import 'about_you.dart';
+
 import 'email_login.dart';
 import 'email_signup.dart';
 
@@ -45,12 +44,6 @@ class _EmailSignupMState extends State<EmailSignupM> {
         (errorUserNameText == null) &&
         (errorPasswordText == null)) {
       submitSignup(emailController, userNameController, passwordController, ctx);
-    } else {
-      print(emailController.text +
-          "---" +
-          userNameController.text +
-          "---" +
-          passwordController.text);
     }
   }
 

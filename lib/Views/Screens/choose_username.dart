@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/Views/Screens/temphome.dart';
 import 'package:username_gen/username_gen.dart';
 
 import '../../Controllers/internet_controller.dart';
@@ -8,10 +7,10 @@ import '../../Controllers/sign_in_controller.dart';
 import '../../Controllers/validations.dart';
 import '../Widgets/choice_button.dart';
 import '../Widgets/continue_username.dart';
+import '../Widgets/show_snackbar.dart';
 import '../Widgets/sign_up_bar.dart';
-import '../Widgets/snackBar.dart';
+
 import 'choose_profilepicture.dart';
-import 'interests.dart';
 
 class ChooseUserName extends StatefulWidget {
   const ChooseUserName({super.key});
@@ -86,8 +85,6 @@ class _ChooseUserNameState extends State<ChooseUserName> {
 
       if (errorUserNameText == null) {
         submit1(userNameController, ctx);
-      } else {
-        print("---" + userNameController.text + "---");
       }
     }
   }

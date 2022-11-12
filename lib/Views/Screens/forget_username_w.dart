@@ -1,14 +1,13 @@
-import 'package:email_validator/email_validator.dart';
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../Controllers/validations.dart';
-import '../Widgets/email_me_button.dart';
+
 import '../Widgets/login_signup_textrow.dart';
-import '../Widgets/sign_up_bar.dart';
+
 import '../Widgets/uesrname_password_textfield.dart';
-import 'email_login.dart';
-import 'email_signup.dart';
+
 import 'forget_username.dart';
 
 class ForgetUserNameW extends StatefulWidget {
@@ -23,10 +22,7 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
   TextEditingController emailController = TextEditingController();
   String? errorEmailText;
 
-  void submit(emailController, ctx) {
-    print('sending data to back end');
-    //Navigator.of(ctx).pop();
-  }
+
 
   void validate(emailController, ctx) async {
     setState(() {
@@ -36,8 +32,6 @@ class _ForgetUserNameWState extends State<ForgetUserNameW> {
 
     if (errorEmailText == null) {
       resetUsername(emailController, ctx);
-    } else {
-      print(emailController.text + "---");
     }
   }
 

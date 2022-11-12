@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
 // import '../../Controllers/signin_google.dart';
+import '../../Controllers/internet_controller.dart';
+import '../../Controllers/sign_in_controller.dart';
 import '../../Controllers/validations.dart';
 import '../Widgets/dividor_or.dart';
-import '../Widgets/sign_up_bar.dart';
+import '../Widgets/show_snackbar.dart';
+
 import '../Widgets/sign_up_button.dart';
 import '../Widgets/uesrname_password_textfield.dart';
 import '../Widgets/user_login_agreement.dart';
@@ -37,8 +41,6 @@ class _EmailLoginWState extends State<EmailLoginW> {
 
     if ((errorUserNameText == null) && (errorPasswordText == null)) {
       submitlogin(userNameController, passwordController, ctx);
-    } else {
-      print(userNameController.text + "---" + passwordController.text);
     }
   }
 
@@ -128,7 +130,7 @@ class _EmailLoginWState extends State<EmailLoginW> {
                       child: Padding(
                         padding: const EdgeInsets.all(4),
                         child: SignUpButton('assets/images/google.png',
-                            'CONTINUE WITH GOOGLE', googleSignIn),
+                            'CONTINUE WITH GOOGLE', handleGoogleSignIn),
                       ),
                     ),
                     SizedBox(
@@ -136,7 +138,7 @@ class _EmailLoginWState extends State<EmailLoginW> {
                       child: Padding(
                         padding: const EdgeInsets.all(4),
                         child: SignUpButton('assets/images/facebook.png',
-                            'CONTINUE WITH FACEBOOK', () {}),
+                            'CONTINUE WITH FACEBOOK', handleFacebookAuth),
                       ),
                     ),
                     const Padding(
@@ -220,5 +222,88 @@ class _EmailLoginWState extends State<EmailLoginW> {
         ),
       ),
     );
+  }
+
+  // handling google sigin in
+  Future handleGoogleSignIn() async {
+    final sp = Provider.of<SignInController>(context, listen: false);
+    final ip = Provider.of<InternetController>(context, listen: false);
+    await ip.checkInternetConnection();
+
+    if (ip.hasInternet == false) {
+      // ignore: use_build_context_synchronously
+      showSnackBar("Check your Internet connection", context);
+    } else {
+      await sp.signInWithGoogle().then((value) {
+        if (sp.hasError == true) {
+          showSnackBar(sp.errorCode.toString(), context);
+        } else {
+          // checking whether user exists or not
+          sp.checkUserExists().then((value) async {
+            if (value == true) {
+              // user exists
+              await sp.getUserDataFromDataBase(sp.uid).then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        handleAfterSignIn();
+                      })));
+            } else {
+              // user does not exist
+              sp.saveDataToDataBase().then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        handleAfterSignIn();
+                      })));
+            }
+          });
+        }
+      });
+    }
+  }
+
+  // handling facebookauth
+  // handling google sigin in
+  Future handleFacebookAuth() async {
+    final sp = Provider.of<SignInController>(context, listen: false);
+    final ip = Provider.of<InternetController>(context, listen: false);
+    await ip.checkInternetConnection();
+
+    if (ip.hasInternet == false) {
+      // ignore: use_build_context_synchronously
+      showSnackBar("Check your Internet connection", context);
+      // facebookController.reset();
+    } else {
+      await sp.signInWithFacebook().then((value) {
+        if (sp.hasError == true) {
+          showSnackBar(sp.errorCode.toString(), context);
+        } else {
+          // checking whether user exists or not
+          sp.checkUserExists().then((value) async {
+            if (value == true) {
+              // user exists
+              await sp.getUserDataFromDataBase(sp.uid).then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        handleAfterSignIn();
+                      })));
+            } else {
+              // user does not exist
+              sp.saveDataToDataBase().then((value) => sp
+                  .saveDataToSharedPreferences()
+                  .then((value) => sp.setSignIn().then((value) {
+                        handleAfterSignIn();
+                      })));
+            }
+          });
+        }
+      });
+    }
+  }
+
+  // handle after signin
+  handleAfterSignIn() {
+    Future.delayed(const Duration(milliseconds: 1000)).then((value) {
+      Navigator.of(context).pushReplacementNamed(Home.routeName, arguments: {});
+    });
   }
 }

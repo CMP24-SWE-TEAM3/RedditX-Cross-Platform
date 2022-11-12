@@ -2,17 +2,17 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 bool mockData = true;
 
 class SignInController extends ChangeNotifier {
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  final FirebaseAuth? firebaseAuth = (kIsWeb) ? null : FirebaseAuth.instance;
   final FacebookAuth facebookAuth = FacebookAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
@@ -81,16 +81,16 @@ class SignInController extends ChangeNotifier {
           idToken: googleSignInAuthentication.idToken,
         );
 
-        final User userDetails =
-            (await firebaseAuth.signInWithCredential(credential)).user!;
+        final User? userDetails =
+            (await firebaseAuth?.signInWithCredential(credential))?.user!;
 
-        _name = userDetails.displayName;
+        _name = userDetails?.displayName;
         // now save all values
-        _name = userDetails.displayName;
-        _email = userDetails.email;
-        _imageUrl = userDetails.photoURL;
+        _name = userDetails?.displayName;
+        _email = userDetails?.email;
+        _imageUrl = userDetails?.photoURL;
         _provider = "GOOGLE";
-        _uid = userDetails.uid;
+        _uid = userDetails?.uid;
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
@@ -130,7 +130,7 @@ class SignInController extends ChangeNotifier {
       try {
         final OAuthCredential credential =
             FacebookAuthProvider.credential(result.accessToken!.token);
-        await firebaseAuth.signInWithCredential(credential);
+        await firebaseAuth?.signInWithCredential(credential);
         // saving the values
         _name = profile['name'];
         _email = profile['email'];
@@ -222,7 +222,7 @@ class SignInController extends ChangeNotifier {
 
   // signout
   Future userSignOut() async {
-    await firebaseAuth.signOut;
+    firebaseAuth?.signOut;
     await googleSignIn.signOut();
     await facebookAuth.logOut();
 
@@ -247,7 +247,7 @@ class SignInController extends ChangeNotifier {
     try {
       // send Data to Back End
       notifyListeners();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending gender";
       _hasError = true;
       notifyListeners();
@@ -264,7 +264,7 @@ class SignInController extends ChangeNotifier {
     try {
       // send Data to Back End
       notifyListeners();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending Photo";
       _hasError = true;
       notifyListeners();
@@ -280,7 +280,7 @@ class SignInController extends ChangeNotifier {
     try {
       // send Data to Back End
       notifyListeners();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending User-Name";
       _hasError = true;
       notifyListeners();
@@ -301,7 +301,7 @@ class SignInController extends ChangeNotifier {
     try {
       // send Data to Back End
       notifyListeners();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       _errorCode = "Error while Login";
       _hasError = true;
       notifyListeners();
@@ -321,7 +321,7 @@ class SignInController extends ChangeNotifier {
     try {
       // send Data to Back End
       notifyListeners();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       _errorCode = "Error while SignUp";
       _hasError = true;
       notifyListeners();
@@ -336,7 +336,7 @@ class SignInController extends ChangeNotifier {
     try {
       // send Data to Back End
       notifyListeners();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending email of reseting password";
       _hasError = true;
       notifyListeners();
@@ -351,7 +351,7 @@ class SignInController extends ChangeNotifier {
     try {
       // send Data to Back End
       notifyListeners();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending email of reseting username";
       _hasError = true;
       notifyListeners();
@@ -367,7 +367,7 @@ class SignInController extends ChangeNotifier {
     try {
       // send Data to Back End
       notifyListeners();
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (_) {
       _errorCode = "Error while setting interest";
       _hasError = true;
       notifyListeners();

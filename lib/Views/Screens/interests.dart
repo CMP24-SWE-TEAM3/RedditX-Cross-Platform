@@ -157,18 +157,13 @@ Future<void> submit(List<String> list, context) async {
     // ignore: use_build_context_synchronously
     showSnackBar("Check your Internet connection", context);
   } else {
-    await sp
-        .interest(list)
-        .then((value) {
+    await sp.interest(list).then((value) {
       if (sp.hasError == true) {
         showSnackBar(sp.errorCode.toString(), context);
       }
     });
   }
-  if (sp.username != null) {
-    print('sending data to back end');
-    print(list);
-    print('----------------------------------------');
+  if (sp.username != null && (!kIsWeb)) {
     Navigator.of(context)
         .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
   } else {
@@ -197,4 +192,3 @@ Future<void> submit(List<String> list, context) async {
             .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
   }
 }
-
