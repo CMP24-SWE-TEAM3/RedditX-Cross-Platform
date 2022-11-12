@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 
 
-import '../Widgets/continue_login_button.dart';
-import '../Widgets/sign_up_bar.dart';
+import '../widgets/continue_login_button.dart';
+import '../widgets/sign_up_bar.dart';
 
-import '../Widgets/uesrname_password_textfield.dart';
-import '../Widgets/user_login_agreement.dart';
+import '../widgets/uesrname_password_textfield.dart';
+import '../widgets/user_login_agreement.dart';
 import 'email_login.dart';
 import 'email_signup.dart';
 import 'forget_password.dart';

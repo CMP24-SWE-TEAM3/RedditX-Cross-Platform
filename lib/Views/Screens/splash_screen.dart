@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../Controllers/sign_in_controller.dart';
+import '../../controllers/sign_in_controller.dart';
 import 'sign_up_page.dart';
 import 'temphome.dart';
 

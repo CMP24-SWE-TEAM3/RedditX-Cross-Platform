@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
-// import '../../Controllers/signin_google.dart';
-import '../../Controllers/internet_controller.dart';
-import '../../Controllers/sign_in_controller.dart';
-import '../Widgets/show_snackbar.dart';
-import '../Widgets/sign_up_button.dart';
-import '../Widgets/sign_up_bar.dart';
+// import '../../controllers/signin_google.dart';
+import '../../controllers/internet_controller.dart';
+import '../../controllers/sign_in_controller.dart';
+import '../widgets/show_snackbar.dart';
+import '../widgets/sign_up_button.dart';
+import '../widgets/sign_up_bar.dart';
 
-import '../Widgets/user_privacy_agreement.dart';
+import '../widgets/user_privacy_agreement.dart';
 import 'email_login.dart';
 import 'temphome.dart';
 

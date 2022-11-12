@@ -2,10 +2,10 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../Controllers/validations.dart';
-import '../Widgets/email_me_button.dart';
-import '../Widgets/sign_up_bar.dart';
-import '../Widgets/uesrname_password_textfield.dart';
+import '../../controllers/validations.dart';
+import '../widgets/email_me_button.dart';
+import '../widgets/sign_up_bar.dart';
+import '../widgets/uesrname_password_textfield.dart';
 import 'email_login.dart';
 import 'forget_username.dart';
 

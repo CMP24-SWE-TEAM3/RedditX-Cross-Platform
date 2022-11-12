@@ -5,10 +5,10 @@ import 'package:username_gen/username_gen.dart';
 import '../../controllers/internet_controller.dart';
 import '../../controllers/sign_in_controller.dart';
 import '../../controllers/validations.dart';
-import '../Widgets/choice_button.dart';
-import '../Widgets/continue_username.dart';
-import '../Widgets/show_snackbar.dart';
-import '../Widgets/sign_up_bar.dart';
+import '../widgets/choice_button.dart';
+import '../widgets/continue_username.dart';
+import '../widgets/show_snackbar.dart';
+import '../widgets/sign_up_bar.dart';
 
 import 'choose_profilepicture.dart';
 

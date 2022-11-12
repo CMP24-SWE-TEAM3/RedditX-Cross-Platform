@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../Controllers/validations.dart';
+import '../../controllers/validations.dart';
 
-import '../Widgets/login_signup_textrow.dart';
+import '../widgets/login_signup_textrow.dart';
 
-import '../Widgets/uesrname_password_textfield.dart';
+import '../widgets/uesrname_password_textfield.dart';
 
 import 'forget_password.dart';
 import 'forget_username.dart';

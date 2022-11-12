@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:provider/provider.dart';
 
-import '../../Controllers/internet_controller.dart';
-import '../../Controllers/sign_in_controller.dart';
+import '../../controllers/internet_controller.dart';
+import '../../controllers/sign_in_controller.dart';
 
-import '../Widgets/show_snackbar.dart';
+import '../widgets/show_snackbar.dart';
 import 'forget_password_m.dart';
 import 'forget_password_w.dart';
 

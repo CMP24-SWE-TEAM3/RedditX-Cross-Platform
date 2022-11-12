@@ -8,9 +8,9 @@ import 'package:provider/provider.dart';
 
 import '../../controllers/internet_controller.dart';
 import '../../controllers/sign_in_controller.dart';
-import '../Widgets/bottm_sheet.dart';
-import '../Widgets/show_snackbar.dart';
-import '../Widgets/sign_up_bar.dart';
+import '../widgets/bottm_sheet.dart';
+import '../widgets/show_snackbar.dart';
+import '../widgets/sign_up_bar.dart';
 
 import 'temphome.dart';
 

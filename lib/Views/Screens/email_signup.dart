@@ -5,7 +5,7 @@ import 'package:reddit/views/Screens/temphome.dart';
 
 import '../../controllers/internet_controller.dart';
 import '../../controllers/sign_in_controller.dart';
-import '../Widgets/show_snackbar.dart';
+import '../widgets/show_snackbar.dart';
 import 'about_you.dart';
 import 'email_signup_m.dart';
 import 'email_signup_w.dart';

@@ -2,16 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 // import 'package:google_sign_in/google_sign_in.dart';
 
-// import '../../Controllers/signin_google.dart';
-import '../../Controllers/internet_controller.dart';
-import '../../Controllers/sign_in_controller.dart';
-import '../../Controllers/validations.dart';
-import '../Widgets/dividor_or.dart';
-import '../Widgets/show_snackbar.dart';
+// import '../../controllers/signin_google.dart';
+import '../../controllers/internet_controller.dart';
+import '../../controllers/sign_in_controller.dart';
+import '../../controllers/validations.dart';
+import '../widgets/dividor_or.dart';
+import '../widgets/show_snackbar.dart';
 
-import '../Widgets/sign_up_button.dart';
-import '../Widgets/uesrname_password_textfield.dart';
-import '../Widgets/user_login_agreement.dart';
+import '../widgets/sign_up_button.dart';
+import '../widgets/uesrname_password_textfield.dart';
+import '../widgets/user_login_agreement.dart';
 import 'email_login.dart';
 import 'email_signup.dart';
 import 'forget_password.dart';

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:username_gen/username_gen.dart';
 
-import '../../Controllers/validations.dart';
+import '../../controllers/validations.dart';
 
-import '../Widgets/uesrname_password_textfield.dart';
+import '../widgets/uesrname_password_textfield.dart';
 
 import 'email_login.dart';
 import 'email_signup.dart';
