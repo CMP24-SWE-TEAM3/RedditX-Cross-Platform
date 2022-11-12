@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/View/Styles/custom_icons.dart';
+import 'package:reddit/View/Widgets/post/Styles/custom_icons.dart';
 
 class MobilePostProvider with ChangeNotifier {
   bool isPostLiked = false;

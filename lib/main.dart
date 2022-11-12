@@ -1,9 +1,9 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:reddit/View/Screens/Post_screen.dart';
+import 'package:reddit/View/Screens/post/Post_screen.dart';
 
-import 'Model/post_model.dart';
-import 'Model/comment_model.dart';
+import 'models/post/post_model.dart';
+import 'models/post/comment_model.dart';
 
 void main() {
   runApp(const MyApp());

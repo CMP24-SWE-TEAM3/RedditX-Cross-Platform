@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/models/comment_model.dart';
-import 'package:reddit/View/Screens/post_page_web.dart';
-import 'package:reddit/View/Widgets/Comments.dart';
+import 'package:reddit/models/post/comment_model.dart';
+import 'package:reddit/View/Screens/post/post_page_web.dart';
+import 'package:reddit/View/Widgets/post/Comments.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/Controller/post_mobile_provider.dart';
-import 'package:reddit/View/Styles/custom_icons.dart';
-import 'package:reddit/View/Widgets/Comments.dart';
-import 'package:reddit/View/Widgets/popup_menu.dart';
+import 'package:reddit/Controller/post/post_mobile_provider.dart';
+import 'package:reddit/View/widgets/post/Styles/custom_icons.dart';
+import 'package:reddit/View/Widgets/post/Comments.dart';
+import 'package:reddit/View/Widgets/post/popup_menu.dart';
 
 /// Mobile post Screen
 class post_screen extends StatefulWidget {
