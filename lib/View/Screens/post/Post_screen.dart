@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/Model/comment_model.dart';
+import 'package:reddit/models/comment_model.dart';
 import 'package:reddit/View/Screens/post_page_web.dart';
 import 'package:reddit/View/Widgets/Comments.dart';
 import 'package:provider/provider.dart';

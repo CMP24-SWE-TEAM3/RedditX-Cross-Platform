@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/View/Screens/Post_screen.dart';
+import 'package:reddit/View/Screens/post/Post_screen.dart';
 import 'package:reddit/View/Styles/custom_icons.dart';
 
 /// Web comments widget used in web post page

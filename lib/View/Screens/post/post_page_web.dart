@@ -13,10 +13,11 @@ class WebPostPage extends StatefulWidget {
 }
 
 class _WebPostPageState extends State<WebPostPage> {
-  @override
+bool isVisible = false;
+@override
   Widget build(BuildContext context) {
     final screen_width = MediaQuery.of(context).size.width;
-
+    print(screen_width);
     return Container(
       width: screen_width,
       height: double.infinity,
@@ -286,20 +287,29 @@ class _WebPostPageState extends State<WebPostPage> {
                       ),
                     ],
                   )),
-              SizedBox(
-                width: screen_width * 0.011,
+              Visibility(
+                visible: isVisible = (screen_width > 1000)? true:false,
+                child: SizedBox(
+                  width: screen_width * 0.011,
+                ),
               ),
 
               /// sidebar container
-              Container(
-                width: screen_width * 0.24,
-                height: 5000,
-                color: Colors.white,
-                margin: const EdgeInsets.only(top: 70),
+              Visibility(
+                visible: isVisible = (screen_width > 1000)? true:false,
+                child: Container(
+                  width: screen_width * 0.24,
+                  height: 5000,
+                  color: Colors.white,
+                  margin: const EdgeInsets.only(top: 70),
+                ),
               ),
-              SizedBox(
-                width: screen_width * 0.015,
-              )
+              Visibility(
+                visible: isVisible = (screen_width > 1000)? true:false,
+                child: SizedBox(
+                  width: screen_width * 0.015,
+                ),
+              ),
             ],
           ),
         ),
