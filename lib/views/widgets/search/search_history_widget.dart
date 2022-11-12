@@ -56,9 +56,9 @@ class SearchHistoryWidget extends StatelessWidget {
                   : Colors.grey,
             ),
             Text(
-              key: Key('search_history_item_$myIndex'),
-              textToShow,
-            ),
+                key: Key('search_history_item_$myIndex'),
+                textToShow,
+                style: const TextStyle(color: Colors.black, fontSize: 12)),
 
             ///Deletes this search result
             IconButton(

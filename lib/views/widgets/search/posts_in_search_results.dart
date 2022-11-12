@@ -100,6 +100,11 @@ class PostsSearchResult extends StatelessWidget {
                   text: TextSpan(
                     ///Post content
                     text: postData.postText,
+                    style: const TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400,
+                      fontSize: 16,
+                    ),
                   ),
                 ),
                 //just space

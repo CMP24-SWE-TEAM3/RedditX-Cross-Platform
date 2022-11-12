@@ -74,6 +74,7 @@ class SearchTextFieldWidget extends StatelessWidget {
             ),
           ),
           hintText: 'Search Reddit',
+          hintStyle: const TextStyle(color: Colors.black, fontSize: 12),
 
           ///Search icon in the prefix of the text field
           prefixIcon: const Icon(

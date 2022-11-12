@@ -8,7 +8,9 @@ class TrendingTodayInSearch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider.of<SearchController>(context).isWeb
-        ? const Text('TRENDING TODAY')
-        : const Text('Trending today');
+        ? const Text('TRENDING TODAY',
+            style: TextStyle(color: Colors.black, fontSize: 12))
+        : const Text('Trending today',
+            style: TextStyle(color: Colors.black, fontSize: 12));
   }
 }
