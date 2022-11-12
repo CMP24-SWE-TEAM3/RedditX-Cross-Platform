@@ -4,18 +4,19 @@ import 'package:provider/provider.dart';
 
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
-import 'views/screens/about_you.dart';
-import 'views/screens/choose_profilepicture.dart';
-import 'views/screens/choose_username.dart';
-import 'views/screens/email_login.dart';
-import 'views/screens/email_signup.dart';
-import 'views/screens/email_signup_w.dart';
-import 'views/screens/email_signup_w_2.dart';
-import 'views/screens/forget_password.dart';
-import 'views/screens/forget_username.dart';
-import 'views/screens/interests.dart';
-import 'views/screens/sign_up_page.dart';
-import 'views/screens/splash_screen.dart';
+
+import 'views/screens/authentication/about_you.dart';
+import 'views/screens/authentication/choose_profilepicture.dart';
+import 'views/screens/authentication/choose_username.dart';
+import 'views/screens/authentication/email_login.dart';
+import 'views/screens/authentication/email_signup.dart';
+import 'views/screens/authentication/email_signup_w.dart';
+import 'views/screens/authentication/email_signup_w_2.dart';
+import 'views/screens/authentication/forget_password.dart';
+import 'views/screens/authentication/forget_username.dart';
+import 'views/screens/authentication/interests.dart';
+import 'views/screens/authentication/sign_up_page.dart';
+import 'views/screens/authentication/splash_screen.dart';
 import 'views/screens/temphome.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 

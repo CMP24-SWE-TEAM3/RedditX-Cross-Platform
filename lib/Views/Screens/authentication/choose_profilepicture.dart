@@ -5,14 +5,15 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/Views/Screens/temphome.dart';
 
-import '../../controllers/internet_controller.dart';
-import '../../controllers/sign_in_controller.dart';
-import '../widgets/bottm_sheet.dart';
-import '../widgets/show_snackbar.dart';
-import '../widgets/sign_up_bar.dart';
+import '../../../controllers/internet_controller.dart';
+import '../../../controllers/sign_in_controller.dart';
+import '../../widgets/authentication/bottm_sheet.dart';
+import '../../widgets/authentication/show_snackbar.dart';
+import '../../widgets/authentication/sign_up_bar.dart';
 
-import 'temphome.dart';
+
 
 class ChooseProfilePicture extends StatefulWidget {
   const ChooseProfilePicture({super.key});

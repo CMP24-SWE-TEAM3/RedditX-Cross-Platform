@@ -1,37 +1,47 @@
+
 import 'package:flutter/material.dart';
 
 
-
-import '../widgets/continue_login_button.dart';
-import '../widgets/sign_up_bar.dart';
-
-import '../widgets/uesrname_password_textfield.dart';
-import '../widgets/user_login_agreement.dart';
+import '../../../controllers/validations.dart';
+import '../../widgets/authentication/sign_up_bar.dart';
+import '../../widgets/authentication/continue_signup_button.dart';
+import '../../widgets/authentication/uesrname_password_textfield.dart';
+import '../../widgets/authentication/user_login_agreement.dart';
 import 'email_login.dart';
 import 'email_signup.dart';
-import 'forget_password.dart';
 
-
-class EmailLoginM extends StatefulWidget {
-  const EmailLoginM({super.key});
+class EmailSignupM extends StatefulWidget {
+  const EmailSignupM({super.key});
 
   @override
-  State<EmailLoginM> createState() => _EmailLoginMState();
+  State<EmailSignupM> createState() => _EmailSignupMState();
 }
 
-class _EmailLoginMState extends State<EmailLoginM> {
+class _EmailSignupMState extends State<EmailSignupM> {
+  bool _submit = false;
+  TextEditingController emailController = TextEditingController();
+  String? errorEmailText;
   TextEditingController userNameController = TextEditingController();
+  String? errorUserNameText;
   TextEditingController passwordController = TextEditingController();
+  String? errorPasswordText;
 
-
-
-  void forgetPass(BuildContext ctx) {
-    Navigator.of(ctx).pushNamed(ForgetPassword.routeName, arguments: {});
+  void emailLogin(BuildContext ctx) {
+    Navigator.of(ctx).pushReplacementNamed(EmailLogin.routeName, arguments: {});
   }
 
-  void emailsignup(BuildContext ctx) {
-    Navigator.of(ctx)
-        .pushReplacementNamed(EmailSignup.routeName, arguments: {});
+  void validate(emailController, userNameController, passwordController, ctx) {
+    setState(() => _submit = true);
+
+    errorEmailText = emailValidation(emailController.text);
+    errorUserNameText = usernameValidation(userNameController.text);
+    errorPasswordText = passwordValidation(passwordController.text);
+
+    if ((errorEmailText == null) &&
+        (errorUserNameText == null) &&
+        (errorPasswordText == null)) {
+      submitSignup(emailController, userNameController, passwordController, ctx);
+    }
   }
 
   @override
@@ -43,7 +53,7 @@ class _EmailLoginMState extends State<EmailLoginM> {
 
     final mediaQuery = MediaQuery.of(context);
     final dynamic appBar =
-        buildAppBar(text: 'Sign Up', function: () => emailsignup(context));
+        buildAppBar(text: 'Log in', function: () => emailLogin(context));
     final heightScreen = (mediaQuery.size.height -
         appBar.preferredSize.height -
         mediaQuery.padding.top);
@@ -54,8 +64,8 @@ class _EmailLoginMState extends State<EmailLoginM> {
     return GestureDetector(
       onVerticalDragUpdate: (details) {},
       onHorizontalDragUpdate: (details) {
-        if (details.delta.direction > 0) {
-          emailsignup(context);
+        if (details.delta.direction <= 0) {
+          emailLogin(context);
         }
       },
       child: Scaffold(
@@ -73,7 +83,7 @@ class _EmailLoginMState extends State<EmailLoginM> {
                       child: Padding(
                         padding: padding,
                         child: const Text(
-                          'Log in to Reddit',
+                          'Hi new friend, welcome to Reddit',
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 24,
@@ -88,47 +98,35 @@ class _EmailLoginMState extends State<EmailLoginM> {
                     ),
                     Padding(
                       padding: EdgeInsets.all(
-                        heightScreen * 0.025,
+                        heightScreen * 0.02,
                       ),
-                      child: UserNameText(
-                        key: const ValueKey('username_log_in_Page'),
-                        userNameController: userNameController,
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.all(
-                        heightScreen * 0.025,
-                      ),
-                      child: PasswordText(
-                        key: const ValueKey('password_log_in_Page'),
-                        passwordController: passwordController,
-                      ),
-                    ),
-                    SizedBox(
-                      height: heightScreen * 0.01,
+                      child: EmailText(
+                          key: const ValueKey('email_sign_up_Page'),
+                          emailController: emailController,
+                          errorEmailText: errorEmailText),
                     ),
                     Padding(
                       padding: EdgeInsets.all(
                         heightScreen * 0.02,
                       ),
-                      child: TextButton(
-                        key: const ValueKey('forgetpassword_log_in_page'),
-                        style: ButtonStyle(
-                          foregroundColor: MaterialStatePropertyAll(
-                              Theme.of(context).colorScheme.primary),
-                        ),
-                        onPressed: () => forgetPass(context),
-                        child: const Text(
-                          'Forget Password',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
+                      child: UserNameText(
+                        key: const ValueKey('username_sign_up_Page'),
+                        userNameController: userNameController,
+                        errorUserNameText: errorUserNameText,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: heightScreen * 0.02,
+                          horizontal: heightScreen * 0.01),
+                      child: PasswordText(
+                        key: const ValueKey('password_sign_up_Page'),
+                        passwordController: passwordController,
+                        errorPasswordText: errorPasswordText,
                       ),
                     ),
                     SizedBox(
-                      height: heightScreen * 0.26,
+                      height: _submit ? heightScreen * 0.1 : heightScreen * 0.2,
                     ),
                     UserLoginAggreement(
                         userAgrementUrl: userAgrementUrl,
@@ -143,11 +141,12 @@ class _EmailLoginMState extends State<EmailLoginM> {
                 alignment: Alignment.bottomCenter,
                 child: Padding(
                   padding: EdgeInsets.only(bottom: heightScreen * 0.02),
-                  child: ContinueLoginButton(
-                    key: const ValueKey('continue_log_in_Page'),
+                  child: ContinueSignUpButton(
+                    key: const ValueKey('continue_sign_up_Page'),
                     userNameController: userNameController,
                     passwordController: passwordController,
-                    function: submitlogin,
+                    emailController: emailController,
+                    function: validate,
                     ctx: context,
                   ),
                 ),

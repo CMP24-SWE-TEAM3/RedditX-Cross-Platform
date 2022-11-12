@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
-import 'about_you.dart';
+import 'authentication/about_you.dart';
+
 
 class Home extends StatelessWidget {
   const Home({super.key});

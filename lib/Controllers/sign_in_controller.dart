@@ -13,6 +13,7 @@ import '../config/constants.dart';
 
 bool mockData = iSMOCK;
 
+/// SignInController for the authentication of user by bare email , google and facebook
 class SignInController extends ChangeNotifier {
   final FirebaseAuth? firebaseAuth = (kIsWeb) ? null : FirebaseAuth.instance;
   final FacebookAuth facebookAuth = FacebookAuth.instance;
@@ -87,7 +88,7 @@ class SignInController extends ChangeNotifier {
             (await firebaseAuth?.signInWithCredential(credential))?.user!;
 
         _name = userDetails?.displayName;
-        // now save all values
+        /// now save all values
         _name = userDetails?.displayName;
         _email = userDetails?.email;
         _imageUrl = userDetails?.photoURL;
@@ -122,9 +123,9 @@ class SignInController extends ChangeNotifier {
 
   Future signInWithFacebook() async {
     final LoginResult result = await facebookAuth.login();
-    // getting the profile
+    /// getting the profile
     final graphResponse = await http.get(Uri.parse(
-        'https://graph.facebook.com/v2.12/me?fields=name,picture.width(800).height(800),first_name,last_name,email&access_token=${result.accessToken!.token}'));
+        'https:///graph.facebook.com/v2.12/me?fields=name,picture.width(800).height(800),first_name,last_name,email&access_token=${result.accessToken!.token}'));
 
     final profile = jsonDecode(graphResponse.body);
 
@@ -133,7 +134,7 @@ class SignInController extends ChangeNotifier {
         final OAuthCredential credential =
             FacebookAuthProvider.credential(result.accessToken!.token);
         await firebaseAuth?.signInWithCredential(credential);
-        // saving the values
+        /// saving the values
         _name = profile['name'];
         _email = profile['email'];
         _imageUrl = profile['picture']['data']['url'];
@@ -167,7 +168,7 @@ class SignInController extends ChangeNotifier {
     }
   }
 
-  // ENTRY FOR CLOUDFIRESTORE
+  /// ENTRY FOR CLOUDFIRESTORE
   Future getUserDataFromDataBase(uid) async {
     if (mockData) {
       _uid = '1234';
@@ -176,7 +177,7 @@ class SignInController extends ChangeNotifier {
       _imageUrl = 'assets/images/defaultuser.png';
       _provider = 'google';
     } else {
-      // Call BackEnd
+      /// Call BackEnd
     }
   }
 
@@ -184,7 +185,7 @@ class SignInController extends ChangeNotifier {
     if (mockData) {
       return;
     } else {
-      // send to BackEnd
+      /// send to BackEnd
     }
     notifyListeners();
   }
@@ -211,18 +212,18 @@ class SignInController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // checkUser exists or not in cloudfirestore
+  /// checkUser exists or not in cloudfirestore
   Future<bool> checkUserExists() async {
     if (mockData) {
       return false;
     } else {
       bool result = false;
-      // check back end
+      /// check back end
       return result;
     }
   }
 
-  // signout
+  /// signout
   Future userSignOut() async {
     firebaseAuth?.signOut;
     await googleSignIn.signOut();
@@ -230,7 +231,7 @@ class SignInController extends ChangeNotifier {
 
     _isSignedIn = false;
     notifyListeners();
-    // clear all storage information
+    /// clear all storage information
     clearStoredData();
   }
 
@@ -247,7 +248,7 @@ class SignInController extends ChangeNotifier {
       return;
     }
     try {
-      // send Data to Back End
+      /// send Data to Back End
       notifyListeners();
     } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending gender";
@@ -259,12 +260,12 @@ class SignInController extends ChangeNotifier {
   Future sendPhoto(File imageFile) async {
     if (mockData) {
       _imageUrl =
-          'https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600w-1714666150.jpg';
+          'https:///www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600w-1714666150.jpg';
       notifyListeners();
       return;
     }
     try {
-      // send Data to Back End
+      /// send Data to Back End
       notifyListeners();
     } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending Photo";
@@ -280,7 +281,7 @@ class SignInController extends ChangeNotifier {
       return;
     }
     try {
-      // send Data to Back End
+      /// send Data to Back End
       notifyListeners();
     } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending User-Name";
@@ -301,7 +302,7 @@ class SignInController extends ChangeNotifier {
       return;
     }
     try {
-      // send Data to Back End
+      /// send Data to Back End
       notifyListeners();
     } on FirebaseAuthException catch (_) {
       _errorCode = "Error while Login";
@@ -321,7 +322,7 @@ class SignInController extends ChangeNotifier {
       return;
     }
     try {
-      // send Data to Back End
+      /// send Data to Back End
       notifyListeners();
     } on FirebaseAuthException catch (_) {
       _errorCode = "Error while SignUp";
@@ -336,7 +337,7 @@ class SignInController extends ChangeNotifier {
       return;
     }
     try {
-      // send Data to Back End
+      /// send Data to Back End
       notifyListeners();
     } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending email of reseting password";
@@ -351,7 +352,7 @@ class SignInController extends ChangeNotifier {
       return;
     }
     try {
-      // send Data to Back End
+      /// send Data to Back End
       notifyListeners();
     } on FirebaseAuthException catch (_) {
       _errorCode = "Error while sending email of reseting username";
@@ -367,7 +368,7 @@ class SignInController extends ChangeNotifier {
       return;
     }
     try {
-      // send Data to Back End
+      /// send Data to Back End
       notifyListeners();
     } on FirebaseAuthException catch (_) {
       _errorCode = "Error while setting interest";
