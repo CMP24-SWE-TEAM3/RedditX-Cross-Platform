@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/methods/show_snack_bar.dart';
-import '../../methods/show_toast.dart';
-import '../../models/post_model.dart';
-import '../../styles/custom_icons.dart';
+
+import '../../../methods/community/show_toast.dart';
+import '../../../models/post_model.dart';
+import '../../../styles/custom_icons.dart';
+
 
 
 /// Shows the bottom part of web post

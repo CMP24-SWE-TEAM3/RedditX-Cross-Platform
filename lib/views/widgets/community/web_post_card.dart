@@ -5,8 +5,10 @@ import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/styles/colors.dart';
-import 'package:reddit/views/widgets/web_post_bottom.dart';
-import '../../styles/custom_icons.dart';
+import 'package:reddit/views/widgets/community/web_post_bottom.dart';
+
+import '../../../styles/custom_icons.dart';
+
 
 /// Shows the  card post view
 class WebPostCard extends StatelessWidget {

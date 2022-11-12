@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:reddit/models/post_model.dart';
-import 'package:reddit/views/widgets/mobile_post_bottom.dart';
+import 'package:reddit/views/widgets/community/mobile_post_bottom.dart';
 import 'mobile_post_top.dart';
 
 /// Shows the card post view

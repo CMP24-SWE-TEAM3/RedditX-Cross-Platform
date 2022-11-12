@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/methods/show_profile_dialog.dart';
 import 'package:reddit/styles/colors.dart';
-import 'package:reddit/views/widgets/pop_up_menu_button.dart';
-import 'package:reddit/views/widgets/mobile_post_bottom.dart';
+import 'package:reddit/views/widgets/community/mobile_post_bottom.dart';
+import 'package:reddit/views/widgets/community/pop_up_menu_button.dart';
 
-import '../../models/post_model.dart';
+import '../../../methods/community/show_profile_dialog.dart';
+import '../../../models/post_model.dart';
+
 
 /// Shows the card post view
 class MobilePostCard extends StatelessWidget {

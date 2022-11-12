@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/methods/show_snack_bar.dart';
-import 'package:reddit/methods/show_toast.dart';
 import 'package:reddit/models/community_model.dart';
 import 'package:reddit/models/post_model.dart';
-import 'package:reddit/views/widgets/web_app_bar.dart';
-import 'package:reddit/views/widgets/web_post_card.dart';
-import '../../styles/colors.dart';
-import '../../styles/custom_icons.dart';
+import '../../../methods/community/show_toast.dart';
+import '../../../styles/colors.dart';
+import '../../../styles/custom_icons.dart';
+import '../../widgets/community/web_app_bar.dart';
+import '../../widgets/community/web_post_card.dart';
 
 /// Community web screen
 class CommunityWebScreen extends StatelessWidget {

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/styles/colors.dart';
-
-import '../../controllers/community_controller.dart';
-import '../../styles/custom_icons.dart';
+import 'package:reddit/styles/custom_icons.dart';
 import 'dart:math' as math;
 
 import 'default_drop_down_button_widget.dart';

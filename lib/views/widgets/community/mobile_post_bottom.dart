@@ -4,8 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/styles/colors.dart';
-import '../../methods/share_bottom_sheet.dart';
-import '../../styles/custom_icons.dart';
+import '../../../methods/community/share_bottom_sheet.dart';
+import '../../../styles/custom_icons.dart';
+
 
 ///  Shows the bottom part of mobile post
 class BottomPostMobile extends StatelessWidget {

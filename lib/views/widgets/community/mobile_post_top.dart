@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/methods/show_profile_dialog.dart';
-import 'package:reddit/views/widgets/pop_up_menu_button.dart';
+import 'package:reddit/views/widgets/community/pop_up_menu_button.dart';
 
-import '../../controllers/community_controller.dart';
-import '../../models/post_model.dart';
+import '../../../controllers/community_controller.dart';
+import '../../../methods/community/show_profile_dialog.dart';
+import '../../../models/post_model.dart';
+
 
 /// Shows the top part of the communnity post
 class TopMobilePost extends StatelessWidget {

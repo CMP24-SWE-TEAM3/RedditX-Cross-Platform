@@ -13,8 +13,8 @@ import 'package:reddit/controllers/community_controller.dart';
 
 import 'package:reddit/main.dart';
 import 'package:reddit/models/community_service.dart';
-import 'package:reddit/views/screens/community_home_mobile_screen.dart';
-import 'package:reddit/views/screens/community_home_web_screen.dart';
+import 'package:reddit/views/screens/community/community_home_mobile_screen.dart';
+import 'package:reddit/views/screens/community/community_home_web_screen.dart';
 
 class MockCommunityService extends Mock implements CommunityService {}
 

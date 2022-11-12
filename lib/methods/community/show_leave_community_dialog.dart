@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/methods/show_snack_bar.dart';
-import 'package:reddit/methods/show_toast.dart';
+import 'package:reddit/methods/community/show_toast.dart';
+
 import 'package:reddit/models/community_model.dart';
 
-import '../controllers/community_controller.dart';
+import '../../controllers/community_controller.dart';
+
 
 /// Show dialog when Asking to leave a community
 
