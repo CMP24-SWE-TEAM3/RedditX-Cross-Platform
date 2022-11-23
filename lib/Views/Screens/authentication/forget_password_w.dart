@@ -3,10 +3,11 @@ import 'package:url_launcher/url_launcher.dart';
 
 
 
+import '../../../controllers/authentication_submitions.dart';
 import '../../../controllers/validations.dart';
 import '../../widgets/authentication/login_signup_textrow.dart';
 import '../../widgets/authentication/uesrname_password_textfield.dart';
-import 'forget_password.dart';
+
 import 'forget_username.dart';
 
 class ForgetPasswordW extends StatefulWidget {
@@ -24,9 +25,9 @@ class _ForgetPasswordWState extends State<ForgetPasswordW> {
   String? errorUserNameText;
 
   void validate(userNameController, emailController, ctx) {
-    setState(() {
+    setState(() async {
       errorEmailText = emailValidation(emailController.text);
-      errorUserNameText = usernameValidation(userNameController.text);
+      errorUserNameText = await usernameValidation(userNameController.text, ctx);
     });
 
     if ((errorEmailText == null) && (errorUserNameText == null)) {

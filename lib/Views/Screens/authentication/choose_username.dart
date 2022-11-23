@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+
 import 'package:username_gen/username_gen.dart';
 
 
 
-import '../../../controllers/internet_controller.dart';
-import '../../../controllers/sign_in_controller.dart';
+import '../../../controllers/authentication_submitions.dart';
+
 import '../../../controllers/validations.dart';
 import '../../widgets/authentication/choice_button.dart';
 import '../../widgets/authentication/continue_username.dart';
-import '../../widgets/authentication/show_snackbar.dart';
+
 import '../../widgets/authentication/sign_up_bar.dart';
-import 'choose_profilepicture.dart';
+
 
 class ChooseUserName extends StatefulWidget {
   const ChooseUserName({super.key});
@@ -29,37 +29,18 @@ class _ChooseUserNameState extends State<ChooseUserName> {
   var _userNameSuggest = ['', '', ''];
 
   void submit1(userNameController, ctx) {
-    submit(userNameController.text, ctx);
+    submitUserName(userNameController.text, ctx);
 
     
   }
 
   void submit2(String username, ctx) {
-    submit(username, ctx);
+    submitUserName(username, ctx);
 
     
   }
 
-  Future<void> submit(String username, ctx) async {
 
-    final sp = Provider.of<SignInController>(context, listen: false);
-      final ip = Provider.of<InternetController>(context, listen: false);
-      await ip.checkInternetConnection();
-
-      if (ip.hasInternet == false) {
-        // ignore: use_build_context_synchronously
-        showSnackBar("Check your Internet connection", context);
-      } else {
-        await sp.sendUserName(username).then((value) {
-          if (sp.hasError == true) {
-            showSnackBar(sp.errorCode.toString(), context);
-          }
-        });
-      }
-      
-    Navigator.of(ctx)
-        .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
-  }
 
   void refresh() {
     setState(() => _userNameSuggest = [
@@ -79,10 +60,10 @@ class _ChooseUserNameState extends State<ChooseUserName> {
     ];
   }
 
-  void validate(userNameController, ctx) {
+  Future<void> validate(userNameController, ctx) async {
     setState(() => _submit = true);
     if (_submit) {
-      errorUserNameText = usernameValidation(userNameController.text);
+      errorUserNameText = await usernameValidation(userNameController.text, ctx);
 
       if (errorUserNameText == null) {
         submit1(userNameController, ctx);

@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:reddit/Controllers/validations.dart';
+import 'package:reddit/controllers/validations.dart';
 
 void main() {
   group('Validations for Emails', () {
@@ -20,24 +20,24 @@ void main() {
   group('Validations for Usernames', () {
     test('Valid Username', () {
       String username = 'Ahmed';
-      expect(usernameValidation(username), null);
+      expect(usernameValidationinternal(username), null);
     });
     
     test('InValid Username 1', () {
       String username = 'a';
-      expect(usernameValidation(username), 'Username must be between 3 and 20 characters');
+      expect(usernameValidationinternal(username), 'Username must be between 3 and 20 characters');
     });
     test('InValid Username 2', () {
       String username = 'asdfasdfasdfasddfasdfasdfasdfasdfasdfasdf';
-      expect(usernameValidation(username), 'Username must be between 3 and 20 characters');
+      expect(usernameValidationinternal(username), 'Username must be between 3 and 20 characters');
     });
     test('InValid Username 3', () {
       String username = 'ah.sadf';
-      expect(usernameValidation(username), 'Letters, numbers, dashes, and underscores only. please try again without symbols.');
+      expect(usernameValidationinternal(username), 'Letters, numbers, dashes, and underscores only. please try again without symbols.');
     });
     test('InValid Username 4', () {
       String username = '';
-      expect(usernameValidation(username), 'Please Enter This Field');
+      expect(usernameValidationinternal(username), 'Please Enter This Field');
     });
   });
 

@@ -7,10 +7,9 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/Views/Screens/temphome.dart';
 
-import '../../../controllers/internet_controller.dart';
+import '../../../controllers/authentication_submitions.dart';
 import '../../../controllers/sign_in_controller.dart';
 import '../../widgets/authentication/bottm_sheet.dart';
-import '../../widgets/authentication/show_snackbar.dart';
 import '../../widgets/authentication/sign_up_bar.dart';
 
 
@@ -29,22 +28,7 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
 
   @override
   Widget build(BuildContext context) {
-    Future<void> submit(ctx) async {
-      final sp = Provider.of<SignInController>(context, listen: false);
-      final ip = Provider.of<InternetController>(context, listen: false);
-      await ip.checkInternetConnection();
 
-      if (ip.hasInternet == false) {
-        // ignore: use_build_context_synchronously
-        showSnackBar("Check your Internet connection", context);
-      } else {
-        await sp.sendPhoto(_imageFile!).then((value) {
-          if (sp.hasError == true) {
-            showSnackBar(sp.errorCode.toString(), context);
-          }
-        });
-      }
-    }
 
     Future<void> takephoto() async {
       if (!kIsWeb) {
@@ -64,7 +48,7 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
         _imageFile = File(pickedFile.path);
       }
       // ignore: use_build_context_synchronously
-      submit(context);
+      submitPhoto(_imageFile, context);
     }
 
     Future<void> chooseImage() async {
@@ -81,7 +65,7 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
         _imageFile = File(pickedFile.path);
       }
       // ignore: use_build_context_synchronously
-      submit(context);
+      submitPhoto(_imageFile, context);
     }
 
     void next(ctx) {

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:username_gen/username_gen.dart';
 
 
+import '../../../controllers/authentication_submitions.dart';
 import '../../../controllers/validations.dart';
 import '../../widgets/authentication/uesrname_password_textfield.dart';
 import 'email_login.dart';
@@ -49,8 +50,8 @@ class _EmailSignupW2State extends State<EmailSignupW2> {
   }
 
   void validate(userNameController, passwordController, ctx) {
-    setState(() {
-      errorUserNameText = usernameValidation(userNameController.text);
+    setState(() async {
+      errorUserNameText = await usernameValidation(userNameController.text, ctx);
       errorPasswordText = passwordValidation(passwordController.text);
     });
 

@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 
+import '../../../controllers/authentication_submitions.dart';
 import '../../../controllers/validations.dart';
 import '../../widgets/authentication/sign_up_bar.dart';
 import '../../widgets/authentication/email_me_button.dart';
 import '../../widgets/authentication/uesrname_password_textfield.dart';
 import 'email_login.dart';
-import 'forget_password.dart';
 import 'forget_username.dart';
 
 class ForgetPasswordM extends StatefulWidget {
@@ -27,9 +27,9 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
 
 
   void validate(userNameController, emailController, ctx) {
-    setState(() {
+    setState(() async {
       errorEmailText = emailValidation(emailController.text);
-      errorUserNameText = usernameValidation(userNameController.text);
+      errorUserNameText = await usernameValidation(userNameController.text, ctx);
     });
 
     if ((errorEmailText == null) && (errorUserNameText == null)) {
