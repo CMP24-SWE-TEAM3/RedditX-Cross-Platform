@@ -11,26 +11,37 @@ class UserAuthentication {
   final FacebookAuth facebookAuth = FacebookAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
+  ///check whether the user is signed_in or not
   bool isSignedIn;
 
+  /// checks whether there is error in the service call or not
   bool hasError;
 
+  /// the definition for the error (erroro message shown to the user)
   String? errorCode;
 
+  /// whether he is signed in with google , facebook or with bare email
   String? provider;
 
+  /// token of the user
   String? uid;
 
+  /// name of the user
   String? name;
 
+  /// username of the user
   String? username;
 
+  /// email of the user
   String? email;
 
+  /// gender of the user
   String? gender;
 
+  /// image url of the user
   String? imageUrl;
 
+  /// list of interest of the user
   List<String>? list;
 
   UserAuthentication({
