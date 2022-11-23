@@ -43,7 +43,7 @@ class CommunityWebScreen extends StatelessWidget {
                       height: 150,
                       child: Image(
                           fit: BoxFit.cover,
-                          image: NetworkImage(communityModel1.banner)),
+                          image: NetworkImage(communityModel1.banner!)),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +53,7 @@ class CommunityWebScreen extends StatelessWidget {
                         ),
                         CircleAvatar(
                           radius: 35,
-                          backgroundImage: NetworkImage(communityModel1.icon),
+                          backgroundImage: NetworkImage(communityModel1.icon!),
                         ),
                         const SizedBox(
                           width: 30,
@@ -64,9 +64,9 @@ class CommunityWebScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              (communityModel1.description.length > 50)
-                                  ? communityModel1.name
-                                  : communityModel1.description,
+                              (communityModel1.description!.length > 50)
+                                  ? communityModel1.id!
+                                  : communityModel1.description!,
                               maxLines: 1,
                               softWrap: true,
                               style: const TextStyle(
@@ -74,7 +74,7 @@ class CommunityWebScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              communityModel1.name,
+                              communityModel1.id!,
                               style: const TextStyle(color: Colors.grey),
                             )
                           ],
@@ -102,7 +102,7 @@ class CommunityWebScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           onTap: () {
-                                            showToast("Successfully left r/${communityModel1.name}");
+                                            showToast("Successfully left r/${communityModel1.id}");
   
                                             Provider.of<CommunityProvider>(
                                                     context,
@@ -129,7 +129,7 @@ class CommunityWebScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20),
                                     onTap: () {
                                       value.joinCommunity();
-                                      showToast("Successfully joined r/${communityModel1.name}");
+                                      showToast("Successfully joined r/${communityModel1.id}");
                                     },
                                     child: const Padding(
                                         padding: EdgeInsets.all(5),
@@ -433,20 +433,20 @@ class CommunityWebScreen extends StatelessWidget {
                                         shrinkWrap: true,
                                         separatorBuilder: (context, index) =>
                                             const Divider(),
-                                        itemCount: postsList.length,
+                                        itemCount: postsListMock.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Container(
                                               color: whiteColor,
                                               child: WebPostCard(
                                                 userName:
-                                                    postsList[index].username,
+                                                    postsListMock[index].userID!,
                                                 index: index,
                                                 dateTime:
-                                                    postsList[index].createdAt,
+                                                    postsListMock[index].createdAt!,
                                                 context: context,
                                                 postPlace: "community",
-                                                postType: postsList[index].type,
+                                                postType: postsListMock[index].type!,
                                               ));
                                         },
                                       ),

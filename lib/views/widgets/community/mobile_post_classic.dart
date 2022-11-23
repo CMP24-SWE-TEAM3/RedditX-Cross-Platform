@@ -45,8 +45,8 @@ class MobilePostClassic extends StatelessWidget {
                           postType: postType,
                           context: context,
                           index: index,
-                          userName: postsList[index].username,
-                          dateTime: postsList[index].createdAt,
+                          userName: postsListMock[index].userID!,
+                          dateTime: postsListMock[index].createdAt!,
                         ),
                         const SizedBox(
                           height: 10,
@@ -54,8 +54,8 @@ class MobilePostClassic extends StatelessWidget {
                         if (postType == 'text' || postType == 'image')
                           Text(
                             (postType == 'text')
-                                ? postsList[index].text
-                                : postsList[index].title,
+                                ? postsListMock[index].text!
+                                : postsListMock[index].title!,
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -74,7 +74,7 @@ class MobilePostClassic extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  postsList[index].attachments[0]))),
+                                  postsListMock[index].attachments![0]))),
                     ),
                   if (postType == 'link')
                     Row(
@@ -83,7 +83,7 @@ class MobilePostClassic extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                postsList[index].title,
+                                postsListMock[index].title!,
                                 maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -99,7 +99,7 @@ class MobilePostClassic extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 18),
                               child: LinkPreviewGenerator(
-                                link: postsList[index].attachments[0],
+                                link: postsListMock[index].attachments![0],
                                 linkPreviewStyle: LinkPreviewStyle.small,
                                 bodyMaxLines: 1,
                                 bodyTextOverflow: TextOverflow.ellipsis,

@@ -61,7 +61,7 @@ Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
                           onTap: () {
                             value.unJoinCommunity();
                             showToast(
-                                "You have left the r/${communityModel1.name} community");
+                                "You have left the r/${communityModel1.id} community");
                             Navigator.pop(context);
                           },
                           child: const Padding(

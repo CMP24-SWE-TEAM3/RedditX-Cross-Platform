@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
+import 'package:reddit/controllers/community_model_controller.dart';
+import 'package:reddit/models/community_model.dart';
 
 /// Show default bottom sheet
 ///
@@ -29,12 +31,12 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                 ),
               ),
               const Divider(),
-              Consumer<CommunityProvider>(
-                builder: (context, value, child) => ListView.builder(
+              Consumer2<CommunityProvider, CommunityModelProvider>(
+                builder: (context, value, value1, child) => ListView.builder(
                     shrinkWrap: true,
                     itemCount: itemCount,
                     itemBuilder: (context, index) => ListTile(
-                        key: ValueKey("${source}_${index}"),
+                        key: ValueKey("${source}_$index"),
                         tileColor: Colors.white,
                         title: InkWell(
                           onTap: () {
@@ -44,16 +46,19 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                             } else if (source == "postView") {
                               value.changePostView(options[index], index);
                             } else if (source == "postSortBy") {
-                              if (index == 3) {
-                                //Navigator.pop(context);
-                                Scaffold.of(context)
-                                    .showBottomSheet((context) => Container(
-                                          color: Colors.red,
-                                          height: 100,
-                                        ));
-                              }
                               value.changePostSortBy(
                                   options[index], index, context);
+
+                              if (index == 0) {
+                                value1.getPosts(
+                                    communityModel1.id!, "hot", [], 2, 40);
+                              } else if (index == 1) {
+                                value1.getPosts(
+                                    communityModel1.id!, "new", [], 2, 40);
+                              } else {
+                                value1.getPosts(
+                                    communityModel1.id!, "top", [], 2, 40);
+                              }
                             }
 
                             Navigator.pop(context);
@@ -77,7 +82,7 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                                   source == "postView" &&
                                       value.checkIconPostView[index])
                                 const Icon(
-                                  key:ValueKey("check_icon"),
+                                  key: ValueKey("check_icon"),
                                   Icons.check_outlined,
                                   color: Colors.blue,
                                 )

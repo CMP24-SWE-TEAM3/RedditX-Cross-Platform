@@ -21,7 +21,7 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
             ),
             const SizedBox(height: 30),
             Text(
-              postsList[index].username,
+              postsListMock[index].userID!,
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.black),
             ),

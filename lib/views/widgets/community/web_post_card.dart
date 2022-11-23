@@ -3,6 +3,7 @@ import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
+import 'package:reddit/controllers/community_model_controller.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/styles/colors.dart';
 import 'package:reddit/views/widgets/community/web_post_bottom.dart';
@@ -43,8 +44,8 @@ class WebPostCard extends StatelessWidget {
       required this.userName});
   @override
   Widget build(BuildContext context) {
-    return Consumer<CommunityProvider>(
-      builder: (context, value, child) => InkWell(
+    return Consumer2<CommunityProvider,CommunityModelProvider>(
+      builder: (context, value,value1, child) => InkWell(
           onTap: () {},
           child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -56,7 +57,8 @@ class WebPostCard extends StatelessWidget {
                         children: [
                           IconButton(
                               onPressed: () {
-                                value.likePost(index);
+                                value1.vote("", 1, index, context);
+                                
                               },
                               icon: (value.isPostLiked[index])
                                   ? const Icon(
@@ -64,11 +66,11 @@ class WebPostCard extends StatelessWidget {
                                       color: Colors.deepOrange,
                                     )
                                   : const Icon(CustomIcons.up_outline)),
-                          Text(Numeral(postsList[index].votesCount)
+                          Text(Numeral(postsList[index].votesCount!)
                               .format(fractionDigits: 1)),
                           IconButton(
                               onPressed: () {
-                                value.disLikePost(index);
+                                value1.vote("", 1, index, context);
                               },
                               icon: (value.isPostDisliked[index])
                                   ? const Icon(
@@ -95,13 +97,13 @@ class WebPostCard extends StatelessWidget {
                                  key: const ValueKey("username_button"),
                                 onTap: () {},
                                 child: Text(
-                                  " u/${postsList[index].username}",
+                                  " u/${postsListMock[index].userID}",
                                   style: const TextStyle(
                                       fontSize: 10.0, color: Colors.grey),
                                 ),
                               ),
                               Text(
-                                "    ${value.calculateAge(postsList[index].createdAt)}",
+                                "    ${value.calculateAge(postsListMock[index].createdAt!)}",
                                 style: TextStyle(color: Colors.grey[600]),
                               ),
                             ],
@@ -114,9 +116,9 @@ class WebPostCard extends StatelessWidget {
                                 maxHeight: 100.0,
                               ),
                               child: Text(
-                                (postsList[index].type == "text")
-                                    ? postsList[index].text
-                                    : postsList[index].title,
+                                (postsListMock[index].type == "text")
+                                    ? postsListMock[index].text!
+                                    : postsListMock[index].title!,
                                 style: const TextStyle(fontSize: 17.0),
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
@@ -125,7 +127,7 @@ class WebPostCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  if (postsList[index].type == "image")
+                  if (postsListMock[index].type == "image")
                     Container(
                       height: 250,
                       width: double.infinity,
@@ -133,16 +135,16 @@ class WebPostCard extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  postsList[index].attachments[0]))),
+                                  postsListMock[index].attachments![0]))),
                     ),
-                  if (postsList[index].type == "link")
+                  if (postsListMock[index].type == "link")
                     SizedBox(
                       height: 90,
                       width: double.infinity,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18),
                         child: LinkPreviewGenerator(
-                          link: postsList[index].attachments[0],
+                          link: postsListMock[index].attachments![0],
                           linkPreviewStyle: LinkPreviewStyle.small,
                           bodyMaxLines: 1,
                           bodyTextOverflow: TextOverflow.ellipsis,

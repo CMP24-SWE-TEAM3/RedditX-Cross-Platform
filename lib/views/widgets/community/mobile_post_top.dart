@@ -78,7 +78,7 @@ class TopMobilePost extends StatelessWidget {
                   ),
                   Consumer<CommunityProvider>(
                     builder: (context, value, child) => Text(
-                      "${value.calculateAge(postsList[index].createdAt)}",
+                      "${value.calculateAge(postsListMock[index].createdAt!)}",
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
@@ -108,7 +108,7 @@ class TopMobilePost extends StatelessWidget {
               showeProfileDialog(context, index);
             },
             child: Text(
-              "u/${postsList[index].username}",
+              "u/${postsListMock[index].userID}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -118,7 +118,7 @@ class TopMobilePost extends StatelessWidget {
           ),
           Consumer<CommunityProvider>(
             builder: (context, value, child) => Text(
-              "    ${value.calculateAge(postsList[index].createdAt)}",
+              "    ${value.calculateAge(postsListMock[index].createdAt!)}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -155,7 +155,7 @@ class TopMobilePost extends StatelessWidget {
               ),
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
-                  "${value.calculateAge(postsList[index].createdAt)}",
+                  "${value.calculateAge(postsListMock[index].createdAt!)}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),

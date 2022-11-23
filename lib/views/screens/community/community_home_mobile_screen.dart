@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_controller.dart';
+import 'package:reddit/controllers/community_model_controller.dart';
 
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/styles/custom_icons.dart';
@@ -32,8 +33,8 @@ class CommunityMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Consumer<CommunityProvider>(
-      builder: (context, value, child) => NestedScrollView(
+        body: Consumer2<CommunityProvider,CommunityModelProvider>(
+      builder: (context, value,value1, child) => NestedScrollView(
         body: DefaultTabController(
             length: 2,
             child: Column(
@@ -110,13 +111,13 @@ class CommunityMobileScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return (value.postView == "classic")
                             ? MobilePostClassic(
-                                postType: postsList[index].type,
+                                postType: postsList[index].type!,
                                 context: context,
                                 postPlace: "community",
                                 index: index,
                               )
                             : MobilePostCard(
-                                postType: postsList[index].type,
+                                postType: postsList[index].type!,
                                 index: index,
                               );
                       },
@@ -186,7 +187,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                "r/${communityModel1.name}",
+                                "r/${communityModel1.id}",
                                 style: const TextStyle(
                                     fontSize: 15, color: whiteColor),
                               )
@@ -313,7 +314,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                 child: Image(
                                     fit: BoxFit.cover,
                                     image:
-                                        NetworkImage(communityModel1.banner)),
+                                        NetworkImage(communityModel1.banner!)),
                               ),
                               Positioned(
                                 left: 20,
@@ -321,7 +322,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                 child: CircleAvatar(
                                   radius: 35,
                                   backgroundImage:
-                                      NetworkImage(communityModel1.icon),
+                                      NetworkImage(communityModel1.icon!),
                                 ),
                               ),
                             ],
@@ -338,7 +339,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "r/${communityModel1.name}",
+                                          "r/${communityModel1.id}",
                                           style: const TextStyle(
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
@@ -395,6 +396,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                                             BorderRadius
                                                                 .circular(15),
                                                         onTap: () {
+                                                          
                                                           showLeaveCommunityDialog(
                                                               context,
                                                               "Are you sure you want to leave the r/Art community?");
@@ -428,10 +430,11 @@ class CommunityMobileScreen extends StatelessWidget {
                                                         BorderRadius.circular(
                                                             15),
                                                     onTap: () {
+                                                      print(postsList.length);
                                                       value.joinCommunity();
 
                                                       showSnackBar(context,
-                                                          "You have joined the r/${communityModel1.name} community");
+                                                          "You have joined the r/${communityModel1.id} community");
 
                                                      
                                                     },
@@ -456,7 +459,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                     Row(
                                       children: [
                                         Text(
-                                          "${Numeral(communityModel1.membersCount).format(fractionDigits: 1)} members",
+                                          "${Numeral(communityModel1.membersCnt!).format(fractionDigits: 1)} members",
                                           style: const TextStyle(
                                               color: communityInfoGrey),
                                         ),
@@ -483,10 +486,10 @@ class CommunityMobileScreen extends StatelessWidget {
                                         },
                                         child: value.isExpanded
                                             ? AutoSizeText(
-                                                communityModel1.description,
+                                                communityModel1.description!,
                                               )
                                             : Text(
-                                                communityModel1.description,
+                                                communityModel1.description!,
                                                 maxLines: 3,
                                                 overflow: TextOverflow.ellipsis,
                                               ),

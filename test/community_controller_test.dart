@@ -1,11 +1,9 @@
-import 'dart:math';
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/models/community_service.dart';
-
 import 'package:mocktail/mocktail.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/styles/custom_icons.dart';
@@ -32,12 +30,12 @@ void main() {
     expect(sut.notificationIcon, Icons.notifications_outlined);
     expect(sut.postView, "card");
     expect(
-        sut.isPostLiked, List.filled(postsList.length, false, growable: true));
+        sut.isPostLiked, List.filled(postsListMock.length, false, growable: true));
     expect(sut.isPostDisliked,
-        List.filled(postsList.length, false, growable: true));
+        List.filled(postsListMock.length, false, growable: true));
 
     expect(
-        sut.isPostSaved, List.filled(postsList.length, false, growable: true));
+        sut.isPostSaved, List.filled(postsListMock.length, false, growable: true));
     expect(sut.bottomSheetNotificationsIcons, [
       Icons.notifications_off_outlined,
       Icons.notifications,

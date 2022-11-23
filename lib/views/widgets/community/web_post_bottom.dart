@@ -40,7 +40,7 @@ class BottomPostWeb extends StatelessWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          Text(Numeral(postsList[index].commentsNumber)
+                          Text(Numeral(postsListMock[index].commentsNum!)
                               .format(fractionDigits: 1)),
                         ],
                       ),

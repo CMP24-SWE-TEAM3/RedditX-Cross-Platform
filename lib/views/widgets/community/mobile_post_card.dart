@@ -44,14 +44,14 @@ class MobilePostCard extends StatelessWidget {
                           showeProfileDialog(context, index);
                         },
                         child: Text(
-                          "u/${postsList[index].username}",
+                          "u/${postsListMock[index].userID!}",
                           style: TextStyle(
                               color: communityPostsGrey, fontSize: 15),
                         ),
                       ),
                       Consumer<CommunityProvider>(
                         builder: (context, value, child) => Text(
-                          "  ${value.calculateAge(postsList[index].createdAt)}",
+                          "  ${value.calculateAge(postsListMock[index].createdAt!)}",
                           style: TextStyle(
                               color: communityPostsGrey, fontSize: 15),
                         ),
@@ -73,7 +73,7 @@ class MobilePostCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 7),
                       child: Text(
-                        postsList[index].text,
+                        postsListMock[index].text!,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -94,7 +94,7 @@ class MobilePostCard extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 18),
                                       child: LinkPreviewGenerator(
-                                        link: postsList[index].attachments[0],
+                                        link: postsListMock[index].attachments![0],
                                         linkPreviewStyle:
                                             LinkPreviewStyle.small,
                                         bodyMaxLines: 1,
@@ -113,15 +113,15 @@ class MobilePostCard extends StatelessWidget {
                                             image: DecorationImage(
                                                 fit: BoxFit.cover,
                                                 image: NetworkImage(
-                                                    postsList[index]
-                                                        .attachments[0]))),
+                                                    postsListMock[index]
+                                                        .attachments![0]))),
                                       )
                                     : const SizedBox(height: 20)),
                         WrappableText(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 9,
                             padding: const EdgeInsets.symmetric(vertical: 7),
-                            text: TextSpan(text: postsList[index].title))
+                            text: TextSpan(text: postsListMock[index].title))
                       ],
                     ),
                 ],
