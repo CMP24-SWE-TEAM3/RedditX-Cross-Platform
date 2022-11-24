@@ -1,33 +1,39 @@
 import 'package:flutter/material.dart';
-import 'views/Settings/screens/setting_Menu.dart';
+import 'package:provider/provider.dart';
+import 'config/const.dart';
+import 'controllers/mobile_settings_controller.dart';
+import 'views/screens/settings/account_setting_screen.dart';
+import 'views/screens/settings/setting_menu.dart';
+import 'package:reddit/views/screens/settings/change_password_screen.dart';
+import 'package:reddit/views/screens/settings/manage_emails.dart';
+import 'package:reddit/views/screens/settings/update_email_screen.dart';
 
 void main() {
   runApp(const SettingsMenu());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class SettingsMenu extends StatelessWidget {
+  const SettingsMenu({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Settings Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: white,
       ),
-      home: _HomePage(),
-    );
-  }
-}
-
-class _HomePage extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Home'),
+      home: ChangeNotifierProvider(
+        create: (_) => SettingsViewModelMobileController(),
+        child: const SettingsHomePage(),
       ),
-      body: const Center(child: Text('Welcome to Reddit')),
+      routes: {
+        SettingsHomePage.routeName: (context) => const SettingsHomePage(),
+        AccountSettingsScreen.routeName: (context) =>
+            const AccountSettingsScreen(),
+        ManageEmailsScreen.routeName: (context) => const ManageEmailsScreen(),
+        UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
+        ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
+      },
     );
   }
 }

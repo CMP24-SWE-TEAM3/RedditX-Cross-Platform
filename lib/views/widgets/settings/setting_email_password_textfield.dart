@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../config/const.dart';
 
 class UserNameText extends StatelessWidget {
   const UserNameText({
@@ -17,6 +16,7 @@ class UserNameText extends StatelessWidget {
       cursorColor: Colors.blue,
       decoration: InputDecoration(
         errorText: errorUserNameText,
+        focusColor: Colors.blue,
         focusedBorder: const OutlineInputBorder(
           borderSide: BorderSide(
             width: 0,
@@ -38,7 +38,7 @@ class EmailText extends StatelessWidget {
   const EmailText({
     Key? key,
     required this.emailController,
-    this.errorEmailText,
+    required this.errorEmailText,
   }) : super(key: key);
 
   final TextEditingController emailController;
@@ -49,16 +49,17 @@ class EmailText extends StatelessWidget {
     return TextField(
       cursorColor: Colors.blue,
       decoration: InputDecoration(
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.cyan),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.cyan),
+        ),
         floatingLabelStyle: const TextStyle(
           color: Colors.blue,
         ),
         errorText: errorEmailText,
-        // focusedBorder: const OutlineInputBorder(
-        //   borderSide: BorderSide(
-        //     width: 0,
-        //     color: Colors.blue,
-        //   ),
-        // ),
+        focusColor: Colors.blue,
         labelText: 'New email address',
         labelStyle: const TextStyle(
           color: Colors.grey,
@@ -86,8 +87,16 @@ class PasswordText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      cursorColor: Colors.black,
+      cursorColor: Colors.blue,
       decoration: InputDecoration(
+        enabledBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.cyan),
+        ),
+        focusedBorder: const UnderlineInputBorder(
+          borderSide: BorderSide(color: Colors.cyan),
+        ),
+
+        focusColor: Colors.blue,
         errorText: errorPasswordText,
         floatingLabelStyle: const TextStyle(
           color: Colors.blue,

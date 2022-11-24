@@ -19,6 +19,7 @@ String? usernameValidation(var username) {
           : (!(RegExp(r'^[A-Za-z0-9_-]+$').hasMatch(username)))
               ? 'Letters, numbers, dashes, and underscores only. please try again without symbols.'
               : (isTaken)
+                  // ignore: dead_code
                   ? 'That username is already taken'
                   : null;
 }

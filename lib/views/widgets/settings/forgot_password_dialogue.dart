@@ -7,6 +7,8 @@ dialogBuilder(BuildContext context) {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        insetPadding:
+            const EdgeInsets.symmetric(vertical: 40.0, horizontal: 10),
         clipBehavior: Clip.antiAlias,
         scrollable: true,
         contentPadding: const EdgeInsets.all(30),
@@ -29,6 +31,9 @@ dialogBuilder(BuildContext context) {
                 ),
               ),
             ),
+            const Divider(
+              height: 10,
+            ),
             const TextField(
               decoration: InputDecoration(
                 focusedBorder: OutlineInputBorder(
@@ -47,7 +52,7 @@ dialogBuilder(BuildContext context) {
                 "Unfortunately, if you never given us your emsil,we will not be able to reset your password."),
             Text.rich(TextSpan(
                 text: "Having trouble?",
-                style: TextStyle(color: Colors.blue),
+                style: const TextStyle(color: Colors.blue),
                 recognizer: TapGestureRecognizer()
                   ..onTap = () async {
                     //on tap code here, you can navigate to other page or URL

@@ -22,8 +22,8 @@ class BloackedAccountsScreen extends StatelessWidget {
   }
 }
 
-class Blocked_search extends StatelessWidget {
-  const Blocked_search({super.key});
+class BlockedSearch extends StatelessWidget {
+  const BlockedSearch({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

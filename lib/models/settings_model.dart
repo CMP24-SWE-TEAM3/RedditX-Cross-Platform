@@ -1,3 +1,22 @@
-import 'package:flutter/material.dart';
+import 'package:reddit/models/user_model.dart';
 
-bool? hasPassword = false;
+class SettingsModel {
+  bool? hasPassword = currentUser.isPasswordSet;
+  //main settings menu variables
+  ///user's reddit UserName
+  String? userName = currentUser.username;
+
+  ///Account Email
+  String? accountMail = currentUser.email;
+
+  String? updateEmailErrorMessage = "";
+/*
+ * update email
+ * change password
+      *validate till integrated
+      *
+ */
+
+}
+
+SettingsModel settingsModel = SettingsModel();

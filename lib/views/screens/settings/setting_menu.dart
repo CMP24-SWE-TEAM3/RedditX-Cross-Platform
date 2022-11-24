@@ -1,15 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/Mobile_settings_controller.dart';
-import 'package:reddit/views/Settings/screens/account_setting_screen.dart';
-import 'package:reddit/views/Settings/screens/change_password_screen.dart';
-import 'package:reddit/views/Settings/screens/manage-emails.dart';
-import 'package:reddit/views/Settings/screens/update_email_screen.dart';
-import '../../../config/const.dart';
-import '../../../config/icons/my_flutter_app_icons.dart';
+import 'package:reddit/controllers/mobile_settings_controller.dart';
+import '/views/screens/settings/account_setting_screen.dart';
 
-import '../widgets/ListTilesWidgets.dart';
-import '../widgets/settingLabelWidget.dart';
+import '../../widgets/settings/list_tiles_widgets.dart';
+import '../../widgets/settings/setting_label_widget.dart';
 
 //to be moved
 bool sw1ReduceAnimation = false;
@@ -17,38 +12,11 @@ bool sw2ShowNSFW = false;
 bool sw3BlurNSFW = false;
 bool sw3enble = false;
 
-void main() {
-  runApp(SettingsMenu());
-}
-
-class SettingsMenu extends StatelessWidget {
-  const SettingsMenu({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: white,
-      ),
-      home: ChangeNotifierProvider(
-        create: (_) => SettingsMobileController(),
-        child: SettingsHomePage(),
-      ),
-      routes: {
-        SettingsHomePage.routeName: (context) => SettingsHomePage(),
-        AccountSettingsScreen.routeName: (context) => AccountSettingsScreen(),
-        ManageEmailsScreen.routeName: (context) => ManageEmailsScreen(),
-        UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
-        ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
-      },
-    );
-  }
-}
-
 class SettingsHomePage extends StatelessWidget {
   static const routeName = '/Settings';
   final String title = "Settings";
+
+  const SettingsHomePage({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,8 +42,8 @@ class SettingsHomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(
                     builder: (context) => ChangeNotifierProvider(
-                      create: (_) => SettingsMobileController(),
-                      child: AccountSettingsScreen(),
+                      create: (_) => SettingsViewModelMobileController(),
+                      child: const AccountSettingsScreen(),
                     ),
                   ));
             },

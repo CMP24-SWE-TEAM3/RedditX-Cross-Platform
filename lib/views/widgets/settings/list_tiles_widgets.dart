@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:url_launcher/url_launcher_string.dart';
 
 import '../../../config/const.dart';
 
+// ignore: must_be_immutable
 class ListTileCustom extends StatelessWidget {
   ListTileCustom(
       {Key? key,
@@ -40,6 +40,7 @@ class ListTileCustom extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SettingsTileButtomSheet extends StatelessWidget {
   Icon leadingIcon;
 
@@ -102,10 +103,12 @@ class SettingsTileButtomSheet extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class SettingsListTile extends StatelessWidget {
   SettingsListTile({super.key, this.title, this.ico, this.onTab});
   String? title;
   Icon? ico;
+  // ignore: prefer_typing_uninitialized_variables
   var onTab;
   @override
   Widget build(BuildContext context) {
@@ -118,6 +121,7 @@ class SettingsListTile extends StatelessWidget {
   }
 }
 
+// ignore: must_be_immutable
 class ListTileURL extends StatelessWidget {
   ListTileURL(
       {super.key, required this.title, required this.ico, required this.url});
