@@ -19,6 +19,8 @@ getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
       postsListAPI = responseData['posts'];
+    } else {
+      postsListAPI = [];
     }
   });
 }
