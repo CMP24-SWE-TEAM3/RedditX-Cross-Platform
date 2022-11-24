@@ -1,8 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:reddit/config/constants.dart';
-import 'package:reddit/models/post_model.dart';
+
+import '../config/constants.dart';
+import '../models/post_model.dart';
+
 
 /// Get posts of a specific community with a sort type
 getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,

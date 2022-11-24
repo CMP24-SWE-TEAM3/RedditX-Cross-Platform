@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:search_project/views/screens/community/community_home.dart';
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
@@ -78,6 +79,7 @@ class MyApp extends StatelessWidget {
           ChooseProfilePicture.routeName: (ctx) => const ChooseProfilePicture(),
           AboutYou.routeName: (ctx) => const AboutYou(),
           SplashScreen.routeName: (ctx) => const SplashScreen(),
+          CommunityHome.routeName: (ctx) => const CommunityHome(),
         },
       ),
     );

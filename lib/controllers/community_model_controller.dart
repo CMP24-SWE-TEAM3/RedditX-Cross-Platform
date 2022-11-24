@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/config/constants.dart';
-import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/models/post_model.dart';
-import 'package:reddit/services/community_services.dart';
+
+import '../config/constants.dart';
+import '../models/post_model.dart';
+import '../services/community_services.dart';
+import 'community_controller.dart';
+
 
 class CommunityModelProvider with ChangeNotifier {
   bool mockData = iSMOCK;
