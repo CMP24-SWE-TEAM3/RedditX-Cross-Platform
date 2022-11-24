@@ -8,7 +8,6 @@ import '../../widgets/authentication/user_privacy_agreement.dart';
 import '../temphome.dart';
 import 'email_login.dart';
 
-
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
   static const routeName = '/signup';
@@ -48,7 +47,7 @@ class _SignUpPageState extends State<SignUpPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(
-                height: heightScreen * 0.05,
+                height: heightScreen * 0.025,
               ),
               const Text(
                 'Dive into anything',
@@ -73,12 +72,14 @@ class _SignUpPageState extends State<SignUpPage> {
               Padding(
                 padding: padding,
                 child: SignUpButton('assets/images/google.png',
-                    'Continue with Google', () =>  handleGoogleSignIn(context)),
+                    'Continue with Google', () => handleGoogleSignIn(context)),
               ),
               Padding(
                 padding: padding,
-                child: SignUpButton('assets/images/facebook.png',
-                    'Continue with Facebook', () => handleFacebookAuth(context)),
+                child: SignUpButton(
+                    'assets/images/facebook.png',
+                    'Continue with Facebook',
+                    () => handleFacebookAuth(context)),
               ),
               Padding(
                 padding: padding,
@@ -127,5 +128,4 @@ class _SignUpPageState extends State<SignUpPage> {
           ),
         ));
   }
-
 }
