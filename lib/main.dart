@@ -2,9 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'controllers/community_controller.dart';
+import 'controllers/community_model_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
 
+import 'models/post_model.dart';
 import 'views/screens/authentication/about_you.dart';
 import 'views/screens/authentication/choose_profilepicture.dart';
 import 'views/screens/authentication/choose_username.dart';
@@ -36,6 +39,12 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
+        ChangeNotifierProvider(
+          create: (context) =>
+              CommunityModelProvider()..getPosts("At5_imagePro235", "hot", [], 2, 40)),
+      ChangeNotifierProvider(
+          create: (context) =>
+              CommunityProvider(communityService: CommunityService()))
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
