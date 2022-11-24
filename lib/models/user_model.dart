@@ -9,7 +9,7 @@ class UserPrefsModel {
   bool? publicVotes;
   bool? enableFollowers;
   bool? highLightNewcomments;
-  String? defaultCommentSort; // convert this to enum
+  String? defaultCommentSort;
   bool? labelNSFW;
   bool? markMessagesRead;
   bool? liveOrangereds;
@@ -151,6 +151,6 @@ class UserModel {
 
 UserModel currentUser = UserModel(
     username: "_3mona",
-    type: "bare email",
+    type: "not bare email",
     email: "mamdouhteachertraining@gmail.com",
     createdAt: DateTime(2022));

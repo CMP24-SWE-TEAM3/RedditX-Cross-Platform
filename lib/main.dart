@@ -12,6 +12,7 @@ void main() {
   runApp(const SettingsMenu());
 }
 
+///main settings miny application
 class SettingsMenu extends StatelessWidget {
   const SettingsMenu({super.key});
   @override
