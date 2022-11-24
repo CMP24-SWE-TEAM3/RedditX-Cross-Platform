@@ -53,21 +53,12 @@ Future<void> main() async {
 
   test('testing logIn', () {
     authService.logIn('ahmed', '134');
-    expect(authService.uid, '1234');
-    expect(authService.name, 'Ahmed Hany');
-    expect(authService.email, 'Ahmed@Hany.com');
-    expect(authService.imageUrl, 'assets/images/defaultuser.png');
-    expect(authService.provider, 'google');
-    expect(authService.username, 'Ahmed300');
+    expect(authService.uid, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9BaG1lZExvdGZ5MDIyMiIsImlhdCI6MTY2OTE1ODMxMywiZXhwIjoxNjY5NTkwMzEzfQ._HP3h2ChmLPiivdKN29b1mn9cuc-6pw_Q5rBGNwDiLY');
   });
 
   test('testing signup', () {
     authService.signUp('ahmed@example.com', 'ahmed', '134');
-    expect(authService.uid, '1234');
-    expect(authService.name, 'Ahmed Hany');
-    expect(authService.email, 'Ahmed@Hany.com');
-    expect(authService.provider, 'bare email');
-    expect(authService.username, 'Ahmed300');
+    expect(authService.uid, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9BaG1lZExvdGZ5MDIyMiIsImlhdCI6MTY2OTE1ODMxMywiZXhwIjoxNjY5NTkwMzEzfQ._HP3h2ChmLPiivdKN29b1mn9cuc-6pw_Q5rBGNwDiLY');
   });
 
   test('testing sending interest', () {

@@ -57,7 +57,7 @@ class SignInController extends ChangeNotifier {
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future logIn(String username, String password) async {
-    if (!mockData) {
+    if (mockData) {
       currentUser.userauthentication.uid = loginBareEmailMock();
       notifyListeners();
       return;
@@ -84,13 +84,8 @@ class SignInController extends ChangeNotifier {
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future signUp(String email, String username, String password) async {
-    if (!mockData) {
-      currentUser.userauthentication.uid = '1234';
-      currentUser.userauthentication.name = 'Ahmed Hany';
-      currentUser.userauthentication.email = 'Ahmed@Hany.com';
-      currentUser.userauthentication.imageUrl = 'assets/images/defaultuser.png';
-      currentUser.userauthentication.provider = 'google';
-      currentUser.userauthentication.username = 'Ahmed300';
+    if (mockData) {
+      currentUser.userauthentication.uid = loginBareEmailMock();
       notifyListeners();
       return;
     } else {
@@ -155,7 +150,7 @@ class SignInController extends ChangeNotifier {
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future<bool> checkUserAvailability(var usernamechosen) async {
-    if (!mockData) {
+    if (mockData) {
       return checkUserAvailabilityMock();
     } else {
       final response = await checkUserAvailabilityAPI(usernamechosen);

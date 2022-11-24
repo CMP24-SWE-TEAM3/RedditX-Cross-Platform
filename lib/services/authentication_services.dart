@@ -91,7 +91,7 @@ sendGenderMock() {
 /// sendPhotoMock Function
 /// return mock data for userphoto whick is a constand link
 sendPhotoMock() {
-  return 'https:///www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600w-1714666150.jpg';
+  return 'https://www.shutterstock.com/image-photo/head-shot-portrait-close-smiling-600w-1714666150.jpg';
 }
 
 /// sendUserNameMock Function
