@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/config/constants.dart';
 import 'package:reddit/controllers/community_controller.dart';
+import 'package:reddit/controllers/community_model_controller.dart';
 import 'package:reddit/models/community_model.dart';
 import 'package:reddit/models/post_model.dart';
 import '../../../methods/community/show_toast.dart';
@@ -34,8 +36,8 @@ class CommunityWebScreen extends StatelessWidget {
                 backgroundColor: whiteColor,
                 title:
                     WebAppBarTitle(constraints: constraints, context: context)),
-            body: Consumer<CommunityProvider>(
-              builder: (context, value, child) {
+            body: Consumer2<CommunityProvider, CommunityModelProvider>(
+              builder: (context, value, value1, child) {
                 return Column(
                   children: [
                     SizedBox(
@@ -102,8 +104,9 @@ class CommunityWebScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           onTap: () {
-                                            showToast("Successfully left r/${communityModel1.id}");
-  
+                                            showToast(
+                                                "Successfully left r/${communityModel1.id}");
+
                                             Provider.of<CommunityProvider>(
                                                     context,
                                                     listen: false)
@@ -129,7 +132,8 @@ class CommunityWebScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20),
                                     onTap: () {
                                       value.joinCommunity();
-                                      showToast("Successfully joined r/${communityModel1.id}");
+                                      showToast(
+                                          "Successfully joined r/${communityModel1.id}");
                                     },
                                     child: const Padding(
                                         padding: EdgeInsets.all(5),
@@ -258,6 +262,8 @@ class CommunityWebScreen extends StatelessWidget {
                                             onTap: () {
                                               value.changePostSortBy(
                                                   "hot", 0, context);
+                                              value1.getPosts("At5_imagePro235",
+                                                  "hot", [], 2, 40);
                                             },
                                             child: Container(
                                               height: 30,
@@ -314,6 +320,8 @@ class CommunityWebScreen extends StatelessWidget {
                                             onTap: () {
                                               value.changePostSortBy(
                                                   "new", 1, context);
+                                              value1.getPosts("At5_imagePro235",
+                                                  "new", [], 2, 40);
                                             },
                                             child: Container(
                                               height: 30,
@@ -371,6 +379,8 @@ class CommunityWebScreen extends StatelessWidget {
                                             onTap: () {
                                               value.changePostSortBy(
                                                   "top", 2, context);
+                                              value1.getPosts("At5_imagePro235",
+                                                  "top", [], 2, 40);
                                             },
                                             child: Container(
                                               height: 30,
@@ -433,20 +443,24 @@ class CommunityWebScreen extends StatelessWidget {
                                         shrinkWrap: true,
                                         separatorBuilder: (context, index) =>
                                             const Divider(),
-                                        itemCount: postsListMock.length,
+                                        itemCount: postsList.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Container(
                                               color: whiteColor,
                                               child: WebPostCard(
-                                                userName:
-                                                    postsListMock[index].userID!,
+                                                userName: iSMOCK
+                                                    ? postsList[index].userID!
+                                                    : postsList[index]
+                                                        ['userID'],
                                                 index: index,
-                                                dateTime:
-                                                    postsListMock[index].createdAt!,
+                                                dateTime: postsListMock[index]
+                                                    .createdAt!,
                                                 context: context,
                                                 postPlace: "community",
-                                                postType: postsListMock[index].type!,
+                                                postType: iSMOCK
+                                                    ? postsList[index].type!
+                                                    : postsList[index]['type'],
                                               ));
                                         },
                                       ),

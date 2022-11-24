@@ -51,13 +51,13 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
 
                               if (index == 0) {
                                 value1.getPosts(
-                                    communityModel1.id!, "hot", [], 2, 40);
+                                    "t5_imagePro235", "hot", [], 2, 40);
                               } else if (index == 1) {
                                 value1.getPosts(
-                                    communityModel1.id!, "new", [], 2, 40);
+                                    "t5_imagePro235", "new", [], 2, 40);
                               } else {
                                 value1.getPosts(
-                                    communityModel1.id!, "top", [], 2, 40);
+                                    "t5_imagePro235", "top", [], 2, 40);
                               }
                             }
 

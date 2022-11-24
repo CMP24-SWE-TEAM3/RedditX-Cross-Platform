@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
+import 'package:reddit/config/constants.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/views/widgets/community/mobile_post_bottom.dart';
 import 'mobile_post_top.dart';
 
 /// Shows the card post view
 class MobilePostClassic extends StatelessWidget {
-    /// To indicate post type: text, image or link
+  /// To indicate post type: text, image or link
   final String postType;
 
   /// To show bottom sheets & pop up menus
@@ -18,7 +19,7 @@ class MobilePostClassic extends StatelessWidget {
 
   /// Index of the post
   final int index;
- 
+
   /// Mobile classic post constructor
   const MobilePostClassic(
       {super.key,
@@ -45,7 +46,9 @@ class MobilePostClassic extends StatelessWidget {
                           postType: postType,
                           context: context,
                           index: index,
-                          userName: postsListMock[index].userID!,
+                          userName: iSMOCK
+                              ? postsList[index].userID
+                              : postsList[index]['userID'],
                           dateTime: postsListMock[index].createdAt!,
                         ),
                         const SizedBox(
@@ -54,8 +57,12 @@ class MobilePostClassic extends StatelessWidget {
                         if (postType == 'text' || postType == 'image')
                           Text(
                             (postType == 'text')
-                                ? postsListMock[index].text!
-                                : postsListMock[index].title!,
+                                ? !iSMOCK
+                                    ? postsList[index]['text']
+                                    : postsList[index].text!
+                                : !iSMOCK
+                                    ? postsList[index]['title']
+                                    : postsList[index].title!,
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -74,7 +81,7 @@ class MobilePostClassic extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  postsListMock[index].attachments![0]))),
+                                  postsList[index].attachments![0]))),
                     ),
                   if (postType == 'link')
                     Row(
@@ -83,7 +90,9 @@ class MobilePostClassic extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                postsListMock[index].title!,
+                                !iSMOCK
+                                    ? postsList[index]['title']
+                                    : postsList[index].title!,
                                 maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -99,7 +108,7 @@ class MobilePostClassic extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 18),
                               child: LinkPreviewGenerator(
-                                link: postsListMock[index].attachments![0],
+                                link: postsList[index].attachments![0],
                                 linkPreviewStyle: LinkPreviewStyle.small,
                                 bodyMaxLines: 1,
                                 bodyTextOverflow: TextOverflow.ellipsis,

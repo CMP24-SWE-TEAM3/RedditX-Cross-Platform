@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/config/constants.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/controllers/community_model_controller.dart';
 
@@ -111,13 +112,13 @@ class CommunityMobileScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return (value.postView == "classic")
                             ? MobilePostClassic(
-                                postType: postsList[index].type!,
+                                postType: iSMOCK?postsList[index].type!: postsList[index]['type'],
                                 context: context,
                                 postPlace: "community",
                                 index: index,
                               )
                             : MobilePostCard(
-                                postType: postsList[index].type!,
+                                postType: iSMOCK ? postsList[index].type! : postsList[index]['type'],
                                 index: index,
                               );
                       },
@@ -430,7 +431,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                                         BorderRadius.circular(
                                                             15),
                                                     onTap: () {
-                                                      print(postsList.length);
+                                                      
                                                       value.joinCommunity();
 
                                                       showSnackBar(context,

@@ -12,7 +12,7 @@ void main() {
     providers: [
       ChangeNotifierProvider(
           create: (context) =>
-              CommunityModelProvider()..getPosts("Art", "hot", [], 1, 10)),
+              CommunityModelProvider()..getPosts("At5_imagePro235", "hot", [], 2, 40)),
       ChangeNotifierProvider(
           create: (context) =>
               CommunityProvider(communityService: CommunityService()))

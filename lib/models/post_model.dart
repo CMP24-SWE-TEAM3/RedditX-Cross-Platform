@@ -117,6 +117,34 @@ class PostModel {
       this.insightCnt,
       this.isDeleted = false,
       this.text});
+Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'spoiler': spoiler,
+      'nsfw': nsfw,
+      'createdAt': createdAt,
+      'userID': userID,
+      'type': type,
+      'attachments': attachments,
+      'commentsNum': commentsNum,
+      'mentionedInUsers': mentionedInUsers,
+      'spammers': spammers,
+      'communityID': communityID,
+      'followers': followers,
+      'flairBackGround':flairBackGround,
+      'flairTextColor': flairTextColor,
+      'flairText': flairText,
+      'flairID': flairID,
+      'votesCount': votesCount,
+      'spamCount': spamCount,
+      'insightCnt': insightCnt,
+      'isDeleted': isDeleted,
+      'text': text
+
+
+
+    };
+  }
 }
 
 
@@ -125,7 +153,7 @@ class PostModel {
 List<dynamic> postsList = [];
 
 /// List of real posts (from API)
-List<PostModel>postsListAPI=[];
+List<dynamic>postsListAPI=[];
 
 /// List of post model
 /// dummy data to test

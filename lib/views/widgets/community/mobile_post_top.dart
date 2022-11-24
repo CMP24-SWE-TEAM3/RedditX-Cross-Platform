@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/config/constants.dart';
 import 'package:reddit/views/widgets/community/pop_up_menu_button.dart';
 
 import '../../../controllers/community_controller.dart';
 import '../../../methods/community/show_profile_dialog.dart';
 import '../../../models/post_model.dart';
-
 
 /// Shows the top part of the communnity post
 class TopMobilePost extends StatelessWidget {
@@ -108,7 +108,7 @@ class TopMobilePost extends StatelessWidget {
               showeProfileDialog(context, index);
             },
             child: Text(
-              "u/${postsListMock[index].userID}",
+              "u/${iSMOCK ? postsList[index].userID : postsList[index]['userID']!}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -118,7 +118,11 @@ class TopMobilePost extends StatelessWidget {
           ),
           Consumer<CommunityProvider>(
             builder: (context, value, child) => Text(
-              "    ${value.calculateAge(postsListMock[index].createdAt!)}",
+
+
+              !iSMOCK
+                  ? "${postsList[index]['createdAt']}"
+                  : "${value.calculateAge(postsListMock[index].createdAt!)}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -155,7 +159,9 @@ class TopMobilePost extends StatelessWidget {
               ),
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
-                  "${value.calculateAge(postsListMock[index].createdAt!)}",
+                  !iSMOCK
+                      ? "${postsList[index]['createdAt']}"
+                      : "${value.calculateAge(postsListMock[index].createdAt!)}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),

@@ -9,7 +9,7 @@ class CommunityModelProvider with ChangeNotifier {
   bool mockData = iSMOCK;
 
   CommunityModelProvider() {
-    getPosts("art", "hot", [], 2, 40);
+    //getPosts("art", "hot", [], 2, 40);
   }
 
   Future getPosts(String communityName, String sortType, List<dynamic> posts,int page, int limit) async {
@@ -17,8 +17,9 @@ class CommunityModelProvider with ChangeNotifier {
       postsList = postsListMock;
       notifyListeners();
     } else {
-      getAPICommunityPosts(communityName, sortType, posts, page, limit);
-      postsList = posts;
+      await getAPICommunityPosts(communityName, sortType, posts, page, limit);
+      postsList = postsListAPI;
+      //print(",,,,,,,,,,,,,, $postsList");
       notifyListeners();
     }
   }

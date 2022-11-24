@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
+import 'package:reddit/config/constants.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/controllers/community_model_controller.dart';
 import 'package:reddit/models/post_model.dart';
@@ -9,7 +10,6 @@ import 'package:reddit/styles/colors.dart';
 import 'package:reddit/views/widgets/community/web_post_bottom.dart';
 
 import '../../../styles/custom_icons.dart';
-
 
 /// Shows the  card post view
 class WebPostCard extends StatelessWidget {
@@ -32,7 +32,6 @@ class WebPostCard extends StatelessWidget {
   /// Index of the post
   final int index;
 
-
   /// Web post card constructor
   const WebPostCard(
       {super.key,
@@ -44,8 +43,8 @@ class WebPostCard extends StatelessWidget {
       required this.userName});
   @override
   Widget build(BuildContext context) {
-    return Consumer2<CommunityProvider,CommunityModelProvider>(
-      builder: (context, value,value1, child) => InkWell(
+    return Consumer2<CommunityProvider, CommunityModelProvider>(
+      builder: (context, value, value1, child) => InkWell(
           onTap: () {},
           child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -58,7 +57,6 @@ class WebPostCard extends StatelessWidget {
                           IconButton(
                               onPressed: () {
                                 value1.vote("", 1, index, context);
-                                
                               },
                               icon: (value.isPostLiked[index])
                                   ? const Icon(
@@ -66,11 +64,13 @@ class WebPostCard extends StatelessWidget {
                                       color: Colors.deepOrange,
                                     )
                                   : const Icon(CustomIcons.up_outline)),
-                          Text(Numeral(postsList[index].votesCount!)
+                          Text(Numeral(iSMOCK
+                                  ? postsList[index].votesCount!
+                                  : postsList[index]['votesCount'])
                               .format(fractionDigits: 1)),
                           IconButton(
                               onPressed: () {
-                                value1.vote("", 1, index, context);
+                                value1.vote("", -1, index, context);
                               },
                               icon: (value.isPostDisliked[index])
                                   ? const Icon(
@@ -94,16 +94,18 @@ class WebPostCard extends StatelessWidget {
                                     fontSize: 10.0, color: Colors.grey),
                               ),
                               InkWell(
-                                 key: const ValueKey("username_button"),
+                                key: const ValueKey("username_button"),
                                 onTap: () {},
                                 child: Text(
-                                  " u/${postsListMock[index].userID}",
+                                  " u/${iSMOCK ? postsList[index].userID : postsList[index]['userID']}",
                                   style: const TextStyle(
                                       fontSize: 10.0, color: Colors.grey),
                                 ),
                               ),
                               Text(
-                                "    ${value.calculateAge(postsListMock[index].createdAt!)}",
+                                iSMOCK
+                                    ? "    ${value.calculateAge(postsList[index].createdAt!)}"
+                                    : "${postsList[index]['createdAt']}",
                                 style: TextStyle(color: Colors.grey[600]),
                               ),
                             ],
@@ -116,9 +118,15 @@ class WebPostCard extends StatelessWidget {
                                 maxHeight: 100.0,
                               ),
                               child: Text(
-                                (postsListMock[index].type == "text")
-                                    ? postsListMock[index].text!
-                                    : postsListMock[index].title!,
+                                (iSMOCK
+                                        ? postsList[index].type == "text"
+                                        : postsList[index]['type'] == "text")
+                                    ? iSMOCK
+                                        ? postsList[index].text!
+                                        : postsList[index]['text']
+                                    : iSMOCK
+                                        ? postsList[index].title!
+                                        : postsList[index]['title'],
                                 style: const TextStyle(fontSize: 17.0),
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
@@ -127,7 +135,9 @@ class WebPostCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  if (postsListMock[index].type == "image")
+                  if (iSMOCK
+                      ? postsList[index].type == "image"
+                      : postsList[index]['type'] == "image")
                     Container(
                       height: 250,
                       width: double.infinity,
@@ -137,7 +147,9 @@ class WebPostCard extends StatelessWidget {
                               image: NetworkImage(
                                   postsListMock[index].attachments![0]))),
                     ),
-                  if (postsListMock[index].type == "link")
+                  if (iSMOCK
+                      ? postsList[index].type == "link"
+                      : postsList[index]['type'] == "link")
                     SizedBox(
                       height: 90,
                       width: double.infinity,
