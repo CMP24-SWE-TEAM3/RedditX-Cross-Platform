@@ -29,6 +29,7 @@ loginBareEmailAPI(String username, String password) async {
         "username": username,
       }));
 
+  // print(response.body + username + password);
   return response;
 }
 
