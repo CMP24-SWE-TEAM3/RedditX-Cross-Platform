@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:reddit/controllers/community_model_controller.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/views/screens/community/community_home_web_screen.dart';
-import 'package:reddit/views/screens/community/temp.dart';
 import 'controllers/community_controller.dart';
 import 'views/screens/community/community_home_mobile_screen.dart';
 

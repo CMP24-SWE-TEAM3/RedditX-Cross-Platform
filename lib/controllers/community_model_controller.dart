@@ -24,6 +24,8 @@ class CommunityModelProvider with ChangeNotifier {
     }
   }
 
+ 
+
   Future vote(String id, int dir,int index,BuildContext context)async
   {
     if(mockData)

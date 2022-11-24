@@ -32,8 +32,8 @@ voteAPI(String id, int dir) async {
         "id": id,
         "dir": dir,
       }));
-  print(response.body);
-  print(response.statusCode);
+  // print(response.body);
+  // print(response.statusCode);
 
   return response;
 }
