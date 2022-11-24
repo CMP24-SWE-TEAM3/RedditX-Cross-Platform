@@ -11,7 +11,6 @@ import 'package:reddit/views/widgets/community/pop_up_menu_button.dart';
 import '../../../methods/community/show_profile_dialog.dart';
 import '../../../models/post_model.dart';
 
-
 /// Shows the card post view
 class MobilePostCard extends StatelessWidget {
   /// To indicate post type: text, image or link
@@ -45,15 +44,20 @@ class MobilePostCard extends StatelessWidget {
                           showeProfileDialog(context, index);
                         },
                         child: Text(
-                          "u/${iSMOCK?postsList[index].userID:postsList[index]['userID']!}",
+                          "u/${iSMOCK ? postsList[index].userID : postsList[index]['userID']!}",
                           style: TextStyle(
                               color: communityPostsGrey, fontSize: 15),
                         ),
                       ),
+                      const SizedBox(
+                        width: 10,
+                      ),
                       Consumer<CommunityProvider>(
                         builder: (context, value, child) => Text(
-                          "  ${value.calculateAge( postsListMock[index].createdAt!)}",
-                         // "  ${value.calculateAge(iSMOCK?postsList[index].createdAt: postsList[index]['createdAt']!)}",
+                          iSMOCK
+                              ? "  ${value.calculateAge(postsListMock[index].createdAt!)}"
+                              : postsList[index]['createdAt'],
+                          // "  ${value.calculateAge(iSMOCK?postsList[index].createdAt: postsList[index]['createdAt']!)}",
                           style: TextStyle(
                               color: communityPostsGrey, fontSize: 15),
                         ),
@@ -74,8 +78,10 @@ class MobilePostCard extends StatelessWidget {
                   if (postType == "text")
                     Padding(
                       padding: const EdgeInsets.only(top: 7),
-                      child: Text(iSMOCK?postsList[index].text:
-                        postsList[index]['text']!,
+                      child: Text(
+                        iSMOCK
+                            ? postsList[index].text
+                            : postsList[index]['text']!,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -123,7 +129,10 @@ class MobilePostCard extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 9,
                             padding: const EdgeInsets.symmetric(vertical: 7),
-                            text: TextSpan(text: iSMOCK?postsList[index].title:postsList[index]['title']))
+                            text: TextSpan(
+                                text: iSMOCK
+                                    ? postsList[index].title
+                                    : postsList[index]['title']))
                       ],
                     ),
                 ],

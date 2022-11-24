@@ -59,10 +59,10 @@ class MobilePostClassic extends StatelessWidget {
                             (postType == 'text')
                                 ? !iSMOCK
                                     ? postsList[index]['text']
-                                    : postsList[index].text!
+                                    : postsList[index].text
                                 : !iSMOCK
                                     ? postsList[index]['title']
-                                    : postsList[index].title!,
+                                    : postsList[index].title,
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
