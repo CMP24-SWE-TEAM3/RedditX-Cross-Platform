@@ -279,6 +279,30 @@ List<PostModel> postsListMock = [
       votesCount: 890),
 ];
 
+List postsListMock1=postsListMock.map((e) => {
+          'title': e.title,
+          'spoiler': e.spoiler,
+          'nsfw': e.nsfw,
+          'createdAt': e.createdAt,
+          'userID': e. userID,
+          'type': e.type,
+          'attachments': e.attachments,
+          'commentsNum': e.commentsNum,
+          'mentionedInUsers': e.mentionedInUsers,
+          'spammers': e.spammers,
+          'communityID': e.communityID,
+          'followers': e.followers,
+          'flairBackGround': e.flairBackGround,
+          'flairTextColor': e.flairTextColor,
+          'flairText': e.flairText,
+          'flairID': e.flairID,
+          'votesCount': e.votesCount,
+          'spamCount': e.spamCount,
+          'insightCnt': e.insightCnt,
+          'isDeleted': e.isDeleted,
+          'text': e.text
+        }).toList();
+
 class CommunityService {
   List<PostModel> testpostsListMock = postsListMock;
   List<UserModel> testUsersList = users;

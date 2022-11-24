@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
-import 'package:reddit/config/constants.dart';
 import 'package:reddit/models/post_model.dart';
 import 'package:reddit/views/widgets/community/mobile_post_bottom.dart';
 import 'mobile_post_top.dart';
@@ -46,9 +45,7 @@ class MobilePostClassic extends StatelessWidget {
                           postType: postType,
                           context: context,
                           index: index,
-                          userName: iSMOCK
-                              ? postsList[index].userID
-                              : postsList[index]['userID'],
+                          userName: postsList[index]['userID'],
                           dateTime: postsListMock[index].createdAt!,
                         ),
                         const SizedBox(
@@ -57,12 +54,10 @@ class MobilePostClassic extends StatelessWidget {
                         if (postType == 'text' || postType == 'image')
                           Text(
                             (postType == 'text')
-                                ? !iSMOCK
-                                    ? postsList[index]['text']
-                                    : postsList[index].text
-                                : !iSMOCK
-                                    ? postsList[index]['title']
-                                    : postsList[index].title,
+                                ?  postsList[index]['text']
+                                    
+                                 :postsList[index]['title'],
+                                    
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -81,7 +76,7 @@ class MobilePostClassic extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  postsList[index].attachments![0]))),
+                                  postsListMock[index].attachments![0]))),
                     ),
                   if (postType == 'link')
                     Row(
@@ -90,9 +85,8 @@ class MobilePostClassic extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                !iSMOCK
-                                    ? postsList[index]['title']
-                                    : postsList[index].title!,
+                                 postsList[index]['title'],
+                                    
                                 maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -108,7 +102,7 @@ class MobilePostClassic extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 18),
                               child: LinkPreviewGenerator(
-                                link: postsList[index].attachments![0],
+                                link: postsListMock[index].attachments![0],
                                 linkPreviewStyle: LinkPreviewStyle.small,
                                 bodyMaxLines: 1,
                                 bodyTextOverflow: TextOverflow.ellipsis,

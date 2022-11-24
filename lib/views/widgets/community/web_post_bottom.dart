@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/config/constants.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/controllers/community_model_controller.dart';
 
@@ -39,9 +38,8 @@ class BottomPostWeb extends StatelessWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          Text(Numeral(iSMOCK
-                                  ? postsList[index].commentsNum!
-                                  : postsList[index]['commentsNum'])
+                          Text(Numeral(
+                                   postsList[index]['commentsNum'])
                               .format(fractionDigits: 1)),
                         ],
                       ),

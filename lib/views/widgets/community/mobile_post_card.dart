@@ -2,7 +2,6 @@ import 'package:float_column/float_column.dart';
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/config/constants.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/styles/colors.dart';
 import 'package:reddit/views/widgets/community/mobile_post_bottom.dart';
@@ -44,7 +43,7 @@ class MobilePostCard extends StatelessWidget {
                           showeProfileDialog(context, index);
                         },
                         child: Text(
-                          "u/${iSMOCK ? postsList[index].userID : postsList[index]['userID']!}",
+                          "u/${postsList[index]['userID']!}",
                           style: TextStyle(
                               color: communityPostsGrey, fontSize: 15),
                         ),
@@ -54,9 +53,8 @@ class MobilePostCard extends StatelessWidget {
                       ),
                       Consumer<CommunityProvider>(
                         builder: (context, value, child) => Text(
-                          iSMOCK
-                              ? "  ${value.calculateAge(postsListMock[index].createdAt!)}"
-                              : postsList[index]['createdAt'],
+                          
+                              "${postsList[index]['createdAt']}",
                           // "  ${value.calculateAge(iSMOCK?postsList[index].createdAt: postsList[index]['createdAt']!)}",
                           style: TextStyle(
                               color: communityPostsGrey, fontSize: 15),
@@ -79,9 +77,8 @@ class MobilePostCard extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(top: 7),
                       child: Text(
-                        iSMOCK
-                            ? postsList[index].text
-                            : postsList[index]['text']!,
+                      
+                             postsList[index]['text']!,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
@@ -102,7 +99,7 @@ class MobilePostCard extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 18),
                                       child: LinkPreviewGenerator(
-                                        link: postsList[index].attachments![0],
+                                        link: postsListMock[index].attachments![0],
                                         linkPreviewStyle:
                                             LinkPreviewStyle.small,
                                         bodyMaxLines: 1,
@@ -121,7 +118,7 @@ class MobilePostCard extends StatelessWidget {
                                             image: DecorationImage(
                                                 fit: BoxFit.cover,
                                                 image: NetworkImage(
-                                                    postsList[index]
+                                                    postsListMock[index]
                                                         .attachments![0]))),
                                       )
                                     : const SizedBox(height: 20)),
@@ -130,9 +127,8 @@ class MobilePostCard extends StatelessWidget {
                             maxLines: 9,
                             padding: const EdgeInsets.symmetric(vertical: 7),
                             text: TextSpan(
-                                text: iSMOCK
-                                    ? postsList[index].title
-                                    : postsList[index]['title']))
+                                text: 
+                                    postsList[index]['title']))
                       ],
                     ),
                 ],

@@ -108,7 +108,7 @@ class TopMobilePost extends StatelessWidget {
               showeProfileDialog(context, index);
             },
             child: Text(
-              "u/${iSMOCK ? postsList[index].userID : postsList[index]['userID']!}",
+              "u/${ postsList[index]['userID']!}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -159,9 +159,8 @@ class TopMobilePost extends StatelessWidget {
               ),
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
-                  !iSMOCK
-                      ? "${postsList[index]['createdAt']}"
-                      : "${value.calculateAge(postsListMock[index].createdAt!)}",
+                  
+                      "${value.calculateAge(postsList[index]['createdAt'])}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),

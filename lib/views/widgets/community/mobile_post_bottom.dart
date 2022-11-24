@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/config/constants.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/controllers/community_model_controller.dart';
 import 'package:reddit/models/post_model.dart';
@@ -39,7 +38,7 @@ class BottomPostMobile extends StatelessWidget {
                     : const Icon(CustomIcons.up_outline)),
           ),
           Text(key:const ValueKey("votes_count"),
-            Numeral(iSMOCK?postsList[index].votesCount!: postsList[index]['votesCount']).format(fractionDigits: 1)),
+            Numeral( postsList[index]['votesCount']).format(fractionDigits: 1)),
           Expanded(
             child: IconButton(
               key: const ValueKey("dislike_button"),
@@ -58,7 +57,7 @@ class BottomPostMobile extends StatelessWidget {
             child: IconButton(
                 onPressed: () {}, icon: const Icon(CustomIcons.comment)),
           ),
-          Text(Numeral(iSMOCK?postsList[index].commentsNum!: postsList[index]['commentsNum'])
+          Text(Numeral( postsList[index]['commentsNum'])
               .format(fractionDigits: 1)),
           Expanded(
             child: IconButton(

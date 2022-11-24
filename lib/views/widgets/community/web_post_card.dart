@@ -56,7 +56,9 @@ class WebPostCard extends StatelessWidget {
                         children: [
                           IconButton(
                               onPressed: () {
-                                value1.vote("", 1, index, context);
+                                iSMOCK
+                                    ? value.likePost(index)
+                                    : value1.vote("", 1, index, context);
                               },
                               icon: (value.isPostLiked[index])
                                   ? const Icon(
@@ -64,13 +66,13 @@ class WebPostCard extends StatelessWidget {
                                       color: Colors.deepOrange,
                                     )
                                   : const Icon(CustomIcons.up_outline)),
-                          Text(Numeral(iSMOCK
-                                  ? postsList[index].votesCount!
-                                  : postsList[index]['votesCount'])
+                          Text(Numeral(postsList[index]['votesCount'])
                               .format(fractionDigits: 1)),
                           IconButton(
                               onPressed: () {
-                                value1.vote("", -1, index, context);
+                                iSMOCK
+                                    ? value.disLikePost(index)
+                                    : value1.vote("", -1, index, context);
                               },
                               icon: (value.isPostDisliked[index])
                                   ? const Icon(
@@ -97,15 +99,16 @@ class WebPostCard extends StatelessWidget {
                                 key: const ValueKey("username_button"),
                                 onTap: () {},
                                 child: Text(
-                                  " u/${iSMOCK ? postsList[index].userID : postsList[index]['userID']}",
+                                  " u/${postsList[index]['userID']}",
                                   style: const TextStyle(
                                       fontSize: 10.0, color: Colors.grey),
                                 ),
                               ),
+                              const SizedBox(
+                                width: 10,
+                              ),
                               Text(
-                                iSMOCK
-                                    ? "    ${value.calculateAge(postsList[index].createdAt!)}"
-                                    : "${postsList[index]['createdAt']}",
+                                "${postsList[index]['createdAt']}",
                                 style: TextStyle(color: Colors.grey[600]),
                               ),
                             ],
@@ -118,15 +121,9 @@ class WebPostCard extends StatelessWidget {
                                 maxHeight: 100.0,
                               ),
                               child: Text(
-                                (iSMOCK
-                                        ? postsList[index].type == "text"
-                                        : postsList[index]['type'] == "text")
-                                    ? iSMOCK
-                                        ? postsList[index].text!
-                                        : postsList[index]['text']
-                                    : iSMOCK
-                                        ? postsList[index].title!
-                                        : postsList[index]['title'],
+                                (postsList[index]['type'] == "text")
+                                    ? postsList[index]['text']
+                                    : postsList[index]['title'],
                                 style: const TextStyle(fontSize: 17.0),
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
@@ -135,9 +132,7 @@ class WebPostCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  if (iSMOCK
-                      ? postsList[index].type == "image"
-                      : postsList[index]['type'] == "image")
+                  if (postsList[index]['type'] == "image")
                     Container(
                       height: 250,
                       width: double.infinity,
@@ -147,9 +142,7 @@ class WebPostCard extends StatelessWidget {
                               image: NetworkImage(
                                   postsListMock[index].attachments![0]))),
                     ),
-                  if (iSMOCK
-                      ? postsList[index].type == "link"
-                      : postsList[index]['type'] == "link")
+                  if (postsList[index]['type'] == "link")
                     SizedBox(
                       height: 90,
                       width: double.infinity,

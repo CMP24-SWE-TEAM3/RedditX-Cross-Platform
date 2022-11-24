@@ -14,7 +14,7 @@ class CommunityModelProvider with ChangeNotifier {
 
   Future getPosts(String communityName, String sortType, List<dynamic> posts,int page, int limit) async {
     if (mockData) {
-      postsList = postsListMock;
+      postsList = postsListMock1;
       notifyListeners();
     } else {
       await getAPICommunityPosts(communityName, sortType, posts, page, limit);

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/config/constants.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/controllers/community_model_controller.dart';
 import 'package:reddit/models/community_model.dart';
@@ -449,18 +448,15 @@ class CommunityWebScreen extends StatelessWidget {
                                           return Container(
                                               color: whiteColor,
                                               child: WebPostCard(
-                                                userName: iSMOCK
-                                                    ? postsList[index].userID!
-                                                    : postsList[index]
-                                                        ['userID'],
+                                                userName: postsList[index]
+                                                    ['userID'],
                                                 index: index,
                                                 dateTime: postsListMock[index]
                                                     .createdAt!,
                                                 context: context,
                                                 postPlace: "community",
-                                                postType: iSMOCK
-                                                    ? postsList[index].type!
-                                                    : postsList[index]['type'],
+                                                postType: postsList[index]
+                                                    ['type'],
                                               ));
                                         },
                                       ),

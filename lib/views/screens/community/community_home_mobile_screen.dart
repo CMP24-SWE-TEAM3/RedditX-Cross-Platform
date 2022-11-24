@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/config/constants.dart';
 import 'package:reddit/controllers/community_controller.dart';
 import 'package:reddit/controllers/community_model_controller.dart';
 
@@ -112,13 +111,13 @@ class CommunityMobileScreen extends StatelessWidget {
                       itemBuilder: (BuildContext context, int index) {
                         return (value.postView == "classic")
                             ? MobilePostClassic(
-                                postType: iSMOCK?postsList[index].type!: postsList[index]['type'],
+                                postType:  postsList[index]['type'],
                                 context: context,
                                 postPlace: "community",
                                 index: index,
                               )
                             : MobilePostCard(
-                                postType: iSMOCK ? postsList[index].type! : postsList[index]['type'],
+                                postType: postsList[index]['type'],
                                 index: index,
                               );
                       },
