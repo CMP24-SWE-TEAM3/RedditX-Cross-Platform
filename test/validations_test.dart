@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:reddit/controllers/validations.dart';
+// ignore: avoid_relative_lib_imports
+import '../lib/controllers/validations.dart';
 
 void main() {
   group('Validations for Emails', () {

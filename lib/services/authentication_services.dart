@@ -1,7 +1,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:reddit/config/constants.dart';
+
+import '../config/constants.dart';
 
 /// facebookapi Function
 /// handles the facebook request by http request the facebook link

@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
 
-import 'package:reddit/Views/Screens/temphome.dart';
-
-
-
 import '../../../controllers/authentication_submitions.dart';
 
 import '../../widgets/authentication/sign_up_bar.dart';
 import '../../widgets/authentication/sign_up_button.dart';
 import '../../widgets/authentication/user_privacy_agreement.dart';
+import '../temphome.dart';
 import 'email_login.dart';
 
 

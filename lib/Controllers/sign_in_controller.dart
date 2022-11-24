@@ -59,6 +59,8 @@ class SignInController extends ChangeNotifier {
   Future logIn(String username, String password) async {
     if (mockData) {
       currentUser.userauthentication.uid = loginBareEmailMock();
+      setSignIn();
+      saveDataToSharedPreferences();
       notifyListeners();
       return;
     } else {
@@ -86,6 +88,8 @@ class SignInController extends ChangeNotifier {
   Future signUp(String email, String username, String password) async {
     if (mockData) {
       currentUser.userauthentication.uid = loginBareEmailMock();
+      setSignIn();
+      saveDataToSharedPreferences();
       notifyListeners();
       return;
     } else {

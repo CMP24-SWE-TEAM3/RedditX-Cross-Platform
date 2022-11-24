@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/internet_controller.dart';
-import 'package:reddit/controllers/sign_in_controller.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 import '../views/screens/authentication/about_you.dart';
@@ -10,6 +8,8 @@ import '../views/screens/authentication/choose_username.dart';
 import '../views/screens/authentication/interests.dart';
 import '../views/screens/temphome.dart';
 import '../views/widgets/authentication/show_snackbar.dart';
+import 'internet_controller.dart';
+import 'sign_in_controller.dart';
 
 ///this function takes the kind and the context of the page and send the gender to the controller and check for the result to show the error
 Future<void> submitAboutyou(String kind, ctx) async {
