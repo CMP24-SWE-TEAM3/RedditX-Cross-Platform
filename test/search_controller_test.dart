@@ -1,20 +1,15 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:search_project/controllers/search_controller.dart';
-import 'package:mocktail/mocktail.dart';
+//import 'package:mocktail/mocktail.dart';
 import 'package:search_project/models/search_model.dart';
 
-class MockSearchService extends Mock implements SearchService {}
-
 void main() {
-  //SharedPreferences.setMockInitialValues({});
-  late MockSearchService mockSearchService;
   late SearchController sut;
 
 //stup method will run before each and every test
   setUp(() {
-    mockSearchService = MockSearchService();
-    sut = SearchController(searchService: SearchService());
+    sut = SearchController();
   });
   test('initial values are correct', () {
     expect(sut.isFocused, false);
@@ -110,27 +105,27 @@ void main() {
   group('test follow / join Functions', () {
     test('Filling Following List', () {
       sut.fillFollowingList();
-      for (var i = 0; i < sut.searchService.peoplesList.length; i++) {
-        expect(sut.isFollowing[i], sut.searchService.peoplesList[i].followed);
+      for (var i = 0; i < peoplesListData.length; i++) {
+        expect(sut.isFollowing[i], peoplesListData[i].followed);
       }
     });
 
     test('Filling Joining List', () {
       sut.fillJoiningList();
-      for (var i = 0; i < sut.searchService.communitiesList.length; i++) {
-        expect(sut.isJoining[i], sut.searchService.communitiesList[i].joined);
+      for (var i = 0; i < communitiesListData.length; i++) {
+        expect(sut.isJoining[i], communitiesListData[i].joined);
       }
     });
 
     test('Filling  is Hovered Join Button List with false', () {
       sut.fillJoiningList();
-      for (var i = 0; i < sut.searchService.communitiesList.length; i++) {
+      for (var i = 0; i < communitiesListData.length; i++) {
         expect(sut.isHoveredJoinButton[i], false);
       }
     });
     test('Filling  is Hovered Follow Button List with false', () {
       sut.fillFollowingList();
-      for (var i = 0; i < sut.searchService.peoplesList.length; i++) {
+      for (var i = 0; i < peoplesListData.length; i++) {
         expect(sut.isHoveredFollowButton[i], false);
       }
     });

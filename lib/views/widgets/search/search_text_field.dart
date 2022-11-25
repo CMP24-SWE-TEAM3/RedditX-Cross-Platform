@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../screens/search/search_screen_two.dart';
 
 import '../../../controllers/search_controller.dart';
-import '../../../models/search_model.dart';
 
 ///Search input text field
 class SearchTextFieldWidget extends StatelessWidget {
@@ -104,27 +103,18 @@ class SearchTextFieldWidget extends StatelessWidget {
             ? TextDirection.rtl
             : TextDirection.ltr,
         //The function that will be called when the user enter the text he want to search for
-        onSubmitted: (_) {
+        onSubmitted: (searchInput) {
           //check that the user is not sumbitted empty text
           if (Provider.of<SearchController>(context, listen: false)
               .searchTextFieldcontroller
               .text
               .isNotEmpty) {
             Provider.of<SearchController>(context, listen: false)
-                .onSubmittingTextField();
+                .onSubmittingTextField(searchInput);
 
             ///Go to search results screen when submit input
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => ChangeNotifierProvider(
-                  create: (_) => SearchController(
-                    searchService: SearchService(),
-                  ),
-                  child: const SearchScreenTwo(),
-                ),
-              ),
-            );
+            Navigator.of(context)
+                .pushNamed(SearchScreenTwo.routeName, arguments: {});
           }
         },
 

@@ -1,25 +1,29 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as international;
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../models/search_model.dart';
-
+import '../config/constants.dart';
 import '../views/widgets/search/comments_in_search_results.dart';
 import '../views/widgets/search/communities_in_search_results.dart';
 import '../views/widgets/search/people_in_search_results.dart';
 import '../views/widgets/search/posts_in_search_results.dart';
 import '../views/widgets/search/search_history_widget.dart';
+import 'search_service_model_controller.dart';
 
 class SearchController with ChangeNotifier {
-  final SearchService searchService;
+  ///Whether this user allows NSFW content or not
+  bool allowNsfw = nsfw;
+
+  ///Current tab in dearch results [Posts , Comments , Communities, People]
+  String tab = 'post';
 
   ///Controller that stores the search input text
   var searchTextFieldcontroller = TextEditingController();
 
   ///Whether the platform is web or android
   //web==> true , App==> false
-  bool isWeb = !(defaultTargetPlatform == TargetPlatform.android);
+  bool isWeb = false; //!(defaultTargetPlatform == TargetPlatform.android);
 
   ///Whether the text direction is RTL or LTR
   bool isRTLText = false;
@@ -58,9 +62,19 @@ class SearchController with ChangeNotifier {
   ///Whether this join button in search result is hovered with mouse or not
   List<bool> isHoveredJoinButton = [];
 
-  SearchController({
-    required this.searchService,
-  }) {
+  ///Type of sort of posts in search results
+  String sortDropDownValue = 'relevance';
+
+  ///Search input
+  String searchInput = '';
+
+  ///Whether sensetive content will not appear or not
+  bool safeSearch = false;
+
+  ///Whether the search results is loading now or not
+  bool isLoading = false;
+
+  SearchController() {
     //web==> circular
     //App==> rectangular
     borderRadius = isWeb ? 20.0 : 0.0;
@@ -116,20 +130,29 @@ class SearchController with ChangeNotifier {
   }
 
   ///When click on a serach history item
-  searchHistoryClicked(String textClicked, int itemIndex) {
-    ///1-Clears the current written text in the text field by calling searchTextFieldcontroller.clear();
+  searchHistoryClicked(String textClicked, int itemIndex) async {
+    ///1-Clears the current written text in the text field by calling [clear()] function;
     searchTextFieldcontroller.clear();
-    clickedItemIndex = itemIndex;
 
     ///2-Makes the text in the text field = the text of the clicked item
     searchTextFieldcontroller.text = textClicked;
+    clickedItemIndex = itemIndex;
 
-    ///3-Makes the cursor in the end of the new text
+    ///3-Makes the search input = the text of thi clicked search history
+    searchInput = textClicked;
+    notifyListeners();
+
+    ///4-Makes the cursor in the end of the new text
     searchTextFieldcontroller.selection = TextSelection.fromPosition(
       TextPosition(offset: searchTextFieldcontroller.text.length),
     );
-    //4-every change in text this function is called
+
+    ///5-every change in text this function is called
     onChangeTextField();
+
+    ///6-sends the search request to the BE
+    await sendSearchRequest(sortDropDownValue, tab, 1);
+
     notifyListeners();
   }
 
@@ -218,10 +241,12 @@ class SearchController with ChangeNotifier {
   }
 
   ///Submits search input
-  onSubmittingTextField() async {
-    ///1-sends the search request to the API
-    //will be implemented later
-    sendSearchRequestToServer();
+  onSubmittingTextField(String searchinput) async {
+    searchInput = searchinput;
+    notifyListeners();
+
+    ///1-sends the search request to the BE
+    await sendSearchRequest(sortDropDownValue, tab, 1);
 
     ///2-Saves search history in the front of the list
     restoreSearchHistory!.insert(0, searchTextFieldcontroller.text);
@@ -234,8 +259,8 @@ class SearchController with ChangeNotifier {
 
   ///Fills List of following / unfollowing Accounts
   fillFollowingList() {
-    for (var i = 0; i < searchService.peoplesList.length; i++) {
-      isFollowing.add(searchService.peoplesList[i].followed);
+    for (var i = 0; i < peoplesListData.length; i++) {
+      isFollowing.add(peoplesListData[i].followed);
 
       ///Makes all follow button unhovered initially
       isHoveredFollowButton.add(false);
@@ -244,8 +269,8 @@ class SearchController with ChangeNotifier {
 
   ///Fills List of joining / unjoining accounts
   fillJoiningList() {
-    for (var i = 0; i < searchService.communitiesList.length; i++) {
-      isJoining.add(searchService.communitiesList[i].joined);
+    for (var i = 0; i < communitiesListData.length; i++) {
+      isJoining.add(communitiesListData[i].joined);
 
       ///Makes all join button unhovered initially
       isHoveredJoinButton.add(false);
@@ -269,7 +294,8 @@ class SearchController with ChangeNotifier {
     if (restoreSearchHistory == null) {
       return [];
     }
-    //List f widgets that will appear
+
+    ///Returns List of widgets that will appear
     List<SearchHistoryWidget> searchHistoryWidget = [];
     int lengthOfShowList = 0;
 
@@ -296,77 +322,152 @@ class SearchController with ChangeNotifier {
   }
 
   ///Returns List of widgets to communities search results
-  List<PeopleSearchResult> buildPeopleInSearchListWidget() {
-    ///Fills the list of followed/unfollowed accounts
-    fillFollowingList();
-
-    ///List of people widgets
-    List<PeopleSearchResult> peopleSearchResultsWidgetList = [];
-
-    ///Fills its data from the peopleList in the model class
-    for (int i = 0; i < searchService.peoplesList.length; i++) {
-      peopleSearchResultsWidgetList.add(
-        PeopleSearchResult(
-          personData: searchService.peoplesList[i],
-          index: i,
+  List<dynamic> buildPeopleInSearchListWidget() {
+    ///If the data is still loading, show CircularProgressIndicator
+    if (isLoading) {
+      return [
+        const Center(
+          child: CircularProgressIndicator(),
         ),
-      );
+      ];
+    } else {
+      ///Fills the list of followed/unfollowed accounts
+      fillFollowingList();
+
+      ///List of people widgets
+      List<PeopleSearchResult> peopleSearchResultsWidgetList = [];
+
+      ///Fills its data from the peopleList in the model class
+      for (int i = 0; i < peoplesListData.length; i++) {
+        peopleSearchResultsWidgetList.add(
+          PeopleSearchResult(
+            personData: peoplesListData[i],
+            index: i,
+          ),
+        );
+      }
+      return peopleSearchResultsWidgetList;
     }
-    return peopleSearchResultsWidgetList;
   }
 
   ///Returns List of widgets to posts search results
-  List<PostsSearchResult> buildPostsInSearchListWidget() {
-    ///List of posts widgets
-    List<PostsSearchResult> postsSearchResultsWidgetList = [];
-
-    ///Fills its data from the postsList in the model class
-    for (int i = 0; i < searchService.postsList.length; i++) {
-      postsSearchResultsWidgetList.add(
-        PostsSearchResult(
-          postData: searchService.postsList[i],
-          index: i,
+  List<dynamic> buildPostsInSearchListWidget() {
+    ///If the data is still loading, show CircularProgressIndicator
+    if (isLoading) {
+      return [
+        const Center(
+          child: CircularProgressIndicator(),
         ),
-      );
+      ];
+    } else {
+      ///List of posts widgets
+      List<PostsSearchResult> postsSearchResultsWidgetList = [];
+
+      ///Fills its data from the postsList in the model class
+      for (int i = 0; i < postsListData.length; i++) {
+        ///If the user is alowed to see NSFW content and [Safe Search] is disabled ,see all the posts
+        if (!safeSearch && allowNsfw) {
+          postsSearchResultsWidgetList.add(
+            PostsSearchResult(
+              postData: postsListData[i],
+              index: i,
+            ),
+          );
+        }
+
+        ///If safe search is enabled or this user disabled NSFW ,Only safe posts will be shown
+        else if (!postsListData[i].nsfw) {
+          postsSearchResultsWidgetList.add(
+            PostsSearchResult(
+              postData: postsListData[i],
+              index: i,
+            ),
+          );
+        }
+      }
+      return postsSearchResultsWidgetList;
     }
-    return postsSearchResultsWidgetList;
   }
 
   ///Returns List of widgets to comments search results
-  List<CommentsSearchResult> buildCommentsInSearchListWidget() {
-    ///List of comments widgets
-    List<CommentsSearchResult> commentsSearchResultsWidgetList = [];
-
-    ///Fills its data from the commentsList in the model class
-    for (int i = 0; i < searchService.commentssList.length; i++) {
-      commentsSearchResultsWidgetList.add(
-        CommentsSearchResult(
-          commentData: searchService.commentssList[i],
-          index: i,
+  List<dynamic> buildCommentsInSearchListWidget() {
+    ///If the data is still loading, show CircularProgressIndicator
+    if (isLoading) {
+      return [
+        const Center(
+          child: CircularProgressIndicator(),
         ),
-      );
+      ];
+    } else {
+      ///List of comments widgets
+      List<CommentsSearchResult> commentsSearchResultsWidgetList = [];
+
+      ///Fills its data from the commentsList in the model class
+      for (int i = 0; i < commentssListData.length; i++) {
+        ///If the user is alowed to see NSFW content and [Safe Search] is disabled ,see all the comments
+        if (!safeSearch && allowNsfw) {
+          commentsSearchResultsWidgetList.add(
+            CommentsSearchResult(
+              commentData: commentssListData[i],
+              index: i,
+            ),
+          );
+        }
+
+        ///If safe search is enabled or this user disabled NSFW ,Only comments on safe communities will be shown
+        else if (!commentssListData[i].postData.nsfw) {
+          commentsSearchResultsWidgetList.add(
+            CommentsSearchResult(
+              commentData: commentssListData[i],
+              index: i,
+            ),
+          );
+        }
+      }
+      return commentsSearchResultsWidgetList;
     }
-    return commentsSearchResultsWidgetList;
   }
 
   ///Returns List of widgets to communities search results
-  List<CommunitiesSearchResult> buildCommunityInSearchListWidget() {
-    ///Fills the list of joined/unjoined communities
-    fillJoiningList();
-
-    ///List of community widgets
-    List<CommunitiesSearchResult> communitySearchResultsWidgetList = [];
-
-    ///Fills its data from the communitiesList in the model class
-    for (int i = 0; i < searchService.communitiesList.length; i++) {
-      communitySearchResultsWidgetList.add(
-        CommunitiesSearchResult(
-          communityData: searchService.communitiesList[i],
-          index: i,
+  List<dynamic> buildCommunityInSearchListWidget() {
+    ///If the data is still loading, show CircularProgressIndicator
+    if (isLoading) {
+      return [
+        const Center(
+          child: CircularProgressIndicator(),
         ),
-      );
+      ];
+    } else {
+      ///Fills the list of joined/unjoined communities
+      fillJoiningList();
+
+      ///List of community widgets
+      List<CommunitiesSearchResult> communitySearchResultsWidgetList = [];
+
+      ///Fills its data from the communitiesList in the model class
+      for (int i = 0; i < communitiesListData.length; i++) {
+        ///If the user is alowed to see NSFW content and [Safe Search] is disabled ,see all the communities
+        if (!safeSearch && allowNsfw) {
+          communitySearchResultsWidgetList.add(
+            CommunitiesSearchResult(
+              communityData: communitiesListData[i],
+              index: i,
+            ),
+          );
+        }
+
+        ///If safe search is enabled or this user disabled NSFW ,Only safe communities will be shown
+        else if (!communitiesListData[i].nsfw) {
+          communitySearchResultsWidgetList.add(
+            CommunitiesSearchResult(
+              communityData: communitiesListData[i],
+              index: i,
+            ),
+          );
+        }
+      }
+      return communitySearchResultsWidgetList;
     }
-    return communitySearchResultsWidgetList;
   }
 
   onPressingFollowButton(int index) {
@@ -476,5 +577,46 @@ class SearchController with ChangeNotifier {
     }
 
     return shownDate;
+  }
+
+  ///Stores sort type in [sortDropDownValue]
+  changSortType(newValue) async {
+    sortDropDownValue = newValue;
+
+    ///Get the search results of the selected sort type
+    await sendSearchRequest(sortDropDownValue, tab, 1);
+    notifyListeners();
+  }
+
+  ///Changes safe search state
+  toggleSafeSearchState() async {
+    safeSearch = !safeSearch;
+    notifyListeners();
+  }
+
+  ///changes the tab in the search resykts screen [posts,comments,users,comunities]
+  changeTab(String thisTab) async {
+    tab = thisTab;
+
+    ///Get the search results of the selected type[tab]
+    await sendSearchRequest(sortDropDownValue, tab, 1);
+    notifyListeners();
+  }
+
+  ///Selects which request will be sent to the BE
+  sendSearchRequest(String sort, String tab, int page) async {
+    isLoading = true;
+    notifyListeners();
+    if (tab == 'post') {
+      await fillPostsList(searchInput, sortDropDownValue, tab, page);
+    } else if (tab == 'comment') {
+      await fillCommentsList(searchInput, sortDropDownValue, tab, page);
+    } else if (tab == 'sr') {
+      await fillCommunitiesList(searchInput, sortDropDownValue, tab, page);
+    } else if (tab == 'user') {
+      await fillUsersList(searchInput, sortDropDownValue, tab, page);
+    }
+    isLoading = false;
+    notifyListeners();
   }
 }

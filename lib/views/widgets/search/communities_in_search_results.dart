@@ -98,6 +98,24 @@ class CommunitiesSearchResult extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: [
+                              if (communityData.nsfw)
+                                Row(
+                                  children: const [
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+
+                                    ///If the community is NSFW, write 'NSFW' in red
+                                    Text(
+                                      'NSFW  ',
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               Expanded(
                                 child: Text(
                                   communityData.membersCount > 1000000
@@ -205,6 +223,24 @@ class CommunityNameRow extends StatelessWidget {
         UserOrCommunityNameText(
           usernameOrCommunityName: communityData.name,
         ),
+        if (communityData.nsfw)
+          Row(
+            children: const [
+              SizedBox(
+                width: 10,
+              ),
+
+              ///If the community is NSFW, write 'NSFW' in red
+              Text(
+                ' NSFW',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
         Expanded(
           child: Text(
             overflow: TextOverflow.clip,

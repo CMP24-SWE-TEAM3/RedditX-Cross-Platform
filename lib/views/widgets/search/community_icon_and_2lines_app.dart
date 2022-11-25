@@ -16,48 +16,70 @@ class CommIconAndTwoLinesApp extends StatelessWidget {
   final String shownDate;
   @override
   Widget build(BuildContext context) {
-    return Row(
+    return Column(
       children: [
-        const SizedBox(
-          width: 5,
-        ),
-        CircularImageWidget(
-          img: postData.communityIcon,
-          radius: 30,
-        ),
-        const SizedBox(
-          width: 5,
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
+        Row(
           children: [
-            Text(
-              textAlign: TextAlign.right,
-              postData.communityName,
-              style: const TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-                color: Colors.black,
-              ),
+            const SizedBox(
+              width: 5,
+            ),
+            CircularImageWidget(
+              img: postData.communityIcon,
+              radius: 30,
             ),
             const SizedBox(
-              height: 2,
+              width: 5,
             ),
-            Text(
-              textAlign: TextAlign.right,
-              '${postData.userName} . $shownDate',
-              style: const TextStyle(
-                fontWeight: FontWeight.w400,
-                fontSize: 12,
-                color: Color.fromRGBO(124, 124, 124, 1),
-              ),
-            ),
-            const SizedBox(
-              height: 5,
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  textAlign: TextAlign.right,
+                  postData.communityName,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    color: Colors.black,
+                  ),
+                ),
+                const SizedBox(
+                  height: 2,
+                ),
+                Text(
+                  textAlign: TextAlign.right,
+                  '${postData.userName} . $shownDate',
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 12,
+                    color: Color.fromRGBO(124, 124, 124, 1),
+                  ),
+                ),
+                const SizedBox(
+                  height: 5,
+                ),
+              ],
             ),
           ],
         ),
+        if (postData.nsfw)
+          Row(
+            children: const [
+              SizedBox(
+                width: 10,
+              ),
+
+              ///If the content is NSFW, write 'NSFW' in red
+              Text(
+                'NSFW',
+                style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 12,
+                  color: Colors.red,
+                ),
+              ),
+            ],
+          ),
       ],
     );
   }
