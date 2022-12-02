@@ -63,10 +63,10 @@ class WebPostCard extends StatelessWidget {
                               },
                               icon: (value.isPostLiked[index])
                                   ? const Icon(
-                                      CustomIcons.up_bold,
+                                      CustomIcons.upBold,
                                       color: Colors.deepOrange,
                                     )
-                                  : const Icon(CustomIcons.up_outline)),
+                                  : const Icon(CustomIcons.upOutline)),
                           Text(Numeral(postsList[index]['votesCount'])
                               .format(fractionDigits: 1)),
                           IconButton(
@@ -77,10 +77,10 @@ class WebPostCard extends StatelessWidget {
                               },
                               icon: (value.isPostDisliked[index])
                                   ? const Icon(
-                                      CustomIcons.down_bold,
+                                      CustomIcons.downBold,
                                       color: blueColor,
                                     )
-                                  : const Icon(CustomIcons.down_outline)),
+                                  : const Icon(CustomIcons.downOutline)),
                         ],
                       ),
                       Column(

@@ -59,7 +59,7 @@ class BottomPostWeb extends StatelessWidget {
                                 value: "Copy link",
                                 child: Row(
                                   children: const [
-                                    Icon(CustomIcons.content_copy),
+                                    Icon(CustomIcons.contentCopy),
                                     SizedBox(
                                       width: 5,
                                     ),

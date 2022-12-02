@@ -348,7 +348,7 @@ class CommunityWebScreen extends StatelessWidget {
                                                 children: [
                                                   Icon(
                                                       CustomIcons
-                                                          .certificate_outline,
+                                                          .certificateOutline,
                                                       size: 20,
                                                       color: (value
                                                               .checkIconPostSortBy[1])

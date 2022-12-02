@@ -87,6 +87,7 @@ class MyApp extends StatelessWidget {
           SplashScreen.routeName: (ctx) => const SplashScreen(),
           CommunityHome.routeName: (ctx) => const CommunityHome(),
           SearchScreenTwo.routeName: (ctx) => const SearchScreenTwo(),
+          SearchScreenOne.routeName: (ctx) => const SearchScreenOne(),
         },
       ),
     );
