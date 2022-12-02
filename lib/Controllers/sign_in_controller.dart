@@ -103,7 +103,7 @@ class SignInController extends ChangeNotifier {
         saveDataToSharedPreferences();
       } else {
         currentUser.userauthentication.hasError = true;
-        currentUser.userauthentication.errorCode = 'Error in sign in';
+        currentUser.userauthentication.errorCode = 'Error in sign up';
       }
       notifyListeners();
       return;
