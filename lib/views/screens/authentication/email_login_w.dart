@@ -29,12 +29,13 @@ class _EmailLoginWState extends State<EmailLoginW> {
   TextEditingController passwordController = TextEditingController();
   String? errorPasswordText;
 
-  void validate(userNameController, passwordController, ctx) {
-    setState(() async {
+  Future<void> validate(userNameController, passwordController, ctx) async {
+    setState(() {
       _submited = true;
-      errorUserNameText = await usernameValidation(userNameController.text, ctx);
-      errorPasswordText = passwordValidation(passwordController.text);
     });
+    
+    errorUserNameText = await usernameValidation(userNameController.text, ctx);
+    errorPasswordText = passwordValidation(passwordController.text);
 
     if ((errorUserNameText == null) && (errorPasswordText == null)) {
       submitlogin(userNameController, passwordController, ctx);

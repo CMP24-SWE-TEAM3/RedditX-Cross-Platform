@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:username_gen/username_gen.dart';
 
-
 import '../../../controllers/authentication_submitions.dart';
 import '../../../controllers/validations.dart';
 import '../../widgets/authentication/uesrname_password_textfield.dart';
@@ -49,14 +48,15 @@ class _EmailSignupW2State extends State<EmailSignupW2> {
     ];
   }
 
-  void validate(userNameController, passwordController, ctx) {
-    setState(() async {
-      errorUserNameText = await usernameValidation(userNameController.text, ctx);
+  Future<void> validate(userNameController, passwordController, ctx) async {
+    setState(() {
       errorPasswordText = passwordValidation(passwordController.text);
     });
+    errorUserNameText = await usernameValidation(userNameController.text, ctx);
 
     if ((errorUserNameText == null) && (errorPasswordText == null)) {
       final routeargs =
+          // ignore: use_build_context_synchronously
           ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>;
       submitSignup(
           routeargs['email'], userNameController, passwordController, ctx);
