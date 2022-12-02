@@ -79,7 +79,7 @@ void shareBottomSheet(BuildContext context, int index) {
                           child: const ShareBottomSheetItem(
                               circleAvatarColor:
                                   Color.fromARGB(255, 222, 229, 232),
-                              icon: CustomIcons.content_copy,
+                              icon: CustomIcons.contentCopy,
                               text: "Copy link"),
                         ),
                       ],
@@ -128,7 +128,7 @@ void shareBottomSheet(BuildContext context, int index) {
                             child: const ShareBottomSheetItem(
                                 circleAvatarColor:
                                     Color.fromARGB(255, 21, 92, 151),
-                                icon: CustomIcons.facebook_squared,
+                                icon: CustomIcons.facebookSquared,
                                 text: "Facebook"),
                           ),
                           InkWell(

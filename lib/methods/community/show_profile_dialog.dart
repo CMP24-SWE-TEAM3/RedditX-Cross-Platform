@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 
 import '../../models/post_model.dart';
-import '../../models/user_model.dart';
+
 
 /// Show Profile Dialog when a user name text button pressed
 

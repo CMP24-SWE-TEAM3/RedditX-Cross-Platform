@@ -281,14 +281,25 @@ class SignInController extends ChangeNotifier {
                 ?.signInWithCredential(credential))
             ?.user!;
 
-        currentUser.userauthentication.name = userDetails?.displayName;
-
         /// now save all values
-        currentUser.userauthentication.name = userDetails?.displayName;
-        currentUser.userauthentication.email = userDetails?.email;
-        currentUser.userauthentication.imageUrl = userDetails?.photoURL;
-        currentUser.userauthentication.provider = "GOOGLE";
-        currentUser.userauthentication.uid = userDetails?.uid;
+        // currentUser.userauthentication.name = userDetails?.displayName;
+        // currentUser.userauthentication.email = userDetails?.email;
+        // currentUser.userauthentication.imageUrl = userDetails?.photoURL;
+        // currentUser.userauthentication.provider = "GOOGLE";
+        //currentUser.userauthentication.uid = userDetails?.uid;
+
+        final response = await loginGoogleEmailAPI(userDetails!.uid);
+        if (response.statusCode == 200) {
+          // print(json.decode(response.body)['token']);
+          currentUser.userauthentication.uid =
+              json.decode(response.body)['token'];
+          currentUser.userauthentication.hasError = false;
+          setSignIn();
+          saveDataToSharedPreferences();
+        } else {
+          currentUser.userauthentication.hasError = true;
+          currentUser.userauthentication.errorCode = 'Error in sign up';
+        }
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
@@ -335,14 +346,27 @@ class SignInController extends ChangeNotifier {
         await currentUser.userauthentication.firebaseAuth
             ?.signInWithCredential(credential);
 
-        /// saving the values
-        currentUser.userauthentication.name = profile['name'];
-        currentUser.userauthentication.email = profile['email'];
-        currentUser.userauthentication.imageUrl =
-            profile['picture']['data']['url'];
-        currentUser.userauthentication.uid = profile['id'];
-        currentUser.userauthentication.hasError = false;
-        currentUser.userauthentication.provider = "FACEBOOK";
+        // /// saving the values
+        // currentUser.userauthentication.name = profile['name'];
+        // currentUser.userauthentication.email = profile['email'];
+        // currentUser.userauthentication.imageUrl =
+        //     profile['picture']['data']['url'];
+        //currentUser.userauthentication.uid = profile['id'];
+        // currentUser.userauthentication.hasError = false;
+        // currentUser.userauthentication.provider = "FACEBOOK";
+        // notifyListeners();
+        final response = await loginFacebookEmailAPI(profile['id']);
+        if (response.statusCode == 200) {
+          // print(json.decode(response.body)['token']);
+          currentUser.userauthentication.uid =
+              json.decode(response.body)['token'];
+          currentUser.userauthentication.hasError = false;
+          setSignIn();
+          saveDataToSharedPreferences();
+        } else {
+          currentUser.userauthentication.hasError = true;
+          currentUser.userauthentication.errorCode = 'Error in sign up';
+        }
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {

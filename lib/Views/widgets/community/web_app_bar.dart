@@ -70,7 +70,7 @@ class WebAppBarTitle extends StatelessWidget {
                   child: IconButton(
                       onPressed: () {},
                       icon: const Icon(
-                        CustomIcons.arrow_up_circle,
+                        CustomIcons.arrowUpCircle,
                         color: Colors.black,
                       )),
                 ),

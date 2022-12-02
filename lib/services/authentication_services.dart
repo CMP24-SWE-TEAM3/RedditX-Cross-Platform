@@ -33,6 +33,44 @@ loginBareEmailAPI(String username, String password) async {
   return response;
 }
 
+/// loginGoogleEmailAPI Function
+/// connect with the back end and sent the username and password and recieve the token in the response
+loginGoogleEmailAPI(String token) async {
+  const String loginRequest = "/api/auth/login";
+  Uri url = Uri.parse(urlApi + loginRequest);
+
+  final response = await http.post(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode({
+        "type": "gmail",
+        "googleOrFacebookToken": token,
+      }));
+
+  // print(response.body + username + password);
+  return response;
+}
+
+/// loginFacebookEmailAPI Function
+/// connect with the back end and sent the username and password and recieve the token in the response
+loginFacebookEmailAPI(String token) async {
+  const String loginRequest = "/api/auth/login";
+  Uri url = Uri.parse(urlApi + loginRequest);
+
+  final response = await http.post(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode({
+        "type": "facebook",
+        "googleOrFacebookToken": token,
+      }));
+
+  // print(response.body + username + password);
+  return response;
+}
+
 /// signUpBareEmailAPI Function
 /// connect with the back end and sent the email, username and password and recieve the token in the response
 signUpBareEmailAPI(email, username, password) async {

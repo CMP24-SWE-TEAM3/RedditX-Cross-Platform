@@ -79,11 +79,13 @@ class TopMobilePost extends StatelessWidget {
                   ),
                   Consumer<CommunityProvider>(
                     builder: (context, value, child) => Text(
-                      "${value.calculateAge(postsListMock[index].createdAt!)}",
+                      !iSMOCK
+                          ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
+                          : "${value.calculateAge(postsListMock[index].createdAt!)}",
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
-                  if (postType == "image")
+                  if (postType == "img")
                     InkWell(
                       child: Text(
                         "  i.redd.it",
@@ -109,7 +111,7 @@ class TopMobilePost extends StatelessWidget {
               showeProfileDialog(context, index);
             },
             child: Text(
-              "u/${ postsList[index]['userID']!}",
+              "u/${postsList[index]['userID']!}".replaceFirst("t2_", ""),
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -122,12 +124,12 @@ class TopMobilePost extends StatelessWidget {
 
 
               !iSMOCK
-                  ? "${postsList[index]['createdAt']}"
+                  ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
                   : "${value.calculateAge(postsListMock[index].createdAt!)}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
-          if (postType == "image")
+          if (postType == "img")
             InkWell(
               onTap: () {},
               child: Text(
@@ -161,7 +163,9 @@ class TopMobilePost extends StatelessWidget {
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
                   
-                      "${value.calculateAge(postsList[index]['createdAt'])}",
+                       !iSMOCK
+                      ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
+                      : "${value.calculateAge(postsListMock[index].createdAt!)}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),

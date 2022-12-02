@@ -38,8 +38,7 @@ class BottomPostWeb extends StatelessWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          Text(Numeral(
-                                   postsList[index]['commentsNum'])
+                          Text(Numeral(postsList[index]['commentsNum'])
                               .format(fractionDigits: 1)),
                         ],
                       ),
@@ -60,7 +59,7 @@ class BottomPostWeb extends StatelessWidget {
                                 value: "Copy link",
                                 child: Row(
                                   children: const [
-                                    Icon(CustomIcons.content_copy),
+                                    Icon(CustomIcons.contentCopy),
                                     SizedBox(
                                       width: 5,
                                     ),

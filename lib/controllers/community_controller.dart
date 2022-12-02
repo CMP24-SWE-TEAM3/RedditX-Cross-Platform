@@ -69,7 +69,7 @@ class CommunityProvider with ChangeNotifier {
   /// List of the posts sort types icons bottom sheet: (Hot, New and Top) that will be passed to [showDefaultBottomSheet] method
   List<IconData> bottomSheetPostSortIcons = [
     Icons.local_fire_department_rounded,
-    CustomIcons.certificate_outline,
+    CustomIcons.certificateOutline,
     CustomIcons.award,
   ];
 

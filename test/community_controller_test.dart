@@ -48,7 +48,7 @@ void main() {
     expect(sut.postSortByIcon, Icons.local_fire_department_rounded);
     expect(sut.bottomSheetPostSortIcons, [
       Icons.local_fire_department_rounded,
-      CustomIcons.certificate_outline,
+      CustomIcons.certificateOutline,
       CustomIcons.award,
     ]);
     expect(sut.postSortByType, "HOT POSTS");
