@@ -54,6 +54,7 @@ dependencies:
 
   linter: ^1.28.0
   drop_cap_text: ^1.1.3
+  http:
 
 
 

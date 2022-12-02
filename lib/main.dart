@@ -7,6 +7,9 @@ import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
+import 'views/screens/search/search_screen_one.dart';
+import 'views/screens/search/search_screen_two.dart';
+import 'controllers/search_controller.dart';
 
 import 'models/post_model.dart';
 import 'views/screens/authentication/about_you.dart';
@@ -45,7 +48,10 @@ class MyApp extends StatelessWidget {
               CommunityModelProvider()..getPosts("At5_imagePro235", "hot", [], 2, 40)),
       ChangeNotifierProvider(
           create: (context) =>
-              CommunityProvider(communityService: CommunityService()))
+              CommunityProvider(communityService: CommunityService())),
+        ChangeNotifierProvider(
+          create: (context) => SearchController(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -80,6 +86,7 @@ class MyApp extends StatelessWidget {
           AboutYou.routeName: (ctx) => const AboutYou(),
           SplashScreen.routeName: (ctx) => const SplashScreen(),
           CommunityHome.routeName: (ctx) => const CommunityHome(),
+          SearchScreenTwo.routeName: (ctx) => const SearchScreenTwo(),
         },
       ),
     );
