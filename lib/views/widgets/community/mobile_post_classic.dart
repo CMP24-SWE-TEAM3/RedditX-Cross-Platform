@@ -51,13 +51,12 @@ class MobilePostClassic extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        if (postType == 'text' || postType == 'image')
+                        if (postType == 'text' || postType == 'img')
                           Text(
-                            (postType == 'text')
-                                ?  postsList[index]['text']
-                                    
-                                 :postsList[index]['title'],
-                                    
+                            // (postType == 'text')
+                            //     ? postsList[index]['text']
+                            //     :
+                            postsList[index]['title'],
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
@@ -66,8 +65,8 @@ class MobilePostClassic extends StatelessWidget {
                       ],
                     ),
                   ),
-                  if (postType == "image") const SizedBox(height: 8),
-                  if (postType == "image")
+                  if (postType == "img") const SizedBox(height: 8),
+                  if (postType == "img")
                     Container(
                       height: 250,
                       width: double.infinity,
@@ -76,7 +75,7 @@ class MobilePostClassic extends StatelessWidget {
                           image: DecorationImage(
                               fit: BoxFit.cover,
                               image: NetworkImage(
-                                  postsListMock[index].attachments![0]))),
+                                  postsList[index]['attachments'][0]))),
                     ),
                   if (postType == 'link')
                     Row(
@@ -85,8 +84,7 @@ class MobilePostClassic extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                 postsList[index]['title'],
-                                    
+                                postsList[index]['title'],
                                 maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -102,7 +100,7 @@ class MobilePostClassic extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 18),
                               child: LinkPreviewGenerator(
-                                link: postsListMock[index].attachments![0],
+                                link: postsList[index]['attachments'][0],
                                 linkPreviewStyle: LinkPreviewStyle.small,
                                 bodyMaxLines: 1,
                                 bodyTextOverflow: TextOverflow.ellipsis,

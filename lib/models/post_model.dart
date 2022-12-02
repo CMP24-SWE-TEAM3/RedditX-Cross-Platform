@@ -1,7 +1,5 @@
-
-
 import 'community_model.dart';
-import 'user_model.dart';
+
 
 /// Spams model: represents Spams of a post.
 class SpamModel {
@@ -58,7 +56,7 @@ class PostModel {
 
   /// Count of spams of the post
   int? spamCount;
-  
+
   /// Count of votes on the post
   int? votesCount;
 
@@ -95,7 +93,6 @@ class PostModel {
   /// Count of comments
   int? commentsNum;
 
-
   /// Constructor of Post model
   PostModel(
       {required this.title,
@@ -119,7 +116,7 @@ class PostModel {
       this.insightCnt,
       this.isDeleted = false,
       this.text});
-Map<String, dynamic> toMap() {
+  Map<String, dynamic> toMap() {
     return {
       'title': title,
       'spoiler': spoiler,
@@ -133,7 +130,7 @@ Map<String, dynamic> toMap() {
       'spammers': spammers,
       'communityID': communityID,
       'followers': followers,
-      'flairBackGround':flairBackGround,
+      'flairBackGround': flairBackGround,
       'flairTextColor': flairTextColor,
       'flairText': flairText,
       'flairID': flairID,
@@ -142,20 +139,15 @@ Map<String, dynamic> toMap() {
       'insightCnt': insightCnt,
       'isDeleted': isDeleted,
       'text': text
-
-
-
     };
   }
 }
-
-
 
 /// List of posts whether API or mock
 List<dynamic> postsList = [];
 
 /// List of real posts (from API)
-List<dynamic>postsListAPI=[];
+List<dynamic> postsListAPI = [];
 
 /// List of post model
 /// dummy data to test
@@ -176,20 +168,21 @@ List<PostModel> postsListMock = [
     spoiler: true,
     nsfw: false,
     createdAt: DateTime(2022, 11, 8, 12, 30),
-    userID: "Huda Ashraf",
-    type: "image",
+    userID: "t2_Huda Ashraf",
+    type: "img",
   ),
   PostModel(
     votesCount: 50,
     communityID: communityModel1.id,
     commentsNum: 120,
-    title: "",
+    title:
+        "“...and then, I have nature and art and poetry, and if that is not enough, what is enough?”― Vincent Willem van Gogh",
     text:
         "“...and then, I have nature and art and poetry, and if that is not enough, what is enough?”― Vincent Willem van Gogh",
     spoiler: true,
     nsfw: false,
     createdAt: DateTime(2022, 11, 8, 10, 30),
-    userID: "Doaa Mohamed",
+    userID: "t2_Doaa Mohamed",
     type: "text",
   ),
   PostModel(
@@ -204,8 +197,8 @@ List<PostModel> postsListMock = [
     spoiler: true,
     nsfw: false,
     createdAt: DateTime(2022, 11, 7, 11, 30),
-    userID: "Mariam",
-    type: "image",
+    userID: "t2_Mariam",
+    type: "img",
   ),
   PostModel(
     votesCount: 1500,
@@ -219,7 +212,7 @@ List<PostModel> postsListMock = [
     spoiler: true,
     nsfw: false,
     createdAt: DateTime(2022, 11, 3),
-    userID: "Eman Ashraf",
+    userID: "t2_Eman Ashraf",
     type: "link",
   ),
   PostModel(
@@ -232,8 +225,9 @@ List<PostModel> postsListMock = [
       createdAt: DateTime(2022, 10, 26),
       text:
           "Yes, anyone can learn to draw. You may think you have no talent but others may well appreciate what you draw. A natural talent may make the learning process easier, but drawing is as much of a skill as a talent. As with any other skill, this can be learned.",
-      title: "",
-      userID: "Zahraa",
+      title:
+          "Yes, anyone can learn to draw. You may think you have no talent but others may well appreciate what you draw. A natural talent may make the learning process easier, but drawing is as much of a skill as a talent. As with any other skill, this can be learned.",
+      userID: "t2_Zahraa",
       votesCount: 240),
   PostModel(
       spoiler: true,
@@ -241,14 +235,14 @@ List<PostModel> postsListMock = [
       attachments: [
         "https://i.pinimg.com/564x/c9/92/64/c9926411478ce371609e61fc76fecaf0.jpg"
       ],
-      type: "image",
+      type: "img",
       commentsNum: 1000,
       communityID: communityModel1.id,
       createdAt: DateTime(2021, 10, 2),
       text: "",
       title:
           "Butterflies..They can't see how truly beautiful they are, but everyone else can. People are like that as well",
-      userID: "Salma Mohamed",
+      userID: "t2_Salma Mohamed",
       votesCount: 900),
   PostModel(
       spoiler: true,
@@ -262,7 +256,7 @@ List<PostModel> postsListMock = [
       createdAt: DateTime(2022, 10, 22),
       text: "",
       title: "10 Art Websites Every Aspiring Artist Should Know",
-      userID: "Hend",
+      userID: "t2_Hend",
       votesCount: 400),
   PostModel(
       spoiler: true,
@@ -270,23 +264,24 @@ List<PostModel> postsListMock = [
       attachments: [
         "https://i.pinimg.com/564x/bf/23/a9/bf23a9053df8a9b82b6aee33cb35cafb.jpg"
       ],
-      type: "image",
+      type: "img",
       commentsNum: 1003,
       communityID: communityModel1.id,
       createdAt: DateTime(2021, 5, 2),
       text: "",
       title:
           "Colored Pencil Techniques. Abstracts with purple flowers to give you ideas for coloring. #coloredpenciltechniques",
-      userID: "Israa",
+      userID: "t2_Israa",
       votesCount: 890),
 ];
 
-List postsListMock1=postsListMock.map((e) => {
+List postsListMock1 = postsListMock
+    .map((e) => {
           'title': e.title,
           'spoiler': e.spoiler,
           'nsfw': e.nsfw,
           'createdAt': e.createdAt,
-          'userID': e. userID,
+          'userID': e.userID,
           'type': e.type,
           'attachments': e.attachments,
           'commentsNum': e.commentsNum,
@@ -303,11 +298,53 @@ List postsListMock1=postsListMock.map((e) => {
           'insightCnt': e.insightCnt,
           'isDeleted': e.isDeleted,
           'text': e.text
-        }).toList();
+        })
+    .toList();
+
+
+
+/// User model
+class UserModelMock {
+  final String avatar;
+
+  /// User model constructor
+  UserModelMock({required this.avatar});
+}
+
+/// List of user model
+/// dummy data to test
+/// will be replaced with real data from the APIs
+List<UserModelMock> users = [
+  UserModelMock(
+      avatar:
+          "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"),
+  UserModelMock(
+      avatar:
+          "https://i.pinimg.com/564x/bf/ce/68/bfce68d80c7f012f15b46e2e6ecc4a8a.jpg"),
+  UserModelMock(
+      avatar:
+          "https://i.pinimg.com/564x/aa/ba/7a/aaba7ada0085c9ec7d275baaa84405a6.jpg"),
+  UserModelMock(
+      avatar:
+          "https://i.pinimg.com/564x/f0/a2/a4/f0a2a413909960c4bc3dd29b4e1d69ee.jpg"),
+  UserModelMock(
+      avatar:
+          "https://i.pinimg.com/564x/d8/3e/24/d83e2410c042538202fb8c9bce9a3f01.jpg"),
+  UserModelMock(
+      avatar:
+          "https://i.pinimg.com/564x/1e/39/8d/1e398d1ef51258540cc600438594b343.jpg"),
+  UserModelMock(
+      avatar:
+          "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg"),
+  UserModelMock(
+      avatar:
+          "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg"),
+];
+
 
 class CommunityService {
   List<PostModel> testpostsListMock = postsListMock;
-  List<UserModel> testUsersList = users;
+  List<UserModelMock> testUsersList = users;
 
   Future<List<PostModel>> getPosts() async {
     await Future.delayed(const Duration(seconds: 1));

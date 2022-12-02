@@ -38,8 +38,7 @@ class BottomPostWeb extends StatelessWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          Text(Numeral(
-                                   postsList[index]['commentsNum'])
+                          Text(Numeral(postsList[index]['commentsNum'])
                               .format(fractionDigits: 1)),
                         ],
                       ),
