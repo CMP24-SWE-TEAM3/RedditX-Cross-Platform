@@ -24,6 +24,12 @@ import 'views/screens/authentication/forget_username.dart';
 import 'views/screens/authentication/interests.dart';
 import 'views/screens/authentication/sign_up_page.dart';
 import 'views/screens/authentication/splash_screen.dart';
+import 'controllers/mobile_settings_controller.dart';
+import 'views/screens/settings/account_setting_screen.dart';
+import 'views/screens/settings/setting_menu.dart';
+import './views/screens/settings/change_password_screen.dart';
+import './views/screens/settings/manage_emails.dart';
+import './views/screens/settings/update_email_screen.dart';
 import 'views/screens/temphome.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
@@ -44,13 +50,16 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(
-          create: (context) =>
-              CommunityModelProvider()..getPosts("At5_imagePro235", "hot", [], 2, 40)),
-      ChangeNotifierProvider(
-          create: (context) =>
-              CommunityProvider(communityService: CommunityService())),
+            create: (context) => CommunityModelProvider()
+              ..getPosts("At5_imagePro235", "hot", [], 2, 40)),
+        ChangeNotifierProvider(
+            create: (context) =>
+                CommunityProvider(communityService: CommunityService())),
         ChangeNotifierProvider(
           create: (context) => SearchController(),
+        ),
+        ChangeNotifierProvider(
+          create: (_) => SettingsViewModelMobileController(),
         ),
       ],
       child: MaterialApp(
@@ -88,20 +97,14 @@ class MyApp extends StatelessWidget {
           CommunityHome.routeName: (ctx) => const CommunityHome(),
           SearchScreenTwo.routeName: (ctx) => const SearchScreenTwo(),
           SearchScreenOne.routeName: (ctx) => const SearchScreenOne(),
+          SettingsHomePage.routeName: (context) => const SettingsHomePage(),
+          AccountSettingsScreen.routeName: (context) =>
+              const AccountSettingsScreen(),
+          ManageEmailsScreen.routeName: (context) => const ManageEmailsScreen(),
+          UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
+          ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
         },
       ),
     );
   }
 }
-
-// class _HomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Home'),
-//       ),
-//       body: const Center(child: Text('Welcome to Reddit')),
-//     );
-//   }
-// }

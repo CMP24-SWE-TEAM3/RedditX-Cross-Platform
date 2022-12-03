@@ -8,7 +8,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/constants.dart';
-import '../models/user_data.dart';
+import '../models/authentication.dart';
 import '../services/authentication_services.dart';
 
 bool mockData = iSMOCK;
@@ -16,37 +16,37 @@ bool mockData = iSMOCK;
 /// SignInController for the authentication of user by bare email , google and facebook
 class SignInController extends ChangeNotifier {
   /// to get status of signed_in
-  bool get isSignedIn => currentUser.userauthentication.isSignedIn;
+  bool get isSignedIn =>  userauthentication.isSignedIn;
 
   /// to get status of error
-  bool get hasError => currentUser.userauthentication.hasError;
+  bool get hasError =>  userauthentication.hasError;
 
   /// to get the error code
-  String? get errorCode => currentUser.userauthentication.errorCode;
+  String? get errorCode =>  userauthentication.errorCode;
 
   /// to get the type of the provider
-  String? get provider => currentUser.userauthentication.provider;
+  String? get provider =>  userauthentication.provider;
 
   /// to get the token
-  String? get uid => currentUser.userauthentication.uid;
+  String? get uid =>  userauthentication.uid;
 
   /// to get the name
-  String? get name => currentUser.userauthentication.name;
+  String? get name =>  userauthentication.name;
 
   /// to get the user name
-  String? get username => currentUser.userauthentication.username;
+  String? get username =>  userauthentication.username;
 
   /// to get the email
-  String? get email => currentUser.userauthentication.email;
+  String? get email =>  userauthentication.email;
 
   /// to get the gender
-  String? get gender => currentUser.userauthentication.gender;
+  String? get gender =>  userauthentication.gender;
 
   /// to get the image url
-  String? get imageUrl => currentUser.userauthentication.imageUrl;
+  String? get imageUrl =>  userauthentication.imageUrl;
 
   /// to get the list
-  List<String>? get list => currentUser.userauthentication.list;
+  List<String>? get list =>  userauthentication.list;
 
   SignInController() {
     checkSignInUser();
@@ -58,7 +58,7 @@ class SignInController extends ChangeNotifier {
   /// set the error code and status in case of error
   Future logIn(String username, String password) async {
     if (mockData) {
-      currentUser.userauthentication.uid = loginBareEmailMock();
+       userauthentication.uid = loginBareEmailMock();
       setSignIn();
       saveDataToSharedPreferences();
       notifyListeners();
@@ -67,14 +67,15 @@ class SignInController extends ChangeNotifier {
       final response = await loginBareEmailAPI(username, password);
       if (response.statusCode == 200) {
         // print(json.decode(response.body)['token']);
-        currentUser.userauthentication.uid =
+         userauthentication.uid =
             json.decode(response.body)['token'];
-        currentUser.userauthentication.hasError = false;
+         userauthentication.hasError = false;
+         userauthentication.username = username;
         setSignIn();
         saveDataToSharedPreferences();
       } else {
-        currentUser.userauthentication.hasError = true;
-        currentUser.userauthentication.errorCode = 'Error in login';
+         userauthentication.hasError = true;
+         userauthentication.errorCode = 'Error in login';
       }
       notifyListeners();
       return;
@@ -87,7 +88,7 @@ class SignInController extends ChangeNotifier {
   /// set the error code and status in case of error
   Future signUp(String email, String username, String password) async {
     if (mockData) {
-      currentUser.userauthentication.uid = loginBareEmailMock();
+       userauthentication.uid = loginBareEmailMock();
       setSignIn();
       saveDataToSharedPreferences();
       notifyListeners();
@@ -96,14 +97,14 @@ class SignInController extends ChangeNotifier {
       final response = await signUpBareEmailAPI(email, username, password);
       if (response.statusCode == 200) {
         // print(json.decode(response.body)['token']);
-        currentUser.userauthentication.uid =
+         userauthentication.uid =
             json.decode(response.body)['token'];
-        currentUser.userauthentication.hasError = false;
+         userauthentication.hasError = false;
         setSignIn();
         saveDataToSharedPreferences();
       } else {
-        currentUser.userauthentication.hasError = true;
-        currentUser.userauthentication.errorCode = 'Error in sign up';
+         userauthentication.hasError = true;
+         userauthentication.errorCode = 'Error in sign up';
       }
       notifyListeners();
       return;
@@ -115,7 +116,7 @@ class SignInController extends ChangeNotifier {
   Future checkSignInUser() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    currentUser.userauthentication.isSignedIn =
+     userauthentication.isSignedIn =
         sharedPreferences.getBool("signed_in") ?? false;
     notifyListeners();
   }
@@ -126,7 +127,7 @@ class SignInController extends ChangeNotifier {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     sharedPreferences.setBool("signed_in", true);
-    currentUser.userauthentication.isSignedIn = true;
+     userauthentication.isSignedIn = true;
     notifyListeners();
   }
 
@@ -136,7 +137,7 @@ class SignInController extends ChangeNotifier {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     await sharedPreferences.setString(
-        'uid', currentUser.userauthentication.uid!);
+        'uid',  userauthentication.uid!);
     notifyListeners();
   }
 
@@ -145,7 +146,7 @@ class SignInController extends ChangeNotifier {
   Future getDataFromSharedPreferences() async {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
-    currentUser.userauthentication.uid = sharedPreferences.getString('uid');
+     userauthentication.uid = sharedPreferences.getString('uid');
     notifyListeners();
   }
 
@@ -169,11 +170,11 @@ class SignInController extends ChangeNotifier {
   /// userSignOut Function
   /// sign out the user form the app
   Future userSignOut() async {
-    currentUser.userauthentication.firebaseAuth?.signOut;
-    await currentUser.userauthentication.googleSignIn.signOut();
-    await currentUser.userauthentication.facebookAuth.logOut();
+     userauthentication.firebaseAuth?.signOut;
+    await  userauthentication.googleSignIn.signOut();
+    await  userauthentication.facebookAuth.logOut();
 
-    currentUser.userauthentication.isSignedIn = false;
+     userauthentication.isSignedIn = false;
     notifyListeners();
 
     /// clear all storage information
@@ -194,7 +195,7 @@ class SignInController extends ChangeNotifier {
   /// set the error code and status in case of error
   Future sendGender(String kind) async {
     if (mockData) {
-      currentUser.userauthentication.gender = sendGenderMock();
+       userauthentication.gender = sendGenderMock();
       notifyListeners();
       return;
     } else {}
@@ -206,7 +207,7 @@ class SignInController extends ChangeNotifier {
   /// set the error code and status in case of error
   Future sendPhoto(File imageFile) async {
     if (mockData) {
-      currentUser.userauthentication.imageUrl = sendPhotoMock();
+       userauthentication.imageUrl = sendPhotoMock();
       notifyListeners();
       return;
     } else {}
@@ -218,7 +219,7 @@ class SignInController extends ChangeNotifier {
   /// set the error code and status in case of error
   Future sendUserName(String username) async {
     if (mockData) {
-      currentUser.userauthentication.username = sendUserNameMock();
+       userauthentication.username = sendUserNameMock();
       notifyListeners();
       return;
     } else {}
@@ -254,7 +255,7 @@ class SignInController extends ChangeNotifier {
   /// set the error code and status in case of error
   Future interest(List<String> list) async {
     if (mockData) {
-      currentUser.userauthentication.list = interestMock();
+       userauthentication.list = interestMock();
       notifyListeners();
       return;
     } else {}
@@ -265,7 +266,7 @@ class SignInController extends ChangeNotifier {
   /// set the error code and status in case of error
   Future signInWithGoogle() async {
     final GoogleSignInAccount? googleSignInAccount =
-        await currentUser.userauthentication.googleSignIn.signIn();
+        await  userauthentication.googleSignIn.signIn();
 
     if (googleSignInAccount != null) {
       try {
@@ -276,54 +277,54 @@ class SignInController extends ChangeNotifier {
           idToken: googleSignInAuthentication.idToken,
         );
 
-        final User? userDetails = (await currentUser
-                .userauthentication.firebaseAuth
+        final User? userDetails = (await 
+                userauthentication.firebaseAuth
                 ?.signInWithCredential(credential))
             ?.user!;
 
         /// now save all values
-        // currentUser.userauthentication.name = userDetails?.displayName;
-        // currentUser.userauthentication.email = userDetails?.email;
-        // currentUser.userauthentication.imageUrl = userDetails?.photoURL;
-        // currentUser.userauthentication.provider = "GOOGLE";
-        //currentUser.userauthentication.uid = userDetails?.uid;
+        //  userauthentication.name = userDetails?.displayName;
+        //  userauthentication.email = userDetails?.email;
+        //  userauthentication.imageUrl = userDetails?.photoURL;
+        //  userauthentication.provider = "GOOGLE";
+        // userauthentication.uid = userDetails?.uid;
 
         final response = await loginGoogleEmailAPI(userDetails!.uid);
         if (response.statusCode == 200) {
           // print(json.decode(response.body)['token']);
-          currentUser.userauthentication.uid =
+           userauthentication.uid =
               json.decode(response.body)['token'];
-          currentUser.userauthentication.hasError = false;
+           userauthentication.hasError = false;
           setSignIn();
           saveDataToSharedPreferences();
         } else {
-          currentUser.userauthentication.hasError = true;
-          currentUser.userauthentication.errorCode = 'Error in sign up';
+           userauthentication.hasError = true;
+           userauthentication.errorCode = 'Error in sign up';
         }
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
           case "account-exists-with-different-credential":
-            currentUser.userauthentication.errorCode =
+             userauthentication.errorCode =
                 "You already have an account with us. Use correct provider";
-            currentUser.userauthentication.hasError = true;
+             userauthentication.hasError = true;
             notifyListeners();
             break;
 
           case "null":
-            currentUser.userauthentication.errorCode =
+             userauthentication.errorCode =
                 "Some unexpected error while trying to sign in";
-            currentUser.userauthentication.hasError = true;
+             userauthentication.hasError = true;
             notifyListeners();
             break;
           default:
-            currentUser.userauthentication.errorCode = e.toString();
-            currentUser.userauthentication.hasError = true;
+             userauthentication.errorCode = e.toString();
+             userauthentication.hasError = true;
             notifyListeners();
         }
       }
     } else {
-      currentUser.userauthentication.hasError = true;
+       userauthentication.hasError = true;
       notifyListeners();
     }
   }
@@ -333,7 +334,7 @@ class SignInController extends ChangeNotifier {
   /// set the error code and status in case of error
   Future signInWithFacebook() async {
     final LoginResult result =
-        await currentUser.userauthentication.facebookAuth.login();
+        await  userauthentication.facebookAuth.login();
 
     /// getting the profile
     final graphResponse = facebookapi(result);
@@ -343,54 +344,54 @@ class SignInController extends ChangeNotifier {
       try {
         final OAuthCredential credential =
             FacebookAuthProvider.credential(result.accessToken!.token);
-        await currentUser.userauthentication.firebaseAuth
+        await  userauthentication.firebaseAuth
             ?.signInWithCredential(credential);
 
         // /// saving the values
-        // currentUser.userauthentication.name = profile['name'];
-        // currentUser.userauthentication.email = profile['email'];
-        // currentUser.userauthentication.imageUrl =
+        //  userauthentication.name = profile['name'];
+        //  userauthentication.email = profile['email'];
+        //  userauthentication.imageUrl =
         //     profile['picture']['data']['url'];
-        //currentUser.userauthentication.uid = profile['id'];
-        // currentUser.userauthentication.hasError = false;
-        // currentUser.userauthentication.provider = "FACEBOOK";
+        // userauthentication.uid = profile['id'];
+        //  userauthentication.hasError = false;
+        //  userauthentication.provider = "FACEBOOK";
         // notifyListeners();
         final response = await loginFacebookEmailAPI(profile['id']);
         if (response.statusCode == 200) {
           // print(json.decode(response.body)['token']);
-          currentUser.userauthentication.uid =
+           userauthentication.uid =
               json.decode(response.body)['token'];
-          currentUser.userauthentication.hasError = false;
+           userauthentication.hasError = false;
           setSignIn();
           saveDataToSharedPreferences();
         } else {
-          currentUser.userauthentication.hasError = true;
-          currentUser.userauthentication.errorCode = 'Error in sign up';
+           userauthentication.hasError = true;
+           userauthentication.errorCode = 'Error in sign up';
         }
         notifyListeners();
       } on FirebaseAuthException catch (e) {
         switch (e.code) {
           case "account-exists-with-different-credential":
-            currentUser.userauthentication.errorCode =
+             userauthentication.errorCode =
                 "You already have an account with us. Use correct provider";
-            currentUser.userauthentication.hasError = true;
+             userauthentication.hasError = true;
             notifyListeners();
             break;
 
           case "null":
-            currentUser.userauthentication.errorCode =
+             userauthentication.errorCode =
                 "Some unexpected error while trying to sign in";
-            currentUser.userauthentication.hasError = true;
+             userauthentication.hasError = true;
             notifyListeners();
             break;
           default:
-            currentUser.userauthentication.errorCode = e.toString();
-            currentUser.userauthentication.hasError = true;
+             userauthentication.errorCode = e.toString();
+             userauthentication.hasError = true;
             notifyListeners();
         }
       }
     } else {
-      currentUser.userauthentication.hasError = true;
+       userauthentication.hasError = true;
       notifyListeners();
     }
   }

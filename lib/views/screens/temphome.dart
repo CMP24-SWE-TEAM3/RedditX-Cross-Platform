@@ -5,6 +5,7 @@ import 'package:search_project/views/screens/community/community_home.dart';
 
 import '../../controllers/sign_in_controller.dart';
 import './search/search_screen_one.dart';
+import 'settings/setting_menu.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -38,7 +39,13 @@ class Home extends StatelessWidget {
                   Navigator.of(context)
                       .pushNamed(SearchScreenOne.routeName, arguments: {});
                 },
-                child: const Text("Search"))
+                child: const Text("Search")),
+                ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(SettingsHomePage.routeName, arguments: {});
+                },
+                child: const Text("Settings")),
           ],
         ),
       ),
