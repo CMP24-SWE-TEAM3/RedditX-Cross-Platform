@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 
 import '../../../controllers/authentication_submitions.dart';
 
-import '../../../controllers/validations.dart';
-
 import '../../widgets/authentication/dividor_or.dart';
 import '../../widgets/authentication/sign_up_button.dart';
 import '../../widgets/authentication/uesrname_password_textfield.dart';
@@ -29,16 +27,13 @@ class _EmailLoginWState extends State<EmailLoginW> {
   TextEditingController passwordController = TextEditingController();
   String? errorPasswordText;
 
-  void validate(userNameController, passwordController, ctx) {
-    setState(() async {
+  Future<void> validate(userNameController, passwordController, ctx) async {
+    setState(() {
       _submited = true;
-      errorUserNameText = await usernameValidation(userNameController.text, ctx);
-      errorPasswordText = passwordValidation(passwordController.text);
     });
 
-    if ((errorUserNameText == null) && (errorPasswordText == null)) {
-      submitlogin(userNameController, passwordController, ctx);
-    }
+    submitlogin(userNameController, passwordController, ctx);
+  
   }
 
   void forgetPass(BuildContext ctx) {
