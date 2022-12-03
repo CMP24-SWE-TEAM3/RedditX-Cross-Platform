@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as international;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -23,7 +24,7 @@ class SearchController with ChangeNotifier {
 
   ///Whether the platform is web or android
   //web==> true , App==> false
-  bool isWeb = false; //!(defaultTargetPlatform == TargetPlatform.android);
+  bool isWeb = !(defaultTargetPlatform == TargetPlatform.android);
 
   ///Whether the text direction is RTL or LTR
   bool isRTLText = false;
