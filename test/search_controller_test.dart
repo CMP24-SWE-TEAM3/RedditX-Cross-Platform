@@ -10,6 +10,126 @@ void main() {
 //stup method will run before each and every test
   setUp(() {
     sut = SearchController();
+    communitiesListData = [
+      CommunityInSearch(
+        nsfw: true,
+        name: 'CommunityName1',
+        img:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
+        about: 'Reddit community for test purpose',
+        membersCount: 1220,
+        joined: true,
+      ),
+      CommunityInSearch(
+        nsfw: false,
+        name: 'CommunityName2',
+        img:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFU7U2h0umyF0P6E_yhTX45sGgPEQAbGaJ4g&usqp=CAU',
+        about: 'CommunityName2 is a community for memes',
+        membersCount: 152,
+        joined: false,
+      ),
+      CommunityInSearch(
+        nsfw: false,
+        name: 'CommunityName3',
+        img:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvQRXWBKMqCQ4zssn7Ik5PI7IY0gZwih_i_g&usqp=CAU',
+        about: 'Ablut text About Text',
+        membersCount: 37,
+        joined: false,
+      ),
+      CommunityInSearch(
+        nsfw: false,
+        name: 'CommunityName4',
+        img:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSnTo6TDNKkt5BW4MzI3YMaB9fEap7PneWulj2oE2JSC4tYaHEkN5q86ybgF7v8HGnlxD4&usqp=CAU',
+        about: 'Islamic history community',
+        membersCount: 11586,
+        joined: false,
+      ),
+      CommunityInSearch(
+        nsfw: false,
+        name: 'CommunityName5',
+        img:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOd256TcC6vcaQ99TYzoP0pBbch9_Q-bbrmw&usqp=CAU',
+        about: 'world news community',
+        membersCount: 111222333,
+        joined: true,
+      ),
+      CommunityInSearch(
+        nsfw: false,
+        name: 'CommunityName6',
+        img:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFU7U2h0umyF0P6E_yhTX45sGgPEQAbGaJ4g&usqp=CAU',
+        about: '',
+        membersCount: 113,
+        joined: false,
+      ),
+    ];
+    postsListData = [
+      PostInSearch(
+        postText:
+            'World War II or the Second Worl all of the great powers—forming two opposing military alliances: the Allies and the Axis powers. World War II was a total war that directly involved more than 100 million personnel from more than 30 countries. The major participants in the war threw their entire economic, industrial, and scientific capabilities behind the war effort, blurring the distinction between civilian and military resources. Aircraft played a major role in the conflict, enabling the strategic bombing of population centres and deploying the only two nuclear weapons ever used in war. World War II was by far the deadliest conflict in human history; it resulted in 70 to 85 million fatalities, mostly among civilians. Tens of millions died due to genocides (including the Holocaust), starvation, massacres, and disease. In the wake of the Axis defeat, Germany and Japan were occupied, and war crimes tribunals were conducted against German and Japanese leaders.',
+        communityName: 'u/communityName1',
+        userName: 'u/userName1',
+        communityIcon:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
+        flairText: 'News',
+        createdAt: DateTime(2021, 10, 30),
+        votesCount: 125,
+        commentsCount: 0,
+        attachedMedia: [],
+        nsfw: false,
+        spoiler: true,
+      ),
+      PostInSearch(
+        postText:
+            'World War II or the Second World War, often abbreviated as WWII or WW2, was a global war that lasted from 1937 to 1945. It involved the vast majority of the worlds countries—including all of the great powers—forming two opposing military alliances: the Allies and the Axis powers. World War II was a total war that directly involved more than 100 million personnel from more than 30 countries. The major participants in the war threw their entire economic, industrial, and scientific capabilities behind the war effort, blurring the distinction between civilian and military resources. Aircraft played a major role in the conflict, enabling the strategic bombing of population centres and deploying the only two nuclear weapons ever used in war. World War II was by far the deadliest conflict in human history; it resulted in 70 to 85 million fatalities, mostly among civilians. Tens of millions died due to genocides (including the Holocaust), starvation, massacres, and disease. In the wake of the Axis defeat, Germany and Japan were occupied, and war crimes tribunals were conducted against German and Japanese leaders.',
+        communityName: 'u/communityName2',
+        userName: 'u/userName2',
+        communityIcon:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRFU7U2h0umyF0P6E_yhTX45sGgPEQAbGaJ4g&usqp=CAU',
+        flairText: 'Politics',
+        createdAt: DateTime(2021, 11, 7),
+        votesCount: -1555,
+        commentsCount: 123,
+        attachedMedia: [
+          'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2C8Z76bai2hfofGkaRDN2E_WAozCYOLL7ONbCgmSEQg&s',
+        ],
+        nsfw: true,
+        spoiler: true,
+      ),
+      PostInSearch(
+        postText:
+            'World War II or the Second World War, often abbreviated as WWII or WW2, was a global war that lasted from 1937 to 1945. It involved the vast majority of the worlds countries—including all of the great powers—forming two opposing military alliances: the Allies and the Axis powers. World War II was a total war that directly involved more than 100 million personnel from more than 30 countries. The major participants in the war threw their entire economic, industrial, and scientific capabilities behind the war effort, blurring the distinction between civilian and military resources. Aircraft played a major role in the conflict, enabling the strategic bombing of population centres and deploying the only two nuclear weapons ever used in war. World War II was by far the deadliest conflict in human history; it resulted in 70 to 85 million fatalities, mostly among civilians. Tens of millions died due to genocides (including the Holocaust), starvation, massacres, and disease. In the wake of the Axis defeat, Germany and Japan were occupied, and war crimes tribunals were conducted against German and Japanese leaders.',
+        communityName: 'u/communityName3',
+        userName: 'u/userName3',
+        communityIcon:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSOd256TcC6vcaQ99TYzoP0pBbch9_Q-bbrmw&usqp=CAU',
+        flairText: '',
+        createdAt: DateTime(2021, 12, 5),
+        votesCount: 1002,
+        commentsCount: 25,
+        attachedMedia: [],
+        nsfw: false,
+        spoiler: true,
+      ),
+      PostInSearch(
+        postText:
+            'World War II or the Second World War, often abbreviated as WWII or WW2, was a global war that lasted from 1937 to 1945. It involved the vast majority of the worlds countries—including all of the great powers—forming two opposing military alliances: the Allies and the Axis powers. World War II was a total war that directly involved more than 100 million personnel from more than 30 countries. The major participants in the war threw their entire economic, industrial, and scientific capabilities behind the war effort, blurring the distinction between civilian and military resources. Aircraft played a major role in the conflict, enabling the strategic bombing of population centres and deploying the only two nuclear weapons ever used in war. World War II was by far the deadliest conflict in human history; it resulted in 70 to 85 million fatalities, mostly among civilians. Tens of millions died due to genocides (including the Holocaust), starvation, massacres, and disease. In the wake of the Axis defeat, Germany and Japan were occupied, and war crimes tribunals were conducted against German and Japanese leaders.',
+        communityName: 'u/communityName4',
+        userName: 'u/userName4',
+        communityIcon:
+            'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTvQRXWBKMqCQ4zssn7Ik5PI7IY0gZwih_i_g&usqp=CAU',
+        flairText: '',
+        createdAt: DateTime(2022, 11, 2),
+        votesCount: 2102233,
+        commentsCount: 123456,
+        attachedMedia: [],
+        nsfw: true,
+        spoiler: true,
+      ),
+    ];
   });
   test('initial values are correct', () {
     expect(sut.isFocused, false);
@@ -261,43 +381,44 @@ void main() {
 
     test('Time is more than or equal one month and less than one year', () {
       sut.isWeb = true;
-      String shownDate = sut.calculateAge(DateTime(2021, 12, 30));
+      String shownDate = sut.calculateAge(DateTime(2022, 2, 1));
       expect(shownDate, '10 months ago');
 
       sut.isWeb = false;
-      shownDate = sut.calculateAge(DateTime(2021, 12, 30));
+      shownDate = sut.calculateAge(DateTime(2022, 2, 1));
       expect(shownDate, '10mo');
     });
 
     test('Time is more than or equal one day and less than one month', () {
       sut.isWeb = true;
-      String shownDate = sut.calculateAge(DateTime(2022, 11, 3));
-      expect(shownDate, '${DateTime.now().day - 3} days ago');
+      String shownDate = sut.calculateAge(DateTime(2022, 12, 1));
+      expect(shownDate, '${DateTime.now().day - 1} days ago');
 
       sut.isWeb = false;
-      shownDate = sut.calculateAge(DateTime(2022, 11, 3));
-      expect(shownDate, '${DateTime.now().day - 3}d');
+      shownDate = sut.calculateAge(DateTime(2022, 12, 1));
+      expect(shownDate, '${DateTime.now().day - 1}d');
     });
 
     test('Time is more than or equal one hour and less than one day', () {
       sut.isWeb = true;
-      String shownDate = sut.calculateAge(DateTime(2022, 11, 12, 12));
-      expect(shownDate, '${DateTime.now().hour - 12} hours ago');
+      String shownDate =
+          sut.calculateAge(DateTime(2022, 12, DateTime.now().day, 5));
+      expect(shownDate, '${DateTime.now().hour - 5} hours ago');
 
       sut.isWeb = false;
-      shownDate = sut.calculateAge(DateTime(2022, 11, 12, 12));
-      expect(shownDate, '${DateTime.now().hour - 12}h');
+      shownDate = sut.calculateAge(DateTime(2022, 12, DateTime.now().day, 5));
+      expect(shownDate, '${DateTime.now().hour - 5}h');
     });
 
     test('Time is more than or equal one minute and less than one hour', () {
       sut.isWeb = true;
-      String shownDate =
-          sut.calculateAge(DateTime(2022, 11, 12, DateTime.now().hour, 2));
+      String shownDate = sut.calculateAge(DateTime(DateTime.now().year,
+          DateTime.now().month, DateTime.now().day, DateTime.now().hour, 2));
       expect(shownDate, '${DateTime.now().minute - 2} minutes ago');
 
       sut.isWeb = false;
-      shownDate =
-          sut.calculateAge(DateTime(2022, 11, 12, DateTime.now().hour, 2));
+      shownDate = sut.calculateAge(DateTime(DateTime.now().year,
+          DateTime.now().month, DateTime.now().day, DateTime.now().hour, 2));
       expect(shownDate, '${DateTime.now().minute - 2}m');
     });
   });
