@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:search_project/views/screens/authentication/splash_screen.dart';
+import 'package:search_project/views/screens/community/community_home.dart';
 
-
-import 'authentication/about_you.dart';
-import 'community/community_screen.dart';
+import '../../controllers/sign_in_controller.dart';
+import './search/search_screen_one.dart';
+import 'settings/setting_menu.dart';
 
 class Home extends StatelessWidget {
   const Home({super.key});
@@ -10,35 +13,42 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final mediaQuery = MediaQuery.of(context);
-    final widthScreen = (mediaQuery.size.width);
-    final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
-    // set up the AlertDialog
-    AlertDialog genderPage = AlertDialog(
-      content: Container(
-        width: widthScreen * 0.4,
-        height: heightScreen * 0.73,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+                onPressed: () {
+                  final sp =
+                      Provider.of<SignInController>(context, listen: false);
+                  sp.userSignOut();
+                  Navigator.of(context).pushReplacementNamed(
+                      SplashScreen.routeName,
+                      arguments: {});
+                },
+                child: const Text('sign out')),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(CommunityHome.routeName, arguments: {});
+                },
+                child: const Text("Community")),
+                ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(SearchScreenOne.routeName, arguments: {});
+                },
+                child: const Text("Search")),
+                ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(SettingsHomePage.routeName, arguments: {});
+                },
+                child: const Text("Settings")),
+          ],
         ),
-        child: const AboutYou(),
       ),
     );
-    return Scaffold(
-        body: Column(
-      children: [
-        ElevatedButton(
-            onPressed: () => showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return genderPage;
-                  },
-                ),
-            child: const Text('Clickme for testing web modems')),
-        ElevatedButton(
-            onPressed: () => Navigator.of(context).pushNamed(CommunityScreen.routeName, arguments: {}),
-            child: const Text('Clickme for community')),
-      ],
-    ));
   }
 }

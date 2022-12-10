@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/models/community_model.dart';
-import 'package:reddit/models/post_model.dart';
+
+import '../../../controllers/community_controller.dart';
+import '../../../controllers/community_model_controller.dart';
 import '../../../methods/community/show_toast.dart';
+import '../../../models/community_model.dart';
+import '../../../models/post_model.dart';
 import '../../../styles/colors.dart';
 import '../../../styles/custom_icons.dart';
 import '../../widgets/community/web_app_bar.dart';
@@ -34,8 +36,8 @@ class CommunityWebScreen extends StatelessWidget {
                 backgroundColor: whiteColor,
                 title:
                     WebAppBarTitle(constraints: constraints, context: context)),
-            body: Consumer<CommunityProvider>(
-              builder: (context, value, child) {
+            body: Consumer2<CommunityProvider, CommunityModelProvider>(
+              builder: (context, value, value1, child) {
                 return Column(
                   children: [
                     SizedBox(
@@ -43,7 +45,7 @@ class CommunityWebScreen extends StatelessWidget {
                       height: 150,
                       child: Image(
                           fit: BoxFit.cover,
-                          image: NetworkImage(communityModel1.banner)),
+                          image: NetworkImage(communityModel1.banner!)),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -53,7 +55,7 @@ class CommunityWebScreen extends StatelessWidget {
                         ),
                         CircleAvatar(
                           radius: 35,
-                          backgroundImage: NetworkImage(communityModel1.icon),
+                          backgroundImage: NetworkImage(communityModel1.icon!),
                         ),
                         const SizedBox(
                           width: 30,
@@ -64,9 +66,9 @@ class CommunityWebScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              (communityModel1.description.length > 50)
-                                  ? communityModel1.name
-                                  : communityModel1.description,
+                              (communityModel1.description!.length > 50)
+                                  ? communityModel1.id!
+                                  : communityModel1.description!,
                               maxLines: 1,
                               softWrap: true,
                               style: const TextStyle(
@@ -74,7 +76,7 @@ class CommunityWebScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              communityModel1.name,
+                              communityModel1.id!,
                               style: const TextStyle(color: Colors.grey),
                             )
                           ],
@@ -102,8 +104,9 @@ class CommunityWebScreen extends StatelessWidget {
                                           borderRadius:
                                               BorderRadius.circular(20),
                                           onTap: () {
-                                            showToast("Successfully left r/${communityModel1.name}");
-  
+                                            showToast(
+                                                "Successfully left r/${communityModel1.id}");
+
                                             Provider.of<CommunityProvider>(
                                                     context,
                                                     listen: false)
@@ -129,7 +132,8 @@ class CommunityWebScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(20),
                                     onTap: () {
                                       value.joinCommunity();
-                                      showToast("Successfully joined r/${communityModel1.name}");
+                                      showToast(
+                                          "Successfully joined r/${communityModel1.id}");
                                     },
                                     child: const Padding(
                                         padding: EdgeInsets.all(5),
@@ -258,6 +262,8 @@ class CommunityWebScreen extends StatelessWidget {
                                             onTap: () {
                                               value.changePostSortBy(
                                                   "hot", 0, context);
+                                              value1.getPosts("At5_imagePro235",
+                                                  "hot", [], 2, 40);
                                             },
                                             child: Container(
                                               height: 30,
@@ -314,6 +320,8 @@ class CommunityWebScreen extends StatelessWidget {
                                             onTap: () {
                                               value.changePostSortBy(
                                                   "new", 1, context);
+                                              value1.getPosts("At5_imagePro235",
+                                                  "new", [], 2, 40);
                                             },
                                             child: Container(
                                               height: 30,
@@ -340,7 +348,7 @@ class CommunityWebScreen extends StatelessWidget {
                                                 children: [
                                                   Icon(
                                                       CustomIcons
-                                                          .certificate_outline,
+                                                          .certificateOutline,
                                                       size: 20,
                                                       color: (value
                                                               .checkIconPostSortBy[1])
@@ -371,6 +379,8 @@ class CommunityWebScreen extends StatelessWidget {
                                             onTap: () {
                                               value.changePostSortBy(
                                                   "top", 2, context);
+                                              value1.getPosts("At5_imagePro235",
+                                                  "top", [], 2, 40);
                                             },
                                             child: Container(
                                               height: 30,
@@ -439,14 +449,15 @@ class CommunityWebScreen extends StatelessWidget {
                                           return Container(
                                               color: whiteColor,
                                               child: WebPostCard(
-                                                userName:
-                                                    postsList[index].username,
+                                                userName: postsList[index]
+                                                    ['userID'],
                                                 index: index,
-                                                dateTime:
-                                                    postsList[index].createdAt,
+                                                dateTime: postsListMock[index]
+                                                    .createdAt!,
                                                 context: context,
                                                 postPlace: "community",
-                                                postType: postsList[index].type,
+                                                postType: postsList[index]
+                                                    ['type'],
                                               ));
                                         },
                                       ),

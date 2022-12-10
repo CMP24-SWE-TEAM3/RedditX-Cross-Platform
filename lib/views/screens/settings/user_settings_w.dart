@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/views/screens/settings/account_settings_w.dart';
 
 class UserSettingsWeb extends StatelessWidget {
   const UserSettingsWeb({super.key});
@@ -35,7 +34,7 @@ class UserSettingsWeb extends StatelessWidget {
         ),
         body: const TabBarView(
           children: <Widget>[
-            AccountSettingsWeb(),
+            Scaffold(),
             Scaffold(),
             Scaffold(),
             Scaffold(),

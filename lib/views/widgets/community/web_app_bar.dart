@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
-import 'package:reddit/styles/colors.dart';
-import 'package:reddit/styles/custom_icons.dart';
 import 'dart:math' as math;
 
-import 'default_drop_down_button_widget.dart';
-
+import '../../../controllers/community_controller.dart';
+import '../../../styles/colors.dart';
+import '../../../styles/custom_icons.dart';
+import 'default_drop_down_widget.dart';
 
 /// Shows the web app bar title
 class WebAppBarTitle extends StatelessWidget {
-  
   /// Constrains to handle respositivity
   final BoxConstraints constraints;
 
@@ -72,7 +70,7 @@ class WebAppBarTitle extends StatelessWidget {
                   child: IconButton(
                       onPressed: () {},
                       icon: const Icon(
-                        CustomIcons.arrow_up_circle,
+                        CustomIcons.arrowUpCircle,
                         color: Colors.black,
                       )),
                 ),
@@ -149,7 +147,7 @@ class WebAppBarTitle extends StatelessWidget {
                             const CircleAvatar(
                               radius: 15,
                               backgroundImage: NetworkImage(
-                                 "https://i.pinimg.com/564x/cd/c8/11/cdc8110b6e2f746ab4c615b69d07dbfe.jpg"),
+                                  "https://i.pinimg.com/564x/cd/c8/11/cdc8110b6e2f746ab4c615b69d07dbfe.jpg"),
                             ),
                             DefaultDropDownButton(
                                 icon: Icons.arrow_drop_down,

@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
 
+import '../../../controllers/community_controller.dart';
+import '../../../controllers/community_model_controller.dart';
 import '../../../methods/community/show_toast.dart';
 import '../../../models/post_model.dart';
 import '../../../styles/custom_icons.dart';
 
-
-
 /// Shows the bottom part of web post
 class BottomPostWeb extends StatelessWidget {
-
   /// Index of the post
   final int index;
 
-  ///Constructor of web bottom post 
+  ///Constructor of web bottom post
   const BottomPostWeb({required this.index, super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<CommunityProvider>(
-        builder: (context, value, child) => Padding(
+    return Consumer2<CommunityProvider, CommunityModelProvider>(
+        builder: (context, value, value1, child) => Padding(
               padding: const EdgeInsets.only(right: 220, left: 40),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -40,7 +38,7 @@ class BottomPostWeb extends StatelessWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          Text(Numeral(postsList[index].commentsNumber)
+                          Text(Numeral(postsList[index]['commentsNum'])
                               .format(fractionDigits: 1)),
                         ],
                       ),
@@ -61,7 +59,7 @@ class BottomPostWeb extends StatelessWidget {
                                 value: "Copy link",
                                 child: Row(
                                   children: const [
-                                    Icon(CustomIcons.content_copy),
+                                    Icon(CustomIcons.contentCopy),
                                     SizedBox(
                                       width: 5,
                                     ),

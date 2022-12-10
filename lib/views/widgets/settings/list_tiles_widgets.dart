@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import '../../../config/const.dart';
+import '../../../config/constants.dart';
+import '../../../models/user_model.dart';
 
 // ignore: must_be_immutable
 class ListTileCustom extends StatelessWidget {
@@ -17,26 +18,30 @@ class ListTileCustom extends StatelessWidget {
   Icon ico;
   String? text;
   String? subtitle = " ";
-  bool? selector;
+  Future<bool?> selector;
+  Future<bool?> enble;
   Function(bool)? onTap = (_) {};
-  bool enble = true;
-
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      leading: ico,
-      title: Text(text!),
-      subtitle: Text(subtitle!),
-      enabled: enble,
-      trailing: Switch(
-        value: selector!,
-        onChanged: (enble) ? onTap : (_) {},
-        activeColor: white,
-        inactiveTrackColor: Colors.grey,
-        activeTrackColor: Colors.blue,
-        splashRadius: 20,
-      ),
-    );
+    return FutureBuilder(
+        future: Future.wait([selector, enble]),
+        builder: (context, value) {
+          return ListTile(
+            leading: ico,
+            title: Text(text!),
+            subtitle: Text(subtitle!),
+            trailing: Switch(
+              value: value.hasData ? value.data![0]! : false,
+              onChanged:
+                  (value.hasData ? value.data![1]! : true) ? onTap : (_) {},
+              activeColor: white,
+              inactiveTrackColor: Colors.grey,
+              activeTrackColor: Colors.blue,
+              splashRadius: 20,
+            ),
+            enabled: value.hasData ? value.data![1]! : true,
+          );
+        });
   }
 }
 
@@ -52,6 +57,8 @@ class SettingsTileButtomSheet extends StatelessWidget {
   List<Text> sheetChildrenTextList;
   List<Icon> sheetChildrenIconList;
 
+  List<dynamic> actionMethods;
+
   SettingsTileButtomSheet(
       {Key? key,
       required this.leadingIcon,
@@ -59,7 +66,8 @@ class SettingsTileButtomSheet extends StatelessWidget {
       required this.sheetText,
       //    this.variableVal,
       required this.sheetChildrenTextList,
-      required this.sheetChildrenIconList})
+      required this.sheetChildrenIconList,
+      required this.actionMethods})
       : super(key: key);
 
   @override
@@ -68,37 +76,44 @@ class SettingsTileButtomSheet extends StatelessWidget {
       leading: leadingIcon,
       title: titleText,
       trailing: Wrap(
-        children: const [Text("tmp"), Icon(Icons.arrow_downward_outlined)],
+        children: [
+          Text(currentUser.username!),
+          const Icon(Icons.arrow_downward_outlined)
+        ],
       ),
       onTap: () {
-        showModalBottomSheet(
-          constraints: BoxConstraints.tightFor(
-              height: sheetChildrenIconList.length * 80),
-          context: context,
-          builder: (context) => ListView(
-            children: [
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: sheetText,
-              ),
-              const Divider(
-                thickness: 2,
-                color: Colors.black26,
-                indent: 20,
-                endIndent: 20,
-              ),
-              for (int i = 0; i < sheetChildrenTextList.length; i++)
-                InkWell(
-                  onTap: () {},
-                  child: ListTile(
-                    leading: sheetChildrenIconList[i],
-                    title: sheetChildrenTextList[i],
-                  ),
-                ),
-            ],
-          ),
-        );
+        switchAccountButtomSheet(context);
       },
+    );
+  }
+
+  Future<dynamic> switchAccountButtomSheet(BuildContext context) {
+    return showModalBottomSheet(
+      constraints:
+          BoxConstraints.tightFor(height: sheetChildrenIconList.length * 80),
+      context: context,
+      builder: (context) => ListView(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: sheetText,
+          ),
+          const Divider(
+            thickness: 2,
+            color: Colors.black26,
+            indent: 20,
+            endIndent: 20,
+          ),
+          for (int i = 0; i < sheetChildrenTextList.length; i++)
+            InkWell(
+              onTap: actionMethods[i],
+              child: ListTile(
+                leading: sheetChildrenIconList[i],
+                title: sheetChildrenTextList[i],
+              ),
+            ),
+        ],
+      ),
     );
   }
 }

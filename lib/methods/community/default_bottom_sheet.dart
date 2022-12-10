@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
+
+import '../../controllers/community_controller.dart';
+import '../../controllers/community_model_controller.dart';
+
+
 
 /// Show default bottom sheet
 ///
@@ -29,8 +33,8 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                 ),
               ),
               const Divider(),
-              Consumer<CommunityProvider>(
-                builder: (context, value, child) => ListView.builder(
+              Consumer2<CommunityProvider, CommunityModelProvider>(
+                builder: (context, value, value1, child) => ListView.builder(
                     shrinkWrap: true,
                     itemCount: itemCount,
                     itemBuilder: (context, index) => ListTile(
@@ -44,16 +48,19 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                             } else if (source == "postView") {
                               value.changePostView(options[index], index);
                             } else if (source == "postSortBy") {
-                              if (index == 3) {
-                                //Navigator.pop(context);
-                                Scaffold.of(context)
-                                    .showBottomSheet((context) => Container(
-                                          color: Colors.red,
-                                          height: 100,
-                                        ));
-                              }
                               value.changePostSortBy(
                                   options[index], index, context);
+
+                              if (index == 0) {
+                                value1.getPosts(
+                                    "t5_imagePro235", "hot", [], 2, 40);
+                              } else if (index == 1) {
+                                value1.getPosts(
+                                    "t5_imagePro235", "new", [], 2, 40);
+                              } else {
+                                value1.getPosts(
+                                    "t5_imagePro235", "top", [], 2, 40);
+                              }
                             }
 
                             Navigator.pop(context);
@@ -77,7 +84,7 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                                   source == "postView" &&
                                       value.checkIconPostView[index])
                                 const Icon(
-                                  key:ValueKey("check_icon"),
+                                  key: ValueKey("check_icon"),
                                   Icons.check_outlined,
                                   color: Colors.blue,
                                 )

@@ -1,19 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/community_controller.dart';
-
+import '../../../controllers/community_controller.dart';
 import '../../../methods/community/show_snack_bar.dart';
 import '../../../styles/custom_icons.dart';
 
-
-/// Pop up menu 
+/// Pop up menu
 class PopUpMenu extends StatelessWidget {
-
   /// Index of post
   final int index;
 
   /// Pop up menu constructor
-  const PopUpMenu({required this.index,super.key});
+  const PopUpMenu({required this.index, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +20,12 @@ class PopUpMenu extends StatelessWidget {
         child: const Icon(Icons.more_vert),
         itemBuilder: (_) => <PopupMenuItem<String>>[
           PopupMenuItem<String>(
-            key: const ValueKey("save_button"),
+              key: const ValueKey("save_button"),
               onTap: () {
                 value.saveUnsavePost(index);
                 (value.isPostSaved[index])
-                    ?showSnackBar(context,"Post saved!")
-                    :showSnackBar(context, "Post unsaved"); 
+                    ? showSnackBar(context, "Post saved!")
+                    : showSnackBar(context, "Post unsaved");
               },
               value: (value.isPostSaved[index]) ? "Unsave" : "Save",
               child: Row(

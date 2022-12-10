@@ -1,16 +1,14 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:provider/provider.dart';
 
-import '../../../controllers/internet_controller.dart';
-import '../../../controllers/sign_in_controller.dart';
+
+import '../../../controllers/authentication_submitions.dart';
+
 import '../../widgets/authentication/interest_button.dart';
 import '../../widgets/authentication/interest_choice.dart';
-import '../../widgets/authentication/show_snackbar.dart';
+
 import '../../widgets/authentication/sign_up_bar.dart';
-import 'choose_profilepicture.dart';
-import 'choose_username.dart';
+
 
 class Interests extends StatefulWidget {
   const Interests({super.key});
@@ -138,7 +136,7 @@ class _InterestsState extends State<Interests> {
                   key: const ValueKey('continue_interest_page'),
                   (num > 2) ? true : false,
                   (num > 2) ? 'Continue' : num.toString() + text,
-                  () => submit(choosenInterest, context),
+                  () => submitInterest(choosenInterest, context),
                 ),
               ),
             ),
@@ -149,47 +147,3 @@ class _InterestsState extends State<Interests> {
   }
 }
 
-Future<void> submit(List<String> list, context) async {
-  final sp = Provider.of<SignInController>(context, listen: false);
-  final ip = Provider.of<InternetController>(context, listen: false);
-  await ip.checkInternetConnection();
-
-  if (ip.hasInternet == false) {
-    // ignore: use_build_context_synchronously
-    showSnackBar("Check your Internet connection", context);
-  } else {
-    await sp.interest(list).then((value) {
-      if (sp.hasError == true) {
-        showSnackBar(sp.errorCode.toString(), context);
-      }
-    });
-  }
-  if (sp.username != null && (!kIsWeb)) {
-    Navigator.of(context)
-        .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
-  } else {
-    final mediaQuery = MediaQuery.of(context);
-    final widthScreen = (mediaQuery.size.width);
-    final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
-    // set up the AlertDialog
-    AlertDialog profilePicturePage = AlertDialog(
-      content: Container(
-        width: widthScreen * 0.4,
-        height: heightScreen * 0.73,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(32.0)),
-        ),
-        child: const ChooseProfilePicture(),
-      ),
-    );
-    (kIsWeb)
-        ? showDialog(
-            context: context,
-            builder: (BuildContext context) {
-              return profilePicturePage;
-            },
-          )
-        : Navigator.of(context)
-            .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
-  }
-}

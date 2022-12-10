@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/models/post_model.dart';
-import '../models/community_service.dart';
+import '../models/post_model.dart';
 import '../styles/custom_icons.dart';
 
 /// Provider used for [CommunityMobileScreen] and [CommunityWebScreen].
@@ -32,14 +31,16 @@ class CommunityProvider with ChangeNotifier {
   String postView = "card";
 
   /// List of the posts liked/not liked by the user
-  List<bool> isPostLiked = List.filled(postsList.length, false, growable: true);
+  List<bool> isPostLiked =
+      List.filled(postsListMock.length, false, growable: true);
 
   /// List of the posts disliked/not disliked by the user
   List<bool> isPostDisliked =
-      List.filled(postsList.length, false, growable: true);
+      List.filled(postsListMock.length, false, growable: true);
 
   /// List of the posts saved/not saved by the user
-  List<bool> isPostSaved = List.filled(postsList.length, false, growable: true);
+  List<bool> isPostSaved =
+      List.filled(postsListMock.length, false, growable: true);
 
   /// List of the Notifications bottom sheet: Off, Low and Frequent if choosen
   List<IconData> bottomSheetNotificationsIconsFilled = [
@@ -68,7 +69,7 @@ class CommunityProvider with ChangeNotifier {
   /// List of the posts sort types icons bottom sheet: (Hot, New and Top) that will be passed to [showDefaultBottomSheet] method
   List<IconData> bottomSheetPostSortIcons = [
     Icons.local_fire_department_rounded,
-    CustomIcons.certificate_outline,
+    CustomIcons.certificateOutline,
     CustomIcons.award,
   ];
 
@@ -131,30 +132,43 @@ class CommunityProvider with ChangeNotifier {
 
   /// Like a post of an [index]
   void likePost(int index) {
-    if (isPostLiked[index]) {
-      postsList[index].votesCount--;
-    } else {
-      postsList[index].votesCount++;
+    int? votes = postsListMock1[index]['votesCount'];
+    // Solves a problem of null safety
+    if (votes != null) {
+      if (isPostLiked[index]) {
+        votes--;
+      } else if (isPostDisliked[index]) {
+        votes += 2;
+      } else {
+        votes++;
+      }
+      isPostLiked[index] = !isPostLiked[index];
+      if (isPostDisliked[index]) {
+        isPostDisliked[index] = !isPostDisliked[index];
+      }
     }
-    isPostLiked[index] = !isPostLiked[index];
-    if (isPostDisliked[index]) {
-      isPostDisliked[index] = !isPostDisliked[index];
-    }
-
+    postsListMock1[index]['votesCount'] = votes;
     notifyListeners();
   }
 
   /// Dislike a post of an [index]
   void disLikePost(int index) {
-    if (isPostDisliked[index]) {
-      postsList[index].votesCount++;
-    } else {
-      postsList[index].votesCount--;
+    int? votes = postsListMock1[index]['votesCount'];
+    if (votes != null) {
+      if (isPostDisliked[index]) {
+        votes++;
+      } else if (isPostLiked[index]) {
+        votes -= 2;
+      } else {
+        votes--;
+      }
+      isPostDisliked[index] = !isPostDisliked[index];
+      if (isPostLiked[index]) {
+        isPostLiked[index] = !isPostLiked[index];
+      }
     }
-    isPostDisliked[index] = !isPostDisliked[index];
-    if (isPostLiked[index]) {
-      isPostLiked[index] = !isPostLiked[index];
-    }
+    postsListMock1[index]['votesCount'] = votes;
+
     notifyListeners();
   }
 

@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/Views/Screens/temphome.dart';
-
 
 import '../../../controllers/sign_in_controller.dart';
+import '../temphome.dart';
 import 'sign_up_page.dart';
-
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -35,11 +33,14 @@ class _SplashScreenState extends State<SplashScreen>
     Timer(
       const Duration(seconds: 3),
       () {
-        (signInController.isSignedIn == false)
-            ? Navigator.of(context)
-                .pushReplacementNamed(SignUpPage.routeName, arguments: {})
-            : Navigator.of(context)
-                .pushReplacementNamed(Home.routeName, arguments: {});
+        if (signInController.isSignedIn == false) {
+          Navigator.of(context)
+              .pushReplacementNamed(SignUpPage.routeName, arguments: {});
+        } else {
+          signInController.getDataFromSharedPreferences();
+          Navigator.of(context)
+              .pushReplacementNamed(Home.routeName, arguments: {});
+        }
       },
     );
   }

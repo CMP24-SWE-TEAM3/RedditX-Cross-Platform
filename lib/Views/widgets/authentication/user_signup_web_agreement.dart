@@ -21,9 +21,6 @@ class UserSignupWebAgreement extends StatelessWidget {
           const TextSpan(
             text:
                 'By continuing, you are setting up a Reddit account and agree to our ',
-            style: TextStyle(
-              color: Colors.black,
-            ),
           ),
           TextSpan(
             text: 'User Agreement ',
@@ -39,9 +36,6 @@ class UserSignupWebAgreement extends StatelessWidget {
           ),
           const TextSpan(
             text: 'and ',
-            style: TextStyle(
-              color: Colors.black,
-            ),
           ),
           TextSpan(
             text: 'Privacy Policy.',

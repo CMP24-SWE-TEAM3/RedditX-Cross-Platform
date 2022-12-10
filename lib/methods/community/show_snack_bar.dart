@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/styles/custom_icons.dart';
+
+import '../../styles/custom_icons.dart';
+
 
 void showSnackBar(BuildContext context, String msg) {
   ScaffoldMessenger.of(context).showSnackBar(SnackBar(

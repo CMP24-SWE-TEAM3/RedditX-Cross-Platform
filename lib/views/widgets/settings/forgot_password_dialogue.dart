@@ -1,8 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:search_project/models/settings_model.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../../controllers/settings_validations.dart';
+import '../authentication/email_me_button.dart';
+import 'forgot_username_dialogue.dart';
+
 dialogBuilder(BuildContext context) {
+  final TextEditingController userNameForgot = TextEditingController();
+  final TextEditingController emailForgot = TextEditingController();
+
   return showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -17,16 +25,18 @@ dialogBuilder(BuildContext context) {
         content: Column(
 //          mainAxisSize: MainAxisSize.min,
           children: [
-            const TextField(
+            TextField(
+              controller: userNameForgot,
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 0,
                     color: Colors.blue,
                   ),
                 ),
                 labelText: 'Username',
-                labelStyle: TextStyle(
+                errorText: settingsModel.forgotPasswordUsernameErrorMessage,
+                labelStyle: const TextStyle(
                   color: Colors.blue,
                 ),
               ),
@@ -34,22 +44,37 @@ dialogBuilder(BuildContext context) {
             const Divider(
               height: 10,
             ),
-            const TextField(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TextButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    dialogBuilderForgotUsername(context);
+                  },
+                  child: const Text("Forgot username?",
+                      style: TextStyle(color: Colors.blue))),
+            ),
+            const Divider(
+              height: 10,
+            ),
+            TextField(
+              controller: emailForgot,
               decoration: InputDecoration(
-                focusedBorder: OutlineInputBorder(
+                focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
                     width: 0,
                     color: Colors.blue,
                   ),
                 ),
                 labelText: 'Email',
-                labelStyle: TextStyle(
+                errorText: settingsModel.forgotPasswordEmailErrorMessage,
+                labelStyle: const TextStyle(
                   color: Colors.blue,
                 ),
               ),
             ),
             const Text(
-                "Unfortunately, if you never given us your emsil,we will not be able to reset your password."),
+                "Unfortunately, if you never given us your email,we will not be able to reset your password."),
             Text.rich(TextSpan(
                 text: "Having trouble?",
                 style: const TextStyle(color: Colors.blue),
@@ -76,17 +101,11 @@ dialogBuilder(BuildContext context) {
               Navigator.of(context).pop();
             },
           ),
-          TextButton(
-            style: TextButton.styleFrom(
-              textStyle: Theme.of(context).textTheme.labelLarge,
-            ),
-            child: const Text(
-              'EMAIL ME',
-              style: TextStyle(color: Colors.blue),
-            ),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+          MailMeButton1(
+            userNameController: userNameForgot,
+            emailController: emailForgot,
+            function: forgotPasswordValidation,
+            ctx: context,
           ),
         ],
       );

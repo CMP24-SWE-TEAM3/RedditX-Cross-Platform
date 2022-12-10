@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/models/settings_model.dart';
+import 'package:provider/provider.dart';
+import '../../../controllers/mobile_settings_view_controller.dart';
+import '../../../models/settings_model.dart';
 import '../../widgets/settings/setting_email_password_textfield.dart';
-import '../../../config/const.dart';
+import '../../../config/constants.dart';
 import '../../widgets/settings/forgot_password_dialogue.dart';
 
 ///screen for changing users email password, found in account settings
@@ -66,7 +68,8 @@ class ChangePasswordScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: PasswordText(
                 passwordController: currentPasswordController,
-                labeling: "Current password"),
+                labeling: "Current password",
+                errorPasswordText: settingsModel.currentPasswordErrorMessage),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -79,13 +82,16 @@ class ChangePasswordScreen extends StatelessWidget {
             padding: const EdgeInsets.all(8.0),
             child: PasswordText(
                 passwordController: newPasswordController,
-                labeling: "New password"),
+                labeling: "New password",
+                errorPasswordText: settingsModel.newPasswordErrorMessage),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: PasswordText(
                 passwordController: confirmNewPasswordController,
-                labeling: "Confirm new password"),
+                labeling: "Confirm new password",
+                errorPasswordText:
+                    settingsModel.confirmNewPasswordErrorMessage),
           ),
           Expanded(
             child: Align(
@@ -95,25 +101,23 @@ class ChangePasswordScreen extends StatelessWidget {
                 children: [
                   SizedBox(
                     width: MediaQuery.of(context).size.width / 2.1,
-                    child: Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(3.0),
-                        child: OutlinedButton(
-                          onPressed: () {},
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all(white),
-                            shape: MaterialStateProperty.all<
-                                RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(18.0),
-                                  side: const BorderSide(color: Colors.blue)),
-                            ),
-                            //maximumSize: MaterialStateProperty.all(double.infinity),
+                    child: Padding(
+                      padding: const EdgeInsets.all(3.0),
+                      child: OutlinedButton(
+                        onPressed: () => Navigator.pop(context),
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all(white),
+                          shape:
+                              MaterialStateProperty.all<RoundedRectangleBorder>(
+                            RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(18.0),
+                                side: const BorderSide(color: Colors.blue)),
                           ),
-                          child: const Text(
-                            "Cancel",
-                            style: TextStyle(color: Colors.black),
-                          ),
+                          //maximumSize: MaterialStateProperty.all(double.infinity),
+                        ),
+                        child: const Text(
+                          "Cancel",
+                          style: TextStyle(color: Colors.black),
                         ),
                       ),
                     ),
@@ -123,7 +127,15 @@ class ChangePasswordScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: OutlinedButton(
-                        onPressed: () {},
+                        onPressed: () =>
+                            Provider.of<SettingsViewModelMobileController>(
+                                    context,
+                                    listen: false)
+                                .changePassword(
+                                    currentPasswordController,
+                                    newPasswordController,
+                                    confirmNewPasswordController,
+                                    context),
                         style: ButtonStyle(
                             backgroundColor:
                                 MaterialStateProperty.all(Colors.blue),
@@ -133,7 +145,10 @@ class ChangePasswordScreen extends StatelessWidget {
                                     borderRadius: BorderRadius.circular(18.0),
                                     side:
                                         const BorderSide(color: Colors.blue)))),
-                        child: const Text("Save"),
+                        child: const Text(
+                          "Save",
+                          style: TextStyle(color: Colors.white),
+                        ),
                       ),
                     ),
                   )

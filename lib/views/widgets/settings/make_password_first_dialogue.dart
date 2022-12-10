@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/mobile_settings_controller.dart';
+import '../../../controllers/mobile_settings_view_controller.dart';
 
 import '../../../models/settings_model.dart';
 

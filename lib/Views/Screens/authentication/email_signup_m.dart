@@ -2,13 +2,13 @@
 import 'package:flutter/material.dart';
 
 
+import '../../../controllers/authentication_submitions.dart';
 import '../../../controllers/validations.dart';
 import '../../widgets/authentication/sign_up_bar.dart';
 import '../../widgets/authentication/continue_signup_button.dart';
 import '../../widgets/authentication/uesrname_password_textfield.dart';
 import '../../widgets/authentication/user_login_agreement.dart';
 import 'email_login.dart';
-import 'email_signup.dart';
 
 class EmailSignupM extends StatefulWidget {
   const EmailSignupM({super.key});
@@ -30,11 +30,11 @@ class _EmailSignupMState extends State<EmailSignupM> {
     Navigator.of(ctx).pushReplacementNamed(EmailLogin.routeName, arguments: {});
   }
 
-  void validate(emailController, userNameController, passwordController, ctx) {
+  Future<void> validate(emailController, userNameController, passwordController, ctx) async {
     setState(() => _submit = true);
 
     errorEmailText = emailValidation(emailController.text);
-    errorUserNameText = usernameValidation(userNameController.text);
+    errorUserNameText = await usernameValidation(userNameController.text, ctx);
     errorPasswordText = passwordValidation(passwordController.text);
 
     if ((errorEmailText == null) &&

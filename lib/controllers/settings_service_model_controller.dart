@@ -1,3 +1,5 @@
+import 'package:search_project/models/settings_model.dart';
+
 import '../services/settings_service.dart';
 import '../models/user_model.dart';
 
@@ -12,13 +14,32 @@ class SettingsServiceModelController {
   }
 
   updateEmailModelController(String? newEmail) async {
-    // ignore: unused_local_variable
     final res = await settingsService.updateEmailService(newEmail);
-    currentUser.email = await settingsService.getEmailService();
-    //if (res.statusCode == 200) {
-    // } else {
-    //   currentUser.email = "ErrorMail@err.com";
-    // }
+    // currentUser.email = await settingsService.getEmailService();
+    if (res.statusCode == 200) {
+      // update email
+      currentUser.email = newEmail;
+      return 0;
+    } else {
+      settingsModel.updateEmailErrorMessage =
+          "Server failed , please try again later.";
+      return -1;
+    }
+  }
+
+  changePasswordModelController(String? currentPassword, String? newPassword,
+      String? confirmNewPassword) async {
+    final res = await settingsService.changePasswordService(
+        currentPassword, newPassword, confirmNewPassword);
+    if (res.statusCode == 200) {
+      // change Ppassword
+      currentUser.passwordChangedAt = DateTime.now();
+      return 0;
+    } else {
+      settingsModel.newPasswordErrorMessage =
+          "Server failed , please try again later.";
+      return -1;
+    }
   }
 }
 

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/methods/community/show_toast.dart';
 
-import 'package:reddit/models/community_model.dart';
 
 import '../../controllers/community_controller.dart';
+import '../../models/community_model.dart';
+import 'show_toast.dart';
 
 
 /// Show dialog when Asking to leave a community
@@ -61,7 +61,7 @@ Future<void> showLeaveCommunityDialog(BuildContext context, String body) async {
                           onTap: () {
                             value.unJoinCommunity();
                             showToast(
-                                "You have left the r/${communityModel1.name} community");
+                                "You have left the r/${communityModel1.id} community");
                             Navigator.pop(context);
                           },
                           child: const Padding(

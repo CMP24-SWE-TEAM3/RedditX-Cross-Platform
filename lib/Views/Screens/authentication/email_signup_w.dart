@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:reddit/views/Screens/temphome.dart';
 
 
-import '../../../controllers/internet_controller.dart';
-import '../../../controllers/sign_in_controller.dart';
+import '../../../controllers/authentication_submitions.dart';
+
 import '../../../controllers/validations.dart';
-import '../../widgets/authentication/show_snackbar.dart';
+
 import '../../widgets/authentication/dividor_or.dart';
 import '../../widgets/authentication/sign_up_button.dart';
 import '../../widgets/authentication/uesrname_password_textfield.dart';
@@ -107,16 +105,20 @@ class _EmailSignupWState extends State<EmailSignupW> {
                       width: fixedWidth * 0.2,
                       child: Padding(
                         padding: const EdgeInsets.all(4),
-                        child: SignUpButton('assets/images/google.png',
-                            'CONTINUE WITH GOOGLE', handleGoogleSignIn),
+                        child: SignUpButton(
+                            'assets/images/google.png',
+                            'CONTINUE WITH GOOGLE',
+                            () => handleGoogleSignIn(context)),
                       ),
                     ),
                     SizedBox(
                       width: fixedWidth * 0.2,
                       child: Padding(
                         padding: const EdgeInsets.all(4),
-                        child: SignUpButton('assets/images/facebook.png',
-                            'CONTINUE WITH FACEBOOK', handleFacebookAuth),
+                        child: SignUpButton(
+                            'assets/images/facebook.png',
+                            'CONTINUE WITH FACEBOOK',
+                            () => handleFacebookAuth(context)),
                       ),
                     ),
                     const Padding(
@@ -175,88 +177,5 @@ class _EmailSignupWState extends State<EmailSignupW> {
         ),
       ),
     );
-  }
-
-  // handling google sigin in
-  Future handleGoogleSignIn() async {
-    final sp = Provider.of<SignInController>(context, listen: false);
-    final ip = Provider.of<InternetController>(context, listen: false);
-    await ip.checkInternetConnection();
-
-    if (ip.hasInternet == false) {
-      // ignore: use_build_context_synchronously
-      showSnackBar("Check your Internet connection", context);
-    } else {
-      await sp.signInWithGoogle().then((value) {
-        if (sp.hasError == true) {
-          showSnackBar(sp.errorCode.toString(), context);
-        } else {
-          // checking whether user exists or not
-          sp.checkUserExists().then((value) async {
-            if (value == true) {
-              // user exists
-              await sp.getUserDataFromDataBase(sp.uid).then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
-                        handleAfterSignIn();
-                      })));
-            } else {
-              // user does not exist
-              sp.saveDataToDataBase().then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
-                        handleAfterSignIn();
-                      })));
-            }
-          });
-        }
-      });
-    }
-  }
-
-  // handling facebookauth
-  // handling google sigin in
-  Future handleFacebookAuth() async {
-    final sp = Provider.of<SignInController>(context, listen: false);
-    final ip = Provider.of<InternetController>(context, listen: false);
-    await ip.checkInternetConnection();
-
-    if (ip.hasInternet == false) {
-      // ignore: use_build_context_synchronously
-      showSnackBar("Check your Internet connection", context);
-      // facebookController.reset();
-    } else {
-      await sp.signInWithFacebook().then((value) {
-        if (sp.hasError == true) {
-          showSnackBar(sp.errorCode.toString(), context);
-        } else {
-          // checking whether user exists or not
-          sp.checkUserExists().then((value) async {
-            if (value == true) {
-              // user exists
-              await sp.getUserDataFromDataBase(sp.uid).then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
-                        handleAfterSignIn();
-                      })));
-            } else {
-              // user does not exist
-              sp.saveDataToDataBase().then((value) => sp
-                  .saveDataToSharedPreferences()
-                  .then((value) => sp.setSignIn().then((value) {
-                        handleAfterSignIn();
-                      })));
-            }
-          });
-        }
-      });
-    }
-  }
-
-  // handle after signin
-  handleAfterSignIn() {
-    Future.delayed(const Duration(milliseconds: 1000)).then((value) {
-      Navigator.of(context).pushReplacementNamed(Home.routeName, arguments: {});
-    });
   }
 }

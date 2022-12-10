@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/styles/colors.dart';
+
+
+import '../../../styles/colors.dart';
 
 /// Shows the item of share bottom sheet
 class ShareBottomSheetItem extends StatelessWidget {

@@ -1,16 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/controllers/mobile_settings_controller.dart';
+import 'package:search_project/models/user_model.dart';
+import '../../../controllers/mobile_settings_view_controller.dart';
+import '../../../models/authentication.dart';
+import '../authentication/choose_profilepicture.dart';
+import '../authentication/sign_up_page.dart';
 import '/views/screens/settings/account_setting_screen.dart';
-
 import '../../widgets/settings/list_tiles_widgets.dart';
 import '../../widgets/settings/setting_label_widget.dart';
-
-//to be moved
-bool sw1ReduceAnimation = false;
-bool sw2ShowNSFW = false;
-bool sw3BlurNSFW = false;
-bool sw3enble = false;
 
 class SettingsHomePage extends StatelessWidget {
   static const routeName = '/Settings';
@@ -28,36 +25,36 @@ class SettingsHomePage extends StatelessWidget {
         title: const Text("Settings"),
       ),
       body: ListView(
-        //   child: Column(
-        //mainAxisAlignment: MainAxisAlignment.center,
         children: [
           SettingsLabel(title: "GENERAL"),
-          SettingsListTile(
-            title: "Account settings for u/USERNAME",
-            ico: const Icon(Icons.person),
-            onTab: () {
-              // Navigator.of(context)
-              //     .pushNamed(accountSettingsScreen.routeName, arguments: {});
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => ChangeNotifierProvider(
-                      create: (_) => SettingsViewModelMobileController(),
-                      child: const AccountSettingsScreen(),
-                    ),
-                  ));
-            },
-          ),
+          (userauthentication.isSignedIn)
+              ? SettingsListTile(
+                  title: "Account settings for u/${currentUser.username}",
+                  ico: const Icon(Icons.person),
+                  onTab: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ChangeNotifierProvider(
+                            create: (_) => SettingsViewModelMobileController(),
+                            child: const AccountSettingsScreen(),
+                          ),
+                        ));
+                  },
+                )
+              : SettingsListTile(
+                  title: "Add Account",
+                  ico: const Icon(Icons.person),
+                  onTab: () =>
+                      Navigator.pushNamed(context, SignUpPage.routeName)),
           SettingsLabel(title: "PREMIUM"),
-          SettingsListTile(
-            title: "Change app icon",
-            ico: const Icon(Icons.reddit),
-          ),
           InkWell(
             onTap: () {},
             child: SettingsListTile(
               title: "Change profile picture",
               ico: const Icon(Icons.photo_camera_front_outlined),
+              onTab: () =>
+                  Navigator.pushNamed(context, ChooseProfilePicture.routeName),
             ),
           ),
           SettingsLabel(title: "ABOUT"),

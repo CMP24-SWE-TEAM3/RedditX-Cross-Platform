@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 
-import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:provider/provider.dart';
 
-import '../../../controllers/internet_controller.dart';
-import '../../../controllers/sign_in_controller.dart';
+
+import '../../../controllers/authentication_submitions.dart';
 import '../../widgets/authentication/choice_button.dart';
-import '../../widgets/authentication/show_snackbar.dart';
 import '../../widgets/authentication/sign_up_bar.dart';
-import 'interests.dart';
+
+
+
 
 class AboutYou extends StatefulWidget {
   const AboutYou({super.key});
@@ -93,7 +92,7 @@ class _AboutYouState extends State<AboutYou> {
                   child: ChoiceButton(
                     key: const ValueKey('man_gender_Page'),
                     'Man',
-                    submit,
+                    submitAboutyou,
                     context,
                   ),
                 ),
@@ -107,7 +106,7 @@ class _AboutYouState extends State<AboutYou> {
                   child: ChoiceButton(
                     key: const ValueKey('woman_gender_Page'),
                     'Woman',
-                    submit,
+                    submitAboutyou,
                     context,
                   ),
                 ),
@@ -123,45 +122,4 @@ class _AboutYouState extends State<AboutYou> {
     Navigator.of(context).pop();
   }
 
-  Future<void> submit(String kind, ctx) async {
-    final mediaQuery = MediaQuery.of(ctx);
-    final widthScreen = (mediaQuery.size.width);
-    final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
-    // set up the AlertDialog
-    AlertDialog interestPage = AlertDialog(
-      content: Container(
-        width: widthScreen * 0.4,
-        height: heightScreen * 0.73,
-        decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(32.0)),
-        ),
-        child: const Interests(),
-      ),
-    );
-
-    final sp = Provider.of<SignInController>(context, listen: false);
-    final ip = Provider.of<InternetController>(context, listen: false);
-    await ip.checkInternetConnection();
-
-    if (ip.hasInternet == false) {
-      // ignore: use_build_context_synchronously
-      showSnackBar("Check your Internet connection", context);
-    } else {
-      await sp.sendGender(kind).then((value) {
-        if (sp.hasError == true) {
-          showSnackBar(sp.errorCode.toString(), context);
-        }
-      });
-    }
-
-    (kIsWeb)
-        ? showDialog(
-            context: ctx,
-            builder: (BuildContext context) {
-              return interestPage;
-            },
-          )
-        : Navigator.of(ctx)
-            .pushReplacementNamed(Interests.routeName, arguments: {});
-  }
 }

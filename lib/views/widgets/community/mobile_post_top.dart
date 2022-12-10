@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/views/widgets/community/pop_up_menu_button.dart';
 
+
+import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../methods/community/show_profile_dialog.dart';
 import '../../../models/post_model.dart';
-
+import 'pop_up_menu_button.dart';
 
 /// Shows the top part of the communnity post
 class TopMobilePost extends StatelessWidget {
@@ -78,11 +79,13 @@ class TopMobilePost extends StatelessWidget {
                   ),
                   Consumer<CommunityProvider>(
                     builder: (context, value, child) => Text(
-                      "${value.calculateAge(postsList[index].createdAt)}",
+                      !iSMOCK
+                          ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
+                          : "${value.calculateAge(postsListMock[index].createdAt!)}",
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
-                  if (postType == "image")
+                  if (postType == "img")
                     InkWell(
                       child: Text(
                         "  i.redd.it",
@@ -108,7 +111,7 @@ class TopMobilePost extends StatelessWidget {
               showeProfileDialog(context, index);
             },
             child: Text(
-              "u/${postsList[index].username}",
+              "u/${postsList[index]['userID']!}".replaceFirst("t2_", ""),
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -118,11 +121,15 @@ class TopMobilePost extends StatelessWidget {
           ),
           Consumer<CommunityProvider>(
             builder: (context, value, child) => Text(
-              "    ${value.calculateAge(postsList[index].createdAt)}",
+
+
+              !iSMOCK
+                  ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
+                  : "${value.calculateAge(postsListMock[index].createdAt!)}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
-          if (postType == "image")
+          if (postType == "img")
             InkWell(
               onTap: () {},
               child: Text(
@@ -155,7 +162,10 @@ class TopMobilePost extends StatelessWidget {
               ),
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
-                  "${value.calculateAge(postsList[index].createdAt)}",
+                  
+                       !iSMOCK
+                      ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
+                      : "${value.calculateAge(postsListMock[index].createdAt!)}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),

@@ -1,4 +1,4 @@
-import 'package:reddit/models/user_model.dart';
+import '../models/user_model.dart';
 
 class SettingsModel {
   bool? hasPassword = currentUser.isPasswordSet;
@@ -9,14 +9,15 @@ class SettingsModel {
   ///Account Email
   String? accountMail = currentUser.email;
 
-  String? updateEmailErrorMessage = "";
-/*
- * update email
- * change password
-      *validate till integrated
-      *
- */
-
+  ///
+  String? updateEmailErrorMessage;
+  String? currentPasswordErrorMessage;
+  String? newPasswordErrorMessage;
+  String? confirmNewPasswordErrorMessage;
+  String? forgotPasswordUsernameErrorMessage;
+  String? forgotPasswordEmailErrorMessage;
+  String? forgotUsernameEmailErrorMessage;
+  String? connectedToGoogle = "Disconnect";
 }
 
 SettingsModel settingsModel = SettingsModel();

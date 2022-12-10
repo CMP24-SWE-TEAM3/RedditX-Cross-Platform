@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:reddit/models/post_model.dart';
-import 'package:reddit/models/user_model.dart';
+
+
+import '../../models/post_model.dart';
+
 
 /// Show Profile Dialog when a user name text button pressed
 
@@ -21,7 +23,7 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
             ),
             const SizedBox(height: 30),
             Text(
-              postsList[index].username,
+              postsListMock[index].userID!,
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.black),
             ),
