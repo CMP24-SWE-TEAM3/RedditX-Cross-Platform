@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 
 import '../config/constants.dart';
+import '../models/authentication.dart';
 
 /// facebookapi Function
 /// handles the facebook request by http request the facebook link
@@ -86,6 +88,25 @@ signUpBareEmailAPI(email, username, password) async {
         "email": email,
         "password": password,
         "username": username,
+      }));
+
+  // print(response.body);
+
+  return response;
+}
+
+uploadUserPhoto(photo) async {
+  const String signupRequest = "/api/user/me/upload-user-photo";
+  Uri url = Uri.parse(urlApi + signupRequest);
+
+  final response = await http.post(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}'),
+      },
+      body: json.encode({
+        "action": "upload",
+        "attachment": photo,
       }));
 
   // print(response.body);

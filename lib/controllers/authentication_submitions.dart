@@ -229,12 +229,12 @@ Future<void> submitInterest(List<String> list, context) async {
               return profilePicturePage;
             },
           )
-        : Navigator.of(context)
-            .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
+        : Navigator.of(context).pushReplacementNamed(
+            ChooseProfilePicture.routeName,
+            arguments: {});
+    //.pushReplacementNamed(ChooseUserName.routeName, arguments: {});
   }
 }
-
-
 
 /// handling google sigin in
 /// hanle google sign in by requesting the function of sign in with google in the controller and check for the result to show the error
@@ -250,9 +250,12 @@ Future handleGoogleSignIn(context) async {
     await sp.signInWithGoogle().then((value) {
       if (sp.hasError == true) {
         showSnackBar(sp.errorCode.toString(), context);
+        return;
       }
     });
   }
+  (kIsWeb) ? null : Navigator.of(context).pop();
+  Navigator.of(context).pushReplacementNamed(Home.routeName, arguments: {});
 }
 
 // handling facebookauth
@@ -270,9 +273,12 @@ Future handleFacebookAuth(context) async {
     await sp.signInWithFacebook().then((value) {
       if (sp.hasError == true) {
         showSnackBar(sp.errorCode.toString(), context);
+        return;
       }
     });
   }
+  (kIsWeb) ? null : Navigator.of(context).pop();
+  Navigator.of(context).pushReplacementNamed(Home.routeName, arguments: {});
 }
 
 /// handle after signin
