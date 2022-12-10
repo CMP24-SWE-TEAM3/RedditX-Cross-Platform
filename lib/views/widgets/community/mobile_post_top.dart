@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../methods/community/show_profile_dialog.dart';
@@ -121,8 +120,6 @@ class TopMobilePost extends StatelessWidget {
           ),
           Consumer<CommunityProvider>(
             builder: (context, value, child) => Text(
-
-
               !iSMOCK
                   ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
                   : "${value.calculateAge(postsListMock[index].createdAt!)}",
@@ -162,15 +159,19 @@ class TopMobilePost extends StatelessWidget {
               ),
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
-                  
-                       !iSMOCK
+                  !iSMOCK
                       ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
                       : "${value.calculateAge(postsListMock[index].createdAt!)}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),
-              const Text("  i.redd.it"),
-              const Spacer(),
+              if (postType == 'img')
+                InkWell(
+                  onTap: () {},
+                  child: const Text("  i.redd.it"),
+                ),
+
+              //const Spacer(),
               PopUpMenu(
                 index: index,
               ),
