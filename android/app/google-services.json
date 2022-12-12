@@ -1,41 +1,33 @@
 {
   "project_info": {
-    "project_number": "675024678040",
-    "project_id": "authentication-reddit",
-    "storage_bucket": "authentication-reddit.appspot.com"
+    "project_number": "934983927246",
+    "project_id": "push-notifications-79111",
+    "storage_bucket": "push-notifications-79111.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:675024678040:android:0af468d9135268ef3834ed",
+        "mobilesdk_app_id": "1:934983927246:android:de49beb360b243e258d79f",
         "android_client_info": {
           "package_name": "com.example.reddit"
         }
       },
       "oauth_client": [
         {
-          "client_id": "675024678040-cshjai764nmspe800cim21upvnfn8vp7.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.reddit",
-            "certificate_hash": "55412d0af6525edfc7ccb07752d44c018ad4931b"
-          }
-        },
-        {
-          "client_id": "675024678040-tnpgq7a1j85asapproqajm7d5qjbfq36.apps.googleusercontent.com",
+          "client_id": "934983927246-ffuntkm0asc223c4n1mh9puiurtdt6p4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBVKq8JrLwuP5b0mbcBko5GdNyCB9J3jVU"
+          "current_key": "AIzaSyD-utwlhZL02lM3xIyiqtYMZbQZ6X-Lcpg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "675024678040-tnpgq7a1j85asapproqajm7d5qjbfq36.apps.googleusercontent.com",
+              "client_id": "934983927246-ffuntkm0asc223c4n1mh9puiurtdt6p4.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
