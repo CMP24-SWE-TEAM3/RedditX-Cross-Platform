@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:dio/dio.dart';
 
 import 'package:http/http.dart' as http;
 
@@ -96,17 +97,76 @@ signUpBareEmailAPI(email, username, password) async {
 }
 
 uploadUserPhoto(photo) async {
-  const String signupRequest = "/api/user/me/upload-user-photo";
-  Uri url = Uri.parse(urlApi + signupRequest);
+  const String photoRequest = "/api/user/me/upload-user-photo";
+  String url = urlApi + photoRequest;
+
+  // ignore: unnecessary_new, prefer_collection_literals
+  var map = new Map<String, dynamic>();
+  map['action'] = 'upload';
+  map['attachment'] = photo;
+  var dio = Dio();
+  dio.options.headers["authorization"] = "Bearer ${userauthentication.uid}";
+  try {
+    // ignore: unnecessary_new
+    FormData formData = new FormData.fromMap(map);
+    var response = await dio.post(url, data: formData);
+    return response;
+  } catch (e) {
+    print(e);
+  }
+}
+
+// uploadUserPhoto(photo) async {
+//   const String photoRequest = "/api/user/me/upload-user-photo";
+//   String url = urlApi + photoRequest;
+
+//   // ignore: unnecessary_new, prefer_collection_literals
+//   var map = new Map<String, dynamic>();
+//   map['action'] = 'upload';
+//   map['file'] = {'filename': photo};
+//   var dio = Dio();
+//   dio.options.headers["authorization"] = "Bearer ${userauthentication.uid}";
+//   // dio.options.headers["authorization"] = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9uYWJpbDEyMyIsImlhdCI6MTY3MDg2NTE1MSwiZXhwIjoxNjcxMjk3MTUxfQ.9Mg2IvUzbPU7zuR7dh1PJeLBZLSX_OK2fVa5NZmwT7c";
+//   try {
+//     // ignore: unnecessary_new
+//     FormData formData = new FormData.fromMap(map);
+//     var response = await dio.post(url, data: formData);
+//     return response;
+//   } catch (e) {
+//     print(e);
+//   }
+// }
+
+forgetuseranameApi(email) async {
+  const String forgetuseranameRequest = "/api/auth/forget";
+  Uri url = Uri.parse(urlApi + forgetuseranameRequest);
 
   final response = await http.post(url,
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}'),
       },
       body: json.encode({
-        "action": "upload",
-        "attachment": photo,
+        "email": email,
+        "operation": true,
+      }));
+
+  // print(response.body);
+
+  return response;
+}
+
+forgetpassApi(email, username) async {
+  const String forgetpassRequest = "/api/auth/forget";
+  Uri url = Uri.parse(urlApi + forgetpassRequest);
+
+  final response = await http.post(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: json.encode({
+        "email": email,
+        "operation": false,
+        "username": username,
       }));
 
   // print(response.body);
@@ -117,8 +177,9 @@ uploadUserPhoto(photo) async {
 /// checkUserAvailabilityAPI Function
 /// connect with the back end and sent the usernaem recieve whether its used or not
 checkUserAvailabilityAPI(username) async {
-  const String signupRequest = "/api/auth/username-available?username=";
-  Uri url = Uri.parse(urlApi + signupRequest + username);
+  const String checkUserAvailabilityRequest =
+      "/api/auth/username-available?username=";
+  Uri url = Uri.parse(urlApi + checkUserAvailabilityRequest + username);
 
   final response = await http.get(url);
 

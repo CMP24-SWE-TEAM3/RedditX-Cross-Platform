@@ -149,7 +149,7 @@ Future<void> submitSignup(
 }
 
 ///this function takes the username, password and the context of the page and send the username and password to the controller to request password reset and check for the result to show the error
-Future<void> resetPass(userNameController, emailController, context) async {
+Future<void> resetPass(emailController, userNameController, context) async {
   final sp = Provider.of<SignInController>(context, listen: false);
   final ip = Provider.of<InternetController>(context, listen: false);
   await ip.checkInternetConnection();
@@ -159,10 +159,14 @@ Future<void> resetPass(userNameController, emailController, context) async {
     showSnackBar("Check your Internet connection", context);
   } else {
     await sp
-        .forgetPass(userNameController.text, emailController.text)
+        .forgetPass(
+      emailController.text,
+      userNameController.text,
+    )
         .then((value) {
       if (sp.hasError == true) {
         showSnackBar(sp.errorCode.toString(), context);
+        return;
       }
     });
   }

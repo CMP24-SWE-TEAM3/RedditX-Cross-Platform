@@ -162,7 +162,8 @@ class SignInController extends ChangeNotifier {
       if (response.statusCode != 200) {
         return false;
       }
-      return (json.decode(response.body)['response'] == 'Avaliable');
+      bool available = (json.decode(response.body)['response'] == 'Available');
+      return available;
     }
   }
 
@@ -213,7 +214,10 @@ class SignInController extends ChangeNotifier {
     } else {
       final response = await uploadUserPhoto(imageFile);
       if (response.statusCode == 200) {
-        //userauthentication.imageUrl = json.decode(response.body)['token'];
+        // ignore: prefer_interpolation_to_compose_strings
+        userauthentication.imageUrl =
+            'https://api.redditswe22.tech/users/files/' +
+                json.decode(response.body)['avatar'];
         userauthentication.hasError = false;
         setSignIn();
         saveDataToSharedPreferences();
@@ -242,12 +246,23 @@ class SignInController extends ChangeNotifier {
   /// send forgetPassword request
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
-  Future forgetPass(String username, String email) async {
+  Future forgetPass(String email, String username) async {
     if (mockData) {
       forgetPassMock();
       notifyListeners();
       return;
-    } else {}
+    } else {
+      final response = await forgetpassApi(email, 't2_$username');
+      if (response.statusCode == 200) {
+        userauthentication.hasError = false;
+      } else {
+        userauthentication.hasError = true;
+        userauthentication.errorCode =
+            'Error in sending Forget Password request';
+      }
+      notifyListeners();
+      return;
+    }
   }
 
   /// forgetUsername Function
@@ -259,7 +274,18 @@ class SignInController extends ChangeNotifier {
       forgetUsernameMock();
       notifyListeners();
       return;
-    } else {}
+    } else {
+      final response = await forgetuseranameApi(email);
+      if (response.statusCode == 200) {
+        userauthentication.hasError = false;
+      } else {
+        userauthentication.hasError = true;
+        userauthentication.errorCode =
+            'Error in sending Forget UserName request';
+      }
+      notifyListeners();
+      return;
+    }
   }
 
   /// interest Function
@@ -359,7 +385,7 @@ class SignInController extends ChangeNotifier {
       try {
         final OAuthCredential credential =
             FacebookAuthProvider.credential(result.accessToken!.token);
-         await  userauthentication.firebaseAuth?.signInWithCredential(credential);
+        await userauthentication.firebaseAuth?.signInWithCredential(credential);
 
         // /// saving the values
         //  userauthentication.name = profile['name'];
