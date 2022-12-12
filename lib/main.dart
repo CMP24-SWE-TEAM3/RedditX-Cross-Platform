@@ -7,6 +7,8 @@ import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
+import 'views/screens/community/community_home_mobile_screen.dart';
+import 'views/screens/community/community_home_web_screen.dart';
 import 'views/screens/search/search_screen_one.dart';
 import 'views/screens/search/search_screen_two.dart';
 import 'controllers/search_controller.dart';
@@ -80,7 +82,14 @@ class MyApp extends StatelessWidget {
               ),
         ),
         initialRoute: '/',
-        home: (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+        home: LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          return (constraints.minWidth.round() < 500)
+              ? CommunityMobileScreen(
+                  context: context, constraints: constraints)
+              : CommunityWebScreen(context: context, constraints: constraints);
+        }),
+        // (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
           Home.routeName: (ctx) => const Home(),
           SignUpPage.routeName: (ctx) => const SignUpPage(),

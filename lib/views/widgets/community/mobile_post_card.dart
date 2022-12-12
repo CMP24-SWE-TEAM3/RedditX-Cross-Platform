@@ -44,7 +44,11 @@ class MobilePostCard extends StatelessWidget {
                           showeProfileDialog(context, index);
                         },
                         child: Text(
-                          "u/${postsList[index]['userID']!}".replaceFirst("t2_", ""),
+                          (!iSMOCK)
+                              ? "u/${postsList[index]['userID']['_id']}"
+                                  .replaceFirst("t2_", "")
+                              : "u/${postsList[index]['userID']['userID']}"
+                                  .replaceFirst("t2_", ""),
                           style: TextStyle(
                               color: communityPostsGrey, fontSize: 15),
                         ),
@@ -140,6 +144,7 @@ class MobilePostCard extends StatelessWidget {
                 index: index,
               ),
             ),
+             const Divider()
           ],
         ),
       ),

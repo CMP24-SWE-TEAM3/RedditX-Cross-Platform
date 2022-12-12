@@ -3,7 +3,6 @@ import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 
-
 import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
@@ -100,8 +99,11 @@ class WebPostCard extends StatelessWidget {
                                 key: const ValueKey("username_button"),
                                 onTap: () {},
                                 child: Text(
-                                  "u/${postsList[index]['userID']!}"
-                                      .replaceFirst("t2_", ""),
+                                  (!iSMOCK)
+                                      ? "u/${postsList[index]['userID']['_id']}"
+                                          .replaceFirst("t2_", "")
+                                      : "u/${postsList[index]['userID']['userID']}"
+                                          .replaceFirst("t2_", ""),
                                   style: const TextStyle(
                                       fontSize: 10.0, color: Colors.grey),
                                 ),
@@ -110,7 +112,7 @@ class WebPostCard extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                 !iSMOCK
+                                !iSMOCK
                                     ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
                                     : "${value.calculateAge(postsListMock[index].createdAt!)}",
                                 style: TextStyle(color: Colors.grey[600]),

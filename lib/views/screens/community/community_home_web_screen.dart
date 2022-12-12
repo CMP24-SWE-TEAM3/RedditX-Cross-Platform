@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
 import '../../../methods/community/show_toast.dart';
@@ -449,8 +450,12 @@ class CommunityWebScreen extends StatelessWidget {
                                           return Container(
                                               color: whiteColor,
                                               child: WebPostCard(
-                                                userName: postsList[index]
-                                                    ['userID'],
+                                                userName: (!iSMOCK)
+                                                    ? "u/${postsList[index]['userID']['_id']}"
+                                                        .replaceFirst("t2_", "")
+                                                    : "u/${postsList[index]['userID'].userID}"
+                                                        .replaceFirst(
+                                                            "t2_", ""),
                                                 index: index,
                                                 dateTime: postsListMock[index]
                                                     .createdAt!,

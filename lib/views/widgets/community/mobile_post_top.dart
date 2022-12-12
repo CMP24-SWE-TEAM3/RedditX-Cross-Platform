@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../methods/community/show_profile_dialog.dart';
@@ -111,7 +110,11 @@ class TopMobilePost extends StatelessWidget {
               showeProfileDialog(context, index);
             },
             child: Text(
-              "u/${postsList[index]['userID']!}".replaceFirst("t2_", ""),
+              (!iSMOCK)
+                  ? "u/${postsList[index]['userID']['_id']}"
+                      .replaceFirst("t2_", "")
+                  : "u/${postsList[index]['userID']['userID']}"
+                      .replaceFirst("t2_", ""),
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -121,8 +124,6 @@ class TopMobilePost extends StatelessWidget {
           ),
           Consumer<CommunityProvider>(
             builder: (context, value, child) => Text(
-
-
               !iSMOCK
                   ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
                   : "${value.calculateAge(postsListMock[index].createdAt!)}",
@@ -162,8 +163,7 @@ class TopMobilePost extends StatelessWidget {
               ),
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
-                  
-                       !iSMOCK
+                  !iSMOCK
                       ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
                       : "${value.calculateAge(postsListMock[index].createdAt!)}",
                   style: TextStyle(color: Colors.grey[600]),

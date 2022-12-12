@@ -210,3 +210,76 @@ CommunityModel communityModel1 = CommunityModel(
   privacyType: "",
   nsfw: false,
 );
+
+List<CommunityRuleModel> communityRulesMock = [
+  CommunityRuleModel(
+      title: "No sad content",
+      description:
+          "No sadcontent, such as pics of animals that have passed away (try /r/petloss), animals that have been injured/abused, or sob stories (e.g. found him in a dumpster, finding abandoned animals, sick/survived cancer)."),
+  CommunityRuleModel(
+      title: "No captioned pictures/videos",
+      description:
+          "No comics, captioned pictures/videos (try /r/lolcats, r/cute, or /r/animaltextgifs), or photos of just text. No memes or snapchat captions."),
+  CommunityRuleModel(
+      title: "No asking for upvotes or approval",
+      description:
+          "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
+          "name my pet."),
+  CommunityRuleModel(
+      title: "No harassment",
+      description:
+          "This includes racial slurs, sexually inappropriate comments, and personal attacks on users or their animals.Examples include: pitbull statistics, reduction of animals to food items (e.g. calling a cow a burger/steak, calling a pig a bacon, anything about Asian people eating cats/dogs), advocating animal abuse, etc."),
+  CommunityRuleModel(
+      title: "No sad content",
+      description:
+          "No sadcontent, such as pics of animals that have passed away (try /r/petloss), animals that have been injured/abused, or sob stories (e.g. found him in a dumpster, finding abandoned animals, sick/survived cancer)."),
+  CommunityRuleModel(
+      title: "No captioned pictures/videos",
+      description:
+          "No comics, captioned pictures/videos (try /r/lolcats, r/cute, or /r/animaltextgifs), or photos of just text. No memes or snapchat captions."),
+  CommunityRuleModel(
+      title: "No asking for upvotes or approval",
+      description:
+          "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
+          "name my pet."),
+  CommunityRuleModel(
+      title: "No harassment",
+      description:
+          "This includes racial slurs, sexually inappropriate comments, and personal attacks on users or their animals.Examples include: pitbull statistics, reduction of animals to food items (e.g. calling a cow a burger/steak, calling a pig a bacon, anything about Asian people eating cats/dogs), advocating animal abuse, etc."),
+  CommunityRuleModel(
+      title: "No sad content",
+      description:
+          "No sadcontent, such as pics of animals that have passed away (try /r/petloss), animals that have been injured/abused, or sob stories (e.g. found him in a dumpster, finding abandoned animals, sick/survived cancer)."),
+  CommunityRuleModel(
+      title: "No captioned pictures/videos",
+      description:
+          "No comics, captioned pictures/videos (try /r/lolcats, r/cute, or /r/animaltextgifs), or photos of just text. No memes or snapchat captions."),
+  CommunityRuleModel(
+      title: "No asking for upvotes or approval",
+      description:
+          "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
+          "name my pet."),
+  CommunityRuleModel(
+      title: "No sad content",
+      description:
+          "No sadcontent, such as pics of animals that have passed away (try /r/petloss), animals that have been injured/abused, or sob stories (e.g. found him in a dumpster, finding abandoned animals, sick/survived cancer)."),
+  CommunityRuleModel(
+      title: "No captioned pictures/videos",
+      description:
+          "No comics, captioned pictures/videos (try /r/lolcats, r/cute, or /r/animaltextgifs), or photos of just text. No memes or snapchat captions."),
+  CommunityRuleModel(
+      title: "No asking for upvotes or approval",
+      description:
+          "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
+          "name my pet."),
+];
+
+List<ModeratorModel> moderatorsMock = [
+  ModeratorModel(username: "Huda Ashraf", role: ""),
+  ModeratorModel(username: "Huda Ashraf", role: ""),
+  ModeratorModel(username: "Huda Ashraf", role: ""),
+  ModeratorModel(username: "Huda Ashraf", role: ""),
+  ModeratorModel(username: "Huda Ashraf", role: ""),
+  ModeratorModel(username: "Huda Ashraf", role: ""),
+  ModeratorModel(username: "Huda Ashraf", role: ""),
+];

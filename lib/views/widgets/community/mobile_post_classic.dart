@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
+import '../../../config/constants.dart';
 import '../../../models/post_model.dart';
 import 'mobile_post_bottom.dart';
 import 'mobile_post_top.dart';
@@ -45,7 +46,11 @@ class MobilePostClassic extends StatelessWidget {
                           postType: postType,
                           context: context,
                           index: index,
-                          userName: postsList[index]['userID'],
+                          userName: (!iSMOCK)
+                              ? "u/${postsList[index]['userID']['_id']}"
+                                  .replaceFirst("t2_", "")
+                              : "u/${postsList[index]['userID']['userID']}"
+                                  .replaceFirst("t2_", ""),
                           dateTime: postsListMock[index].createdAt!,
                         ),
                         const SizedBox(
@@ -118,7 +123,8 @@ class MobilePostClassic extends StatelessWidget {
                     height: 10,
                     width: double.infinity,
                     color: Theme.of(context).scaffoldBackgroundColor,
-                  )
+                  ),
+                  const  Divider()
                 ],
               ),
             )));

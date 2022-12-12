@@ -1,3 +1,4 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
@@ -36,108 +37,250 @@ class CommunityMobileScreen extends StatelessWidget {
         builder: (context, value, value1, child) => NestedScrollView(
           body: DefaultTabController(
               length: 2,
-              child: Column(
-                children: [
-                  TabBar(
-                      onTap: (val) {
-                        value.changeTab(val);
-                      },
-                      labelColor: Colors.black,
-                      tabs: const [
-                        Tab(
-                          text: "Posts",
-                        ),
-                        Tab(text: "About")
-                      ]),
-                  if (value.tabIndex == 0)
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        InkWell(
-                            onTap: () {
-                              showDefaultBottomSheet(
-                                  context,
-                                  "SORT POSTS BY",
-                                  3,
-                                  value.bottomSheetPostSortIcons,
-                                  [
-                                    "Hot",
-                                    "New",
-                                    "Top",
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    TabBar(
+                        onTap: (val) {
+                          value.changeTab(val);
+                        },
+                        labelColor: Colors.black,
+                        tabs: const [
+                          Tab(
+                            text: "Posts",
+                          ),
+                          Tab(text: "About")
+                        ]),
+                    if (value.tabIndex == 0)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          InkWell(
+                              onTap: () {
+                                showDefaultBottomSheet(
+                                    context,
+                                    "SORT POSTS BY",
+                                    3,
+                                    value.bottomSheetPostSortIcons,
+                                    [
+                                      "Hot",
+                                      "New",
+                                      "Top",
+                                    ],
+                                    "postSortBy");
+                              },
+                              child: SizedBox(
+                                height: 30,
+                                child: Row(
+                                  children: [
+                                    Icon(value.postSortByIcon),
+                                    const SizedBox(
+                                      width: 5,
+                                    ),
+                                    Text(
+                                      value.postSortByType,
+                                      maxLines: 1,
+                                      overflow: TextOverflow.clip,
+                                    ),
+                                    const Icon(Icons.arrow_drop_down_rounded),
                                   ],
-                                  "postSortBy");
-                            },
-                            child: SizedBox(
-                              height: 30,
+                                ),
+                              )),
+                          const Spacer(),
+                          IconButton(
+                              onPressed: () {
+                                showDefaultBottomSheet(
+                                    context,
+                                    "POST VIEW",
+                                    2,
+                                    value.bottomSheetPostViewIcons,
+                                    ["Card", "Classic"],
+                                    "postView");
+                              },
+                              icon: Icon(value.postViewIcon))
+                        ],
+                      ),
+                    if (value.tabIndex == 0)
+                      SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            for (int index = 0;
+                                index < postsList.length;
+                                index++)
+                              (value.postView == "classic")
+                                  ? MobilePostClassic(
+                                      postType: postsList[index]['type'],
+                                      context: context,
+                                      postPlace: "community",
+                                      index: index,
+                                    )
+                                  : MobilePostCard(
+                                      postType: postsList[index]['type'],
+                                      index: index,
+                                    ),
+                          ],
+                        ),
+                      ),
+                    if (value.tabIndex == 1)
+                      SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            SizedBox(
+                              height: 38,
                               child: Row(
                                 children: [
-                                  Icon(value.postSortByIcon),
-                                  const SizedBox(
-                                    width: 5,
+                                  const Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 20,
+                                        right: 20,
+                                        top: 10,
+                                        bottom: 10),
+                                    child: Text(
+                                      "Moderators",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15),
+                                    ),
                                   ),
-                                  Text(
-                                    value.postSortByType,
-                                    maxLines: 1,
-                                    overflow: TextOverflow.clip,
-                                  ),
-                                  const Icon(Icons.arrow_drop_down_rounded),
+                                  const Spacer(),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.mail_outlined,
+                                        color: Colors.grey,
+                                      ))
                                 ],
                               ),
-                            )),
-                        const Spacer(),
-                        IconButton(
-                            onPressed: () {
-                              showDefaultBottomSheet(
-                                  context,
-                                  "POST VIEW",
-                                  2,
-                                  value.bottomSheetPostViewIcons,
-                                  ["Card", "Classic"],
-                                  "postView");
-                            },
-                            icon: Icon(value.postViewIcon))
-                      ],
-                    ),
-                  if (value.tabIndex == 0)
-                    Expanded(
-                      child: ListView.separated(
-                        separatorBuilder: (context, index) => const Divider(),
-                        itemCount: postsList.length,
-                        itemBuilder: (BuildContext context, int index) {
-                          return (value.postView == "classic")
-                              ? MobilePostClassic(
-                                  postType: postsList[index]['type'],
-                                  context: context,
-                                  postPlace: "community",
-                                  index: index,
-                                )
-                              : MobilePostCard(
-                                  postType: postsList[index]['type'],
-                                  index: index,
-                                );
-                        },
-                      ),
-                    ),
-                  if (value.tabIndex == 1)
-                    Expanded(
-                        child: Column(
-                      children: [
-                        Container(
-                          width: double.infinity,
-                          color: Colors.red,
-                          child: const Text("kjhgf"),
+                            ),
+                            Column(
+                              children: [
+                                for (int index = 0;
+                                    index < moderatorsMock.length;
+                                    index++)
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 20),
+                                    child: Row(
+                                      children: [
+                                        InkWell(
+                                          child: Text(
+                                              "u/${moderatorsMock[index].username}"),
+                                          onTap: () {},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                SizedBox(
+                                  height: 38,
+                                  child: Row(
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 20,
+                                            right: 20,
+                                            top: 10,
+                                            bottom: 10),
+                                        child: Text(
+                                          "Subreddit Rules",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  height: 1,
+                                  color:
+                                      const Color.fromARGB(255, 225, 223, 223),
+                                ),
+                                for (int index = 0;
+                                    index < communityRulesMock.length;
+                                    index++)
+                                  ExpandableNotifier(
+                                      child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        ScrollOnExpand(
+                                          scrollOnExpand: true,
+                                          scrollOnCollapse: false,
+                                          child: ExpandablePanel(
+                                            theme: const ExpandableThemeData(
+                                              headerAlignment:
+                                                  ExpandablePanelHeaderAlignment
+                                                      .center,
+                                              tapBodyToCollapse: true,
+                                            ),
+                                            header: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 0,
+                                                    bottom: 0,
+                                                    left: 20,
+                                                    right: 20),
+                                                child: Text(
+                                                  "${index + 1}. ${communityRulesMock[index].title}",
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                )),
+                                            collapsed: const Text(
+                                              "",
+                                              softWrap: true,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            expanded: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 10),
+                                                    child: Text(
+                                                      "${communityRulesMock[index].description}",
+                                                      softWrap: true,
+                                                      overflow:
+                                                          TextOverflow.fade,
+                                                    )),
+                                              ],
+                                            ),
+                                            builder: (_, collapsed, expanded) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 45,
+                                                    right: 45,
+                                                    bottom: 0),
+                                                child: Expandable(
+                                                  collapsed: collapsed,
+                                                  expanded: expanded,
+                                                  theme:
+                                                      const ExpandableThemeData(
+                                                          crossFadePoint: 0),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ))
+                              ],
+                            )
+                          ],
                         ),
-                        Container(
-                            width: double.infinity,
-                            color: Colors.green,
-                            child: const Text("kjhgf"))
-                      ],
-                    ))
-                ],
+                      )
+                  ],
+                ),
               )),
           headerSliverBuilder: (context, innerBoxIsScrolled) {
             return [
