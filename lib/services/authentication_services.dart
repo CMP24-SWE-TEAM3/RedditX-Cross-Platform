@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:http_parser/http_parser.dart';
 
 import '../config/constants.dart';
 import '../models/authentication.dart';
@@ -96,47 +97,41 @@ signUpBareEmailAPI(email, username, password) async {
   return response;
 }
 
+/// uploadUserPhoto Function
+/// connect with the back end and sent the photo
 uploadUserPhoto(photo) async {
   const String photoRequest = "/api/user/me/upload-user-photo";
   String url = urlApi + photoRequest;
+  String fileName = photo.path.split('/').last;
 
-  // ignore: unnecessary_new, prefer_collection_literals
-  var map = new Map<String, dynamic>();
-  map['action'] = 'upload';
-  map['attachment'] = photo;
+  String ext = fileName.split('.').last;
   var dio = Dio();
-  dio.options.headers["authorization"] = "Bearer ${userauthentication.uid}";
   try {
     // ignore: unnecessary_new
-    FormData formData = new FormData.fromMap(map);
-    var response = await dio.post(url, data: formData);
+    FormData formData = new FormData.fromMap({
+      'action': 'upload',
+      'attachment': await MultipartFile.fromFile(
+        photo.path, filename: fileName,
+        // ignore: unnecessary_new
+        contentType: new MediaType('image', ext),
+      ),
+      'type': 'image/$ext',
+    });
+    var response = await dio.post(url,
+        data: formData,
+        options: Options(headers: {
+          'accept': '*/*',
+          'authorization': "Bearer ${userauthentication.uid}",
+          'Content-Type': 'multipart/form-data',
+        }));
     return response;
   } catch (e) {
-    print(e);
+    return e;
   }
 }
 
-// uploadUserPhoto(photo) async {
-//   const String photoRequest = "/api/user/me/upload-user-photo";
-//   String url = urlApi + photoRequest;
-
-//   // ignore: unnecessary_new, prefer_collection_literals
-//   var map = new Map<String, dynamic>();
-//   map['action'] = 'upload';
-//   map['file'] = {'filename': photo};
-//   var dio = Dio();
-//   dio.options.headers["authorization"] = "Bearer ${userauthentication.uid}";
-//   // dio.options.headers["authorization"] = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9uYWJpbDEyMyIsImlhdCI6MTY3MDg2NTE1MSwiZXhwIjoxNjcxMjk3MTUxfQ.9Mg2IvUzbPU7zuR7dh1PJeLBZLSX_OK2fVa5NZmwT7c";
-//   try {
-//     // ignore: unnecessary_new
-//     FormData formData = new FormData.fromMap(map);
-//     var response = await dio.post(url, data: formData);
-//     return response;
-//   } catch (e) {
-//     print(e);
-//   }
-// }
-
+/// forgetuseranameApi Function
+/// connect with the back end and sent the forget user name request
 forgetuseranameApi(email) async {
   const String forgetuseranameRequest = "/api/auth/forget";
   Uri url = Uri.parse(urlApi + forgetuseranameRequest);
@@ -155,6 +150,8 @@ forgetuseranameApi(email) async {
   return response;
 }
 
+/// forgetpassApi Function
+/// connect with the back end and sent the forget pass request
 forgetpassApi(email, username) async {
   const String forgetpassRequest = "/api/auth/forget";
   Uri url = Uri.parse(urlApi + forgetpassRequest);
@@ -182,6 +179,68 @@ checkUserAvailabilityAPI(username) async {
   Uri url = Uri.parse(urlApi + checkUserAvailabilityRequest + username);
 
   final response = await http.get(url);
+
+  return response;
+}
+
+/// interestApi Function
+/// connect with the back end and sent the interest list
+interestApi(interest) async {
+  const String interestRequest = "/api/user/me/interests";
+  Uri url = Uri.parse(urlApi + interestRequest);
+
+  final response = await http.post(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}'),
+      },
+      body: json.encode({
+        "categories": interest,
+      }));
+
+  // print(response.body);
+
+  return response;
+}
+
+/// sendGenderApi Function
+/// connect with the back end and sent the Gender
+sendGenderApi(kind) async {
+  const String sendGenderRequest = "/api/user/update";
+  Uri url = Uri.parse(urlApi + sendGenderRequest);
+
+  final response = await http.post(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}'),
+      },
+      body: json.encode({
+        "type": 'gender',
+        "value": kind,
+      }));
+
+  // print(response.body);
+
+  return response;
+}
+
+/// sendUserNameApi Function
+/// connect with the back end and sent the User Name
+sendUserNameApi(username) async {
+  const String sendGenderRequest = "/api/user/update";
+  Uri url = Uri.parse(urlApi + sendGenderRequest);
+
+  final response = await http.post(url,
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}'),
+      },
+      body: json.encode({
+        "type": '_id',
+        "value": username,
+      }));
+
+  // print(response.body);
 
   return response;
 }

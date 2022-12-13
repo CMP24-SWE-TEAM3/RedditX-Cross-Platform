@@ -199,7 +199,17 @@ class SignInController extends ChangeNotifier {
       userauthentication.gender = sendGenderMock();
       notifyListeners();
       return;
-    } else {}
+    } else {
+      final response = await sendGenderApi(kind);
+      if (response.statusCode == 200) {
+        userauthentication.hasError = false;
+      } else {
+        userauthentication.hasError = true;
+        userauthentication.errorCode = 'Error in sending Sendign Gender';
+      }
+      notifyListeners();
+      return;
+    }
   }
 
   /// sendPhoto Function
@@ -214,10 +224,11 @@ class SignInController extends ChangeNotifier {
     } else {
       final response = await uploadUserPhoto(imageFile);
       if (response.statusCode == 200) {
-        // ignore: prefer_interpolation_to_compose_strings
+        var photoNameBody = response.data;
+        String name = photoNameBody['avatar'];
+
         userauthentication.imageUrl =
-            'https://api.redditswe22.tech/users/files/' +
-                json.decode(response.body)['avatar'];
+            'https://api.redditswe22.tech/users/files/$name';
         userauthentication.hasError = false;
         setSignIn();
         saveDataToSharedPreferences();
@@ -239,7 +250,17 @@ class SignInController extends ChangeNotifier {
       userauthentication.username = sendUserNameMock();
       notifyListeners();
       return;
-    } else {}
+    } else {
+      final response = await sendUserNameApi(username);
+      if (response.statusCode == 200) {
+        userauthentication.hasError = false;
+      } else {
+        userauthentication.hasError = true;
+        userauthentication.errorCode = 'Error in sending Sendign User Name';
+      }
+      notifyListeners();
+      return;
+    }
   }
 
   /// forgetPass Function
@@ -297,7 +318,18 @@ class SignInController extends ChangeNotifier {
       userauthentication.list = interestMock();
       notifyListeners();
       return;
-    } else {}
+    } else {
+      final response = await interestApi(list);
+      if (response.statusCode == 200) {
+        userauthentication.hasError = false;
+      } else {
+        userauthentication.hasError = true;
+        userauthentication.errorCode =
+            'Error in sending Interest';
+      }
+      notifyListeners();
+      return;
+    }
   }
 
   /// signInWithGoogle Function

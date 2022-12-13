@@ -259,7 +259,11 @@ Future handleGoogleSignIn(context) async {
     });
   }
   (kIsWeb) ? null : Navigator.of(context).pop();
-  Navigator.of(context).pushReplacementNamed(Home.routeName, arguments: {});
+  (kIsWeb)
+      ? Navigator.of(context)
+          .pushReplacementNamed(Home.routeName, arguments: {})
+      : Navigator.of(context)
+          .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
 }
 
 // handling facebookauth
@@ -282,7 +286,11 @@ Future handleFacebookAuth(context) async {
     });
   }
   (kIsWeb) ? null : Navigator.of(context).pop();
-  Navigator.of(context).pushReplacementNamed(Home.routeName, arguments: {});
+  (kIsWeb)
+      ? Navigator.of(context)
+          .pushReplacementNamed(Home.routeName, arguments: {})
+      : Navigator.of(context)
+          .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
 }
 
 /// handle after signin
