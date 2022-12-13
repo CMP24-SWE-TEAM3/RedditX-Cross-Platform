@@ -49,7 +49,7 @@ class MobilePostClassic extends StatelessWidget {
                           userName: (!iSMOCK)
                               ? "u/${postsList[index]['userID']['_id']}"
                                   .replaceFirst("t2_", "")
-                              : "u/${postsList[index]['userID']['userID']}"
+                              : "u/${postsList[index]['userID'].userID}"
                                   .replaceFirst("t2_", ""),
                           dateTime: postsListMock[index].createdAt!,
                         ),

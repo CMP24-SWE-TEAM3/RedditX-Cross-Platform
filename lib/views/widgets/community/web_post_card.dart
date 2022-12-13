@@ -102,7 +102,7 @@ class WebPostCard extends StatelessWidget {
                                   (!iSMOCK)
                                       ? "u/${postsList[index]['userID']['_id']}"
                                           .replaceFirst("t2_", "")
-                                      : "u/${postsList[index]['userID']['userID']}"
+                                      : "u/${postsList[index]['userID'].userID}"
                                           .replaceFirst("t2_", ""),
                                   style: const TextStyle(
                                       fontSize: 10.0, color: Colors.grey),

@@ -43,13 +43,13 @@ class FlairModel {
 /// Moderator Model
 class ModeratorModel {
   /// User name of moderator
-  String? username;
+  String? userID;
 
   /// Indicates if the moderator is a creator or only moderator
   String? role;
 
   /// Constructor of Moderator model
-  ModeratorModel({this.username, this.role});
+  ModeratorModel({this.userID, this.role});
 }
 
 /// Community options model
@@ -185,7 +185,7 @@ FlairModel flairModel1 = FlairModel(
     flairText: "",
     flairTextColor: "");
 
-ModeratorModel moderatorModel1 = ModeratorModel(role: "", username: "");
+ModeratorModel moderatorModel1 = ModeratorModel(role: "", userID: "");
 
 CommunityOptionsModel communityOptionsModel = CommunityOptionsModel(
     allowImgAndLinksUploads: true,
@@ -210,6 +210,7 @@ CommunityModel communityModel1 = CommunityModel(
   privacyType: "",
   nsfw: false,
 );
+
 
 List<CommunityRuleModel> communityRulesMock = [
   CommunityRuleModel(
@@ -274,12 +275,21 @@ List<CommunityRuleModel> communityRulesMock = [
           "name my pet."),
 ];
 
-List<ModeratorModel> moderatorsMock = [
-  ModeratorModel(username: "Huda Ashraf", role: ""),
-  ModeratorModel(username: "Huda Ashraf", role: ""),
-  ModeratorModel(username: "Huda Ashraf", role: ""),
-  ModeratorModel(username: "Huda Ashraf", role: ""),
-  ModeratorModel(username: "Huda Ashraf", role: ""),
-  ModeratorModel(username: "Huda Ashraf", role: ""),
-  ModeratorModel(username: "Huda Ashraf", role: ""),
+List<dynamic> moderatorsAPI = [];
+List<dynamic> moderators = [];
+List<dynamic> moderatorsMock = [
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
 ];
+List moderatorsMock1 = moderatorsMock
+    .map((e) => {
+          'userID': e.userID,
+          'role':e.role
+         
+        })
+    .toList();

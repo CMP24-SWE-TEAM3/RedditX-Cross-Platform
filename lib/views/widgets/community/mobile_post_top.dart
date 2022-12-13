@@ -113,7 +113,7 @@ class TopMobilePost extends StatelessWidget {
               (!iSMOCK)
                   ? "u/${postsList[index]['userID']['_id']}"
                       .replaceFirst("t2_", "")
-                  : "u/${postsList[index]['userID']['userID']}"
+                  : "u/${postsList[index]['userID'].userID}"
                       .replaceFirst("t2_", ""),
               style: TextStyle(color: Colors.grey[600]),
             ),

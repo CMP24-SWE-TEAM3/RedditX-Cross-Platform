@@ -2,6 +2,8 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
+import 'package:search_project/services/community_services.dart';
+import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
 import '../../../methods/community/default_bottom_sheet.dart';
@@ -160,7 +162,7 @@ class CommunityMobileScreen extends StatelessWidget {
                             Column(
                               children: [
                                 for (int index = 0;
-                                    index < moderatorsMock.length;
+                                    index < moderators.length;
                                     index++)
                                   Padding(
                                     padding: const EdgeInsets.symmetric(
@@ -169,7 +171,9 @@ class CommunityMobileScreen extends StatelessWidget {
                                       children: [
                                         InkWell(
                                           child: Text(
-                                              "u/${moderatorsMock[index].username}"),
+                                              (!iSMOCK)?"u/${moderators[index]['_id']}"
+                                                  .replaceFirst("t2_", ""): "u/${moderators[index]['userID']}"
+                                                  .replaceFirst("t2_", "")),
                                           onTap: () {},
                                         ),
                                       ],
@@ -500,6 +504,8 @@ class CommunityMobileScreen extends StatelessWidget {
                                                           radius: 15,
                                                           child: InkWell(
                                                             onTap: () {
+                                                              value1.getCommunityModerators(
+                                                                  "t5_imagePro235");
                                                               showDefaultBottomSheet(
                                                                   context,
                                                                   "COMMUNITY NOTIFICATIONS",

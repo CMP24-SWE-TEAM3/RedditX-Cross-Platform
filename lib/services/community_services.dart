@@ -1,10 +1,12 @@
 // ignore_for_file: depend_on_referenced_packages
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import '../config/constants.dart';
+import '../models/authentication.dart';
+import '../models/community_model.dart';
 import '../models/post_model.dart';
-
 
 /// Get posts of a specific community with a sort type
 getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
@@ -17,12 +19,41 @@ getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
       'mapData': jsonEncode(queryParameters),
     },
   );
-  await http.get(url).then((value) {
+  await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+  ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
       postsListAPI = responseData['posts'];
     } else {
       postsListAPI = [];
+    }
+  });
+}
+
+
+
+getAPIModerators(String communityName) async {
+  String searchRequest = "/api/r/$communityName/about/moderators";
+  Uri url = Uri.parse(urlApi + searchRequest);
+  await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader:
+          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJBaG1lZGxvdGZ5MjAyIiwiaWF0IjoxNjcwODc3OTY2LCJleHAiOjE2NzEzMDk5NjZ9.ia64aUBqYVmaOQrkB42PblXj2kPFb3gsrXamCYuG9IA"}')
+    },
+  ).then((value) {
+    if (value.statusCode == 200) {
+      var responseData = json.decode(value.body) as Map<String, dynamic>;
+      moderatorsAPI=responseData['users'];
+      print(responseData);
+    } else {
+      moderatorsAPI =[];
+      print(value.statusCode);
     }
   });
 }
