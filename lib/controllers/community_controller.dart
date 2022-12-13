@@ -188,9 +188,9 @@ class CommunityProvider with ChangeNotifier {
   void changeExpandedHight(bool isExpandedd) {
     isExpanded = !isExpandedd;
     if (isExpanded) {
-      expandedHeight = 400;
+      expandedHeight = 450;
     } else {
-      expandedHeight = 320;
+      expandedHeight = 350;
     }
     notifyListeners();
   }

@@ -142,7 +142,7 @@ class CommunityModel {
 
   /// Constructor of Community model
   CommunityModel(
-      {this.isDeleted,
+      {this.isDeleted = false,
       this.trendPoints,
       this.moderators,
       this.rank,
@@ -153,7 +153,7 @@ class CommunityModel {
       this.description,
       this.flairList,
       this.icon,
-      this.membersCnt,
+      this.membersCnt = 1,
       required this.id,
       required this.privacyType,
       required this.nsfw,
@@ -161,12 +161,12 @@ class CommunityModel {
       ModeratorModel? userMod //instance of ModeratorModel,
 
       }) {
-    membersCnt = 1;
-    isDeleted = false;
-    flairList = [];
-    moderators = [];
-    //moderators.append(userMod!);
-    communityRules = [];
+    // membersCnt = 1;
+    // isDeleted = false;
+    // flairList = [];
+    // moderators = [];
+    // //moderators.append(userMod!);
+    // communityRules = [];
   }
 }
 
@@ -211,8 +211,9 @@ CommunityModel communityModel1 = CommunityModel(
   nsfw: false,
 );
 
-
-List<CommunityRuleModel> communityRulesMock = [
+List<dynamic> communityRules = [];
+List<dynamic> communityRulesAPI = [];
+List<dynamic> communityRulesMock = [
   CommunityRuleModel(
       title: "No sad content",
       description:
@@ -274,6 +275,9 @@ List<CommunityRuleModel> communityRulesMock = [
           "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
           "name my pet."),
 ];
+List communityRulesMock1 = communityRulesMock
+    .map((e) => {'title': e.title, 'description': e.description})
+    .toList();
 
 List<dynamic> moderatorsAPI = [];
 List<dynamic> moderators = [];
@@ -286,10 +290,5 @@ List<dynamic> moderatorsMock = [
   ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
   ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
 ];
-List moderatorsMock1 = moderatorsMock
-    .map((e) => {
-          'userID': e.userID,
-          'role':e.role
-         
-        })
-    .toList();
+List moderatorsMock1 =
+    moderatorsMock.map((e) => {'userID': e.userID, 'role': e.role}).toList();

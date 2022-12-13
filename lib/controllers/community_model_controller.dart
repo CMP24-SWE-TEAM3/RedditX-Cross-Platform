@@ -10,8 +10,6 @@ import 'community_controller.dart';
 class CommunityModelProvider with ChangeNotifier {
   bool mockData = iSMOCK;
 
- 
-
   Future getPosts(String communityName, String sortType, List<dynamic> posts,
       int page, int limit) async {
     if (mockData) {
@@ -25,12 +23,27 @@ class CommunityModelProvider with ChangeNotifier {
     }
   }
 
-  Future getCommunityModerators(String communityName) async {
+  Future getCommunityAbout(String communityName) async {
     if (mockData) {
       moderators = moderatorsMock1;
+      communityRules = communityRulesMock1;
     } else {
-      await getAPIModerators(communityName);
+      await getAPICommunityAbout(communityName);
       moderators = moderatorsAPI;
+      communityRules = communityRulesAPI;
+    }
+    notifyListeners();
+  }
+
+  Future getCommunityFlairs(String communityName) async {
+    if (mockData) {
+      print("mockk");
+      // moderators = moderatorsMock1;
+      // communityRules = communityRulesMock;
+    } else {
+      await getAPICommunityFlairs(communityName);
+      // moderators = moderatorsAPI;
+      // communityRules = communityRulesAPI;
     }
     notifyListeners();
   }

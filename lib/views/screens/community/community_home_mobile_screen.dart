@@ -17,6 +17,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import '../../../styles/custom_icons.dart';
 import '../../widgets/community/mobile_post_card.dart';
 import '../../widgets/community/mobile_post_classic.dart';
+import 'dart:math' as math;
 
 /// Community mobile screen
 class CommunityMobileScreen extends StatelessWidget {
@@ -63,6 +64,8 @@ class CommunityMobileScreen extends StatelessWidget {
                           ),
                           InkWell(
                               onTap: () {
+                                value1.getCommunityFlairs("t5_imagePro235");
+                                //value1.getCommunityModerators("t5_imagePro235");
                                 showDefaultBottomSheet(
                                     context,
                                     "SORT POSTS BY",
@@ -171,8 +174,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                       children: [
                                         InkWell(
                                           child: Text(
-                                              (!iSMOCK)?"u/${moderators[index]['_id']}"
-                                                  .replaceFirst("t2_", ""): "u/${moderators[index]['userID']}"
+                                              "u/${moderators[index]['userID']}"
                                                   .replaceFirst("t2_", "")),
                                           onTap: () {},
                                         ),
@@ -205,7 +207,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                       const Color.fromARGB(255, 225, 223, 223),
                                 ),
                                 for (int index = 0;
-                                    index < communityRulesMock.length;
+                                    index < communityRules.length;
                                     index++)
                                   ExpandableNotifier(
                                       child: Padding(
@@ -230,7 +232,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                                     left: 20,
                                                     right: 20),
                                                 child: Text(
-                                                  "${index + 1}. ${communityRulesMock[index].title}",
+                                                  "${index + 1}. ${communityRules[index]['title']}",
                                                   overflow:
                                                       TextOverflow.ellipsis,
                                                   maxLines: 2,
@@ -251,7 +253,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                                         const EdgeInsets.only(
                                                             bottom: 10),
                                                     child: Text(
-                                                      "${communityRulesMock[index].description}",
+                                                      "${communityRules[index]['description']}",
                                                       softWrap: true,
                                                       overflow:
                                                           TextOverflow.fade,
@@ -504,7 +506,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                                           radius: 15,
                                                           child: InkWell(
                                                             onTap: () {
-                                                              value1.getCommunityModerators(
+                                                              value1.getCommunityAbout(
                                                                   "t5_imagePro235");
                                                               showDefaultBottomSheet(
                                                                   context,
@@ -641,7 +643,50 @@ class CommunityMobileScreen extends StatelessWidget {
                                                       TextOverflow.ellipsis,
                                                 ),
                                         ),
-                                      )
+                                      ),
+                                      Expanded(
+                                          child: RichText(
+                                        key: const Key('post_content'),
+                                        text: TextSpan(
+                                          children: [
+                                            ///Container of the flair text
+                                            for (int i = 0; i < 3; i++)
+                                              WidgetSpan(
+                                                child: Container(
+                                                  margin: const EdgeInsets.only(
+                                                    left: 5,
+                                                  ),
+                                                  padding: const EdgeInsets.all(
+                                                    2,
+                                                  ),
+                                                  decoration: BoxDecoration(
+                                                    ///Random color
+                                                    color: Color(
+                                                      (math.Random()
+                                                                  .nextDouble() *
+                                                              0xFFFFFF)
+                                                          .toInt(),
+                                                    ).withOpacity(
+                                                      1,
+                                                    ),
+                                                    //rounded rectangle shape
+                                                    borderRadius:
+                                                        const BorderRadius.all(
+                                                      Radius.circular(10),
+                                                    ),
+                                                  ),
+                                                  child: const Text(
+                                                    ///Flair text
+                                                    '  postData.flairText  ',
+                                                    style: TextStyle(
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                          ],
+                                        ),
+                                      ))
                                     ],
                                   )))
                         ],
