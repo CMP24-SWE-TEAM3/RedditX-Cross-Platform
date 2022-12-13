@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'views/screens/notification_one.dart';
@@ -16,7 +15,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   FirebaseMessaging.instance.getToken().then((value) {
-    print("token:$value");
+    print("token:${value.toString()}");
   });
 
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) async {
@@ -37,39 +36,34 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: const [
-        //ChangeNotifierProvider(create: ((context) => SignInController())),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Reddit',
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          colorScheme: (kIsWeb)
-              ? ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-                  .copyWith(secondary: Colors.deepOrange)
-              : ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
-                  .copyWith(secondary: Colors.lightBlue),
-          textTheme: ThemeData.light().textTheme.copyWith(
-                bodyLarge: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
-                ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Reddit',
+      theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
+        colorScheme: (kIsWeb)
+            ? ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+                .copyWith(secondary: Colors.deepOrange)
+            : ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
+                .copyWith(secondary: Colors.lightBlue),
+        textTheme: ThemeData.light().textTheme.copyWith(
+              bodyLarge: const TextStyle(
+                color: Colors.grey,
+                fontSize: 12,
               ),
-        ),
-        initialRoute: '/',
-        home: const Scaffold(),
-        navigatorKey: navigatorKey,
-        routes: {
-          '/notification_one': ((context) => const NotificationOne()),
-          '/notification_two': ((context) => const NotificationTwo()),
-          '/notification_three': ((context) => const NotificationThree()),
-          '/notification_four': ((context) => const NotificationFour()),
-          '/notification_five': ((context) => const NotificationFive()),
-          '/notification_six': ((context) => const NotificationSix()),
-        },
+            ),
       ),
+      initialRoute: '/',
+      home: const Scaffold(),
+      navigatorKey: navigatorKey,
+      routes: {
+        '/notification_one': ((context) => const NotificationOne()),
+        '/notification_two': ((context) => const NotificationTwo()),
+        '/notification_three': ((context) => const NotificationThree()),
+        '/notification_four': ((context) => const NotificationFour()),
+        '/notification_five': ((context) => const NotificationFive()),
+        '/notification_six': ((context) => const NotificationSix()),
+      },
     );
   }
 }
