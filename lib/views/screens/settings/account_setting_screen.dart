@@ -64,7 +64,7 @@ class AccountSettingsScreen extends StatelessWidget {
               leading: const Icon(Icons.settings),
               title: const Text("Update email address"),
               trailing: const Icon(Icons.arrow_forward_rounded),
-              subtitle: Text(currentUser.email!),
+              subtitle: Text(currentUser!.email!),
             ),
           ),
           InkWell(
@@ -132,7 +132,7 @@ class AccountSettingsScreen extends StatelessWidget {
             onTap: (_) {
               Provider.of<SettingsViewModelMobileController>(context,
                       listen: false)
-                  .toggleSwitch("allowToFollow");
+                  .toggleSwitch("allowToFollow", context);
             },
           ),
           ListTileCustom(
@@ -146,7 +146,7 @@ class AccountSettingsScreen extends StatelessWidget {
             onTap: (_) {
               Provider.of<SettingsViewModelMobileController>(context,
                       listen: false)
-                  .toggleSwitch("allowChatRequests");
+                  .toggleSwitch("allowChatRequests", context);
             },
           ),
           ListTileCustom(
@@ -161,7 +161,7 @@ class AccountSettingsScreen extends StatelessWidget {
             onTap: (_) {
               Provider.of<SettingsViewModelMobileController>(context,
                       listen: false)
-                  .toggleSwitch("allowDirectMessages");
+                  .toggleSwitch("allowDirectMessages", context);
             },
           ),
         ],

@@ -2,8 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as international;
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../../models/search_model.dart';
+import '../models/search_model.dart';
 import '../config/constants.dart';
 import '../views/widgets/search/comments_in_search_results.dart';
 import '../views/widgets/search/communities_in_search_results.dart';

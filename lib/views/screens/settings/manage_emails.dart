@@ -37,7 +37,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("InboxMessages"),
+                .toggleSwitch("InboxMessages", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.chat),
@@ -52,7 +52,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) {
               Provider.of<SettingsViewModelMobileController>(context,
                       listen: false)
-                  .toggleSwitch("chatRequestsEmails");
+                  .toggleSwitch("chatRequestsEmails", context);
             },
           ),
           SettingsLabel(title: "ACTIVITY"),
@@ -69,7 +69,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("newUserWelcomeEmails"),
+                .toggleSwitch("newUserWelcomeEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
@@ -84,7 +84,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("commentsOnYourPostsEmails"),
+                .toggleSwitch("commentsOnYourPostsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.reply_outlined),
@@ -99,7 +99,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("repliesToYourCommentsEmails"),
+                .toggleSwitch("repliesToYourCommentsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
@@ -114,7 +114,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("upvotesOnYourPostsEmails"),
+                .toggleSwitch("upvotesOnYourPostsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
@@ -129,7 +129,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("upvotesOnYourCommentsEmails"),
+                .toggleSwitch("upvotesOnYourCommentsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.person),
@@ -144,7 +144,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("userNameMentionsEmails"),
+                .toggleSwitch("userNameMentionsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
@@ -159,7 +159,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("newFollowersEmails"),
+                .toggleSwitch("newFollowersEmails", context),
           ),
           SettingsLabel(title: "NEWSLETTER"),
           ListTileCustom(
@@ -175,7 +175,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("dailyDigestEmails"),
+                .toggleSwitch("dailyDigestEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
@@ -190,7 +190,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("weeklyRecapEmails"),
+                .toggleSwitch("weeklyRecapEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
@@ -205,7 +205,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleSwitch("communityDiscoveryEmails"),
+                .toggleSwitch("communityDiscoveryEmails", context),
           ),
           SettingsLabel(title: ""),
           ListTileCustom(
@@ -219,7 +219,7 @@ class ManageEmailsScreen extends StatelessWidget {
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleUnsubscribeFromAllEmails(),
+                .toggleUnsubscribeFromAllEmails(context),
           ),
         ],
       ),

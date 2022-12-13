@@ -1,10 +1,12 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../config/constants.dart';
 import '../../../models/user_model.dart';
 
-// ignore: must_be_immutable
+///list tile customized for settings
 class ListTileCustom extends StatelessWidget {
   ListTileCustom(
       {Key? key,
@@ -45,18 +47,13 @@ class ListTileCustom extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
+/// List tile with a ready buttom sheet for settings
 class SettingsTileButtomSheet extends StatelessWidget {
   Icon leadingIcon;
-
   Text titleText;
   Text sheetText;
-
-  //var variableVal;
-
   List<Text> sheetChildrenTextList;
   List<Icon> sheetChildrenIconList;
-
   List<dynamic> actionMethods;
 
   SettingsTileButtomSheet(
@@ -77,7 +74,7 @@ class SettingsTileButtomSheet extends StatelessWidget {
       title: titleText,
       trailing: Wrap(
         children: [
-          Text(currentUser.username!),
+          Text(currentUser!.username!),
           const Icon(Icons.arrow_downward_outlined)
         ],
       ),
@@ -118,7 +115,7 @@ class SettingsTileButtomSheet extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
+///a general settings list tile
 class SettingsListTile extends StatelessWidget {
   SettingsListTile({super.key, this.title, this.ico, this.onTab});
   String? title;
@@ -136,7 +133,7 @@ class SettingsListTile extends StatelessWidget {
   }
 }
 
-// ignore: must_be_immutable
+///a ready list tile for URLs in settings
 class ListTileURL extends StatelessWidget {
   ListTileURL(
       {super.key, required this.title, required this.ico, required this.url});

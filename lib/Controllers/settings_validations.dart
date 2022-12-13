@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:search_project/models/settings_model.dart';
-
-import '../views/widgets/settings/forgot_username_dialogue.dart';
 import 'authentication_submitions.dart';
 import 'validations.dart';
 
+///validates change password's screen for entered new password
 validateChangePassword(
     TextEditingController currentPassword,
     TextEditingController newPassword,
@@ -51,21 +50,7 @@ validateChangePassword(
   return -1;
 }
 
-// ignore: slash_for_doc_comments
-/**
-   void validate(userNameController, emailController, ctx) {
-    setState(() async {
-      errorEmailText = emailValidation(emailController.text);
-      errorUserNameText = await usernameValidation(userNameController.text, ctx);
-    });
-
-    if ((errorEmailText == null) && (errorUserNameText == null)) {
-      resetPass(emailController, userNameController, ctx);
-    }
-  }
-
- */
-
+///validates forgot passsword dialigue
 forgotPasswordValidation(userNameController, emailController, ctx) async {
   settingsModel.forgotPasswordEmailErrorMessage =
       emailValidation(emailController.text);
@@ -78,6 +63,7 @@ forgotPasswordValidation(userNameController, emailController, ctx) async {
   }
 }
 
+///validates forgot username dialogue
 forgotUsernameValidation(emailController, ctx) async {
   settingsModel.forgotUsernameEmailErrorMessage =
       emailValidation(emailController.text);

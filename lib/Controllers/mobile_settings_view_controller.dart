@@ -1,25 +1,36 @@
 import 'package:flutter/material.dart';
 import 'package:search_project/controllers/settings_validations.dart';
+import 'package:search_project/models/user_model.dart';
 import '../methods/community/show_snack_bar.dart';
 import 'validations.dart';
 import '../models/settings_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:provider/provider.dart';
 import 'settings_service_model_controller.dart';
 
 ///settings provider, contains user settings' controller methods
 class SettingsViewModelMobileController with ChangeNotifier {
-  //Account settings screen
-  //make profPic
-
   ///Connected to google or disconnected
   bool connectedToGoogle = false;
 
-  updateIsPasswordCheck() {
-    settingsServiceModelController.getIsPasswordSet();
-    //notifyListeners();
+  ///loads user's username adn password from shared prefs
+  getSettingsUserDataFromPrefs() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    currentUser?.username = prefs.getString("UserName");
+    notifyListeners();
   }
 
+  ///requests email to setup reddit password upon user's preference
+  updateIsPasswordCheck() {
+    settingsServiceModelController.getIsPasswordSet();
+  }
+
+  ///get user's email into user's model
+  getEmailIntoModel() {
+    settingsServiceModelController.getEmailServiceController();
+  }
+
+  ///controller for validations of change password textfields
+  ///and calling change password request
   changePassword(
       TextEditingController currentPassword,
       TextEditingController newPassword,
@@ -35,6 +46,7 @@ class SettingsViewModelMobileController with ChangeNotifier {
     }
   }
 
+  ///utility function for change password controller that invokes servicecontroller
   changePasswordInner(
       TextEditingController currentPassword,
       TextEditingController newPassword,
@@ -59,7 +71,7 @@ class SettingsViewModelMobileController with ChangeNotifier {
     }
   }
 
-  ///updates email, takes [newEmail] ,validates it then invokes updateEmailService
+  ///utility function for update email for invoking service contoller
   updateEmail(String newEmail) async {
     String? validation = emailValidation(newEmail);
     if (validation == null) {
@@ -75,17 +87,20 @@ class SettingsViewModelMobileController with ChangeNotifier {
     }
   }
 
+  ///updates email, takes [newEmail] ,validates it then invokes updateEmailService
   updateEmailOuter(String newEmail,
       TextEditingController updatedEmailController, var context) async {
-    if (updateEmail(updatedEmailController.text) == 0) {
+    if (await updateEmail(updatedEmailController.text) == 0) {
       Navigator.pop(context);
       showSnackBar(context, "Email Updated Successfully!");
       settingsModel.updateEmailErrorMessage = null;
+      notifyListeners();
     } else {
       settingsModel.updateEmailErrorMessage = "Failed,Check Your connection";
     }
   }
 
+  ///controller that communicates with send password mail service
   sendRedditPasswordToEmail() {
     settingsServiceModelController.sendRedditPasswordToEmailService();
   }
@@ -98,17 +113,30 @@ class SettingsViewModelMobileController with ChangeNotifier {
     return switchValue;
   }
 
-  ///toggles switch value according a key
-  toggleSwitch(String? key) async {
+  ///switching logic and shared preferences effect
+  toggleSwitchLogic(String? key) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? switchValue = prefs.getBool(key!) ?? false;
     prefs.setBool(key, !switchValue);
+    return switchValue;
+  }
+
+  ///toggles switch value according a key
+  toggleSwitch(String? key, context) async {
+    bool? switchValue = await toggleSwitchLogic(key!);
+    int res = await settingsServiceModelController
+        .changePrefsServiceController({key: !switchValue!});
+    if (res == 0) {
+      showSnackBar(context, "Updated Successfully!");
+    } else {
+      showSnackBar(context, "failed! check connection");
+    }
     notifyListeners();
   }
 
   ///Toggles UnsubscribeFromAllEmails switch and disable manage email switches in manage emails screen
-  toggleUnsubscribeFromAllEmails() async {
-    toggleSwitch("unsubscribeFromAllEmails");
+  toggleUnsubscribeFromAllEmails(ctx) async {
+    toggleSwitch("unsubscribeFromAllEmails", ctx);
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? sw = await getSwitchValue("unsubscribeFromAllEmails");
     prefs.setBool("unsubscribeFromAllEmailsEnabling", !sw!);
@@ -128,9 +156,23 @@ class SettingsViewModelMobileController with ChangeNotifier {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool? switchValue = prefs.getBool("connectedToGoogle") ?? false;
     prefs.setBool("connectedToGoogle", !switchValue);
-    //TODO call mock service of diconnection and connection
     updateConnectedToGoogle();
+  }
 
-    // notifyListeners();
+  ///invokes prefs model filling function and updates local shared prefs
+  updateSharedPrefsFromService(String? username) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    currentUser?.username = username;
+    getEmailIntoModel();
+    prefs.setString("UserName", username!);
+    prefs.setString("current_email", currentUser!.email!);
+    Map<String, bool>? res =
+        await settingsServiceModelController.getUserPrefsModelController();
+    if (res != null) {
+      res.forEach((key, value) {
+        prefs.setBool(key, value);
+      });
+    }
+    notifyListeners();
   }
 }

@@ -5,7 +5,7 @@ import '../../../controllers/mobile_settings_view_controller.dart';
 import '../../../models/authentication.dart';
 import '../authentication/choose_profilepicture.dart';
 import '../authentication/sign_up_page.dart';
-import '/views/screens/settings/account_setting_screen.dart';
+import '../../screens/settings/account_setting_screen.dart';
 import '../../widgets/settings/list_tiles_widgets.dart';
 import '../../widgets/settings/setting_label_widget.dart';
 
@@ -13,6 +13,7 @@ class SettingsHomePage extends StatelessWidget {
   static const routeName = '/Settings';
   final String title = "Settings";
 
+  ///The main menu for settings
   const SettingsHomePage({super.key});
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class SettingsHomePage extends StatelessWidget {
           SettingsLabel(title: "GENERAL"),
           (userauthentication.isSignedIn)
               ? SettingsListTile(
-                  title: "Account settings for u/${currentUser.username}",
+                  title: "Account settings for u/${currentUser?.username}",
                   ico: const Icon(Icons.person),
                   onTab: () {
                     Navigator.push(

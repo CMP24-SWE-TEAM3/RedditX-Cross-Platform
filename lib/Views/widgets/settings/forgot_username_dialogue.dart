@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../controllers/settings_validations.dart';
 import '../authentication/email_me_button.dart';
 
+///dialogue for forgot username
 dialogBuilderForgotUsername(BuildContext context) {
   final TextEditingController emailForgot = TextEditingController();
 
@@ -21,7 +22,6 @@ dialogBuilderForgotUsername(BuildContext context) {
         actionsAlignment: MainAxisAlignment.spaceEvenly,
         title: const Text('Recover username'),
         content: Column(
-//          mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: emailForgot,

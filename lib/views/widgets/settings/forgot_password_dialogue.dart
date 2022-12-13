@@ -7,6 +7,7 @@ import '../../../controllers/settings_validations.dart';
 import '../authentication/email_me_button.dart';
 import 'forgot_username_dialogue.dart';
 
+///dialogue for forgot password
 dialogBuilder(BuildContext context) {
   final TextEditingController userNameForgot = TextEditingController();
   final TextEditingController emailForgot = TextEditingController();
@@ -23,7 +24,6 @@ dialogBuilder(BuildContext context) {
         actionsAlignment: MainAxisAlignment.spaceEvenly,
         title: const Text('Forgot your password?'),
         content: Column(
-//          mainAxisSize: MainAxisSize.min,
           children: [
             TextField(
               controller: userNameForgot,

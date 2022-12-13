@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import '../../config/constants.dart';
+import '../config/constants.dart';
 
 /// fetch Search Posts Function
 /// connect with the back end and sent the search word and recieve the posts

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../controllers/mobile_settings_view_controller.dart';
-import '../../../methods/community/show_snack_bar.dart';
 import '../../../models/settings_model.dart';
+import '../../../models/user_model.dart';
 import '../../widgets/settings/setting_email_password_textfield.dart';
 import '../../../config/constants.dart';
-import '../../widgets/settings/forgot_password_dialogue.dart';
 
 ///screen for updating users email address, found in account settings
 class UpdateEmailAddress extends StatelessWidget {
@@ -44,12 +43,12 @@ class UpdateEmailAddress extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "u/${settingsModel.userName}",
+                      "u/${currentUser?.username}",
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      settingsModel.accountMail!,
+                      currentUser!.email!,
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],
