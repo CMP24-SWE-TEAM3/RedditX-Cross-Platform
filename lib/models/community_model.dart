@@ -43,13 +43,13 @@ class FlairModel {
 /// Moderator Model
 class ModeratorModel {
   /// User name of moderator
-  String? username;
+  String? userID;
 
   /// Indicates if the moderator is a creator or only moderator
   String? role;
 
   /// Constructor of Moderator model
-  ModeratorModel({this.username, this.role});
+  ModeratorModel({this.userID, this.role});
 }
 
 /// Community options model
@@ -108,10 +108,10 @@ class CommunityModel {
   String? description;
 
   /// Background image of community
-  String? banner;
+  late String? banner;
 
   /// Image of community
-  String? icon;
+  late String? icon;
 
   /// Count of community members
   int? membersCnt;
@@ -142,7 +142,7 @@ class CommunityModel {
 
   /// Constructor of Community model
   CommunityModel(
-      {this.isDeleted,
+      {this.isDeleted = false,
       this.trendPoints,
       this.moderators,
       this.rank,
@@ -153,7 +153,7 @@ class CommunityModel {
       this.description,
       this.flairList,
       this.icon,
-      this.membersCnt,
+      this.membersCnt = 1,
       required this.id,
       required this.privacyType,
       required this.nsfw,
@@ -161,12 +161,12 @@ class CommunityModel {
       ModeratorModel? userMod //instance of ModeratorModel,
 
       }) {
-    membersCnt = 1;
-    isDeleted = false;
-    flairList = [];
-    moderators = [];
-    //moderators.append(userMod!);
-    communityRules = [];
+    // membersCnt = 1;
+    // isDeleted = false;
+    // flairList = [];
+    // moderators = [];
+    // //moderators.append(userMod!);
+    // communityRules = [];
   }
 }
 
@@ -185,7 +185,7 @@ FlairModel flairModel1 = FlairModel(
     flairText: "",
     flairTextColor: "");
 
-ModeratorModel moderatorModel1 = ModeratorModel(role: "", username: "");
+ModeratorModel moderatorModel1 = ModeratorModel(role: "", userID: "");
 
 CommunityOptionsModel communityOptionsModel = CommunityOptionsModel(
     allowImgAndLinksUploads: true,
@@ -196,6 +196,88 @@ CommunityOptionsModel communityOptionsModel = CommunityOptionsModel(
     spamsNumBeforeRemove: 10,
     postType: 0,
     region: "");
+
+List<dynamic> communityRules = [];
+List<dynamic> communityRulesAPI = [];
+List<dynamic> communityRulesMock = [
+  CommunityRuleModel(
+      title: "No sad content",
+      description:
+          "No sadcontent, such as pics of animals that have passed away (try /r/petloss), animals that have been injured/abused, or sob stories (e.g. found him in a dumpster, finding abandoned animals, sick/survived cancer)."),
+  CommunityRuleModel(
+      title: "No captioned pictures/videos",
+      description:
+          "No comics, captioned pictures/videos (try /r/lolcats, r/cute, or /r/animaltextgifs), or photos of just text. No memes or snapchat captions."),
+  CommunityRuleModel(
+      title: "No asking for upvotes or approval",
+      description:
+          "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
+          "name my pet."),
+  CommunityRuleModel(
+      title: "No harassment",
+      description:
+          "This includes racial slurs, sexually inappropriate comments, and personal attacks on users or their animals.Examples include: pitbull statistics, reduction of animals to food items (e.g. calling a cow a burger/steak, calling a pig a bacon, anything about Asian people eating cats/dogs), advocating animal abuse, etc."),
+  CommunityRuleModel(
+      title: "No sad content",
+      description:
+          "No sadcontent, such as pics of animals that have passed away (try /r/petloss), animals that have been injured/abused, or sob stories (e.g. found him in a dumpster, finding abandoned animals, sick/survived cancer)."),
+  CommunityRuleModel(
+      title: "No captioned pictures/videos",
+      description:
+          "No comics, captioned pictures/videos (try /r/lolcats, r/cute, or /r/animaltextgifs), or photos of just text. No memes or snapchat captions."),
+  CommunityRuleModel(
+      title: "No asking for upvotes or approval",
+      description:
+          "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
+          "name my pet."),
+  CommunityRuleModel(
+      title: "No harassment",
+      description:
+          "This includes racial slurs, sexually inappropriate comments, and personal attacks on users or their animals.Examples include: pitbull statistics, reduction of animals to food items (e.g. calling a cow a burger/steak, calling a pig a bacon, anything about Asian people eating cats/dogs), advocating animal abuse, etc."),
+  CommunityRuleModel(
+      title: "No sad content",
+      description:
+          "No sadcontent, such as pics of animals that have passed away (try /r/petloss), animals that have been injured/abused, or sob stories (e.g. found him in a dumpster, finding abandoned animals, sick/survived cancer)."),
+  CommunityRuleModel(
+      title: "No captioned pictures/videos",
+      description:
+          "No comics, captioned pictures/videos (try /r/lolcats, r/cute, or /r/animaltextgifs), or photos of just text. No memes or snapchat captions."),
+  CommunityRuleModel(
+      title: "No asking for upvotes or approval",
+      description:
+          "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
+          "name my pet."),
+  CommunityRuleModel(
+      title: "No sad content",
+      description:
+          "No sadcontent, such as pics of animals that have passed away (try /r/petloss), animals that have been injured/abused, or sob stories (e.g. found him in a dumpster, finding abandoned animals, sick/survived cancer)."),
+  CommunityRuleModel(
+      title: "No captioned pictures/videos",
+      description:
+          "No comics, captioned pictures/videos (try /r/lolcats, r/cute, or /r/animaltextgifs), or photos of just text. No memes or snapchat captions."),
+  CommunityRuleModel(
+      title: "No asking for upvotes or approval",
+      description:
+          "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
+          "name my pet."),
+];
+List communityRulesMock1 = communityRulesMock
+    .map((e) => {'title': e.title, 'description': e.description})
+    .toList();
+
+List<dynamic> moderatorsAPI = [];
+List<dynamic> moderators = [];
+List<dynamic> moderatorsMock = [
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+  ModeratorModel(userID: "t2_Huda Ashraf", role: ""),
+];
+List moderatorsMock1 =
+    moderatorsMock.map((e) => {'userID': e.userID, 'role': e.role}).toList();
 
 CommunityModel communityModel1 = CommunityModel(
   membersCnt: 1720030,
@@ -210,3 +292,19 @@ CommunityModel communityModel1 = CommunityModel(
   privacyType: "",
   nsfw: false,
 );
+
+Map<String, dynamic> communityInfoAPI = {};
+Map<String, dynamic> communityInfo = {};
+Map<String, dynamic> communityInfoMock = {
+  'membersCnt': 1720030,
+  'icon':
+      "https://i.pinimg.com/564x/6f/29/00/6f290029bc26b8ead13bf3ad311acc03.jpg",
+  'banner':
+      "https://i.pinimg.com/564x/3e/17/ce/3e17ce3b0066de9192f6b01df8ceb40a.jpg",
+  'createdAt': DateTime.now(),
+  '_id': "Art",
+  'description':
+      "This is a subreddit about art, where we are serious about art and artists, and discussing art in a mature, substantive way. READ THE RULES AND LOOK AT THE OTHER POSTS BEFORE POSTING. Be on your best behavior and do not comment unless you have something meaningful and mature to say. We are STRICTLY MODERATED and DO NOT give out warnings.",
+  'privacyType': "",
+  'nsfw': false,
+};

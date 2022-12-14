@@ -1,5 +1,12 @@
 import 'community_model.dart';
 
+/// User ID model
+class UserID {
+  String? userID;
+  String? avatar;
+
+  UserID({required this.userID, required this.avatar});
+}
 
 /// Spams model: represents Spams of a post.
 class SpamModel {
@@ -82,7 +89,7 @@ class PostModel {
   String? communityID;
 
   /// User name of the user who posted the post
-  String? userID;
+  UserID? userID;
 
   /// List of the spammers of the post
   List<SpamModel>? spammers;
@@ -168,7 +175,10 @@ List<PostModel> postsListMock = [
     spoiler: true,
     nsfw: false,
     createdAt: DateTime(2022, 11, 8, 12, 30),
-    userID: "t2_Huda Ashraf",
+    userID: UserID(
+        userID: "t2_Huda Ashraf",
+        avatar:
+            "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"),
     type: "img",
   ),
   PostModel(
@@ -182,7 +192,10 @@ List<PostModel> postsListMock = [
     spoiler: true,
     nsfw: false,
     createdAt: DateTime(2022, 11, 8, 10, 30),
-    userID: "t2_Doaa Mohamed",
+    userID: UserID(
+        userID: "t2_Doaa Mohamed",
+        avatar:
+            "https://i.pinimg.com/564x/bf/ce/68/bfce68d80c7f012f15b46e2e6ecc4a8a.jpg"),
     type: "text",
   ),
   PostModel(
@@ -197,7 +210,10 @@ List<PostModel> postsListMock = [
     spoiler: true,
     nsfw: false,
     createdAt: DateTime(2022, 11, 7, 11, 30),
-    userID: "t2_Mariam",
+    userID: UserID(
+        userID: "t2_Mariam",
+        avatar:
+            "https://i.pinimg.com/564x/aa/ba/7a/aaba7ada0085c9ec7d275baaa84405a6.jpg"),
     type: "img",
   ),
   PostModel(
@@ -212,7 +228,10 @@ List<PostModel> postsListMock = [
     spoiler: true,
     nsfw: false,
     createdAt: DateTime(2022, 11, 3),
-    userID: "t2_Eman Ashraf",
+    userID: UserID(
+        userID: "t2_Eman Ashraf",
+        avatar:
+            "https://i.pinimg.com/564x/f0/a2/a4/f0a2a413909960c4bc3dd29b4e1d69ee.jpg"),
     type: "link",
   ),
   PostModel(
@@ -227,7 +246,10 @@ List<PostModel> postsListMock = [
           "Yes, anyone can learn to draw. You may think you have no talent but others may well appreciate what you draw. A natural talent may make the learning process easier, but drawing is as much of a skill as a talent. As with any other skill, this can be learned.",
       title:
           "Yes, anyone can learn to draw. You may think you have no talent but others may well appreciate what you draw. A natural talent may make the learning process easier, but drawing is as much of a skill as a talent. As with any other skill, this can be learned.",
-      userID: "t2_Zahraa",
+      userID: UserID(
+          userID: "t2_Zahraa",
+          avatar:
+              "https://i.pinimg.com/564x/d8/3e/24/d83e2410c042538202fb8c9bce9a3f01.jpg"),
       votesCount: 240),
   PostModel(
       spoiler: true,
@@ -242,7 +264,10 @@ List<PostModel> postsListMock = [
       text: "",
       title:
           "Butterflies..They can't see how truly beautiful they are, but everyone else can. People are like that as well",
-      userID: "t2_Salma Mohamed",
+      userID: UserID(
+          userID: "t2_Salma Mohamed",
+          avatar:
+              "https://i.pinimg.com/564x/1e/39/8d/1e398d1ef51258540cc600438594b343.jpg"),
       votesCount: 900),
   PostModel(
       spoiler: true,
@@ -256,7 +281,10 @@ List<PostModel> postsListMock = [
       createdAt: DateTime(2022, 10, 22),
       text: "",
       title: "10 Art Websites Every Aspiring Artist Should Know",
-      userID: "t2_Hend",
+      userID: UserID(
+          userID: "t2_Hend",
+          avatar:
+              "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg"),
       votesCount: 400),
   PostModel(
       spoiler: true,
@@ -271,7 +299,10 @@ List<PostModel> postsListMock = [
       text: "",
       title:
           "Colored Pencil Techniques. Abstracts with purple flowers to give you ideas for coloring. #coloredpenciltechniques",
-      userID: "t2_Israa",
+      userID: UserID(
+          userID: "t2_Israa",
+          avatar:
+              "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg"),
       votesCount: 890),
 ];
 
@@ -301,8 +332,6 @@ List postsListMock1 = postsListMock
         })
     .toList();
 
-
-
 /// User model
 class UserModelMock {
   final String avatar;
@@ -311,41 +340,8 @@ class UserModelMock {
   UserModelMock({required this.avatar});
 }
 
-/// List of user model
-/// dummy data to test
-/// will be replaced with real data from the APIs
-List<UserModelMock> users = [
-  UserModelMock(
-      avatar:
-          "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"),
-  UserModelMock(
-      avatar:
-          "https://i.pinimg.com/564x/bf/ce/68/bfce68d80c7f012f15b46e2e6ecc4a8a.jpg"),
-  UserModelMock(
-      avatar:
-          "https://i.pinimg.com/564x/aa/ba/7a/aaba7ada0085c9ec7d275baaa84405a6.jpg"),
-  UserModelMock(
-      avatar:
-          "https://i.pinimg.com/564x/f0/a2/a4/f0a2a413909960c4bc3dd29b4e1d69ee.jpg"),
-  UserModelMock(
-      avatar:
-          "https://i.pinimg.com/564x/d8/3e/24/d83e2410c042538202fb8c9bce9a3f01.jpg"),
-  UserModelMock(
-      avatar:
-          "https://i.pinimg.com/564x/1e/39/8d/1e398d1ef51258540cc600438594b343.jpg"),
-  UserModelMock(
-      avatar:
-          "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg"),
-  UserModelMock(
-      avatar:
-          "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg"),
-];
-
-
 class CommunityService {
   List<PostModel> testpostsListMock = postsListMock;
-  List<UserModelMock> testUsersList = users;
-
   Future<List<PostModel>> getPosts() async {
     await Future.delayed(const Duration(seconds: 1));
     return testpostsListMock;

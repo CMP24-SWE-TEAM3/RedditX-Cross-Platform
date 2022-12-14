@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_project/controllers/profile_controller.dart';
+import 'package:search_project/controllers/profile_model_controller.dart';
 import 'package:search_project/views/screens/community/community_home.dart';
 
 import 'controllers/community_controller.dart';
@@ -31,10 +32,13 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: ((context) => InternetController())),
-        ChangeNotifierProvider(create: ((context) => ProfileProvider())),
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
+        ChangeNotifierProvider(
+            create: ((context) =>
+                ProfileModelProvider()..getProfileAbout("t2_hamada"))),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
-              ..getPosts("At5_imagePro235", "hot", [], 2, 40)),
+              ..getPosts("t5_imagePro235", "hot", [], 2, 40)),
         ChangeNotifierProvider(
             create: (context) =>
                 CommunityProvider(communityService: CommunityService())),
@@ -60,8 +64,7 @@ class MyApp extends StatelessWidget {
         home: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
           return (constraints.minWidth.round() < 500)
-              ? ProfileMobileScreen(
-                  context: context, constraints: constraints)
+              ? ProfileMobileScreen(context: context, constraints: constraints)
               : CommunityWebScreen(context: context, constraints: constraints);
         }),
         routes: {},

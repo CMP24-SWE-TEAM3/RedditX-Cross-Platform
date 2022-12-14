@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-
+import '../../config/constants.dart';
 import '../../models/post_model.dart';
-
 
 /// Show Profile Dialog when a user name text button pressed
 
@@ -19,11 +18,16 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
             const SizedBox(height: 20),
             CircleAvatar(
               radius: 45,
-              backgroundImage: NetworkImage(users[index].avatar),
+              backgroundImage:
+                  NetworkImage(postsList[index]['userID']!['avatar']!),
             ),
             const SizedBox(height: 30),
             Text(
-              postsListMock[index].userID!,
+              (!iSMOCK)
+                  ? "u/${postsList[index]['userID']['_id']}"
+                      .replaceFirst("t2_", "")
+                  : "u/${postsList[index]['userID']['userID']}"
+                      .replaceFirst("t2_", ""),
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.black),
             ),
