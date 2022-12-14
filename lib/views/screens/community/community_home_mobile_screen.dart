@@ -575,47 +575,37 @@ class CommunityMobileScreen extends StatelessWidget {
                                       height: 10,
                                     ),
                                     Expanded(
-                                        key: const ValueKey(
-                                            "expanded_discription"),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                value.changeExpandedHight(
-                                                    value.isExpanded);
-                                              },
-                                              child: value.isExpanded
-                                                  ? AutoSizeText(
-                                                      communityInfo[
-                                                              'description'] ??
-                                                          "",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    )
-                                                  : Text(
-                                                      communityInfo[
-                                                              'description'] ??
-                                                          "",
-                                                      maxLines: 3,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    ),
-                                            ),
-                                          ],
-                                        )),
+                                      key: const ValueKey(
+                                          "expanded_discription"),
+                                      child: InkWell(
+                                        onTap: () {
+                                          value.changeExpandedHight(
+                                              value.isExpanded);
+                                        },
+                                        child: value.isExpanded
+                                            ? AutoSizeText(
+                                                communityInfo['description'] ??
+                                                    "",
+                                                textAlign: TextAlign.start,
+                                              )
+                                            : Text(
+                                                communityInfo['description'] ??
+                                                    "",
+                                                maxLines: 3,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.start,
+                                              ),
+                                      ),
+                                    ),
                                     Expanded(
                                         child: RichText(
                                       key: const Key('post_content'),
                                       text: TextSpan(
                                         children: [
                                           ///Container of the flair text
-                                          for (int i = 0; i < 3; i++)
+                                          for (int i = 0;
+                                              i < communityFlairs.length;
+                                              i++)
                                             WidgetSpan(
                                               child: Container(
                                                 margin: const EdgeInsets.only(
@@ -640,10 +630,10 @@ class CommunityMobileScreen extends StatelessWidget {
                                                     Radius.circular(10),
                                                   ),
                                                 ),
-                                                child: const Text(
+                                                child: Text(
                                                   ///Flair text
-                                                  '  postData.flairText  ',
-                                                  style: TextStyle(
+                                                  '${communityFlairs[i]['flairText']}',
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                   ),
                                                 ),

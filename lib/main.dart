@@ -54,7 +54,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
-              ..getPosts("At5_imagePro235", "hot", [], 2, 40)..getCommunityAbout("t5_imagePro235")..getCommunityInfo("t5_imagePro235")),
+              ..getPosts("At5_imagePro235", "hot", [], 2, 40)..getCommunityAbout("t5_imagePro235")..getCommunityInfo("t5_imagePro235")..getCommunityFlairs("t5_imagePro235")),
         ChangeNotifierProvider(
             create: (context) =>
                 CommunityProvider(communityService: CommunityService())),

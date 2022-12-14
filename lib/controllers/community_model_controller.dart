@@ -47,14 +47,12 @@ class CommunityModelProvider with ChangeNotifier {
 
   Future getCommunityFlairs(String communityName) async {
     if (mockData) {
-      //print("mockk");
-      // moderators = moderatorsMock1;
-      // communityRules = communityRulesMock;
+      communityFlairs=communityFlairsMock;
     } else {
       await getAPICommunityFlairs(communityName);
-      // moderators = moderatorsAPI;
-      // communityRules = communityRulesAPI;
+      communityFlairs=communityFlairsAPI;
     }
+    print(communityFlairs[0]['flairText']);
     notifyListeners();
   }
 

@@ -308,3 +308,30 @@ Map<String, dynamic> communityInfoMock = {
   'privacyType': "",
   'nsfw': false,
 };
+
+List<dynamic>communityFlairsAPI=[];
+List<dynamic>communityFlairs=[];
+List<dynamic>communityFlairsMock=[
+  {
+    'flairText':"flair1",
+    'flairTextColor':"",
+    'flairBackGround':"",
+    'flairModOnly':false,
+    'flairAllowUserEdit':"",
+    '_id':""
+  },{
+        'flairText': "flair2",
+    'flairTextColor': "",
+    'flairBackGround': "",
+    'flairModOnly': false,
+    'flairAllowUserEdit': "",
+    '_id': ""
+  },{
+        'flairText': "flair3",
+    'flairTextColor': "",
+    'flairBackGround': "",
+    'flairModOnly': false,
+    'flairAllowUserEdit': "",
+    '_id': ""
+  }
+];
