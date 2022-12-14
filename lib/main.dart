@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
         ChangeNotifierProvider(
             create: ((context) =>
-                ProfileModelProvider()..getProfileAbout("t2_hamada"))),
+                ProfileModelProvider()..getProfileComments("t2_hamada")..getProfileAbout("t2_AhmedLotfy02"))),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
               ..getPosts("t5_imagePro235", "hot", [], 2, 40)),

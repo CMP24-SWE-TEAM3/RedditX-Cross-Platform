@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
+import 'package:search_project/controllers/profile_model_controller.dart';
 import 'package:search_project/services/community_services.dart';
 import 'package:search_project/views/widgets/profile/profile_comment.dart';
 import '../../../controllers/community_controller.dart';
@@ -35,8 +36,9 @@ class ProfileMobileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Consumer2<ProfileProvider, CommunityModelProvider>(
-        builder: (context, value, value1, child) => NestedScrollView(
+      body: Consumer3<ProfileProvider, CommunityModelProvider,
+          ProfileModelProvider>(
+        builder: (context, value, value1, value2, child) => NestedScrollView(
           body: DefaultTabController(
               length: 3,
               child: SingleChildScrollView(
@@ -278,6 +280,14 @@ class ProfileMobileScreen extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                             ],
+                          ),
+                          const Text(
+                            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbout",
+                            maxLines: 3,
+                            overflow: TextOverflow.ellipsis,
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold),
                           )
                         ],
                       ),

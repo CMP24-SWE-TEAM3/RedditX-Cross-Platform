@@ -26,10 +26,10 @@ getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      print(responseData);
+      //print(responseData);
       postsListAPI = responseData['posts'];
     } else {
-      print("posts ${value.statusCode}");
+      //print("posts ${value.statusCode}");
       postsListAPI = [];
     }
   });

@@ -23,12 +23,22 @@ class ProfileModelProvider with ChangeNotifier {
 
   Future getProfileAbout(String userName) async {
     if (mockData) {
-      //postsList = postsListMock1;
+      print("111111111");
       notifyListeners();
     } else {
       await getAPIProfileAbout(userName);
-      //postsList = postsListAPI;
-      //print(",,,,,,,,,,,,,, $postsList");
+      print("2222222222222");
+      notifyListeners();
+    }
+  }
+
+  Future getProfileComments(String userName) async {
+    if (mockData) {
+      print("111111111");
+      notifyListeners();
+    } else {
+      await getAPIProfileComments(userName);
+      print("2222222222222");
       notifyListeners();
     }
   }
