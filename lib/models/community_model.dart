@@ -108,10 +108,10 @@ class CommunityModel {
   String? description;
 
   /// Background image of community
-  String? banner;
+  late String? banner;
 
   /// Image of community
-  String? icon;
+  late String? icon;
 
   /// Count of community members
   int? membersCnt;
@@ -197,20 +197,6 @@ CommunityOptionsModel communityOptionsModel = CommunityOptionsModel(
     postType: 0,
     region: "");
 
-CommunityModel communityModel1 = CommunityModel(
-  membersCnt: 1720030,
-  icon:
-      "https://i.pinimg.com/564x/6f/29/00/6f290029bc26b8ead13bf3ad311acc03.jpg",
-  banner:
-      "https://i.pinimg.com/564x/3e/17/ce/3e17ce3b0066de9192f6b01df8ceb40a.jpg",
-  createdAt: DateTime.now(),
-  id: "Art",
-  description:
-      "This is a subreddit about art, where we are serious about art and artists, and discussing art in a mature, substantive way. READ THE RULES AND LOOK AT THE OTHER POSTS BEFORE POSTING. Be on your best behavior and do not comment unless you have something meaningful and mature to say. We are STRICTLY MODERATED and DO NOT give out warnings.",
-  privacyType: "",
-  nsfw: false,
-);
-
 List<dynamic> communityRules = [];
 List<dynamic> communityRulesAPI = [];
 List<dynamic> communityRulesMock = [
@@ -292,3 +278,33 @@ List<dynamic> moderatorsMock = [
 ];
 List moderatorsMock1 =
     moderatorsMock.map((e) => {'userID': e.userID, 'role': e.role}).toList();
+
+CommunityModel communityModel1 = CommunityModel(
+  membersCnt: 1720030,
+  icon:
+      "https://i.pinimg.com/564x/6f/29/00/6f290029bc26b8ead13bf3ad311acc03.jpg",
+  banner:
+      "https://i.pinimg.com/564x/3e/17/ce/3e17ce3b0066de9192f6b01df8ceb40a.jpg",
+  createdAt: DateTime.now(),
+  id: "Art",
+  description:
+      "This is a subreddit about art, where we are serious about art and artists, and discussing art in a mature, substantive way. READ THE RULES AND LOOK AT THE OTHER POSTS BEFORE POSTING. Be on your best behavior and do not comment unless you have something meaningful and mature to say. We are STRICTLY MODERATED and DO NOT give out warnings.",
+  privacyType: "",
+  nsfw: false,
+);
+
+Map<String, dynamic> communityInfoAPI = {};
+Map<String, dynamic> communityInfo = {};
+Map<String, dynamic> communityInfoMock = {
+  'membersCnt': 1720030,
+  'icon':
+      "https://i.pinimg.com/564x/6f/29/00/6f290029bc26b8ead13bf3ad311acc03.jpg",
+  'banner':
+      "https://i.pinimg.com/564x/3e/17/ce/3e17ce3b0066de9192f6b01df8ceb40a.jpg",
+  'createdAt': DateTime.now(),
+  '_id': "Art",
+  'description':
+      "This is a subreddit about art, where we are serious about art and artists, and discussing art in a mature, substantive way. READ THE RULES AND LOOK AT THE OTHER POSTS BEFORE POSTING. Be on your best behavior and do not comment unless you have something meaningful and mature to say. We are STRICTLY MODERATED and DO NOT give out warnings.",
+  'privacyType': "",
+  'nsfw': false,
+};

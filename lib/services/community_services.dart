@@ -29,13 +29,11 @@ getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
       var responseData = json.decode(value.body) as Map<String, dynamic>;
       postsListAPI = responseData['posts'];
     } else {
-      print("posts ${value.statusCode}");
+      //print("posts ${value.statusCode}");
       postsListAPI = [];
     }
   });
 }
-
-
 
 getAPICommunityAbout(String communityName) async {
   String searchRequest = "/api/r/$communityName";
@@ -50,23 +48,44 @@ getAPICommunityAbout(String communityName) async {
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      print(responseData);
-      moderatorsAPI=responseData['moderators'];
-      communityRulesAPI=responseData['communityRules'];
-
-      
+      //print(responseData);
+      moderatorsAPI = responseData['moderators'];
+      communityRulesAPI = responseData['communityRules'];
     } else {
-      moderatorsAPI =[];
-      communityRules=[];
-      print(value.statusCode);
+      moderatorsAPI = [];
+      communityRules = [];
+      //print(value.statusCode);
     }
   });
 }
 
-///api/r/{subreddit}/api/flair-list
+/// Get community name, date of creation, description and members count
+getAPICommunityInfo(String communityName) async {
+  String searchRequest = "/api/r/info?id=$communityName";
+  Uri url = Uri.parse(urlApi + searchRequest);
+  await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader:
+          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJBaG1lZGxvdGZ5MjAyIiwiaWF0IjoxNjcwODc3OTY2LCJleHAiOjE2NzEzMDk5NjZ9.ia64aUBqYVmaOQrkB42PblXj2kPFb3gsrXamCYuG9IA"}')
+    },
+  ).then((value) {
+    if (value.statusCode == 200) {
+      var responseData = json.decode(value.body) as Map<String, dynamic>;
+      print(responseData['things'][0]);
+      communityInfoAPI = responseData['things'][0];
+    } else {
+      communityInfoAPI = {};
 
-getAPICommunityFlairs(String communityName)async
-{
+      //print(value.statusCode);
+    }
+  });
+}
+
+
+
+getAPICommunityFlairs(String communityName) async {
   String searchRequest = "api/r/$communityName/api/flair-list";
   Uri url = Uri.parse(urlApi + searchRequest);
   await http.get(
@@ -79,8 +98,8 @@ getAPICommunityFlairs(String communityName)async
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      print("flaiiirs");
-      print(responseData);
+      //print("flaiiirs");
+      //print(responseData);
       //moderatorsAPI = responseData['users'];
     } else {
       //moderatorsAPI = [];

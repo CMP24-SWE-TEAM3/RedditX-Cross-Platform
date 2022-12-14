@@ -35,9 +35,19 @@ class CommunityModelProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  Future getCommunityInfo(String communityName) async {
+    if (mockData) {
+     communityInfo=communityInfoMock;
+    } else {
+      await getAPICommunityInfo(communityName);
+      communityInfo=communityInfoAPI;
+    notifyListeners();
+  }
+  }
+
   Future getCommunityFlairs(String communityName) async {
     if (mockData) {
-      print("mockk");
+      //print("mockk");
       // moderators = moderatorsMock1;
       // communityRules = communityRulesMock;
     } else {
@@ -68,4 +78,4 @@ class CommunityModelProvider with ChangeNotifier {
       notifyListeners();
     }
   }
-}
+  }

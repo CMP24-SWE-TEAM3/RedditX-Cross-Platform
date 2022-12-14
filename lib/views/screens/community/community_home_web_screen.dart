@@ -468,6 +468,39 @@ class CommunityWebScreen extends StatelessWidget {
                                       ),
                                     ))
                               ],
+                            ),
+                            const SizedBox(
+                              width: 50,
+                            ),
+                            Column(
+                              children: [
+                                SizedBox(height: height / 20),
+                                const SizedBox(
+                                  height: 30,
+                                ),
+                                SizedBox(
+                                    width: (constraints.minWidth >= 1250)
+                                        ? width / 4
+                                        : 300,
+                                    child: (constraints.minWidth > 1250)
+                                        ? Expanded(
+                                            child: ListView.separated(
+                                              shrinkWrap: true,
+                                              separatorBuilder:
+                                                  (context, index) =>
+                                                      const Divider(),
+                                              itemCount: 10,
+                                              itemBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return Container(
+                                                    color: whiteColor,
+                                                    child: const Text("data"));
+                                              },
+                                            ),
+                                          )
+                                        : null)
+                              ],
                             )
                           ],
                         ),
