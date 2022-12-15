@@ -149,7 +149,7 @@ Future<void> submitSignup(
 }
 
 ///this function takes the username, password and the context of the page and send the username and password to the controller to request password reset and check for the result to show the error
-Future<void> resetPass(emailController, userNameController, context) async {
+Future<void> resetPass(userNameController, emailController, context) async {
   final sp = Provider.of<SignInController>(context, listen: false);
   final ip = Provider.of<InternetController>(context, listen: false);
   await ip.checkInternetConnection();
@@ -159,14 +159,10 @@ Future<void> resetPass(emailController, userNameController, context) async {
     showSnackBar("Check your Internet connection", context);
   } else {
     await sp
-        .forgetPass(
-      emailController.text,
-      userNameController.text,
-    )
+        .forgetPass(userNameController.text, emailController.text)
         .then((value) {
       if (sp.hasError == true) {
         showSnackBar(sp.errorCode.toString(), context);
-        return;
       }
     });
   }
@@ -233,12 +229,12 @@ Future<void> submitInterest(List<String> list, context) async {
               return profilePicturePage;
             },
           )
-        : Navigator.of(context).pushReplacementNamed(
-            ChooseProfilePicture.routeName,
-            arguments: {});
-    //.pushReplacementNamed(ChooseUserName.routeName, arguments: {});
+        : Navigator.of(context)
+            .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
   }
 }
+
+
 
 /// handling google sigin in
 /// hanle google sign in by requesting the function of sign in with google in the controller and check for the result to show the error
@@ -254,16 +250,9 @@ Future handleGoogleSignIn(context) async {
     await sp.signInWithGoogle().then((value) {
       if (sp.hasError == true) {
         showSnackBar(sp.errorCode.toString(), context);
-        return;
       }
     });
   }
-  (kIsWeb) ? null : Navigator.of(context).pop();
-  (kIsWeb)
-      ? Navigator.of(context)
-          .pushReplacementNamed(Home.routeName, arguments: {})
-      : Navigator.of(context)
-          .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
 }
 
 // handling facebookauth
@@ -281,16 +270,9 @@ Future handleFacebookAuth(context) async {
     await sp.signInWithFacebook().then((value) {
       if (sp.hasError == true) {
         showSnackBar(sp.errorCode.toString(), context);
-        return;
       }
     });
   }
-  (kIsWeb) ? null : Navigator.of(context).pop();
-  (kIsWeb)
-      ? Navigator.of(context)
-          .pushReplacementNamed(Home.routeName, arguments: {})
-      : Navigator.of(context)
-          .pushReplacementNamed(ChooseUserName.routeName, arguments: {});
 }
 
 /// handle after signin
