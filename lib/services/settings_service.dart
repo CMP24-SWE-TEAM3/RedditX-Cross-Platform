@@ -22,7 +22,7 @@ class SettingsService {
       var obj = json.decode(res.body);
       return obj[0]['passwordSet'];
     } else {
-      throw Exception("Error getting passwordSet ");
+      return null;
     }
   }
 
@@ -31,7 +31,7 @@ class SettingsService {
     final res =
         await http.get(Uri.parse(baseUrl + apiRoute), headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      // HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}')
+      HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}')
     });
     log(res.body);
     if (res.statusCode == 200) {
@@ -59,7 +59,7 @@ class SettingsService {
   changePasswordService(String? currentPassword, String? newPassword,
       String? confirmNewPassword) async {
     const apiRoute = "/api/auth/reset-password";
-    final res = await http.post(Uri.parse(baseUrl + apiRoute),
+    final res = await http.patch(Uri.parse(baseUrl + apiRoute),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}')
@@ -69,6 +69,7 @@ class SettingsService {
           "newPassword": newPassword,
           "confirmNewPassword": confirmNewPassword
         }));
+    log(res.body);
     return res;
   }
 
@@ -82,10 +83,11 @@ class SettingsService {
           HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}')
         },
         body: jsonEncode(<String, dynamic>{
-          //"email": email,
+          "email": email,
           'username': "t2_${userName!}",
           'operation': false
         }));
+    log(res.body);
     return res;
   }
 

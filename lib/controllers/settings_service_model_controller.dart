@@ -8,7 +8,7 @@ class SettingsServiceModelController {
   ///invokes service for getting is password reset
   getIsPasswordSet() async {
     currentUser?.isPasswordSet =
-        await settingsService.getIsPasswordSetService();
+        await settingsService.getIsPasswordSetService() ?? false;
   }
 
   ///invokes service for getting user's email
