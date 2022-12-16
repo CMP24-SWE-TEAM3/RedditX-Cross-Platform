@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../controllers/mobile_settings_controller.dart';
-import '../../../models/settings_model.dart';
+import '../../../../controllers/mobile_settings_view_controller.dart';
+import '../../../../models/settings_model.dart';
+import '../../../../models/user_model.dart';
 import '../../widgets/settings/setting_email_password_textfield.dart';
-import '../../../config/const.dart';
-import '../../widgets/settings/forgot_password_dialogue.dart';
+import '../../../../config/constants.dart';
 
 ///screen for updating users email address, found in account settings
 class UpdateEmailAddress extends StatelessWidget {
   ///Email Text field controller for email to be updated
   final TextEditingController updatedEmailController = TextEditingController();
-
-  ///Password Text field controller for email to be updated
-  final TextEditingController passwordController = TextEditingController();
 
   ///Update Email Address screen route name
   static const routeName = '/Settings/Account_Settings/Update_Email';
@@ -46,12 +43,12 @@ class UpdateEmailAddress extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "u/${settingsModel.userName}",
+                      "u/${currentUser?.username}",
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
                     Text(
-                      settingsModel.accountMail!,
+                      currentUser!.email!,
                       style: const TextStyle(fontSize: 16),
                     ),
                   ],
@@ -68,18 +65,6 @@ class UpdateEmailAddress extends StatelessWidget {
             child: EmailText(
                 emailController: updatedEmailController,
                 errorEmailText: settingsModel.updateEmailErrorMessage),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: PasswordText(
-                passwordController: passwordController, labeling: "Password"),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextButton(
-                onPressed: () => dialogBuilder(context),
-                child: const Text("Forgot password?",
-                    style: TextStyle(color: Colors.blue))),
           ),
           Row(
             children: [
@@ -117,13 +102,14 @@ class UpdateEmailAddress extends StatelessWidget {
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width / 2.1,
                           child: OutlinedButton(
-                            onPressed: () {
-                              Provider.of<SettingsViewModelMobileController>(
-                                      context,
-                                      listen: false)
-                                  .updateEmail(updatedEmailController.text);
-                              Navigator.pop(context);
-                            },
+                            onPressed: () =>
+                                Provider.of<SettingsViewModelMobileController>(
+                                        context,
+                                        listen: false)
+                                    .updateEmailOuter(
+                                        updatedEmailController.text,
+                                        updatedEmailController,
+                                        context),
                             style: ButtonStyle(
                                 backgroundColor:
                                     MaterialStateProperty.all(Colors.blue),
@@ -134,7 +120,10 @@ class UpdateEmailAddress extends StatelessWidget {
                                             BorderRadius.circular(18.0),
                                         side: const BorderSide(
                                             color: Colors.blue)))),
-                            child: const Text("Save"),
+                            child: const Text(
+                              "Save",
+                              style: TextStyle(color: Colors.white),
+                            ),
                           ),
                         ),
                       )

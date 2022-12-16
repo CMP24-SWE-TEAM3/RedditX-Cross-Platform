@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../controllers/mobile_settings_controller.dart';
+import '../../../controllers/mobile_settings_view_controller.dart';
 
 import '../../../models/settings_model.dart';
 
+/// a dialog shown for bare email accounts who try to access
+/// update email screen , change password screen and connect/disconnect from google
+/// allows them to recieve email for setting up their reddit password
 showMakePasswordFirstDialogue(context1, String s) => showDialog<String>(
       context: context1,
       builder: (BuildContext context) => AlertDialog(

@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../controllers/mobile_settings_controller.dart';
+import '../../../../controllers/mobile_settings_view_controller.dart';
+import '../authentication/sign_up_page.dart';
 import 'manage_emails.dart';
 import 'update_email_screen.dart';
 import '../../widgets/settings/list_tiles_widgets.dart';
 import '../../widgets/settings/setting_label_widget.dart';
-import '../../../models/settings_model.dart';
-import '../../../models/user_model.dart';
+import '../../../../models/settings_model.dart';
+import '../../../../models/user_model.dart';
 import '../../widgets/settings/make_password_first_dialogue.dart';
 import 'change_password_screen.dart';
 
@@ -14,18 +15,9 @@ import 'change_password_screen.dart';
 class AccountSettingsScreen extends StatelessWidget {
   /// Account Settings Screen reoute name
   static const routeName = '/Settings/Account_Settings';
-
   const AccountSettingsScreen({super.key});
   @override
   Widget build(BuildContext context) {
-    ///Appears in AccountSettingsScreen indicating if connected to google or not
-    // Provider.of<SettingsViewModelMobileController>(context)
-    //     .updateIsPasswordCheck();
-    String connectDisconnectGoogle =
-        (Provider.of<SettingsViewModelMobileController>(context)
-                .connectedToGoogle)
-            ? "Disconnect"
-            : "Connect";
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -43,14 +35,16 @@ class AccountSettingsScreen extends StatelessWidget {
             sheetText: const Text("ACCOUNTS"),
             sheetChildrenTextList: [
               Text("u/${settingsModel.userName}"),
-              const Text("Anonymous browsing"), //to be changed
               const Text("Add account"),
             ],
             sheetChildrenIconList: const [
               Icon(Icons.person),
-              Icon(Icons.device_unknown_outlined),
               Icon(Icons.add),
-            ], //todo replace with service list
+            ],
+            actionMethods: [
+              () => Navigator.pop(context),
+              () => Navigator.pushNamed(context, SignUpPage.routeName),
+            ],
           ),
           InkWell(
             onTap: (settingsModel.hasPassword!)
@@ -70,7 +64,7 @@ class AccountSettingsScreen extends StatelessWidget {
               leading: const Icon(Icons.settings),
               title: const Text("Update email address"),
               trailing: const Icon(Icons.arrow_forward_rounded),
-              subtitle: Text(currentUser.email!),
+              subtitle: Text(currentUser!.email!),
             ),
           ),
           InkWell(
@@ -105,7 +99,7 @@ class AccountSettingsScreen extends StatelessWidget {
                       .toggleConnectedToGoogle()
                   : showMakePasswordFirstDialogue(
                       context, "disconnect your Google account"),
-              child: Text(connectDisconnectGoogle,
+              child: Text(settingsModel.connectedToGoogle!,
                   style: const TextStyle(color: Colors.blue)),
             ),
           ),
@@ -129,45 +123,45 @@ class AccountSettingsScreen extends StatelessWidget {
           ListTileCustom(
             ico: const Icon(Icons.person_pin),
             text: "Allow people to follow you",
-            enble: true,
+            enble: Future<bool>.value(true),
             subtitle:
                 "Followers will be notified about posts you make to your profile and see them in their home feed.",
             selector: Provider.of<SettingsViewModelMobileController>(context,
-                    listen: false)
-                .allowToFollow,
+                    listen: true)
+                .getSwitchValue("allowToFollow"),
             onTap: (_) {
               Provider.of<SettingsViewModelMobileController>(context,
                       listen: false)
-                  .toggleAllowToFollow();
+                  .toggleSwitch("allowToFollow", context);
             },
           ),
           ListTileCustom(
             ico: const Icon(Icons.chat),
             text: "Allow chat requests",
-            enble: true,
+            enble: Future<bool>.value(true),
             subtitle: "",
             selector: Provider.of<SettingsViewModelMobileController>(context,
-                    listen: false)
-                .allowChatRequests,
+                    listen: true)
+                .getSwitchValue("allowChatRequests"),
             onTap: (_) {
               Provider.of<SettingsViewModelMobileController>(context,
                       listen: false)
-                  .toggleAllowChatRequests();
+                  .toggleSwitch("allowChatRequests", context);
             },
           ),
           ListTileCustom(
             ico: const Icon(Icons.email_outlined),
             text: "Allow direct messages",
-            enble: true,
+            enble: Future<bool>.value(true),
             subtitle:
                 "Heads up - This setting doesnt apply to Reddit admins and moderators of communities you've joined.",
             selector: Provider.of<SettingsViewModelMobileController>(context,
-                    listen: false)
-                .allowDirectMessages,
+                    listen: true)
+                .getSwitchValue("allowDirectMessages"),
             onTap: (_) {
               Provider.of<SettingsViewModelMobileController>(context,
                       listen: false)
-                  .toggleAllowDirectMessages();
+                  .toggleSwitch("allowDirectMessages", context);
             },
           ),
         ],

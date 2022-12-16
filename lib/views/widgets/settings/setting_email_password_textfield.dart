@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+///Text field for username in settings
 class UserNameText extends StatelessWidget {
   const UserNameText({
     Key? key,
@@ -34,6 +35,7 @@ class UserNameText extends StatelessWidget {
   }
 }
 
+///Text field for email in settings
 class EmailText extends StatelessWidget {
   const EmailText({
     Key? key,
@@ -72,6 +74,7 @@ class EmailText extends StatelessWidget {
   }
 }
 
+///Text field for Password in settings
 class PasswordText extends StatelessWidget {
   const PasswordText({
     Key? key,
@@ -95,18 +98,11 @@ class PasswordText extends StatelessWidget {
         focusedBorder: const UnderlineInputBorder(
           borderSide: BorderSide(color: Colors.cyan),
         ),
-
         focusColor: Colors.blue,
         errorText: errorPasswordText,
         floatingLabelStyle: const TextStyle(
           color: Colors.blue,
         ),
-        // focusedBorder: const OutlineInputBorder(
-        //   borderSide: BorderSide(
-        //     width: 0,
-        //     color: Colors.blue,
-        //   ),
-        // ),
         labelText: labeling,
         labelStyle: const TextStyle(
           color: Colors.grey,

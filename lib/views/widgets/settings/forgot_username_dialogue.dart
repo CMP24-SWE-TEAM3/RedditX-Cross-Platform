@@ -5,11 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../controllers/settings_validations.dart';
 import '../authentication/email_me_button.dart';
-import 'forgot_username_dialogue.dart';
 
-///dialogue for forgot password
-dialogBuilder(BuildContext context) {
-  final TextEditingController userNameForgot = TextEditingController();
+///dialogue for forgot username
+dialogBuilderForgotUsername(BuildContext context) {
   final TextEditingController emailForgot = TextEditingController();
 
   return showDialog(
@@ -22,41 +20,9 @@ dialogBuilder(BuildContext context) {
         scrollable: true,
         contentPadding: const EdgeInsets.all(30),
         actionsAlignment: MainAxisAlignment.spaceEvenly,
-        title: const Text('Forgot your password?'),
+        title: const Text('Recover username'),
         content: Column(
           children: [
-            TextField(
-              controller: userNameForgot,
-              decoration: InputDecoration(
-                focusedBorder: const OutlineInputBorder(
-                  borderSide: BorderSide(
-                    width: 0,
-                    color: Colors.blue,
-                  ),
-                ),
-                labelText: 'Username',
-                errorText: settingsModel.forgotPasswordUsernameErrorMessage,
-                labelStyle: const TextStyle(
-                  color: Colors.blue,
-                ),
-              ),
-            ),
-            const Divider(
-              height: 10,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    dialogBuilderForgotUsername(context);
-                  },
-                  child: const Text("Forgot username?",
-                      style: TextStyle(color: Colors.blue))),
-            ),
-            const Divider(
-              height: 10,
-            ),
             TextField(
               controller: emailForgot,
               decoration: InputDecoration(
@@ -66,7 +32,7 @@ dialogBuilder(BuildContext context) {
                     color: Colors.blue,
                   ),
                 ),
-                labelText: 'Email',
+                labelText: 'Email address for your account',
                 errorText: settingsModel.forgotPasswordEmailErrorMessage,
                 labelStyle: const TextStyle(
                   color: Colors.blue,
@@ -101,10 +67,9 @@ dialogBuilder(BuildContext context) {
               Navigator.of(context).pop();
             },
           ),
-          MailMeButton1(
-            userNameController: userNameForgot,
+          MailMeButton2(
             emailController: emailForgot,
-            function: forgotPasswordValidation,
+            function: forgotUsernameValidation,
             ctx: context,
           ),
         ],

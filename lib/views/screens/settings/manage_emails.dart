@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../../controllers/mobile_settings_controller.dart';
-import '../../../views/widgets/settings/list_tiles_widgets.dart';
-import '../../../views/widgets/settings/setting_label_widget.dart';
+import '../../../../controllers/mobile_settings_view_controller.dart';
+import '../../../../views/widgets/settings/list_tiles_widgets.dart';
+import '../../../../views/widgets/settings/setting_label_widget.dart';
 
 ///manage emails settings screen, accesed from account settings
 class ManageEmailsScreen extends StatelessWidget {
@@ -13,9 +13,6 @@ class ManageEmailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ///enabler for manage email settings, when [true] they are disactivated and vice versa
-    bool unsubscribeEnabling =
-        Provider.of<SettingsViewModelMobileController>(context, listen: true)
-            .unsubscribeFromAllEmailsEnabling;
     return Scaffold(
       appBar: AppBar(
         leading: InkWell(
@@ -31,27 +28,31 @@ class ManageEmailsScreen extends StatelessWidget {
             ico: const Icon(Icons.email_outlined),
             text: "Inbox messages",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .inboxMessagesEmails,
+                .getSwitchValue("InboxMessages"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleInboxMessagesEmails(),
+                .toggleSwitch("InboxMessages", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.chat),
             text: "Allow chat requests",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .chatRequestsEmails,
+                .getSwitchValue("chatRequestsEmails"),
             onTap: (_) {
               Provider.of<SettingsViewModelMobileController>(context,
                       listen: false)
-                  .toggleChatRequestsEmails();
+                  .toggleSwitch("chatRequestsEmails", context);
             },
           ),
           SettingsLabel(title: "ACTIVITY"),
@@ -59,146 +60,166 @@ class ManageEmailsScreen extends StatelessWidget {
             ico: const Icon(Icons.email_outlined),
             text: "New user welcome",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .newUserWelcomeEmails,
+                .getSwitchValue("newUserWelcomeEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleNewUserWelcomeEmails(),
+                .toggleSwitch("newUserWelcomeEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Comments On Your Posts",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .commentsOnYourPostsEmails,
+                .getSwitchValue("commentsOnYourPostsEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleCommentsOnYourPostsEmails(),
+                .toggleSwitch("commentsOnYourPostsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.reply_outlined),
             text: "Replies To Your Comments",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .repliesToYourCommentsEmails,
+                .getSwitchValue("repliesToYourCommentsEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleRepliesToYourCommentsEmails(),
+                .toggleSwitch("repliesToYourCommentsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Upvotes On Your Posts",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .upvotesOnYourPostsEmails,
+                .getSwitchValue("upvotesOnYourPostsEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleUpvotesOnYourPostsEmails(),
+                .toggleSwitch("upvotesOnYourPostsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Upvotes On Your Comments",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .upvotesOnYourCommentsEmails,
+                .getSwitchValue("upvotesOnYourCommentsEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleUpvotesOnYourCommentsEmails(),
+                .toggleSwitch("upvotesOnYourCommentsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.person),
             text: "Username mentions",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .userNameMentionsEmails,
+                .getSwitchValue("userNameMentionsEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleUserNameMentionsEmails(),
+                .toggleSwitch("userNameMentionsEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "New followers",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .newFollowersEmails,
+                .getSwitchValue("newFollowersEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleNewFollowersEmails(),
+                .toggleSwitch("newFollowersEmails", context),
           ),
           SettingsLabel(title: "NEWSLETTER"),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Daily Digest",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .dailyDigestEmails,
+                .getSwitchValue("dailyDigestEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleDailyDigestEmails(),
+                .toggleSwitch("dailyDigestEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Weekly Recap",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .weeklyRecapEmails,
+                .getSwitchValue("weeklyRecapEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleWeeklyRecapEmails(),
+                .toggleSwitch("weeklyRecapEmails", context),
           ),
           ListTileCustom(
             ico: const Icon(Icons.notifications),
             text: "Community Discovery",
             subtitle: "",
-            enble: unsubscribeEnabling,
+            enble: Provider.of<SettingsViewModelMobileController>(context,
+                    listen: true)
+                .getSwitchValue("unsubscribeFromAllEmailsEnabling"),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .communityDiscoveryEmails,
+                .getSwitchValue("communityDiscoveryEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleCommunityDiscoveryEmails(),
+                .toggleSwitch("communityDiscoveryEmails", context),
           ),
           SettingsLabel(title: ""),
           ListTileCustom(
             ico: const Icon(Icons.email_outlined),
             text: "Unsubscribe from all emails",
             subtitle: "",
-            enble: true,
+            enble: Future<bool>.value(true),
             selector: Provider.of<SettingsViewModelMobileController>(context,
                     listen: true)
-                .unsubscribeFromAllEmails,
+                .getSwitchValue("unsubscribeFromAllEmails"),
             onTap: (_) => Provider.of<SettingsViewModelMobileController>(
                     context,
                     listen: false)
-                .toggleUnsubscribeFromAllEmails(),
+                .toggleUnsubscribeFromAllEmails(context),
           ),
         ],
       ),

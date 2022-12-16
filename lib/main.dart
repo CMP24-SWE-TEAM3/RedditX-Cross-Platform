@@ -5,8 +5,10 @@ import 'package:search_project/views/screens/community/community_home.dart';
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
+import 'controllers/create_community_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
+import 'views/screens/create_community/create_community_screen.dart';
 import 'views/screens/search/search_screen_one.dart';
 import 'views/screens/search/search_screen_two.dart';
 import 'controllers/search_controller.dart';
@@ -59,7 +61,10 @@ class MyApp extends StatelessWidget {
           create: (context) => SearchController(),
         ),
         ChangeNotifierProvider(
-          create: (_) => SettingsViewModelMobileController(),
+          create: (context) => SettingsViewModelMobileController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CreateCommunityViewModelController(),
         ),
       ],
       child: MaterialApp(
@@ -103,6 +108,7 @@ class MyApp extends StatelessWidget {
           ManageEmailsScreen.routeName: (context) => const ManageEmailsScreen(),
           UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
           ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
+          CreateCommunityScreen.routeName: (context) => CreateCommunityScreen(),
         },
       ),
     );
