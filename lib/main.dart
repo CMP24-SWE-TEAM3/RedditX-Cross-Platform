@@ -26,7 +26,7 @@ import 'views/screens/authentication/forget_username.dart';
 import 'views/screens/authentication/interests.dart';
 import 'views/screens/authentication/sign_up_page.dart';
 import 'views/screens/authentication/splash_screen.dart';
-import 'controllers/mobile_settings_controller.dart';
+import 'controllers/mobile_settings_view_controller.dart';
 import 'views/screens/settings/account_setting_screen.dart';
 import 'views/screens/settings/setting_menu.dart';
 import './views/screens/settings/change_password_screen.dart';

@@ -88,8 +88,10 @@ class SettingsServiceModelController {
       currentUser?.userPrefs?.searchIncludeOver18 = res["searchIncludeOver18"];
       currentUser?.userPrefs?.defaultCommentSort = res["defaultCommentSort"];
       currentUser?.userPrefs?.language = res["langauge"];
-    } else {}
     return res;
+    } else {
+      return null;
+    }
   }
 }
 

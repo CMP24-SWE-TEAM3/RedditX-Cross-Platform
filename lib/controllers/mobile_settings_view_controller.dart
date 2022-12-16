@@ -160,7 +160,7 @@ class SettingsViewModelMobileController with ChangeNotifier {
   }
 
   ///invokes prefs model filling function and updates local shared prefs
-  updateSharedPrefsFromService(String? username) async {
+  updateSharedPrefsFromService(String? username, ctx) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     currentUser?.username = username;
     getEmailIntoModel();
@@ -171,7 +171,10 @@ class SettingsViewModelMobileController with ChangeNotifier {
     if (res != null) {
       res.forEach((key, value) {
         prefs.setBool(key, value);
+        showSnackBar(ctx, "prefs loaded successfully!");
       });
+    } else {
+      showSnackBar(ctx, "get prefs failed");
     }
     notifyListeners();
   }

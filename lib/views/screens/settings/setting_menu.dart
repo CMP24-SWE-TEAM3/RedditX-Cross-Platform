@@ -9,12 +9,25 @@ import '../../screens/settings/account_setting_screen.dart';
 import '../../widgets/settings/list_tiles_widgets.dart';
 import '../../widgets/settings/setting_label_widget.dart';
 
-class SettingsHomePage extends StatelessWidget {
+class SettingsHomePage extends StatefulWidget {
   static const routeName = '/Settings';
-  final String title = "Settings";
 
   ///The main menu for settings
   const SettingsHomePage({super.key});
+
+  @override
+  State<SettingsHomePage> createState() => _SettingsHomePageState();
+}
+
+class _SettingsHomePageState extends State<SettingsHomePage> {
+  final String title = "Settings";
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<SettingsViewModelMobileController>(context)
+        .updateSharedPrefsFromService(currentUser?.username, context);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
