@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:search_project/views/screens/community/community_home.dart';
 import 'package:search_project/views/widgets/authentication/show_snackbar.dart';
 import '../models/create_community_model.dart';
 import 'create_community_service_model_controller.dart';

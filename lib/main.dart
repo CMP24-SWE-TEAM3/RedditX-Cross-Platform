@@ -2,9 +2,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_project/views/screens/community/community_home.dart';
-import 'controllers/create_community_controller.dart';
-
-import 'views/screens/create_community/create_community_screen.dart';
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
@@ -13,7 +10,8 @@ import 'controllers/sign_in_controller.dart';
 import 'views/screens/search/search_screen_one.dart';
 import 'views/screens/search/search_screen_two.dart';
 import 'controllers/search_controller.dart';
-
+import 'controllers/create_community_controller.dart';
+import 'views/screens/create_community/create_community_screen.dart';
 import 'models/post_model.dart';
 import 'views/screens/authentication/about_you.dart';
 import 'views/screens/authentication/choose_profilepicture.dart';
@@ -54,10 +52,10 @@ class MyApp extends StatelessWidget {
                 CommunityProvider(communityService: CommunityService())),
         ChangeNotifierProvider(
           create: (context) => SearchController(),
-        ),
-        ChangeNotifierProvider(
+        ),        ChangeNotifierProvider(
           create: (context) => CreateCommunityViewModelController(),
         ),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

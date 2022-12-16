@@ -20,11 +20,10 @@ String? emailValidation(var email) {
 Future<String?> usernameValidation(var username, context) async {
   final signInController =
       Provider.of<SignInController>(context, listen: false);
-
+  bool avaliable = await signInController.checkUserAvailability(username);
   // print(avaliable);
   String? check1 = usernameValidationinternal(username);
   if (check1 == null) {
-    bool avaliable = await signInController.checkUserAvailability(username);
     if (avaliable) {
       return null;
     } else {
