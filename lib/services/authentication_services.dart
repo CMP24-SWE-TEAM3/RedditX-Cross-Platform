@@ -9,6 +9,18 @@ import 'package:http_parser/http_parser.dart';
 import '../config/constants.dart';
 import '../models/authentication.dart';
 
+/// getuserdataAPI Function
+/// Connect with back end to get the data of the user by sending the [username] of the user
+getuserdataAPI(username) async {
+  String getUserDataRequest =
+      '/api/user/$username/about';
+  Uri url = Uri.parse(urlApi + getUserDataRequest);
+
+  final response = await http.get(url);
+
+  return response;
+}
+
 /// facebookapi Function
 /// handles the facebook request by http request the facebook link
 facebookapi(result) async {
@@ -19,7 +31,7 @@ facebookapi(result) async {
 }
 
 /// loginBareEmailAPI Function
-/// connect with the back end and sent the username and password and recieve the token in the response
+/// connect with the back end and sent the [username] and [password] and recieve the token in the response
 loginBareEmailAPI(String username, String password) async {
   const String loginRequest = "/api/auth/login";
   Uri url = Uri.parse(urlApi + loginRequest);
@@ -39,7 +51,7 @@ loginBareEmailAPI(String username, String password) async {
 }
 
 /// loginGoogleEmailAPI Function
-/// connect with the back end and sent the username and password and recieve the token in the response
+/// connect with the back end and sent the google token and recieve the token in the response
 loginGoogleEmailAPI(String token) async {
   const String loginRequest = "/api/auth/login";
   Uri url = Uri.parse(urlApi + loginRequest);
@@ -58,7 +70,7 @@ loginGoogleEmailAPI(String token) async {
 }
 
 /// loginFacebookEmailAPI Function
-/// connect with the back end and sent the username and password and recieve the token in the response
+/// connect with the back end and sent the facebook token and recieve the token in the response
 loginFacebookEmailAPI(String token) async {
   const String loginRequest = "/api/auth/login";
   Uri url = Uri.parse(urlApi + loginRequest);
@@ -77,7 +89,7 @@ loginFacebookEmailAPI(String token) async {
 }
 
 /// signUpBareEmailAPI Function
-/// connect with the back end and sent the email, username and password and recieve the token in the response
+/// connect with the back end and sent the [email], [username] and [password] and recieve the token in the response
 signUpBareEmailAPI(email, username, password) async {
   const String signupRequest = "/api/auth/signup";
   Uri url = Uri.parse(urlApi + signupRequest);
@@ -99,7 +111,7 @@ signUpBareEmailAPI(email, username, password) async {
 }
 
 /// uploadUserPhoto Function
-/// connect with the back end and sent the photo
+/// connect with the back end and sent the [photo]
 uploadUserPhoto(photo) async {
   const String photoRequest = "/api/user/me/upload-user-photo";
   String url = urlApi + photoRequest;
@@ -173,7 +185,7 @@ forgetpassApi(email, username) async {
 }
 
 /// checkUserAvailabilityAPI Function
-/// connect with the back end and sent the usernaem recieve whether its used or not
+/// connect with the back end and sent the [usernaem] recieve whether its used or not
 checkUserAvailabilityAPI(username) async {
   const String checkUserAvailabilityRequest =
       "/api/auth/username-available?username=";
@@ -185,7 +197,7 @@ checkUserAvailabilityAPI(username) async {
 }
 
 /// interestApi Function
-/// connect with the back end and sent the interest list
+/// connect with the back end and sent the [interest] list
 interestApi(interest) async {
   const String interestRequest = "/api/user/me/interests";
   Uri url = Uri.parse(urlApi + interestRequest);
@@ -205,7 +217,7 @@ interestApi(interest) async {
 }
 
 /// sendGenderApi Function
-/// connect with the back end and sent the Gender
+/// connect with the back end and sent the [Gender]
 sendGenderApi(kind) async {
   const String sendGenderRequest = "/api/user/update";
   Uri url = Uri.parse(urlApi + sendGenderRequest);
@@ -226,7 +238,7 @@ sendGenderApi(kind) async {
 }
 
 /// sendUserNameApi Function
-/// connect with the back end and sent the User Name
+/// connect with the back end and sent the [UserName]
 sendUserNameApi(username) async {
   const String sendGenderRequest = "/api/user/update";
   Uri url = Uri.parse(urlApi + sendGenderRequest);

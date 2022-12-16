@@ -9,6 +9,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../config/constants.dart';
 import '../models/authentication.dart';
+import '../models/user_model.dart';
 import '../services/authentication_services.dart';
 
 bool mockData = iSMOCK;
@@ -52,6 +53,32 @@ class SignInController extends ChangeNotifier {
     checkSignInUser();
   }
 
+  /// fillUser Function
+  /// takes the [username]
+  /// fill the usermodel for the documentation
+  Future fillUser(String username) async {
+    final response = await getuserdataAPI('t2_$username');
+    if (response.statusCode == 200) {
+      var map = json.decode(response.data)[0];
+      if (map != null) {
+        currentUser!.username = username;
+        currentUser!.avatar = map['avatar'];
+        currentUser!.userPrefs!.prefShowTrending = map['prefShowTrending'];
+        // currentUser!.member.is
+        saveDataToSharedPreferences();
+
+      } else {
+        userauthentication.hasError = true;
+        userauthentication.errorCode = 'Error in getting User';
+      }
+    } else {
+      userauthentication.hasError = true;
+      userauthentication.errorCode = 'Error in getting User';
+    }
+    notifyListeners();
+    return;
+  }
+
   /// login Function
   /// takes the username and password
   /// choose whether to use mock server or backend server
@@ -71,6 +98,7 @@ class SignInController extends ChangeNotifier {
         userauthentication.username = json.decode(response.body)['username'];
         userauthentication.hasError = false;
         userauthentication.username = username;
+        fillUser(username);
         setSignIn();
         saveDataToSharedPreferences();
       } else {
@@ -101,6 +129,7 @@ class SignInController extends ChangeNotifier {
         userauthentication.uid = json.decode(response.body)['token'];
         userauthentication.username = json.decode(response.body)['username'];
         userauthentication.hasError = false;
+        fillUser(username);
         setSignIn();
         saveDataToSharedPreferences();
       } else {
@@ -138,6 +167,7 @@ class SignInController extends ChangeNotifier {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     await sharedPreferences.setString('uid', userauthentication.uid!);
+    // save user model
     notifyListeners();
   }
 
@@ -147,6 +177,7 @@ class SignInController extends ChangeNotifier {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     userauthentication.uid = sharedPreferences.getString('uid');
+    // get the user model
     notifyListeners();
   }
 
@@ -324,8 +355,7 @@ class SignInController extends ChangeNotifier {
         userauthentication.hasError = false;
       } else {
         userauthentication.hasError = true;
-        userauthentication.errorCode =
-            'Error in sending Interest';
+        userauthentication.errorCode = 'Error in sending Interest';
       }
       notifyListeners();
       return;
@@ -368,6 +398,7 @@ class SignInController extends ChangeNotifier {
           userauthentication.uid = json.decode(response.body)['token'];
           userauthentication.username = json.decode(response.body)['username'];
           userauthentication.hasError = false;
+          fillUser(userauthentication.username!);
           setSignIn();
           saveDataToSharedPreferences();
         } else {
@@ -432,7 +463,9 @@ class SignInController extends ChangeNotifier {
         if (response.statusCode == 200) {
           // print(json.decode(response.body)['token']);
           userauthentication.uid = json.decode(response.body)['token'];
+          userauthentication.username = json.decode(response.body)['username'];
           userauthentication.hasError = false;
+          fillUser(userauthentication.username!);
           setSignIn();
           saveDataToSharedPreferences();
         } else {
