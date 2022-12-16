@@ -350,7 +350,7 @@ class SignInController extends ChangeNotifier {
         //   accessToken: googleSignInAuthentication.accessToken,
         //   idToken: googleSignInAuthentication.idToken,
         // );
-        print(googleSignInAuthentication);
+        // print(googleSignInAuthentication);
         // print(credential.accessToken);
         //final User? userDetails = (await userauthentication.firebaseAuth?.signInWithCredential(credential))?.user!;
 
@@ -373,7 +373,7 @@ class SignInController extends ChangeNotifier {
         } else {
           userauthentication.hasError = true;
           userauthentication.errorCode = 'Error in sign up';
-          print(response.body);
+          // print(response.body);
         }
         notifyListeners();
       } on FirebaseAuthException catch (e) {
