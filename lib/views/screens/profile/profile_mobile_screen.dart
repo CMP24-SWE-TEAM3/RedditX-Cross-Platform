@@ -1,38 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:numeral/numeral.dart';
+
 import 'package:provider/provider.dart';
+import 'package:search_project/config/constants.dart';
 import 'package:search_project/controllers/profile_model_controller.dart';
-import 'package:search_project/services/community_services.dart';
+import 'package:search_project/models/user_model.dart';
+import 'package:search_project/services/profile_services.dart';
+
 import 'package:search_project/views/widgets/profile/profile_comment.dart';
-import '../../../controllers/community_controller.dart';
+
 import '../../../controllers/community_model_controller.dart';
 import '../../../controllers/profile_controller.dart';
-import '../../../methods/community/default_bottom_sheet.dart';
-import '../../../methods/community/show_leave_community_dialog.dart';
-import '../../../methods/community/show_snack_bar.dart';
-import '../../../models/community_model.dart';
+
 import '../../../models/post_model.dart';
-import '../../../styles/colors.dart';
-import 'package:auto_size_text/auto_size_text.dart';
 
-import '../../../styles/custom_icons.dart';
-import '../../widgets/community/mobile_post_card.dart';
 import '../../widgets/community/mobile_post_classic.dart';
+import 'package:intl/intl.dart';
 
-/// Community mobile screen
-class ProfileMobileScreen extends StatelessWidget {
+class ProfileMobileScreen extends StatefulWidget {
   /// Constrains to handle respositivity
   final BoxConstraints constraints;
 
   /// Context used in [defaultBottomSheet] and others
   final BuildContext context;
 
+  /// User name
+  final String userID;
+
   /// Community mobile screen constructor
   const ProfileMobileScreen({
     super.key,
+    required this.userID,
     required this.context,
     required this.constraints,
   });
+  @override
+  State<StatefulWidget> createState() {
+    return ProfileMobileScreenState();
+  }
+}
+
+/// Community mobile screen
+class ProfileMobileScreenState extends State<ProfileMobileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,7 +55,6 @@ class ProfileMobileScreen extends StatelessWidget {
                     TabBar(
                         onTap: (val) {
                           value.changeTab(val);
-                          //getAPICommunityPosts("", "", [], 1, 3);
                         },
                         labelColor: Colors.black,
                         tabs: const [
@@ -87,24 +94,24 @@ class ProfileMobileScreen extends StatelessWidget {
                           child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.all(20),
+                            padding: const EdgeInsets.all(20),
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
+                                  children: [
                                     Text(
-                                      "2",
-                                      style: TextStyle(
+                                      "${userProfileAbout['linkKarma']}",
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
-                                    Text(
+                                    const Text(
                                       'Post Karma',
                                       style: TextStyle(color: Colors.grey),
                                     )
@@ -116,17 +123,17 @@ class ProfileMobileScreen extends StatelessWidget {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
+                                  children: [
                                     Text(
-                                      "2",
-                                      style: TextStyle(
+                                      "${userProfileAbout['commentKarma']}",
+                                      style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
                                     ),
-                                    SizedBox(
+                                    const SizedBox(
                                       height: 8,
                                     ),
-                                    Text(
+                                    const Text(
                                       'Comment Karma',
                                       style: TextStyle(color: Colors.grey),
                                     )
@@ -187,11 +194,11 @@ class ProfileMobileScreen extends StatelessWidget {
                         children: [
                           InkWell(
                               onTap: () {},
-                              child: const CircleAvatar(
+                              child: CircleAvatar(
                                 radius: 70,
                                 backgroundColor: Colors.blue,
                                 backgroundImage: NetworkImage(
-                                    "https://i.pinimg.com/564x/6f/29/00/6f290029bc26b8ead13bf3ad311acc03.jpg"),
+                                    userProfileAbout['avatar'] ?? ""),
                               )),
                           const SizedBox(
                             height: 15,
@@ -220,9 +227,10 @@ class ProfileMobileScreen extends StatelessWidget {
                           const SizedBox(
                             height: 15,
                           ),
-                          const Text(
-                            "Heba_Ashraf",
-                            style: TextStyle(
+                          Text(
+                            "${userProfileAbout['userID']}"
+                                .replaceFirst("t2_", ""),
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontSize: 30,
                                 fontWeight: FontWeight.bold),
@@ -233,17 +241,17 @@ class ProfileMobileScreen extends StatelessWidget {
                           InkWell(
                               onTap: () {},
                               child: Row(
-                                children: const [
+                                children: [
                                   Text(
-                                    "1 follower",
-                                    style: TextStyle(
+                                    "${userProfileAbout['followerCount']}",
+                                    style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     width: 5,
                                   ),
-                                  Icon(
+                                  const Icon(
                                     Icons.arrow_forward_ios,
                                     color: Colors.white,
                                     size: 10,
@@ -254,38 +262,41 @@ class ProfileMobileScreen extends StatelessWidget {
                             height: 10,
                           ),
                           Row(
-                            children: const [
+                            children: [
                               Text(
-                                "u/Heba_Ashraf ",
-                                style: TextStyle(
+                                "u/${userProfileAbout['userID']} "
+                                    .replaceFirst("t2_", ""),
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
-                              Text(
+                              const Text(
                                 "· 1m ",
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                "· 2 karma ",
-                                style: TextStyle(
+                                "· ${userProfileAbout['totalKarma']} karma ",
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                "· Oct 8.2022",
-                                style: TextStyle(
+                                iSMOCK
+                                    ? "· ${value.calculateAge(userProfileAbout['createdAt'])}"
+                                    : "· ${value.calculateAge(DateTime.parse(userProfileAbout['createdAt']))}",
+                                style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                             ],
                           ),
-                          const Text(
-                            "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAbout",
+                          Text(
+                            userProfileAbout['about'] ?? "",
                             maxLines: 3,
                             overflow: TextOverflow.ellipsis,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold),
                           )

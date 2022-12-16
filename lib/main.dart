@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
         ChangeNotifierProvider(
             create: ((context) =>
-                ProfileModelProvider()..getProfileComments("t2_hamada")..getProfileAbout("t2_AhmedLotfy02"))),
+                ProfileModelProvider()..getProfileComments("t2_hamada")..getProfileAbout("t2_hamada"))),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
               ..getPosts("t5_imagePro235", "hot", [], 2, 40)),
@@ -64,7 +64,7 @@ class MyApp extends StatelessWidget {
         home: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
           return (constraints.minWidth.round() < 500)
-              ? ProfileMobileScreen(context: context, constraints: constraints)
+              ? ProfileMobileScreen(context: context, constraints: constraints,userID: "t2_hamada",)
               : CommunityWebScreen(context: context, constraints: constraints);
         }),
         routes: {},

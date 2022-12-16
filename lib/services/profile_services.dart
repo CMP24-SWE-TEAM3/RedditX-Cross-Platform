@@ -1,12 +1,12 @@
-
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
+import 'package:search_project/models/user_model.dart';
 
 import '../config/constants.dart';
 
 getAPIProfileAbout(String userName) async {
-  String searchRequest = "/api/user/${userName}/about";
+  String searchRequest = "/api/user/$userName/about";
   Uri url = Uri.parse(urlApi + searchRequest);
   await http.get(
     url,
@@ -18,15 +18,16 @@ getAPIProfileAbout(String userName) async {
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      print(responseData);
+      //print(responseData['about']['user']);
+      userProfileAboutAPI=responseData['about']['user'];
     } else {
-
-      print(value.statusCode);
+      //print(value.statusCode);
+      userProfileAboutAPI={};
     }
   });
 }
-///
-//https://api.redditswe22.tech/api/user/comment/t2_hamada
+
+
 
 getAPIProfileComments(String userName) async {
   String searchRequest = "/api/user/comment/${userName}";
@@ -47,4 +48,3 @@ getAPIProfileComments(String userName) async {
     }
   });
 }
-

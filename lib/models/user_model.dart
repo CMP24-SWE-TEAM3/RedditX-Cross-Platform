@@ -154,3 +154,18 @@ UserModel currentUser = UserModel(
     type: "not bare email",
     email: "mamdouhteachertraining@gmail.com",
     createdAt: DateTime(2022));
+
+
+Map<String,dynamic>userProfileAboutMock={
+  'followerCount':4,
+  'createdAt':DateTime.now(),
+  'linkKarma':5,
+  'commentKarma':3,
+  'totalKarma':8,
+  'about':"about",
+  'avatar':'https://i.pinimg.com/564x/3e/17/ce/3e17ce3b0066de9192f6b01df8ceb40a.jpg',
+  'userID':'Heba'
+};
+
+Map<String,dynamic>userProfileAboutAPI={};
+Map<String,dynamic>userProfileAbout={};

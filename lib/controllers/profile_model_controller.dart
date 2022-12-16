@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:search_project/models/user_model.dart';
 import 'package:search_project/services/profile_services.dart';
 
 import '../config/constants.dart';
@@ -23,22 +24,22 @@ class ProfileModelProvider with ChangeNotifier {
 
   Future getProfileAbout(String userName) async {
     if (mockData) {
-      print("111111111");
+      userProfileAbout=userProfileAboutMock;
       notifyListeners();
     } else {
       await getAPIProfileAbout(userName);
-      print("2222222222222");
+      userProfileAbout=userProfileAboutAPI;
       notifyListeners();
     }
   }
 
   Future getProfileComments(String userName) async {
     if (mockData) {
-      print("111111111");
+      //print("111111111");
       notifyListeners();
     } else {
       await getAPIProfileComments(userName);
-      print("2222222222222");
+      //print("2222222222222");
       notifyListeners();
     }
   }
