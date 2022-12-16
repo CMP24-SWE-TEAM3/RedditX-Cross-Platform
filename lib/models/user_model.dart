@@ -158,7 +158,7 @@ UserModel currentUser = UserModel(
 
 Map<String,dynamic>userProfileAboutMock={
   'followerCount':4,
-  'createdAt':DateTime.now(),
+  'createdAt':"2022-12-01T20:37:45.112Z",
   'linkKarma':5,
   'commentKarma':3,
   'totalKarma':8,
@@ -169,3 +169,32 @@ Map<String,dynamic>userProfileAboutMock={
 
 Map<String,dynamic>userProfileAboutAPI={};
 Map<String,dynamic>userProfileAbout={};
+
+
+List<dynamic>userProfileCommentsMock=[
+  {
+    "authorId": "t2_shredan1",
+    "text": "new comment1",
+    "votesCount": 1,
+    "createdAt": "2022-12-01T20:37:45.112Z",
+    "replyingTo": "637becd563fc9ec2d423d0c0",
+    "voteType":1
+  },{
+    "authorId": "t2_shredan2",
+    "text": "new comment2",
+    "votesCount": 2,
+    "createdAt": "2022-12-01T20:37:45.112Z",
+    "replyingTo": "637becd563fc9ec2d423d0c0",
+    "voteType": -1,
+  },{
+    "authorId": "t2_shredan3",
+    "text": "new comment3",
+    "votesCount": 3,
+    "createdAt": "2022-12-01T20:37:45.112Z",
+    "replyingTo": "637becd563fc9ec2d423d0c0",
+    "voteType": 1,
+  }
+];
+
+List<dynamic>userProfileCommentsAPI=[];
+List<dynamic>userProfileComments=[];

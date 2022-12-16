@@ -18,10 +18,8 @@ getAPIProfileAbout(String userName) async {
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      //print(responseData['about']['user']);
       userProfileAboutAPI=responseData['about']['user'];
     } else {
-      //print(value.statusCode);
       userProfileAboutAPI={};
     }
   });
@@ -30,7 +28,7 @@ getAPIProfileAbout(String userName) async {
 
 
 getAPIProfileComments(String userName) async {
-  String searchRequest = "/api/user/comment/${userName}";
+  String searchRequest = "/api/user/$userName/comment/";
   Uri url = Uri.parse(urlApi + searchRequest);
   await http.get(
     url,
@@ -42,9 +40,9 @@ getAPIProfileComments(String userName) async {
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      //print(responseData['comments']);
+      userProfileCommentsAPI=responseData['comments'];
     } else {
-      //print(value.statusCode);
+      userProfileCommentsAPI=[];
     }
   });
 }

@@ -1,53 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:search_project/controllers/profile_controller.dart';
 import 'package:search_project/styles/custom_icons.dart';
 
+import '../../../models/user_model.dart';
+
 class ProfileComment extends StatelessWidget {
+  final int index;
+
+  const ProfileComment({super.key, required this.index});
+
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {},
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: SizedBox(
-          width: double.infinity,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Text(
-                "Post title",
-                style: TextStyle(fontSize: 15),
-              ),
-              Row(
+    return Consumer<ProfileProvider>(
+      builder: (context, value, child) {
+        return InkWell(
+          onTap: () {},
+          child: Padding(
+            padding: const EdgeInsets.all(10),
+            child: SizedBox(
+              width: double.infinity,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  Text(
-                    "u/user_name",
-                    style: TextStyle(color: Colors.grey),
+                  const Text(
+                    "Post title",
+                    style: TextStyle(fontSize: 15),
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "u/${userProfileComments[index]['authorId']}"
+                            .replaceFirst("t2_", ""),
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                      Text(
+                        "· ${value.calculateAge(DateTime.parse(userProfileComments[index]['createdAt']))}",
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                      const SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        "${userProfileComments[index]['votesCount']}",
+                        style: const TextStyle(color: Colors.grey),
+                      ),
+                      Icon(
+                        (userProfileComments[index]['voteType'] == 1)
+                            ? CustomIcons.upBold
+                            : CustomIcons.downBold,
+                        color: Colors.grey,
+                        size: 14,
+                      )
+                    ],
+                  ),
+                  const SizedBox(
+                    width: 5,
                   ),
                   Text(
-                    "· 1mo",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  Text(
-                    "· 1",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                  Icon(
-                    CustomIcons.upBold,
-                    color: Colors.grey,
-                    size: 14,
+                    "${userProfileComments[index]['text']}",
+                    style: const TextStyle(color: Colors.grey),
                   )
                 ],
               ),
-              Text(
-                "comment content",
-                style: TextStyle(color: Colors.grey),
-              )
-            ],
+            ),
           ),
-        ),
-      ),
+        );
+      },
     );
-    throw UnimplementedError();
   }
 }

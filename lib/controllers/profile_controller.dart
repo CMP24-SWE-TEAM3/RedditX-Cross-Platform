@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:search_project/config/constants.dart';
-import 'package:search_project/models/post_model.dart';
 
-import '../services/community_services.dart';
+
 
 class ProfileProvider with ChangeNotifier {
   /// Index of tabs Posts,Comments and about in both [UserProfileMobileScreen] and [UserProfileWebScreen].
@@ -12,7 +11,6 @@ class ProfileProvider with ChangeNotifier {
   /// Toggle tab views: Posts& Comments & About
   void changeTab(int val) {
     tabIndex = val;
-    print(postsList);
     notifyListeners();
   }
 

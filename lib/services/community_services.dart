@@ -73,12 +73,9 @@ getAPICommunityInfo(String communityName) async {
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      print(responseData['things'][0]);
       communityInfoAPI = responseData['things'][0];
     } else {
       communityInfoAPI = {};
-
-      //print(value.statusCode);
     }
   });
 }
@@ -95,7 +92,7 @@ getAPICommunityFlairs(String communityName) async {
     },
   ).then((value) {
     if (value.statusCode == 200) {
-      var responseData = json.decode(value.body) as Map<String, dynamic>;
+      //var responseData = json.decode(value.body) as Map<String, dynamic>;
       //print("flaiiirs");
       //print(responseData);
       //moderatorsAPI = responseData['users'];

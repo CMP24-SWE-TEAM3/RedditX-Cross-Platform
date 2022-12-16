@@ -35,11 +35,11 @@ class ProfileModelProvider with ChangeNotifier {
 
   Future getProfileComments(String userName) async {
     if (mockData) {
-      //print("111111111");
+      userProfileComments=userProfileCommentsMock;
       notifyListeners();
     } else {
       await getAPIProfileComments(userName);
-      //print("2222222222222");
+      userProfileComments=userProfileCommentsAPI;
       notifyListeners();
     }
   }

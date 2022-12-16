@@ -37,6 +37,8 @@ class VoteModel {
 
 /// Post model: represents the post.
 class PostModel {
+
+  String? id;
   /// Post title
   String? title;
 
@@ -102,7 +104,9 @@ class PostModel {
 
   /// Constructor of Post model
   PostModel(
-      {required this.title,
+      {
+        required this.id,
+      required this.title,
       required this.spoiler,
       required this.nsfw,
       required this.createdAt,
@@ -162,6 +166,7 @@ List<dynamic> postsListAPI = [];
 
 List<PostModel> postsListMock = [
   PostModel(
+    id:"639ab04cd0388bee70b25ee3",
     votesCount: 7500,
     communityID: communityModel1.id,
     commentsNum: 3400,
@@ -182,6 +187,7 @@ List<PostModel> postsListMock = [
     type: "img",
   ),
   PostModel(
+    id: "639ab04cd0388bee70b25ee1",
     votesCount: 50,
     communityID: communityModel1.id,
     commentsNum: 120,
@@ -199,6 +205,7 @@ List<PostModel> postsListMock = [
     type: "text",
   ),
   PostModel(
+    id: "639ab04cd0388bee70b25ee2",
     votesCount: 150,
     communityID: communityModel1.id,
     commentsNum: 100,
@@ -217,6 +224,7 @@ List<PostModel> postsListMock = [
     type: "img",
   ),
   PostModel(
+    id: "639ab04cd0388bee70b25ee4",
     votesCount: 1500,
     communityID: communityModel1.id,
     commentsNum: 1000,
@@ -235,6 +243,7 @@ List<PostModel> postsListMock = [
     type: "link",
   ),
   PostModel(
+    id: "639ab04cd0388bee70b25ee5",
       spoiler: true,
       nsfw: false,
       attachments: [""],
@@ -252,6 +261,7 @@ List<PostModel> postsListMock = [
               "https://i.pinimg.com/564x/d8/3e/24/d83e2410c042538202fb8c9bce9a3f01.jpg"),
       votesCount: 240),
   PostModel(
+    id: "639ab04cd0388bee70b25ee6",
       spoiler: true,
       nsfw: false,
       attachments: [
@@ -270,6 +280,7 @@ List<PostModel> postsListMock = [
               "https://i.pinimg.com/564x/1e/39/8d/1e398d1ef51258540cc600438594b343.jpg"),
       votesCount: 900),
   PostModel(
+    id: "639ab04cd0388bee70b25ee7",
       spoiler: true,
       nsfw: false,
       attachments: [
@@ -287,6 +298,7 @@ List<PostModel> postsListMock = [
               "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg"),
       votesCount: 400),
   PostModel(
+    id: "639ab04cd0388bee70b25ee8",
       spoiler: true,
       nsfw: false,
       attachments: [
@@ -308,6 +320,7 @@ List<PostModel> postsListMock = [
 
 List postsListMock1 = postsListMock
     .map((e) => {
+      '_id':e.id,
           'title': e.title,
           'spoiler': e.spoiler,
           'nsfw': e.nsfw,

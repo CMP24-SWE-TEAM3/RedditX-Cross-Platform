@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'package:search_project/config/constants.dart';
 import 'package:search_project/controllers/profile_model_controller.dart';
 import 'package:search_project/models/user_model.dart';
-import 'package:search_project/services/profile_services.dart';
 
 import 'package:search_project/views/widgets/profile/profile_comment.dart';
 
@@ -14,7 +12,7 @@ import '../../../controllers/profile_controller.dart';
 import '../../../models/post_model.dart';
 
 import '../../widgets/community/mobile_post_classic.dart';
-import 'package:intl/intl.dart';
+
 
 class ProfileMobileScreen extends StatefulWidget {
   /// Constrains to handle respositivity
@@ -84,8 +82,8 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                       SingleChildScrollView(
                         child: Column(
                           children: [
-                            for (int index = 0; index < 10; index++)
-                              ProfileComment(),
+                            for (int index = 0; index < userProfileComments.length; index++)
+                              ProfileComment(index:index),
                           ],
                         ),
                       ),
@@ -283,9 +281,8 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                iSMOCK
-                                    ? "· ${value.calculateAge(userProfileAbout['createdAt'])}"
-                                    : "· ${value.calculateAge(DateTime.parse(userProfileAbout['createdAt']))}",
+                               
+                                    "· ${value.calculateAge(DateTime.parse(userProfileAbout['createdAt']))}",
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
