@@ -10,15 +10,14 @@ import 'community_controller.dart';
 class CommunityModelProvider with ChangeNotifier {
   bool mockData = iSMOCK;
 
-  Future getPosts(String communityName, String sortType, List<dynamic> posts,
+  Future getCommunityPosts(String communityName, String sortType, List<dynamic> posts,
       int page, int limit) async {
     if (mockData) {
-      postsList = postsListMock1;
+      communityPostsList = communityPostsListMock;
       notifyListeners();
     } else {
       await getAPICommunityPosts(communityName, sortType, posts, page, limit);
-      postsList = postsListAPI;
-      //print(",,,,,,,,,,,,,, $postsList");
+      communityPostsList = communityPostsListAPI;
       notifyListeners();
     }
   }
@@ -48,13 +47,16 @@ class CommunityModelProvider with ChangeNotifier {
   Future getCommunityFlairs(String communityName) async {
     if (mockData) {
       communityFlairs=communityFlairsMock;
+      
     } else {
+      
       await getAPICommunityFlairs(communityName);
       communityFlairs=communityFlairsAPI;
+      
     }
-    print(communityFlairs[0]['flairText']);
     notifyListeners();
   }
+
 
   Future vote(String id, int dir, int index, BuildContext context) async {
     if (mockData) {

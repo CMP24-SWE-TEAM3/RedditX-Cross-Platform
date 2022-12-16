@@ -37,11 +37,16 @@ class VoteModel {
 
 /// Post model: represents the post.
 class PostModel {
+  String? id;
+
   /// Post title
   String? title;
 
-  /// Post text (if its type is "text")
+  /// Post text
   String? text;
+  String? textHTML;
+
+  String? textJSON;
 
   /// Indicates whether the post is deleted or not
   bool? isDeleted;
@@ -102,7 +107,8 @@ class PostModel {
 
   /// Constructor of Post model
   PostModel(
-      {required this.title,
+      {required this.id,
+      required this.title,
       required this.spoiler,
       required this.nsfw,
       required this.createdAt,
@@ -122,46 +128,205 @@ class PostModel {
       this.spamCount = 0,
       this.insightCnt,
       this.isDeleted = false,
+      this.textHTML,
       this.text});
-  Map<String, dynamic> toMap() {
-    return {
-      'title': title,
-      'spoiler': spoiler,
-      'nsfw': nsfw,
-      'createdAt': createdAt,
-      'userID': userID,
-      'type': type,
-      'attachments': attachments,
-      'commentsNum': commentsNum,
-      'mentionedInUsers': mentionedInUsers,
-      'spammers': spammers,
-      'communityID': communityID,
-      'followers': followers,
-      'flairBackGround': flairBackGround,
-      'flairTextColor': flairTextColor,
-      'flairText': flairText,
-      'flairID': flairID,
-      'votesCount': votesCount,
-      'spamCount': spamCount,
-      'insightCnt': insightCnt,
-      'isDeleted': isDeleted,
-      'text': text
-    };
-  }
 }
 
 /// List of posts whether API or mock
-List<dynamic> postsList = [];
+List<dynamic> communityPostsList = [];
 
 /// List of real posts (from API)
-List<dynamic> postsListAPI = [];
+List<dynamic> communityPostsListAPI = [];
 
 /// List of post model
 /// dummy data to test
 /// will be replaced with real data from the APIs
 
+List<Map<String, dynamic>> communityPostsListMock = [
+  {
+    'id': "639ab04cd0388bee70b25ee3",
+    'votesCount': 7500,
+    'communityID': communityModel1.id,
+    'commentsNum': 3400,
+    'attachments': [
+      "https://i.pinimg.com/originals/0d/22/ae/0d22ae6fe219f106395c2901968e167e.gif",
+      "https://i.pinimg.com/originals/0d/22/ae/0d22ae6fe219f106395c2901968e167e.gif",
+      "https://i.pinimg.com/originals/0d/22/ae/0d22ae6fe219f106395c2901968e167e.gif"
+    ],
+    'title':
+        "“I dream my painting and I paint my dream.”― Vincent Willem van Gogh",
+    'spoiler': true,
+    'nsfw': false,
+    'createdAt': DateTime(2022, 11, 8, 12, 30),
+    'userID': {
+      '_id': "t2_Huda Ashraf",
+      'avatar':
+          "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg",
+    },
+    'type': "image",
+  },
+  {
+    'id': "639ab04cd0388bee70b25ee1",
+    'votesCount': 50,
+    'communityID': communityModel1.id,
+    'commentsNum': 300,
+    'textHTML':
+        "“...and then, I have nature and art and poetry, and if that is not enough, what is enough?”― Vincent Willem van Gogh",
+    'title':
+        "“...and then, I have nature and art and poetry, and if that is not enough, what is enough?”― Vincent Willem van Gogh",
+    'spoiler': true,
+    'nsfw': false,
+    'createdAt': DateTime(2022, 11, 8, 12, 30),
+    'userID': {
+      '_id': "t2_Doaa Mohamed",
+      'avatar':
+          "https://i.pinimg.com/564x/bf/ce/68/bfce68d80c7f012f15b46e2e6ecc4a8a.jpg",
+    },
+    'type': "text",
+  },
+  {
+    'id': "639ab04cd0388bee70b25ee2",
+    'votesCount': 150,
+    'communityID': communityModel1.id,
+    'commentsNum': 100,
+    'attachments': [
+      "https://i.pinimg.com/564x/60/9d/04/609d04f9f059aa65a99955bf9a8b348e.jpg"
+    ],
+    'textHTML':
+        "<p>...and then, I have nature and art and poetry, and if that is not enough, what is enough?”― Vincent Willem van Gogh</p>",
+    'title':
+        "Japanese artist and art university graduate Gotte have turned their creative skills towards a very cool subject. Their light-hearted watercolor animal drawings depict a typical day in their adorable pet's life - a cute hamster named Sukeroku.",
+    'spoiler': true,
+    'nsfw': false,
+    'createdAt': DateTime(2022, 11, 8, 12, 30),
+    'userID': {
+      '_id': "t2_Mariam",
+      'avatar':
+          "https://i.pinimg.com/564x/aa/ba/7a/aaba7ada0085c9ec7d275baaa84405a6.jpg",
+    },
+    'type': "image",
+  },
+  {
+    'id': "639ab04cd0388bee70b25ee4",
+    'votesCount': 1500,
+    'communityID': communityModel1.id,
+    'commentsNum': 1000,
+    'attachments': [
+      "https://www.nevuefineartmarketing.com/4-amazing-artist-websites-you-should-see/?utm_source=pinterest&utm_medium=social&utm_campaign=SocialWarfare"
+    ],
+    'textHTML':
+        "Professional artist websites are essential to the success of any aspiring artist selling art online or locally.Building an online presence goes a long way in getting an artist’s name out there.It is crucial to have a well-designed website that will separate your art business from all of the other artists selling art online",
+    'title':
+        "Professional artist websites are essential to the success of any aspiring artist selling art online or locally.Building an online presence goes a long way in getting an artist’s name out there.It is crucial to have a well-designed website that will separate your art business from all of the other artists selling art online",
+    'spoiler': true,
+    'nsfw': false,
+    'createdAt': DateTime(2022, 11, 3),
+    'userID': {
+      '_id': "t2_Eman Ashraf",
+      'avatar':
+          "https://i.pinimg.com/564x/f0/a2/a4/f0a2a413909960c4bc3dd29b4e1d69ee.jpg",
+    },
+    'type': "link",
+  },
+  {
+    'id': "639ab04cd0388bee70b25ee5",
+    'votesCount': 50,
+    'communityID': communityModel1.id,
+    'commentsNum': 140,
+    'attachments': [
+      "https://www.nevuefineartmarketing.com/4-amazing-artist-websites-you-should-see/?utm_source=pinterest&utm_medium=social&utm_campaign=SocialWarfare"
+    ],
+    'textHTML':
+        "Professional artist websites are essential to the success of any aspiring artist selling art online or locally.Building an online presence goes a long way in getting an artist’s name out there.It is crucial to have a well-designed website that will separate your art business from all of the other artists selling art online",
+    'title':
+        "Professional artist websites are essential to the success of any aspiring artist selling art online or locally.Building an online presence goes a long way in getting an artist’s name out there.It is crucial to have a well-designed website that will separate your art business from all of the other artists selling art online",
+    'spoiler': true,
+    'nsfw': false,
+    'createdAt': DateTime(2022, 10, 26),
+    'userID': {
+      '_id': "t2_Zahraa",
+      'avatar':
+          "https://i.pinimg.com/564x/d8/3e/24/d83e2410c042538202fb8c9bce9a3f01.jpg",
+    },
+    'type': "text",
+  },
+  {
+    'id': "639ab04cd0388bee70b25ee6",
+    'votesCount': 80,
+    'communityID': communityModel1.id,
+    'commentsNum': 900,
+    'attachments': [
+      "https://i.pinimg.com/564x/c9/92/64/c9926411478ce371609e61fc76fecaf0.jpg"
+    ],
+    'textHTML':
+        "Professional artist websites are essential to the success of any aspiring artist selling art online or locally.Building an online presence goes a long way in getting an artist’s name out there.It is crucial to have a well-designed website that will separate your art business from all of the other artists selling art online",
+    'title':
+        "Professional artist websites are essential to the success of any aspiring artist selling art online or locally.Building an online presence goes a long way in getting an artist’s name out there.It is crucial to have a well-designed website that will separate your art business from all of the other artists selling art online",
+    'spoiler': true,
+    'nsfw': false,
+    'createdAt': DateTime(2021, 10, 2),
+    'userID': {
+      '_id': "t2_Salma Mohamed",
+      'avatar':
+          "https://i.pinimg.com/564x/1e/39/8d/1e398d1ef51258540cc600438594b343.jpg",
+    },
+    'type': "image",
+  },
+  {
+    'id': "639ab04cd0388bee70b25ee7",
+    'votesCount': 200,
+    'communityID': communityModel1.id,
+    'commentsNum': 40,
+    'attachments': [
+      "https://www.creativefounders.com/art-websites-aspiring-artist/"
+    ],
+    'textHTML': "10 Art Websites Every Aspiring Artist Should Know",
+    'title': "10 Art Websites Every Aspiring Artist Should Know",
+    'spoiler': true,
+    'nsfw': false,
+    'createdAt': DateTime(2022, 10, 22),
+    'userID': {
+      '_id': "t2_Hend",
+      'avatar':
+          "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg",
+    },
+    'type': "link",
+  },
+  {
+    'id': "639ab04cd0388bee70b25ee7",
+    'votesCount': 200,
+    'communityID': communityModel1.id,
+    'commentsNum': 40,
+    'attachments': [
+      "https://i.pinimg.com/564x/bf/23/a9/bf23a9053df8a9b82b6aee33cb35cafb.jpg"
+    ],
+    'textHTML':
+        "<p>...and then, I have nature and art and poetry, and if that is not enough, what is enough?”― Vincent Willem van Gogh</p>",
+    'title':
+        "Colored Pencil Techniques. Abstracts with purple flowers to give you ideas for coloring. #coloredpenciltechniques",
+    'spoiler': true,
+    'nsfw': false,
+    'createdAt': DateTime(2021, 5, 2),
+    'userID': {
+      '_id': "t2_Israa",
+      'avatar':
+          "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg",
+    },
+    'type': "image",
+  },
+];
+
+/// User model
+class UserModelMock {
+  final String avatar;
+
+  /// User model constructor
+  UserModelMock({required this.avatar});
+}
+
 List<PostModel> postsListMock = [
   PostModel(
+    id: "639ab04cd0388bee70b25ee3",
     votesCount: 7500,
     communityID: communityModel1.id,
     commentsNum: 3400,
@@ -182,6 +347,7 @@ List<PostModel> postsListMock = [
     type: "img",
   ),
   PostModel(
+    id: "639ab04cd0388bee70b25ee1",
     votesCount: 50,
     communityID: communityModel1.id,
     commentsNum: 120,
@@ -199,6 +365,7 @@ List<PostModel> postsListMock = [
     type: "text",
   ),
   PostModel(
+    id: "639ab04cd0388bee70b25ee2",
     votesCount: 150,
     communityID: communityModel1.id,
     commentsNum: 100,
@@ -217,6 +384,7 @@ List<PostModel> postsListMock = [
     type: "img",
   ),
   PostModel(
+    id: "639ab04cd0388bee70b25ee4",
     votesCount: 1500,
     communityID: communityModel1.id,
     commentsNum: 1000,
@@ -235,6 +403,7 @@ List<PostModel> postsListMock = [
     type: "link",
   ),
   PostModel(
+      id: "639ab04cd0388bee70b25ee5",
       spoiler: true,
       nsfw: false,
       attachments: [""],
@@ -252,6 +421,7 @@ List<PostModel> postsListMock = [
               "https://i.pinimg.com/564x/d8/3e/24/d83e2410c042538202fb8c9bce9a3f01.jpg"),
       votesCount: 240),
   PostModel(
+      id: "639ab04cd0388bee70b25ee6",
       spoiler: true,
       nsfw: false,
       attachments: [
@@ -270,6 +440,7 @@ List<PostModel> postsListMock = [
               "https://i.pinimg.com/564x/1e/39/8d/1e398d1ef51258540cc600438594b343.jpg"),
       votesCount: 900),
   PostModel(
+      id: "639ab04cd0388bee70b25ee7",
       spoiler: true,
       nsfw: false,
       attachments: [
@@ -287,6 +458,7 @@ List<PostModel> postsListMock = [
               "https://i.pinimg.com/564x/dc/6b/7d/dc6b7da2bb455dd400fc986e34dfa2f7.jpg"),
       votesCount: 400),
   PostModel(
+      id: "639ab04cd0388bee70b25ee8",
       spoiler: true,
       nsfw: false,
       attachments: [
@@ -296,7 +468,7 @@ List<PostModel> postsListMock = [
       commentsNum: 1003,
       communityID: communityModel1.id,
       createdAt: DateTime(2021, 5, 2),
-      text: "",
+      textHTML: "",
       title:
           "Colored Pencil Techniques. Abstracts with purple flowers to give you ideas for coloring. #coloredpenciltechniques",
       userID: UserID(
@@ -308,6 +480,7 @@ List<PostModel> postsListMock = [
 
 List postsListMock1 = postsListMock
     .map((e) => {
+          '_id': e.id,
           'title': e.title,
           'spoiler': e.spoiler,
           'nsfw': e.nsfw,
@@ -331,14 +504,6 @@ List postsListMock1 = postsListMock
           'text': e.text
         })
     .toList();
-
-/// User model
-class UserModelMock {
-  final String avatar;
-
-  /// User model constructor
-  UserModelMock({required this.avatar});
-}
 
 class CommunityService {
   List<PostModel> testpostsListMock = postsListMock;

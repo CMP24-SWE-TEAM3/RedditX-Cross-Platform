@@ -2,8 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/services/community_services.dart';
-import '../../../config/constants.dart';
+
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
 import '../../../methods/community/default_bottom_sheet.dart';
@@ -19,6 +18,8 @@ import '../../widgets/community/mobile_post_card.dart';
 import '../../widgets/community/mobile_post_classic.dart';
 import 'dart:math' as math;
 
+import 'package:flutter_html/flutter_html.dart';
+
 /// Community mobile screen
 class CommunityMobileScreen extends StatelessWidget {
   /// Constrains to handle respositivity
@@ -27,11 +28,15 @@ class CommunityMobileScreen extends StatelessWidget {
   /// Context used in [defaultBottomSheet] and others
   final BuildContext context;
 
+
+  final String communityName;
+
   /// Community mobile screen constructor
   const CommunityMobileScreen({
     super.key,
     required this.context,
     required this.constraints,
+    required this.communityName
   });
 
   @override
@@ -65,8 +70,6 @@ class CommunityMobileScreen extends StatelessWidget {
                           ),
                           InkWell(
                               onTap: () {
-                                //value1.getCommunityFlairs("t5_imagePro235");
-                                //value1.getCommunityModerators("t5_imagePro235");
                                 showDefaultBottomSheet(
                                     context,
                                     "SORT POSTS BY",
@@ -77,7 +80,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                       "New",
                                       "Top",
                                     ],
-                                    "postSortBy");
+                                    "postSortBy",communityName);
                               },
                               child: SizedBox(
                                 height: 30,
@@ -105,7 +108,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                     2,
                                     value.bottomSheetPostViewIcons,
                                     ["Card", "Classic"],
-                                    "postView");
+                                    "postView",communityName);
                               },
                               icon: Icon(value.postViewIcon))
                         ],
@@ -115,19 +118,20 @@ class CommunityMobileScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             for (int index = 0;
-                                index < postsList.length;
+                                index < communityPostsList.length;
                                 index++)
                               (value.postView == "classic")
                                   ? MobilePostClassic(
-                                      postType: postsList[index]['type'],
+                                      postType: communityPostsList[index]
+                                          ['type'],
                                       context: context,
-                                      postPlace: "community",
-                                      index: index,
-                                    )
-                                  : MobilePostCard(
-                                      postType: postsList[index]['type'],
-                                      index: index,
-                                    ),
+                                      postPlace: 'community',
+                                      index: index)
+                                  :  MobilePostCard(
+                                          postType: communityPostsList[index]
+                                              ['type'],
+                                          index: index,
+                                        ),
                           ],
                         ),
                       ),
@@ -463,7 +467,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                                                   "Low",
                                                                   "Frequent"
                                                                 ],
-                                                                "notifications");
+                                                                "notifications",communityName);
                                                           },
                                                           child: Icon(
                                                             key: const ValueKey(

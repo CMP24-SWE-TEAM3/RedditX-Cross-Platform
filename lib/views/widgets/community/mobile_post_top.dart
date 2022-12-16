@@ -20,7 +20,7 @@ class TopMobilePost extends StatelessWidget {
   final BuildContext context;
 
   /// Shows when the post was posted
-  final DateTime dateTime;
+  final String dateTime;
 
   /// Shows the user name who posted
   final String userName;
@@ -79,12 +79,12 @@ class TopMobilePost extends StatelessWidget {
                   Consumer<CommunityProvider>(
                     builder: (context, value, child) => Text(
                       !iSMOCK
-                          ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
-                          : "${value.calculateAge(postsListMock[index].createdAt!)}",
+                          ? "${value.calculateAge(DateTime.parse(communityPostsList[index]['createdAt']))}"
+                          : "${value.calculateAge(communityPostsListMock[index]['createdAt'])}",
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
-                  if (postType == "img")
+                  if (postType == "image")
                     InkWell(
                       child: Text(
                         "  i.redd.it",
@@ -110,11 +110,8 @@ class TopMobilePost extends StatelessWidget {
               showeProfileDialog(context, index);
             },
             child: Text(
-              (!iSMOCK)
-                  ? "u/${postsList[index]['userID']['_id']}"
-                      .replaceFirst("t2_", "")
-                  : "u/${postsList[index]['userID'].userID}"
-                      .replaceFirst("t2_", ""),
+              "u/${communityPostsList[index]['userID']['_id']}"
+                  .replaceFirst("t2_", ""),
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -125,12 +122,12 @@ class TopMobilePost extends StatelessWidget {
           Consumer<CommunityProvider>(
             builder: (context, value, child) => Text(
               !iSMOCK
-                  ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
-                  : "${value.calculateAge(postsListMock[index].createdAt!)}",
+                  ? "${value.calculateAge(DateTime.parse(communityPostsList[index]['createdAt']))}"
+                  : "${value.calculateAge(communityPostsListMock[index]['createdAt'])}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
-          if (postType == "img")
+          if (postType == "image")
             InkWell(
               onTap: () {},
               child: Text(
@@ -152,25 +149,31 @@ class TopMobilePost extends StatelessWidget {
             backgroundImage: NetworkImage(
                 "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
           ),
-          const SizedBox(
-            width: 4,
-          ),
+          // const SizedBox(
+          //   width: 4,
+          // ),
           Row(
             children: [
               InkWell(
                 onTap: () {},
                 child: const Text("r/AskAnySoftware"),
               ),
+              const SizedBox(
+                width: 5,
+              ),
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
                   !iSMOCK
-                      ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
-                      : "${value.calculateAge(postsListMock[index].createdAt!)}",
+                      ? "${value.calculateAge(DateTime.parse(communityPostsList[index]['createdAt']))}"
+                      : "${value.calculateAge(communityPostsListMock[index]['createdAt'])}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),
-              const Text("  i.redd.it"),
-              const Spacer(),
+              if (postType == 'image')
+                InkWell(
+                  onTap: () {},
+                  child: const Text("  i.redd.it"),
+                ),
               PopUpMenu(
                 index: index,
               ),

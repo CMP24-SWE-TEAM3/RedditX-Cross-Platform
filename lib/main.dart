@@ -7,6 +7,7 @@ import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
+
 import 'views/screens/community/community_home_mobile_screen.dart';
 import 'views/screens/community/community_home_web_screen.dart';
 import 'views/screens/search/search_screen_one.dart';
@@ -54,7 +55,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
-              ..getPosts("At5_imagePro235", "hot", [], 2, 40)..getCommunityAbout("t5_imagePro235")..getCommunityInfo("t5_imagePro235")..getCommunityFlairs("t5_imagePro235")),
+              ..getCommunityPosts("t5_imagePro235", "hot", [], 1, 40)..getCommunityAbout("t5_imagePro235")..getCommunityInfo("t5_imagePro235")..getCommunityFlairs("t5_imagePro235")),
         ChangeNotifierProvider(
             create: (context) =>
                 CommunityProvider(communityService: CommunityService())),
@@ -84,14 +85,14 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         home:
-        //  LayoutBuilder(
-        //     builder: (BuildContext context, BoxConstraints constraints) {
-        //   return (constraints.minWidth.round() < 500)
-        //       ? CommunityMobileScreen(
-        //           context: context, constraints: constraints)
-        //       : CommunityWebScreen(context: context, constraints: constraints);
-        // }),
-         (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+         LayoutBuilder(
+            builder: (BuildContext context, BoxConstraints constraints) {
+          return (constraints.minWidth.round() < 500)
+              ? CommunityMobileScreen(
+                  context: context, constraints: constraints,communityName: "t5_imagePro235",)
+              : CommunityWebScreen(context: context, constraints: constraints,communityName: "t5_imagePro235",);
+        }),
+         //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
           Home.routeName: (ctx) => const Home(),
           SignUpPage.routeName: (ctx) => const SignUpPage(),

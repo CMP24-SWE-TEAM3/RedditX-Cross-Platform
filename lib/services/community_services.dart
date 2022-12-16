@@ -4,9 +4,9 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 
 import '../config/constants.dart';
-import '../models/authentication.dart';
 import '../models/community_model.dart';
 import '../models/post_model.dart';
+
 
 /// Get posts of a specific community with a sort type
 getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
@@ -14,7 +14,7 @@ getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
   var queryParameters = {'page': page, 'limit': limit};
   Uri url = Uri.https(
     "api.redditswe22.tech",
-    "/api/listing/posts/r/t5_imagePro235/$sortType",
+    "/api/listing/posts/r/$communityName/$sortType",
     {
       'mapData': jsonEncode(queryParameters),
     },
@@ -27,10 +27,13 @@ getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      postsListAPI = responseData['posts'];
+      communityPostsListAPI = responseData['posts'];
+      print("_______________________________________");
+       print(communityPostsListAPI[7]);
+    
     } else {
       //print("posts ${value.statusCode}");
-      postsListAPI = [];
+      communityPostsListAPI = [];
     }
   });
 }
@@ -86,7 +89,7 @@ getAPICommunityInfo(String communityName) async {
 
 
 getAPICommunityFlairs(String communityName) async {
-  String searchRequest = "/api/r/${communityName}/api/flair-list";
+  String searchRequest = "/api/r/$communityName/api/flair-list";
   Uri url = Uri.parse(urlApi + searchRequest);
   await http.get(
     url,
@@ -99,13 +102,14 @@ getAPICommunityFlairs(String communityName) async {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
       communityFlairsAPI=responseData['flairs'];
-      print(responseData);
 
     } else {
-      print(value.statusCode);
     }
   });
 }
+
+
+
 
 voteAPI(String id, int dir) async {
   const String voteRequest = "/api/listing/vote";

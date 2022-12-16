@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import '../../../config/constants.dart';
 import '../../../models/post_model.dart';
 import 'mobile_post_bottom.dart';
 import 'mobile_post_top.dart';
+import 'dart:math' as math;
 
 /// Shows the card post view
 class MobilePostClassic extends StatelessWidget {
@@ -42,36 +44,81 @@ class MobilePostClassic extends StatelessWidget {
                     child: Column(
                       children: [
                         TopMobilePost(
-                          postPlace: postPlace,
-                          postType: postType,
-                          context: context,
-                          index: index,
-                          userName: (!iSMOCK)
-                              ? "u/${postsList[index]['userID']['_id']}"
-                                  .replaceFirst("t2_", "")
-                              : "u/${postsList[index]['userID'].userID}"
-                                  .replaceFirst("t2_", ""),
-                          dateTime: postsListMock[index].createdAt!,
-                        ),
+                            postPlace: postPlace,
+                            postType: postType,
+                            context: context,
+                            index: index,
+                            userName:
+                                "u/${communityPostsList[index]['userID']['_id']}"
+                                    .replaceFirst("t2_", ""),
+                            dateTime: !iSMOCK
+                                ? "${communityPostsList[index]['createdAt']}"
+                                : "${communityPostsListMock[index]['createdAt']}"),
                         const SizedBox(
                           height: 10,
                         ),
-                        if (postType == 'text' || postType == 'img')
+                        if (postType == 'text' ||
+                            postType == 'image' ||
+                            postType == 'linkWithImage')
                           Text(
-                            // (postType == 'text')
-                            //     ? postsList[index]['text']
-                            //     :
-                            postsList[index]['title'],
+                            communityPostsList[index]['title'],
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
+                          (communityPostsList[index]['flairText']!=null)?
+                        const SizedBox(
+                          height: 5,
+                        ):const SizedBox(
+                          height: 0,),
+                        (communityPostsList[index]['flairText']!=null)?
+                        InkWell(
+                          onTap: () {},
+                          child: RichText(
+                            key: const Key('post_content'),
+                            text: TextSpan(
+                              children: [
+                                WidgetSpan(
+                                  child: Container(
+                                    margin: const EdgeInsets.only(
+                                      left: 5,
+                                    ),
+                                    padding: const EdgeInsets.all(
+                                      2,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      ///Random color
+                                      color: Color(
+                                        (math.Random().nextDouble() * 0xFFFFFF)
+                                            .toInt(),
+                                      ).withOpacity(
+                                        1,
+                                      ),
+                                      //rounded rectangle shape
+                                      borderRadius: const BorderRadius.all(
+                                        Radius.circular(10),
+                                      ),
+                                    ),
+                                    child: Text(
+                                      ///Flair text
+                                      '${communityPostsList[index]['flairText']}',
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ):const SizedBox(
+                          height: 0,),
                       ],
                     ),
                   ),
-                  if (postType == "img") const SizedBox(height: 8),
-                  if (postType == "img")
+                  if (postType == "image") const SizedBox(height: 8),
+                  if (postType == "image")
                     Container(
                       height: 250,
                       width: double.infinity,
@@ -79,8 +126,13 @@ class MobilePostClassic extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  postsList[index]['attachments'][0]))),
+                              image: NetworkImage((communityPostsList[index]
+                                              ['attachments']
+                                          .length ==
+                                      0)
+                                  ? "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"
+                                  : communityPostsList[index]['attachments']
+                                      [0]))),
                     ),
                   if (postType == 'link')
                     Row(
@@ -89,7 +141,7 @@ class MobilePostClassic extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                postsList[index]['title'],
+                                communityPostsList[index]['title'],
                                 maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -105,7 +157,12 @@ class MobilePostClassic extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 18),
                               child: LinkPreviewGenerator(
-                                link: postsList[index]['attachments'][0],
+                                link: (communityPostsList[index]['attachments']
+                                            .length ==
+                                        0)
+                                    ? "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"
+                                    : communityPostsList[index]['attachments']
+                                        [0],
                                 linkPreviewStyle: LinkPreviewStyle.small,
                                 bodyMaxLines: 1,
                                 bodyTextOverflow: TextOverflow.ellipsis,
@@ -116,6 +173,15 @@ class MobilePostClassic extends StatelessWidget {
                         ))
                       ],
                     ),
+                  if (postType == 'linkWithImage')
+                    Html(
+                      data: communityPostsList[index]['textHTML'] ?? '',
+                      shrinkWrap: true,
+                      style: {
+                        '#': Style(
+                            maxLines: 3, textOverflow: TextOverflow.ellipsis)
+                      },
+                    ),
                   BottomPostMobile(
                     index: index,
                   ),
@@ -124,7 +190,7 @@ class MobilePostClassic extends StatelessWidget {
                     width: double.infinity,
                     color: Theme.of(context).scaffoldBackgroundColor,
                   ),
-                  const  Divider()
+                  const Divider()
                 ],
               ),
             )));
