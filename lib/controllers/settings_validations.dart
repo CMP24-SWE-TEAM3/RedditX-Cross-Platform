@@ -54,10 +54,7 @@ validateChangePassword(
 forgotPasswordValidation(userNameController, emailController, ctx) async {
   settingsModel.forgotPasswordEmailErrorMessage =
       emailValidation(emailController.text);
-  settingsModel.forgotPasswordUsernameErrorMessage =
-      await usernameValidation(userNameController.text, ctx);
-  if ((settingsModel.forgotPasswordEmailErrorMessage == null) &&
-      (settingsModel.forgotPasswordUsernameErrorMessage == null)) {
+  if ((settingsModel.forgotPasswordEmailErrorMessage == null)) {
     resetPass(emailController, userNameController, ctx);
     Navigator.of(ctx).pop();
   }

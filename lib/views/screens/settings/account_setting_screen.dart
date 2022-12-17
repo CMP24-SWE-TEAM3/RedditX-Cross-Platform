@@ -30,11 +30,12 @@ class AccountSettingsScreen extends StatelessWidget {
         children: [
           SettingsLabel(title: "BASIC SETTINGS"),
           SettingsTileButtomSheet(
+            key: const ValueKey('Switch_Accounts_Button'),
             leadingIcon: const Icon(Icons.person_outlined),
             titleText: const Text("Switch Accounts"),
             sheetText: const Text("ACCOUNTS"),
             sheetChildrenTextList: [
-              Text("u/${settingsModel.userName}"),
+              Text("u/${currentUser!.username}"),
               const Text("Add account"),
             ],
             sheetChildrenIconList: const [
@@ -47,7 +48,8 @@ class AccountSettingsScreen extends StatelessWidget {
             ],
           ),
           InkWell(
-            onTap: (settingsModel.hasPassword!)
+            key: const ValueKey('email_Button'),
+            onTap: (!currentUser!.isPasswordSet!)
                 ? () => showMakePasswordFirstDialogue(
                     context, "change your email address")
                 : () {
@@ -68,7 +70,8 @@ class AccountSettingsScreen extends StatelessWidget {
             ),
           ),
           InkWell(
-            onTap: (settingsModel.hasPassword!)
+            key: const ValueKey('Pass_Button'),
+            onTap: (!currentUser!.isPasswordSet!)
                 ? () => showMakePasswordFirstDialogue(
                     context, "change your password")
                 : () {
@@ -89,11 +92,12 @@ class AccountSettingsScreen extends StatelessWidget {
           ),
           SettingsLabel(title: "CONNECTED ACCOUNTS"),
           ListTile(
+            key: const ValueKey('Google_Button'),
             leading: const Icon(Icons.g_mobiledata_rounded),
             title: const Text("Google"),
-            subtitle: Text(settingsModel.accountMail!),
+            subtitle: Text(currentUser!.email!),
             trailing: TextButton(
-              onPressed: () => (!settingsModel.hasPassword!)
+              onPressed: () => (currentUser!.isPasswordSet!)
                   ? Provider.of<SettingsViewModelMobileController>(context,
                           listen: false)
                       .toggleConnectedToGoogle()
@@ -105,6 +109,7 @@ class AccountSettingsScreen extends StatelessWidget {
           ),
           SettingsLabel(title: "CONTACT SETTINGS"),
           InkWell(
+            key: const ValueKey('Manage_Button'),
             child: const ListTile(
               leading: Icon(Icons.email),
               title: Text("Manage emails"),
@@ -121,6 +126,7 @@ class AccountSettingsScreen extends StatelessWidget {
           ),
           SettingsLabel(title: "BLOCKING AND PERMISSIONS"),
           ListTileCustom(
+            key: const ValueKey('Follow_Button'),
             ico: const Icon(Icons.person_pin),
             text: "Allow people to follow you",
             enble: Future<bool>.value(true),
@@ -136,6 +142,7 @@ class AccountSettingsScreen extends StatelessWidget {
             },
           ),
           ListTileCustom(
+            key: const ValueKey('Chat_Button'),
             ico: const Icon(Icons.chat),
             text: "Allow chat requests",
             enble: Future<bool>.value(true),
@@ -150,6 +157,7 @@ class AccountSettingsScreen extends StatelessWidget {
             },
           ),
           ListTileCustom(
+            key: const ValueKey('Direct_Button'),
             ico: const Icon(Icons.email_outlined),
             text: "Allow direct messages",
             enble: Future<bool>.value(true),

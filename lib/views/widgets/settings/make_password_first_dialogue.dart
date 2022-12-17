@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../controllers/mobile_settings_view_controller.dart';
 
-import '../../../models/settings_model.dart';
+import '../../../models/user_model.dart';
 
 /// a dialog shown for bare email accounts who try to access
 /// update email screen , change password screen and connect/disconnect from google
@@ -30,7 +30,7 @@ showMakePasswordFirstDialogue(context1, String s) => showDialog<String>(
                         insetPadding: const EdgeInsets.all(10),
                         title: const Text('Ckeck your email'),
                         content: Text(
-                            "We sent an email to ${settingsModel.userName} with a link to create your password"),
+                            "We sent an email to ${currentUser!.username} with a link to create your password"),
                         actions: <Widget>[
                           ElevatedButton(
                             onPressed: () {

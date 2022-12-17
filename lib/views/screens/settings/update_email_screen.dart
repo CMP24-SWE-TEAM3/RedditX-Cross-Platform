@@ -63,6 +63,7 @@ class UpdateEmailAddress extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: EmailText(
+                key: const ValueKey('Email_Text'),
                 emailController: updatedEmailController,
                 errorEmailText: settingsModel.updateEmailErrorMessage),
           ),
@@ -80,6 +81,7 @@ class UpdateEmailAddress extends StatelessWidget {
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width / 2.1,
                           child: OutlinedButton(
+                            key: const ValueKey('Cancel_Button'),
                             onPressed: () => Navigator.pop(context),
                             style: ButtonStyle(
                               backgroundColor: MaterialStateProperty.all(white),
@@ -102,6 +104,7 @@ class UpdateEmailAddress extends StatelessWidget {
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width / 2.1,
                           child: OutlinedButton(
+                            key: const ValueKey('Save_Button'),
                             onPressed: () =>
                                 Provider.of<SettingsViewModelMobileController>(
                                         context,

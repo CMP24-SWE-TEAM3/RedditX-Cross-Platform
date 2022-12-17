@@ -30,6 +30,7 @@ class SettingsHomePage extends StatelessWidget {
           SettingsLabel(title: "GENERAL"),
           (userauthentication.isSignedIn)
               ? SettingsListTile(
+                  key: const ValueKey('Account_settings_Button'),
                   title: "Account settings for u/${currentUser?.username}",
                   ico: const Icon(Icons.person),
                   onTab: () {
@@ -49,6 +50,7 @@ class SettingsHomePage extends StatelessWidget {
                   },
                 )
               : SettingsListTile(
+                  key: const ValueKey('Add_Account_Button'),
                   title: "Add Account",
                   ico: const Icon(Icons.person),
                   onTab: () =>
@@ -57,6 +59,7 @@ class SettingsHomePage extends StatelessWidget {
           InkWell(
             onTap: () {},
             child: SettingsListTile(
+              key: const ValueKey('Change_profile_picture_Button'),
               title: "Change profile picture",
               ico: const Icon(Icons.photo_camera_front_outlined),
               onTab: () =>
@@ -65,27 +68,32 @@ class SettingsHomePage extends StatelessWidget {
           ),
           SettingsLabel(title: "ABOUT"),
           ListTileURL(
+            key: const ValueKey('Policy_Button'),
             url: "http://redditinc.com/policies/content-policy",
             title: "Content policy",
             ico: const Icon(Icons.message_sharp),
           ),
           ListTileURL(
+            key: const ValueKey('Privacy_Button'),
             url: "http://reddit.com/policies/privacy-policy",
             title: "Privacy policy",
             ico: const Icon(Icons.settings),
           ),
           ListTileURL(
+            key: const ValueKey('Agreement_Button'),
             url: "http://redditinc.com/policies/user-agreement",
             title: "User agreement",
             ico: const Icon(Icons.settings),
           ),
           SettingsLabel(title: "SUPPORT"),
           ListTileURL(
+            key: const ValueKey('Help_center_Button'),
             url: "http://reddithelp.com/hc/en-us",
             title: "Help center",
             ico: const Icon(Icons.help),
           ),
           ListTileURL(
+            key: const ValueKey('Repport_Button'),
             url:
                 "http://reddit.zendesk.com/hc/en-us/requests/new?ticket_form_id=65076",
             title: "Report an issue",

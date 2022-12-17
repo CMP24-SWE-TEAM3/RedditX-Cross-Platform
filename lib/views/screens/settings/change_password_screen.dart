@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../../controllers/mobile_settings_view_controller.dart';
 import '../../../../models/settings_model.dart';
 import '../../../../config/constants.dart';
+import '../../../models/user_model.dart';
 import '../../widgets/settings/forgot_password_dialogue.dart';
 import '../../widgets/settings/setting_email_password_textfield.dart';
 
@@ -51,7 +52,7 @@ class ChangePasswordScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     Text(
-                      "u/${settingsModel.userName}",
+                      "u/${currentUser!.username}",
                       style: const TextStyle(
                           fontSize: 20, fontWeight: FontWeight.bold),
                     ),
@@ -67,6 +68,7 @@ class ChangePasswordScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: PasswordText(
+                key: const ValueKey('Current_Password_Text'),
                 passwordController: currentPasswordController,
                 labeling: "Current password",
                 errorPasswordText: settingsModel.currentPasswordErrorMessage),
@@ -74,6 +76,7 @@ class ChangePasswordScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: TextButton(
+                key: const ValueKey('Forgot_Password_Button'),
                 onPressed: () => dialogBuilder(context),
                 child: const Text("Forgot password?",
                     style: TextStyle(color: Colors.blue))),
@@ -81,6 +84,7 @@ class ChangePasswordScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: PasswordText(
+                key: const ValueKey('New_Password_Text'),
                 passwordController: newPasswordController,
                 labeling: "New password",
                 errorPasswordText: settingsModel.newPasswordErrorMessage),
@@ -88,6 +92,7 @@ class ChangePasswordScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: PasswordText(
+                key: const ValueKey('NewConfirm_Password_Text'),
                 passwordController: confirmNewPasswordController,
                 labeling: "Confirm new password",
                 errorPasswordText:
@@ -104,6 +109,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: OutlinedButton(
+                        key: const ValueKey('Cancel_Button'),
                         onPressed: () => Navigator.pop(context),
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all(white),
@@ -127,6 +133,7 @@ class ChangePasswordScreen extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.all(3.0),
                       child: OutlinedButton(
+                        key: const ValueKey('Save_Button'),
                         onPressed: () =>
                             Provider.of<SettingsViewModelMobileController>(
                                     context,

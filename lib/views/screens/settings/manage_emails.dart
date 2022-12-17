@@ -25,6 +25,7 @@ class ManageEmailsScreen extends StatelessWidget {
         children: [
           SettingsLabel(title: "MESSAGES"),
           ListTileCustom(
+            key: const ValueKey('Inbox_Button'),
             ico: const Icon(Icons.email_outlined),
             text: "Inbox messages",
             subtitle: "",
@@ -40,6 +41,7 @@ class ManageEmailsScreen extends StatelessWidget {
                 .toggleSwitch("InboxMessages", context),
           ),
           ListTileCustom(
+            key: const ValueKey('Allow_chat_Button'),
             ico: const Icon(Icons.chat),
             text: "Allow chat requests",
             subtitle: "",
@@ -57,6 +59,7 @@ class ManageEmailsScreen extends StatelessWidget {
           ),
           SettingsLabel(title: "ACTIVITY"),
           ListTileCustom(
+            key: const ValueKey('New_user_Button'),
             ico: const Icon(Icons.email_outlined),
             text: "New user welcome",
             subtitle: "",
@@ -72,6 +75,7 @@ class ManageEmailsScreen extends StatelessWidget {
                 .toggleSwitch("newUserWelcomeEmails", context),
           ),
           ListTileCustom(
+            key: const ValueKey('Comments_Button'),
             ico: const Icon(Icons.notifications),
             text: "Comments On Your Posts",
             subtitle: "",
@@ -87,6 +91,7 @@ class ManageEmailsScreen extends StatelessWidget {
                 .toggleSwitch("commentsOnYourPostsEmails", context),
           ),
           ListTileCustom(
+            key: const ValueKey('Replies_To_Comments_Button'),
             ico: const Icon(Icons.reply_outlined),
             text: "Replies To Your Comments",
             subtitle: "",
@@ -102,6 +107,7 @@ class ManageEmailsScreen extends StatelessWidget {
                 .toggleSwitch("repliesToYourCommentsEmails", context),
           ),
           ListTileCustom(
+            key: const ValueKey('Upvotes_Posts_Button'),
             ico: const Icon(Icons.notifications),
             text: "Upvotes On Your Posts",
             subtitle: "",
@@ -117,6 +123,7 @@ class ManageEmailsScreen extends StatelessWidget {
                 .toggleSwitch("upvotesOnYourPostsEmails", context),
           ),
           ListTileCustom(
+            key: const ValueKey('Upvotes_Comments_Button'),
             ico: const Icon(Icons.notifications),
             text: "Upvotes On Your Comments",
             subtitle: "",
@@ -132,6 +139,7 @@ class ManageEmailsScreen extends StatelessWidget {
                 .toggleSwitch("upvotesOnYourCommentsEmails", context),
           ),
           ListTileCustom(
+            key: const ValueKey('Username_mentions_Button'),
             ico: const Icon(Icons.person),
             text: "Username mentions",
             subtitle: "",
@@ -147,6 +155,7 @@ class ManageEmailsScreen extends StatelessWidget {
                 .toggleSwitch("userNameMentionsEmails", context),
           ),
           ListTileCustom(
+            key: const ValueKey('New_followers_Button'),
             ico: const Icon(Icons.notifications),
             text: "New followers",
             subtitle: "",
@@ -163,6 +172,7 @@ class ManageEmailsScreen extends StatelessWidget {
           ),
           SettingsLabel(title: "NEWSLETTER"),
           ListTileCustom(
+            key: const ValueKey('Daily_Digest_Button'),
             ico: const Icon(Icons.notifications),
             text: "Daily Digest",
             subtitle: "",
@@ -178,6 +188,7 @@ class ManageEmailsScreen extends StatelessWidget {
                 .toggleSwitch("dailyDigestEmails", context),
           ),
           ListTileCustom(
+            key: const ValueKey('Weekly_Recap_Button'),
             ico: const Icon(Icons.notifications),
             text: "Weekly Recap",
             subtitle: "",
@@ -193,6 +204,7 @@ class ManageEmailsScreen extends StatelessWidget {
                 .toggleSwitch("weeklyRecapEmails", context),
           ),
           ListTileCustom(
+            key: const ValueKey('Community_Discovery_Button'),
             ico: const Icon(Icons.notifications),
             text: "Community Discovery",
             subtitle: "",
@@ -209,6 +221,7 @@ class ManageEmailsScreen extends StatelessWidget {
           ),
           SettingsLabel(title: ""),
           ListTileCustom(
+            key: const ValueKey('Unsubscribe_fromallemails_Button'),
             ico: const Icon(Icons.email_outlined),
             text: "Unsubscribe from all emails",
             subtitle: "",

@@ -162,13 +162,13 @@ class MemberModel {
 ///User model for current user
 class UserModel {
   ///preferences of user
-  UserPrefsModel? userPrefs;
+  UserPrefsModel userPrefs = UserPrefsModel();
 
   ///meModel of current user
-  MeModel? meReturn;
+  MeModel meReturn = MeModel();
 
   ///About model of current user
-  AboutModel? aboutReturn;
+  AboutModel aboutReturn = AboutModel();
 
   ///current user's username
   String? username;
@@ -252,10 +252,10 @@ class UserModel {
   List<String>? followers;
 
   ///List of curent user's members in his subreddit
-  List<MemberModel>? member;
+  List<MemberModel> member = [];
 
   ///List of curent user's moderator roles in subreddits
-  List<ModeratorModel>? moderators;
+  List<ModeratorModel> moderators = [];
 
   ///List of curent user's preferred categories
   List<String>? categories;

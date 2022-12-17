@@ -1,7 +1,5 @@
 import 'dart:developer';
-import 'dart:io';
 
-import 'package:flutter/material.dart';
 import 'package:search_project/models/settings_model.dart';
 
 import '../services/settings_service.dart';
@@ -73,25 +71,25 @@ class SettingsServiceModelController {
   getUserPrefsModelController() async {
     final res = await settingsService.getUserPrefsService();
     if (res != null) {
-      currentUser?.userPrefs?.threadedMessages = res["threadedMessages"];
-      currentUser?.userPrefs?.threadedMessages = res["threadedMessages"];
-      currentUser?.userPrefs?.showLinkFlair = res["showLinkFlair"];
-      currentUser?.userPrefs?.countryCode = res["countryCode"];
-      currentUser?.userPrefs?.emailCommentReply = res["emailCommentReply"];
-      currentUser?.userPrefs?.emailUpVoteComment = res["emailUpvoteComment"];
-      currentUser?.userPrefs?.emailMessages = res["emailMessages"];
-      currentUser?.userPrefs?.emailPostReply = res["emailPostReply"];
-      currentUser?.userPrefs?.emailPrivateMessage = res["emailPrivateMessage"];
-      currentUser?.userPrefs?.over18 = res["over18"];
-      currentUser?.userPrefs?.labelNSFW = res["labelNsfw"];
-      currentUser?.userPrefs?.markMessagesRead = res["markMessageRead"];
-      currentUser?.userPrefs?.enableFollowers = res["enableFollwers"];
-      currentUser?.userPrefs?.publicVotes = res["publicVotes"];
-      currentUser?.userPrefs?.showLocationBasedRecommendation =
+      currentUser?.userPrefs.threadedMessages = res["threadedMessages"];
+      currentUser?.userPrefs.threadedMessages = res["threadedMessages"];
+      currentUser?.userPrefs.showLinkFlair = res["showLinkFlair"];
+      currentUser?.userPrefs.countryCode = res["countryCode"];
+      currentUser?.userPrefs.emailCommentReply = res["emailCommentReply"];
+      currentUser?.userPrefs.emailUpVoteComment = res["emailUpvoteComment"];
+      currentUser?.userPrefs.emailMessages = res["emailMessages"];
+      currentUser?.userPrefs.emailPostReply = res["emailPostReply"];
+      currentUser?.userPrefs.emailPrivateMessage = res["emailPrivateMessage"];
+      currentUser?.userPrefs.over18 = res["over18"];
+      currentUser?.userPrefs.labelNSFW = res["labelNsfw"];
+      currentUser?.userPrefs.markMessagesRead = res["markMessageRead"];
+      currentUser?.userPrefs.enableFollowers = res["enableFollwers"];
+      currentUser?.userPrefs.publicVotes = res["publicVotes"];
+      currentUser?.userPrefs.showLocationBasedRecommendation =
           res["showLocationBasedRecommendations"];
-      currentUser?.userPrefs?.searchIncludeOver18 = res["searchIncludeOver18"];
-      currentUser?.userPrefs?.defaultCommentSort = res["defaultCommentSort"];
-      currentUser?.userPrefs?.language = res["langauge"];
+      currentUser?.userPrefs.searchIncludeOver18 = res["searchIncludeOver18"];
+      currentUser?.userPrefs.defaultCommentSort = res["defaultCommentSort"];
+      currentUser?.userPrefs.language = res["langauge"];
       log(res.toString());
       return res;
     } else {

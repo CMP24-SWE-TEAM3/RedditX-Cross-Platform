@@ -54,6 +54,7 @@ class CreateCommunityScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 18, 5),
                 child: TextFormField(
+                  key: const ValueKey('Community_name_Text'),
                   maxLength: 21,
                   controller: createCommunityTextFieldController,
                   cursorColor: Colors.blue,
@@ -92,6 +93,7 @@ class CreateCommunityScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     InkWell(
+                      key: const ValueKey('Community_Type_Button'),
                       onTap: () {
                         showModalBottomSheet(
                           constraints: BoxConstraints.tightFor(
@@ -162,6 +164,7 @@ class CreateCommunityScreen extends StatelessWidget {
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       trailing: Switch(
+                        key: const ValueKey('plus18_Button'),
                         value: plus18!,
                         onChanged: (_) =>
                             Provider.of<CreateCommunityViewModelController>(
@@ -182,6 +185,7 @@ class CreateCommunityScreen extends StatelessWidget {
                 child: SizedBox(
                   height: 50,
                   child: OutlinedButton(
+                    key: const ValueKey('Create_Community_Button'),
                     onPressed: () {
                       // Validate returns true if the form is valid, or false otherwise.
                       if (_formKey.currentState!.validate()) {
@@ -216,6 +220,7 @@ class CreateCommunityScreen extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(15),
                 child: TextButton(
+                  key: const ValueKey('Community_rules_Button'),
                     onPressed: () => showDialog(
                         context: context,
                         builder: (context) => AlertDialog(
