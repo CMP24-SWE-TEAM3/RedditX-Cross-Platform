@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
     //timer for 2 seconds
     Timer(
       const Duration(seconds: 3),
-      () {
+      () async {
         if (signInController.isSignedIn == false) {
           (kIsWeb)
               ? Navigator.of(context)
@@ -42,7 +42,8 @@ class _SplashScreenState extends State<SplashScreen>
               : Navigator.of(context)
                   .pushReplacementNamed(SignUpPage.routeName, arguments: {});
         } else {
-          signInController.getDataFromSharedPreferences();
+          await signInController.getDataFromSharedPreferences();
+          // ignore: use_build_context_synchronously
           Navigator.of(context)
               .pushReplacementNamed(Home.routeName, arguments: {});
         }

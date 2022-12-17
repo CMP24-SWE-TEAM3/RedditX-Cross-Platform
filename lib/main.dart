@@ -8,6 +8,7 @@ import 'controllers/community_model_controller.dart';
 import 'controllers/create_community_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
+import 'views/screens/Home/home_page.dart';
 import 'views/screens/create_community/create_community_screen.dart';
 import 'views/screens/search/search_screen_one.dart';
 import 'views/screens/search/search_screen_two.dart';
@@ -71,6 +72,10 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         title: 'Reddit',
         theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.black),
+            color: Colors.white, //<-- SEE HERE
+          ),
           scaffoldBackgroundColor: Colors.white,
           colorScheme: (kIsWeb)
               ? ColorScheme.fromSwatch(primarySwatch: Colors.blue)
@@ -88,6 +93,7 @@ class MyApp extends StatelessWidget {
         home: (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
           Home.routeName: (ctx) => const Home(),
+          HomePage.routeName: (ctx) => const HomePage(),
           SignUpPage.routeName: (ctx) => const SignUpPage(),
           EmailLogin.routeName: (ctx) => const EmailLogin(),
           EmailSignup.routeName: (ctx) => const EmailSignup(),

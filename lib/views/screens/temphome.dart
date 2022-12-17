@@ -6,6 +6,7 @@ import 'package:search_project/views/screens/create_community/create_community_s
 
 import '../../controllers/sign_in_controller.dart';
 import './search/search_screen_one.dart';
+import 'Home/home_page.dart';
 import 'settings/setting_menu.dart';
 
 class Home extends StatelessWidget {
@@ -54,6 +55,12 @@ class Home extends StatelessWidget {
                       .pushNamed(SettingsHomePage.routeName, arguments: {});
                 },
                 child: const Text("Settings")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(HomePage.routeName, arguments: {});
+                },
+                child: const Text("Home")),
           ],
         ),
       ),

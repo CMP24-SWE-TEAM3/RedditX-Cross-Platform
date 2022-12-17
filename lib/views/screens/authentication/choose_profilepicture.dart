@@ -49,6 +49,7 @@ class _ChooseProfilePictureState extends State<ChooseProfilePicture> {
       }
       // ignore: use_build_context_synchronously
       submitPhoto(_imageFile, context);
+      
     }
 
     Future<void> chooseImage() async {

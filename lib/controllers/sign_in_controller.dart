@@ -76,7 +76,7 @@ class SignInController extends ChangeNotifier {
         currentUser!.isPasswordSet = map['passwordSet'];
         currentUser!.email = map['email'];
         currentUser!.about = map['about'];
-        saveDataToSharedPreferences();
+        await saveDataToSharedPreferences();
       } else {
         userauthentication.hasError = true;
         userauthentication.errorCode = 'Error in getting User';
@@ -96,8 +96,8 @@ class SignInController extends ChangeNotifier {
   Future logIn(String username, String password) async {
     if (mockData) {
       userauthentication.uid = loginBareEmailMock();
-      setSignIn();
-      saveDataToSharedPreferences();
+      await setSignIn();
+      await saveDataToSharedPreferences();
       notifyListeners();
       return;
     } else {
@@ -105,12 +105,11 @@ class SignInController extends ChangeNotifier {
       if (response.statusCode == 200) {
         // print(json.decode(response.body)['token']);
         userauthentication.uid = json.decode(response.body)['token'];
-        userauthentication.username = json.decode(response.body)['username'];
         userauthentication.hasError = false;
         userauthentication.username = username;
-        fillUser(username);
-        setSignIn();
-        saveDataToSharedPreferences();
+        await fillUser(username);
+        await setSignIn();
+        await saveDataToSharedPreferences();
       } else {
         userauthentication.hasError = true;
         userauthentication.errorCode = 'Error in login';
@@ -127,8 +126,8 @@ class SignInController extends ChangeNotifier {
   Future signUp(String email, String username, String password) async {
     if (mockData) {
       userauthentication.uid = loginBareEmailMock();
-      setSignIn();
-      saveDataToSharedPreferences();
+      await setSignIn();
+      await saveDataToSharedPreferences();
       notifyListeners();
       return;
     } else {
@@ -137,11 +136,11 @@ class SignInController extends ChangeNotifier {
       if (response.statusCode == 200) {
         // print(json.decode(response.body)['token']);
         userauthentication.uid = json.decode(response.body)['token'];
-        userauthentication.username = json.decode(response.body)['username'];
+        userauthentication.username = username;
         userauthentication.hasError = false;
-        fillUser(username);
-        setSignIn();
-        saveDataToSharedPreferences();
+        await fillUser(username);
+        await setSignIn();
+        await saveDataToSharedPreferences();
       } else {
         userauthentication.hasError = true;
         userauthentication.errorCode = 'Error in sign up';
@@ -182,8 +181,9 @@ class SignInController extends ChangeNotifier {
         'username', currentUser!.username ?? 'guest');
     await sharedPreferences.setString(
         'UserModel_avatar',
-        currentUser!.avatar ??
-            'https://www.iconpacks.net/icons/2/free-reddit-logo-icon-2436-thumb.png');
+        (currentUser!.avatar != null)
+            ? 'https://api.redditswe22.tech/users/files/${currentUser!.avatar}'
+            : 'https://www.iconpacks.net/icons/2/free-reddit-logo-icon-2436-thumb.png');
     await sharedPreferences.setBool('UserModel_prefShowTrending',
         currentUser!.userPrefs.prefShowTrending ?? false);
     await sharedPreferences.setBool('UserModel_canCreateSubreddit',
@@ -324,8 +324,9 @@ class SignInController extends ChangeNotifier {
         userauthentication.imageUrl =
             'https://api.redditswe22.tech/users/files/$name';
         userauthentication.hasError = false;
-        setSignIn();
-        saveDataToSharedPreferences();
+        await fillUser(userauthentication.username!);
+        await setSignIn();
+        await saveDataToSharedPreferences();
       } else {
         userauthentication.hasError = true;
         userauthentication.errorCode = 'Error in uploading Picture';
@@ -459,11 +460,12 @@ class SignInController extends ChangeNotifier {
         if (response.statusCode == 200) {
           // print(json.decode(response.body)['token']);
           userauthentication.uid = json.decode(response.body)['token'];
-          userauthentication.username = json.decode(response.body)['username'];
+          userauthentication.username =
+              json.decode(response.body)['username'].substring(3);
           userauthentication.hasError = false;
-          fillUser(userauthentication.username!);
-          setSignIn();
-          saveDataToSharedPreferences();
+          await fillUser(userauthentication.username!);
+          await setSignIn();
+          await saveDataToSharedPreferences();
         } else {
           userauthentication.hasError = true;
           userauthentication.errorCode = 'Error in sign up';
@@ -526,11 +528,12 @@ class SignInController extends ChangeNotifier {
         if (response.statusCode == 200) {
           // print(json.decode(response.body)['token']);
           userauthentication.uid = json.decode(response.body)['token'];
-          userauthentication.username = json.decode(response.body)['username'];
+          userauthentication.username =
+              json.decode(response.body)['username'].substring(3);
           userauthentication.hasError = false;
-          fillUser(userauthentication.username!);
-          setSignIn();
-          saveDataToSharedPreferences();
+          await fillUser(userauthentication.username!);
+          await setSignIn();
+          await saveDataToSharedPreferences();
         } else {
           userauthentication.hasError = true;
           userauthentication.errorCode = 'Error in sign up';
