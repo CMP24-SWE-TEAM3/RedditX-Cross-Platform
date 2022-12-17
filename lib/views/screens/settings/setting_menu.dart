@@ -1,33 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_project/models/user_model.dart';
-import '../../../../controllers/mobile_settings_view_controller.dart';
-import '../../../../models/authentication.dart';
+import '../../../controllers/mobile_settings_view_controller.dart';
+import '../../../models/authentication.dart';
 import '../authentication/choose_profilepicture.dart';
 import '../authentication/sign_up_page.dart';
 import '../../screens/settings/account_setting_screen.dart';
 import '../../widgets/settings/list_tiles_widgets.dart';
 import '../../widgets/settings/setting_label_widget.dart';
 
-class SettingsHomePage extends StatefulWidget {
+class SettingsHomePage extends StatelessWidget {
   static const routeName = '/Settings';
+  final String title = "Settings";
 
   ///The main menu for settings
   const SettingsHomePage({super.key});
-
-  @override
-  State<SettingsHomePage> createState() => _SettingsHomePageState();
-}
-
-class _SettingsHomePageState extends State<SettingsHomePage> {
-  final String title = "Settings";
-  @override
-  void initState() {
-    super.initState();
-    Provider.of<SettingsViewModelMobileController>(context)
-        .updateSharedPrefsFromService(currentUser?.username, context);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,6 +33,11 @@ class _SettingsHomePageState extends State<SettingsHomePage> {
                   title: "Account settings for u/${currentUser?.username}",
                   ico: const Icon(Icons.person),
                   onTab: () {
+                    Provider.of<SettingsViewModelMobileController>(context,
+                            listen: false)
+                        .updateSharedPrefsFromService(
+                            currentUser?.username, context);
+
                     Navigator.push(
                         context,
                         MaterialPageRoute(

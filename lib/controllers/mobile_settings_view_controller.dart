@@ -12,13 +12,6 @@ class SettingsViewModelMobileController with ChangeNotifier {
   ///Connected to google or disconnected
   bool connectedToGoogle = false;
 
-  ///loads user's username adn password from shared prefs
-  getSettingsUserDataFromPrefs() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    currentUser?.username = prefs.getString("UserName");
-    notifyListeners();
-  }
-
   ///requests email to setup reddit password upon user's preference
   updateIsPasswordCheck() {
     settingsServiceModelController.getIsPasswordSet();
@@ -162,17 +155,15 @@ class SettingsViewModelMobileController with ChangeNotifier {
   ///invokes prefs model filling function and updates local shared prefs
   updateSharedPrefsFromService(String? username, ctx) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    currentUser?.username = username;
-    getEmailIntoModel();
     prefs.setString("UserName", username!);
     prefs.setString("current_email", currentUser!.email!);
-    Map<String, bool>? res =
+    final res =
         await settingsServiceModelController.getUserPrefsModelController();
     if (res != null) {
       res.forEach((key, value) {
-        prefs.setBool(key, value);
-        showSnackBar(ctx, "prefs loaded successfully!");
+        value is bool ? prefs.setBool(key, value) : "";
       });
+      showSnackBar(ctx, "prefs loaded successfully!");
     } else {
       showSnackBar(ctx, "get prefs failed");
     }

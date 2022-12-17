@@ -113,7 +113,7 @@ class SettingsService {
     });
     if (res.statusCode == 200) {
       var obj = json.decode(res.body);
-      return obj;
+      return obj['prefs']['user'];
     } else {
       return null;
     }

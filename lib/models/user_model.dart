@@ -76,6 +76,8 @@ class UserPrefsModel {
     enableFollowers = true;
     prefShowTrending = true;
   }
+
+  get canCreateSubreddit => null;
 }
 
 ///voting model
@@ -317,6 +319,8 @@ class UserModel {
     votedComments = [];
     mentionedInComments = [];
   }
+
+  get over18 => null;
 }
 
 ///instance of current user

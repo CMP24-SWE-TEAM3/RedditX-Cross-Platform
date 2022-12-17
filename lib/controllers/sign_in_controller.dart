@@ -59,14 +59,24 @@ class SignInController extends ChangeNotifier {
   Future fillUser(String username) async {
     final response = await getuserdataAPI('t2_$username');
     if (response.statusCode == 200) {
-      var map = json.decode(response.data)[0];
+      var map = json.decode(response.body)[1];
       if (map != null) {
         currentUser!.username = username;
         currentUser!.avatar = map['avatar'];
         currentUser!.userPrefs!.prefShowTrending = map['prefShowTrending'];
-        // currentUser!.member.is
+        currentUser!.canCreateSubreddit = map['canCreateSubreddit'];
+        currentUser!.userPrefs!.over18 = map['over18'];
+        currentUser!.hasVerifiedEmail = map['hasVerifiedEmail'];
+        currentUser!.createdAt = map['createdAt'];
+        currentUser!.inboxCount = map['inboxCount'];
+        currentUser!.karma = map['totalKarma'];
+        currentUser!.postKarma = map['linkKarma'];
+        currentUser!.userPrefs!.enableFollowers = map['acceptFollowers'];
+        currentUser!.commentKarma = map['commentKarma'];
+        currentUser!.isPasswordSet = map['passwordSet'];
+        currentUser!.email = map['email'];
+        currentUser!.about = map['about'];
         saveDataToSharedPreferences();
-
       } else {
         userauthentication.hasError = true;
         userauthentication.errorCode = 'Error in getting User';
@@ -167,7 +177,35 @@ class SignInController extends ChangeNotifier {
     final SharedPreferences sharedPreferences =
         await SharedPreferences.getInstance();
     await sharedPreferences.setString('uid', userauthentication.uid!);
-    // save user model
+    //save user model
+    await sharedPreferences.setString(
+        'UserModel_avatar',
+        currentUser!.avatar ??
+            'https://www.iconpacks.net/icons/2/free-reddit-logo-icon-2436-thumb.png');
+    await sharedPreferences.setBool('UserModel_prefShowTrending',
+        currentUser!.userPrefs?.prefShowTrending ?? false);
+    await sharedPreferences.setBool('UserModel_canCreateSubreddit',
+        currentUser!.userPrefs?.canCreateSubreddit ?? false);
+    await sharedPreferences.setBool(
+        'UserModel_over18', currentUser!.over18 ?? false);
+    await sharedPreferences.setBool(
+        'UserModel_hasVerifiedEmail', currentUser!.hasVerifiedEmail ?? false);
+    await sharedPreferences.setString(
+        'UserModel_createdAt', currentUser!.createdAt!.toString());
+    await sharedPreferences.setInt(
+        'UserModel_totalKarma', currentUser!.karma ?? 0);
+    await sharedPreferences.setInt(
+        'UserModel_linkKarma', currentUser!.postKarma ?? 0);
+    await sharedPreferences.setBool('UserModel_acceptFollowers',
+        currentUser!.userPrefs?.enableFollowers ?? false);
+    await sharedPreferences.setInt(
+        'UserModel_commentKarma', currentUser!.commentKarma ?? 0);
+    await sharedPreferences.setBool(
+        'UserModel_passwordSet', currentUser!.isPasswordSet!);
+    await sharedPreferences.setString('UserModel_email', currentUser!.email!);
+    await sharedPreferences.setString(
+        'UserModel_about', currentUser!.about ?? "A redditor");
+
     notifyListeners();
   }
 
@@ -178,6 +216,28 @@ class SignInController extends ChangeNotifier {
         await SharedPreferences.getInstance();
     userauthentication.uid = sharedPreferences.getString('uid');
     // get the user model
+    currentUser!.avatar != sharedPreferences.getString('UserModel_avatar');
+    currentUser!.userPrefs?.prefShowTrending !=
+        sharedPreferences.getBool('UserModel_prefShowTrending');
+    currentUser!.avatar != sharedPreferences.getString('UserModel_userId');
+    currentUser!.userPrefs?.canCreateSubreddit !=
+        sharedPreferences.getBool('UserModel_canCreateSubreddit');
+    currentUser!.over18 != sharedPreferences.getBool('UserModel_over18');
+    currentUser!.hasVerifiedEmail !=
+        sharedPreferences.getBool('UserModel_hasVerifiedEmail');
+    currentUser!.createdAt !=
+        DateTime.parse(sharedPreferences.getString('UserModel_createdAt') ??
+            '2022-12-15 00:00:00.000');
+    currentUser!.postKarma != sharedPreferences.getInt('UserModel_totalKarma');
+    currentUser!.postKarma != sharedPreferences.getInt('UserModel_linkKarma');
+    currentUser!.userPrefs?.enableFollowers !=
+        sharedPreferences.getBool('UserModel_acceptFollowers');
+    currentUser!.commentKarma !=
+        sharedPreferences.getInt('UserModel_commentKarma');
+    currentUser!.isPasswordSet !=
+        sharedPreferences.getBool('UserModel_passwordSet');
+    currentUser!.email != sharedPreferences.getString('UserModel_email');
+    currentUser!.about != sharedPreferences.getString('UserModel_about');
     notifyListeners();
   }
 

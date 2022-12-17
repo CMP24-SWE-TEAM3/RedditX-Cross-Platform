@@ -1,3 +1,7 @@
+import 'dart:developer';
+import 'dart:io';
+
+import 'package:flutter/material.dart';
 import 'package:search_project/models/settings_model.dart';
 
 import '../services/settings_service.dart';
@@ -66,7 +70,7 @@ class SettingsServiceModelController {
   }
 
   ///calls service to fill user prefs model from Database
-  Future<Map<String, bool>?> getUserPrefsModelController() async {
+  getUserPrefsModelController() async {
     final res = await settingsService.getUserPrefsService();
     if (res != null) {
       currentUser?.userPrefs?.threadedMessages = res["threadedMessages"];
@@ -88,7 +92,8 @@ class SettingsServiceModelController {
       currentUser?.userPrefs?.searchIncludeOver18 = res["searchIncludeOver18"];
       currentUser?.userPrefs?.defaultCommentSort = res["defaultCommentSort"];
       currentUser?.userPrefs?.language = res["langauge"];
-    return res;
+      log(res.toString());
+      return res;
     } else {
       return null;
     }
