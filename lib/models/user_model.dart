@@ -325,7 +325,7 @@ class UserModel {
 
 ///instance of current user
 UserModel? currentUser = UserModel(
-    username: "_3mona",
+    username: "guest",
     type: "not bare email",
     email: "mamdouhteachertraining@gmail.com",
     createdAt: DateTime(2022));
