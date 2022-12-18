@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// vote modek
 class voteModel {
   voteModel({required this.userID, required this.voteType});
 
