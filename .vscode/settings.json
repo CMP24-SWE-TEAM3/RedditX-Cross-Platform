@@ -1,3 +1,4 @@
 {
-    "emulator.emulatorPathWindows": "C:\\Users\\Kareem Ashraf\\AppData\\Local\\Android\\sdk\\emulator"
+    "emulator.emulatorPathWindows": "C:\\Users\\Kareem Ashraf\\AppData\\Local\\Android\\sdk\\emulator",
+    "java.configuration.updateBuildConfiguration": "interactive"
 }

@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/View/Widgets/post/Styles/custom_icons.dart';
+import 'package:reddit/styles/custom_icons.dart';
 
 class MobilePostProvider with ChangeNotifier {
   bool isPostLiked = false;
   bool isPostDisliked = false;
   int reactsCount = 0;
-
 
   bool isPostSaved = false;
 
@@ -17,8 +16,7 @@ class MobilePostProvider with ChangeNotifier {
     CustomIcons.chart_outline
   ];
 
-
-    void likePost() {
+  void likePost() {
     if (isPostLiked) {
       reactsCount--;
     } else {

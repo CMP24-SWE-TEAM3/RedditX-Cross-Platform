@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:reddit/Controller/post/post_mobile_provider.dart';
-import 'package:reddit/View/Widgets/post/web_comments.dart';
-import 'package:reddit/View/widgets/post/Styles/custom_icons.dart';
+import 'package:reddit/controllers/post/post_mobile_provider.dart';
+import 'package:reddit/views/widgets/post/web_comments.dart';
+import 'package:reddit/styles/custom_icons.dart';
 
 /// The post design on web
 class WebPostPage extends StatefulWidget {
@@ -13,22 +13,22 @@ class WebPostPage extends StatefulWidget {
 }
 
 class _WebPostPageState extends State<WebPostPage> {
-bool isVisible = false;
-@override
+  bool isVisible = false;
+  @override
   Widget build(BuildContext context) {
     final screen_width = MediaQuery.of(context).size.width;
     print(screen_width);
     return Container(
       width: screen_width,
       height: double.infinity,
-      color: Color.fromRGBO(50, 50, 50, 1),
+      color: const Color.fromRGBO(50, 50, 50, 1),
 
       /// The main container the contains the pgae
       child: Container(
         width: screen_width * 0.85,
         height: double.infinity,
         margin: const EdgeInsets.only(right: 65, left: 65),
-        color: Color.fromRGBO(218, 224, 230, 1),
+        color: const Color.fromRGBO(218, 224, 230, 1),
         child: SingleChildScrollView(
           child: Row(
             children: [
@@ -288,7 +288,7 @@ bool isVisible = false;
                     ],
                   )),
               Visibility(
-                visible: isVisible = (screen_width > 1000)? true:false,
+                visible: isVisible = (screen_width > 1000) ? true : false,
                 child: SizedBox(
                   width: screen_width * 0.011,
                 ),
@@ -296,7 +296,7 @@ bool isVisible = false;
 
               /// sidebar container
               Visibility(
-                visible: isVisible = (screen_width > 1000)? true:false,
+                visible: isVisible = (screen_width > 1000) ? true : false,
                 child: Container(
                   width: screen_width * 0.24,
                   height: 5000,
@@ -305,7 +305,7 @@ bool isVisible = false;
                 ),
               ),
               Visibility(
-                visible: isVisible = (screen_width > 1000)? true:false,
+                visible: isVisible = (screen_width > 1000) ? true : false,
                 child: SizedBox(
                   width: screen_width * 0.015,
                 ),

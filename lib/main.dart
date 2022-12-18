@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:reddit/View/Screens/post/Post_screen.dart';
+import 'package:reddit/views/screens/post/post_screen.dart';
 
 import 'models/post/post_model.dart';
-import 'models/post/comment_model.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,7 +9,6 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
-
 
   @override
   Widget build(BuildContext context) {
@@ -22,15 +19,15 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: post_screen(
-        commentsNumber: postsList[0].commentsNumber,
-        title: postsList[0].title,
-        type: postsList[0].type,
-        text: postsList[0].text,
-        attachments: postsList[0].attachments,
-        communityName: postsList[0].communityName,
-        createdAt: postsList[0].createdAt,
-        username: postsList[0].username,
-        votesCount: postsList[0].votesCount),
+          commentsNumber: postsList[0].commentsNumber,
+          title: postsList[0].title,
+          type: postsList[0].type,
+          text: postsList[0].text,
+          attachments: postsList[0].attachments,
+          communityName: postsList[0].communityName,
+          createdAt: postsList[0].createdAt,
+          username: postsList[0].username,
+          votesCount: postsList[0].votesCount),
     );
   }
 }
@@ -53,7 +50,7 @@ class _HomePage extends StatelessWidget {
         actions: [
           IconButton(
             onPressed: () {},
-            icon: Icon(Icons.search),
+            icon: const Icon(Icons.search),
             color: Colors.black,
           ),
           CircleAvatar(
@@ -65,7 +62,7 @@ class _HomePage extends StatelessWidget {
           ),
         ],
       ),
-      body: Center(
+      body: const Center(
         child: Text('kareem'),
       ),
     );

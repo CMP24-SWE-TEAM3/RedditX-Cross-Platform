@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:reddit/View/widgets/post/Styles/custom_icons.dart';
-import 'package:reddit/View/Widgets/post/popup_menu.dart';
+import 'package:reddit/styles/custom_icons.dart';
+import 'package:reddit/views/widgets/post/popup_menu.dart';
 
 /// Mobile comment widget used in mobile post page
-class comments extends StatefulWidget {
+class commentReply extends StatefulWidget {
   // String username;
   // String createdAt;
   // String text;
   // var userPhoto;
   // int votesCount;
-  String commentsText;
+  String commentReplyText;
 
-  comments(
+  commentReply(
       {Key? key,
       // required this.userPhoto,
       // required this.username,
       // required this.createdAt,
       // required this.text,
       // required this.votesCount,
-      required this.commentsText})
+      required this.commentReplyText})
       : super(key: key);
 
   @override
-  State<comments> createState() => _commentsState();
+  State<commentReply> createState() => _commentReplyState();
 }
 
-class _commentsState extends State<comments> {
+class _commentReplyState extends State<commentReply> {
   double container_height = 230;
-  TextOverflow comments_text = TextOverflow.clip;
+  TextOverflow commentReply_text = TextOverflow.clip;
   bool is_visible = true;
 
   @override
@@ -38,7 +38,7 @@ class _commentsState extends State<comments> {
     return InkWell(
       onTap: () => setState(() {
         container_height = container_height == 50 ? 230 : 50;
-        comments_text =
+        commentReply_text =
             container_height == 50 ? TextOverflow.ellipsis : TextOverflow.clip;
         is_visible = container_height == 50 ? false : true;
       }),
@@ -50,37 +50,40 @@ class _commentsState extends State<comments> {
           color: Colors.white,
           child: Column(
             children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: 7,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: CircleAvatar(
-                      radius: 10.0,
-                      child: ClipRRect(
-                        child: Image.asset('assets/kareem.jpg'),
-                        borderRadius: BorderRadius.circular(50.0),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    SizedBox(
+                      width: 7,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: CircleAvatar(
+                        radius: 10.0,
+                        child: ClipRRect(
+                          child: Image.asset('assets/kareem.jpg'),
+                          borderRadius: BorderRadius.circular(50.0),
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    width: 10,
-                  ),
-                  GestureDetector(
-                    onTap: () {},
-                    child: Text("Kareem Ashraf"),
-                  ),
-                  Text(" . 21h")
-                ],
+                    SizedBox(
+                      width: 10,
+                    ),
+                    GestureDetector(
+                      onTap: () {},
+                      child: Text("Kareem Ashraf"),
+                    ),
+                    Text(" . 21h")
+                  ],
+                ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: Text(
-                    "${widget.commentsText}",
-                    overflow: comments_text,
+                    "${widget.commentReplyText}",
+                    overflow: commentReply_text,
                     style: TextStyle(),
                   ),
                 ),
@@ -131,15 +134,10 @@ class _commentsState extends State<comments> {
                     ], icon: Icon(Icons.more_vert_rounded)),
                     InkWell(
                       onTap: () {},
-                      child: Row(
-                        children: [
-                          IconButton(
-                            onPressed: () {},
-                            icon: Icon(Icons.reply_sharp),
-                            color: Colors.black,
-                          ),
-                          Text("Reply"),
-                        ],
+                      child: IconButton(
+                        onPressed: () {},
+                        icon: Icon(Icons.reply_sharp),
+                        color: Colors.black,
                       ),
                     ),
                     IconButton(
@@ -149,12 +147,6 @@ class _commentsState extends State<comments> {
                         onPressed: () {}, icon: Icon(CustomIcons.down_outline)),
                   ],
                 ),
-              ),
-              Container(
-                height: 7,
-                width: double.infinity,
-                child: Text(''),
-                color: Color.fromRGBO(242, 243, 244, 1),
               ),
             ],
           ),
