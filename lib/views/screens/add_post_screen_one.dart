@@ -471,15 +471,26 @@ class AddPostScreenOne extends StatelessWidget {
                               : Provider.of<AddPostController>(context).isImage
 
                                   ///Add Image
-                                  ? Container()
+                                  ? SizedBox(
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 200,
+                                      child: Provider.of<AddPostController>(
+                                              context,
+                                              listen: false)
+                                          .viewSelectedImages(),
+                                    )
                                   : Provider.of<AddPostController>(context)
                                           .isVideo
 
                                       ///Add Video
-                                      ? Container()
+                                      ? Provider.of<AddPostController>(
+                                          context,
+                                          listen: false,
+                                        ).viewSelectedVideo()
 
                                       ///Spacer to make the next widget in the end of the column
                                       : const Spacer(),
+                  const Spacer(),
                   //if the text field are tapped==> show the icons as one row
                   //else ==> show them as a column with icons and text
                   Provider.of<AddPostController>(context).isTapped ||

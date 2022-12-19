@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as international;
+import 'package:multi_image_picker/multi_image_picker.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:video_player/video_player.dart';
+import 'dart:async';
+import '../views/widgets/add_post/pick_image_or_video_button.dart';
 
 class AddPostController with ChangeNotifier {
   ///Whether the platform is web or android
@@ -46,6 +51,10 @@ class AddPostController with ChangeNotifier {
     TextEditingController(),
     TextEditingController(),
   ];
+
+  List<Asset> images = [];
+  List<Asset> selectedImages = [];
+  XFile video = XFile('');
 
   ///when click on X button in add post
   exitAddPostScreen() {}
@@ -272,5 +281,81 @@ class AddPostController with ChangeNotifier {
       );
     }
     return moreOptions;
+  }
+
+  ///Select images from gallery or camera
+  ///max no. of selected images are 20
+  Future<void> pickImages() async {
+    final selected = await MultiImagePicker.pickImages(
+      maxImages: 20,
+      //to be able to select from camera or gallery
+      enableCamera: true,
+      //store selected images in [images]
+      selectedAssets: images,
+      materialOptions: const MaterialOptions(
+        selectionLimitReachedText: 'you can select only up to 20 images',
+        autoCloseOnSelectionLimit: false,
+      ),
+    );
+    selectedImages.addAll(selected);
+    notifyListeners();
+  }
+
+  //ListView that shows selected images horizontally
+  ListView viewSelectedImages() {
+    return ListView(
+      scrollDirection: Axis.horizontal,
+      children: List.generate(
+
+          ///if the selected images are less than 20 ==>view images and add a pick button to ba able to add more images
+          ///if the items are 20 ==> view images only
+          selectedImages.length < 20
+              ? selectedImages.length + 1
+              : selectedImages.length, (index) {
+        if (index < selectedImages.length) {
+          ///[index < selectedImages.length] means it is an image not the pick button
+          Asset asset = selectedImages[index];
+
+          ///view the image as a square assist
+          return AssetThumb(
+            asset: asset,
+            width: 200,
+            height: 200,
+          );
+        } else {
+          ///the button that picks more images if images are less than 20
+          return const PickButton(isImage: true);
+        }
+      }),
+    );
+  }
+
+  ///Pick video from gallery
+  Future<void> pickvideo() async {
+    ImagePicker imagePicker = ImagePicker();
+    video =
+        await imagePicker.pickVideo(source: ImageSource.gallery) ?? XFile('');
+    notifyListeners();
+  }
+
+  ///Show picked video
+  Widget viewSelectedVideo() {
+    if (video.path != '') {
+      ///if there is a selected video
+      ///palying a video from an assest
+      VideoPlayerController controller =
+          VideoPlayerController.asset(video.path);
+      return SizedBox(
+        width: 300,
+        height: 300,
+        child: FittedBox(
+          fit: BoxFit.fill,
+          child: VideoPlayer(controller),
+        ),
+      );
+    } else {
+      ///Button to pick video if there isn't a selected video
+      return const PickButton(isImage: false);
+    }
   }
 }
