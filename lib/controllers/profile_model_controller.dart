@@ -70,6 +70,25 @@ class ProfileModelProvider with ChangeNotifier {
     }
   }
 
+  /// Save posts
+   Future save(String id) async {
+    if (!mockData) {
+      saveAPI('t3_$id');
+      notifyListeners();
+    }
+    
+  }
+
+  /// UnSave posts
+  Future unSave(String id) async {
+    if (!mockData) {
+      unSaveAPI('t3_$id');
+      notifyListeners();
+    }
+  }
+
+
+
   ///Get user saved posts whether from API or mock data
    Future getUserSavedPosts() async {
     if (mockData) {

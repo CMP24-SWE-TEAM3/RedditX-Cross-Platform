@@ -62,7 +62,8 @@ class MyApp extends StatelessWidget {
               ),
         ),
         initialRoute: '/',
-        home: UserSavedPosts(),
+        home:
+        UserSavedPosts(),
         // LayoutBuilder(
         //     builder: (BuildContext context, BoxConstraints constraints) {
         //   return ProfileMobileScreen(

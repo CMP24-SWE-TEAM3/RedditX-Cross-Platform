@@ -92,24 +92,24 @@ class BottomPostWeb extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children:  [
-                                (false
-                                    //value.isPostSaved[index]
-                                    )
-                                    ? const Icon(
-                                        CustomIcons.unsaved,
-                                      )
-                                    : const Icon(
-                                        CustomIcons.saved,
-                                      ),
-                                (false
-                                    //value.isPostSaved[index]
-                                    )
-                                    ? const Text(
-                                        "Unsave",
-                                        style: TextStyle(fontSize: 12),
-                                      )
-                                    : const Text("Save")
+                              children:const   [
+                                // (false
+                                //     //value.isPostSaved[index]
+                                //     )
+                                //     ? const Icon(
+                                //         CustomIcons.unsaved,
+                                //       )
+                                //     : const Icon(
+                                //         CustomIcons.saved,
+                                //       ),
+                                // (false
+                                //     //value.isPostSaved[index]
+                                //     )
+                                //     ? const Text(
+                                //         "Unsave",
+                                //         style: TextStyle(fontSize: 12),
+                                //       )
+                                //     : const Text("Save")
                               ],
                             )),
                       ],

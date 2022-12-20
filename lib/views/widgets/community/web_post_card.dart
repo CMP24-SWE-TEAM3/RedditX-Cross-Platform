@@ -8,7 +8,7 @@ import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
 import '../../../models/post_model.dart';
-import '../../../styles/colors.dart';
+
 import '../../../styles/custom_icons.dart';
 import 'web_post_bottom.dart';
 
@@ -61,14 +61,13 @@ class WebPostCard extends StatelessWidget {
                                 //     ? value.likePost(index)
                                 //     : value1.vote("", 1, index, context);
                               },
-                              icon: (false
-                                  //value.isPostLiked[index]
-                                  )
-                                  ? const Icon(
-                                      CustomIcons.upBold,
-                                      color: Colors.deepOrange,
-                                    )
-                                  : const Icon(CustomIcons.upOutline)),
+                              icon:
+                              //  const Icon(
+                              //         CustomIcons.upBold,
+                              //         color: Colors.deepOrange,
+                              //       )
+                                  const Icon(CustomIcons.upOutline)
+                                  ),
                           Text(Numeral(
                                   communityPostsList[index]['votesCount'] ?? 0)
                               .format(fractionDigits: 1)),
@@ -78,14 +77,13 @@ class WebPostCard extends StatelessWidget {
                                 //     ? value.disLikePost(index)
                                 //     : value1.vote("", -1, index, context);
                               },
-                              icon: (false
-                                  // value.isPostDisliked[index]
-                                  )
-                                  ? const Icon(
-                                      CustomIcons.downBold,
-                                      color: blueColor,
-                                    )
-                                  : const Icon(CustomIcons.downOutline)),
+                              icon:
+                              //  const Icon(
+                              //         CustomIcons.downBold,
+                              //         color: blueColor,
+                              //       )
+                              //     : 
+                                  const Icon(CustomIcons.downOutline)),
                         ],
                       ),
                       Column(

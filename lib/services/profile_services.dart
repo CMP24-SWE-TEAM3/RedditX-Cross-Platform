@@ -130,6 +130,35 @@ voteAPI(String id, int dir) async {
       body: jsonEncode(<String, dynamic>{"id": id, 'dir': dir}));
 }
 
+/// Save a post
+saveAPI(String id) async {
+
+  const apiRoute = "/api/listing/save";
+  await http.post(Uri.parse(urlApi + apiRoute),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader:
+            ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzEyMTUzNjksImV4cCI6MTY3MTY0NzM2OX0.Ju__2iM52qX-pdVxr-czdiusZSnAxrruGuCtKV5UBzw"}')
+      },
+      body: jsonEncode(<String, dynamic>{"linkID": id}));
+
+      
+}
+
+/// unsave a post
+unSaveAPI(String id) async {
+  const apiRoute = "/api/listing/unsave";
+ await http.post(Uri.parse(urlApi + apiRoute),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+        HttpHeaders.authorizationHeader:
+            ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzEyMTUzNjksImV4cCI6MTY3MTY0NzM2OX0.Ju__2iM52qX-pdVxr-czdiusZSnAxrruGuCtKV5UBzw"}')
+      },
+      body: jsonEncode(<String, dynamic>{"linkID": id}));
+
+}
+
+
 /// Get user saved posts from API
 getAPISavedPosts() async {
   String apiRoute = "/api/user/me/saved-posts";
@@ -145,8 +174,55 @@ getAPISavedPosts() async {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
       savedPostsAPI = responseData['posts'];
+      for(int i=0;i<savedPostsAPI.length;i++)
+      {
+        savedPostsIDs.add(savedPostsAPI[i]['_id']);
+
+      }
+      print(savedPostsIDs);
     } else {
       savedPostsAPI = [];
+    }
+  });
+}
+
+
+getAPIUpVotedPosts(String userName) async {
+  String apiRoute = "/api/user/me/$userName/upvoted";
+  Uri url = Uri.parse(urlApi + apiRoute);
+  await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader:
+          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzEyMTUzNjksImV4cCI6MTY3MTY0NzM2OX0.Ju__2iM52qX-pdVxr-czdiusZSnAxrruGuCtKV5UBzw"}')
+    },
+  ).then((value) {
+    if (value.statusCode == 200) {
+      var responseData = json.decode(value.body) as Map<String, dynamic>;
+      upvotedPostsAPI = responseData['posts'];
+    } else {
+      upvotedPostsAPI = [];
+    }
+  });
+}
+
+getAPIDownVotedPosts(String userName) async {
+  String apiRoute = "/api/user/$userName/downvoted";
+  Uri url = Uri.parse(urlApi + apiRoute);
+  await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader:
+          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzEyMTUzNjksImV4cCI6MTY3MTY0NzM2OX0.Ju__2iM52qX-pdVxr-czdiusZSnAxrruGuCtKV5UBzw"}')
+    },
+  ).then((value) {
+    if (value.statusCode == 200) {
+      var responseData = json.decode(value.body) as Map<String, dynamic>;
+      downvotedPostsAPI = responseData['posts'];
+    } else {
+      downvotedPostsAPI = [];
     }
   });
 }

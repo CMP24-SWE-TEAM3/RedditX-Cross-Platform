@@ -81,7 +81,7 @@ class MobilePostCard extends StatelessWidget {
                           ),
                         ),
                       if (postType == "text") const Spacer(),
-                      PopUpMenu(index: index),
+                      PopUpMenu(index: index,posts: posts,),
                     ],
                   ),
                   if (postType == "text" || postType == 'linkWithImage')

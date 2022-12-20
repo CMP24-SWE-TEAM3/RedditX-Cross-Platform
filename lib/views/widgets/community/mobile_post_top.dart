@@ -6,7 +6,6 @@ import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../methods/community/show_profile_dialog.dart';
 import '../../../models/post_model.dart';
-import '../../../models/user_model.dart';
 import 'pop_up_menu_button.dart';
 
 /// Shows the top part of the communnity post
@@ -102,7 +101,7 @@ class TopMobilePost extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          PopUpMenu(index: index),
+          PopUpMenu(index: index,posts: posts,),
         ],
       );
     }
@@ -144,6 +143,7 @@ class TopMobilePost extends StatelessWidget {
           const Spacer(),
           PopUpMenu(
             index: index,
+            posts: posts,
           ),
         ],
       );
@@ -181,6 +181,7 @@ class TopMobilePost extends StatelessWidget {
                 ),
               PopUpMenu(
                 index: index,
+                posts: posts,
               ),
             ],
           )
