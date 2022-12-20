@@ -28,6 +28,7 @@ class HomeMobile extends StatelessWidget {
             refreshController.loadComplete();
           },
           child: ListView.separated(
+            key: const ValueKey('list_Home_page'),
             itemBuilder: (context, index) {
               return ListTile(
                 title: Text('test ${value.testo} $index'),

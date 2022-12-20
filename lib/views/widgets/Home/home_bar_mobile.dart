@@ -29,6 +29,7 @@ AppBar buildHomeBar(text) {
     centerTitle: false,
     leading: Builder(builder: (context) {
       return IconButton(
+        key: const ValueKey('leftbannel_ToolBar'),
         icon: const Icon(Icons.menu),
         onPressed: () => displayDrawer(context),
       );
@@ -36,6 +37,7 @@ AppBar buildHomeBar(text) {
     actions: [
       Builder(builder: (context) {
         return DropdownButton(
+            key: const ValueKey('dropdown_ToolBar'),
             value: value,
             iconEnabledColor: Colors.amberAccent,
             items: items.map(buildMenuItem).toList(),
@@ -53,12 +55,14 @@ AppBar buildHomeBar(text) {
             });
       }),
       IconButton(
+        key: const ValueKey('search_ToolBar'),
         onPressed: () {
           // showSearch(context: context, delegate: SearchCommunityDelegate(ref));
         },
         icon: const Icon(Icons.search),
       ),
       IconButton(
+        key: const ValueKey('add_ToolBar'),
         onPressed: () {
           // Routemaster.of(context).push('/add-post');
         },
@@ -66,6 +70,7 @@ AppBar buildHomeBar(text) {
       ),
       Builder(builder: (context) {
         return IconButton(
+          key: const ValueKey('righttbannel_ToolBar'),
           icon: CircleAvatar(
             backgroundImage: NetworkImage(currentUser!.avatar!),
           ),
