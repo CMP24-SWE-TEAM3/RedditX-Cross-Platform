@@ -1,14 +1,14 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/controllers/profile_controller.dart';
-import 'package:search_project/controllers/profile_model_controller.dart';
-import 'package:search_project/views/screens/profile/profile_saved_posts.dart';
+
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
 import 'controllers/internet_controller.dart';
 
+import 'controllers/profile_controller.dart';
+import 'controllers/profile_model_controller.dart';
 import 'models/post_model.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -33,9 +33,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
         ChangeNotifierProvider(
             create: ((context) => ProfileModelProvider()
-              ..getProfileAbout("t2_hamada")
-              ..getProfileComments('t2_shredan')
-              ..getProfilePosts("t2_hamada")..getProfilePostsCommunityAvatars("t5_imagePro235")..getUserSavedPosts()
+              ..getProfileAbout("t2_lotfy2")
+              ..getProfileComments('t2_lotfy2')
+              ..getProfilePosts("t2_hamada")..getProfilePostsCommunityAvatars("t5_imagePro235")..getUserSavedPosts()..getUserDownVotedPosts("t2_lotfy2")..getUserUpVotedPosts("t2_lotfy2")
             )),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
@@ -73,7 +73,7 @@ class MyApp extends StatelessWidget {
           );
         }),
         routes: const {},
-      ),
+      )
     );
   }
 }

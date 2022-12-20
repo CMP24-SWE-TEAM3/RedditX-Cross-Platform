@@ -4,6 +4,8 @@ import 'package:search_project/config/constants.dart';
 
 
 
+
+
 class ProfileProvider with ChangeNotifier {
   /// Index of tabs Posts,Comments and about in both [UserProfileMobileScreen] and [UserProfileWebScreen].
   int tabIndex = 0;
@@ -81,22 +83,6 @@ class ProfileProvider with ChangeNotifier {
   }
 
 
-// bool checkSaved=false;
-
-//  isPostSaved(String postID,int index)
-//   {
-//     for(int i=0;i<savedPosts.length;i++)
-//     {
-//       if(postID==savedPosts[i]['_id'])
-//       {
-//        checkSaved=true;
-//        notifyListeners();
-      
-//       }
-//     }
-//     checkSaved=false;
-//     notifyListeners();
-//   }
 
 
 }

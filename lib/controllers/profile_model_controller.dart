@@ -9,6 +9,10 @@ import '../config/constants.dart';
 class ProfileModelProvider with ChangeNotifier {
   bool mockData = iSMOCK;
 
+    List<dynamic> upvotedPostsIDs = [];
+
+  List<dynamic> downvotedPostsIDs = [];
+
   /// Get profile posts whether from API or mock data
   Future getProfilePosts(String userName) async {
     if (mockData) {
@@ -100,40 +104,45 @@ class ProfileModelProvider with ChangeNotifier {
       notifyListeners();
     }
   }
+
+   ///Get user upvoted posts whether from API or mock data
+  Future getUserUpVotedPosts(String userName) async {
+    if (mockData) {
+      upvotedPosts = upvotedPostsMock;
+      notifyListeners();
+    } else {
+      await getAPIUpVotedPosts(userName);
+      upvotedPosts = upvotedPostsAPI;
+      
+      notifyListeners();
+    }
+
+
+  }
+
+     ///Get user upvoted posts whether from API or mock data
+  Future getUserDownVotedPosts(String userName) async {
+    if (mockData) {
+      downvotedPosts = downvotedPostsMock;
+      notifyListeners();
+    } else {
+      await getAPIDownVotedPosts(userName);
+      downvotedPosts = downvotedPostsAPI;
+      notifyListeners();
+    }
+
+  }
   
 
   /// Upvote, downvote or cancel vote
   Future vote(String id, int dir) async {
     if (!mockData) {
       voteAPI(id, dir);
-
       notifyListeners();
     }
   }
 
-  /// Get vote type: Upvote, downvote or cancel vote
-  // Future getAPIVoteTypes(String postPlace) async {
-  //   if (postPlace == 'home') {
-  //     for (int i = 0; i <= votersHome.length; i++) {
-  //       if (votersHome[i][0]['userID'] == 't2_lotfy2') {
-  //         profilePostsVotesType[i] = votersHome[i]['voteType'];
-  //         notifyListeners();
-  //       }
-  //     }
-  //   } else if (postPlace == 'community') {
-  //     for (int i = 0; i <= votersCommunity.length; i++) {
-  //       if (votersCommunity[i][0]['userID'] == 't2_lotfy2') {
-  //         profilePostsVotesType[i] = votersCommunity[i]['voteType'];
-  //         notifyListeners();
-  //       }
-  //     }
-  //   } else {
-  //     for (int i = 0; i <= votersProfile.length; i++) {
-  //       if (votersProfile[i][0]['userID'] == 't2_lotfy2') {
-  //         profilePostsVotesType[i] = votersProfile[i]['voteType'];
-  //         notifyListeners();
-  //       }
-  //     }
-  //   }
-  // }
+
+
+
 }

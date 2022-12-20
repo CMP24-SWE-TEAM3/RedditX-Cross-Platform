@@ -57,10 +57,11 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                         labelColor: Colors.black,
                         tabs: const [
                           Tab(
+                            key: ValueKey("posts_tab"),
                             text: "Posts",
                           ),
-                          Tab(text: "Comments"),
-                          Tab(text: "About")
+                          Tab(key: ValueKey("comments_tab"), text: "Comments"),
+                          Tab(key: ValueKey("about_tab"), text: "About")
                         ]),
                     if (value.tabIndex == 0)
                       SingleChildScrollView(

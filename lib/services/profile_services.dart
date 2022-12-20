@@ -122,7 +122,7 @@ getProfilePostsCommunityAvatarsAPI(String communityName) async {
 /// Vote service to upvote, downvote or cancel any of them
 voteAPI(String id, int dir) async {
   const apiRoute = "/api/listing/vote";
-  await http.post(Uri.parse(urlApi + apiRoute),
+  var response=await http.post(Uri.parse(urlApi + apiRoute),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
         HttpHeaders.authorizationHeader:
@@ -186,9 +186,9 @@ getAPISavedPosts() async {
   });
 }
 
-
+/// Get user voted posts from API
 getAPIUpVotedPosts(String userName) async {
-  String apiRoute = "/api/user/me/$userName/upvoted";
+  String apiRoute = "/api/user/$userName/upvoted";
   Uri url = Uri.parse(urlApi + apiRoute);
   await http.get(
     url,
@@ -200,13 +200,23 @@ getAPIUpVotedPosts(String userName) async {
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
+
       upvotedPostsAPI = responseData['posts'];
+            for (int i = 0; i < upvotedPostsAPI.length; i++) {
+        upvotedPostsIDs.add(upvotedPostsAPI[i]['_id']);
+      }
+
     } else {
       upvotedPostsAPI = [];
+
     }
+
+    
   });
 }
 
+
+/// Get user downvoted posts from API
 getAPIDownVotedPosts(String userName) async {
   String apiRoute = "/api/user/$userName/downvoted";
   Uri url = Uri.parse(urlApi + apiRoute);
@@ -221,8 +231,17 @@ getAPIDownVotedPosts(String userName) async {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
       downvotedPostsAPI = responseData['posts'];
+            for (int i = 0; i < downvotedPostsAPI.length; i++) {
+        downvotedPostsIDs.add(downvotedPostsAPI[i]['_id']);
+      }
     } else {
       downvotedPostsAPI = [];
+
     }
+    //     print("/////////////////////////////////");
+    // print(downvotedPostsIDs);
+    // print("/////////////////////////////////");
+    // print(downvotedPostsAPI);
+
   });
 }

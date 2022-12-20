@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
 import 'package:search_project/config/constants.dart';
+import 'package:search_project/controllers/profile_controller.dart';
 import 'package:search_project/controllers/profile_model_controller.dart';
 import 'package:search_project/models/user_model.dart';
 import 'package:search_project/styles/colors.dart';
@@ -12,7 +13,7 @@ import '../../../methods/community/share_bottom_sheet.dart';
 import '../../../styles/custom_icons.dart';
 
 ///  Shows the bottom part of mobile post
-class BottomPostMobile extends StatelessWidget {
+class BottomPostMobile extends StatefulWidget {
   /// Index of post
   final int index;
 
@@ -32,57 +33,84 @@ class BottomPostMobile extends StatelessWidget {
       super.key});
 
   @override
+  State<BottomPostMobile> createState() => _BottomPostMobileState();
+}
+
+class _BottomPostMobileState extends State<BottomPostMobile> {
+  @override
   Widget build(BuildContext context) {
-    return Consumer3<CommunityProvider, CommunityModelProvider,
-        ProfileModelProvider>(
-      builder: (context, value, value1, value2, child) => Row(
+    return Consumer4<CommunityProvider, CommunityModelProvider,
+        ProfileModelProvider, ProfileProvider>(
+      builder: (context, value, value1, value2, value3, child) => Row(
         children: [
           Expanded(
             child: IconButton(
                 key: const ValueKey("like_button"),
-                onPressed: () {
-                  // (profilePostsVotesType[index] == 1)
-                  //     ? value2.vote(posts[index]['_id'], -1)
-                  //     : value2.vote(posts[index]['_id'], 1);
+                onPressed: () async {
+                  await Provider.of<ProfileModelProvider>(context,
+                          listen: false)
+                      .getUserUpVotedPosts('t2_lotfy2');
+                  //await value2.getUserUpVotedPosts('t2_lotfy2');
+                  ((upvotedPostsIDs
+                          .contains(widget.posts[widget.index]['_id'])))
+                      ? value2.vote(
+                          "t3_${widget.posts[widget.index]['_id']}", 0)
+                      : value2.vote(
+                          "t3_${widget.posts[widget.index]['_id']}", 1);
+                  value2.getUserUpVotedPosts('t2_lotfy2');
+                  await value2.getUserUpVotedPosts('t2_lotfy2');
                 },
-                icon: (iSMOCK)?const Icon(CustomIcons.upOutline):(profilePostsVotesType[index] == 1)
-                    ? const Icon(
-                        CustomIcons.upBold,
-                        color: Colors.deepOrange,
-                      )
-                    : const Icon(CustomIcons.upOutline)),
+                icon: (iSMOCK)
+                    ? const Icon(CustomIcons.upOutline)
+                    : ((upvotedPostsIDs
+                            .contains(widget.posts[widget.index]['_id'])))
+                        ? const Icon(
+                            CustomIcons.upBold,
+                            color: Colors.deepOrange,
+                          )
+                        : const Icon(CustomIcons.upOutline)),
           ),
           Text(
               key: const ValueKey("votes_count"),
-              Numeral(posts[index]['votesCount'] ?? 0)
+              Numeral(widget.posts[widget.index]['votesCount'] ?? 0)
                   .format(fractionDigits: 1)),
           Expanded(
             child: IconButton(
                 key: const ValueKey("dislike_button"),
-                onPressed: () {
-               
-                  (profilePostsVotesType[index] == -1)
-                      ? value2.vote(posts[index]['_id'], 2)
-                      : value2.vote(posts[index]['_id'], -1);
+                onPressed: () async {
+                  await Provider.of<ProfileModelProvider>(context,
+                          listen: false)
+                      .getUserDownVotedPosts('t2_lotfy2');
+
+                  ((downvotedPostsIDs
+                          .contains(widget.posts[widget.index]['_id'])))
+                      ? value2.vote(
+                          "t3_${widget.posts[widget.index]['_id']}", 2)
+                      : value2.vote(
+                          "t3_${widget.posts[widget.index]['_id']}", -1);
+                  await value2.getUserDownVotedPosts('t2_lotfy2');
                 },
-                icon: (iSMOCK)?const Icon(CustomIcons.downOutline):(profilePostsVotesType[index] == -1)
-                    ? const Icon(
-                        CustomIcons.downBold,
-                        color: blueColor,
-                      )
-                    : const Icon(CustomIcons.downOutline)),
+                icon: (iSMOCK)
+                    ? const Icon(CustomIcons.downOutline)
+                    : (downvotedPostsIDs
+                            .contains(widget.posts[widget.index]['_id']))
+                        ? const Icon(
+                            CustomIcons.downBold,
+                            color: blueColor,
+                          )
+                        : const Icon(CustomIcons.downOutline)),
           ),
           Expanded(
             child: IconButton(
                 onPressed: () {}, icon: const Icon(CustomIcons.comment)),
           ),
-          Text(Numeral(posts[index]['commentsNum'] ?? 0)
+          Text(Numeral(widget.posts[widget.index]['commentsNum'] ?? 0)
               .format(fractionDigits: 1)),
           Expanded(
             child: IconButton(
                 key: const ValueKey("share_button"),
                 onPressed: () {
-                  shareBottomSheet(context, index);
+                  shareBottomSheet(context, widget.index);
                 },
                 icon: const Icon(Icons.share_outlined)),
           ),
