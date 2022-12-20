@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_project/controllers/profile_controller.dart';
 import 'package:search_project/controllers/profile_model_controller.dart';
+import 'package:search_project/views/screens/profile/profile_saved_posts.dart';
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
             create: ((context) => ProfileModelProvider()
               ..getProfileAbout("t2_hamada")
               ..getProfileComments('t2_shredan')
-              ..getProfilePosts("t2_hamada")..getProfilePostsCommunityAvatars("t5_imagePro235")
+              ..getProfilePosts("t2_hamada")..getProfilePostsCommunityAvatars("t5_imagePro235")..getUserSavedPosts()
             )),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
@@ -61,14 +62,15 @@ class MyApp extends StatelessWidget {
               ),
         ),
         initialRoute: '/',
-        home: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-          return ProfileMobileScreen(
-            context: context,
-            constraints: constraints,
-            userID: "t2_hamada",
-          );
-        }),
+        home: UserSavedPosts(),
+        // LayoutBuilder(
+        //     builder: (BuildContext context, BoxConstraints constraints) {
+        //   return ProfileMobileScreen(
+        //     context: context,
+        //     constraints: constraints,
+        //     userID: "t2_hamada",
+        //   );
+        // }),
         routes: const {},
       ),
     );

@@ -70,6 +70,19 @@ class ProfileModelProvider with ChangeNotifier {
     }
   }
 
+  ///Get user saved posts whether from API or mock data
+   Future getUserSavedPosts() async {
+    if (mockData) {
+        savedPosts=savedPostsMock;
+      notifyListeners();
+    } else {
+      await getAPISavedPosts();
+      savedPosts=savedPostsAPI;
+      notifyListeners();
+    }
+  }
+  
+
   /// Upvote, downvote or cancel vote
   Future vote(String id, int dir) async {
     if (!mockData) {

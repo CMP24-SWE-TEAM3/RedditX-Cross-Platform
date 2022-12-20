@@ -5,7 +5,6 @@ import 'package:search_project/models/user_model.dart';
 
 import '../config/constants.dart';
 
-
 /// Get profile posts using API
 getAPIProfilePosts(String userName) async {
   String apiRoute = "/api/user/$userName/submitted";
@@ -19,19 +18,14 @@ getAPIProfilePosts(String userName) async {
     },
   ).then((value) {
     if (value.statusCode == 200) {
-
-
       var responseData = json.decode(value.body) as Map<String, dynamic>;
       profilePostsAPI = responseData['posts'];
-     for(int i=0;i<profilePostsAPI.length;i++)
-     {
-      votersProfileAPI.add(profilePostsAPI[i]['voters']);
-      
-     }     
+      for (int i = 0; i < profilePostsAPI.length; i++) {
+        votersProfileAPI.add(profilePostsAPI[i]['voters']);
+      }
     } else {
       profilePostsAPI = [];
-      votersProfileAPI=[];
-
+      votersProfileAPI = [];
     }
   });
 }
@@ -78,10 +72,8 @@ getAPIProfileComments(String userName) async {
   });
 }
 
-
 /// get comments post titles using API
-getCommentPostTitles(String ids)async
-{
+getCommentPostTitles(String ids) async {
   String apiRoute = "/api/r/info?id=$ids";
   Uri url = Uri.parse(urlApi + apiRoute);
   await http.get(
@@ -94,22 +86,17 @@ getCommentPostTitles(String ids)async
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      for(int i=0;i<responseData['things'].length;i++)
-      {
-        commentsPostTitlesAPI
-        .add(responseData['things'][i]['title']);
+      for (int i = 0; i < responseData['things'].length; i++) {
+        commentsPostTitlesAPI.add(responseData['things'][i]['title']);
       }
- 
     } else {
-           
-      commentsPostTitlesAPI=[];
+      commentsPostTitlesAPI = [];
     }
   });
 }
 
 /// Get communities Avatar to show in profile posts
-getProfilePostsCommunityAvatarsAPI(String communityName)async
-{
+getProfilePostsCommunityAvatarsAPI(String communityName) async {
   String apiRoute = "/api/r/info?id=$communityName";
   Uri url = Uri.parse(urlApi + apiRoute);
   await http.get(
@@ -122,31 +109,44 @@ getProfilePostsCommunityAvatarsAPI(String communityName)async
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-            for (int i = 0; i < responseData['things'].length; i++) {
-        profilePostsCommunityAvatarsAPI
-            .add(responseData['things'][i]['icon']);
+      for (int i = 0; i < responseData['things'].length; i++) {
+        profilePostsCommunityAvatarsAPI.add(responseData['things'][i]['icon']);
       }
     } else {
-
-      profilePostsCommunityAvatarsAPI=[];
+      profilePostsCommunityAvatarsAPI = [];
     }
-
-
   });
-
-
 }
-
 
 /// Vote service to upvote, downvote or cancel any of them
 voteAPI(String id, int dir) async {
   const apiRoute = "/api/listing/vote";
-   await http.post(Uri.parse(urlApi + apiRoute),
+  await http.post(Uri.parse(urlApi + apiRoute),
       headers: <String, String>{
         'Content-Type': 'application/json; charset=UTF-8',
-        HttpHeaders.authorizationHeader: ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzEyMTUzNjksImV4cCI6MTY3MTY0NzM2OX0.Ju__2iM52qX-pdVxr-czdiusZSnAxrruGuCtKV5UBzw"}')
+        HttpHeaders.authorizationHeader:
+            ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzEyMTUzNjksImV4cCI6MTY3MTY0NzM2OX0.Ju__2iM52qX-pdVxr-czdiusZSnAxrruGuCtKV5UBzw"}')
       },
-      body: jsonEncode(<String, dynamic>{"id": id,'dir':dir}));
+      body: jsonEncode(<String, dynamic>{"id": id, 'dir': dir}));
 }
 
-
+/// Get user saved posts from API
+getAPISavedPosts() async {
+  String apiRoute = "/api/user/me/saved-posts";
+  Uri url = Uri.parse(urlApi + apiRoute);
+  await http.get(
+    url,
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+      HttpHeaders.authorizationHeader:
+          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzEyMTUzNjksImV4cCI6MTY3MTY0NzM2OX0.Ju__2iM52qX-pdVxr-czdiusZSnAxrruGuCtKV5UBzw"}')
+    },
+  ).then((value) {
+    if (value.statusCode == 200) {
+      var responseData = json.decode(value.body) as Map<String, dynamic>;
+      savedPostsAPI = responseData['posts'];
+    } else {
+      savedPostsAPI = [];
+    }
+  });
+}
