@@ -9,6 +9,7 @@ import 'controllers/create_community_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
 import 'views/screens/Home/home_page.dart';
+import 'views/screens/addComment/add_comment.dart';
 import 'views/screens/create_community/create_community_screen.dart';
 import 'views/screens/profile/profile_page.dart';
 
@@ -129,6 +130,7 @@ class MyApp extends StatelessWidget {
           ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
           CreateCommunityScreen.routeName: (context) => CreateCommunityScreen(),
           ProfilePage.routeName: (context) => const ProfilePage(),
+          AddComment.routeName: (context) => AddComment(),
         },
       ),
     );
