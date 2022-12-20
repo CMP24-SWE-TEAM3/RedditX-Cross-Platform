@@ -10,7 +10,7 @@ import '../../../controllers/search_controller.dart';
 ///This class is Stateful to can call [initState()] to restore search results
 class SearchScreenOne extends StatefulWidget {
   const SearchScreenOne({super.key});
-
+  static const routeName = '/searchScreenOne';
   @override
   State<StatefulWidget> createState() => SearchScreenOneState();
 }
