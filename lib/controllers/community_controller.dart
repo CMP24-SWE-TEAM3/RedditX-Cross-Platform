@@ -32,15 +32,15 @@ class CommunityProvider with ChangeNotifier {
 
   /// List of the posts liked/not liked by the user
   List<bool> isPostLiked =
-      List.filled(postsListMock.length, false, growable: true);
+      List.filled(communityPostsList.length, false, growable: true);
 
   /// List of the posts disliked/not disliked by the user
   List<bool> isPostDisliked =
-      List.filled(postsListMock.length, false, growable: true);
+      List.filled(communityPostsList.length, false, growable: true);
 
   /// List of the posts saved/not saved by the user
   List<bool> isPostSaved =
-      List.filled(postsListMock.length, false, growable: true);
+      List.filled(communityPostsList.length, false, growable: true);
 
   /// List of the Notifications bottom sheet: Off, Low and Frequent if choosen
   List<IconData> bottomSheetNotificationsIconsFilled = [
@@ -132,7 +132,7 @@ class CommunityProvider with ChangeNotifier {
 
   /// Like a post of an [index]
   void likePost(int index) {
-    int? votes = postsListMock1[index]['votesCount'];
+    int? votes = communityPostsListMock[index]['votesCount'];
     // Solves a problem of null safety
     if (votes != null) {
       if (isPostLiked[index]) {
@@ -147,13 +147,13 @@ class CommunityProvider with ChangeNotifier {
         isPostDisliked[index] = !isPostDisliked[index];
       }
     }
-    postsListMock1[index]['votesCount'] = votes;
+    communityPostsListMock[index]['votesCount'] = votes;
     notifyListeners();
   }
 
   /// Dislike a post of an [index]
   void disLikePost(int index) {
-    int? votes = postsListMock1[index]['votesCount'];
+    int? votes = communityPostsListMock[index]['votesCount'];
     if (votes != null) {
       if (isPostDisliked[index]) {
         votes++;
@@ -167,7 +167,7 @@ class CommunityProvider with ChangeNotifier {
         isPostLiked[index] = !isPostLiked[index];
       }
     }
-    postsListMock1[index]['votesCount'] = votes;
+    communityPostsListMock[index]['votesCount'] = votes;
 
     notifyListeners();
   }
@@ -188,9 +188,9 @@ class CommunityProvider with ChangeNotifier {
   void changeExpandedHight(bool isExpandedd) {
     isExpanded = !isExpandedd;
     if (isExpanded) {
-      expandedHeight = 400;
+      expandedHeight = 450;
     } else {
-      expandedHeight = 320;
+      expandedHeight = 350;
     }
     notifyListeners();
   }

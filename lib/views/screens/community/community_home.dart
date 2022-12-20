@@ -10,17 +10,11 @@ class CommunityHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) {
-      return (constraints.minWidth.round() < 500)
-          ? CommunityMobileScreen(
-              context: context,
-              constraints: constraints,
-              communityName: "At5_imagePro235")
-          : CommunityWebScreen(
-              context: context,
-              constraints: constraints,
-              communityName: "At5_imagePro235",
-            );
-    }));
+            builder: (BuildContext context, BoxConstraints constraints) {
+          return (constraints.minWidth.round() < 500)
+              ? CommunityMobileScreen(
+                  context: context, constraints: constraints,communityName: "t5_imagePro235",)
+              : CommunityWebScreen(context: context, constraints: constraints,communityName: "t5_imagePro235",);
+        }));
   }
 }

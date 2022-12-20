@@ -154,15 +154,18 @@ class TopMobilePost extends StatelessWidget {
             radius: 10,
             backgroundImage: NetworkImage(""),
           ),
-          const SizedBox(
-            width: 4,
-          ),
+          // const SizedBox(
+          //   width: 4,
+          // ),
           Row(
             children: [
               InkWell(
                 onTap: () {},
                 child: Text(
                     "${posts[index]['communityID']['_id']}".replaceAll("t5_", "")),
+              ),
+              const SizedBox(
+                width: 5,
               ),
               const SizedBox(
                 width: 5,

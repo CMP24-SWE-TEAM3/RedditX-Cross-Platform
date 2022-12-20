@@ -11,6 +11,7 @@ import 'controllers/sign_in_controller.dart';
 import 'views/screens/Home/home_page.dart';
 import 'views/screens/create_community/create_community_screen.dart';
 import 'views/screens/profile/profile_page.dart';
+
 import 'views/screens/search/search_screen_one.dart';
 import 'views/screens/search/search_screen_two.dart';
 import 'controllers/search_controller.dart';
@@ -41,6 +42,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   // initial the application
+  
   WidgetsFlutterBinding.ensureInitialized();
   (kIsWeb) ? null : await Firebase.initializeApp();
   runApp(const MyApp());
@@ -66,7 +68,9 @@ class MyApp extends StatelessWidget {
               
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
-        ChangeNotifierProvider(create: (context) => CommunityModelProvider()),
+        ChangeNotifierProvider(
+            create: (context) => CommunityModelProvider()
+              ..getCommunityPosts("t5_imagePro235", "hot", [], 1, 40)..getCommunityAbout("t5_imagePro235")..getCommunityInfo("t5_imagePro235")..getCommunityFlairs("t5_imagePro235")),
         ChangeNotifierProvider(
             create: (context) =>
                 CommunityProvider(communityService: CommunityService())),
@@ -102,7 +106,8 @@ class MyApp extends StatelessWidget {
               ),
         ),
         initialRoute: '/',
-        home: (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+        home:(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+         //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
           Home.routeName: (ctx) => const Home(),
           HomePage.routeName: (ctx) => const HomePage(),

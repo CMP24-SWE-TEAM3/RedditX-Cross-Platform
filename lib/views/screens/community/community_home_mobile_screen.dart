@@ -20,7 +20,6 @@ import '../../widgets/community/mobile_post_classic.dart';
 import 'dart:math' as math;
 
 
-
 /// Community mobile screen
 class CommunityMobileScreen extends StatelessWidget {
   /// Constrains to handle respositivity
