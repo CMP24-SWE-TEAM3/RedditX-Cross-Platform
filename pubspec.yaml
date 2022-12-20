@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+publish_to: "none" # Remove this line if you wish to publish to pub.dev
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -44,10 +44,10 @@ dependencies:
   flutter_facebook_auth: ^5.0.6
   google_sign_in: ^5.4.2
   http: ^0.13.5
+  pull_to_refresh: ^2.0.0
   image_picker: ^0.8.6
 
   permission_handler: ^10.2.0
-
 
   intl: ^0.17.0
 
@@ -58,9 +58,7 @@ dependencies:
 
   flutter_launcher_icons: ^0.10.0
 
-
   any_link_preview: ^2.0.9
-
 
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.6
@@ -75,7 +73,6 @@ dependencies:
   cached_network_image: ^3.2.2
   test_cov_console: ^0.2.2
   dartdoc: ^6.1.1
-
 
   settings_ui:
 dev_dependencies:
@@ -97,7 +94,6 @@ flutter:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-
     - assets/kareem.jpg
     - assets/images/logo.png
     - assets/images/loginEmote.png
@@ -119,7 +115,6 @@ flutter:
   # example:
 
   fonts:
-
     - family: XButtonIcon
       fonts:
         - asset: assets/icons/xButton.ttf
