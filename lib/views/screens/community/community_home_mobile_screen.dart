@@ -345,7 +345,7 @@ class CommunityMobileScreen extends StatelessWidget {
                               ),
                               Text(
                                 "r/${communityInfo['_id']}"
-                                    .replaceFirst("t5_", ""),
+                                    .replaceFirst("t5_", "") ?? ' ',
                                 style: const TextStyle(
                                     fontSize: 15, color: whiteColor),
                               )

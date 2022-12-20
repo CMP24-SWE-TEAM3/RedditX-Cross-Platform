@@ -37,6 +37,16 @@ class BottomPostMobile extends StatefulWidget {
 }
 
 class _BottomPostMobileState extends State<BottomPostMobile> {
+  bool voting = false;
+
+  refresh() {
+    @override
+    void setState(VoidCallback fn) {
+      super.setState(fn);
+      voting = !voting;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer4<CommunityProvider, CommunityModelProvider,
@@ -59,6 +69,7 @@ class _BottomPostMobileState extends State<BottomPostMobile> {
                           "t3_${widget.posts[widget.index]['_id']}", 1);
                   value2.getUserUpVotedPosts('t2_lotfy2');
                   await value2.getUserUpVotedPosts('t2_lotfy2');
+                  refresh();
                 },
                 icon: (iSMOCK)
                     ? const Icon(CustomIcons.upOutline)
@@ -89,6 +100,7 @@ class _BottomPostMobileState extends State<BottomPostMobile> {
                       : value2.vote(
                           "t3_${widget.posts[widget.index]['_id']}", -1);
                   await value2.getUserDownVotedPosts('t2_lotfy2');
+                  refresh();
                 },
                 icon: (iSMOCK)
                     ? const Icon(CustomIcons.downOutline)
