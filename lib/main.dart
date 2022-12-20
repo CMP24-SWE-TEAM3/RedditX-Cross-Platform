@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:search_project/controllers/drawer_view_model_controller.dart';
 import 'package:search_project/views/screens/community/community_home.dart';
+import 'package:search_project/views/screens/drawers/drawers_home_screen.dart';
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
@@ -45,7 +47,7 @@ import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   // initial the application
-  
+
   WidgetsFlutterBinding.ensureInitialized();
   (kIsWeb) ? null : await Firebase.initializeApp();
   runApp(const MyApp());
@@ -58,18 +60,16 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-         ChangeNotifierProvider(create: (context) => ProfileProvider()),
-        ChangeNotifierProvider(
-            create: ((context) => ProfileModelProvider()
-           
-           
-             )),
-              
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
+        ChangeNotifierProvider(create: ((context) => ProfileModelProvider())),
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
-              ..getCommunityPosts("t5_imagePro45", "hot", [], 2, 40)..getCommunityAbout("t5_imagePro235")..getCommunityInfo("t5_imagePro235")..getCommunityFlairs("t5_imagePro235")),
+              ..getCommunityPosts("t5_imagePro45", "hot", [], 2, 40)
+              ..getCommunityAbout("t5_imagePro235")
+              ..getCommunityInfo("t5_imagePro235")
+              ..getCommunityFlairs("t5_imagePro235")),
         ChangeNotifierProvider(
             create: (context) =>
                 CommunityProvider(communityService: CommunityService())),
@@ -82,8 +82,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CreateCommunityViewModelController(),
         ),
+        ChangeNotifierProvider(create: (context) => HomeController()),
         ChangeNotifierProvider(
-          create: (context) => HomeController(),
+          create: (context) => DrawersViewModelController(),
         ),
       ],
       child: MaterialApp(
@@ -108,8 +109,8 @@ class MyApp extends StatelessWidget {
               ),
         ),
         initialRoute: '/',
-        home:(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
-         //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+        home: (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+        //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
           Home.routeName: (ctx) => const Home(),
           Popular.routeName: (ctx) => const Popular(),
@@ -137,6 +138,7 @@ class MyApp extends StatelessWidget {
           CreateCommunityScreen.routeName: (context) => CreateCommunityScreen(),
           ProfilePage.routeName: (context) => const ProfilePage(),
           // AddComment.routeName: (context) => AddComment(),
+          DrawerHome.routeName: (context) => const DrawerHome(),
         },
       ),
     );

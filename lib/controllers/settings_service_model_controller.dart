@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:search_project/models/settings_model.dart';
@@ -46,7 +47,7 @@ class SettingsServiceModelController {
       String? confirmNewPassword) async {
     final res = await settingsService.changePasswordService(
         currentPassword, newPassword, confirmNewPassword);
-    if (res.statusCode == 200) {
+    if (json.decode(res.body)['status'] == "success") {
       // change password
       currentUser?.passwordChangedAt = DateTime.now();
       return 0;
@@ -58,8 +59,8 @@ class SettingsServiceModelController {
   }
 
   ///invokes service for updating user pref(s)
-  changePrefsServiceController(Map<String, bool>? prefs) async {
-    final res = await settingsService.updatePrefsService(prefs: prefs);
+  changePrefsServiceController(key, value) async {
+    final res = await settingsService.updatePrefsService(key, value);
     if (res.statusCode == 200) {
       return 0;
     } else {

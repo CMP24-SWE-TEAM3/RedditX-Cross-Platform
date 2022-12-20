@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:search_project/controllers/settings_validations.dart';
 import 'package:search_project/models/user_model.dart';
@@ -29,10 +31,11 @@ class SettingsViewModelMobileController with ChangeNotifier {
       TextEditingController newPassword,
       TextEditingController confirmNewPassword,
       var context) async {
-    if (changePasswordInner(currentPassword, newPassword, confirmNewPassword) ==
+    if (await changePasswordInner(
+            currentPassword, newPassword, confirmNewPassword) ==
         0) {
-      showSnackBar(context, "Password changed successfully!");
       Navigator.pop(context);
+      showSnackBar(context, "Password changed successfully!");
       settingsModel.newPasswordErrorMessage = null;
     } else {
       settingsModel.newPasswordErrorMessage = "Failed,Check Your connection";
@@ -44,10 +47,12 @@ class SettingsViewModelMobileController with ChangeNotifier {
       TextEditingController currentPassword,
       TextEditingController newPassword,
       TextEditingController confirmNewPassword) async {
-    if (validateChangePassword(
-            currentPassword, newPassword, confirmNewPassword) ==
-        0) {
+    var val = validateChangePassword(
+        currentPassword, newPassword, confirmNewPassword);
+    log(val.toString());
+    if (val == 0) {
       var passwordValidating = passwordValidation(newPassword.text);
+      log(passwordValidating.toString());
       if (passwordValidating == null) {
         settingsModel.newPasswordErrorMessage = null;
         //change password service call
@@ -117,8 +122,8 @@ class SettingsViewModelMobileController with ChangeNotifier {
   ///toggles switch value according a key
   toggleSwitch(String? key, context) async {
     bool? switchValue = await toggleSwitchLogic(key!);
-    int res = await settingsServiceModelController
-        .changePrefsServiceController({key: !switchValue!});
+    int res = await settingsServiceModelController.changePrefsServiceController(
+        key, !switchValue!);
     if (res == 0) {
       showSnackBar(context, "Updated Successfully!");
     } else {

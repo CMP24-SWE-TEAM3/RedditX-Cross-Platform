@@ -33,7 +33,8 @@ class ChangePasswordScreen extends StatelessWidget {
           child: const Icon(Icons.arrow_back),
           onTap: () => Navigator.pop(context),
         ),
-        title: const Text("Change password"),
+        title: const Text("Change password",
+            style: TextStyle(color: Colors.black)),
       ),
       body: Column(
         children: [

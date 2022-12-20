@@ -23,7 +23,10 @@ class SettingsHomePage extends StatelessWidget {
           child: const Icon(Icons.arrow_back),
           onTap: () => Navigator.pop(context),
         ),
-        title: const Text("Settings"),
+        title: const Text(
+          "Settings",
+          style: TextStyle(color: Colors.black),
+        ),
       ),
       body: ListView(
         children: [

@@ -24,7 +24,8 @@ class UpdateEmailAddress extends StatelessWidget {
           child: const Icon(Icons.arrow_back),
           onTap: () => Navigator.pop(context),
         ),
-        title: const Text("Update email address"),
+        title: const Text("Update email address",
+            style: TextStyle(color: Colors.black)),
       ),
       body: ListView(
         children: [
