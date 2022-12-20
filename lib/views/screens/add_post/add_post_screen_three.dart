@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../../controllers/add_post_controller.dart';
 import '../../../methods/circular_image_widget.dart';
 import '../../../models/add_post_model.dart';
+import '../../widgets/add_post/community_flairs.dart';
 import '../../widgets/add_post/nsfw_spoiler_button.dart';
 import '../../widgets/add_post/rules.dart';
 import 'add_post_screen_two.dart';
@@ -215,7 +216,11 @@ class AddPostScreenThree extends StatelessWidget {
                         Provider.of<AddPostController>(
                           context,
                           listen: false,
-                        ).openFlair();
+                        ).openFlair(args.communityInAddPost.communityName);
+                        Navigator.pushNamed(
+                          context,
+                          CommunityFlairs.routeName,
+                        );
                       },
                       child: Row(
                         children: const [

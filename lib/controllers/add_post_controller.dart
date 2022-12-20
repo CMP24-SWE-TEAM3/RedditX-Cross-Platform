@@ -11,6 +11,7 @@ import '../views/widgets/add_post/my_communities_data.dart';
 import '../views/widgets/add_post/pick_image_or_video_button.dart';
 import '../views/widgets/add_post/poll_option.dart';
 import 'add_post_service_model_controller.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class AddPostController with ChangeNotifier {
   ///Whether the platform is web or android
@@ -77,13 +78,16 @@ class AddPostController with ChangeNotifier {
   ///whether the post will be spoiler or not
   bool selectedSRSpoiler = false;
 
-  String flairText = '';
-  String flairBackGround = '';
-  String flairTextColor = '';
-  String flairTextID = '';
+  int flairindex = -1;
+  int flairInitialIndex = -1;
   String communityID = '';
 
   bool communityLoading = false;
+
+  applyFlair() {
+    flairindex = flairInitialIndex;
+    notifyListeners();
+  }
 
   setCommunityName(String communityName) {
     communityID = communityName;
@@ -409,19 +413,104 @@ class AddPostController with ChangeNotifier {
     notifyListeners();
   }
 
-  openFlair() {}
+  openFlair(String communityName) async {
+    communityLoading = true;
+    notifyListeners();
+    await getCommunityFlairs(communityName);
+    communityLoading = false;
+    notifyListeners();
+  }
+
+  List<dynamic> buildFlairsScreen() {
+    if (communityLoading) {
+      return [
+        const Center(
+          child: CircularProgressIndicator(),
+        ),
+      ];
+    } else {
+      ///List of rules to be showed for the user when click on [Rules] button
+      List<Widget> flairsList = [];
+      flairsList.add(
+        RadioListTile(
+          title: const Text(
+            'None',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.w300,
+              fontSize: 16,
+            ),
+          ),
+          value: "-1",
+          groupValue: 'Flair',
+          onChanged: (value) {
+            flairInitialIndex = -1;
+            notifyListeners();
+          },
+        ),
+      );
+      for (int i = 0; i < flairs.length; i++) {
+        flairsList.add(
+          RadioListTile(
+            title: Container(
+              margin: const EdgeInsets.only(
+                left: 5,
+              ),
+              padding: const EdgeInsets.all(
+                2,
+              ),
+              decoration: BoxDecoration(
+                color: HexColor(
+                  flairs[i].flairTextColor == ''
+                      ? '#ffffff'
+                      : flairs[i].flairBackGround,
+                ).withOpacity(
+                  1,
+                ),
+                //rounded rectangle shape
+                borderRadius: const BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              child: Text(
+                ///Flair text
+                flairs[i].flairText,
+                style: TextStyle(
+                  color: HexColor(
+                    flairs[i].flairTextColor == ''
+                        ? '#000000'
+                        : flairs[i].flairTextColor,
+                  ),
+                  fontWeight: FontWeight.w300,
+                  fontSize: 16,
+                ),
+              ),
+            ),
+            value: "$i",
+            groupValue: 'Flair',
+            onChanged: (value) {
+              flairInitialIndex = i;
+              notifyListeners();
+            },
+          ),
+        );
+      }
+      return flairsList;
+    }
+  }
 
   sendPost() {
     submitPost(
-        selectedSRNSFW,
-        selectedSRSpoiler,
-        addPostTitlecontroller.text,
-        addPostTextcontroller.text,
-        flairText,
-        flairTextColor,
-        flairBackGround,
-        flairTextID,
-        communityID);
+      selectedSRNSFW,
+      selectedSRSpoiler,
+      addPostTitlecontroller.text,
+      addPostTextcontroller.text,
+      (flairindex == -1) ? '' : flairs[flairindex].flairText,
+      (flairindex == -1) ? '' : flairs[flairindex].flairTextColor,
+      (flairindex == -1) ? '' : flairs[flairindex].flairBackGround,
+      (flairindex == -1) ? '' : flairs[flairindex].flairID,
+      communityID,
+    );
   }
 
   ///When the user toggle the state of [NSFW] while adding post
