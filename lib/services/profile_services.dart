@@ -115,6 +115,7 @@ getProfilePostsCommunityAvatarsAPI(String communityName) async {
     } else {
       profilePostsCommunityAvatarsAPI = [];
     }
+
   });
 }
 
@@ -179,7 +180,6 @@ getAPISavedPosts() async {
         savedPostsIDs.add(savedPostsAPI[i]['_id']);
 
       }
-      print(savedPostsIDs);
     } else {
       savedPostsAPI = [];
     }

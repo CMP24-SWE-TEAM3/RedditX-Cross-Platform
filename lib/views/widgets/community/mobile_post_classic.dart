@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:search_project/models/user_model.dart';
 import '../../../config/constants.dart';
 import '../../../models/post_model.dart';
 import 'mobile_post_bottom.dart';
 import 'mobile_post_top.dart';
-import 'dart:math' as math;
 
 /// Shows the card post view
 class MobilePostClassic extends StatelessWidget {
@@ -100,12 +100,10 @@ class MobilePostClassic extends StatelessWidget {
                                             2,
                                           ),
                                           decoration: BoxDecoration(
-                                            ///Random color
-                                            color: Color(
-                                              (math.Random().nextDouble() *
-                                                      0xFFFFFF)
-                                                  .toInt(),
-                                            ).withOpacity(
+                                           
+                                            color: 
+                                             HexColor("${profilePosts[index]['flairBackGround']}")
+                                            .withOpacity(
                                               1,
                                             ),
                                             //rounded rectangle shape
@@ -117,8 +115,9 @@ class MobilePostClassic extends StatelessWidget {
                                           child: Text(
                                             ///Flair text
                                             '${posts[index]['flairText']}',
-                                            style: const TextStyle(
-                                              color: Colors.white,
+                                            style:  TextStyle(
+                                              color: HexColor(
+                                                  "${profilePosts[index]['flairTextColor']}"),
                                             ),
                                           ),
                                         ),
