@@ -19,7 +19,7 @@ class ManageEmailsScreen extends StatelessWidget {
           child: const Icon(Icons.arrow_back),
           onTap: () => Navigator.pop(context),
         ),
-        title: const Text("Emails"),
+        title: const Text("Emails", style: TextStyle(color: Colors.black)),
       ),
       body: ListView(
         children: [

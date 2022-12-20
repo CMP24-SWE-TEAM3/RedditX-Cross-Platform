@@ -1,7 +1,9 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:search_project/controllers/drawer_view_model_controller.dart';
 import 'package:search_project/views/screens/community/community_home.dart';
+import 'package:search_project/views/screens/drawers/drawers_home_screen.dart';
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
@@ -67,6 +69,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CreateCommunityViewModelController(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => DrawersViewModelController(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -115,6 +120,7 @@ class MyApp extends StatelessWidget {
           UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
           ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
           CreateCommunityScreen.routeName: (context) => CreateCommunityScreen(),
+          DrawerHome.routeName: (context) => const DrawerHome(),
         },
       ),
     );

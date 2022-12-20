@@ -24,7 +24,8 @@ class AccountSettingsScreen extends StatelessWidget {
           child: const Icon(Icons.arrow_back),
           onTap: () => Navigator.pop(context),
         ),
-        title: const Text("Acount Settings"),
+        title: const Text("Acount Settings",
+            style: TextStyle(color: Colors.black)),
       ),
       body: ListView(
         children: [

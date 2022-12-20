@@ -92,14 +92,16 @@ class SettingsService {
   }
 
   /// post request to send user updated pref(s) can take one or more values
-  updatePrefsService({required Map<String, bool>? prefs}) async {
-    const apiRoute = "/api/user/me/prefs:";
-    final res = await http.post(Uri.parse(baseUrl + apiRoute),
+  updatePrefsService(key, value) async {
+    const apiRoute = "/api/user/me/prefs";
+    log("type: $key, value: $value");
+    final res = await http.patch(Uri.parse(baseUrl + apiRoute),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           HttpHeaders.authorizationHeader: 'Bearer ${userauthentication.uid}'
         },
-        body: jsonEncode(prefs));
+        body: jsonEncode({"type": key, "value": value}));
+    log(res.body);
     return res;
   }
 

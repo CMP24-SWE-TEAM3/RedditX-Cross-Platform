@@ -298,6 +298,7 @@ class UserModel {
       required this.createdAt}) {
     isPasswordSet = (type == 'bare email') ? true : false;
     friendsCount = 0;
+    karma = 0;
     friendRequestToMe = [];
     friendRequestFromMe = [];
     friend = [];

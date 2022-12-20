@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:search_project/views/screens/authentication/splash_screen.dart';
 import 'package:search_project/views/screens/community/community_home.dart';
 import 'package:search_project/views/screens/create_community/create_community_screen.dart';
+import 'package:search_project/views/screens/drawers/drawers_home_screen.dart';
 
 import '../../controllers/sign_in_controller.dart';
 import './search/search_screen_one.dart';
@@ -61,6 +62,12 @@ class Home extends StatelessWidget {
                       .pushNamed(HomePage.routeName, arguments: {});
                 },
                 child: const Text("Home")),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.of(context)
+                      .pushNamed(DrawerHome.routeName, arguments: {});
+                },
+                child: const Text("Drawers Home")),
           ],
         ),
       ),
