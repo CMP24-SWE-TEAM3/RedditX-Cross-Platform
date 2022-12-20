@@ -111,7 +111,7 @@ class MyApp extends StatelessWidget {
         home: (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
-          Home.routeName: (ctx) => const Home(),
+          Home.routeName: (ctx) => const HomePage(),
           Popular.routeName: (ctx) => const Popular(),
           HomePage.routeName: (ctx) => const HomePage(),
           SignUpPage.routeName: (ctx) => const SignUpPage(),
