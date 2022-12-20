@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../widgets/drawers/right_drawer.dart';
+import '../../widgets/drawers/left_drawer.dart';
 
 class DrawerHome extends StatelessWidget {
   const DrawerHome({super.key});
@@ -35,17 +36,7 @@ class DrawerHome extends StatelessWidget {
         ],
       ),
       endDrawer: rightDrawer(context),
-      drawer: Drawer(
-        child: Container(
-          color: Colors.red,
-          child: const Center(
-            child: Text(
-              "Reddit",
-              style: TextStyle(color: Colors.white, fontSize: 30),
-            ),
-          ),
-        ),
-      ),
+      drawer: leftDrawer(context),
     );
   }
 }

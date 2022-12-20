@@ -160,7 +160,7 @@ Drawer rightDrawer(BuildContext context) {
                                     Row(
                                       children: [
                                         Text(
-                                            "                    ${currentUser?.karma}")
+                                            "                    ${currentUser?.karma ?? 0}")
                                       ],
                                     ),
                                     Row(
