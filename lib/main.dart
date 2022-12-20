@@ -6,10 +6,12 @@ import 'package:search_project/views/screens/community/community_home.dart';
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
 import 'controllers/create_community_controller.dart';
+import 'controllers/home_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
 import 'views/screens/Home/home_page.dart';
 import 'views/screens/addComment/add_comment.dart';
+import 'views/screens/Popular/popular_page.dart';
 import 'views/screens/create_community/create_community_screen.dart';
 import 'views/screens/profile/profile_page.dart';
 
@@ -80,6 +82,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => CreateCommunityViewModelController(),
         ),
+        ChangeNotifierProvider(
+          create: (context) => HomeController(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -107,6 +112,7 @@ class MyApp extends StatelessWidget {
          //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
           Home.routeName: (ctx) => const Home(),
+          Popular.routeName: (ctx) => const Popular(),
           HomePage.routeName: (ctx) => const HomePage(),
           SignUpPage.routeName: (ctx) => const SignUpPage(),
           EmailLogin.routeName: (ctx) => const EmailLogin(),

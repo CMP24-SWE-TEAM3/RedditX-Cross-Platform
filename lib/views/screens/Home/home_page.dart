@@ -10,6 +10,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return (kIsWeb) ? const  HomeWeb(): const HomeMobile();
+    return (kIsWeb) ? const  HomeWeb(): HomeMobile();
   }
 }
