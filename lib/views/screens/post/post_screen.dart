@@ -131,12 +131,16 @@ class _post_screenState extends State<post_screen> {
           ? Stack(alignment: AlignmentDirectional.bottomCenter, children: [
               /// Main screen for mobile post
               SingleChildScrollView(
+                key: const ValueKey("post_page"),
+
                 child: Container(
                   child: Column(children: [
                     SizedBox(
                       height: 15,
                     ),
                     Row(
+                      key: const ValueKey("post_user_info"),
+
                       children: [
                         SizedBox(
                           width: 15,
@@ -181,6 +185,8 @@ class _post_screenState extends State<post_screen> {
                       ],
                     ),
                     Padding(
+                      key: const ValueKey("post_text"),
+
                       padding: const EdgeInsets.all(15.0),
                       child: Container(
                         child: Column(
@@ -220,6 +226,8 @@ class _post_screenState extends State<post_screen> {
                       ),
                     ),
                     Row(
+                      key: const ValueKey("post_action_buttons"),
+
                       // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Spacer(
@@ -331,6 +339,8 @@ class _post_screenState extends State<post_screen> {
 
                     /// Comments area
                     Column(
+                      key: const ValueKey("comments_area"),
+
                       children: <Widget>[
                         for (var item in commentsText)
                           comments(
@@ -357,6 +367,8 @@ class _post_screenState extends State<post_screen> {
 
               /// Add new comment area
               Container(
+                key: const ValueKey("add_new_comment"),
+
                 height: 50,
                 width: double.infinity,
                 color: Colors.white,

@@ -54,14 +54,18 @@ class _commentsState extends State<comments> {
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: AnimatedContainer(
+          key: const ValueKey("comment_AnimatedContainer"),
           duration: Duration(milliseconds: 250),
           height: container_height,
           color: Colors.white,
           child: Column(
+            key: const ValueKey("all_comment_info"),
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
+                  key: const ValueKey("comment_user_info"),
+
                   children: [
                     SizedBox(
                       width: 7,
@@ -88,6 +92,8 @@ class _commentsState extends State<comments> {
                 ),
               ),
               Expanded(
+                key: const ValueKey("comment_text"),
+
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
@@ -98,6 +104,8 @@ class _commentsState extends State<comments> {
                 ),
               ),
               Visibility(
+                key: const ValueKey("comment_actions_buttons"),
+
                 visible: is_visible,
                 child: Row(
                   children: [

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 void sort_comments(BuildContext ctx) {
   /// Sorting bottom sheet
   showModalBottomSheet(
+
       isDismissible: true,
       isScrollControlled: true,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
@@ -10,6 +11,8 @@ void sort_comments(BuildContext ctx) {
       context: ctx,
       builder: (_) {
         return SingleChildScrollView(
+          key: const ValueKey("post_bottomSheet"),
+
           child: Padding(
             padding: const EdgeInsets.all(15.0),
             child: Column(children: [

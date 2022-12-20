@@ -11,6 +11,8 @@ class PopupMen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return PopupMenuButton(
+      key: const ValueKey("post_popUpMenu"),
+
       constraints: BoxConstraints.expand(
           width: MediaQuery.of(context).size.width * 0.55, height: 350),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
