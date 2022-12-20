@@ -131,3 +131,18 @@ List<CommunityRuleModel> communityRulesMock = [
           "No post titles asking for upvotes or approval, such as (any love for...), (what does /r/aww think of...), or (this didn't get much love on...), or (karma machine), (sort by new), (don't scroll past), (not your typical aww), (r/aww needs more [X] animals,"
           "name my pet."),
 ];
+
+List<CommunityInAddPost> communitiesInAddPostMock = [
+  CommunityInAddPost(
+    communityIcon: 'default-icon.jpg',
+    communityName: 'r/Palastine',
+    membersCount: 1002,
+    nsfw: true,
+  ),
+  CommunityInAddPost(
+    communityIcon: 'default-icon.jpg',
+    communityName: 'r/Arabs',
+    membersCount: 102,
+    nsfw: false,
+  )
+];

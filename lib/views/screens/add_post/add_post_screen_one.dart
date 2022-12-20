@@ -5,7 +5,7 @@ import '../../../controllers/add_post_controller.dart';
 
 class AddPostScreenOne extends StatelessWidget {
   const AddPostScreenOne({super.key});
-
+  static const routeName = '/addPostScreenOne';
   @override
   Widget build(BuildContext context) {
     return Scaffold(

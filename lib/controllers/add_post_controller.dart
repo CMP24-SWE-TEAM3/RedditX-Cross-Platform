@@ -1,11 +1,14 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as international;
 import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:video_player/video_player.dart';
+//import 'package:video_player/video_player.dart';
 import 'dart:async';
 import '../models/add_post_model.dart';
 import '../services/add_post_service.dart';
+import '../styles/custom_icons.dart';
 import '../views/widgets/add_post/community_rules.dart';
 import '../views/widgets/add_post/my_communities_data.dart';
 import '../views/widgets/add_post/pick_image_or_video_button.dart';
@@ -366,18 +369,21 @@ class AddPostController with ChangeNotifier {
   ///Show picked video
   Widget viewSelectedVideo() {
     if (video.path != '') {
+      print('=================================================${video.path}');
+
       ///if there is a selected video
       ///palying a video from an assest
-      VideoPlayerController controller =
+      /* VideoPlayerController controller =
           VideoPlayerController.asset(video.path);
       return SizedBox(
-        width: 300,
-        height: 300,
+        width: 200,
+        height: 200,
         child: FittedBox(
           fit: BoxFit.fill,
           child: VideoPlayer(controller),
         ),
-      );
+      );*/
+      return Container();
     } else {
       ///Button to pick video if there isn't a selected video
       return const PickButton(isImage: false);
@@ -499,8 +505,10 @@ class AddPostController with ChangeNotifier {
     }
   }
 
-  sendPost() {
-    submitPost(
+  sendPost(context) async {
+    List<File> attachements = [];
+    List attachementType = [];
+    await submitPost(
       selectedSRNSFW,
       selectedSRSpoiler,
       addPostTitlecontroller.text,
@@ -510,6 +518,29 @@ class AddPostController with ChangeNotifier {
       (flairindex == -1) ? '' : flairs[flairindex].flairBackGround,
       (flairindex == -1) ? '' : flairs[flairindex].flairID,
       communityID,
+      attachements,
+      attachementType,
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        key: const Key('posted'),
+        backgroundColor: Colors.white,
+        duration: const Duration(seconds: 5),
+        content: Row(
+          children: const [
+            Icon(CustomIcons.reddit),
+            Expanded(
+              child: Text(
+                style: TextStyle(
+                  color: Colors.black,
+                ),
+                '  Successfully Posted',
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 

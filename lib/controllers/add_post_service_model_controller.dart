@@ -4,11 +4,18 @@ import '../models/add_post_model.dart';
 
 fillSubscriberCommunitiesList() async {
   if (iSMOCK) {
-    communitiesInAddPost = [];
+    communitiesInAddPost = communitiesInAddPostMock;
   } else {
     final res = await fetchMySubscribed();
-    for (int i = 0; i < res['results']!.length; i++) {
-      //communitiesInAddPost.add();
+    for (int i = 0; i < res.length; i++) {
+      communitiesInAddPost.add(
+        CommunityInAddPost(
+          communityName: res[i]['_id'],
+          communityIcon: res[i]['icon'],
+          membersCount: res[i]['membersCnt'],
+          nsfw: false,
+        ),
+      );
     }
   }
 }

@@ -90,7 +90,7 @@ class AddPostScreenThree extends StatelessWidget {
                           Provider.of<AddPostController>(
                             context,
                             listen: false,
-                          ).sendPost();
+                          ).sendPost(context);
                         },
                       ),
                       const SizedBox(
