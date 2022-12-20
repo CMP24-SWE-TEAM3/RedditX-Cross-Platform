@@ -12,7 +12,7 @@ class ProfilePage extends StatelessWidget {
             builder: (BuildContext context, BoxConstraints constraints) {
           return ProfileMobileScreen(
             context: context,
-            constraints: constraints,
+  
             userID: "t2_hamada",
           );
         });

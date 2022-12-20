@@ -58,19 +58,15 @@ class MyApp extends StatelessWidget {
          ChangeNotifierProvider(create: (context) => ProfileProvider()),
         ChangeNotifierProvider(
             create: ((context) => ProfileModelProvider()
-              ..getProfileAbout("t2_lotfy2")
-              ..getProfileComments('t2_lotfy2')
-              ..getProfilePosts("t2_hamada")
-              ..getProfilePostsCommunityAvatars("t5_imagePro235")
-              ..getUserSavedPosts()
-              ..getUserDownVotedPosts("t2_lotfy2")
-              ..getUserUpVotedPosts("t2_lotfy2"))),
+           
+           
+             )),
               
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
-              ..getCommunityPosts("t5_imagePro235", "hot", [], 1, 40)..getCommunityAbout("t5_imagePro235")..getCommunityInfo("t5_imagePro235")..getCommunityFlairs("t5_imagePro235")),
+              ..getCommunityPosts("t5_imagePro45", "hot", [], 2, 40)..getCommunityAbout("t5_imagePro235")..getCommunityInfo("t5_imagePro235")..getCommunityFlairs("t5_imagePro235")),
         ChangeNotifierProvider(
             create: (context) =>
                 CommunityProvider(communityService: CommunityService())),

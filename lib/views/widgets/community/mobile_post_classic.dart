@@ -71,20 +71,20 @@ class MobilePostClassic extends StatelessWidget {
                             postType == 'image' ||
                             postType == 'linkWithImage')
                           Text(
-                            profilePosts[index]['title'],
+                            posts[index]['title'],
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
-                        (profilePosts[index]['flairText'] != null)
+                        (posts[index]['flairText'] != null)
                             ? const SizedBox(
                                 height: 5,
                               )
                             : const SizedBox(
                                 height: 0,
                               ),
-                        (profilePosts[index]['flairText'] != null)
+                        (posts[index]['flairText'] != null)
                             ? InkWell(
                                 onTap: () {},
                                 child: RichText(
@@ -102,7 +102,7 @@ class MobilePostClassic extends StatelessWidget {
                                           decoration: BoxDecoration(
                                            
                                             color: 
-                                             HexColor("${profilePosts[index]['flairBackGround']}")
+                                             HexColor("${posts[index]['flairBackGround']}")
                                             .withOpacity(
                                               1,
                                             ),
@@ -117,7 +117,7 @@ class MobilePostClassic extends StatelessWidget {
                                             '${posts[index]['flairText']}',
                                             style:  TextStyle(
                                               color: HexColor(
-                                                  "${profilePosts[index]['flairTextColor']}"),
+                                                  "${posts[index]['flairTextColor']}"),
                                             ),
                                           ),
                                         ),

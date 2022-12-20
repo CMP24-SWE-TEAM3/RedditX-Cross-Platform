@@ -15,8 +15,7 @@ import '../../widgets/community/mobile_post_classic.dart';
 
 
 class ProfileMobileScreen extends StatefulWidget {
-  /// Constrains to handle respositivity
-  final BoxConstraints constraints;
+
 
   /// Context used in [defaultBottomSheet] and others
   final BuildContext context;
@@ -29,7 +28,7 @@ class ProfileMobileScreen extends StatefulWidget {
     super.key,
     required this.userID,
     required this.context,
-    required this.constraints,
+
   });
   @override
   State<StatefulWidget> createState() {

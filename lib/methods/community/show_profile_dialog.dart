@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:search_project/controllers/profile_model_controller.dart';
+import 'package:search_project/views/screens/profile/profile_mobile_screen.dart';
 
 import '../../config/constants.dart';
 import '../../models/post_model.dart';
@@ -82,7 +85,18 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
               height: 20,
             ),
             InkWell(
-                onTap: () {},
+                onTap: () async{
+                  await Provider.of<ProfileModelProvider>(context, listen: false).getProfilePosts(
+ communityPostsList[index]['userID']['_id']);
+  
+  await Provider.of<ProfileModelProvider>(context,
+                          listen: false).getProfileComments( communityPostsList[index]['userID']['_id']);
+                           await Provider.of<ProfileModelProvider>(context,
+                          listen: false).getProfileAbout( communityPostsList[index]['userID']['_id']);
+                          
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileMobileScreen(userID: communityPostsList[index]['userID']
+                                  ['_id'], context: context)));
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Row(
