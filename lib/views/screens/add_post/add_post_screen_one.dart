@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../../controllers/add_post_controller.dart';
+import '../../../controllers/add_post_controller.dart';
 
 class AddPostScreenOne extends StatelessWidget {
   const AddPostScreenOne({super.key});
@@ -28,7 +28,7 @@ class AddPostScreenOne extends StatelessWidget {
                           Provider.of<AddPostController>(
                             context,
                             listen: false,
-                          ).exitAddPostScreen();
+                          ).exitAddPostScreen(context);
                         },
                       ),
 

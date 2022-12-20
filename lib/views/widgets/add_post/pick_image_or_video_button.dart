@@ -18,6 +18,7 @@ class PickButton extends StatelessWidget {
       height: 200,
       color: const Color.fromARGB(120, 158, 158, 158),
       child: IconButton(
+        key: isImage ? const Key('pick_image') : const Key('pick_video'),
         onPressed: () async {
           isImage
               ? await Provider.of<AddPostController>(

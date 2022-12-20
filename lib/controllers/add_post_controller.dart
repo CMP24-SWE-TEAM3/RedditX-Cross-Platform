@@ -4,7 +4,13 @@ import 'package:multi_image_picker/multi_image_picker.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:video_player/video_player.dart';
 import 'dart:async';
+import '../models/add_post_model.dart';
+import '../services/add_post_service.dart';
+import '../views/widgets/add_post/community_rules.dart';
+import '../views/widgets/add_post/my_communities_data.dart';
 import '../views/widgets/add_post/pick_image_or_video_button.dart';
+import '../views/widgets/add_post/poll_option.dart';
+import 'add_post_service_model_controller.dart';
 
 class AddPostController with ChangeNotifier {
   ///Whether the platform is web or android
@@ -38,6 +44,7 @@ class AddPostController with ChangeNotifier {
   TextEditingController addPostTitlecontroller = TextEditingController();
 
   ///Controller of text content
+
   TextEditingController addPostTextcontroller = TextEditingController();
 
   ///Controller of link content
@@ -52,13 +59,77 @@ class AddPostController with ChangeNotifier {
     TextEditingController(),
   ];
 
+  ///List of images inside image picker function
   List<Asset> images = [];
+
+  ///List of images to be displayed and sent if the user selects images
   List<Asset> selectedImages = [];
+
+  ///Video file if the user selects video
   XFile video = XFile('');
 
+  ///Whether the [Show more] button im communities list is clicked or not
+  bool showMore = false;
+
+  ///whether the post will be nsfw or not
+  bool selectedSRNSFW = false;
+
+  ///whether the post will be spoiler or not
+  bool selectedSRSpoiler = false;
+
+  String flairText = '';
+  String flairBackGround = '';
+  String flairTextColor = '';
+  String flairTextID = '';
+  String communityID = '';
+
+  bool communityLoading = false;
+
+  setCommunityName(String communityName) {
+    communityID = communityName;
+    notifyListeners();
+  }
+
   ///when click on X button in add post
-  exitAddPostScreen() {}
-  nextButton() {}
+  exitAddPostScreen(context) {
+    if (addPostTitlecontroller.text == '' &&
+        addPostTextcontroller.text == '' &&
+        addPostLinkcontroller.text == '' &&
+        addPollFirstLinkcontroller.text == '') {
+      Navigator.pop(context);
+    } else {
+      showDialog(
+        context: context,
+        builder: (context) {
+          return AlertDialog(
+            title: const Text('Discard post submission?'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  ///pop the dialog and the add post screen
+                  Navigator.pop(context);
+                  Navigator.pop(context);
+                },
+                child: const Text('Cancel'),
+              ),
+              TextButton(
+                onPressed: () {
+                  ///Pop the dialog only
+                  Navigator.pop(context);
+                },
+                child: const Text('Discard'),
+              ),
+            ],
+          );
+        },
+      );
+    }
+  }
+
+  ///when click on [Next] button in add post
+  nextButton() async {
+    await fillSubscriberCommunitiesList();
+  }
 
   ///When tap the text field
   onTabTitleTextField() {
@@ -227,57 +298,7 @@ class AddPostController with ChangeNotifier {
     List<Widget> moreOptions = [];
     for (int i = 2; i < optionsController.length; i++) {
       moreOptions.add(
-        SizedBox(
-          child: Column(
-            children: [
-              Row(
-                children: [
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.5,
-                    height: MediaQuery.of(context).size.height * 0.08,
-                    child: TextField(
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: const Color.fromARGB(96, 158, 158, 158),
-                        focusColor: Colors.white,
-                        hoverColor: Colors.white,
-                        focusedBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.white,
-                          ),
-                        ),
-                        hintText: 'Option ${i + 1}',
-                        hintStyle: const TextStyle(
-                          color: Color.fromARGB(120, 158, 158, 158),
-                          fontSize: 13,
-                        ),
-                      ),
-                      keyboardType: TextInputType.text, // any type of text
-                      maxLines: 1,
-                      textDirection: isRTLTextField(optionsController[i].text)
-                          ? TextDirection.rtl
-                          : TextDirection.ltr,
-                      controller: optionsController[i],
-                    ),
-                  ),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.2,
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      deleteItem(i);
-                    },
-                  ),
-                ],
-              ),
-              const SizedBox(height: 5),
-            ],
-          ),
-        ),
+        PollOption(index: i),
       );
     }
     return moreOptions;
@@ -301,7 +322,7 @@ class AddPostController with ChangeNotifier {
     notifyListeners();
   }
 
-  //ListView that shows selected images horizontally
+  ///ListView that shows selected images horizontally
   ListView viewSelectedImages() {
     return ListView(
       scrollDirection: Axis.horizontal,
@@ -356,6 +377,93 @@ class AddPostController with ChangeNotifier {
     } else {
       ///Button to pick video if there isn't a selected video
       return const PickButton(isImage: false);
+    }
+  }
+
+  ///Show user's subscribed communities
+  List<CommunityDataAddPost> mySubscribedCommunities() {
+    ///List of community data widget
+    List<CommunityDataAddPost> mySubscribed = [];
+    int endIndex = 0;
+
+    ///if the user clicked [Show More] button then show all communities
+    ///if the user didn't click [Show More] button then show max of 5 communities
+    if (showMore || communitiesInAddPost.length <= 5) {
+      endIndex = communitiesInAddPost.length;
+    } else {
+      endIndex = 5;
+    }
+    for (int i = 0; i < endIndex; i++) {
+      mySubscribed.add(
+        CommunityDataAddPost(
+          communityInAddPost: communitiesInAddPost[i],
+        ),
+      );
+    }
+    return mySubscribed;
+  }
+
+  ///When [Show More] button is clicked make [showMore] flag true
+  showMoreFunc() {
+    showMore = true;
+    notifyListeners();
+  }
+
+  openFlair() {}
+
+  sendPost() {
+    submitPost(
+        selectedSRNSFW,
+        selectedSRSpoiler,
+        addPostTitlecontroller.text,
+        addPostTextcontroller.text,
+        flairText,
+        flairTextColor,
+        flairBackGround,
+        flairTextID,
+        communityID);
+  }
+
+  ///When the user toggle the state of [NSFW] while adding post
+  toggleNsfw() {
+    selectedSRNSFW = !selectedSRNSFW;
+    notifyListeners();
+  }
+
+  ///When the user toggle the state of [Spoiler] while adding post
+  toggleSpoiler() {
+    selectedSRSpoiler = !selectedSRSpoiler;
+    notifyListeners();
+  }
+
+  getCommunityRules(String communityName) async {
+    communityLoading = true;
+    notifyListeners();
+    await getCommunityRulesAPI(communityName);
+    communityLoading = false;
+    notifyListeners();
+  }
+
+  ///returns list of rules to be showed for the user when click on [Rules] button
+  List<dynamic> communityRulesWidget(CommunityInAddPost communityInAddPost) {
+    if (communityLoading) {
+      return [
+        const Center(
+          child: CircularProgressIndicator(),
+        ),
+      ];
+    } else {
+      ///List of rules to be showed for the user when click on [Rules] button
+      List<Widget> communityRulesList = [];
+      for (int i = 0; i < communityRules.length; i++) {
+        communityRulesList.add(
+          CommunityRules(
+            communityInAddPost: communityInAddPost,
+            index: i,
+          ),
+        );
+      }
+      return communityRulesList;
     }
   }
 }

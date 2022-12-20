@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'views/screens/add_post_screen_one.dart';
+import 'package:search_project/views/screens/add_post/add_post_screen_three.dart';
+import 'services/add_post_service.dart';
+import 'views/screens/add_post/add_post_screen_one.dart';
 import 'controllers/add_post_controller.dart';
 
 void main() async {
   // initial the application
+  await fetchMySubscribed();
   runApp(const MyApp());
 }
 
@@ -20,25 +23,29 @@ class MyApp extends StatelessWidget {
             create: ((context) => AddPostController())),
       ],
       child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Reddit',
-        theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
-          colorScheme: (kIsWeb)
-              ? ColorScheme.fromSwatch(primarySwatch: Colors.blue)
-                  .copyWith(secondary: Colors.deepOrange)
-              : ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
-                  .copyWith(secondary: Colors.lightBlue),
-          textTheme: ThemeData.light().textTheme.copyWith(
-                bodyLarge: const TextStyle(
-                  color: Colors.grey,
-                  fontSize: 12,
+          routes: {
+            AddPostScreenThree.routeName: (context) =>
+                const AddPostScreenThree(),
+          },
+          debugShowCheckedModeBanner: false,
+          title: 'Reddit',
+          theme: ThemeData(
+            scaffoldBackgroundColor: Colors.white,
+            colorScheme: (kIsWeb)
+                ? ColorScheme.fromSwatch(primarySwatch: Colors.blue)
+                    .copyWith(secondary: Colors.deepOrange)
+                : ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
+                    .copyWith(secondary: Colors.lightBlue),
+            textTheme: ThemeData.light().textTheme.copyWith(
+                  bodyLarge: const TextStyle(
+                    color: Colors.grey,
+                    fontSize: 12,
+                  ),
                 ),
-              ),
-        ),
-        home:
-            const AddPostScreenOne(), // (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
-      ),
+          ),
+          home:
+              const Scaffold() // AddPostScreenOne(), // (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+          ),
     );
   }
 }
