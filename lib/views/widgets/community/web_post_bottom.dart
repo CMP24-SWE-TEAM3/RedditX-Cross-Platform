@@ -38,7 +38,8 @@ class BottomPostWeb extends StatelessWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          Text(Numeral(postsList[index]['commentsNum'])
+                          Text(Numeral(
+                                  communityPostsList[index]['commentsNum'] ?? 0)
                               .format(fractionDigits: 1)),
                         ],
                       ),
@@ -91,20 +92,24 @@ class BottomPostWeb extends StatelessWidget {
                             child: Row(
                               mainAxisSize: MainAxisSize.min,
                               mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                (value.isPostSaved[index])
-                                    ? const Icon(
-                                        CustomIcons.unsaved,
-                                      )
-                                    : const Icon(
-                                        CustomIcons.saved,
-                                      ),
-                                (value.isPostSaved[index])
-                                    ? const Text(
-                                        "Unsave",
-                                        style: TextStyle(fontSize: 12),
-                                      )
-                                    : const Text("Save")
+                              children:const   [
+                                // (false
+                                //     //value.isPostSaved[index]
+                                //     )
+                                //     ? const Icon(
+                                //         CustomIcons.unsaved,
+                                //       )
+                                //     : const Icon(
+                                //         CustomIcons.saved,
+                                //       ),
+                                // (false
+                                //     //value.isPostSaved[index]
+                                //     )
+                                //     ? const Text(
+                                //         "Unsave",
+                                //         style: TextStyle(fontSize: 12),
+                                //       )
+                                //     : const Text("Save")
                               ],
                             )),
                       ],

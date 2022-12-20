@@ -1,6 +1,8 @@
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
 import '../../../methods/community/show_toast.dart';
@@ -19,9 +21,14 @@ class CommunityWebScreen extends StatelessWidget {
   /// Context used in [defaultBottomSheet] and others
   final BuildContext context;
 
+  final String communityName;
+
   /// Community web screen constructor
   const CommunityWebScreen(
-      {super.key, required this.context, required this.constraints});
+      {super.key,
+      required this.context,
+      required this.constraints,
+      required this.communityName});
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -45,7 +52,7 @@ class CommunityWebScreen extends StatelessWidget {
                       height: 150,
                       child: Image(
                           fit: BoxFit.cover,
-                          image: NetworkImage(communityModel1.banner!)),
+                          image: NetworkImage(communityInfo['banner'] ?? "")),
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
@@ -55,7 +62,8 @@ class CommunityWebScreen extends StatelessWidget {
                         ),
                         CircleAvatar(
                           radius: 35,
-                          backgroundImage: NetworkImage(communityModel1.icon!),
+                          backgroundImage:
+                              NetworkImage(communityInfo['icon'] ?? ""),
                         ),
                         const SizedBox(
                           width: 30,
@@ -66,9 +74,7 @@ class CommunityWebScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              (communityModel1.description!.length > 50)
-                                  ? communityModel1.id!
-                                  : communityModel1.description!,
+                              communityInfo['description'] ?? "",
                               maxLines: 1,
                               softWrap: true,
                               style: const TextStyle(
@@ -76,7 +82,7 @@ class CommunityWebScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              communityModel1.id!,
+                              "${communityInfo['_id']}".replaceFirst("t5_", ""),
                               style: const TextStyle(color: Colors.grey),
                             )
                           ],
@@ -105,7 +111,8 @@ class CommunityWebScreen extends StatelessWidget {
                                               BorderRadius.circular(20),
                                           onTap: () {
                                             showToast(
-                                                "Successfully left r/${communityModel1.id}");
+                                                "Successfully left r/${communityInfo['_id']}"
+                                                    .replaceFirst("t5_", ""));
 
                                             Provider.of<CommunityProvider>(
                                                     context,
@@ -133,7 +140,8 @@ class CommunityWebScreen extends StatelessWidget {
                                     onTap: () {
                                       value.joinCommunity();
                                       showToast(
-                                          "Successfully joined r/${communityModel1.id}");
+                                          "Successfully joined r/${communityInfo['_id']}"
+                                              .replaceAll("t5_", ""));
                                     },
                                     child: const Padding(
                                         padding: EdgeInsets.all(5),
@@ -262,8 +270,12 @@ class CommunityWebScreen extends StatelessWidget {
                                             onTap: () {
                                               value.changePostSortBy(
                                                   "hot", 0, context);
-                                              value1.getPosts("At5_imagePro235",
-                                                  "hot", [], 2, 40);
+                                              value1.getCommunityPosts(
+                                                  communityName,
+                                                  "hot",
+                                                  [],
+                                                  2,
+                                                  40);
                                             },
                                             child: Container(
                                               height: 30,
@@ -320,8 +332,12 @@ class CommunityWebScreen extends StatelessWidget {
                                             onTap: () {
                                               value.changePostSortBy(
                                                   "new", 1, context);
-                                              value1.getPosts("At5_imagePro235",
-                                                  "new", [], 2, 40);
+                                              value1.getCommunityPosts(
+                                                  communityName,
+                                                  "new",
+                                                  [],
+                                                  2,
+                                                  40);
                                             },
                                             child: Container(
                                               height: 30,
@@ -379,8 +395,12 @@ class CommunityWebScreen extends StatelessWidget {
                                             onTap: () {
                                               value.changePostSortBy(
                                                   "top", 2, context);
-                                              value1.getPosts("At5_imagePro235",
-                                                  "top", [], 2, 40);
+                                              value1.getCommunityPosts(
+                                                  communityName,
+                                                  "top",
+                                                  [],
+                                                  2,
+                                                  40);
                                             },
                                             child: Container(
                                               height: 30,
@@ -443,31 +463,192 @@ class CommunityWebScreen extends StatelessWidget {
                                         shrinkWrap: true,
                                         separatorBuilder: (context, index) =>
                                             const Divider(),
-                                        itemCount: postsList.length,
+                                        itemCount: communityPostsList.length,
                                         itemBuilder:
                                             (BuildContext context, int index) {
                                           return Container(
                                               color: whiteColor,
                                               child: WebPostCard(
-                                                userName: postsList[index]
-                                                    ['userID'],
+                                                userName: (!iSMOCK)
+                                                    ? "u/${communityPostsList[index]['userID']['_id']}"
+                                                        .replaceFirst("t2_", "")
+                                                    : "u/${communityPostsList[index]['userID']['_id']}"
+                                                        .replaceFirst(
+                                                            "t2_", ""),
                                                 index: index,
-                                                dateTime: postsListMock[index]
-                                                    .createdAt!,
+                                                dateTime: !iSMOCK
+                                                    ? "${communityPostsList[index]['createdAt']}"
+                                                    : "${communityPostsListMock[index]['createdAt']}",
                                                 context: context,
                                                 postPlace: "community",
-                                                postType: postsList[index]
-                                                    ['type'],
+                                                postType:
+                                                    communityPostsList[index]
+                                                        ['type'],
                                               ));
                                         },
                                       ),
                                     ))
                               ],
-                            )
+                            ),
                           ],
                         ),
                       ))),
-                    if (value.tabIndex == 1) const Text("About"),
+                    if (value.tabIndex == 1)
+                      Expanded(
+                          child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          children: [
+                            SizedBox(
+                              height: 38,
+                              child: Row(
+                                children: [
+                                  const Padding(
+                                    padding: EdgeInsets.only(
+                                        left: 20,
+                                        right: 20,
+                                        top: 10,
+                                        bottom: 10),
+                                    child: Text(
+                                      "Moderators",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 15),
+                                    ),
+                                  ),
+                                  const Spacer(),
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.mail_outlined,
+                                        color: Colors.grey,
+                                      ))
+                                ],
+                              ),
+                            ),
+                            Column(
+                              children: [
+                                for (int index = 0;
+                                    index < moderators.length;
+                                    index++)
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: 20, vertical: 20),
+                                    child: Row(
+                                      children: [
+                                        InkWell(
+                                          child: Text(
+                                              "u/${moderators[index]['userID']}"
+                                                  .replaceFirst("t2_", "")),
+                                          onTap: () {},
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                SizedBox(
+                                  height: 38,
+                                  child: Row(
+                                    children: const [
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                            left: 20,
+                                            right: 20,
+                                            top: 10,
+                                            bottom: 10),
+                                        child: Text(
+                                          "Subreddit Rules",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              fontSize: 15),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                                Container(
+                                  height: 1,
+                                  color:
+                                      const Color.fromARGB(255, 225, 223, 223),
+                                ),
+                                for (int index = 0;
+                                    index < communityRules.length;
+                                    index++)
+                                  ExpandableNotifier(
+                                      child: Padding(
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: <Widget>[
+                                        ScrollOnExpand(
+                                          scrollOnExpand: true,
+                                          scrollOnCollapse: false,
+                                          child: ExpandablePanel(
+                                            theme: const ExpandableThemeData(
+                                              headerAlignment:
+                                                  ExpandablePanelHeaderAlignment
+                                                      .center,
+                                              tapBodyToCollapse: true,
+                                            ),
+                                            header: Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 0,
+                                                    bottom: 0,
+                                                    left: 20,
+                                                    right: 20),
+                                                child: Text(
+                                                  "${index + 1}. ${communityRules[index]['title']}",
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                  maxLines: 2,
+                                                )),
+                                            collapsed: const Text(
+                                              "",
+                                              softWrap: true,
+                                              maxLines: 2,
+                                              overflow: TextOverflow.ellipsis,
+                                            ),
+                                            expanded: Column(
+                                              mainAxisSize: MainAxisSize.min,
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: <Widget>[
+                                                Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 10),
+                                                    child: Text(
+                                                      "${communityRules[index]['description']}",
+                                                      softWrap: true,
+                                                      overflow:
+                                                          TextOverflow.fade,
+                                                    )),
+                                              ],
+                                            ),
+                                            builder: (_, collapsed, expanded) {
+                                              return Padding(
+                                                padding: const EdgeInsets.only(
+                                                    left: 45,
+                                                    right: 45,
+                                                    bottom: 0),
+                                                child: Expandable(
+                                                  collapsed: collapsed,
+                                                  expanded: expanded,
+                                                  theme:
+                                                      const ExpandableThemeData(
+                                                          crossFadePoint: 0),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ))
+                              ],
+                            )
+                          ],
+                        ),
+                      ))
                   ],
                 );
               },

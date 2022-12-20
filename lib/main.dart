@@ -10,11 +10,14 @@ import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
 import 'views/screens/Home/home_page.dart';
 import 'views/screens/create_community/create_community_screen.dart';
+import 'views/screens/profile/profile_page.dart';
 import 'views/screens/search/search_screen_one.dart';
 import 'views/screens/search/search_screen_two.dart';
 import 'controllers/search_controller.dart';
 
 import 'models/post_model.dart';
+import 'controllers/profile_controller.dart';
+import 'controllers/profile_model_controller.dart';
 import 'views/screens/authentication/about_you.dart';
 import 'views/screens/authentication/choose_profilepicture.dart';
 import 'views/screens/authentication/choose_username.dart';
@@ -50,11 +53,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+         ChangeNotifierProvider(create: (context) => ProfileProvider()),
+        ChangeNotifierProvider(
+            create: ((context) => ProfileModelProvider()
+              ..getProfileAbout("t2_lotfy2")
+              ..getProfileComments('t2_lotfy2')
+              ..getProfilePosts("t2_hamada")
+              ..getProfilePostsCommunityAvatars("t5_imagePro235")
+              ..getUserSavedPosts()
+              ..getUserDownVotedPosts("t2_lotfy2")
+              ..getUserUpVotedPosts("t2_lotfy2"))),
+              
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
-        ChangeNotifierProvider(
-            create: (context) => CommunityModelProvider()
-              ..getPosts("At5_imagePro235", "hot", [], 2, 40)),
+        ChangeNotifierProvider(create: (context) => CommunityModelProvider()),
         ChangeNotifierProvider(
             create: (context) =>
                 CommunityProvider(communityService: CommunityService())),
@@ -115,6 +127,7 @@ class MyApp extends StatelessWidget {
           UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
           ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
           CreateCommunityScreen.routeName: (context) => CreateCommunityScreen(),
+          ProfilePage.routeName: (context) => const ProfilePage(),
         },
       ),
     );
