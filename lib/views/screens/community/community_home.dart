@@ -4,17 +4,25 @@ import 'community_home_mobile_screen.dart';
 import 'community_home_web_screen.dart';
 
 class CommunityHome extends StatelessWidget {
-  const CommunityHome({super.key});
+  CommunityHome(this.commName, {super.key});
   static const routeName = '/CommunityHome';
+  String commName;
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(child: LayoutBuilder(
-            builder: (BuildContext context, BoxConstraints constraints) {
-          return (constraints.minWidth.round() < 500)
-              ? CommunityMobileScreen(
-                  context: context, constraints: constraints,communityName: "t5_imagePro235",)
-              : CommunityWebScreen(context: context, constraints: constraints,communityName: "t5_imagePro235",);
-        }));
+        builder: (BuildContext context, BoxConstraints constraints) {
+      return (constraints.minWidth.round() < 500)
+          ? CommunityMobileScreen(
+              context: context,
+              constraints: constraints,
+              communityName: commName,
+            )
+          : CommunityWebScreen(
+              context: context,
+              constraints: constraints,
+              communityName: commName,
+            );
+    }));
   }
 }

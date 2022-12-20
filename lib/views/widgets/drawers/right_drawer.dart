@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:search_project/controllers/drawer_view_model_controller.dart';
 import 'package:search_project/views/screens/authentication/splash_screen.dart';
 import 'package:search_project/views/screens/create_community/create_community_screen.dart';
+import 'package:search_project/views/screens/profile/profile_mobile_screen.dart';
+import 'package:search_project/views/screens/profile/profile_saved_posts.dart';
 import 'package:search_project/views/screens/settings/setting_menu.dart';
 
 import '../../../models/authentication.dart';
@@ -209,8 +211,10 @@ Drawer rightDrawer(BuildContext context) {
                     child: ListTile(
                       leading: const Icon(Icons.person_pin),
                       title: const Text("My Profile"),
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(SplashScreen.routeName),
+                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileMobileScreen(
+                                  userID: currentUser!.username!,
+                                  context: context))),
+                      
                     ),
                   ),
                   InkWell(
@@ -225,16 +229,10 @@ Drawer rightDrawer(BuildContext context) {
                     child: ListTile(
                       leading: const Icon(Icons.library_add_check_sharp),
                       title: const Text("Saved"),
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(SplashScreen.routeName),
-                    ),
-                  ),
-                  InkWell(
-                    child: ListTile(
-                      leading: const Icon(Icons.access_time),
-                      title: const Text("History"),
-                      onTap: () => Navigator.of(context)
-                          .pushNamed(SplashScreen.routeName),
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => UserSavedPosts())),
                     ),
                   ),
                 ],

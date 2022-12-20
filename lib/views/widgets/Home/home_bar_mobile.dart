@@ -31,7 +31,7 @@ AppBar buildHomeBar(text) {
       return IconButton(
         key: const ValueKey('leftbannel_ToolBar'),
         icon: const Icon(Icons.menu),
-        onPressed: () => displayDrawer(context),
+        onPressed: () => Scaffold.of(context).openDrawer(),
       );
     }),
     actions: [
@@ -74,7 +74,7 @@ AppBar buildHomeBar(text) {
           icon: CircleAvatar(
             backgroundImage: NetworkImage(currentUser!.avatar!),
           ),
-          onPressed: () => displayEndDrawer(context),
+          onPressed: () => Scaffold.of(context).openEndDrawer(),
         );
       }),
     ],

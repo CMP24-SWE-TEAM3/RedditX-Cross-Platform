@@ -8,6 +8,8 @@ import 'package:search_project/views/screens/temphome.dart';
 import 'package:search_project/views/widgets/community/mobile_post_classic.dart';
 
 import '../../widgets/Home/home_bar_mobile.dart';
+import '../../widgets/drawers/left_drawer.dart';
+import '../../widgets/drawers/right_drawer.dart';
 
 class HomeMobile extends StatefulWidget {
   // ignore: prefer_const_constructors_in_immutables
@@ -70,6 +72,8 @@ class _HomeMobileState extends State<HomeMobile> {
           ),
         ),
       ),
+      endDrawer: rightDrawer(context),
+      drawer: leftDrawer(context),
     );
   }
 }

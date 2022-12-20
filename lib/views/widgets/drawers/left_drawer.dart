@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:search_project/controllers/drawer_view_model_controller.dart';
 import 'package:search_project/views/screens/authentication/splash_screen.dart';
+import 'package:search_project/views/screens/community/community_home.dart';
+import 'package:search_project/views/screens/community/community_home_mobile_screen.dart';
 import 'package:search_project/views/screens/create_community/create_community_screen.dart';
 import 'package:search_project/views/screens/settings/setting_menu.dart';
 
@@ -76,10 +78,17 @@ Drawer leftDrawer(BuildContext context) {
                             for (int i = 0;
                                 i < communitiesListLeftDrawer!.length;
                                 i++)
-                              ListTile(
-                                leading: const Icon(Icons.reddit),
-                                title: Text(communitiesListLeftDrawer![i]!
-                                    .substring(3)),
+                              InkWell(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CommunityHome(
+                                            communitiesListLeftDrawer![i]!))),
+                                child: ListTile(
+                                  leading: const Icon(Icons.reddit),
+                                  title: Text(communitiesListLeftDrawer![i]!
+                                      .substring(3)),
+                                ),
                               ),
                           ]),
                           isExpanded: isopen.elementAt(0)),
@@ -101,11 +110,19 @@ Drawer leftDrawer(BuildContext context) {
                             for (int i = 0;
                                 i < moderatedCommunitiesListLeftDrawer!.length;
                                 i++)
-                              ListTile(
-                                leading: const Icon(Icons.reddit),
-                                title: Text(
-                                    moderatedCommunitiesListLeftDrawer![i]!
-                                        .substring(3)),
+                              InkWell(
+                                onTap: () => Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CommunityHome(
+                                            moderatedCommunitiesListLeftDrawer![
+                                                i]!))),
+                                child: ListTile(
+                                  leading: const Icon(Icons.reddit),
+                                  title: Text(
+                                      moderatedCommunitiesListLeftDrawer![i]!
+                                          .substring(3)),
+                                ),
                               ),
                           ]),
                           isExpanded: isopen.elementAt(1)),
