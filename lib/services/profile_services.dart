@@ -4,6 +4,7 @@ import 'package:http/http.dart' as http;
 import 'package:search_project/models/user_model.dart';
 
 import '../config/constants.dart';
+import '../models/authentication.dart';
 
 /// Get profile posts using API
 getAPIProfilePosts(String userName) async {
@@ -14,7 +15,7 @@ getAPIProfilePosts(String userName) async {
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader:
-          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJBaG1lZGxvdGZ5MjAyIiwiaWF0IjoxNjcwODc3OTY2LCJleHAiOjE2NzEzMDk5NjZ9.ia64aUBqYVmaOQrkB42PblXj2kPFb3gsrXamCYuG9IA"}')
+          ('Bearer ${userauthentication.uid}')
     },
   ).then((value) {
     if (value.statusCode == 200) {
@@ -39,7 +40,7 @@ getAPIProfileAbout(String userName) async {
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader:
-          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJBaG1lZGxvdGZ5MjAyIiwiaWF0IjoxNjcwODc3OTY2LCJleHAiOjE2NzEzMDk5NjZ9.ia64aUBqYVmaOQrkB42PblXj2kPFb3gsrXamCYuG9IA"}')
+          ('Bearer ${userauthentication.uid}')
     },
   ).then((value) {
     if (value.statusCode == 200) {
@@ -60,7 +61,7 @@ getAPIProfileComments(String userName) async {
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
       HttpHeaders.authorizationHeader:
-          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJBaG1lZGxvdGZ5MjAyIiwiaWF0IjoxNjcwODc3OTY2LCJleHAiOjE2NzEzMDk5NjZ9.ia64aUBqYVmaOQrkB42PblXj2kPFb3gsrXamCYuG9IA"}')
+          ('Bearer ${userauthentication.uid}')
     },
   ).then((value) {
     if (value.statusCode == 200) {

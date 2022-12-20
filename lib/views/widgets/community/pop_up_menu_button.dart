@@ -8,7 +8,7 @@ import '../../../methods/community/show_snack_bar.dart';
 import '../../../styles/custom_icons.dart';
 
 /// Pop up menu
-class PopUpMenu extends StatelessWidget {
+class PopUpMenu extends StatefulWidget {
   /// Index of post
   final int index;
 
@@ -20,10 +20,25 @@ class PopUpMenu extends StatelessWidget {
   const PopUpMenu({required this.index, required this.posts, super.key});
 
   @override
+  State<PopUpMenu> createState() => _PopUpMenuState();
+}
+
+class _PopUpMenuState extends State<PopUpMenu> {
+
+    bool voting = true;
+    refresh() {
+    @override
+    void setState(VoidCallback fn) {
+      super.setState(fn);
+      voting = !voting;
+    }
+  }
+  @override
   Widget build(BuildContext context) {
     return Consumer3<CommunityProvider, ProfileProvider, ProfileModelProvider>(
         builder: (context, value, value2, value3, child) => InkWell(
               onTap: () {
+                refresh();
                
               },
               child: PopupMenuButton(
@@ -33,10 +48,10 @@ class PopUpMenu extends StatelessWidget {
                   PopupMenuItem<String>(
                       key: const ValueKey("save_button"),
                       onTap: () {
-                        ((savedPostsIDs.contains(posts[index]['_id'])))
-                            ? value3.unSave(posts[index]['_id'])
-                            : value3.save(posts[index]['_id']);
-                        (savedPostsIDs.contains(posts[index]['_id']))
+                        ((savedPostsIDs.contains(widget.posts[widget.index]['_id'])))
+                            ? value3.unSave(widget.posts[widget.index]['_id'])
+                            : value3.save(widget.posts[widget.index]['_id']);
+                        (savedPostsIDs.contains(widget.posts[widget.index]['_id']))
                             ? Future.delayed(const Duration(milliseconds: 1000),
                                 () {
                                 showSnackBar(context, "Post unsaved!");
@@ -45,19 +60,20 @@ class PopUpMenu extends StatelessWidget {
                                 () {
                                 showSnackBar(context, "Post saved!");
                               });
+                              refresh();
                       },
-                      value: ((savedPostsIDs.contains(posts[index]['_id'])))
+                      value: ((savedPostsIDs.contains(widget.posts[widget.index]['_id'])))
                           ? "Unsave"
                           : "Save",
                       child: Row(
                         children: [
-                          (savedPostsIDs.contains(posts[index]['_id']))
+                          (savedPostsIDs.contains(widget.posts[widget.index]['_id']))
                               ? const Icon(CustomIcons.unsaved)
                               : const Icon(CustomIcons.saved),
                           const SizedBox(
                             width: 5,
                           ),
-                          (savedPostsIDs.contains(posts[index]['_id']))
+                          (savedPostsIDs.contains(widget.posts[widget.index]['_id']))
                               ? const Text("Unsave")
                               : const Text("Save")
                         ],
