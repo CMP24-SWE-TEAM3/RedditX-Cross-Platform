@@ -57,8 +57,16 @@
 ///         License:   SIL (https://github.com/FortAwesome/Font-Awesome/blob/master/LICENSE.txt)
 ///         Homepage:  http://fortawesome.github.com/Font-Awesome/
 ///
+<<<<<<< HEAD
 import 'package:flutter/widgets.dart';
 
+=======
+// ignore_for_file: constant_identifier_names
+
+import 'package:flutter/widgets.dart';
+
+/// Custom Icons class
+>>>>>>> b067448b9b3a4e78703aa28bc202aa5b0eba204c
 class CustomIcons {
   CustomIcons._();
 
@@ -66,6 +74,7 @@ class CustomIcons {
   static const String? _kFontPkg = null;
 
   static const IconData up_bold =
+<<<<<<< HEAD
   IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
   static const IconData down_bold =
   IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
@@ -144,3 +153,83 @@ class CustomIcons {
   static const IconData coins =
   IconData(0xf51e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
 }
+=======
+      IconData(0xe800, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData down_bold =
+      IconData(0xe801, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData comment =
+      IconData(0xe802, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData view_headline =
+      IconData(0xe803, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData new_releases =
+      IconData(0xe804, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData award =
+      IconData(0xe805, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData menu =
+      IconData(0xe806, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData menu_outline =
+      IconData(0xe807, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData up_outline =
+      IconData(0xe808, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData down_outline =
+      IconData(0xe809, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData certificate_outline =
+      IconData(0xe80a, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chart_outline =
+      IconData(0xe80b, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData reddit_1 =
+      IconData(0xe80c, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData sms =
+      IconData(0xe80d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData mail =
+      IconData(0xe80e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData content_copy =
+      IconData(0xe80f, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chart =
+      IconData(0xe810, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData fire =
+      IconData(0xe811, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData bullhorn =
+      IconData(0xe812, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData gift =
+      IconData(0xe844, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData arrow_up_circle =
+      IconData(0xe883, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData broadsword =
+      IconData(0xe946, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData certificate =
+      IconData(0xf0a3, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData mail_alt =
+      IconData(0xf0e0, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData instagram =
+      IconData(0xf16d, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData reddit =
+      IconData(0xf1a1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData reddit_squared =
+      IconData(0xf1a2, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chart_line =
+      IconData(0xf201, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData whatsapp =
+      IconData(0xf232, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData chrome =
+      IconData(0xf268, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData reddit_alien =
+      IconData(0xf281, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData snapchat =
+      IconData(0xf2ab, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData snapchat_ghost =
+      IconData(0xf2ac, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData facebook_squared =
+      IconData(0xf308, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData saved =
+      IconData(0xf333, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData shield_1 =
+      IconData(0xf38e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData hotjar =
+      IconData(0xf3b1, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData unsaved =
+      IconData(0xf3b9, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+  static const IconData coins =
+      IconData(0xf51e, fontFamily: _kFontFam, fontPackage: _kFontPkg);
+}
+>>>>>>> b067448b9b3a4e78703aa28bc202aa5b0eba204c

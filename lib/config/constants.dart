@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import 'package:flutter/material.dart';
 
 /// the boolean that checks the mock mode
@@ -19,3 +20,7 @@ const MaterialColor white = MaterialColor(
     900: Color(0xFFFFFFFF),
   },
 );
+=======
+/// the boolean that checks the mock mode
+const bool iSMOCK = true;
+>>>>>>> b067448b9b3a4e78703aa28bc202aa5b0eba204c
