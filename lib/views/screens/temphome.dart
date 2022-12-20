@@ -8,7 +8,7 @@ import '../../controllers/sign_in_controller.dart';
 import './search/search_screen_one.dart';
 import 'Home/home_page.dart';
 import 'profile/profile_page.dart';
-import 'addComment/add_comment.dart';
+// import 'addComment/add_comment.dart';
 import 'settings/setting_menu.dart';
 
 class Home extends StatelessWidget {

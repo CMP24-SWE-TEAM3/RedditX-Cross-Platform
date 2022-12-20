@@ -146,8 +146,7 @@ class MobilePostClassic extends StatelessWidget {
                                           .length ==
                                       0)
                                   ? "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"
-                                  : posts[index]['attachments']
-                                      [0]))),
+                                  : 'https://api.redditswe22.tech/posts/files/${posts[index]['attachments'][0]}'))),
                     ),
                   if (postType == 'link')
                     Row(

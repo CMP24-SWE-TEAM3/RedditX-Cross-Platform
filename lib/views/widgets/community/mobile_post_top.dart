@@ -51,7 +51,7 @@ class TopMobilePost extends StatelessWidget {
             onTap: () {},
             child: CircleAvatar(
               radius: 25,
-              backgroundImage: NetworkImage(posts[index]['icon'] ?? ''),
+              backgroundImage: NetworkImage('https://api.redditswe22.tech/subreddits/files/${posts[index]['icon']}'),
             ),
           ),
           const SizedBox(
@@ -151,9 +151,9 @@ class TopMobilePost extends StatelessWidget {
     } else {
       return Row(
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             radius: 10,
-            backgroundImage: NetworkImage(""),
+            backgroundImage: NetworkImage('https://api.redditswe22.tech/subreddits/files/${posts[index]['icon']}'),
           ),
           // const SizedBox(
           //   width: 4,
