@@ -1,10 +1,10 @@
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'dart:io';
+// import 'dart:io';
 
 import '../config/constants.dart';
 
-import '../models/authentication.dart';
+// import '../models/authentication.dart';
 import '../models/home_model.dart';
 
 /// Get posts of a specific community with a sort type

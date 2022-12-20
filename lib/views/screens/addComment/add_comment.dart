@@ -6,6 +6,7 @@ import '../../../controllers/post_comment.dart';
 class AddComment extends StatelessWidget {
   AddComment(this.ID, {super.key});
   static const routeName = '/AddComment';
+  // ignore: non_constant_identifier_names
   var ID = '';
   TextEditingController commentController = TextEditingController();
 

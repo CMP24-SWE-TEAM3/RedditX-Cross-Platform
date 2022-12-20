@@ -10,6 +10,7 @@ import 'package:search_project/views/widgets/community/mobile_post_classic.dart'
 import '../../widgets/Home/home_bar_mobile.dart';
 
 class HomeMobile extends StatefulWidget {
+  // ignore: prefer_const_constructors_in_immutables
   HomeMobile({super.key});
 
   @override
