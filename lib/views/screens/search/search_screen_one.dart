@@ -87,7 +87,7 @@ class SearchScreenOneState extends State {
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.9,
                         width: MediaQuery.of(context).size.width,
-                        color: const Color.fromARGB(255, 230, 124, 159),
+                        color: Colors.white,
                       ),
                     ),
                     SizedBox(
