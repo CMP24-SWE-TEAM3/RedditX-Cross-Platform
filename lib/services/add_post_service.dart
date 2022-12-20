@@ -12,8 +12,7 @@ fetchMySubscribed() async {
     Uri.parse(urlApi + searchRequest),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      HttpHeaders.authorizationHeader:
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzE1NTE5NTIsImV4cCI6MTY3MTk4Mzk1Mn0._0z3MfL07P4tHEn108xR255dkQ2Va2MKJnOeb8vcdNg'
+      HttpHeaders.authorizationHeader: 'Bearer $token'
     },
   );
   if (res.statusCode == 200) {
@@ -74,8 +73,7 @@ submitPost(
       options: Options(
         headers: {
           'accept': '*/*',
-          'authorization':
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzE1NTE5NTIsImV4cCI6MTY3MTk4Mzk1Mn0._0z3MfL07P4tHEn108xR255dkQ2Va2MKJnOeb8vcdNg",
+          'authorization': "Bearer $token",
           'Content-Type': 'multipart/form-data',
         },
       ),
@@ -93,8 +91,7 @@ getAPICommunityFlairs(String communityName) async {
     url,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      HttpHeaders.authorizationHeader:
-          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzE1NTE5NTIsImV4cCI6MTY3MTk4Mzk1Mn0._0z3MfL07P4tHEn108xR255dkQ2Va2MKJnOeb8vcdNg"}')
+      HttpHeaders.authorizationHeader: ('Bearer $token')
     },
   ).then(
     (value) {
@@ -115,8 +112,7 @@ getAPICommunityRules(String communityName) async {
     url,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      HttpHeaders.authorizationHeader:
-          ('Bearer ${"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbFR5cGUiOiJiYXJlIGVtYWlsIiwidXNlcm5hbWUiOiJ0Ml9sb3RmeTIiLCJpYXQiOjE2NzE1NTE5NTIsImV4cCI6MTY3MTk4Mzk1Mn0._0z3MfL07P4tHEn108xR255dkQ2Va2MKJnOeb8vcdNg"}')
+      HttpHeaders.authorizationHeader: ('Bearer $token')
     },
   ).then(
     (value) {
