@@ -41,6 +41,7 @@ dependencies:
   shared_preferences: ^2.0.15
   linter: ^1.28.0
   drop_cap_text: ^1.1.3
+  flutter_html: 
   http:
 
 dev_dependencies:

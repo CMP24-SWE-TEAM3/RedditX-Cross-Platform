@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'circular_image_widget.dart';
+import '../../../methods/circular_image_widget.dart';
 import 'community_icon_and_2lines_app.dart';
 import 'community_icon_and_2lines_web.dart';
 import 'upvotes_and_comments.dart';
