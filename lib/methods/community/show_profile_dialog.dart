@@ -19,14 +19,14 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
             CircleAvatar(
               radius: 45,
               backgroundImage:
-                  NetworkImage(postsList[index]['userID']!['avatar']!),
+                  NetworkImage(communityPostsList[index]['userID']!['avatar']!),
             ),
             const SizedBox(height: 30),
             Text(
               (!iSMOCK)
-                  ? "u/${postsList[index]['userID']['_id']}"
+                  ? "u/${communityPostsList[index]['userID']['_id']}"
                       .replaceFirst("t2_", "")
-                  : "u/${postsList[index]['userID']['userID']}"
+                  : "u/${communityPostsList[index]['userID']['userID']}"
                       .replaceFirst("t2_", ""),
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.black),

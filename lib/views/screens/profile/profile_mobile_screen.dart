@@ -9,7 +9,7 @@ import 'package:search_project/views/widgets/profile/profile_comment.dart';
 import '../../../controllers/community_model_controller.dart';
 import '../../../controllers/profile_controller.dart';
 
-import '../../../models/post_model.dart';
+
 
 import '../../widgets/community/mobile_post_classic.dart';
 
@@ -24,7 +24,7 @@ class ProfileMobileScreen extends StatefulWidget {
   /// User name
   final String userID;
 
-  /// Community mobile screen constructor
+  /// Profile mobile screen constructor
   const ProfileMobileScreen({
     super.key,
     required this.userID,
@@ -37,7 +37,7 @@ class ProfileMobileScreen extends StatefulWidget {
   }
 }
 
-/// Community mobile screen
+/// Profile mobile screen
 class ProfileMobileScreenState extends State<ProfileMobileScreen> {
   @override
   Widget build(BuildContext context) {
@@ -67,13 +67,15 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                         child: Column(
                           children: [
                             for (int index = 0;
-                                index < postsList.length;
+                                index < profilePosts.length;
                                 index++)
                               MobilePostClassic(
-                                postType: postsList[index]['type'],
+                                postType: profilePosts[index]['type'],
                                 context: context,
-                                postPlace: "community",
+                                postPlace: "profile",
                                 index: index,
+                                posts: profilePosts,
+                                voters: votersProfile,
                               )
                           ],
                         ),
@@ -101,7 +103,7 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "${userProfileAbout['linkKarma']}",
+                                      "${userProfileAbout['linkKarma']??5}",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
@@ -123,7 +125,7 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "${userProfileAbout['commentKarma']}",
+                                      "${userProfileAbout['commentKarma']??20}",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold,
                                           fontSize: 20),
@@ -226,7 +228,7 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                             height: 15,
                           ),
                           Text(
-                            "${userProfileAbout['userID']}"
+                            "${userProfileAbout['userID']??""}"
                                 .replaceFirst("t2_", ""),
                             style: const TextStyle(
                                 color: Colors.white,
@@ -241,7 +243,7 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                               child: Row(
                                 children: [
                                   Text(
-                                    "${userProfileAbout['followerCount']}",
+                                    "${userProfileAbout['followerCount']??1} follower",
                                     style: const TextStyle(
                                         color: Colors.white,
                                         fontWeight: FontWeight.bold),
@@ -262,7 +264,7 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                           Row(
                             children: [
                               Text(
-                                "u/${userProfileAbout['userID']} "
+                                "u/${userProfileAbout['userID']??""} "
                                     .replaceFirst("t2_", ""),
                                 style: const TextStyle(
                                     color: Colors.white,
@@ -275,14 +277,15 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                                "· ${userProfileAbout['totalKarma']} karma ",
+                                "· ${userProfileAbout['totalKarma']??23} karma ",
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),
                               ),
                               Text(
-                               
-                                    "· ${value.calculateAge(DateTime.parse(userProfileAbout['createdAt']))}",
+                               (userProfileAbout['createdAt']==null)?"":
+                                    "${value.calculateAge(DateTime.parse(userProfileAbout['createdAt']))}",
+                                 
                                 style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold),

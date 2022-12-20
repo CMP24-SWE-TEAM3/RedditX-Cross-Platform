@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:search_project/controllers/profile_controller.dart';
 import 'package:search_project/controllers/profile_model_controller.dart';
 
-
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
 import 'controllers/internet_controller.dart';
@@ -13,8 +12,6 @@ import 'models/post_model.dart';
 
 import 'package:flutter/foundation.dart' show kIsWeb;
 
-
-import 'views/screens/community/community_home_web_screen.dart';
 import 'views/screens/profile/profile_mobile_screen.dart';
 
 void main() async {
@@ -34,11 +31,14 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(create: (context) => ProfileProvider()),
         ChangeNotifierProvider(
-            create: ((context) =>
-                ProfileModelProvider()..getProfileComments("t2_hamada")..getProfileAbout("t2_hamada")..getProfileComments('t2_shredan'))),
+            create: ((context) => ProfileModelProvider()
+              ..getProfileAbout("t2_hamada")
+              ..getProfileComments('t2_shredan')
+              ..getProfilePosts("t2_hamada")..getProfilePostsCommunityAvatars("t5_imagePro235")
+            )),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
-              ..getPosts("t5_imagePro235", "hot", [], 2, 40)),
+            ),
         ChangeNotifierProvider(
             create: (context) =>
                 CommunityProvider(communityService: CommunityService())),
@@ -63,11 +63,13 @@ class MyApp extends StatelessWidget {
         initialRoute: '/',
         home: LayoutBuilder(
             builder: (BuildContext context, BoxConstraints constraints) {
-          return (constraints.minWidth.round() < 500)
-              ? ProfileMobileScreen(context: context, constraints: constraints,userID: "t2_hamada",)
-              : CommunityWebScreen(context: context, constraints: constraints);
+          return ProfileMobileScreen(
+            context: context,
+            constraints: constraints,
+            userID: "t2_hamada",
+          );
         }),
-        routes: {},
+        routes: const {},
       ),
     );
   }

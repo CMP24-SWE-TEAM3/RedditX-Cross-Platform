@@ -4,14 +4,18 @@ import 'package:provider/provider.dart';
 import '../../controllers/community_controller.dart';
 import '../../controllers/community_model_controller.dart';
 
-
-
 /// Show default bottom sheet
 ///
 /// it shows a bottom sheet of [title],[itemCount],[icons],[options] and [source]
 
-void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
-    List<IconData> icons, List<String> options, String source) {
+void showDefaultBottomSheet(
+    BuildContext context,
+    String title,
+    int itemCount,
+    List<IconData> icons,
+    List<String> options,
+    String source,
+    String communityName) {
   showModalBottomSheet(
       isDismissible: true,
       isScrollControlled: true,
@@ -52,14 +56,14 @@ void showDefaultBottomSheet(BuildContext context, String title, int itemCount,
                                   options[index], index, context);
 
                               if (index == 0) {
-                                value1.getPosts(
-                                    "t5_imagePro235", "hot", [], 2, 40);
+                                value1.getCommunityPosts(
+                                    communityName, "hot", [], 2, 40);
                               } else if (index == 1) {
-                                value1.getPosts(
-                                    "t5_imagePro235", "new", [], 2, 40);
+                                value1.getCommunityPosts(
+                                    communityName, "new", [], 2, 40);
                               } else {
-                                value1.getPosts(
-                                    "t5_imagePro235", "top", [], 2, 40);
+                                value1.getCommunityPosts(
+                                    communityName, "top", [], 2, 40);
                               }
                             }
 

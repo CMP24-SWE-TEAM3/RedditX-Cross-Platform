@@ -13,7 +13,7 @@ getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
   var queryParameters = {'page': page, 'limit': limit};
   Uri url = Uri.https(
     "api.redditswe22.tech",
-    "/api/listing/posts/r/t5_imagePro235/hot",
+    "/api/listing/posts/r/$communityName/$sortType",
     {
       'mapData': jsonEncode(queryParameters),
     },
@@ -26,18 +26,21 @@ getAPICommunityPosts(String communityName, String sortType, List<dynamic> posts,
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      //print(responseData);
-      postsListAPI = responseData['posts'];
+      communityPostsListAPI = responseData['posts'];
+       for (int i = 0; i < communityPostsListAPI.length; i++) {
+        communityPostsListAPI.add(communityPostsListAPI[i]['voters']);
+      }
+
     } else {
-      //print("posts ${value.statusCode}");
-      postsListAPI = [];
+
+      communityPostsListAPI = [];
     }
   });
 }
 
 getAPICommunityAbout(String communityName) async {
-  String searchRequest = "/api/r/$communityName";
-  Uri url = Uri.parse(urlApi + searchRequest);
+  String apiRoute = "/api/r/$communityName";
+  Uri url = Uri.parse(urlApi + apiRoute);
   await http.get(
     url,
     headers: <String, String>{
@@ -61,8 +64,8 @@ getAPICommunityAbout(String communityName) async {
 
 /// Get community name, date of creation, description and members count
 getAPICommunityInfo(String communityName) async {
-  String searchRequest = "/api/r/info?id=$communityName";
-  Uri url = Uri.parse(urlApi + searchRequest);
+  String apiRoute = "/api/r/info?id=$communityName";
+  Uri url = Uri.parse(urlApi + apiRoute);
   await http.get(
     url,
     headers: <String, String>{
@@ -73,16 +76,19 @@ getAPICommunityInfo(String communityName) async {
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
+      //print(responseData['things'][0]);
       communityInfoAPI = responseData['things'][0];
     } else {
       communityInfoAPI = {};
+
+      //print(value.statusCode);
     }
   });
 }
 
 getAPICommunityFlairs(String communityName) async {
-  String searchRequest = "api/r/$communityName/api/flair-list";
-  Uri url = Uri.parse(urlApi + searchRequest);
+  String apiRoute = "/api/r/$communityName/api/flair-list";
+  Uri url = Uri.parse(urlApi + apiRoute);
   await http.get(
     url,
     headers: <String, String>{
@@ -92,28 +98,10 @@ getAPICommunityFlairs(String communityName) async {
     },
   ).then((value) {
     if (value.statusCode == 200) {
-      //var responseData = json.decode(value.body) as Map<String, dynamic>;
-      //print("flaiiirs");
-      //print(responseData);
-      //moderatorsAPI = responseData['users'];
-    } else {
-      //moderatorsAPI = [];
-      //print(value.statusCode);
-    }
+      var responseData = json.decode(value.body) as Map<String, dynamic>;
+      communityFlairsAPI = responseData['flairs'];
+    } else {}
   });
 }
 
-voteAPI(String id, int dir) async {
-  const String voteRequest = "/api/listing/vote";
-  Uri url = Uri.parse(urlApi + voteRequest);
 
-  final response = await http.post(url,
-      body: jsonEncode(<String, dynamic>{
-        "id": id,
-        "dir": dir,
-      }));
-  // print(response.body);
-  // print(response.statusCode);
-
-  return response;
-}

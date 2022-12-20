@@ -24,26 +24,26 @@ class ProfileComment extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Post title",
-                    style: TextStyle(fontSize: 15),
+                   Text(
+                    "${commentsPostTitles[index]}",
+                    style: const TextStyle(fontSize: 15),
                   ),
                   Row(
                     children: [
                       Text(
-                        "u/${userProfileComments[index]['authorId']}"
+                        "u/${userProfileComments[index]['authorId']??""}"
                             .replaceFirst("t2_", ""),
                         style: const TextStyle(color: Colors.grey),
                       ),
                       Text(
-                        "· ${value.calculateAge(DateTime.parse(userProfileComments[index]['createdAt']))}",
+                        "· ${value.calculateAge(DateTime.parse(userProfileComments[index]['createdAt']??""))}",
                         style: const TextStyle(color: Colors.grey),
                       ),
                       const SizedBox(
                         width: 5,
                       ),
                       Text(
-                        "${userProfileComments[index]['votesCount']}",
+                        "${userProfileComments[index]['votesCount']??0}",
                         style: const TextStyle(color: Colors.grey),
                       ),
                       Icon(
@@ -59,7 +59,7 @@ class ProfileComment extends StatelessWidget {
                     width: 5,
                   ),
                   Text(
-                    "${userProfileComments[index]['text']}",
+                    "${userProfileComments[index]['text']??"comment content"}",
                     style: const TextStyle(color: Colors.grey),
                   )
                 ],

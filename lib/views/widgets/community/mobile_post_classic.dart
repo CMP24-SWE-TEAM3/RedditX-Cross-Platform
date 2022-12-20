@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
+import 'package:search_project/models/user_model.dart';
 import '../../../config/constants.dart';
 import '../../../models/post_model.dart';
 import 'mobile_post_bottom.dart';
 import 'mobile_post_top.dart';
+import 'dart:math' as math;
 
 /// Shows the card post view
 class MobilePostClassic extends StatelessWidget {
@@ -20,13 +23,22 @@ class MobilePostClassic extends StatelessWidget {
   /// Index of the post
   final int index;
 
+
+  /// Posts list
+  final List<dynamic>posts;
+
+  /// Voters
+  
+  final List<dynamic>voters;
+
   /// Mobile classic post constructor
   const MobilePostClassic(
       {super.key,
       required this.postType,
       required this.context,
       required this.postPlace,
-      required this.index});
+      required this.index,
+      required this.posts,required this.voters});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -42,36 +54,87 @@ class MobilePostClassic extends StatelessWidget {
                     child: Column(
                       children: [
                         TopMobilePost(
-                          postPlace: postPlace,
-                          postType: postType,
-                          context: context,
-                          index: index,
-                          userName: (!iSMOCK)
-                              ? "u/${postsList[index]['userID']['_id']}"
-                                  .replaceFirst("t2_", "")
-                              : "u/${postsList[index]['userID'].userID}"
-                                  .replaceFirst("t2_", ""),
-                          dateTime: postsListMock[index].createdAt!,
-                        ),
+                            postPlace: postPlace,
+                            postType: postType,
+                            context: context,
+                            index: index,
+                            userName:
+                                "u/${posts[index]['userID']['_id']}"
+                                    .replaceFirst("t2_", ""),
+                            dateTime: !iSMOCK
+                                ? "${posts[index]['createdAt']}"
+                                : "${communityPostsListMock[index]['createdAt']}",posts: posts,),
                         const SizedBox(
                           height: 10,
                         ),
-                        if (postType == 'text' || postType == 'img')
+                        if (postType == 'text' ||
+                            postType == 'image' ||
+                            postType == 'linkWithImage')
                           Text(
-                            // (postType == 'text')
-                            //     ? postsList[index]['text']
-                            //     :
-                            postsList[index]['title'],
+                            profilePosts[index]['title'],
                             maxLines: 4,
                             overflow: TextOverflow.ellipsis,
                             style: const TextStyle(
                                 fontWeight: FontWeight.bold, fontSize: 17),
                           ),
+                        (profilePosts[index]['flairText'] != null)
+                            ? const SizedBox(
+                                height: 5,
+                              )
+                            : const SizedBox(
+                                height: 0,
+                              ),
+                        (profilePosts[index]['flairText'] != null)
+                            ? InkWell(
+                                onTap: () {},
+                                child: RichText(
+                                  key: const Key('post_content'),
+                                  text: TextSpan(
+                                    children: [
+                                      WidgetSpan(
+                                        child: Container(
+                                          margin: const EdgeInsets.only(
+                                            left: 5,
+                                          ),
+                                          padding: const EdgeInsets.all(
+                                            2,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            ///Random color
+                                            color: Color(
+                                              (math.Random().nextDouble() *
+                                                      0xFFFFFF)
+                                                  .toInt(),
+                                            ).withOpacity(
+                                              1,
+                                            ),
+                                            //rounded rectangle shape
+                                            borderRadius:
+                                                const BorderRadius.all(
+                                              Radius.circular(10),
+                                            ),
+                                          ),
+                                          child: Text(
+                                            ///Flair text
+                                            '${posts[index]['flairText']}',
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : const SizedBox(
+                                height: 0,
+                              ),
                       ],
                     ),
                   ),
-                  if (postType == "img") const SizedBox(height: 8),
-                  if (postType == "img")
+                  if (postType == "image") const SizedBox(height: 8),
+                  if (postType == "image")
                     Container(
                       height: 250,
                       width: double.infinity,
@@ -79,8 +142,13 @@ class MobilePostClassic extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  postsList[index]['attachments'][0]))),
+                              image: NetworkImage((posts[index]
+                                              ['attachments']
+                                          .length ==
+                                      0)
+                                  ? "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"
+                                  : posts[index]['attachments']
+                                      [0]))),
                     ),
                   if (postType == 'link')
                     Row(
@@ -89,7 +157,7 @@ class MobilePostClassic extends StatelessWidget {
                           child: Column(
                             children: [
                               Text(
-                                postsList[index]['title'],
+                                posts[index]['title'],
                                 maxLines: 5,
                                 overflow: TextOverflow.ellipsis,
                                 style: const TextStyle(
@@ -105,7 +173,12 @@ class MobilePostClassic extends StatelessWidget {
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 18),
                               child: LinkPreviewGenerator(
-                                link: postsList[index]['attachments'][0],
+                                link: (posts[index]['attachments']
+                                            .length ==
+                                        0)
+                                    ? "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"
+                                    : profilePosts[index]['attachments']
+                                        [0],
                                 linkPreviewStyle: LinkPreviewStyle.small,
                                 bodyMaxLines: 1,
                                 bodyTextOverflow: TextOverflow.ellipsis,
@@ -116,8 +189,19 @@ class MobilePostClassic extends StatelessWidget {
                         ))
                       ],
                     ),
+                  if (postType == 'linkWithImage')
+                    Html(
+                      data: posts[index]['textHTML'] ?? '',
+                      shrinkWrap: true,
+                      style: {
+                        '#': Style(
+                            maxLines: 3, textOverflow: TextOverflow.ellipsis)
+                      },
+                    ),
                   BottomPostMobile(
                     index: index,
+                    posts: posts,
+                    voters: voters,
                   ),
                   Container(
                     height: 10,

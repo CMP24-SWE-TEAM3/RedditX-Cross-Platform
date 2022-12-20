@@ -2,6 +2,8 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
+import 'package:search_project/models/user_model.dart';
+
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
 import '../../../methods/community/default_bottom_sheet.dart';
@@ -17,6 +19,8 @@ import '../../widgets/community/mobile_post_card.dart';
 import '../../widgets/community/mobile_post_classic.dart';
 import 'dart:math' as math;
 
+
+
 /// Community mobile screen
 class CommunityMobileScreen extends StatelessWidget {
   /// Constrains to handle respositivity
@@ -25,12 +29,16 @@ class CommunityMobileScreen extends StatelessWidget {
   /// Context used in [defaultBottomSheet] and others
   final BuildContext context;
 
+  final String communityName;
+
+  
+
   /// Community mobile screen constructor
-  const CommunityMobileScreen({
-    super.key,
-    required this.context,
-    required this.constraints,
-  });
+  const CommunityMobileScreen(
+      {super.key,
+      required this.context,
+      required this.constraints,
+      required this.communityName});
 
   @override
   Widget build(BuildContext context) {
@@ -63,8 +71,6 @@ class CommunityMobileScreen extends StatelessWidget {
                           ),
                           InkWell(
                               onTap: () {
-                                //value1.getCommunityFlairs("t5_imagePro235");
-                                //value1.getCommunityModerators("t5_imagePro235");
                                 showDefaultBottomSheet(
                                     context,
                                     "SORT POSTS BY",
@@ -75,7 +81,8 @@ class CommunityMobileScreen extends StatelessWidget {
                                       "New",
                                       "Top",
                                     ],
-                                    "postSortBy");
+                                    "postSortBy",
+                                    communityName);
                               },
                               child: SizedBox(
                                 height: 30,
@@ -103,7 +110,8 @@ class CommunityMobileScreen extends StatelessWidget {
                                     2,
                                     value.bottomSheetPostViewIcons,
                                     ["Card", "Classic"],
-                                    "postView");
+                                    "postView",
+                                    communityName);
                               },
                               icon: Icon(value.postViewIcon))
                         ],
@@ -113,18 +121,22 @@ class CommunityMobileScreen extends StatelessWidget {
                         child: Column(
                           children: [
                             for (int index = 0;
-                                index < postsList.length;
+                                index < communityPostsList.length;
                                 index++)
                               (value.postView == "classic")
                                   ? MobilePostClassic(
-                                      postType: postsList[index]['type'],
+                                      postType: communityPostsList[index]
+                                          ['type'],
                                       context: context,
-                                      postPlace: "community",
+                                      postPlace: 'community',
                                       index: index,
-                                    )
+                                      posts: communityPostsList,voters: votersCommunity,)
                                   : MobilePostCard(
-                                      postType: postsList[index]['type'],
+                                      postType: communityPostsList[index]
+                                          ['type'],
                                       index: index,
+                                      posts: communityPostsList,
+                                      voters: votersCommunity,
                                     ),
                           ],
                         ),
@@ -461,7 +473,8 @@ class CommunityMobileScreen extends StatelessWidget {
                                                                   "Low",
                                                                   "Frequent"
                                                                 ],
-                                                                "notifications");
+                                                                "notifications",
+                                                                communityName);
                                                           },
                                                           child: Icon(
                                                             key: const ValueKey(
@@ -573,47 +586,37 @@ class CommunityMobileScreen extends StatelessWidget {
                                       height: 10,
                                     ),
                                     Expanded(
-                                        key: const ValueKey(
-                                            "expanded_discription"),
-                                        child: Row(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                value.changeExpandedHight(
-                                                    value.isExpanded);
-                                              },
-                                              child: value.isExpanded
-                                                  ? AutoSizeText(
-                                                      communityInfo[
-                                                              'description'] ??
-                                                          "",
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    )
-                                                  : Text(
-                                                      communityInfo[
-                                                              'description'] ??
-                                                          "",
-                                                      maxLines: 3,
-                                                      overflow:
-                                                          TextOverflow.ellipsis,
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                    ),
-                                            ),
-                                          ],
-                                        )),
+                                      key: const ValueKey(
+                                          "expanded_discription"),
+                                      child: InkWell(
+                                        onTap: () {
+                                          value.changeExpandedHight(
+                                              value.isExpanded);
+                                        },
+                                        child: value.isExpanded
+                                            ? AutoSizeText(
+                                                communityInfo['description'] ??
+                                                    "",
+                                                textAlign: TextAlign.start,
+                                              )
+                                            : Text(
+                                                communityInfo['description'] ??
+                                                    "",
+                                                maxLines: 3,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.start,
+                                              ),
+                                      ),
+                                    ),
                                     Expanded(
                                         child: RichText(
                                       key: const Key('post_content'),
                                       text: TextSpan(
                                         children: [
                                           ///Container of the flair text
-                                          for (int i = 0; i < 3; i++)
+                                          for (int i = 0;
+                                              i < communityFlairs.length;
+                                              i++)
                                             WidgetSpan(
                                               child: Container(
                                                 margin: const EdgeInsets.only(
@@ -638,10 +641,10 @@ class CommunityMobileScreen extends StatelessWidget {
                                                     Radius.circular(10),
                                                   ),
                                                 ),
-                                                child: const Text(
+                                                child: Text(
                                                   ///Flair text
-                                                  '  postData.flairText  ',
-                                                  style: TextStyle(
+                                                  '${communityFlairs[i]['flairText']}',
+                                                  style: const TextStyle(
                                                     color: Colors.white,
                                                   ),
                                                 ),
