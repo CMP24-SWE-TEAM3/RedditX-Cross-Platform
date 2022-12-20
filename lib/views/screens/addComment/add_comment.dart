@@ -4,8 +4,9 @@ import '../../../controllers/post_comment.dart';
 
 // ignore: must_be_immutable
 class AddComment extends StatelessWidget {
-  AddComment({super.key});
+  AddComment(this.ID, {super.key});
   static const routeName = '/AddComment';
+  var ID = '';
   TextEditingController commentController = TextEditingController();
 
   @override
@@ -36,7 +37,7 @@ class AddComment extends StatelessWidget {
           TextButton(
             key: const ValueKey('post_button_addComment_page'),
             onPressed: () async {
-              await postComment(/*postID*/ 'asdf', commentController);
+              await postComment(ID , commentController);
               // ignore: use_build_context_synchronously
               Navigator.of(context).pop();
             },

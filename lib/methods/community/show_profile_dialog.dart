@@ -89,11 +89,14 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
                   await Provider.of<ProfileModelProvider>(context, listen: false).getProfilePosts(
  communityPostsList[index]['userID']['_id']);
   
+  // ignore: use_build_context_synchronously
   await Provider.of<ProfileModelProvider>(context,
                           listen: false).getProfileComments( communityPostsList[index]['userID']['_id']);
+                           // ignore: use_build_context_synchronously
                            await Provider.of<ProfileModelProvider>(context,
                           listen: false).getProfileAbout( communityPostsList[index]['userID']['_id']);
                           
+                  // ignore: use_build_context_synchronously
                   Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileMobileScreen(userID: communityPostsList[index]['userID']
                                   ['_id'], context: context)));
                 },

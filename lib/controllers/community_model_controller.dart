@@ -18,12 +18,12 @@ class CommunityModelProvider with ChangeNotifier {
       votersCommunity=votersCommunityMock;
       notifyListeners();
     } else {
-      await getAPICommunityPosts(communityName);
+      await getAPICommunityPosts(communityName, sortType);
       communityPostsList = communityPostsListAPI;
       votersCommunity=votersCommunityAPI;
       notifyListeners();
     }
-    print(communityPostsList);
+    // print(communityPostsList);
   }
 
   Future getCommunityAbout(String communityName) async {
@@ -46,8 +46,8 @@ class CommunityModelProvider with ChangeNotifier {
       communityInfo = communityInfoAPI;
       notifyListeners();
     }
-    print("////////////////////////////////////////");
-    print(communityInfo);
+    // print("////////////////////////////////////////");
+    // print(communityInfo);
   }
 
   Future getCommunityFlairs(String communityName) async {

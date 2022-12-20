@@ -44,7 +44,6 @@ dependencies:
   flutter_facebook_auth: ^5.0.6
   google_sign_in: ^5.4.2
   http: ^0.13.5
-  pull_to_refresh: ^2.0.0
   image_picker: ^0.8.6
 
   permission_handler: ^10.2.0

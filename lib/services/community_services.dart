@@ -10,8 +10,8 @@ import '../models/post_model.dart';
 import '../models/user_model.dart';
 
 /// Get posts of a specific community with a sort type
-getAPICommunityPosts(String communityName) async {
-  String apiRoute = "/api/listing/posts/r/$communityName/hot?page=1&limit=6";
+getAPICommunityPosts(String communityName, sortType) async {
+  String apiRoute = "/api/listing/posts/r/$communityName/$sortType?page=1&limit=6";
   Uri url = Uri.parse(urlApi + apiRoute);
   await http.get(
     url,
@@ -29,7 +29,7 @@ getAPICommunityPosts(String communityName) async {
       }
     } else {
 
-      print(value.statusCode);
+      // print(value.statusCode);
       communityPostsListAPI = [];
       votersProfileAPI = [];
     }
@@ -56,8 +56,8 @@ getAPICommunityAbout(String communityName) async {
     } else {
       moderatorsAPI = [];
       communityRules = [];
-      print("___________________________________");
-      print(value.statusCode);
+      // print("___________________________________");
+      // print(value.statusCode);
     }
   });
 }
@@ -76,13 +76,13 @@ getAPICommunityInfo(String communityName) async {
   ).then((value) {
     if (value.statusCode == 200) {
       var responseData = json.decode(value.body) as Map<String, dynamic>;
-      print("___________________________________");
-      print(responseData);
+      // print("___________________________________");
+      // print(responseData);
       communityInfoAPI = responseData['things'][0];
     } else {
       communityInfoAPI = {};
 
-      print(value.statusCode);
+      // print(value.statusCode);
     }
   });
 }

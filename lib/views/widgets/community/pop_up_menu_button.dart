@@ -28,6 +28,7 @@ class _PopUpMenuState extends State<PopUpMenu> {
     bool voting = true;
     refresh() {
     @override
+    // ignore: unused_element
     void setState(VoidCallback fn) {
       super.setState(fn);
       voting = !voting;

@@ -6,6 +6,7 @@ import 'package:search_project/controllers/profile_controller.dart';
 import 'package:search_project/controllers/profile_model_controller.dart';
 import 'package:search_project/models/user_model.dart';
 import 'package:search_project/styles/colors.dart';
+import 'package:search_project/views/screens/addComment/add_comment.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
 import '../../../methods/community/share_bottom_sheet.dart';
@@ -41,6 +42,7 @@ class _BottomPostMobileState extends State<BottomPostMobile> {
 
   refresh() {
     @override
+    // ignore: unused_element
     void setState(VoidCallback fn) {
       super.setState(fn);
       voting = !voting;
@@ -114,7 +116,17 @@ class _BottomPostMobileState extends State<BottomPostMobile> {
           ),
           Expanded(
             child: IconButton(
-                onPressed: () {}, icon: const Icon(CustomIcons.comment)),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => AddComment(
+                                widget.posts[widget.index]['_id'],
+                              )));
+                  // Navigator.of(context)
+                  //     .pushNamed(AddComment.routeName, arguments: {});
+                },
+                icon: const Icon(CustomIcons.comment)),
           ),
           Text(Numeral(widget.posts[widget.index]['commentsNum'] ?? 0)
               .format(fractionDigits: 1)),

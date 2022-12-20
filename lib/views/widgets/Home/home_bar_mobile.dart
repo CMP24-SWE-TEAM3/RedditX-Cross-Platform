@@ -45,12 +45,12 @@ AppBar buildHomeBar(text) {
               if (value?.split(' ')[1] == 'Home' && currentValue != 'Home') {
                 Navigator.of(context)
                     .pushReplacementNamed(HomePage.routeName, arguments: {});
-                print(value);
+                // print(value);
               } else if (value?.split(' ')[1] == 'Popular' &&
                   currentValue != 'Popular') {
                 Navigator.of(context)
                     .pushReplacementNamed(Popular.routeName, arguments: {});
-                print(value);
+                // print(value);
               }
             });
       }),

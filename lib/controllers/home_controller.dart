@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 
 import '../config/constants.dart';
+import '../services/home_service.dart';
 
 bool mockData = iSMOCK;
 
 class HomeController extends ChangeNotifier {
-  String testo = 'hi';
+  var page = 0;
+  var limit = 10;
   load() {
-    testo = 'load';
+    page++;
     notifyListeners();
   }
 
   refresh() {
-    testo = 'refresh';
+    page = 0;
+    notifyListeners();
+  }
+
+  loadPosts() async {
+    await getAPIHomePosts(page, limit);
     notifyListeners();
   }
 }
