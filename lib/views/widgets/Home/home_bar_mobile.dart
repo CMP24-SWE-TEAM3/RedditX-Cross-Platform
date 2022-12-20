@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:search_project/views/screens/Home/home_page.dart';
 import 'package:search_project/views/screens/Popular/popular_page.dart';
+import 'package:search_project/views/screens/search/search_screen_one.dart';
 import '../../../models/user_model.dart';
 
 void displayDrawer(BuildContext context) {
@@ -54,13 +55,16 @@ AppBar buildHomeBar(text) {
               }
             });
       }),
-      IconButton(
+      Builder(builder: (context) {
+        return IconButton(
         key: const ValueKey('search_ToolBar'),
         onPressed: () {
-          // showSearch(context: context, delegate: SearchCommunityDelegate(ref));
+          Navigator.of(context)
+              .pushReplacementNamed(SearchScreenOne.routeName, arguments: {});
         },
         icon: const Icon(Icons.search),
-      ),
+      );
+      }),
       IconButton(
         key: const ValueKey('add_ToolBar'),
         onPressed: () {

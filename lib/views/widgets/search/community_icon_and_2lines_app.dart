@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'circular_image_widget.dart';
+import '../../../methods/circular_image_widget.dart';
 
 import '../../../models/search_model.dart';
 

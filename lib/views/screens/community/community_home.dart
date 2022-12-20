@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'community_home_mobile_screen.dart';
 import 'community_home_web_screen.dart';
 
+// ignore: must_be_immutable
 class CommunityHome extends StatelessWidget {
   CommunityHome(this.commName, {super.key});
   static const routeName = '/CommunityHome';
