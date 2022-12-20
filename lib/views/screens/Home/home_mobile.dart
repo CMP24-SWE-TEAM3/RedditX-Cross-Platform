@@ -66,7 +66,7 @@ class _HomeMobileState extends State<HomeMobile> {
                   voters: []);
             },
             separatorBuilder: (context, index) => const Divider(),
-            itemCount: 10,
+            itemCount: homePostsList.length,
           ),
         ),
       ),

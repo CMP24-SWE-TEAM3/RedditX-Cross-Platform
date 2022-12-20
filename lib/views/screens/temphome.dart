@@ -69,12 +69,6 @@ class Home extends StatelessWidget {
                       .pushNamed(ProfilePage.routeName, arguments: {});
                 },
                 child: const Text("profile")),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.of(context)
-                      .pushNamed(AddComment.routeName, arguments: {});
-                },
-                child: const Text("Add Comment")),
           ],
         ),
       ),

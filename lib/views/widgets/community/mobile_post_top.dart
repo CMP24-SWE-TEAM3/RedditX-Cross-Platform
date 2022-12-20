@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -50,10 +49,9 @@ class TopMobilePost extends StatelessWidget {
           InkWell(
             radius: 20,
             onTap: () {},
-            child: const CircleAvatar(
+            child: CircleAvatar(
               radius: 25,
-              backgroundImage: NetworkImage(
-                  "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
+              backgroundImage: NetworkImage(posts[index]['icon'] ?? ''),
             ),
           ),
           const SizedBox(
@@ -64,9 +62,9 @@ class TopMobilePost extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {},
-                child: const Text(
-                  "r/Painting",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                child: Text(
+                  posts[index]['userID']['_id'],
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 5),
@@ -77,14 +75,14 @@ class TopMobilePost extends StatelessWidget {
                       showeProfileDialog(context, index);
                     },
                     child: Text(
-                      "u/THEBNTG",
+                      posts[index]['userID']['_id'],
                       style: TextStyle(color: Colors.grey[800]),
                     ),
                   ),
                   Consumer<CommunityProvider>(
                     builder: (context, value, child) => Text(
                       !iSMOCK
-                          ? "${value.calculateAge(DateTime.parse(communityPostsList[index]['createdAt']))}"
+                          ? "${value.calculateAge(DateTime.parse(posts[index]['createdAt']))}"
                           : "${value.calculateAge(communityPostsListMock[index]['createdAt'])}",
                       style: TextStyle(color: Colors.grey[600]),
                     ),
@@ -101,7 +99,10 @@ class TopMobilePost extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          PopUpMenu(index: index,posts: posts,),
+          PopUpMenu(
+            index: index,
+            posts: posts,
+          ),
         ],
       );
     }
@@ -161,8 +162,8 @@ class TopMobilePost extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {},
-                child: Text(
-                    "${posts[index]['communityID']['_id']}".replaceAll("t5_", "")),
+                child: Text("${posts[index]['communityID']['_id']}"
+                    .replaceAll("t5_", "")),
               ),
               const SizedBox(
                 width: 5,
@@ -172,8 +173,7 @@ class TopMobilePost extends StatelessWidget {
               ),
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
-                   "${value.calculateAge(DateTime.parse(posts[index]['createdAt']))}",
-              
+                  "${value.calculateAge(DateTime.parse(posts[index]['createdAt']))}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),

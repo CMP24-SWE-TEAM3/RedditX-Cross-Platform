@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:search_project/models/home_model.dart';
 
 import '../config/constants.dart';
 import '../services/home_service.dart';
@@ -20,6 +21,7 @@ class HomeController extends ChangeNotifier {
 
   loadPosts() async {
     await getAPIHomePosts(page, limit);
+    homePostsList = homePostsListAPI;
     notifyListeners();
   }
 }
