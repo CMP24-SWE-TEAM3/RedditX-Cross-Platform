@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/views/screens/authentication/splash_screen.dart';
-import 'package:search_project/views/screens/community/community_home.dart';
-import 'package:search_project/views/screens/create_community/create_community_screen.dart';
+
 
 
 import '../../controllers/sign_in_controller.dart';
 import './search/search_screen_one.dart';
 import 'Home/home_page.dart';
+import 'authentication/splash_screen.dart';
+import 'community/community_home.dart';
+import 'create_community/create_community_screen.dart';
 import 'profile/profile_page.dart';
 // import 'addComment/add_comment.dart';
 import 'settings/setting_menu.dart';

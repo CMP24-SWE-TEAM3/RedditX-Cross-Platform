@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/models/user_model.dart';
 import '../../../controllers/mobile_settings_view_controller.dart';
 import '../../../models/authentication.dart';
+import '../../../models/user_model.dart';
 import '../authentication/choose_profilepicture.dart';
 import '../authentication/sign_up_page.dart';
 import '../../screens/settings/account_setting_screen.dart';

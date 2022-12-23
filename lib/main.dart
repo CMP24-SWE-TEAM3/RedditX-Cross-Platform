@@ -11,6 +11,7 @@ import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
 
 import 'views/screens/Popular/popular_page.dart';
+import 'views/screens/community/community_home.dart';
 import 'views/screens/create_community/create_community_screen.dart';
 import 'views/screens/profile/profile_page.dart';
 
@@ -113,11 +114,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         home:
-            //CommunityHome(commName: 't5_imagePro45',userName: 't2_hamada',posts: communityPostsList,),
-            ProfilePage(
-          userID: 't2_hamada',
-          context: context,
-        ),
+            CommunityHome(commName: 't5_imagePro45',userName: 't2_hamada',posts: communityPostsList,),
+        //     ProfilePage(
+        //   userID: 't2_hamada',
+        //   context: context,
+        // ),
         //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {

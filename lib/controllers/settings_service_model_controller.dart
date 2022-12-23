@@ -1,8 +1,9 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:search_project/models/settings_model.dart';
 
+
+import '../models/settings_model.dart';
 import '../services/settings_service.dart';
 import '../models/user_model.dart';
 

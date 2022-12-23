@@ -2,7 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/models/user_model.dart';
+
 
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
@@ -11,6 +11,7 @@ import '../../../methods/community/show_leave_community_dialog.dart';
 import '../../../methods/community/show_snack_bar.dart';
 import '../../../models/community_model.dart';
 import '../../../models/post_model.dart';
+import '../../../models/user_model.dart';
 import '../../../styles/colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 

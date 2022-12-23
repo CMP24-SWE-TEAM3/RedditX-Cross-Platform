@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:search_project/models/user_model.dart';
-import 'package:search_project/models/community_model.dart';
+
 
 import '../config/constants.dart';
+import '../models/community_model.dart';
 import '../models/post_model.dart';
+import '../models/user_model.dart';
 import '../services/community_services.dart';
 
 class CommunityModelProvider with ChangeNotifier {

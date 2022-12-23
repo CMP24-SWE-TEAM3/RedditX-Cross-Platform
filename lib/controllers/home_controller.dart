@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:search_project/models/home_model.dart';
+
 
 import '../config/constants.dart';
+import '../models/home_model.dart';
 import '../services/home_service.dart';
 
 bool mockData = iSMOCK;

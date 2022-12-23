@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/config/constants.dart';
-import 'package:search_project/controllers/profile_controller.dart';
-import 'package:search_project/controllers/profile_model_controller.dart';
-import 'package:search_project/models/user_model.dart';
-import 'package:search_project/styles/colors.dart';
-import 'package:search_project/views/screens/addComment/add_comment.dart';
+
+import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
+import '../../../controllers/profile_controller.dart';
+import '../../../controllers/profile_model_controller.dart';
 import '../../../methods/community/share_bottom_sheet.dart';
 
+import '../../../models/user_model.dart';
+import '../../../styles/colors.dart';
 import '../../../styles/custom_icons.dart';
+import '../../screens/addComment/add_comment.dart';
 
 ///  Shows the bottom part of mobile post
 class BottomPostMobile extends StatefulWidget {

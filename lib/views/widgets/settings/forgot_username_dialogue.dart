@@ -1,9 +1,10 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:search_project/models/settings_model.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../controllers/settings_validations.dart';
+import '../../../models/settings_model.dart';
 import '../authentication/email_me_button.dart';
 
 ///dialogue for forgot username

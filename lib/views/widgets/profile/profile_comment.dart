@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/controllers/profile_controller.dart';
-import 'package:search_project/styles/custom_icons.dart';
 
+
+import '../../../controllers/profile_controller.dart';
 import '../../../models/user_model.dart';
+import '../../../styles/custom_icons.dart';
 
 class ProfileComment extends StatelessWidget {
   final int index;

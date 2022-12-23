@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:search_project/views/screens/Home/home_page.dart';
-import 'package:search_project/views/screens/Popular/popular_page.dart';
-import 'package:search_project/views/screens/search/search_screen_one.dart';
 import '../../../models/user_model.dart';
+import '../../screens/Home/home_page.dart';
+import '../../screens/Popular/popular_page.dart';
+import '../../screens/search/search_screen_one.dart';
 
 void displayDrawer(BuildContext context) {
   Scaffold.of(context).openDrawer();

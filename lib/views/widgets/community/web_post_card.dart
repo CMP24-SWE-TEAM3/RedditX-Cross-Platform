@@ -3,11 +3,12 @@ import 'package:flutter_html/flutter_html.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/controllers/profile_controller.dart';
+
 
 import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
+import '../../../controllers/profile_controller.dart';
 import '../../../controllers/profile_model_controller.dart';
 import '../../../models/post_model.dart';
 

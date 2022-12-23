@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:search_project/views/widgets/authentication/show_snackbar.dart';
+
+import '../methods/community/show_snack_bar.dart';
 import '../models/create_community_model.dart';
 import 'create_community_service_model_controller.dart';
 
@@ -31,16 +32,16 @@ class CreateCommunityViewModelController with ChangeNotifier {
         .createCommunityServiceController(communityName,
             createCommunitySheetTitle[createCommunityIndex!], plus18);
     if (res == 0) {
-      showSnackBar("Created successfully", ctx);
+      showSnackBar("Created successfully" as BuildContext, ctx);
       Navigator.of(ctx).pushReplacementNamed('/');
       return;
     }
     if (res == 1) {
-      showSnackBar("name already taken", ctx);
+      showSnackBar("name already taken" as BuildContext, ctx);
       return;
     }
     if (res == -1) {
-      showSnackBar("server fail! try again", ctx);
+      showSnackBar("server fail! try again" as BuildContext, ctx);
       return;
     }
   }
