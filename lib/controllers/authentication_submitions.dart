@@ -146,11 +146,32 @@ Future<void> submitSignup(
       }
     });
   }
-  (kIsWeb)
-      ? Navigator.of(context)
-          .pushReplacementNamed(Home.routeName, arguments: {})
-      : Navigator.of(context)
-          .pushReplacementNamed(AboutYou.routeName, arguments: {});
+  if (kIsWeb) {
+    Navigator.of(context).pushReplacementNamed(Home.routeName, arguments: {});
+    final mediaQuery = MediaQuery.of(context);
+    final widthScreen = (mediaQuery.size.width);
+    final heightScreen = (mediaQuery.size.height - mediaQuery.padding.top);
+    // set up the AlertDialog
+    AlertDialog genderPage = AlertDialog(
+      content: Container(
+        width: widthScreen * 0.4,
+        height: heightScreen * 0.73,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(Radius.circular(32.0)),
+        ),
+        child: const AboutYou(),
+      ),
+    );
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return genderPage;
+      },
+    );
+  } else {
+    Navigator.of(context)
+        .pushReplacementNamed(AboutYou.routeName, arguments: {});
+  }
 }
 
 /// resetPass Function
@@ -198,6 +219,7 @@ Future<void> resetUsername(emailController, context) async {
   }
   (kIsWeb) ? null : showSnackBar('You will recieve an email soon', context);
 }
+
 /// submitInterest Function
 ///this function takes the [interest] and the [context] of the page and send the interest to the controller and check for the result to show the error
 Future<void> submitInterest(List<String> list, context) async {
