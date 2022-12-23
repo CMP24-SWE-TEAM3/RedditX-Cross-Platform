@@ -1,7 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter/material.dart';
 import 'package:search_project/controllers/search_controller.dart';
-//import 'package:mocktail/mocktail.dart';
 import 'package:search_project/models/search_model.dart';
 
 void main() {
@@ -10,6 +9,10 @@ void main() {
 //stup method will run before each and every test
   setUp(() {
     sut = SearchController();
+    peoplesListData = peoplesListDataMock;
+    postsListData = postsListDataMock;
+    commentssListData = commentssListDataMock;
+    communitiesListData = communitiesListDataMock;
   });
   test('initial values are correct', () {
     expect(sut.isFocused, false);
@@ -248,7 +251,7 @@ void main() {
       expect(sut.enabledBorderColor(), Colors.blue);
     });
   });
-  group('test calculate age function and formatting it', () {
+   group('test calculate age function and formatting it', () {
     test('Time is more than or equal one year', () {
       sut.isWeb = true;
       String shownDate = sut.calculateAge(DateTime(2020, 10, 30));
@@ -261,43 +264,44 @@ void main() {
 
     test('Time is more than or equal one month and less than one year', () {
       sut.isWeb = true;
-      String shownDate = sut.calculateAge(DateTime(2021, 12, 30));
-      expect(shownDate, '10 months ago');
+      String shownDate = sut.calculateAge(DateTime(2022, 10, 1));
+      expect(shownDate, '2 months ago');
 
       sut.isWeb = false;
-      shownDate = sut.calculateAge(DateTime(2021, 12, 30));
-      expect(shownDate, '10mo');
+      shownDate = sut.calculateAge(DateTime(2022, 10, 1));
+      expect(shownDate, '2mo');
     });
 
     test('Time is more than or equal one day and less than one month', () {
       sut.isWeb = true;
-      String shownDate = sut.calculateAge(DateTime(2022, 11, 3));
-      expect(shownDate, '${DateTime.now().day - 3} days ago');
+      String shownDate = sut.calculateAge(DateTime(2022, 12, 1));
+      expect(shownDate, '${DateTime.now().day - 1} days ago');
 
       sut.isWeb = false;
-      shownDate = sut.calculateAge(DateTime(2022, 11, 3));
-      expect(shownDate, '${DateTime.now().day - 3}d');
+      shownDate = sut.calculateAge(DateTime(2022, 12, 1));
+      expect(shownDate, '${DateTime.now().day - 1}d');
     });
 
     test('Time is more than or equal one hour and less than one day', () {
       sut.isWeb = true;
-      String shownDate = sut.calculateAge(DateTime(2022, 11, 12, 12));
-      expect(shownDate, '${DateTime.now().hour - 12} hours ago');
+      String shownDate =
+          sut.calculateAge(DateTime(2022, 12, DateTime.now().day, 5));
+      expect(shownDate, '${DateTime.now().hour - 5} hours ago');
 
       sut.isWeb = false;
-      shownDate = sut.calculateAge(DateTime(2022, 11, 12, 12));
-      expect(shownDate, '${DateTime.now().hour - 12}h');
+      shownDate = sut.calculateAge(DateTime(2022, 12, DateTime.now().day, 5));
+      expect(shownDate, '${DateTime.now().hour - 5}h');
     });
 
     test('Time is more than or equal one minute and less than one hour', () {
       sut.isWeb = true;
-      String shownDate =
-          sut.calculateAge(DateTime(2022, 11, 12, DateTime.now().hour, 2));
+      String shownDate = sut.calculateAge(DateTime(DateTime.now().year,
+          DateTime.now().month, DateTime.now().day, DateTime.now().hour, 2));
       expect(shownDate, '${DateTime.now().minute - 2} minutes ago');
 
       sut.isWeb = false;
-      shownDate =
-          sut.calculateAge(DateTime(2022, 11, 12, DateTime.now().hour, 2));
+      shownDate = sut.calculateAge(DateTime(DateTime.now().year,
+          DateTime.now().month, DateTime.now().day, DateTime.now().hour, 2));
       expect(shownDate, '${DateTime.now().minute - 2}m');
     });
   });

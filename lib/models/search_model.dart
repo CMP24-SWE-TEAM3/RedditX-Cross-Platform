@@ -1,4 +1,4 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+///Data of person in search results
 class PersonInSearch {
   String userName;
   int karma;
@@ -19,9 +19,10 @@ class PersonInSearch {
   });
 }
 
+///List of users that will be filled with mock list or real data from the API
 List<PersonInSearch> peoplesListData = [];
-//dummy data to test
-//will be replaced with real data from the APIs
+
+///List of mock data for people
 List<PersonInSearch> peoplesListDataMock = [
   PersonInSearch(
     userName: 'UserName1',
@@ -89,8 +90,8 @@ List<PersonInSearch> peoplesListDataMock = [
   ),
 ];
 
-/////////////////////////
-//data of the in search results
+
+///Data of community in search results
 class CommunityInSearch {
   String name;
   int membersCount;
@@ -112,9 +113,10 @@ class CommunityInSearch {
   });
 }
 
-//dummy data to test
-//will be replaced with real data from the APIs
+///List of communities that will be filled with mock list or real data from the API
 List<CommunityInSearch> communitiesListData = [];
+
+///List of mock data for communities
 List<CommunityInSearch> communitiesListDataMock = [
   CommunityInSearch(
     nsfw: true,
@@ -166,6 +168,7 @@ List<CommunityInSearch> communitiesListDataMock = [
   ),
 ];
 
+///Data of post in search results
 class PostInSearch {
   String postText;
   String communityName;
@@ -197,7 +200,10 @@ class PostInSearch {
   });
 }
 
+///List of posts that will be filled with mock list or real data from the API
 List<PostInSearch> postsListData = [];
+
+///List of mock data for posts
 List<PostInSearch> postsListDataMock = [
   PostInSearch(
     textHTML: '',
@@ -267,6 +273,7 @@ List<PostInSearch> postsListDataMock = [
   ),
 ];
 
+///Data of comments in search results
 class CommentInSearch {
   PostInSearch postData;
   String userName;
@@ -284,7 +291,10 @@ class CommentInSearch {
   });
 }
 
+///List of comments that will be filled with mock list or real data from the API
 List<CommentInSearch> commentssListData = [];
+
+///List of mock data for comments
 List<CommentInSearch> commentssListDataMock = [
   CommentInSearch(
     postData: postsListData[0],
@@ -338,3 +348,16 @@ List<CommentInSearch> commentssListDataMock = [
     commentText: 'Elon Mask bought Twitter!',
   ),
 ];
+
+class SearchMockData {
+  List<CommentInSearch> commentssListData;
+  List<PostInSearch> postsListData;
+  List<CommunityInSearch> communitiesListData;
+  List<PersonInSearch> peoplesListData;
+  SearchMockData({
+    required this.commentssListData,
+    required this.postsListData,
+    required this.communitiesListData,
+    required this.peoplesListData,
+  });
+}
