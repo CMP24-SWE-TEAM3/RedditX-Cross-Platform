@@ -11,7 +11,7 @@ import 'Home/home_page.dart';
 import 'profile/profile_page.dart';
 // import 'addComment/add_comment.dart';
 import 'settings/setting_menu.dart';
-
+/// temphome
 class Home extends StatelessWidget {
   const Home({super.key});
   static const routeName = '/Home';
