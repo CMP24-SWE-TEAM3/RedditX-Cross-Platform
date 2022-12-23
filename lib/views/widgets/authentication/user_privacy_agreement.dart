@@ -17,7 +17,7 @@ class UserPrivacyAggreement extends StatelessWidget {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        style: Theme.of(context).textTheme.bodyText1,
+        style: Theme.of(context).textTheme.bodyLarge,
         children: <TextSpan>[
           const TextSpan(
             text: 'By continuing, you agree to our ',

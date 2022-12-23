@@ -23,7 +23,7 @@ class SearchScreenTwo extends StatelessWidget {
       /// closest DefaultTabController.
       child: Builder(
         builder: (BuildContext context) {
-          final TabController tabController = DefaultTabController.of(context)!;
+          final TabController tabController = DefaultTabController.of(context);
 
           ///To be called when the the tab changes
           tabController.addListener(

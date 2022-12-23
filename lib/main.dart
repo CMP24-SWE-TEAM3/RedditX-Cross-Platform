@@ -101,7 +101,7 @@ class MyApp extends StatelessWidget {
               : ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
                   .copyWith(secondary: Colors.lightBlue),
           textTheme: ThemeData.light().textTheme.copyWith(
-                bodyText1: const TextStyle(
+                bodyLarge: const TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
                 ),
