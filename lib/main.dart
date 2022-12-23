@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/controllers/drawer_view_model_controller.dart';
-import 'package:search_project/views/screens/drawers/drawers_home_screen.dart';
+import 'controllers/drawer_view_model_controller.dart';
+import 'views/screens/drawers/drawers_home_screen.dart';
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';

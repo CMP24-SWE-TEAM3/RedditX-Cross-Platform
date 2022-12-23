@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:search_project/controllers/home_controller.dart';
-import 'package:search_project/models/home_model.dart';
+import '../../../controllers/home_controller.dart';
+import '../../../models/home_model.dart';
 // ignore: unused_import
-import 'package:search_project/views/screens/temphome.dart';
-import 'package:search_project/views/widgets/community/mobile_post_classic.dart';
+import '../../../views/screens/temphome.dart';
+import '../../../views/widgets/community/mobile_post_classic.dart';
 
 import '../../widgets/Home/home_bar_mobile.dart';
 import '../../widgets/drawers/left_drawer.dart';

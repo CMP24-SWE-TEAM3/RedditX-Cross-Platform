@@ -1,8 +1,8 @@
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:search_project/controllers/settings_validations.dart';
-import 'package:search_project/models/user_model.dart';
+import '../controllers/settings_validations.dart';
+import '../models/user_model.dart';
 import '../methods/community/show_snack_bar.dart';
 import 'validations.dart';
 import '../models/settings_model.dart';

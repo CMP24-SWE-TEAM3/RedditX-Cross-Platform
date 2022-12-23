@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/controllers/profile_model_controller.dart';
-import 'package:search_project/views/screens/profile/profile_mobile_screen.dart';
+import '../../controllers/profile_model_controller.dart';
+import '../../views/screens/profile/profile_mobile_screen.dart';
 
 import '../../config/constants.dart';
 import '../../models/post_model.dart';

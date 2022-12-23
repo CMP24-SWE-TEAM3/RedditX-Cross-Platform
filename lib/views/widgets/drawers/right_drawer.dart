@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/controllers/drawer_view_model_controller.dart';
-import 'package:search_project/views/screens/create_community/create_community_screen.dart';
-import 'package:search_project/views/screens/profile/profile_mobile_screen.dart';
-import 'package:search_project/views/screens/profile/profile_saved_posts.dart';
-import 'package:search_project/views/screens/settings/setting_menu.dart';
+import '../../../controllers/drawer_view_model_controller.dart';
+import '../../../views/screens/create_community/create_community_screen.dart';
+import '../../../views/screens/profile/profile_mobile_screen.dart';
+import '../../../views/screens/profile/profile_saved_posts.dart';
+import '../../../views/screens/settings/setting_menu.dart';
 
 import '../../../models/authentication.dart';
 import '../../../models/user_model.dart';

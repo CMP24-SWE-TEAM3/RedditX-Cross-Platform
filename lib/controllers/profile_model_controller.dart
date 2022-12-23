@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:search_project/models/user_model.dart';
-import 'package:search_project/services/profile_services.dart';
+import '../models/user_model.dart';
+import '../services/profile_services.dart';
 
 import '../config/constants.dart';
 

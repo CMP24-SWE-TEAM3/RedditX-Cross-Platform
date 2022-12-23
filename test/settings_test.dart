@@ -1,9 +1,11 @@
+// ignore_for_file: avoid_relative_lib_imports
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
-import 'package:search_project/controllers/mobile_settings_view_controller.dart';
-import 'package:search_project/services/settings_service.dart';
-import 'package:search_project/controllers/settings_validations.dart';
+import '../lib/controllers/mobile_settings_view_controller.dart';
+import '../lib/services/settings_service.dart';
+import '../lib/controllers/settings_validations.dart';
 
 class MockSettingsService extends Mock implements SettingsService {}
 

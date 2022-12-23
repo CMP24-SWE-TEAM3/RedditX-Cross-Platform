@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
-import 'package:search_project/controllers/profile_model_controller.dart';
-import 'package:search_project/models/user_model.dart';
-import 'package:search_project/services/profile_services.dart';
-import 'package:search_project/styles/custom_icons.dart';
+import '../../../controllers/profile_model_controller.dart';
+import '../../../models/user_model.dart';
+import '../../../services/profile_services.dart';
+import '../../../styles/custom_icons.dart';
 
 import '../../widgets/community/mobile_post_classic.dart';
 

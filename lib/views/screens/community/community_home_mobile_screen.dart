@@ -2,7 +2,7 @@ import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/models/user_model.dart';
+import '../../../models/user_model.dart';
 
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';

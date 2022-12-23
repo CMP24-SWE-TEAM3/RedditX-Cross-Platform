@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
-import 'package:search_project/models/user_model.dart';
+import '../../../models/user_model.dart';
 import '../../../config/constants.dart';
 import '../../../models/post_model.dart';
 import 'mobile_post_bottom.dart';

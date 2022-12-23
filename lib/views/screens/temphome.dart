@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/views/screens/authentication/splash_screen.dart';
-import 'package:search_project/views/screens/community/community_home.dart';
-import 'package:search_project/views/screens/create_community/create_community_screen.dart';
-import 'package:search_project/views/screens/drawers/drawers_home_screen.dart';
+import 'authentication/splash_screen.dart';
+import 'community/community_home.dart';
+import 'create_community/create_community_screen.dart';
+import 'drawers/drawers_home_screen.dart';
 
 import '../../controllers/sign_in_controller.dart';
 import './search/search_screen_one.dart';

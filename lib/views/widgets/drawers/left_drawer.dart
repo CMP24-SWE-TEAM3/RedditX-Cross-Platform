@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/controllers/drawer_view_model_controller.dart';
-import 'package:search_project/views/screens/community/community_home.dart';
-import 'package:search_project/views/screens/create_community/create_community_screen.dart';
+import '../../../controllers/drawer_view_model_controller.dart';
+import '../../../views/screens/community/community_home.dart';
+import '../../../views/screens/create_community/create_community_screen.dart';
 
 import '../../../models/authentication.dart';
 import '../../../models/drawers_model.dart';

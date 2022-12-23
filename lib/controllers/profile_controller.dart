@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:search_project/config/constants.dart';
+import '../config/constants.dart';
 
 
 

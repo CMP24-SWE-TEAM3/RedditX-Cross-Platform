@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:search_project/models/settings_model.dart';
+import '../models/settings_model.dart';
 import 'authentication_submitions.dart';
 import 'validations.dart';
 

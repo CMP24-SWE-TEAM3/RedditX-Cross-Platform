@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:http/http.dart' as http;
-import 'package:search_project/models/user_model.dart';
+import '../models/user_model.dart';
 
 import '../config/constants.dart';
 import '../models/authentication.dart';

@@ -3,20 +3,13 @@ import '../../../views/screens/Home/home_page.dart';
 import '../../../views/screens/Popular/popular_page.dart';
 import '../../../views/screens/search/search_screen_one.dart';
 import '../../../models/user_model.dart';
-
-void displayDrawer(BuildContext context) {
-  Scaffold.of(context).openDrawer();
-}
-
-void displayEndDrawer(BuildContext context) {
-  Scaffold.of(context).openEndDrawer();
-}
+import '../../screens/temphome.dart';
 
 final items = ['🛖 Home', '↗ Popular'];
 String value = items[0];
 String? currentValue;
 
-AppBar buildHomeBar(text) {
+AppBar buildHomeBarWeb(text) {
   currentValue = text;
   if (currentValue != null) {
     if (currentValue == 'Home') {
@@ -30,9 +23,13 @@ AppBar buildHomeBar(text) {
     centerTitle: false,
     leading: Builder(builder: (context) {
       return IconButton(
-        key: const ValueKey('leftbannel_ToolBar'),
-        icon: const Icon(Icons.menu),
-        onPressed: () => Scaffold.of(context).openDrawer(),
+        key: const ValueKey('logo_ToolBar'),
+        icon: const ImageIcon(
+          NetworkImage(
+              'https://www.iconpacks.net/icons/2/free-reddit-logo-icon-2436-thumb.png'),
+        ),
+        onPressed: () => Navigator.of(context)
+            .pushReplacementNamed(Home.routeName, arguments: {}),
       );
     }),
     actions: [
@@ -57,13 +54,13 @@ AppBar buildHomeBar(text) {
       }),
       Builder(builder: (context) {
         return IconButton(
-        key: const ValueKey('search_ToolBar'),
-        onPressed: () {
-          Navigator.of(context)
-              .pushReplacementNamed(SearchScreenOne.routeName, arguments: {});
-        },
-        icon: const Icon(Icons.search),
-      );
+          key: const ValueKey('search_ToolBar'),
+          onPressed: () {
+            Navigator.of(context)
+                .pushReplacementNamed(SearchScreenOne.routeName, arguments: {});
+          },
+          icon: const Icon(Icons.search),
+        );
       }),
       IconButton(
         key: const ValueKey('add_ToolBar'),
@@ -76,9 +73,12 @@ AppBar buildHomeBar(text) {
         return IconButton(
           key: const ValueKey('righttbannel_ToolBar'),
           icon: CircleAvatar(
-            backgroundImage: NetworkImage(currentUser!.avatar!),
+            backgroundImage: (currentUser!.avatar == null)
+                ? const NetworkImage(
+                    'https://www.iconpacks.net/icons/2/free-reddit-logo-icon-2436-thumb.png')
+                : NetworkImage(currentUser!.avatar!),
           ),
-          onPressed: () => Scaffold.of(context).openEndDrawer(),
+          onPressed: null,
         );
       }),
     ],
