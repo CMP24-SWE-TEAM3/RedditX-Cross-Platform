@@ -6,6 +6,7 @@ import '../models/user_model.dart';
 import '../config/constants.dart';
 import '../models/authentication.dart';
 
+
 /// Get profile posts using API
 getAPIProfilePosts(String userName) async {
   String apiRoute = "/api/user/$userName/submitted";
@@ -14,8 +15,7 @@ getAPIProfilePosts(String userName) async {
     url,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      HttpHeaders.authorizationHeader:
-          ('Bearer ${userauthentication.uid}')
+      HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}')
     },
   ).then((value) {
     if (value.statusCode == 200) {
@@ -39,8 +39,7 @@ getAPIProfileAbout(String userName) async {
     url,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      HttpHeaders.authorizationHeader:
-          ('Bearer ${userauthentication.uid}')
+      HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}')
     },
   ).then((value) {
     if (value.statusCode == 200) {
@@ -60,8 +59,7 @@ getAPIProfileComments(String userName) async {
     url,
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
-      HttpHeaders.authorizationHeader:
-          ('Bearer ${userauthentication.uid}')
+      HttpHeaders.authorizationHeader: ('Bearer ${userauthentication.uid}')
     },
   ).then((value) {
     if (value.statusCode == 200) {

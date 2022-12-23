@@ -3,11 +3,12 @@ import 'package:provider/provider.dart';
 import 'authentication/splash_screen.dart';
 import 'community/community_home.dart';
 import 'create_community/create_community_screen.dart';
-import 'drawers/drawers_home_screen.dart';
+
 
 import '../../controllers/sign_in_controller.dart';
 import './search/search_screen_one.dart';
 import 'Home/home_page.dart';
+
 import 'profile/profile_page.dart';
 // import 'addComment/add_comment.dart';
 import 'settings/setting_menu.dart';
@@ -72,8 +73,7 @@ class Home extends StatelessWidget {
                 child: const Text("profile")),
             ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context)
-                      .pushNamed(DrawerHome.routeName, arguments: {});
+   
                 },
                 child: const Text("Drawers Home")),
           ],

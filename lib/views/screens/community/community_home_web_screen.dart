@@ -21,11 +21,16 @@ class CommunityWebScreen extends StatelessWidget {
   /// Context used in [defaultBottomSheet] and others
   final BuildContext context;
 
+  /// community name
   final String communityName;
+
+  /// Posts list
+  final List<dynamic> posts;
 
   /// Community web screen constructor
   const CommunityWebScreen(
       {super.key,
+      required this.posts,
       required this.context,
       required this.constraints,
       required this.communityName});
@@ -82,7 +87,8 @@ class CommunityWebScreen extends StatelessWidget {
                             ),
                             const SizedBox(height: 6),
                             Text(
-                              "${communityInfo['_id']}".replaceFirst("t5_", ""),
+                              "${communityInfo['_id'] ?? ""}"
+                                  .replaceFirst("t5_", ""),
                               style: const TextStyle(color: Colors.grey),
                             )
                           ],
@@ -469,6 +475,7 @@ class CommunityWebScreen extends StatelessWidget {
                                           return Container(
                                               color: whiteColor,
                                               child: WebPostCard(
+                                                posts: communityPostsList,
                                                 userName: (!iSMOCK)
                                                     ? "u/${communityPostsList[index]['userID']['_id']}"
                                                         .replaceFirst("t2_", "")

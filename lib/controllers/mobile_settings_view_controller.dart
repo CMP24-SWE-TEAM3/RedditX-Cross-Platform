@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../controllers/settings_validations.dart';
 import '../models/user_model.dart';
+
 import '../methods/community/show_snack_bar.dart';
+
 import 'validations.dart';
 import '../models/settings_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';

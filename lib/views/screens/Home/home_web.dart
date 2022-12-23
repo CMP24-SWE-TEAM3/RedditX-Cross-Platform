@@ -4,6 +4,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 
 import '../../../controllers/home_controller.dart';
 import '../../../models/home_model.dart';
+import '../../../models/user_model.dart';
 import '../../widgets/Home/home_bar_web.dart';
 import '../../widgets/community/mobile_post_classic.dart';
 
@@ -15,6 +16,7 @@ class HomeWeb extends StatefulWidget {
 }
 
 class _HomeWebState extends State<HomeWeb> {
+  
   final RefreshController refreshController =
       RefreshController(initialRefresh: true);
 
@@ -60,6 +62,7 @@ class _HomeWebState extends State<HomeWeb> {
                     context: context,
                     postPlace: 'home',
                     index: index,
+                    userName: currentUser!.username!,
                     posts: homePostsList,
                     // ignore: prefer_const_literals_to_create_immutables
                     voters: []);

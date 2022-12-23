@@ -3,7 +3,10 @@ import 'package:provider/provider.dart';
 import '../../../controllers/profile_controller.dart';
 import '../../../styles/custom_icons.dart';
 
+
+
 import '../../../models/user_model.dart';
+
 
 class ProfileComment extends StatelessWidget {
   final int index;
@@ -25,7 +28,7 @@ class ProfileComment extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                    Text(
-                    "${commentsPostTitles[index]}",
+                    "${(commentsPostTitles.isNotEmpty)?commentsPostTitles[index]:""}",
                     style: const TextStyle(fontSize: 15),
                   ),
                   Row(

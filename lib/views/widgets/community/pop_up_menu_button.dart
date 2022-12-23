@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../controllers/profile_controller.dart';
 import '../../../controllers/profile_model_controller.dart';
+import '../../../methods/community/show_snack_bar.dart';
 import '../../../models/user_model.dart';
 import '../../../controllers/community_controller.dart';
-import '../../../methods/community/show_snack_bar.dart';
+
+
 import '../../../styles/custom_icons.dart';
 
 /// Pop up menu

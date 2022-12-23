@@ -1,21 +1,34 @@
 import 'package:flutter/material.dart';
+
+
 import '../config/constants.dart';
+import '../models/post_model.dart';
 
 
 
 
 
-
+/// Profile controller class
 class ProfileProvider with ChangeNotifier {
+
+  /// Service for testing
+  final ProfileService profileService;
+
+  /// Constructor
+  ProfileProvider({required this.profileService});
+
+
   /// Index of tabs Posts,Comments and about in both [UserProfileMobileScreen] and [UserProfileWebScreen].
   int tabIndex = 0;
    bool mockData=iSMOCK;
+
 
   /// Toggle tab views: Posts& Comments & About
   void changeTab(int val) {
     tabIndex = val;
     notifyListeners();
   }
+
 
   /// calculating the age of posts from the DateTime they created at [createdAt]
   calculateAge(DateTime createdAt) {

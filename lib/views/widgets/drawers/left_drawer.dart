@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:search_project/models/post_model.dart';
+import 'package:search_project/models/user_model.dart';
 import '../../../controllers/drawer_view_model_controller.dart';
 import '../../../views/screens/community/community_home.dart';
 import '../../../views/screens/create_community/create_community_screen.dart';
@@ -78,7 +80,12 @@ Drawer leftDrawer(BuildContext context) {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => CommunityHome(
-                                            communitiesListLeftDrawer![i]!))),
+                                              userName: currentUser!.username!,
+                                              commName:
+                                                  communitiesListLeftDrawer![
+                                                      i]!,
+                                              posts: communityPostsList,
+                                            ))),
                                 child: ListTile(
                                   leading: const Icon(Icons.reddit),
                                   title: Text(communitiesListLeftDrawer![i]!
@@ -107,11 +114,16 @@ Drawer leftDrawer(BuildContext context) {
                                 i++)
                               InkWell(
                                 onTap: () => Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) => CommunityHome(
-                                            moderatedCommunitiesListLeftDrawer![
-                                                i]!))),
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CommunityHome(
+                                            userName: currentUser!.username!,
+                                            posts: communityPostsList,
+                                            commName:
+                                                moderatedCommunitiesListLeftDrawer![
+                                                    i]!,
+                                          )),
+                                ),
                                 child: ListTile(
                                   leading: const Icon(Icons.reddit),
                                   title: Text(

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 
 /// the boolean that checks the mock mode
-const bool iSMOCK = false;
-/// url for the back end
+const bool iSMOCK = true;
 const urlApi = "https://api.redditswe22.tech";
 /// for testing neglected after integration
 bool nsfw = true;

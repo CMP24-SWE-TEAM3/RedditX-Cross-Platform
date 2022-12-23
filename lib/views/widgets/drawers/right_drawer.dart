@@ -210,10 +210,12 @@ Drawer rightDrawer(BuildContext context) {
                     child: ListTile(
                       leading: const Icon(Icons.person_pin),
                       title: const Text("My Profile"),
-                      onTap: () => Navigator.push(context, MaterialPageRoute(builder: (context)=> ProfileMobileScreen(
+                      onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ProfileMobileScreen(
                                   userID: currentUser!.username!,
                                   context: context))),
-                      
                     ),
                   ),
                   InkWell(
@@ -231,7 +233,9 @@ Drawer rightDrawer(BuildContext context) {
                       onTap: () => Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => UserSavedPosts())),
+                              builder: (context) => UserSavedPosts(
+                                    userName: currentUser!.username!,
+                                  ))),
                     ),
                   ),
                 ],

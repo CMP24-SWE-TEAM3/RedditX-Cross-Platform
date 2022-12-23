@@ -7,13 +7,18 @@ import '../../../models/home_model.dart';
 import '../../../views/screens/temphome.dart';
 import '../../../views/widgets/community/mobile_post_classic.dart';
 
+
+
+
 import '../../widgets/Home/home_bar_mobile.dart';
-import '../../widgets/drawers/left_drawer.dart';
-import '../../widgets/drawers/right_drawer.dart';
+
+
 
 class HomeMobile extends StatefulWidget {
+    /// user name
+  final String userName;
   // ignore: prefer_const_constructors_in_immutables
-  HomeMobile({super.key});
+  HomeMobile({required this.userName,super.key});
 
   @override
   State<HomeMobile> createState() => _HomeMobileState();
@@ -58,6 +63,7 @@ class _HomeMobileState extends State<HomeMobile> {
             key: const ValueKey('list_Home_page'),
             itemBuilder: (context, index) {
               return MobilePostClassic(
+                userName: widget.userName,
                   // ignore: prefer_const_literals_to_create_immutables
                   postType: homePostsList[index]['type'],
                   context: context,
@@ -72,8 +78,7 @@ class _HomeMobileState extends State<HomeMobile> {
           ),
         ),
       ),
-      endDrawer: rightDrawer(context),
-      drawer: leftDrawer(context),
+     
     );
   }
 }

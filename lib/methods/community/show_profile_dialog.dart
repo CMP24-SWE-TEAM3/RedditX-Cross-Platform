@@ -2,10 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/profile_model_controller.dart';
-import '../../views/screens/profile/profile_mobile_screen.dart';
+
 
 import '../../config/constants.dart';
+
 import '../../models/post_model.dart';
+import '../../views/screens/profile/profile_page.dart';
 
 /// Show Profile Dialog when a user name text button pressed
 
@@ -97,7 +99,7 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
                           listen: false).getProfileAbout( communityPostsList[index]['userID']['_id']);
                           
                   // ignore: use_build_context_synchronously
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileMobileScreen(userID: communityPostsList[index]['userID']
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfilePage(userID: communityPostsList[index]['userID']
                                   ['_id'], context: context)));
                 },
                 child: Padding(

@@ -11,10 +11,13 @@ import '../../../controllers/profile_controller.dart';
 
 
 
+
 import '../../widgets/community/mobile_post_classic.dart';
 
 
+
 class ProfileMobileScreen extends StatefulWidget {
+
 
 
   /// Context used in [defaultBottomSheet] and others
@@ -76,6 +79,7 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                                 index: index,
                                 posts: profilePosts,
                                 voters: votersProfile,
+                                userName: widget.userID,
                               )
                           ],
                         ),

@@ -3,7 +3,9 @@ import '../models/user_model.dart';
 import '../models/community_model.dart';
 
 import '../config/constants.dart';
+
 import '../models/post_model.dart';
+
 import '../services/community_services.dart';
 
 class CommunityModelProvider with ChangeNotifier {
@@ -23,6 +25,7 @@ class CommunityModelProvider with ChangeNotifier {
       votersCommunity=votersCommunityAPI;
       notifyListeners();
     }
+    
     // print(communityPostsList);
   }
 

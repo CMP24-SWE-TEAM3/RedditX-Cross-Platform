@@ -12,10 +12,13 @@ import '../../widgets/community/mobile_post_classic.dart';
 
 // ignore: must_be_immutable
 class UserSavedPosts extends StatelessWidget {
+    /// user name
+  final String userName;
+
   RefreshController refreshController =
       RefreshController(initialRefresh: false);
 
-  UserSavedPosts({super.key});
+  UserSavedPosts({required this.userName,super.key});
 
   Future<void> onRefresh() async {
     // monitor network fetch
@@ -82,6 +85,7 @@ class UserSavedPosts extends StatelessWidget {
                               shrinkWrap: true,
                               itemBuilder: (context, index) =>
                                   MobilePostClassic(
+                                    userName: userName,
                                     postType: savedPosts[index]['type'],
                                     context: context,
                                     postPlace: "profile",

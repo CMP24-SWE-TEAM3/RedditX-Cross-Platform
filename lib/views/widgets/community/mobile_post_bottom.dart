@@ -9,9 +9,12 @@ import '../../../styles/colors.dart';
 import '../../../views/screens/addComment/add_comment.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
+
 import '../../../methods/community/share_bottom_sheet.dart';
 
+
 import '../../../styles/custom_icons.dart';
+
 
 ///  Shows the bottom part of mobile post
 class BottomPostMobile extends StatefulWidget {
@@ -21,9 +24,12 @@ class BottomPostMobile extends StatefulWidget {
   ///Posts
   final List<dynamic> posts;
 
-  /// voters
+  /// voters of post
 
   final List<dynamic> voters;
+
+  /// String user name
+  final String userName;
 
   /// Constructor of mobile bottom post widget
 
@@ -31,6 +37,7 @@ class BottomPostMobile extends StatefulWidget {
       {required this.index,
       required this.posts,
       required this.voters,
+      required this.userName,
       super.key});
 
   @override
@@ -61,7 +68,7 @@ class _BottomPostMobileState extends State<BottomPostMobile> {
                 onPressed: () async {
                   await Provider.of<ProfileModelProvider>(context,
                           listen: false)
-                      .getUserUpVotedPosts('t2_lotfy2');
+                      .getUserUpVotedPosts(widget.userName);
                   //await value2.getUserUpVotedPosts('t2_lotfy2');
                   ((upvotedPostsIDs
                           .contains(widget.posts[widget.index]['_id'])))
@@ -69,8 +76,8 @@ class _BottomPostMobileState extends State<BottomPostMobile> {
                           "t3_${widget.posts[widget.index]['_id']}", 0)
                       : value2.vote(
                           "t3_${widget.posts[widget.index]['_id']}", 1);
-                  value2.getUserUpVotedPosts('t2_lotfy2');
-                  await value2.getUserUpVotedPosts('t2_lotfy2');
+                  value2.getUserUpVotedPosts(widget.userName);
+                  await value2.getUserUpVotedPosts(widget.userName);
                   refresh();
                 },
                 icon: (iSMOCK)
@@ -93,7 +100,7 @@ class _BottomPostMobileState extends State<BottomPostMobile> {
                 onPressed: () async {
                   await Provider.of<ProfileModelProvider>(context,
                           listen: false)
-                      .getUserDownVotedPosts('t2_lotfy2');
+                      .getUserDownVotedPosts(widget.userName);
 
                   ((downvotedPostsIDs
                           .contains(widget.posts[widget.index]['_id'])))
@@ -101,7 +108,7 @@ class _BottomPostMobileState extends State<BottomPostMobile> {
                           "t3_${widget.posts[widget.index]['_id']}", 2)
                       : value2.vote(
                           "t3_${widget.posts[widget.index]['_id']}", -1);
-                  await value2.getUserDownVotedPosts('t2_lotfy2');
+                  await value2.getUserDownVotedPosts(widget.userName);
                   refresh();
                 },
                 icon: (iSMOCK)

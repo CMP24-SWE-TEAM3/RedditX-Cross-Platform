@@ -11,6 +11,7 @@ import '../../../methods/community/show_leave_community_dialog.dart';
 import '../../../methods/community/show_snack_bar.dart';
 import '../../../models/community_model.dart';
 import '../../../models/post_model.dart';
+
 import '../../../styles/colors.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -18,7 +19,6 @@ import '../../../styles/custom_icons.dart';
 import '../../widgets/community/mobile_post_card.dart';
 import '../../widgets/community/mobile_post_classic.dart';
 import 'dart:math' as math;
-
 
 /// Community mobile screen
 class CommunityMobileScreen extends StatelessWidget {
@@ -30,11 +30,14 @@ class CommunityMobileScreen extends StatelessWidget {
 
   final String communityName;
 
-  
+    /// user name
+  final String userName;
 
   /// Community mobile screen constructor
   const CommunityMobileScreen(
-      {super.key,
+      {
+        required this.userName,
+        super.key,
       required this.context,
       required this.constraints,
       required this.communityName});
@@ -124,13 +127,17 @@ class CommunityMobileScreen extends StatelessWidget {
                                 index++)
                               (value.postView == "classic")
                                   ? MobilePostClassic(
+                                    userName: userName,
                                       postType: communityPostsList[index]
                                           ['type'],
                                       context: context,
                                       postPlace: 'community',
                                       index: index,
-                                      posts: communityPostsList,voters: votersCommunity,)
+                                      posts: communityPostsList,
+                                      voters: votersCommunity,
+                                    )
                                   : MobilePostCard(
+                                    userName: userName,
                                       postType: communityPostsList[index]
                                           ['type'],
                                       index: index,
@@ -344,7 +351,7 @@ class CommunityMobileScreen extends StatelessWidget {
                                 width: 5,
                               ),
                               Text(
-                                "r/${communityInfo['_id']}"
+                                "r/${communityInfo['_id'] ?? ""}"
                                     .replaceFirst("t5_", ""),
                                 style: const TextStyle(
                                     fontSize: 15, color: whiteColor),

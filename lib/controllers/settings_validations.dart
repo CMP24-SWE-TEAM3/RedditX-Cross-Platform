@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../models/settings_model.dart';
 import 'authentication_submitions.dart';
 import 'validations.dart';

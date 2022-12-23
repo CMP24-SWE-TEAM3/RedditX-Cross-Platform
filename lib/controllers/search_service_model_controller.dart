@@ -1,6 +1,6 @@
 import '../config/constants.dart';
-import '../services/search_service.dart';
 import '../models/user_model.dart';
+import '../services/search_service.dart';
 import '../models/search_model.dart';
 
 ///Function that uses the returned data from API to fill List of posts
