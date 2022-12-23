@@ -100,6 +100,6 @@ class SettingsServiceModelController {
   }
 }
 
-///instance of the service controller
+///instance of the settings service model controller
 SettingsServiceModelController settingsServiceModelController =
     SettingsServiceModelController();

@@ -17,11 +17,17 @@ class ListTileCustom extends StatelessWidget {
       required this.enble,
       this.onTap})
       : super(key: key);
+      ///settings list tile icon in leading
   Icon ico;
+      ///settings list tile text
   String? text;
+      ///settings list tile subtext
   String? subtitle = " ";
+      ///settings list tile boolean selector
   Future<bool?> selector;
+      ///settings list tile boolean enabling
   Future<bool?> enble;
+      ///settings list tile onTab function to be executed
   Function(bool)? onTap = (_) {};
   @override
   Widget build(BuildContext context) {
@@ -83,7 +89,7 @@ class SettingsTileButtomSheet extends StatelessWidget {
       },
     );
   }
-
+///switch account buttom sheet 
   Future<dynamic> switchAccountButtomSheet(BuildContext context) {
     return showModalBottomSheet(
       constraints:
@@ -115,10 +121,12 @@ class SettingsTileButtomSheet extends StatelessWidget {
   }
 }
 
-///a general settings list tile
+///a general settings list tile, mainly used for navigation
 class SettingsListTile extends StatelessWidget {
   SettingsListTile({super.key, this.title, this.ico, this.onTab});
+  ///settings list tile title
   String? title;
+  ///settings list tile icon
   Icon? ico;
   // ignore: prefer_typing_uninitialized_variables
   var onTab;
@@ -137,8 +145,11 @@ class SettingsListTile extends StatelessWidget {
 class ListTileURL extends StatelessWidget {
   ListTileURL(
       {super.key, required this.title, required this.ico, required this.url});
+  ///list tile URL title
   String? title;
+  ///list tile URL's url 
   String url;
+  ///list tile URL icon
   Icon? ico;
   @override
   Widget build(BuildContext context) {

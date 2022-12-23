@@ -8,12 +8,12 @@ import '../authentication/sign_up_page.dart';
 import '../../screens/settings/account_setting_screen.dart';
 import '../../widgets/settings/list_tiles_widgets.dart';
 import '../../widgets/settings/setting_label_widget.dart';
-
+  ///The main menu screen for settings 
 class SettingsHomePage extends StatelessWidget {
+  ///maim screen menu route name
   static const routeName = '/Settings';
+  ///maim screen menu title
   final String title = "Settings";
-
-  ///The main menu for settings
   const SettingsHomePage({super.key});
   @override
   Widget build(BuildContext context) {
