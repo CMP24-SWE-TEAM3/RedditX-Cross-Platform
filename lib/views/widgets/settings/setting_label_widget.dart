@@ -7,6 +7,7 @@ class SettingsLabel extends StatelessWidget {
     super.key,
     this.title,
   });
+  ///settings list tile
   String? title = "";
   @override
   Widget build(BuildContext context) {

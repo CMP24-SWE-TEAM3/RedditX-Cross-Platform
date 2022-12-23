@@ -7,15 +7,17 @@ import 'package:search_project/views/screens/create_community/create_community_s
 import '../../../models/authentication.dart';
 import '../../../models/drawers_model.dart';
 import '../../screens/authentication/sign_up_page.dart';
-
+///left drawer widget
 Drawer leftDrawer(BuildContext context) {
+  ///list of open status of expansion list tiles
   List<bool> isopen =
       Provider.of<DrawersViewModelController>(context).expandIsOpen;
   return Drawer(
     child: Column(
       children: [
         (!userauthentication.isSignedIn)
-            ? Column(
+            //guest mode
+            ? Column( 
                 children: [
                   const Divider(
                     height: 20,
@@ -51,6 +53,7 @@ Drawer leftDrawer(BuildContext context) {
                   ),
                 ],
               )
+              //logged in mode
             : Column(
                 children: [
                   const Divider(

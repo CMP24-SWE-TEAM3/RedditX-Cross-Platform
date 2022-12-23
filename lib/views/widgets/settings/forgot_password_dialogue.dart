@@ -9,7 +9,9 @@ import 'forgot_username_dialogue.dart';
 
 ///dialogue for forgot password
 dialogBuilder(BuildContext context) {
+  ///text editing Controller for user Name in Forgot password screen
   final TextEditingController userNameForgot = TextEditingController();
+  ///text editing Controller for user email in Forgot password screen
   final TextEditingController emailForgot = TextEditingController();
 
   return showDialog(

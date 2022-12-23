@@ -8,6 +8,7 @@ import '../authentication/email_me_button.dart';
 
 ///dialogue for forgot username
 dialogBuilderForgotUsername(BuildContext context) {
+  ///text editing Controller for user email in Forgot username screen
   final TextEditingController emailForgot = TextEditingController();
 
   return showDialog(

@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import '../services/create_community_service.dart';
 
-///create community service model controller
+///createCommunity service model controller that communicates with model and service
 class CreateCommunityServiceModelController {
   ///invokes create community service
   createCommunityServiceController(
@@ -21,6 +21,6 @@ class CreateCommunityServiceModelController {
     return -1;
   }
 }
-
+///an instance of Create Community Service Model Controller 
 CreateCommunityServiceModelController createCommunityServiceModelController =
     CreateCommunityServiceModelController();

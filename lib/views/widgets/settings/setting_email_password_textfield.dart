@@ -7,8 +7,9 @@ class UserNameText extends StatelessWidget {
     required this.userNameController,
     this.errorUserNameText,
   }) : super(key: key);
-
+///username text editing controller 
   final TextEditingController userNameController;
+///username text editing error message 
   final String? errorUserNameText;
 
   @override
@@ -42,8 +43,9 @@ class EmailText extends StatelessWidget {
     required this.emailController,
     required this.errorEmailText,
   }) : super(key: key);
-
+///email text editing controller 
   final TextEditingController emailController;
+///email text editing error message 
   final String? errorEmailText;
 
   @override
@@ -82,9 +84,11 @@ class PasswordText extends StatelessWidget {
     required this.labeling,
     this.errorPasswordText,
   }) : super(key: key);
-
+///password lable
   final String? labeling;
+///password text editing controller
   final TextEditingController passwordController;
+///password text editing error message
   final String? errorPasswordText;
 
   @override
