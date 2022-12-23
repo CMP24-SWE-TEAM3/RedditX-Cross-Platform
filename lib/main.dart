@@ -1,8 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/controllers/drawer_view_model_controller.dart';
-import 'package:search_project/views/screens/drawers/drawers_home_screen.dart';
+
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
@@ -10,8 +9,7 @@ import 'controllers/create_community_controller.dart';
 import 'controllers/home_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
-import 'views/screens/Home/home_page.dart';
-// import 'views/screens/addComment/add_comment.dart';
+
 import 'views/screens/Popular/popular_page.dart';
 import 'views/screens/create_community/create_community_screen.dart';
 import 'views/screens/profile/profile_page.dart';
@@ -28,7 +26,7 @@ import 'views/screens/authentication/choose_profilepicture.dart';
 import 'views/screens/authentication/choose_username.dart';
 import 'views/screens/authentication/email_login.dart';
 import 'views/screens/authentication/email_signup.dart';
-import 'views/screens/authentication/email_signup_w.dart';
+
 import 'views/screens/authentication/email_signup_w_2.dart';
 import 'views/screens/authentication/forget_password.dart';
 import 'views/screens/authentication/forget_username.dart';
@@ -41,7 +39,7 @@ import 'views/screens/settings/setting_menu.dart';
 import './views/screens/settings/change_password_screen.dart';
 import './views/screens/settings/manage_emails.dart';
 import './views/screens/settings/update_email_screen.dart';
-import 'views/screens/temphome.dart';
+
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
@@ -59,13 +57,21 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => ProfileProvider()),
-        ChangeNotifierProvider(create: ((context) => ProfileModelProvider())),
+        ChangeNotifierProvider(
+            create: (context) =>
+                ProfileProvider(profileService: ProfileService())),
+        ChangeNotifierProvider(
+            create: ((context) => ProfileModelProvider()
+              ..getProfileAbout("t2_hamada")
+              ..getProfileComments("t2_hamada")
+              ..getProfilePosts("t2_hamada")
+              ..getUserSavedPosts()
+              ..getUserUpVotedPosts('t2_hamada'))),
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
-              ..getCommunityPosts("t5_imagePro45", "hot", [], 2, 40)
+              ..getCommunityPosts("t5_imagePro235", "hot", [], 2, 40)
               ..getCommunityAbout("t5_imagePro235")
               ..getCommunityInfo("t5_imagePro235")
               ..getCommunityFlairs("t5_imagePro235")),
@@ -82,9 +88,7 @@ class MyApp extends StatelessWidget {
           create: (context) => CreateCommunityViewModelController(),
         ),
         ChangeNotifierProvider(create: (context) => HomeController()),
-        ChangeNotifierProvider(
-          create: (context) => DrawersViewModelController(),
-        ),
+
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -108,12 +112,18 @@ class MyApp extends StatelessWidget {
               ),
         ),
         initialRoute: '/',
-        home: (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+        home:
+            //CommunityHome(commName: 't5_imagePro45',userName: 't2_hamada',posts: communityPostsList,),
+            ProfilePage(
+          userID: 't2_hamada',
+          context: context,
+        ),
+        //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
-          Home.routeName: (ctx) => const HomePage(),
+          //Home.routeName: (ctx) => const HomePage(),
           Popular.routeName: (ctx) => const Popular(),
-          HomePage.routeName: (ctx) => const HomePage(),
+          //HomePage.routeName: (ctx) => const HomePage(),
           SignUpPage.routeName: (ctx) => const SignUpPage(),
           EmailLogin.routeName: (ctx) => const EmailLogin(),
           EmailSignup.routeName: (ctx) => const EmailSignup(),
@@ -135,9 +145,8 @@ class MyApp extends StatelessWidget {
           UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
           ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
           CreateCommunityScreen.routeName: (context) => CreateCommunityScreen(),
-          ProfilePage.routeName: (context) => const ProfilePage(),
+          //ProfilePage.routeName: (context) => const ProfilePage(),
           // AddComment.routeName: (context) => AddComment(),
-          DrawerHome.routeName: (context) => const DrawerHome(),
         },
       ),
     );

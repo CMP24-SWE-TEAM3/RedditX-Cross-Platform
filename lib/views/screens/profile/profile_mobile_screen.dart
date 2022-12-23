@@ -1,20 +1,21 @@
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
-import 'package:search_project/controllers/profile_model_controller.dart';
-import 'package:search_project/models/user_model.dart';
 
-import 'package:search_project/views/widgets/profile/profile_comment.dart';
 
 import '../../../controllers/community_model_controller.dart';
 import '../../../controllers/profile_controller.dart';
 
 
 
+import '../../../controllers/profile_model_controller.dart';
+import '../../../models/user_model.dart';
 import '../../widgets/community/mobile_post_classic.dart';
+import '../../widgets/profile/profile_comment.dart';
 
 
 class ProfileMobileScreen extends StatefulWidget {
+
 
 
   /// Context used in [defaultBottomSheet] and others
@@ -76,6 +77,7 @@ class ProfileMobileScreenState extends State<ProfileMobileScreen> {
                                 index: index,
                                 posts: profilePosts,
                                 voters: votersProfile,
+                                userName: widget.userID,
                               )
                           ],
                         ),

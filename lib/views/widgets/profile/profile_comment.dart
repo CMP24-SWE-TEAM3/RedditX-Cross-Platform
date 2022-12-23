@@ -25,7 +25,7 @@ class ProfileComment extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                    Text(
-                    "${commentsPostTitles[index]}",
+                    "${(commentsPostTitles.isNotEmpty)?commentsPostTitles[index]:""}",
                     style: const TextStyle(fontSize: 15),
                   ),
                   Row(

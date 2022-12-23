@@ -24,13 +24,16 @@ class MobilePostCard extends StatelessWidget {
   /// Posts
   final List<dynamic>posts;
 
-  /// Voters
+  /// Voters of post
   
   final List<dynamic>voters;
 
+  /// user name
+  final String userName;
+
   /// Post card constructor
   const MobilePostCard(
-      {required this.index, required this.postType,required this.posts,required this.voters, super.key});
+      {required this.index, required this.postType,required this.posts,required this.voters,required this.userName, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -172,6 +175,7 @@ class MobilePostCard extends StatelessWidget {
                 index: index,
                 posts: posts,
                 voters: voters,
+                userName: userName,
               ),
             ),
             const Divider()

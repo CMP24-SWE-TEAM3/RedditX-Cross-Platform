@@ -28,8 +28,6 @@ getAPICommunityPosts(String communityName, sortType) async {
         votersCommunityAPI.add(communityPostsListAPI[i]['voters']);
       }
     } else {
-
-      // print(value.statusCode);
       communityPostsListAPI = [];
       votersProfileAPI = [];
     }

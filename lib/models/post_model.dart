@@ -512,3 +512,12 @@ class CommunityService {
     return testpostsListMock;
   }
 }
+
+
+class ProfileService {
+  List<PostModel> testProfilePosts = postsListMock;
+  Future<List<PostModel>> getPosts() async {
+    await Future.delayed(const Duration(seconds: 1));
+    return testProfilePosts;
+  }
+}

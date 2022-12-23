@@ -23,6 +23,7 @@ class CommunityModelProvider with ChangeNotifier {
       votersCommunity=votersCommunityAPI;
       notifyListeners();
     }
+    
     // print(communityPostsList);
   }
 

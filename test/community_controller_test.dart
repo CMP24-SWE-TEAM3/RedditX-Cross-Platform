@@ -33,13 +33,7 @@ void main() {
     expect(sut.joined, false);
     expect(sut.notificationIcon, Icons.notifications_outlined);
     expect(sut.postView, "card");
-    expect(
-        sut.isPostLiked, List.filled(communityPostsListMock.length, false, growable: true));
-    expect(sut.isPostDisliked,
-        List.filled(communityPostsListMock.length, false, growable: true));
-
-    expect(
-        sut.isPostSaved, List.filled(communityPostsListMock.length, false, growable: true));
+ 
     expect(sut.bottomSheetNotificationsIcons, [
       Icons.notifications_off_outlined,
       Icons.notifications,
@@ -108,14 +102,14 @@ void main() {
         'on pressing the community description in mobile screen, if isExpanded=true  ==> expandedHeight variable will be 400',
         () {
       sut.changeExpandedHight(false);
-      expect(sut.expandedHeight, 400);
+      expect(sut.expandedHeight, 450);
     });
 
     test(
         'on pressing the community description in mobile screen, if isExpanded=false  ==> expandedHeight variable will be 320',
         () {
       sut.changeExpandedHight(true);
-      expect(sut.expandedHeight, 320);
+      expect(sut.expandedHeight, 350);
     });
   });
 
@@ -135,37 +129,11 @@ void main() {
       await sut.communityService.getPosts();
       verify(() => sut.communityService.getPosts()).called(1);
     });
-    test(
-        'on pressing the upward button  ==> the isPostLiked variable will be true',
-        () {
-      sut.likePost(0);
-      expect(sut.isPostLiked[0], true);
-    });
 
-    test(
-        'on pressing the downward button  ==> the isPostDisLiked variable will be true',
-        () {
-      sut.disLikePost(0);
-      expect(sut.isPostDisliked[0], true);
-    });
+
   });
 
-  group('Save/Unsave posts works well:', () {
-    test(
-        'on pressing the save button  ==> the isPostSaved variable will be true',
-        () {
-      sut.saveUnsavePost(0);
-      expect(sut.isPostSaved[0], true);
-    });
-
-    test(
-        'on pressing the save button again ==> the isPostSaved variable will be false',
-        () {
-      sut.isPostSaved[0] = true;
-      sut.saveUnsavePost(0);
-      expect(sut.isPostSaved[0], false);
-    });
-  });
+ 
 
   group('Get posts:', () {
     test('Checking existence of posts list returned from getPosts function',

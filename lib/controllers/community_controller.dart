@@ -131,8 +131,8 @@ class CommunityProvider with ChangeNotifier {
   }
 
   /// Like a post of an [index]
-  void likePost(int index) {
-    int? votes = communityPostsListMock[index]['votesCount'];
+  void likePost(int index,List<dynamic>posts) {
+    int? votes = posts[index]['votesCount'];
     // Solves a problem of null safety
     if (votes != null) {
       if (isPostLiked[index]) {
@@ -147,13 +147,13 @@ class CommunityProvider with ChangeNotifier {
         isPostDisliked[index] = !isPostDisliked[index];
       }
     }
-    communityPostsListMock[index]['votesCount'] = votes;
+    posts[index]['votesCount'] = votes;
     notifyListeners();
   }
 
   /// Dislike a post of an [index]
-  void disLikePost(int index) {
-    int? votes = communityPostsListMock[index]['votesCount'];
+  void disLikePost(int index, List<dynamic> posts) {
+    int? votes = posts[index]['votesCount'];
     if (votes != null) {
       if (isPostDisliked[index]) {
         votes++;
@@ -167,7 +167,7 @@ class CommunityProvider with ChangeNotifier {
         isPostLiked[index] = !isPostLiked[index];
       }
     }
-    communityPostsListMock[index]['votesCount'] = votes;
+    posts[index]['votesCount'] = votes;
 
     notifyListeners();
   }

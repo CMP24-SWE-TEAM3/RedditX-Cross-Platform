@@ -31,6 +31,9 @@ class MobilePostClassic extends StatelessWidget {
   
   final List<dynamic>voters;
 
+  ///user name
+  final String userName;
+
   /// Mobile classic post constructor
   const MobilePostClassic(
       {super.key,
@@ -38,7 +41,9 @@ class MobilePostClassic extends StatelessWidget {
       required this.context,
       required this.postPlace,
       required this.index,
-      required this.posts,required this.voters});
+      required this.posts,
+      required this.userName,
+      required this.voters});
   @override
   Widget build(BuildContext context) {
     return InkWell(
@@ -197,6 +202,7 @@ class MobilePostClassic extends StatelessWidget {
                       },
                     ),
                   BottomPostMobile(
+                    userName: userName,
                     index: index,
                     posts: posts,
                     voters: voters,
