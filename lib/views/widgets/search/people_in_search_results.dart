@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../methods/circular_image_widget.dart';
+import '../../../methods/circular_omage_widget.dart';
 import 'follow_join_button_in_search_rsults.dart';
 import 'username_communityname.dart';
 

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:search_project/views/screens/add_post/add_post_screen_one.dart';
 import '../../../views/screens/Home/home_page.dart';
 import '../../../views/screens/Popular/popular_page.dart';
 import '../../../views/screens/search/search_screen_one.dart';
@@ -62,13 +63,17 @@ AppBar buildHomeBarWeb(text) {
           icon: const Icon(Icons.search),
         );
       }),
-      IconButton(
-        key: const ValueKey('add_ToolBar'),
-        onPressed: () {
-          // Routemaster.of(context).push('/add-post');
-        },
-        icon: const Icon(Icons.add),
-      ),
+      Builder(builder: (context) {
+        return IconButton(
+          key: const ValueKey('add_ToolBar'),
+          onPressed: () {
+            Navigator.of(context).pushReplacementNamed(
+                AddPostScreenOne.routeName,
+                arguments: {});
+          },
+          icon: const Icon(Icons.add),
+        );
+      }),
       Builder(builder: (context) {
         return IconButton(
           key: const ValueKey('righttbannel_ToolBar'),

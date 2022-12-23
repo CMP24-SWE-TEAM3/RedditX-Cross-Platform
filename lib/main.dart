@@ -1,6 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:search_project/controllers/add_post_controller.dart';
+import 'package:search_project/views/screens/add_post/add_post_screen_one.dart';
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
@@ -12,6 +14,8 @@ import 'controllers/sign_in_controller.dart';
 import 'models/user_model.dart';
 import 'views/screens/Home/home_page.dart';
 import 'views/screens/Popular/popular_page.dart';
+import 'views/screens/add_post/add_post_screen_three.dart';
+import 'views/screens/add_post/add_post_screen_two.dart';
 import 'views/screens/authentication/email_signup_w.dart';
 import 'views/screens/create_community/create_community_screen.dart';
 
@@ -71,6 +75,7 @@ class MyApp extends StatelessWidget {
               ..getUserSavedPosts()
               ..getUserUpVotedPosts('t2_hamada'))),
         ChangeNotifierProvider(create: ((context) => SignInController())),
+        ChangeNotifierProvider(create: ((context) => AddPostController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(
             create: (context) => CommunityModelProvider()
@@ -107,7 +112,7 @@ class MyApp extends StatelessWidget {
               : ColorScheme.fromSwatch(primarySwatch: Colors.deepOrange)
                   .copyWith(secondary: Colors.lightBlue),
           textTheme: ThemeData.light().textTheme.copyWith(
-                bodyText1: const TextStyle(
+                bodyLarge: const TextStyle(
                   color: Colors.grey,
                   fontSize: 12,
                 ),
@@ -148,6 +153,9 @@ class MyApp extends StatelessWidget {
           UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
           ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
           CreateCommunityScreen.routeName: (context) => CreateCommunityScreen(),
+          AddPostScreenOne.routeName: (context) => const AddPostScreenOne(),
+          AddPostScreenTwo.routeName: (context) => const AddPostScreenTwo(),
+          AddPostScreenThree.routeName: (context) => const AddPostScreenThree(),
           //ProfilePage.routeName: (context) => const ProfilePage(),
           // AddComment.routeName: (context) => AddComment(),
         },
