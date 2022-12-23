@@ -3,41 +3,49 @@ import '../models/user_model.dart';
 import '../services/search_service.dart';
 import '../models/search_model.dart';
 
-///Function that uses the returned data from API to fill List of posts
+///Function that uses the returned data from API or mock data to fill List of posts
 fillPostsList(String searchPhrase, String sort, String tab, int page) async {
   if (iSMOCK) {
+    ///if [iSMOCK] is true ==> fill the list with the mock data
     postsListData = postsListDataMock;
   } else {
-    ///The response of the API as map
+    //////if [iSMOCK] is false ==> fill the list with the response data from the API
+    ///The response of the API as list of results
     final res = await fetchSearchPosts(searchPhrase, sort, tab, page);
-    for (int i = 0; i < res.lenght; i++) {
+    for (int i = 0; i < res['results']!.length; i++) {
       postsListData.add(
         PostInSearch(
           attachedMedia: [],
-          commentsCount: res[i]['membersCnt'](res[i]['postComments'].length),
-          communityIcon: res[i]['communityID']['icon'],
-          communityName: res[i]['communityID']['_id'],
-          createdAt: DateTime.parse(res[i]['createdAt']),
-          flairText: res[i]['flairText'],
-          nsfw: res[i]['nsfw'],
-          postText: '',
-          spoiler: res[i]['spoiler'],
-          userName: res[i]['userID']['_id'],
-          votesCount: res[i]['membersCnt'](res[i]['votesCount']),
-          textHTML: res[i]['textHTML'],
-          postType: res[i]['type'],
+          commentsCount: res['results']![i]['postComments'].length,
+          communityIcon: res['results']![i]['communityID'] != null
+              ? res['results']![i]['communityID']['icon']
+              : 'default-icon.jpg',
+          communityName: res['results']![i]['communityID'] != null
+              ? res['results']![i]['communityID']['_id']
+              : 'community1',
+          createdAt: DateTime.parse(res['results']![i]['createdAt']),
+          flairText: res['results']![i]['flairText'] ?? '',
+          nsfw: res['results']![i]['nsfw'],
+          postText: res['results']![i]['textHTML'],
+          spoiler: res['results']![i]['spoiler'],
+          userName: res['results']![i]['userID']['_id'],
+          votesCount: res['results']![i]['votesCount'],
+          textHTML: res['results']![i]['textHTML'],
+          postType: res['results']![i]['type'],
         ),
       );
     }
   }
 }
 
-///Function that uses the returned data from API to fill List of comments
+///Function that uses the returned data from API or mock data to fill List of comments
 fillCommentsList(String searchPhrase, String sort, String tab, int page) async {
   if (iSMOCK) {
+    ///if [iSMOCK] is true ==> fill the list with the mock data
     commentssListData = commentssListDataMock;
   } else {
-    ///The response of the API as map
+    //////if [iSMOCK] is false ==> fill the list with the response data from the API
+    ///The response of the API as list of results
     final res = await fetchSearchComments(searchPhrase, sort, tab, page);
     for (int i = 0; i < res.length; i++) {
       commentssListData.add(
@@ -52,14 +60,14 @@ fillCommentsList(String searchPhrase, String sort, String tab, int page) async {
             flairText: '',
             createdAt: DateTime.parse(res[i]['postID']['createdAt']),
             votesCount: res[i]['postID']['votesCount'],
-            commentsCount: res[i]['postID']['commentsNum'],
+            commentsCount: res[i]['postID']['commentsNum'] ?? 1,
             attachedMedia: [],
             nsfw: true,
             spoiler: true,
           ),
-          userAvatar: res[i]['authorId']['avatar'],
+          userAvatar: 'default-icon.jpg',
           userName: res[i]['authorId']['_id'],
-          commentVotesCount: int.parse(res[i]['votesCount']),
+          commentVotesCount: res[i]['votesCount'],
           createdAt: DateTime.parse(res[i]['createdAt']),
           commentText: res[i]['textJSON'],
         ),
@@ -68,14 +76,17 @@ fillCommentsList(String searchPhrase, String sort, String tab, int page) async {
   }
 }
 
-///Function that uses the returned data from API to fill List of communities
+///Function that uses the returned data from API or mock data to fill List of communities
 fillCommunitiesList(
     String searchPhrase, String sort, String tab, int page) async {
   if (iSMOCK) {
+    ///if [iSMOCK] is true ==> fill the list with the mock data
     communitiesListData = communitiesListDataMock;
   } else {
+    //////if [iSMOCK] is false ==> fill the list with the response data from the API
+    ///The response of the API as list of results
     final res = await fetchSearchSR(searchPhrase, sort, tab, page);
-    for (int i = 0; i < res.lenght; i++) {
+    for (int i = 0; i < res.length; i++) {
       bool isJoined = false;
       final membersList = res[i]['membersCnt'];
       for (int j = 0; j < membersList.length; j++) {
@@ -97,11 +108,14 @@ fillCommunitiesList(
   }
 }
 
-///Function that uses the returned data from API to fill List of users
+///Function that uses the returned data from API or mock data to fill List of users
 fillUsersList(String searchPhrase, String sort, String tab, int page) async {
   if (iSMOCK) {
+    ///if [iSMOCK] is true ==> fill the list with the mock data
     peoplesListData = peoplesListDataMock;
   } else {
+    //////if [iSMOCK] is false ==> fill the list with the response data from the API
+    ///The response of the API as list of results
     final res = await fetchSearchusers(searchPhrase, sort, tab, page);
     for (int i = 0; i < res.lenght; i++) {
       peoplesListData.add(

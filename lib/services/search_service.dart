@@ -7,82 +7,81 @@ import '../../config/constants.dart';
 fetchSearchPosts(String searchPhrase, String sort, String tab, int page) async {
   String searchRequest = "/api/search/r?type=post&q=$searchPhrase";
   Uri url = Uri.parse(urlApi + searchRequest);
-  await http
+  ///call the API url
+  var res= await http
       .get(
     url,
-  )
-      .then(
-    (value) {
-      if (value.statusCode == 200) {
-        var responseData = json.decode(value.body) as Map<String, dynamic>;
-        return responseData['results'];
-      } else {
-        return [];
-      }
-    },
   );
+  if (res.statusCode == 200) {
+    ///if the response ended without errors==> return list of results
+    return json.decode(res.body) as Map<String, dynamic>;
+  } else {
+    ///if the response ends with error==> retyrn empty list
+    return null;
+  }
 }
 
 /// fetch Search Comments Function
 /// connect with the back end and sent the search word and recieve the Comments
 fetchSearchComments(
     String searchPhrase, String sort, String tab, int page) async {
+  ///prepare the API url
   String searchRequest = "/api/search/r?type=comment&q=$searchPhrase";
   Uri url = Uri.parse(urlApi + searchRequest);
-  await http
+  ///call the API url
+  var res=await http
       .get(
     url,
-  )
-      .then(
-    (value) {
-      if (value.statusCode == 200) {
-        var responseData = json.decode(value.body) as Map<String, dynamic>;
-        return responseData['results'];
-      } else {
-        return [];
-      }
-    },
   );
+  if (res.statusCode == 200) {
+    ///if the response ended without errors==> return list of results
+    var responseData = json.decode(res.body) as Map<String, dynamic>;
+    return responseData['results'];
+    
+  } else {
+    ///if the response ends with error==> retyrn empty list
+    return [];
+  }
 }
 
 /// fetch Search users Function
 /// connect with the back end and sent the search word and recieve the users
 fetchSearchusers(String searchPhrase, String sort, String tab, int page) async {
+  ///prepare the API url
   String searchRequest = "/api/search/r?type=user&q=$searchPhrase";
   Uri url = Uri.parse(urlApi + searchRequest);
-  await http
+  ///call the API url
+  var res=await http
       .get(
     url,
-  )
-      .then(
-    (value) {
-      if (value.statusCode == 200) {
-        var responseData = json.decode(value.body) as Map<String, dynamic>;
-        return responseData['results'];
-      } else {
-        return [];
-      }
-    },
   );
+  if (res.statusCode == 200) {
+    ///if the response ended without errors==> return list of results
+    var responseData = json.decode(res.body) as Map<String, dynamic>;
+    return responseData['results'];
+  } else {
+    ///if the response ends with error==> retyrn empty list
+    return [];
+  }
 }
 
 /// fetch Search communites Function
 /// connect with the back end and sent the search word and recieve the communites
 fetchSearchSR(String searchPhrase, String sort, String tab, int page) async {
+  ///prepare the API url
   String searchRequest = "/api/search/r?type=sr&q=$searchPhrase&sort=$sort";
   Uri url = Uri.parse(urlApi + searchRequest);
-  await http
+  ///call the API url
+  var res=await http
       .get(
     url,
-  )
-      .then(
-    (value) {
-      if (value.statusCode == 200) {
-        var responseData = json.decode(value.body) as Map<String, dynamic>;
-        return responseData['results'];
-      } else {
-        return [];
-      }
-    },
   );
+  if (res.statusCode == 200) {
+    ///if the response ended without errors==> return list of results
+    var responseData = json.decode(res.body) as Map<String, dynamic>;
+    return responseData['results'];
+  } else {
+    ///if the response ends with error==> retyrn empty list
+    return [];
+  }
 }
