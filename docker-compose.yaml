@@ -1,0 +1,7 @@
+version: '3.3'
+services:
+  cross:
+    build: ./
+    container_name: cross_container
+    ports:
+      - '5000:80'
