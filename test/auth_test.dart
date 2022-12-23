@@ -22,7 +22,7 @@ Future<void> main() async {
   final SignInController authService = SignInController();
 
   test('initial values are correct', () {
-    expect(authService.isSignedIn, false);
+    expect(authService.isSignedIn, true);
     expect(authService.hasError, false);
     expect(authService.errorCode, null);
     expect(authService.provider, null);

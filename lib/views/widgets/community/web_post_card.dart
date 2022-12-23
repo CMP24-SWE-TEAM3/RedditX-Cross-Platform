@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:numeral/numeral.dart';
 import 'package:provider/provider.dart';
-
 
 import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../controllers/community_model_controller.dart';
 import '../../../models/post_model.dart';
-import '../../../styles/colors.dart';
+
 import '../../../styles/custom_icons.dart';
 import 'web_post_bottom.dart';
 
@@ -25,7 +25,7 @@ class WebPostCard extends StatelessWidget {
   final BuildContext context;
 
   /// Shows when the post was posted
-  final DateTime dateTime;
+  final String dateTime;
 
   /// Shows the user name who posted
   final String userName;
@@ -57,30 +57,33 @@ class WebPostCard extends StatelessWidget {
                         children: [
                           IconButton(
                               onPressed: () {
-                                iSMOCK
-                                    ? value.likePost(index)
-                                    : value1.vote("", 1, index, context);
+                                // iSMOCK
+                                //     ? value.likePost(index)
+                                //     : value1.vote("", 1, index, context);
                               },
-                              icon: (value.isPostLiked[index])
-                                  ? const Icon(
-                                      CustomIcons.upBold,
-                                      color: Colors.deepOrange,
-                                    )
-                                  : const Icon(CustomIcons.upOutline)),
-                          Text(Numeral(postsList[index]['votesCount'])
+                              icon:
+                              //  const Icon(
+                              //         CustomIcons.upBold,
+                              //         color: Colors.deepOrange,
+                              //       )
+                                  const Icon(CustomIcons.upOutline)
+                                  ),
+                          Text(Numeral(
+                                  communityPostsList[index]['votesCount'] ?? 0)
                               .format(fractionDigits: 1)),
                           IconButton(
                               onPressed: () {
-                                iSMOCK
-                                    ? value.disLikePost(index)
-                                    : value1.vote("", -1, index, context);
+                                // iSMOCK
+                                //     ? value.disLikePost(index)
+                                //     : value1.vote("", -1, index, context);
                               },
-                              icon: (value.isPostDisliked[index])
-                                  ? const Icon(
-                                      CustomIcons.downBold,
-                                      color: blueColor,
-                                    )
-                                  : const Icon(CustomIcons.downOutline)),
+                              icon:
+                              //  const Icon(
+                              //         CustomIcons.downBold,
+                              //         color: blueColor,
+                              //       )
+                              //     : 
+                                  const Icon(CustomIcons.downOutline)),
                         ],
                       ),
                       Column(
@@ -100,7 +103,7 @@ class WebPostCard extends StatelessWidget {
                                 key: const ValueKey("username_button"),
                                 onTap: () {},
                                 child: Text(
-                                  "u/${postsList[index]['userID']!}"
+                                  "u/${communityPostsList[index]['userID']['_id']}"
                                       .replaceFirst("t2_", ""),
                                   style: const TextStyle(
                                       fontSize: 10.0, color: Colors.grey),
@@ -110,9 +113,9 @@ class WebPostCard extends StatelessWidget {
                                 width: 10,
                               ),
                               Text(
-                                 !iSMOCK
-                                    ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
-                                    : "${value.calculateAge(postsListMock[index].createdAt!)}",
+                                !iSMOCK
+                                    ? "${value.calculateAge(DateTime.parse(communityPostsList[index]['createdAt']))}"
+                                    : "${value.calculateAge(communityPostsListMock[index]['createdAt'])}",
                                 style: TextStyle(color: Colors.grey[600]),
                               ),
                             ],
@@ -125,9 +128,9 @@ class WebPostCard extends StatelessWidget {
                                 maxHeight: 100.0,
                               ),
                               child: Text(
-                                (postsList[index]['type'] == "text")
-                                    ? postsList[index]['text']
-                                    : postsList[index]['title'],
+                                (communityPostsList[index]['type'] == "text")
+                                    ? "${communityPostsList[index]['textHTML']}"
+                                    : communityPostsList[index]['title'],
                                 style: const TextStyle(fontSize: 17.0),
                                 maxLines: 3,
                                 overflow: TextOverflow.ellipsis,
@@ -136,24 +139,42 @@ class WebPostCard extends StatelessWidget {
                       )
                     ],
                   ),
-                  if (postsList[index]['type'] == "img")
+                  if (postType == 'linkWithImage')
+                    Html(
+                      data: communityPostsList[index]['textHTML'] ?? '',
+                      shrinkWrap: true,
+                      style: {
+                        '#': Style(
+                            maxLines: 3, textOverflow: TextOverflow.ellipsis)
+                      },
+                    ),
+                  if (communityPostsList[index]['type'] == "image")
                     Container(
                       height: 250,
                       width: double.infinity,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               fit: BoxFit.cover,
-                              image: NetworkImage(
-                                  postsList[index]['attachments'][0]))),
+                              image: NetworkImage((communityPostsList[index]
+                                              ['attachments']
+                                          .length ==
+                                      0)
+                                  ? "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"
+                                  : communityPostsList[index]['attachments']
+                                      [0]))),
                     ),
-                  if (postsList[index]['type'] == "link")
+                  if (communityPostsList[index]['type'] == "link")
                     SizedBox(
                       height: 90,
                       width: double.infinity,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 18),
                         child: LinkPreviewGenerator(
-                          link: postsList[index]['attachments'][0],
+                          link: (communityPostsList[index]['attachments']
+                                      .length ==
+                                  0)
+                              ? "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"
+                              : communityPostsList[index]['attachments'][0],
                           linkPreviewStyle: LinkPreviewStyle.small,
                           bodyMaxLines: 1,
                           bodyTextOverflow: TextOverflow.ellipsis,

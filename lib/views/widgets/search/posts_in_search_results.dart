@@ -3,7 +3,7 @@ import 'dart:math' as math;
 import 'package:float_column/float_column.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
+import 'package:flutter_html/flutter_html.dart';
 import 'community_icon_and_2lines_app.dart';
 import 'community_icon_and_2lines_web.dart';
 import 'upvotes_and_comments.dart';
@@ -36,94 +36,131 @@ class PostsSearchResult extends StatelessWidget {
             color: Colors.white,
             //[FloatColumn] arrange widgets if there is a picture to show
             //to make text wrap it
-            child: FloatColumn(
-              children: [
-                const SizedBox(
-                  height: 10,
-                ),
+            child: postData.postType != 'linkWithImage'
+                ? FloatColumn(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
 
-                ///Item of Float Column that will be float in the column
-                Floatable(
-                  ///Aalignment
-                  float: FCFloat.start,
-                  child: SizedBox(
-                    //MediaQuery.of(context).size.width is screen width
-                    width: postData.attachedMedia
-                            .isNotEmpty //is there a picture to show or not
-                        ? MediaQuery.of(context).size.width *
-                            0.69 //to free space for the picture
-                        : MediaQuery.of(context).size.width * 1,
+                      ///Item of Float Column that will be float in the column
+                      Floatable(
+                        ///Aalignment
+                        float: FCFloat.start,
+                        child: SizedBox(
+                          //MediaQuery.of(context).size.width is screen width
+                          width: postData.attachedMedia
+                                  .isNotEmpty //is there a picture to show or not
+                              ? MediaQuery.of(context).size.width *
+                                  0.69 //to free space for the picture
+                              : MediaQuery.of(context).size.width * 1,
 
-                    ///Community icon and the 2 lines next to it
-                    child: CommIconAndTwoLinesApp(
-                      postData: postData,
-                      shownDate: shownDate,
-                    ),
-                  ),
-                ),
-                postData.attachedMedia.isNotEmpty
-                    //if there is picture to show
-                    ? Floatable(
-                        ///Alignment
-                        float: FCFloat.right,
-                        padding: EdgeInsets.symmetric(
-                            //make the horizontal padding according to the screen width
-                            //MediaQuery.of(context).size.width is screen width
-                            horizontal:
-                                MediaQuery.of(context).size.width * 0.03),
-
-                        ///ClipRRect to clip the picture top borders to be little rounded
-                        child: ClipRRect(
-                          borderRadius: const BorderRadius.only(
-                            topLeft: Radius.circular(4),
-                            topRight: Radius.circular(4),
-                          ),
-                          child: Image(
-                            fit: BoxFit.fill,
-                            alignment: Alignment.topRight,
-                            width: MediaQuery.of(context).size.width * 0.24,
-                            height: MediaQuery.of(context).size.width * 0.24,
-                            image: NetworkImage(
-                              postData.attachedMedia[0],
-                            ),
+                          ///Community icon and the 2 lines next to it
+                          child: CommIconAndTwoLinesApp(
+                            postData: postData,
+                            shownDate: shownDate,
                           ),
                         ),
-                      )
-                    : Container(),
+                      ),
+                      postData.attachedMedia.isNotEmpty
+                          //if there is picture to show
+                          ? Floatable(
+                              ///Alignment
+                              float: FCFloat.right,
+                              padding: EdgeInsets.symmetric(
+                                  //make the horizontal padding according to the screen width
+                                  //MediaQuery.of(context).size.width is screen width
+                                  horizontal:
+                                      MediaQuery.of(context).size.width * 0.03),
 
-                ///[WrappableText]
-                ///Makes the post text wrap the image
-                WrappableText(
-                  key: const Key('post_content'),
-                  padding: const EdgeInsets.all(10),
-                  textAlign: TextAlign.start,
-                  text: TextSpan(
-                    ///Post content
-                    text: postData.postText,
-                    style: const TextStyle(
-                      color: Colors.black,
-                      fontWeight: FontWeight.w400,
-                      fontSize: 16,
-                    ),
+                              ///ClipRRect to clip the picture top borders to be little rounded
+                              child: ClipRRect(
+                                borderRadius: const BorderRadius.only(
+                                  topLeft: Radius.circular(4),
+                                  topRight: Radius.circular(4),
+                                ),
+                                child: Image(
+                                  fit: BoxFit.fill,
+                                  alignment: Alignment.topRight,
+                                  width:
+                                      MediaQuery.of(context).size.width * 0.24,
+                                  height:
+                                      MediaQuery.of(context).size.width * 0.24,
+                                  image: NetworkImage(
+                                    'https://api.redditswe22.tech/subreddits/files/${postData.attachedMedia[0]}',
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container(),
+
+                      ///[WrappableText]
+                      ///Makes the post text wrap the image
+                      WrappableText(
+                        key: const Key('post_content'),
+                        padding: const EdgeInsets.all(10),
+                        textAlign: TextAlign.start,
+                        text: TextSpan(
+                          ///Post content
+                          text: postData.postText,
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w400,
+                            fontSize: 16,
+                          ),
+                        ),
+                      ),
+                      //just space
+                      const SizedBox(
+                        height: 10,
+                      ),
+
+                      ///Upvotes and comments
+                      UpVotesAndComments(
+                        postData: postData,
+                        isPost: true,
+                      ),
+
+                      ///Horizontal line
+                      const Divider(
+                        color: Color.fromRGBO(135, 138, 140, 0.2),
+                      ),
+                    ],
+                  )
+                : Column(
+                    children: [
+                      const SizedBox(
+                        height: 10,
+                      ),
+                      CommIconAndTwoLinesApp(
+                        postData: postData,
+                        shownDate: shownDate,
+                      ),
+                      const SizedBox(height: 5),
+                      Html(
+                        data: postData.textHTML,
+                        shrinkWrap: true,
+                        style: {
+                          '#': Style(
+                              maxLines: 3, textOverflow: TextOverflow.ellipsis)
+                        },
+                      ),
+                      const SizedBox(
+                        height: 10,
+                      ),
+
+                      ///Upvotes and comments
+                      UpVotesAndComments(
+                        postData: postData,
+                        isPost: true,
+                      ),
+
+                      ///Horizontal line
+                      const Divider(
+                        color: Color.fromRGBO(135, 138, 140, 0.2),
+                      ),
+                    ],
                   ),
-                ),
-                //just space
-                const SizedBox(
-                  height: 10,
-                ),
-
-                ///Upvotes and comments
-                UpVotesAndComments(
-                  postData: postData,
-                  isPost: true,
-                ),
-
-                ///Horizontal line
-                const Divider(
-                  color: Color.fromRGBO(135, 138, 140, 0.2),
-                ),
-              ],
-            ),
           )
         /////////////////////////////WEB////////////////////////////
         : Container(
@@ -181,7 +218,7 @@ class PostsSearchResult extends StatelessWidget {
                                 shape: BoxShape.rectangle,
                                 image: DecorationImage(
                                   image: NetworkImage(
-                                    postData.attachedMedia[0],
+                                    'https://api.redditswe22.tech/subreddits/files/${postData.attachedMedia[0]}',
                                   ),
 
                                   ///Fits the photo inside the curcular box

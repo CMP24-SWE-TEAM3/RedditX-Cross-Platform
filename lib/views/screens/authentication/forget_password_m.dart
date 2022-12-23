@@ -1,7 +1,5 @@
-
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 
 import '../../../controllers/authentication_submitions.dart';
 import '../../../controllers/validations.dart';
@@ -24,15 +22,13 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
   TextEditingController userNameController = TextEditingController();
   String? errorUserNameText;
 
-
-
   void validate(userNameController, emailController, ctx) {
-    setState(() async {
+    setState(() {
       errorEmailText = emailValidation(emailController.text);
-      errorUserNameText = await usernameValidation(userNameController.text, ctx);
     });
 
-    if ((errorEmailText == null) && (errorUserNameText == null)) {
+    // errorUserNameText = await usernameValidation(userNameController.text, ctx);
+    if ((errorEmailText == null)) {
       resetPass(emailController, userNameController, ctx);
     }
   }
@@ -97,7 +93,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
                       heightScreen * 0.02,
                     ),
                     child: UserNameText(
-                      key: const ValueKey('username_forget_password_Page'),
+                        key: const ValueKey('username_forget_password_Page'),
                         userNameController: userNameController,
                         errorUserNameText: errorUserNameText),
                   ),
@@ -106,7 +102,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
                       heightScreen * 0.02,
                     ),
                     child: EmailText(
-                       key: const ValueKey('email_forget_password_Page'),
+                        key: const ValueKey('email_forget_password_Page'),
                         emailController: emailController,
                         errorEmailText: errorEmailText),
                   ),
@@ -166,7 +162,7 @@ class _ForgetPasswordMState extends State<ForgetPasswordM> {
 
   TextButton textbutton(txt, fuction) {
     return TextButton(
-       key: const ValueKey('forget_username_forget_password_Page'),
+      key: const ValueKey('forget_username_forget_password_Page'),
       style: ButtonStyle(
         foregroundColor:
             MaterialStatePropertyAll(Theme.of(context).colorScheme.primary),

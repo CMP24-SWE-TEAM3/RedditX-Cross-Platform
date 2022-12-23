@@ -1,17 +1,28 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:search_project/views/screens/community/community_home.dart';
+import 'controllers/drawer_view_model_controller.dart';
+import 'views/screens/drawers/drawers_home_screen.dart';
 
 import 'controllers/community_controller.dart';
 import 'controllers/community_model_controller.dart';
+import 'controllers/create_community_controller.dart';
+import 'controllers/home_controller.dart';
 import 'controllers/internet_controller.dart';
 import 'controllers/sign_in_controller.dart';
+import 'views/screens/Home/home_page.dart';
+// import 'views/screens/addComment/add_comment.dart';
+import 'views/screens/Popular/popular_page.dart';
+import 'views/screens/create_community/create_community_screen.dart';
+import 'views/screens/profile/profile_page.dart';
+
 import 'views/screens/search/search_screen_one.dart';
 import 'views/screens/search/search_screen_two.dart';
 import 'controllers/search_controller.dart';
 
 import 'models/post_model.dart';
+import 'controllers/profile_controller.dart';
+import 'controllers/profile_model_controller.dart';
 import 'views/screens/authentication/about_you.dart';
 import 'views/screens/authentication/choose_profilepicture.dart';
 import 'views/screens/authentication/choose_username.dart';
@@ -24,11 +35,18 @@ import 'views/screens/authentication/forget_username.dart';
 import 'views/screens/authentication/interests.dart';
 import 'views/screens/authentication/sign_up_page.dart';
 import 'views/screens/authentication/splash_screen.dart';
+import 'controllers/mobile_settings_view_controller.dart';
+import 'views/screens/settings/account_setting_screen.dart';
+import 'views/screens/settings/setting_menu.dart';
+import './views/screens/settings/change_password_screen.dart';
+import './views/screens/settings/manage_emails.dart';
+import './views/screens/settings/update_email_screen.dart';
 import 'views/screens/temphome.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
 
 void main() async {
   // initial the application
+
   WidgetsFlutterBinding.ensureInitialized();
   (kIsWeb) ? null : await Firebase.initializeApp();
   runApp(const MyApp());
@@ -41,22 +59,41 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
+        ChangeNotifierProvider(create: (context) => ProfileProvider()),
+        ChangeNotifierProvider(create: ((context) => ProfileModelProvider())),
         ChangeNotifierProvider(create: ((context) => SignInController())),
         ChangeNotifierProvider(create: ((context) => InternetController())),
         ChangeNotifierProvider(
-          create: (context) =>
-              CommunityModelProvider()..getPosts("At5_imagePro235", "hot", [], 2, 40)),
-      ChangeNotifierProvider(
-          create: (context) =>
-              CommunityProvider(communityService: CommunityService())),
+            create: (context) => CommunityModelProvider()
+              ..getCommunityPosts("t5_imagePro45", "hot", [], 2, 40)
+              ..getCommunityAbout("t5_imagePro235")
+              ..getCommunityInfo("t5_imagePro235")
+              ..getCommunityFlairs("t5_imagePro235")),
+        ChangeNotifierProvider(
+            create: (context) =>
+                CommunityProvider(communityService: CommunityService())),
         ChangeNotifierProvider(
           create: (context) => SearchController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => SettingsViewModelMobileController(),
+        ),
+        ChangeNotifierProvider(
+          create: (context) => CreateCommunityViewModelController(),
+        ),
+        ChangeNotifierProvider(create: (context) => HomeController()),
+        ChangeNotifierProvider(
+          create: (context) => DrawersViewModelController(),
         ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Reddit',
         theme: ThemeData(
+          appBarTheme: const AppBarTheme(
+            iconTheme: IconThemeData(color: Colors.black),
+            color: Colors.white, //<-- SEE HERE
+          ),
           scaffoldBackgroundColor: Colors.white,
           colorScheme: (kIsWeb)
               ? ColorScheme.fromSwatch(primarySwatch: Colors.blue)
@@ -72,8 +109,11 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: '/',
         home: (kIsWeb) ? const EmailSignupW() : const SplashScreen(),
+        //(kIsWeb) ? const EmailSignupW() : const SplashScreen(),
         routes: {
-          Home.routeName: (ctx) => const Home(),
+          Home.routeName: (ctx) => const HomePage(),
+          Popular.routeName: (ctx) => const Popular(),
+          HomePage.routeName: (ctx) => const HomePage(),
           SignUpPage.routeName: (ctx) => const SignUpPage(),
           EmailLogin.routeName: (ctx) => const EmailLogin(),
           EmailSignup.routeName: (ctx) => const EmailSignup(),
@@ -85,23 +125,21 @@ class MyApp extends StatelessWidget {
           ChooseProfilePicture.routeName: (ctx) => const ChooseProfilePicture(),
           AboutYou.routeName: (ctx) => const AboutYou(),
           SplashScreen.routeName: (ctx) => const SplashScreen(),
-          CommunityHome.routeName: (ctx) => const CommunityHome(),
+          // CommunityHome.routeName: (ctx) => const CommunityHome(),
           SearchScreenTwo.routeName: (ctx) => const SearchScreenTwo(),
           SearchScreenOne.routeName: (ctx) => const SearchScreenOne(),
+          SettingsHomePage.routeName: (context) => const SettingsHomePage(),
+          AccountSettingsScreen.routeName: (context) =>
+              const AccountSettingsScreen(),
+          ManageEmailsScreen.routeName: (context) => const ManageEmailsScreen(),
+          UpdateEmailAddress.routeName: (context) => UpdateEmailAddress(),
+          ChangePasswordScreen.routeName: (context) => ChangePasswordScreen(),
+          CreateCommunityScreen.routeName: (context) => CreateCommunityScreen(),
+          ProfilePage.routeName: (context) => const ProfilePage(),
+          // AddComment.routeName: (context) => AddComment(),
+          DrawerHome.routeName: (context) => const DrawerHome(),
         },
       ),
     );
   }
 }
-
-// class _HomePage extends StatelessWidget {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Home'),
-//       ),
-//       body: const Center(child: Text('Welcome to Reddit')),
-//     );
-//   }
-// }

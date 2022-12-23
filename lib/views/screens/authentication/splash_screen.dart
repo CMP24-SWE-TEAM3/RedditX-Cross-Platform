@@ -5,7 +5,9 @@ import 'package:provider/provider.dart';
 
 import '../../../controllers/sign_in_controller.dart';
 import '../temphome.dart';
+import 'email_signup.dart';
 import 'sign_up_page.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -32,12 +34,16 @@ class _SplashScreenState extends State<SplashScreen>
     //timer for 2 seconds
     Timer(
       const Duration(seconds: 3),
-      () {
+      () async {
         if (signInController.isSignedIn == false) {
-          Navigator.of(context)
-              .pushReplacementNamed(SignUpPage.routeName, arguments: {});
+          (kIsWeb)
+              ? Navigator.of(context)
+                  .pushReplacementNamed(EmailSignup.routeName, arguments: {})
+              : Navigator.of(context)
+                  .pushReplacementNamed(SignUpPage.routeName, arguments: {});
         } else {
-          signInController.getDataFromSharedPreferences();
+          await signInController.getDataFromSharedPreferences();
+          // ignore: use_build_context_synchronously
           Navigator.of(context)
               .pushReplacementNamed(Home.routeName, arguments: {});
         }

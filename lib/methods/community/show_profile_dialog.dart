@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../../controllers/profile_model_controller.dart';
+import '../../views/screens/profile/profile_mobile_screen.dart';
 
-
+import '../../config/constants.dart';
 import '../../models/post_model.dart';
-
 
 /// Show Profile Dialog when a user name text button pressed
 
@@ -19,11 +21,16 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
             const SizedBox(height: 20),
             CircleAvatar(
               radius: 45,
-              backgroundImage: NetworkImage(users[index].avatar),
+              backgroundImage:
+                  NetworkImage(communityPostsList[index]['userID']!['avatar']!),
             ),
             const SizedBox(height: 30),
             Text(
-              postsListMock[index].userID!,
+              (!iSMOCK)
+                  ? "u/${communityPostsList[index]['userID']['_id']}"
+                      .replaceFirst("t2_", "")
+                  : "u/${communityPostsList[index]['userID']['userID']}"
+                      .replaceFirst("t2_", ""),
               style: const TextStyle(
                   fontWeight: FontWeight.bold, color: Colors.black),
             ),
@@ -78,7 +85,21 @@ Future<void> showeProfileDialog(BuildContext context, int index) async {
               height: 20,
             ),
             InkWell(
-                onTap: () {},
+                onTap: () async{
+                  await Provider.of<ProfileModelProvider>(context, listen: false).getProfilePosts(
+ communityPostsList[index]['userID']['_id']);
+  
+  // ignore: use_build_context_synchronously
+  await Provider.of<ProfileModelProvider>(context,
+                          listen: false).getProfileComments( communityPostsList[index]['userID']['_id']);
+                           // ignore: use_build_context_synchronously
+                           await Provider.of<ProfileModelProvider>(context,
+                          listen: false).getProfileAbout( communityPostsList[index]['userID']['_id']);
+                          
+                  // ignore: use_build_context_synchronously
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ProfileMobileScreen(userID: communityPostsList[index]['userID']
+                                  ['_id'], context: context)));
+                },
                 child: Padding(
                   padding: const EdgeInsets.symmetric(vertical: 10),
                   child: Row(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-
 import '../../../config/constants.dart';
 import '../../../controllers/community_controller.dart';
 import '../../../methods/community/show_profile_dialog.dart';
@@ -21,13 +20,16 @@ class TopMobilePost extends StatelessWidget {
   final BuildContext context;
 
   /// Shows when the post was posted
-  final DateTime dateTime;
+  final String dateTime;
 
   /// Shows the user name who posted
   final String userName;
 
   /// Index of the post
   final int index;
+
+  ///Posts
+  final List<dynamic> posts;
 
   /// Constructor of mobile top post widget
   const TopMobilePost(
@@ -37,7 +39,8 @@ class TopMobilePost extends StatelessWidget {
       required this.dateTime,
       required this.userName,
       required this.index,
-      super.key});
+      super.key,
+      required this.posts});
   @override
   Widget build(BuildContext context) {
     if (postPlace == 'home') {
@@ -46,10 +49,9 @@ class TopMobilePost extends StatelessWidget {
           InkWell(
             radius: 20,
             onTap: () {},
-            child: const CircleAvatar(
+            child: CircleAvatar(
               radius: 25,
-              backgroundImage: NetworkImage(
-                  "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
+              backgroundImage: NetworkImage('https://api.redditswe22.tech/subreddits/files/${posts[index]['icon']}'),
             ),
           ),
           const SizedBox(
@@ -60,9 +62,9 @@ class TopMobilePost extends StatelessWidget {
             children: [
               InkWell(
                 onTap: () {},
-                child: const Text(
-                  "r/Painting",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                child: Text(
+                  posts[index]['userID']['_id'],
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               const SizedBox(height: 5),
@@ -73,19 +75,19 @@ class TopMobilePost extends StatelessWidget {
                       showeProfileDialog(context, index);
                     },
                     child: Text(
-                      "u/THEBNTG",
+                      posts[index]['userID']['_id'],
                       style: TextStyle(color: Colors.grey[800]),
                     ),
                   ),
                   Consumer<CommunityProvider>(
                     builder: (context, value, child) => Text(
                       !iSMOCK
-                          ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
-                          : "${value.calculateAge(postsListMock[index].createdAt!)}",
+                          ? "${value.calculateAge(DateTime.parse(posts[index]['createdAt']))}"
+                          : "${value.calculateAge(communityPostsListMock[index]['createdAt'])}",
                       style: TextStyle(color: Colors.grey[600]),
                     ),
                   ),
-                  if (postType == "img")
+                  if (postType == "image")
                     InkWell(
                       child: Text(
                         "  i.redd.it",
@@ -97,7 +99,10 @@ class TopMobilePost extends StatelessWidget {
             ],
           ),
           const Spacer(),
-          PopUpMenu(index: index),
+          PopUpMenu(
+            index: index,
+            posts: posts,
+          ),
         ],
       );
     }
@@ -111,7 +116,8 @@ class TopMobilePost extends StatelessWidget {
               showeProfileDialog(context, index);
             },
             child: Text(
-              "u/${postsList[index]['userID']!}".replaceFirst("t2_", ""),
+              "u/${communityPostsList[index]['userID']['_id']}"
+                  .replaceFirst("t2_", ""),
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
@@ -121,15 +127,13 @@ class TopMobilePost extends StatelessWidget {
           ),
           Consumer<CommunityProvider>(
             builder: (context, value, child) => Text(
-
-
               !iSMOCK
-                  ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
-                  : "${value.calculateAge(postsListMock[index].createdAt!)}",
+                  ? "${value.calculateAge(DateTime.parse(posts[index]['createdAt']))}"
+                  : "${value.calculateAge(communityPostsListMock[index]['createdAt'])}",
               style: TextStyle(color: Colors.grey[600]),
             ),
           ),
-          if (postType == "img")
+          if (postType == "image")
             InkWell(
               onTap: () {},
               child: Text(
@@ -140,39 +144,47 @@ class TopMobilePost extends StatelessWidget {
           const Spacer(),
           PopUpMenu(
             index: index,
+            posts: posts,
           ),
         ],
       );
     } else {
       return Row(
         children: [
-          const CircleAvatar(
+          CircleAvatar(
             radius: 10,
-            backgroundImage: NetworkImage(
-                "https://img.freepik.com/free-vector/romantic-floral-background_53876-89197.jpg?w=1060&t=st=1666372949~exp=1666373549~hmac=ceb57c29aa08ce88b7f2f80aeecfefb86c8399beff83859f981e28f8bb4e6c21"),
+            backgroundImage: NetworkImage('https://api.redditswe22.tech/subreddits/files/${posts[index]['icon']}'),
           ),
-          const SizedBox(
-            width: 4,
-          ),
+          // const SizedBox(
+          //   width: 4,
+          // ),
           Row(
             children: [
               InkWell(
                 onTap: () {},
-                child: const Text("r/AskAnySoftware"),
+                child: Text("${posts[index]['communityID']['_id']}"
+                    .replaceAll("t5_", "")),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              const SizedBox(
+                width: 5,
               ),
               Consumer<CommunityProvider>(
                 builder: (context, value, child) => Text(
-                  
-                       !iSMOCK
-                      ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
-                      : "${value.calculateAge(postsListMock[index].createdAt!)}",
+                  "${value.calculateAge(DateTime.parse(posts[index]['createdAt']))}",
                   style: TextStyle(color: Colors.grey[600]),
                 ),
               ),
-              const Text("  i.redd.it"),
-              const Spacer(),
+              if (postType == 'image')
+                InkWell(
+                  onTap: () {},
+                  child: const Text("  i.redd.it"),
+                ),
               PopUpMenu(
                 index: index,
+                posts: posts,
               ),
             ],
           )

@@ -34,12 +34,12 @@ void main() {
     expect(sut.notificationIcon, Icons.notifications_outlined);
     expect(sut.postView, "card");
     expect(
-        sut.isPostLiked, List.filled(postsListMock.length, false, growable: true));
+        sut.isPostLiked, List.filled(communityPostsListMock.length, false, growable: true));
     expect(sut.isPostDisliked,
-        List.filled(postsListMock.length, false, growable: true));
+        List.filled(communityPostsListMock.length, false, growable: true));
 
     expect(
-        sut.isPostSaved, List.filled(postsListMock.length, false, growable: true));
+        sut.isPostSaved, List.filled(communityPostsListMock.length, false, growable: true));
     expect(sut.bottomSheetNotificationsIcons, [
       Icons.notifications_off_outlined,
       Icons.notifications,

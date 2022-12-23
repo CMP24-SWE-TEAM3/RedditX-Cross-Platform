@@ -1,5 +1,7 @@
+
 import 'package:float_column/float_column.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 import 'package:link_preview_generator/link_preview_generator.dart';
 import 'package:provider/provider.dart';
 
@@ -19,9 +21,16 @@ class MobilePostCard extends StatelessWidget {
   /// Index of the post
   final int index;
 
+  /// Posts
+  final List<dynamic>posts;
+
+  /// Voters
+  
+  final List<dynamic>voters;
+
   /// Post card constructor
   const MobilePostCard(
-      {required this.index, required this.postType, super.key});
+      {required this.index, required this.postType,required this.posts,required this.voters, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +53,8 @@ class MobilePostCard extends StatelessWidget {
                           showeProfileDialog(context, index);
                         },
                         child: Text(
-                          "u/${postsList[index]['userID']!}".replaceFirst("t2_", ""),
+                          "u/${communityPostsList[index]['userID']['_id']}"
+                              .replaceFirst("t2_", ""),
                           style: TextStyle(
                               color: communityPostsGrey, fontSize: 15),
                         ),
@@ -55,14 +65,13 @@ class MobilePostCard extends StatelessWidget {
                       Consumer<CommunityProvider>(
                         builder: (context, value, child) => Text(
                           !iSMOCK
-                              ? "${value.calculateAge(DateTime.parse(postsList[index]['createdAt']))}"
-                              : "${value.calculateAge(postsListMock[index].createdAt!)}",
-                          // "  ${value.calculateAge(iSMOCK?postsList[index].createdAt: postsList[index]['createdAt']!)}",
+                              ? "${value.calculateAge(DateTime.parse(communityPostsList[index]['createdAt']))}"
+                              : "${value.calculateAge(communityPostsListMock[index]['createdAt'])}",
                           style: TextStyle(
                               color: communityPostsGrey, fontSize: 15),
                         ),
                       ),
-                      if (postType == 'img')
+                      if (postType == 'image')
                         InkWell(
                           onTap: () {},
                           child: Text(
@@ -72,24 +81,33 @@ class MobilePostCard extends StatelessWidget {
                           ),
                         ),
                       if (postType == "text") const Spacer(),
-                      PopUpMenu(index: index),
+                      PopUpMenu(index: index,posts: posts,),
                     ],
                   ),
-                  if (postType == "text")
+                  if (postType == "text" || postType == 'linkWithImage')
                     Padding(
                       padding: const EdgeInsets.only(top: 7),
                       child: Text(
-                        postsList[index]['title']!,
+                        communityPostsList[index]['title']!,
                         maxLines: 3,
                         overflow: TextOverflow.ellipsis,
                       ),
-                    )
-                  else
+                    ),
+                  if (postType == 'linkWithImage')
+                    Html(
+                      data: communityPostsList[index]['textHTML'] ?? '',
+                      shrinkWrap: true,
+                      style: {
+                        '#': Style(
+                            maxLines: 3, textOverflow: TextOverflow.ellipsis)
+                      },
+                    ),
+                  if (postType == "image" || postType == 'link')
                     FloatColumn(
                       children: [
                         Floatable(
                             float: FCFloat.end,
-                            padding: (postType == 'img')
+                            padding: (postType == 'image')
                                 ? const EdgeInsets.only(left: 8, right: 8)
                                 : const EdgeInsets.only(left: 0),
                             child: (postType == 'link')
@@ -100,8 +118,13 @@ class MobilePostCard extends StatelessWidget {
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 18),
                                       child: LinkPreviewGenerator(
-                                        link: postsList[index]['attachments']
-                                            [0],
+                                        link: (communityPostsList[index]
+                                                        ['attachments']
+                                                    .length ==
+                                                0)
+                                            ? "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"
+                                            : communityPostsList[index]
+                                                ['attachments'][0],
                                         linkPreviewStyle:
                                             LinkPreviewStyle.small,
                                         bodyMaxLines: 1,
@@ -110,7 +133,7 @@ class MobilePostCard extends StatelessWidget {
                                       ),
                                     ),
                                   )
-                                : (postType == 'img')
+                                : (postType == 'image')
                                     ? Container(
                                         height: 90,
                                         width: 120,
@@ -120,15 +143,24 @@ class MobilePostCard extends StatelessWidget {
                                             image: DecorationImage(
                                                 fit: BoxFit.cover,
                                                 image: NetworkImage(
-                                                    postsList[index]
-                                                        ['attachments'][0]))),
+                                                    (communityPostsList[index]
+                                                                    [
+                                                                    'attachments']
+                                                                .length ==
+                                                            0)
+                                                        ? "https://i.pinimg.com/564x/07/6b/62/076b62cf375a4d1a009d7e501fd8f451.jpg"
+                                                        : communityPostsList[
+                                                                    index]
+                                                                ['attachments']
+                                                            [0]))),
                                       )
                                     : const SizedBox(height: 20)),
                         WrappableText(
                             overflow: TextOverflow.ellipsis,
                             maxLines: 9,
                             padding: const EdgeInsets.symmetric(vertical: 7),
-                            text: TextSpan(text: postsList[index]['title']))
+                            text: TextSpan(
+                                text: communityPostsList[index]['title']))
                       ],
                     ),
                 ],
@@ -138,8 +170,11 @@ class MobilePostCard extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 5),
               child: BottomPostMobile(
                 index: index,
+                posts: posts,
+                voters: voters,
               ),
             ),
+            const Divider()
           ],
         ),
       ),

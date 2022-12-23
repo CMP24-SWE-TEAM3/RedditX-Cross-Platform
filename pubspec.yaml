@@ -34,6 +34,7 @@ dependencies:
   connectivity_plus: ^3.0.2
   cupertino_icons: ^1.0.2
   email_validator: ^2.1.17
+  dio: ^4.0.6
   firebase_auth: ^4.1.2
   firebase_core: ^2.2.0
   firebase_core_platform_interface: ^4.5.2
@@ -47,7 +48,6 @@ dependencies:
 
   permission_handler: ^10.2.0
 
-
   intl: ^0.17.0
 
   provider: ^6.0.4
@@ -57,9 +57,7 @@ dependencies:
 
   flutter_launcher_icons: ^0.10.0
 
-
   any_link_preview: ^2.0.9
-
 
   shared_preferences: ^2.0.15
   url_launcher: ^6.1.6
@@ -75,7 +73,11 @@ dependencies:
   test_cov_console: ^0.2.2
   dartdoc: ^6.1.1
 
-
+  settings_ui:
+  expandable: ^5.0.1
+  flutter_html: ^3.0.0-alpha.6
+  pull_to_refresh: ^2.0.0
+  hexcolor: ^3.0.1
 dev_dependencies:
   flutter_lints: ^2.0.0
   change_app_package_name: ^1.1.0
@@ -91,8 +93,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
+  # assets:
+  #   - images/a_dot_burr.jpeg
+  #   - images/a_dot_ham.jpeg
   assets:
-
     - assets/kareem.jpg
     - assets/images/logo.png
     - assets/images/loginEmote.png
@@ -101,19 +105,19 @@ flutter:
     - assets/images/email.png
     - assets/images/defaultuser.png
     - assets/images/web_signup_edge.jpg
-
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
+
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
+
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a
   # "family" key with the font family name, and a "fonts" key with a
   # list giving the asset and other descriptors for the font. For
   # example:
-  fonts:
 
+  fonts:
     - family: XButtonIcon
       fonts:
         - asset: assets/icons/xButton.ttf
@@ -135,3 +139,7 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+flutter_icons:
+  image_path: "assets/icons/app_icon.png"
+  android: true
+  ios: true

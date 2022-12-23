@@ -52,10 +52,10 @@ class SearchScreenTwo extends StatelessWidget {
                   builder: (context, constraint) => Column(
                     children: [
                       SizedBox(
-                        height: constraint.maxHeight * 0.07,
+                        height: constraint.maxHeight * 0.05,
                         child: Row(
                           children: [
-                            SizedBox(width: constraint.maxHeight * 0.03),
+                            SizedBox(width: constraint.maxHeight * 0.005),
                             TabBar(
                               labelColor: Colors.black, //selected label
                               unselectedLabelColor: Colors.grey,

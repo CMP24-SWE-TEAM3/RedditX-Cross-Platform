@@ -49,3 +49,6 @@ class UserAuthentication {
     required this.hasError,
   });
 }
+/// the instant of the UserAuthentication
+final UserAuthentication userauthentication =
+    UserAuthentication(isSignedIn: false, hasError: false);
