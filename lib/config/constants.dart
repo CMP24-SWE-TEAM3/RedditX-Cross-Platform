@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 
 /// the boolean that checks the mock mode
 const bool iSMOCK = false;
+/// url for the back end
 const urlApi = "https://api.redditswe22.tech";
+/// for testing neglected after integration
 bool nsfw = true;
+/// for coloring
 const MaterialColor white = MaterialColor(
   0xFFFFFFFF,
   <int, Color>{

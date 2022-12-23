@@ -7,7 +7,8 @@ import '../config/constants.dart';
 // import '../models/authentication.dart';
 import '../models/home_model.dart';
 
-/// Get posts of a specific community with a sort type
+/// getAPIHomePosts Function
+/// Get posts for home page with pagination by sending [page] and [limit] which represents the number of posts to be returned to the back end
 getAPIHomePosts(page, limit) async {
   String apiRoute = "/api/listing/posts/best?page=$page&limit=$limit";
   Uri url = Uri.parse(urlApi + apiRoute);

@@ -9,7 +9,7 @@ List<dynamic> homePostsListAPI = [];
 /// List of post model
 /// dummy data to test
 /// will be replaced with real data from the APIs
-
+/// for mocking
 List<Map<String, dynamic>> homePostsListMock = [
   {
     'id': "639ab04cd0388bee70b25ee3",

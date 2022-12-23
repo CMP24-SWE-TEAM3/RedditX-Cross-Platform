@@ -51,7 +51,7 @@ loginBareEmailAPI(String username, String password) async {
 }
 
 /// loginGoogleEmailAPI Function
-/// connect with the back end and sent the google token and recieve the token in the response
+/// connect with the back end and sent the google [token] and recieve the token in the response
 loginGoogleEmailAPI(String token) async {
   const String loginRequest = "/api/auth/login";
   Uri url = Uri.parse(urlApi + loginRequest);
@@ -70,7 +70,7 @@ loginGoogleEmailAPI(String token) async {
 }
 
 /// loginFacebookEmailAPI Function
-/// connect with the back end and sent the facebook token and recieve the token in the response
+/// connect with the back end and sent the facebook [token] and recieve the token in the response
 loginFacebookEmailAPI(String token) async {
   const String loginRequest = "/api/auth/login";
   Uri url = Uri.parse(urlApi + loginRequest);
@@ -111,7 +111,7 @@ signUpBareEmailAPI(email, username, password) async {
 }
 
 /// uploadUserPhoto Function
-/// connect with the back end and sent the [photo]
+/// connect with the back end and sent the [photo] and recieve the new name for the photo
 uploadUserPhoto(photo) async {
   const String photoRequest = "/api/user/me/upload-user-photo";
   String url = urlApi + photoRequest;
@@ -144,7 +144,7 @@ uploadUserPhoto(photo) async {
 }
 
 /// forgetuseranameApi Function
-/// connect with the back end and sent the forget user name request
+/// connect with the back end and sent the forget user name request by sending the [email] to the back end
 forgetuseranameApi(email) async {
   const String forgetuseranameRequest = "/api/auth/forget";
   Uri url = Uri.parse(urlApi + forgetuseranameRequest);
@@ -164,7 +164,7 @@ forgetuseranameApi(email) async {
 }
 
 /// forgetpassApi Function
-/// connect with the back end and sent the forget pass request
+/// connect with the back end and sent the forget pass request by sending the [email] and [username]
 forgetpassApi(email, username) async {
   const String forgetpassRequest = "/api/auth/forget";
   Uri url = Uri.parse(urlApi + forgetpassRequest);
@@ -185,7 +185,7 @@ forgetpassApi(email, username) async {
 }
 
 /// checkUserAvailabilityAPI Function
-/// connect with the back end and sent the [usernaem] recieve whether its used or not
+/// connect with the back end and sent the [username] recieve whether its used or not
 checkUserAvailabilityAPI(username) async {
   const String checkUserAvailabilityRequest =
       "/api/auth/username-available?username=";

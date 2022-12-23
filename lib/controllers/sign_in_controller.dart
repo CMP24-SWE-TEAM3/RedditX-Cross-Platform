@@ -90,7 +90,7 @@ class SignInController extends ChangeNotifier {
   }
 
   /// login Function
-  /// takes the username and password
+  /// takes the [username] and [password]
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future logIn(String username, String password) async {
@@ -120,7 +120,7 @@ class SignInController extends ChangeNotifier {
   }
 
   /// signUp Function
-  /// takes the username , password and email
+  /// takes the [username] , [password] and [email]
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future signUp(String email, String username, String password) async {
@@ -245,7 +245,7 @@ class SignInController extends ChangeNotifier {
   }
 
   /// checkUserAvailability Function
-  /// takes the username and checks whether it is taken or not
+  /// takes the [usernamechosen] and checks whether it is taken or not
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future<bool> checkUserAvailability(var usernamechosen) async {
@@ -285,7 +285,7 @@ class SignInController extends ChangeNotifier {
   }
 
   /// sendGender Function
-  /// takes the kind and send it
+  /// takes the [kind] and send it
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future sendGender(String kind) async {
@@ -307,7 +307,7 @@ class SignInController extends ChangeNotifier {
   }
 
   /// sendPhoto Function
-  /// takes the user image and send it
+  /// takes the user [imageFile] and send it
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future sendPhoto(File imageFile) async {
@@ -337,7 +337,7 @@ class SignInController extends ChangeNotifier {
   }
 
   /// sendUserName Function
-  /// takes the UserName and send it
+  /// takes the [username] and send it
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future sendUserName(String username) async {
@@ -359,7 +359,7 @@ class SignInController extends ChangeNotifier {
   }
 
   /// forgetPass Function
-  /// send forgetPassword request
+  /// send forgetPassword request by taking [email] and [username]
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future forgetPass(String email, String username) async {
@@ -382,7 +382,7 @@ class SignInController extends ChangeNotifier {
   }
 
   /// forgetUsername Function
-  /// send forgetUsername request
+  /// send forgetUsername request by taking the [email]
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future forgetUsername(String email) async {
@@ -405,7 +405,7 @@ class SignInController extends ChangeNotifier {
   }
 
   /// interest Function
-  /// takes the interest of the user and send it
+  /// takes the interest [list]  of the user and send it
   /// choose whether to use mock server or backend server
   /// set the error code and status in case of error
   Future interest(List<String> list) async {

@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import '../models/authentication.dart';
 
 /// addCommentApi Function
-/// connect with the back end and sent the [text] to make the comment on the post
+/// connect with the back end and send the [postId] and the [text] to make the comment on the post
 addCommentApi(postId, text) async {
   const String addCommentRequest = "/api/listing/addcomment";
   Uri url = Uri.parse(urlApi + addCommentRequest);

@@ -11,7 +11,8 @@ import '../views/widgets/authentication/show_snackbar.dart';
 import 'internet_controller.dart';
 import 'sign_in_controller.dart';
 
-///this function takes the kind and the context of the page and send the gender to the controller and check for the result to show the error
+/// submitAboutyou Function
+///this function takes the [kind] and the context [ctx] of the page and send the gender to the controller and check for the result to show the error
 Future<void> submitAboutyou(String kind, ctx) async {
   final mediaQuery = MediaQuery.of(ctx);
   final widthScreen = (mediaQuery.size.width);
@@ -54,7 +55,8 @@ Future<void> submitAboutyou(String kind, ctx) async {
           .pushReplacementNamed(Interests.routeName, arguments: {});
 }
 
-///this function takes the photo and the context of the page and send the photo to the controller and check for the result to show the error
+/// submitPhoto Function
+///this function takes the [photo] and the [context] of the page and send the photo to the controller and check for the result to show the error
 Future<void> submitPhoto(photo, context) async {
   final sp = Provider.of<SignInController>(context, listen: false);
   final ip = Provider.of<InternetController>(context, listen: false);
@@ -72,7 +74,8 @@ Future<void> submitPhoto(photo, context) async {
   }
 }
 
-///this function takes the username and the context of the page and send the username to the controller and check for the result to show the error
+/// submitUserName Function
+///this function takes the [username] and the [context] of the page and send the username to the controller and check for the result to show the error
 Future<void> submitUserName(String username, context) async {
   final sp = Provider.of<SignInController>(context, listen: false);
   final ip = Provider.of<InternetController>(context, listen: false);
@@ -93,7 +96,8 @@ Future<void> submitUserName(String username, context) async {
       .pushReplacementNamed(ChooseProfilePicture.routeName, arguments: {});
 }
 
-///this function takes the username, password and the context of the page and send the username and password to the controller and check for the result to show the error
+/// submitlogin Function
+///this function takes the [username], [password] and the [context] of the page and send the username and password to the controller and check for the result to show the error
 Future<void> submitlogin(
     userNameController, passwordController, context) async {
   final sp = Provider.of<SignInController>(context, listen: false);
@@ -121,7 +125,8 @@ Future<void> submitlogin(
   }
 }
 
-///this function takes the email, username, password and the context of the page and send the email, username and password to the controller and check for the result to show the error
+/// submitSignup Function
+///this function takes the [email], [username], [password] and the [context] of the page and send the email, username and password to the controller and check for the result to show the error
 Future<void> submitSignup(
     emailController, userNameController, passwordController, context) async {
   final sp = Provider.of<SignInController>(context, listen: false);
@@ -148,7 +153,8 @@ Future<void> submitSignup(
           .pushReplacementNamed(AboutYou.routeName, arguments: {});
 }
 
-///this function takes the username, password and the context of the page and send the username and password to the controller to request password reset and check for the result to show the error
+/// resetPass Function
+///this function takes the [username], [password] and the [context] of the page and send the username and password to the controller to request password reset and check for the result to show the error
 Future<void> resetPass(emailController, userNameController, context) async {
   final sp = Provider.of<SignInController>(context, listen: false);
   final ip = Provider.of<InternetController>(context, listen: false);
@@ -173,7 +179,8 @@ Future<void> resetPass(emailController, userNameController, context) async {
   (kIsWeb) ? null : showSnackBar('You will recieve an email soon', context);
 }
 
-///this function takes the email and the context of the page and send the email to the controller to request password reset and check for the result to show the error
+/// resetUsername Function
+///this function takes the [email] and the [context] of the page and send the email to the controller to request password reset and check for the result to show the error
 Future<void> resetUsername(emailController, context) async {
   final sp = Provider.of<SignInController>(context, listen: false);
   final ip = Provider.of<InternetController>(context, listen: false);
@@ -191,8 +198,8 @@ Future<void> resetUsername(emailController, context) async {
   }
   (kIsWeb) ? null : showSnackBar('You will recieve an email soon', context);
 }
-
-///this function takes the interest and the context of the page and send the interest to the controller and check for the result to show the error
+/// submitInterest Function
+///this function takes the [interest] and the [context] of the page and send the interest to the controller and check for the result to show the error
 Future<void> submitInterest(List<String> list, context) async {
   final sp = Provider.of<SignInController>(context, listen: false);
   final ip = Provider.of<InternetController>(context, listen: false);
