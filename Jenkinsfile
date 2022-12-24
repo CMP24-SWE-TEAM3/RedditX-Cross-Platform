@@ -4,7 +4,6 @@ pipeline {
     stages {
         stage('Pre-Build Setup') {
             steps {
-                sh 'whoami'
                 sh 'mv Dockerfile.prod Dockerfile'
             }
         }
