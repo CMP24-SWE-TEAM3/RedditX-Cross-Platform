@@ -1,16 +1,42 @@
-# reddit
+#Reddit App
 
-A new Flutter project.
+## Used Architecture
 
-## Getting Started
+## Files Structure
 
-This project is a starting point for a Flutter application.
+## Models
 
-A few resources to get you started if this is your first Flutter project:
+##Views
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+##Controllers
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Services
+
+## Documentaion
+
+## Unit Testing
+
+## Demo Video
+
+## Contributors
+
+**Team Leader:**
+
+[Kareem Ashraf](https://github.com/kareem37).
+
+**Flutter Developers:**
+
+[Ahmed Hany](https://github.com/Ahmed-H300).
+
+[Donia Gameel]https://github.com/DoniaGameel).
+
+[Heba Ashraf](https://github.com/hebaashraf21).
+
+[Mamdouh Attia](https://github.com/Mamdouh-Attia).
+
+[Mohammed Sobhy](https://github.com/Sobhiu).
+
+**DevOps:**
+
+[Waleed Hesham](https://github.com/waleedhesham446).
+
