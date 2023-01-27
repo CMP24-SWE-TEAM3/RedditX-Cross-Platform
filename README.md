@@ -44,6 +44,22 @@ The project aims to design and implement a software product using state-of-the-a
 
 ## Used Architecture
 
+**MVC+S** architecture
+
+_M_ stands for _models_
+
+_V_ stands for _views_
+
+_C_ stands for _controllers_
+
+_S_ stands for _services_
+
+**Resources for MVC+S in flutter:**
+
+[MVC+S resource 1](https://itnext.io/mvc-s-design-pattern-in-flutter-6eba15169413).
+
+[MVC+S resource 2](https://blog.gskinner.com/archives/2020/09/flutter-state-management-with-mvcs.html).
+
 ## Files Structure
 
 ## Models
@@ -56,13 +72,19 @@ The project aims to design and implement a software product using state-of-the-a
 
 ## Documentaion
 
+**_dartdoc_** package in flutter
+
+Documentation files are in **doc** folder
+
+[dartdoc Package](https://pub.dev/packages/dartdoc).
+
 ## Unit Testing
 
 **_flutter_test_** Package for unit testing
 
 **_test_cov_console_** Package for test coverage report
 
-We did unit testing for **Logic functions* in the **Controllers** files
+We did unit testing for **Logic functions** in the **Controllers** files
 
 Testing codes are in **_test_** folder 
 
