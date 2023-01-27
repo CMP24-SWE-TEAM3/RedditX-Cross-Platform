@@ -1,4 +1,4 @@
-#Reddit App
+# Reddit App
 
 ## Used Architecture
 
@@ -6,9 +6,9 @@
 
 ## Models
 
-##Views
+## Views
 
-##Controllers
+## Controllers
 
 ## Services
 
@@ -28,7 +28,7 @@
 
 [Ahmed Hany](https://github.com/Ahmed-H300).
 
-[Donia Gameel]https://github.com/DoniaGameel).
+[Donia Gameel](https://github.com/DoniaGameel).
 
 [Heba Ashraf](https://github.com/hebaashraf21).
 
