@@ -60,7 +60,7 @@ The project aims to design and implement a software product using state-of-the-a
 
 **_flutter_test_** Package for unit testing
 
-**_ test_cov_console_** Package for test coverage report
+**_test_cov_console_** Package for test coverage report
 
 We did unit testing for **Logic functions* in the **Controllers** files
 
