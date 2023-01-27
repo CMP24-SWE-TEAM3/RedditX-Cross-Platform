@@ -6,7 +6,7 @@ The project aims to design and implement a software product using state-of-the-a
 
 ## Selected Features from Reddit
 
-[Features List]([https://github.com/Ahmed-H300](https://docs.google.com/spreadsheets/d/1JDI1iNsRKggG_pek6BaOMwvxPN0BFIyFv6Qi6eoBfuo/edit#gid=0).
+[Features List](https://docs.google.com/spreadsheets/d/1JDI1iNsRKggG_pek6BaOMwvxPN0BFIyFv6Qi6eoBfuo/edit#gid=0).
 
 ## Some Used Practices
 
@@ -30,7 +30,7 @@ The project aims to design and implement a software product using state-of-the-a
 
 **Commenting.**
 
-**Formatting and Linting.*
+**Formatting and Linting.**
 
 **Naming Convention.**
 
