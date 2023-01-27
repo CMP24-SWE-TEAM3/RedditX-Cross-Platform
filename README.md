@@ -1,5 +1,47 @@
 # Reddit App
 
+It is the Software Course' project in Faculty of Engineering, Cairo University.
+
+The project aims to design and implement a software product using state-of-the-art tools and technologies in the software industry.
+
+## Selected Features from Reddit
+
+[Features List]([https://github.com/Ahmed-H300](https://docs.google.com/spreadsheets/d/1JDI1iNsRKggG_pek6BaOMwvxPN0BFIyFv6Qi6eoBfuo/edit#gid=0)).
+
+## Some Used Practices
+
+**pagination**
+
+**Responsive**
+
+**There is a service to mimic the back-end responses (with fake data) to work without the back-end whenever needed.* 
+
+**Alternating between the real and the mimic back-end is very smooth as we change one variable only.**
+
+**Separation of responsibilities & Smooth Integration.**
+
+**Using package managers.**
+
+**Single Responsibility Principle [SRP]**
+
+**Separation of Duties [SoD].**
+
+**DRY Principle [Don’t Repeat Yourself]**
+
+**Commenting.**
+
+**Formatting and Linting.*
+
+**Naming Convention.**
+
+**Unit Testing.**
+
+**Task Management.**
+
+**Authentication & Authorization.**
+
+**Divide system into multiple modules.**
+
 ## Used Architecture
 
 ## Files Structure
@@ -15,6 +57,14 @@
 ## Documentaion
 
 ## Unit Testing
+
+## Naming Convention and Linting Rules
+
+## Authentication and Authorisation 
+
+## Interface with BE
+
+**RESTful API** that sends and receives data in JSON format.
 
 ## Demo Video
 
@@ -41,4 +91,5 @@
 **DevOps:**
 
 [Waleed Hesham](https://github.com/waleedhesham446).
+
 
