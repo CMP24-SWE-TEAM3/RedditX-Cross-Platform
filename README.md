@@ -6,7 +6,7 @@ The project aims to design and implement a software product using state-of-the-a
 
 ## Selected Features from Reddit
 
-[Features List]([https://github.com/Ahmed-H300](https://docs.google.com/spreadsheets/d/1JDI1iNsRKggG_pek6BaOMwvxPN0BFIyFv6Qi6eoBfuo/edit#gid=0)).
+[Features List]([https://github.com/Ahmed-H300](https://docs.google.com/spreadsheets/d/1JDI1iNsRKggG_pek6BaOMwvxPN0BFIyFv6Qi6eoBfuo/edit#gid=0).
 
 ## Some Used Practices
 
@@ -14,7 +14,7 @@ The project aims to design and implement a software product using state-of-the-a
 
 **Responsive**
 
-**There is a service to mimic the back-end responses (with fake data) to work without the back-end whenever needed.* 
+**There is a service to mimic the back-end responses (with fake data) to work without the back-end whenever needed.** 
 
 **Alternating between the real and the mimic back-end is very smooth as we change one variable only.**
 
