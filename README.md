@@ -57,6 +57,10 @@ The project aims to design and implement a software product using state-of-the-a
 
 **Divide system into multiple modules.**
 
+## ⛏️Built with
+
+**Flutter**
+
 ## Functional Documentaion
 
 **_dartdoc_** package in flutter
