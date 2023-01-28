@@ -97,9 +97,13 @@ https://pub.dev/packages/flutter_code_style/score
 ## Authentication and Authorization
 
 **sign up by Email**
+
 **sign up by Gmail**
+
 **sign up by Facebook**
+
 **Choose your interest, profile picture, gender, username when you first sign up in Reddit**
+
 **Saving login Status in shared prefrence to be kept loged in**
 
 ## Interface with BE
