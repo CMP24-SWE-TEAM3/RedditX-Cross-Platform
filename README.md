@@ -60,15 +60,53 @@ _S_ stands for _services_
 
 [MVC+S resource 2](https://blog.gskinner.com/archives/2020/09/flutter-state-management-with-mvcs.html).
 
-## Files Structure
+# Files Structure in lib folder
 
 ## Models
 
+Models are data classes.
+
+Each Functionality has a file for its model.
+
+Each model file contains lists for mock data and lists for real data.
+
 ## Views
+
+Views are all the Widgets and Pages within the Flutter Application.
+
+It divides into two folders:
+
+**1-Screens:**
+
+This folder contains a folder for each functionality in the Reddit App.
+
+The folder for each functionality contains the Screens of this functionality
+
+**2-Widgets:**
+
+This folder contains a folder for each functionality in the Reddit App.
+
+The folder for each functionality contains the Widgets used in the screens of this functionality
 
 ## Controllers
 
+The controller layer is high-level functions that perform a specific type of task.
+
+**State management logic goes in here.**
+
+Contains Two types of controllers:
+
+1-UI controllers that has the logic that deals with UI layer and update app state according to user interactions.
+
+2-controllers thet typically fetch from services and inject them into models and that way they control and update app state.
+
 ## Services
+
+Services fetch data from the outside world and return it to the app. Commands call on services and inject the results into the model. Services do not touch the model directly.
+
+Whatever data that comes into our APP must have to be from here. It is connecting with REST API.
+
+There is a file for each functionality service.
 
 ## Documentaion
 
