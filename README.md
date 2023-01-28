@@ -137,6 +137,7 @@ https://pub.dev/packages/flutter_code_style/score
 ## 🎥 Demo Video
 
 
+
 ## Used Architecture
 
 **MVC+S** architecture
