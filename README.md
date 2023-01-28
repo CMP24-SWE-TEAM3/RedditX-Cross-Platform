@@ -130,7 +130,7 @@ https://pub.dev/packages/flutter_code_style/score
 
 **Used Technologies in requests:** _HTTP_ & _DIO_
 
-## Demo Video
+## 🎥 Demo Video
 
 
 ## Used Architecture
@@ -202,9 +202,6 @@ Services fetch data from the outside world and return it to the app. Commands ca
 Whatever data that comes into our APP must have to be from here. It is connecting with REST API.
 
 There is a file for each functionality service.
-
-## 🎥 Demo Video
-
 
 ## Contributors
 
