@@ -42,6 +42,64 @@ The project aims to design and implement a software product using state-of-the-a
 
 **Divide system into multiple modules.**
 
+## Documentaion
+
+**_dartdoc_** package in flutter
+
+Documentation files are in **doc** folder
+
+[dartdoc Package](https://pub.dev/packages/dartdoc).
+
+## Unit Testing
+
+**_flutter_test_** Package for unit testing
+
+**_test_cov_console_** Package for test coverage report
+
+We did unit testing for **Logic functions** in the **Controllers** files
+
+Testing codes are in **_test_** folder 
+
+Each controller's functions test is in a separate file in this folder
+
+**Resources explain using this packages in Unit testing:**
+
+[Unit Testing Source 1](https://youtu.be/75i5VmTI6A0).
+
+[Unit Testing Source 2](https://youtu.be/pgMI5nmAem0).
+
+[Unit Testing Source 3](https://youtu.be/7N1qRivtCWI).
+
+
+## Naming Convention and Linting Rules
+
+**Formatting Tool:**
+
+VsCode formatting tool
+
+**Linting:**
+
+**_Dart_Linting rules_**
+
+**_flutter_code_style_** package
+
+https://dart.dev/guides/language/effective-dart/style
+
+https://dart.dev/tools/linter-rules
+
+https://pub.dev/packages/dart_style
+
+https://pub.dev/packages/flutter_code_style/score
+
+## Authentication and Authorisation 
+
+## Interface with BE
+
+**RESTful API** that sends and receives data in JSON format.
+
+## Demo Video
+
+
 ## Used Architecture
 
 **MVC+S** architecture
@@ -109,63 +167,6 @@ Services fetch data from the outside world and return it to the app. Commands ca
 Whatever data that comes into our APP must have to be from here. It is connecting with REST API.
 
 There is a file for each functionality service.
-
-## Documentaion
-
-**_dartdoc_** package in flutter
-
-Documentation files are in **doc** folder
-
-[dartdoc Package](https://pub.dev/packages/dartdoc).
-
-## Unit Testing
-
-**_flutter_test_** Package for unit testing
-
-**_test_cov_console_** Package for test coverage report
-
-We did unit testing for **Logic functions** in the **Controllers** files
-
-Testing codes are in **_test_** folder 
-
-Each controller's functions test is in a separate file in this folder
-
-**Resources explain using this packages in Unit testing:**
-
-[Unit Testing Source 1](https://youtu.be/75i5VmTI6A0).
-
-[Unit Testing Source 2](https://youtu.be/pgMI5nmAem0).
-
-[Unit Testing Source 3](https://youtu.be/7N1qRivtCWI).
-
-
-## Naming Convention and Linting Rules
-
-**Formatting Tool:**
-
-VsCode formatting tool
-
-**Linting:**
-
-**_Dart_Linting rules_**
-
-**_flutter_code_style_** package
-
-https://dart.dev/guides/language/effective-dart/style
-
-https://dart.dev/tools/linter-rules
-
-https://pub.dev/packages/dart_style
-
-https://pub.dev/packages/flutter_code_style/score
-
-## Authentication and Authorisation 
-
-## Interface with BE
-
-**RESTful API** that sends and receives data in JSON format.
-
-## Demo Video
 
 ## Contributors
 
