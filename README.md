@@ -16,6 +16,9 @@ It is the Software Course' project in Faculty of Engineering, Cairo University.
 
 The project aims to design and implement a software product using state-of-the-art tools and technologies in the software industry.
 
+[**Reddit Web API**](https://www.reddit.com/dev/api/).
+
+
 ## Selected Features from Reddit
 
 [Features List](https://docs.google.com/spreadsheets/d/1JDI1iNsRKggG_pek6BaOMwvxPN0BFIyFv6Qi6eoBfuo/edit#gid=0).
@@ -54,6 +57,80 @@ The project aims to design and implement a software product using state-of-the-a
 
 **Divide system into multiple modules.**
 
+## Documentaion
+
+**_dartdoc_** package in flutter
+
+Documentation files are in **doc** folder
+
+[dartdoc Package](https://pub.dev/packages/dartdoc).
+
+## Unit Testing
+
+**_flutter_test_** Package for unit testing
+
+**_test_cov_console_** Package for test coverage report
+
+We did unit testing for **Logic functions** in the **Controllers** files
+
+Testing codes are in **_test_** folder 
+
+Each controller's functions test is in a separate file in this folder
+
+**Resources explain using this packages in Unit testing:**
+
+[Unit Testing Source 1](https://youtu.be/75i5VmTI6A0).
+
+[Unit Testing Source 2](https://youtu.be/pgMI5nmAem0).
+
+[Unit Testing Source 3](https://youtu.be/7N1qRivtCWI).
+
+
+## Naming Convention and Linting Rules
+
+**Formatting Tool:**
+
+VsCode formatting tool
+
+**Linting:**
+
+**_Dart_Linting rules_**
+
+**_flutter_code_style_** package
+
+https://dart.dev/guides/language/effective-dart/style
+
+https://dart.dev/tools/linter-rules
+
+https://pub.dev/packages/dart_style
+
+https://pub.dev/packages/flutter_code_style/score
+
+## Authentication and Authorization
+
+**sign up by Email**
+
+**sign up by Gmail**
+
+**sign up by Facebook**
+
+**Forget password**
+
+**Forget username**
+
+**Fire bsed used in Google and Face Authentication to handle Token**
+
+**Choose your interest, profile picture, gender, username when you first sign up in Reddit**
+
+**Saving login Status in shared prefrence to be kept loged in**
+
+## Interface with BE
+
+**RESTful API** that sends and receives data in JSON format.
+
+## Demo Video
+
+
 ## Used Architecture
 
 **MVC+S** architecture
@@ -65,6 +142,8 @@ _V_ stands for _views_
 _C_ stands for _controllers_
 
 _S_ stands for _services_
+
+![My Image](MVC+S.png)
 
 **Resources for MVC+S in flutter:**
 
@@ -171,11 +250,28 @@ https://pub.dev/packages/flutter_code_style/score
 
 ## Authentication and Authorisation 
 
+**sign up by Email**
+
+**sign up by Gmail**
+
+**sign up by Facebook**
+
+**Forget password**
+
+**Forget username**
+
+**Fire bsed used in Google and Face Authentication to handle Token**
+
+**Choose your interest, profile picture, gender, username when you first sign up in Reddit**
+
+**Saving login Status in shared prefrence to be kept loged in**
+
 ## Interface with BE
 
 **RESTful API** that sends and receives data in JSON format.
 
 ## 🎥 Demo Video
+
 
 ## Contributors
 
