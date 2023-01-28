@@ -187,6 +187,8 @@ The controller layer is high-level functions that perform a specific type of tas
 
 **State management logic goes in here.**
 
+We used **_Providers_** for state management
+
 Contains Two types of controllers:
 
 1-UI controllers that has the logic that deals with UI layer and update app state according to user interactions.
