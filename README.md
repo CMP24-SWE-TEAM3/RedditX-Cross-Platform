@@ -102,6 +102,10 @@ https://pub.dev/packages/flutter_code_style/score
 
 **sign up by Facebook**
 
+**Forget password**
+
+**Forget username**
+
 **Fire bsed used in Google and Face Authentication to handle Token**
 
 **Choose your interest, profile picture, gender, username when you first sign up in Reddit**
