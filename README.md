@@ -1,5 +1,17 @@
 # Reddit App
 
+<div align="center">
+<img height="300" src="Reddit_Logo.jpg">
+</div>
+
+<div align="center">
+    <h1 align='center'>⚡️<i>Reddit clone</i>⚡️</h1>
+    <hr>
+    <p>Amazing Reddit clone - A network of communities where people can dive into their interests, hobbies and passions.</p>
+</div>
+
+- A Social Network for Communities and Groups - Reddit is a network of communities based on people's interests. Find communities you're interested in, and become part of an online community!
+
 It is the Software Course' project in Faculty of Engineering, Cairo University.
 
 The project aims to design and implement a software product using state-of-the-art tools and technologies in the software industry.
@@ -163,7 +175,7 @@ https://pub.dev/packages/flutter_code_style/score
 
 **RESTful API** that sends and receives data in JSON format.
 
-## Demo Video
+## 🎥 Demo Video
 
 ## Contributors
 
