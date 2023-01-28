@@ -128,6 +128,8 @@ https://pub.dev/packages/flutter_code_style/score
 
 **RESTful API** that sends and receives data in JSON format.
 
+**Used Technologies in requests:** _HTTP_ & _DIO_
+
 ## Demo Video
 
 
@@ -199,7 +201,7 @@ Whatever data that comes into our APP must have to be from here. It is connectin
 
 There is a file for each functionality service.
 
-## Documentaion
+## Funcional Documentaion
 
 **_dartdoc_** package in flutter
 
