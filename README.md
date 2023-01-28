@@ -54,6 +54,8 @@ _C_ stands for _controllers_
 
 _S_ stands for _services_
 
+![My Image](MVC+S.png)
+
 **Resources for MVC+S in flutter:**
 
 [MVC+S resource 1](https://itnext.io/mvc-s-design-pattern-in-flutter-6eba15169413).
